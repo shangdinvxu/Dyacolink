@@ -44,6 +44,8 @@ import java.util.TimerTask;
  */
 public class BleService extends Service {
 
+
+
     private static final String TAG = "BleService";
     //重连的次数
     private int retrycount = 0;
