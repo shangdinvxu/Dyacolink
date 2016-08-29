@@ -215,6 +215,7 @@ public class BleService extends Service {
      * 2.注销ble提供者的连接更新广播
      **/
     @Override
+
     public void onDestroy() {
         if (android.os.Build.MODEL.startsWith("HUAWEI MT7") || android.os.Build.MODEL.startsWith("Galaxy Note4")) {
             //采用定时器没有用到广播
