@@ -44,7 +44,6 @@ import java.util.TimerTask;
  */
 public class BleService extends Service {
 
-//SSDDDD
     private static final String TAG = "BleService";
     //重连的次数
     private int retrycount = 0;
@@ -337,7 +336,6 @@ public class BleService extends Service {
                     }
                 }
             }
-
             //处理连接丢失信息：触发连接丢失处理,清空线程列表和设备信息列表，发送ble同步成功的广播，尝试重新连接蓝牙设备。
             @Override
             protected void handleConnectLostMsg() {
