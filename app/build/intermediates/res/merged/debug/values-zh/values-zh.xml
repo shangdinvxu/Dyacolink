@@ -1,0 +1,1253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="smssdk_country_group_a">
+		<item>阿尔巴尼亚,355,110,27601|27602|27603|27604</item>
+		<item>阿尔及利亚,213,52,60303|60302|60301</item>
+		<item>阿富汗,93,46,41220|41230|41240|41250|41201</item>
+		<item>阿根廷,54,27,722070|72207|72236|722020|72201|72234|72202|722320|722310|722010|722340|722330|722341</item>
+		<item>阿拉伯联合酋长国,971,184,42402|42403</item>
+		<item>阿鲁巴岛,297,102,36301|36302</item>
+		<item>阿曼,968,182,42202|42203</item>
+		<item>阿塞拜疆,994,193,40002|40001|40004</item>
+		<item>埃及,20,5,60203|60202|60201</item>
+		<item>埃塞俄比亚,251,84,63601</item>
+		<item>爱尔兰,353,108,27201|27213|27202|27211|27205|27203|27209</item>
+		<item>爱沙尼亚,372,117,24803|24802|24801</item>
+		<item>安道尔,376,121,21303</item>
+		<item>安哥拉,244,79,63102|63104</item>
+		<item>安圭拉岛,1264,199,365840</item>
+		<item>安提瓜和巴布达,1268,200,338050|344030|344920</item>
+		<item>奥地利,43,16,23207|23209|23210|23211|23201|23212|23202|23214|23203|23204|23215|23205|23206</item>
+		<item>澳大利亚,61,33,50507|50506|50519|50590|50572|50571|50530|50501|50512|50511|50503|50502|505060|50538|50516|505061|50526</item>
+		<item>澳门,853,169,45501|45500|45503|45502|45505|45504</item>
+    </string-array>
+    <string-array name="smssdk_country_group_b">
+		<item>巴巴多斯,1246,198,342600</item>
+		<item>巴布亚新几内亚,675,155,53701|53702|53703</item>
+		<item>巴哈马群岛,1242,197,364390|36439</item>
+		<item>巴基斯坦,92,45,</item>
+		<item>巴拉圭,595,148,74404|74403|74402|74401</item>
+		<item>巴勒斯坦领土,970,183,42506-PS|42505-PS</item>
+		<item>巴林,973,186,42604|42605|42601|42602</item>
+		<item>巴拿马,507,140,71404|71402|71403|71401</item>
+		<item>巴西,55,28,72416|72405|72439|72406|72403|72415|72437|72404|72434|72423|72402|72432|72410|72433|72400|72411|72430|72431|72407</item>
+		<item>白俄罗斯,375,120,25704|25701|25702</item>
+		<item>百慕大群岛,1441,204,350000</item>
+		<item>保加利亚,359,114,28401|28405|28403</item>
+		<item>贝宁,229,64,61605|61601|61602|61603|61604</item>
+		<item>比利时,32,9,20610|20620|20640|20606|20605|20601</item>
+		<item>冰岛,354,109,27409|27411|27404|27401|27402|27407</item>
+		<item>波多黎各,1787,212,310970</item>
+		<item>波兰,48,22,26016|26038|26004|26018|26017|26006|26009|26019|26008|26010|26032|26001|26034|26012|26011|26003|26036|26014|26002|26013|26035</item>
+		<item>波利尼西亚（法属）,689,165,54720</item>
+		<item>波斯尼亚和黑塞哥维那,387,129,21890|21805|21803</item>
+		<item>玻利维亚,591,144,73603|73602|73601</item>
+		<item>伯利兹,501,134,70267</item>
+		<item>博茨瓦纳,267,99,65202|65201|65204</item>
+		<item>不丹,975,188,40211|40277</item>
+		<item>布基纳法索,226,61,61301|61302|61303</item>
+		<item>布隆迪,257,90,64201|64203|64202|64207|64282</item>
+    </string-array>
+    <string-array name="smssdk_country_group_c">
+		<item>朝鲜,850,167,46703</item>
+		<item>赤道几内亚,240,75,62701|62703</item>
+    </string-array>
+    <string-array name="smssdk_country_group_d">
+		<item>丹麦,45,19,23801|23812|23802|23813|23803|23806|23828|23807|23808|23830|23820|23810|23866|23877</item>
+		<item>德国,49,23,26203|26202|26205|26216|26204|26207|26217|26206|26209|26208|26243|26276|26220|26242|26212|26201|26211|26277</item>
+		<item>东帝汶,670,153,51401|51402</item>
+		<item>多哥,228,63,61501|61503</item>
+		<item>多米尼加共和国,1809,213,37001|37002|37003|37004</item>
+		<item>多米尼克,1767,210,366110</item>
+    </string-array>
+    <string-array name="smssdk_country_group_e">
+		<item>俄罗斯,7,3,25020|25099|25035|25002|25012|25001|25003|25039|25005|25007</item>
+		<item>厄瓜多尔,593,146,74002|74001|74000</item>
+    </string-array>
+    <string-array name="smssdk_country_group_f">
+		<item>法国,33,10,20816|20804|20826|20815|20825|20813|20802|20823|20801|20811|20822|20888|20810|20821|20831|20820|20809|20808|20817</item>
+		<item>法罗群岛,298,103,28801|28802|28803</item>
+		<item>菲律宾,63,35,51518|51502|51501|51503|51505</item>
+		<item>斐济,679,159,54202|54201</item>
+		<item>芬兰,358,113,24409|24432|24410|24421|24412|24411|24414|24403|24413|24405|24426|24404|24491</item>
+		<item>佛得角,238,73,62501|62502</item>
+    </string-array>
+    <string-array name="smssdk_country_group_g">
+		<item>冈比亚,220,55,60702|60701|60704|60703</item>
+		<item>刚果共和国,242,77,62907|62910|62901</item>
+		<item>刚果民主共和国,243,78,63086|63001|63089|63002|63005</item>
+		<item>哥伦比亚,57,30,732130|732020|732154|732111|732123|732101</item>
+		<item>哥斯达黎加,506,139,71204|71203|71201</item>
+		<item>格林纳达,1473,205,352110</item>
+		<item>格陵兰岛,299,104,29001</item>
+		<item>格鲁吉亚,995,194,28202|28201|28204|28205</item>
+		<item>古巴,53,26,36801</item>
+		<item>瓜德罗普岛,590,143,34008|34003|34002|34001|34020</item>
+		<item>关岛,1671,208,310400|310140|310470|310110</item>
+		<item>圭亚那,592,145,73802|73801</item>
+		<item>圭亚那（法属）,594,147,74201|74220</item>
+    </string-array>
+    <string-array name="smssdk_country_group_h">
+		<item>哈萨克斯坦,7,4,40102|40101|40177|40108|40107</item>
+		<item>海地,509,142,37201|37202</item>
+		<item>韩国,82,40,45006|45005|45008|45002|45004</item>
+		<item>荷兰,31,8,20423|20412|20410|20465|20420|20462|20409|20408|20407|20418|20406|20417|20428|20416|20405|20415|20404|20414|20469|20403|20468|20424|20402</item>
+		<item>荷属安的列斯群岛,599,152,36269|36202|36201|36251|36294|36282|36281</item>
+		<item>黑山共和国,382,126,29703|29702|29701</item>
+		<item>洪都拉斯,504,137,70830|70840|70802|70801</item>
+    </string-array>
+    <string-array name="smssdk_country_group_i">
+	    
+	</string-array>
+    <string-array name="smssdk_country_group_j">
+		<item>基里巴斯,686,163,54509</item>
+		<item>吉布提,253,86,63801</item>
+		<item>吉尔吉斯斯坦,996,195,43705|43701</item>
+		<item>几内亚,224,59,61105|61104|61103|61102|61101</item>
+		<item>几内亚比绍,245,80,63202|63203</item>
+		<item>加拿大,1,1,302657|302656|302710|302655|302500|302610|302720|302702|302270|302490|302880|302220|302680|302360|302690|302510|302653|302861|302222|302640|302651|302530|302221|302320</item>
+		<item>加纳,233,68,62001|62002|62003|62004|62006|62007</item>
+		<item>加蓬,241,76,62804|62801|62802|62803</item>
+		<item>柬埔寨,855,170,45602|45601|45608|45618|45609|45604|45603|45606|45605|23455-KH</item>
+		<item>捷克共和国,420,131,23001|23002|23003|23004|23005|23008</item>
+		<item>津巴布韦,263,95,64801|64803|64804</item>
+    </string-array>
+    <string-array name="smssdk_country_group_k">
+		<item>喀麦隆,237,72,62401|62402|62404</item>
+		<item>卡塔尔,974,187,42701|42702</item>
+		<item>开曼群岛,1345,203,346140</item>
+		<item>科摩罗,269,101,65401</item>
+		<item>科特迪瓦,225,60,61205|61204|61203|61202</item>
+		<item>科威特,965,179,41904|41903|41902</item>
+		<item>克罗地亚,385,127,21902|21901|21912|21910</item>
+		<item>肯尼亚,254,87,63905|63907|63903|63902</item>
+		<item>库克群岛,682,161,54801</item>
+    </string-array>
+    <string-array name="smssdk_country_group_l">
+		<item>拉脱维亚,371,116,24703|24706|24705|24708|24707|24709|24702|24701</item>
+		<item>莱索托,266,98,65101|65102</item>
+		<item>老挝,856,171,45701|45708|45703|45702</item>
+		<item>黎巴嫩,961,175,41503|41501</item>
+		<item>立陶宛,370,115,24601|24603|24602</item>
+		<item>利比里亚,231,66,61804|61807|61801|61802</item>
+		<item>利比亚,218,54,60603|60601|60600</item>
+		<item>列支敦士登,423,133,29501|29577|29505|29502</item>
+		<item>法属留尼汪岛,262,94,64710|64702</item>
+		<item>卢森堡,352,107,27099|27077|27001</item>
+		<item>卢旺达,250,83,63510|63512|63513|63514</item>
+		<item>罗马尼亚,40,14,22603|22604|22605|22610|22601</item>
+    </string-array>
+    <string-array name="smssdk_country_group_m">
+		<item>马达加斯加,261,93,64601|64602|64604</item>
+		<item>马尔代夫,960,174,47201|47202</item>
+		<item>马耳他,356,111,27821|27877|27801</item>
+		<item>马拉维,265,97,65010|65001</item>
+		<item>马来西亚,60,32,50220|50211|50213|502150|50212|502151|502152|50217|50216|50219|50218</item>
+		<item>马里,223,58,61002|61001</item>
+		<item>马其顿,389,130,29402|29401|29403</item>
+		<item>马提尼克,596,149,34003|34002|34001|34020</item>
+		<item>毛里求斯,230,65,61710|61701|61702</item>
+		<item>毛里塔尼亚,222,57,60910|60902</item>
+		<item>美国,1,2,311090|310080|311050|311370|310160|31150|311010|310680|310120|310560|311650|310880|310760|31190|310320|310630|310710|310090|310290|316993|310170|310050|31060|311580|310690|311020|311340|310570|311660|310450|310011|310770|316995|310012|316994|311730|310004|311610|310840|310005|310600|31100|311190|310180|31050|310060|316883|311150|310380|311030|310260|311230|310020|310340|311991|311430|316885|310660|310100|316884|310540|310023|310980|311740|310410|31016|310610|310016|31130|31011|31611|310190|311040|316011|310150|310790|310990|310870|310420|310300|310740|311710</item>
+		<item>蒙古,976,189,42898|42888|42899|42801</item>
+		<item>蒙特塞拉特岛,1664,207,354860</item>
+		<item>孟加拉国,880,172,47007|47005|47006|47003|47004|47001|47002</item>
+		<item>秘鲁,51,24,71610|71606|71617|71607|71615</item>
+		<item>密克罗尼西亚,691,166,55001</item>
+		<item>缅甸,95,48,41401|41406|41405</item>
+		<item>摩尔多瓦,373,118,25903|25902|25904|25901</item>
+		<item>摩洛哥,212,51,60405|60402|60401|60400</item>
+		<item>摩纳哥,377,122,21201</item>
+		<item>莫桑比克,258,91,64301|64304|64303</item>
+		<item>墨西哥,52,25,33402|33403|33401|33450|33406|334090|33404|33405</item>
+    </string-array>
+    <string-array name="smssdk_country_group_n">
+		<item>纳米比亚,264,96,64902|64901|64903</item>
+		<item>南非,27,6,65510|65512|65501|65502|65507|65519</item>
+		<item>南苏丹,211,50,65995</item>
+		<item>尼泊尔,977,190,42901|42902</item>
+		<item>尼加拉瓜,505,138,71021|71030</item>
+		<item>尼日尔,227,62,61401|61402|61403|61404</item>
+		<item>尼日利亚,234,69,62150|62140|62130|62120|62125|23455-NG|62160</item>
+		<item>挪威,47,21,24208|24209|24220|24221|24222|24201|24223|24202|24224|24204|24205|24206</item>
+    </string-array>
+    <string-array name="smssdk_country_group_o">
+	    
+	</string-array>
+    <string-array name="smssdk_country_group_p">
+		<item>帕劳,680,160,55201|55280</item>
+		<item>葡萄牙,351,106,26804|26806|26801|26803</item>
+    </string-array>
+    <string-array name="smssdk_country_group_q">
+	</string-array>
+    <string-array name="smssdk_country_group_r">
+		<item>日本,81,39,44027|44026|44029|44028|44023|44144|44022|44143|44025|44024|44145|44140|44021|44142|44141|44020|44016|44015|44018|44017|44012|44011|44099|44014|44013|44019|44090|44096|44095|44010|44098|44097|44092|44091|44094|44093|44004|44007|44006|44001|44089|44000|44088|44003|44002|44009|44008|44087|44199|44078|44198|44077|44079|44074|44194|44073|44076|44075|44191|44070|44190|44193|44072|44192|44071|44067|44066|44069|44068|44063|44062|44065|44064|44061|44060|44056|44055|44058|44052|44051|44054|44053|44050|44170|44049|44048|44045|44044|44165|44047|44046|44041|44162|44040|44161|44043|44164|44042|44163|44038|44037|44039|44034|44033|44036|44035|44030|44032|44031</item>
+		<item>瑞典,46,20,24035|24013|24036|24014|24037|24015|24038|24016|24039|24017|24018|24019|24030|24031|24010|24032|24033|24012|24034|24002|24003|24026|24027|24028|24006|24029|24007|24008|24040|24020|24043|24022|24000|24044|24023|24001|24045</item>
+		<item>瑞士,41,15,22812|22801|22802|22803|22805|22809|22851|22853|22854</item>
+    </string-array>
+    <string-array name="smssdk_country_group_s">
+		<item>萨尔瓦多,503,136,70602|70601|70604|70603|70605</item>
+		<item>萨摩亚,685,162,54900</item>
+		<item>塞尔维亚,381,125,29341|22001|22003|22005</item>
+		<item>塞拉利昂,232,67,61902|61903|61904|61905|61906|61909|61901</item>
+		<item>塞内加尔,221,56,60801|60803|60802</item>
+		<item>塞浦路斯,357,112,28022|28001|28020|28010</item>
+		<item>塞舌尔,248,81,63310|63301|63302</item>
+		<item>沙特阿拉伯,966,180,42003|42004|42001|42006</item>
+		<item>圣多美和普林西比,239,74,62601</item>
+		<item>圣基茨和尼维斯,1869,215,356110|356070</item>
+		<item>圣卢西亚,1758,209,358110</item>
+		<item>圣马力诺,378,123,29201</item>
+		<item>圣皮埃尔和密克隆岛,508,141,30801</item>
+		<item>圣文森特和格林纳丁斯,1784,211,360110</item>
+		<item>斯里兰卡,94,47,41301|41305|41302|41308</item>
+		<item>斯洛伐克,421,132,23199|23101|23102|23106</item>
+		<item>斯洛文尼亚,386,128,29364|29341|29340|29370</item>
+		<item>斯威士兰,268,100,65310|65301</item>
+		<item>苏丹,249,82,63401|63402|63407</item>
+		<item>苏里南,597,150,74604|74603|74602</item>
+		<item>所罗门群岛,677,157,54010</item>
+		<item>索马里,252,85,63782|63760|63730|63701|63725|63704</item>
+    </string-array>
+    <string-array name="smssdk_country_group_t">
+		<item>塔吉克斯坦,992,191,43605|43601|43602|43603|43604</item>
+		<item>台湾,886,173,46602|46668|46603|46688|46699|46601|46689|46656|46697|46610|46609|46606|46607|46605|46693|46692</item>
+		<item>泰国,66,38,52000|52099|52020|52003|52004|52015|52001|52023|52002|52018|52005</item>
+		<item>坦桑尼亚,255,88,64011|64003|64002|64005|64004|64007|64006|64009|64008</item>
+		<item>汤加,676,156,53901</item>
+		<item>特克斯和凯科斯群岛,1649,206,376352|376350</item>
+		<item>特立尼达，多巴哥,1868,214,374130|37412</item>
+		<item>突尼斯,216,53,60503|60502|60501</item>
+		<item>土耳其,90,43,28602|28603|28601|28604</item>
+		<item>土库曼斯坦,993,192,43801|43802</item>
+    </string-array>
+    <string-array name="smssdk_country_group_u">
+	    
+	</string-array>
+    <string-array name="smssdk_country_group_v">
+	    
+	</string-array>
+    <string-array name="smssdk_country_group_w">
+		<item>瓦努阿图,678,158,54101|54105</item>
+		<item>危地马拉,502,135,70402|70401|70403</item>
+		<item>维尔京群岛（美属）,1284,201,311470</item>
+		<item>维尔京群岛（英属）,1340,202,348570|348170</item>
+		<item>委内瑞拉,58,31,73406|73404|73401</item>
+		<item>文莱,673,154,52811|52802</item>
+		<item>乌干达,256,89,64111|64133|64166|64122|64110|64101|64114</item>
+		<item>乌克兰,380,124,25507|25506|25521|25501|25503|25502|25505|25504</item>
+		<item>乌拉圭,598,151,74803|74802|74801|74800|74810|74807</item>
+		<item>乌兹别克斯坦,998,196,43401|43402|43407|43403|43404|43405|43406</item>
+    </string-array>
+    <string-array name="smssdk_country_group_x">
+		<item>西班牙,34,11,21402|21401|21423|21411|21422|21410|21421|21432|21420|21409|21408|21419|21407|21418|21417|21406|21405|21427|21416|21404|21415|21425|21403</item>
+		<item>希腊,30,7,20203|20202|20201|20210|20209|20207|20205</item>
+		<item>香港,852,168,45413|45412|45401|45404|45403|45414|45400|45411|45409|45406|45405|45416|45408|45419|45429|45407</item>
+		<item>新加坡,65,37,52502|52503|52512|52501|52505</item>
+		<item>新喀里多尼亚,687,164,54601</item>
+		<item>新西兰,64,36,53001|53004|53005|53024|53002|53006</item>
+		<item>匈牙利,36,12,21630|21670|21601</item>
+		<item>叙利亚,963,177,41701|41702</item>
+    </string-array>
+    <string-array name="smssdk_country_group_y">
+		<item>牙买加,1876,216,338180|338020|338110</item>
+		<item>亚美尼亚,374,119,28301|28310|28305|28304</item>
+		<item>也门,967,181,42101|42102|42103</item>
+		<item>伊拉克,964,178,41805|41840|41820|41830|41845</item>
+		<item>伊朗,98,49,43235|43214|43220|43200|43211|43219</item>
+		<item>以色列,972,185,42577|42516|42505|42506|42507|RESTRICTED-IL|42519|42508|42501|42512|42523|42502|42503|42514|42515</item>
+		<item>意大利,39,13,22206|22207|22208|22210|22243|22288|22244|22299|22233|22201|22235|22204|22248|22205|22230</item>
+		<item>印度,91,44,405893|405892|405895|405894|405897|405896|405899|405898|40501|40506|40505|405891|405890|40503|405889|405882|405881|405883|405886|405885|405888|405887|405880|405879|405878|405871|405750|405870|405873|405752|405872|405751|405875|405754|405874|405753|405877|405756|405876|405755|405868|405867|405869|405860|405862|405861|405864|405863|405866|405865|405856|405859|405858|40494|40493|40492|40491|40498|40497|40496|40495|40490|40483|40482|40481|40480|40487|40486|40485|405799|40484|40489|40488|40472|40471|40470|40476|40475|40474|40473|40479|40478|40477|40460|405930|405811|40462|405810|405931|40469|40468|40467|40466|405809|405802|405923|405801|405922|405804|405925|405803|405924|405806|405927|405805|405926|405808|405929|405807|405928|40450|40570|40454|40453|40452|405800|405921|40451|405920|40458|40457|40456|40455|40459|405919|405912|405914|405913|405916|405915|405918|405917|40443|40442|40441|40567|40446|40566|40449|405901|405900|405903|405902|405905|405904|405907|405906|40553|40552|40431|40551|40430|40436|40556|40435|40555|40434|40554|40433|40438|40437|405851|405850|40421|405853|40420|405852|405855|405854|40425|40424|40422|40429|40428|40427|40419|405846|405845|405848|405847|405849|405046|405045|405840|405047|40410|405842|405841|405843|40413|40412|405040|40411|40418|405042|40417|405041|40416|405044|40415|405043|40409|405835|405834|405837|405836|405839|405838|405035|405034|405037|405036|40520|405039|405831|405038|405830|405833|405832|40524|40403|40402|40523|40522|40401|40521|40400|40407|405031|40406|405030|40405|405033|40404|405032|40519|40518|405824|405823|405825|405828|405827|405829|405026|405025|405820|405027|405822|405029|405821|40513|40512|40511|40510|40517|40515|40514|40509|40508|40507|405813|405812|405815|405814|405817|405816|405819|405818</item>
+		<item>印度尼西亚,62,34,51010|51021|51089|51001|51011|51027|51007|51028|51009|51008</item>
+		<item>英国,44,17,23427|23428|23407|23409|23420|23400|23401|23423|23500|23424|23402|23403|23425|23426|23416|23417|23418|23419|23430|23431|23476|23410|23433|23455|23411|23478|23434|23458|23414|23415|23450|23451</item>
+		<item>约旦,962,176,41601|41677|41603</item>
+		<item>越南,84,41,45204|45205|45202|45201|45207</item>
+    </string-array>
+    <string-array name="smssdk_country_group_z">
+		<item>赞比亚,260,92,64502|64501|64503</item>
+		<item>泽西,44,18,</item>
+		<item>乍得,235,70,62201|62203</item>
+		<item>直布罗陀,350,105,26606|26609|26601</item>
+		<item>智利,56,29,73008|73006|73004|73002|73013|73003|73014|73011|73012|73001</item>
+		<item>中非共和国,236,71,62301|62302|62303|62304</item>
+		<item>中国,86,42,46006|46007|46005|46002|46003|46000|46001</item>
+    </string-array>
+    <string name="Incoming_tel_title">来电提醒</string>
+    <string name="account">账号</string>
+    <string name="achieve_target">恭喜你达到目标值</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_sign_in">登录</string>
+    <string name="address">地区</string>
+    <string name="alarm_activity_manage_title">闹钟设置</string>
+    <string name="alarm_desc_everyday">每天</string>
+    <string name="alarm_desc_friday">五</string>
+    <string name="alarm_desc_monday">一</string>
+    <string name="alarm_desc_none">无</string>
+    <string name="alarm_desc_saturday">六</string>
+    <string name="alarm_desc_sunday">日</string>
+    <string name="alarm_desc_thursday">四</string>
+    <string name="alarm_desc_tuesday">二</string>
+    <string name="alarm_desc_wednesday">三</string>
+    <string name="alarm_desc_weekend">周末</string>
+    <string name="alarm_desc_workday">工作日</string>
+    <string name="alarm_help">闹钟不提醒？</string>
+    <string name="alarm_modify_alarm">修改闹钟</string>
+    <string name="alarm_noitice">手表连续振动 9 次表示闹钟提醒</string>
+    <string name="alarm_notify">无声闹钟</string>
+    <string name="alarm_repeat">重复</string>
+    <string name="alarm_save">保存</string>
+    <string name="alarm_week">周</string>
+    <string name="app_name">DYH08</string>
+    <string name="app_start">欢迎进入连爱手表</string>
+    <string name="attention_activity_title">添加关注</string>
+    <string name="being_written">正在写入</string>
+    <string name="birthday">生日</string>
+    <string name="body_activity">"设置身体信息"</string>
+    <string name="body_info_age">年龄</string>
+    <string name="body_info_age_is_necessary">年龄不可为空！</string>
+    <string name="body_info_age_recommend">年龄应在12至114岁之间。</string>
+    <string name="body_info_bmi">BMI指数</string>
+    <string name="body_info_body_type">，您的体型</string>
+    <string name="body_info_height">身高</string>
+    <string name="body_info_height_is_necessary">身高不可为空！</string>
+    <string name="body_info_height_recommend">推荐身高在60cm到272cm之间。</string>
+    <string name="body_info_mildly_obese">轻度肥胖</string>
+    <string name="body_info_moderately_obese">中度肥胖</string>
+    <string name="body_info_modify">修改身体信息</string>
+    <string name="body_info_mubiao">运动目标不能为空</string>
+    <string name="body_info_normal">正常</string>
+    <string name="body_info_overweight">偏胖</string>
+    <string name="body_info_register">注册身体信息</string>
+    <string name="body_info_severe_obesity">重度肥胖</string>
+    <string name="body_info_slim">偏瘦</string>
+    <string name="body_info_unknow">未知</string>
+    <string name="body_info_weight">体重</string>
+    <string name="body_info_weight_is_necessary">体重不可为空！</string>
+    <string name="body_info_weight_recommend">推荐体重在20kg到453kg之间。</string>
+    <string name="bound_active">二、匹配ID</string>
+    <string name="bound_active_notice">5v DC</string>
+    <string name="bound_active_notice2">可以用手机充电器或电脑USB端口</string>
+    <string name="bound_active_notice3">1.找到与表盘四位ID相同的手表</string>
+    <string name="bound_active_notice4">2.点击</string>
+    <string name="bound_active_notice5">a.手表触屏控制绑定方案</string>
+    <string name="bound_active_notice6">b.PIN码绑定方案</string>
+    <string name="bound_active_notice7">根据手机和手表提示进行配对。</string>
+    <string name="bound_active_notice8">根据提示在手机蓝牙配对页面输入手表上的PIN码即可完成配对。</string>
+    <string name="bound_ble_click">点击绑定</string>
+    <string name="bound_ble_list">蓝牙设备列表</string>
+    <string name="bound_ble_refresh">刷新</string>
+    <string name="bound_dounding">正在绑定....</string>
+    <string name="bound_dounding_successful">绑定成功！</string>
+    <string name="bound_failed">无法绑定设备</string>
+    <string name="bound_failed_msg">首次绑定设备时需要网络，而您的手机网络不通，请先打开网络后再试！</string>
+    <string name="bound_failed_reason">绑定失败...请重新绑定！</string>
+    <string name="bound_illegal_address">非法设备地址</string>
+    <string name="bound_illegal_address_msg">不是合法的设备地址！</string>
+    <string name="bound_link_band">连爱手环</string>
+    <string name="bound_link_watch">连爱手表</string>
+    <string name="bound_list">设备列表</string>
+    <string name="bound_pick_up">一、手表充电</string>
+    <string name="bound_scan">三、根据提示进行绑定操作</string>
+    <string name="bound_scan_sqr">取消绑定(剩余{0}秒)</string>
+    <string name="bound_skip">跳过</string>
+    <string name="bound_string">绑定</string>
+    <string name="bound_title">绑定你的手表</string>
+    <string name="bound_title_band">绑定你的手环</string>
+    <string name="brace_version">固件版本 </string>
+    <string name="bracelet_battery">电量{0}%</string>
+    <string name="bracelet_bound">绑定成功</string>
+    <string name="bracelet_down_file_fail">文件下载错误！~</string>
+    <string name="bracelet_help">帮助</string>
+    <string name="bracelet_mac_address">MAC:{0}</string>
+    <string name="bracelet_oad">更新固件</string>
+    <string name="bracelet_oad_Portal">检测到您的固件有新的版本哦，是否立即更新？</string>
+    <string name="bracelet_oad_failed">固件升级失败</string>
+    <string name="bracelet_oad_failed_battery">固件升级需要设备电量在30%以上，请充电后再更新固件！</string>
+    <string name="bracelet_oad_failed_msg">蓝牙升级需要手机在有网络的情况下进行，请确保手机网络正常！</string>
+    <string name="bracelet_oad_keycodeback">固件升级过程中请勿切换页面！</string>
+    <string name="bracelet_oad_msg">是否确定升级？</string>
+    <string name="bracelet_oad_reason">由于升级过程中蓝牙被关闭,固件升级失败</string>
+    <string name="bracelet_oad_syn">正在同步运动数据...</string>
+    <string name="bracelet_oad_version_top">当前固件版本为最新版本！</string>
+    <string name="bracelet_owner">连爱智能设备</string>
+    <string name="bracelet_sync_format">MM月dd日 HH:mm:ss</string>
+    <string name="bracelet_sync_none"> [从未同步过]</string>
+    <string name="bracelet_sync_time">上次同步时间</string>
+    <string name="bracelet_title">手表管理</string>
+    <string name="bracelet_unbound">解除绑定</string>
+    <string name="bracelet_unbound_failed">无法解除绑定</string>
+    <string name="bracelet_unbound_failed_msg">解除绑定需要手机在有网络的情况下进行，请确保手机网络正常！</string>
+    <string name="bracelet_unbound_msg">是否确解除绑定？</string>
+    <string name="bracelet_update">检查更新</string>
+    <string name="bracelet_version">固件版本 {0}</string>
+    <string name="cal_title">卡路里消耗</string>
+    <string name="cancel">退出</string>
+    <string name="change_weight_activity">修改体重</string>
+    <string name="change_weight_goal">目标体重</string>
+    <string name="changeinfo">正在提交到服务器</string>
+    <string name="changeinfook">修改成功</string>
+    <string name="chat_sendpic_image_view_file_path_not_valid">需要打开的图片路径不正确，请检查SD卡后再试！</string>
+    <string name="chat_sendpic_image_view_image_not_valid">图片已失效或被移除，载入失败</string>
+    <string name="chat_sendpic_image_view_imagebig_for_memery">要打开的图片超过程序的可用内存，请重启程序后再试。</string>
+    <string name="chat_sendpic_image_view_imagedata_not_valid">需要打开的图片数据不正确，请关闭后再试！</string>
+    <string name="chat_sendpic_image_view_imageloading">图片载入中...</string>
+    <string name="chat_sendpic_image_view_imageloading2">图片载入中...</string>
+    <string name="chat_sendpic_image_view_multitouch_hint">提示：支持多点触控缩放图片</string>
+    <string name="chat_sendpic_image_view_oom_for_rotate">内存不足，旋转图片没有成功，你可重启程序后再试！</string>
+    <string name="chat_sendpic_image_view_sendpic">发送图片</string>
+    <string name="chat_sendpic_image_view_title">查看图片</string>
+    <string name="choose_date">请选择重复周期</string>
+    <string name="comeback">返回</string>
+    <string name="common_distance_unit_metres">"米 "</string>
+    <string name="common_problem">常见问题</string>
+    <string name="common_sleep_light">浅睡</string>
+    <string name="common_sleep_sound">深睡</string>
+    <string name="count_title">总时长</string>
+    <string name="data_by_month">月数据</string>
+    <string name="data_by_week">周数据</string>
+    <string name="data_by_year">年数据</string>
+    <string name="date">日期:</string>
+    <string name="date_picker_activity_title">选择日期</string>
+    <string name="date_picker_back2today">返回今天</string>
+    <string name="date_picker_out_time">您选择的日期超过了今天!</string>
+    <string name="debug_device_set_success">DEBUG(设备反馈): 设置用户信息成功！</string>
+    <string name="debug_device_unbound_failed">解绑失败！！！！</string>
+    <string name="detail_sport_data_content_reading">内容数据读取中..</string>
+    <string name="detail_sport_data_hdsj">时间</string>
+    <string name="detail_sport_data_image_loading">正在准备图片..</string>
+    <string name="detail_sport_data_nlxh">卡路里</string>
+    <string name="detail_sport_data_pbjl">跑步距离</string>
+    <string name="detail_sport_data_pjsd">速度</string>
+    <string name="detail_sport_data_qc">起床</string>
+    <string name="detail_sport_data_qssj">浅睡</string>
+    <string name="detail_sport_data_refresh_range">刷新：日期范围：</string>
+    <string name="detail_sport_data_rs">入睡</string>
+    <string name="detail_sport_data_run_time">跑步用时</string>
+    <string name="detail_sport_data_sm">睡眠</string>
+    <string name="detail_sport_data_sssj">深睡</string>
+    <string name="detail_sport_data_sum_main_run">跑步</string>
+    <string name="detail_sport_data_sum_main_sleep">睡眠</string>
+    <string name="detail_sport_data_sum_main_walk">步行</string>
+    <string name="detail_sport_data_title">日明细数据</string>
+    <string name="detail_sport_data_today">今日</string>
+    <string name="detail_sport_data_waiting_tomorrow">请期待明天的到来！</string>
+    <string name="detail_sport_data_wcmb">完成目标</string>
+    <string name="detail_sport_data_ydjl">距离</string>
+    <string name="detail_sport_data_ydl">步行</string>
+    <string name="device_info_address">设备地址：</string>
+    <string name="device_info_msg">配置信息：</string>
+    <string name="device_info_name">设备名称：</string>
+    <string name="device_info_no">暂无设备信息</string>
+    <string name="device_info_none">暂无</string>
+    <string name="device_info_title">设备信息</string>
+    <string name="dianyuan_notify">电源管理</string>
+    <string name="distance_count">总里程</string>
+    <string name="distance_to_goal">距离目标</string>
+    <string name="edit_target">编辑目标</string>
+    <string name="effective_time_is_invalid">生效时间无效</string>
+    <string name="ent_address">群组网址</string>
+    <string name="ent_name">群组名称</string>
+    <string name="error_field_required">不能为空</string>
+    <string name="evenote_title">连爱手表，动起来!</string>
+    <string name="feesback_point">我们将会在收到反馈的72小时内给你回复</string>
+    <string name="find_device">寻找设备</string>
+    <string name="find_friend">查找好友</string>
+    <string name="find_qunzu">查找群组</string>
+    <string name="firmware_update_title">固件更新</string>
+    <string name="forget_password_find_back">找回您的账号密码</string>
+    <string name="forget_password_notice">(请输入您的注册邮箱来帮您找回您的帐号密码)</string>
+    <string name="forget_password_register_mail">请输入您的注册邮箱</string>
+    <string name="forgot_password_title">重置密码</string>
+    <string name="fri">五</string>
+    <string name="friday">周五</string>
+    <string name="friendinfo_activity_title">好友资料</string>
+    <string name="general_about">关于</string>
+    <string name="general_back">返回</string>
+    <string name="general_cancel">取消</string>
+    <string name="general_change">修改</string>
+    <string name="general_clouding">正在同步...</string>
+    <string name="general_clouding_failure">同步失败</string>
+    <string name="general_clouding_success">同步完成</string>
+    <string name="general_delete">删除</string>
+    <string name="general_dialog_sync_text">已完成{0}%（共{1}条,已下载{2}条）</string>
+    <string name="general_error">出错了</string>
+    <string name="general_faild">失败了</string>
+    <string name="general_female">女</string>
+    <string name="general_got_it">知道了</string>
+    <string name="general_invild">无效</string>
+    <string name="general_loading">载入中...</string>
+    <string name="general_look">查看</string>
+    <string name="general_male">男</string>
+    <string name="general_more">更多</string>
+    <string name="general_network_faild">您的无线网络不给力！</string>
+    <string name="general_next">下一步</string>
+    <string name="general_no">取消</string>
+    <string name="general_no_more_data">已经到底啦!</string>
+    <string name="general_nodata">无记录</string>
+    <string name="general_not_delete">无法删除</string>
+    <string name="general_null_data">暂无数据</string>
+    <string name="general_null_label">这家伙很懒，什么也没说</string>
+    <string name="general_oading">升级中...</string>
+    <string name="general_ok">确定</string>
+    <string name="general_prompt">提示</string>
+    <string name="general_retry">重试</string>
+    <string name="general_save">保存</string>
+    <string name="general_send">发  送</string>
+    <string name="general_setting">设置</string>
+    <string name="general_share">分享</string>
+    <string name="general_sleep">睡眠</string>
+    <string name="general_sport">运动</string>
+    <string name="general_start_check">开始体验</string>
+    <string name="general_submitting">数据提交中...</string>
+    <string name="general_sycing">同步中...</string>
+    <string name="general_sync_end">同步完成</string>
+    <string name="general_sync_time">最近同步于{0}, 共{1}条</string>
+    <string name="general_tip">提示</string>
+    <string name="general_uploading">正在下载文件...</string>
+    <string name="general_wait">请稍候...</string>
+    <string name="general_yes">确定</string>
+    <string name="get_code">获取验证码</string>
+    <string name="getting_started">入门指南</string>
+    <string name="getting_version_information">正在获取版本信息</string>
+    <string name="goal_BMI">BMI指数</string>
+    <string name="goal_BMI_INDEX">身体质量指数</string>
+    <string name="goal_body">您的体型</string>
+    <string name="goal_body_value">通过BMI计算</string>
+    <string name="goal_check">检测报告</string>
+    <string name="goal_consume">消耗</string>
+    <string name="goal_diy">自定目标</string>
+    <string name="goal_notice">手表连续振动 5 次表示完成运动目标</string>
+    <string name="goal_recommend">推荐</string>
+    <string name="goal_sport">运动</string>
+    <string name="goal_step">步</string>
+    <string name="goal_step_error_message">目标步数必须为大于0的整数!</string>
+    <string name="goal_step_error_title">目标设置错误</string>
+    <string name="goal_title">运动目标设置</string>
+    <string name="group_details">群组详情</string>
+    <string name="handup_setting">勿扰模式</string>
+    <string name="handup_setting_intro">勿扰时间段内：</string>
+    <string name="handup_setting_intro1">1、抬手显屏功能关闭</string>
+    <string name="handup_setting_intro2">2、除闹钟、倒计时外其余震动功能均关闭</string>
+    <string name="home_state_active">活动</string>
+    <string name="home_state_run">跑步</string>
+    <string name="home_state_sit">静坐</string>
+    <string name="home_state_walk">走路</string>
+    <string name="imageView">imageView</string>
+    <string name="lastmonth">上个月</string>
+    <string name="lastweek">上周</string>
+    <string name="lastyear">去年</string>
+    <string name="lenth">身高</string>
+    <string name="loadmore">上拉加载更多...</string>
+    <string name="login_QQ">QQ登录</string>
+    <string name="login_activity_wechat">请安装微信客户端</string>
+    <string name="login_activity_wechat_cancle">取消授权</string>
+    <string name="login_activity_wechat_fail">授权失败</string>
+    <string name="login_activity_wechat_success">授权成功</string>
+    <string name="login_content_1">使用连爱,即表示您同意连爱的</string>
+    <string name="login_content_2"><u>使用条款</u></string>
+    <string name="login_content_3"><u>和</u></string>
+    <string name="login_content_4"><u>隐私政策</u></string>
+    <string name="login_email">电子邮箱登录</string>
+    <string name="login_erification_code">输入验证码</string>
+    <string name="login_error1">账号不能为空</string>
+    <string name="login_error10">该号码已经被注册</string>
+    <string name="login_error11">昵称不能为空哦</string>
+    <string name="login_error2">请输入正确的邮箱格式</string>
+    <string name="login_error3">密码不能为空</string>
+    <string name="login_error4">密码和用户名不匹配</string>
+    <string name="login_error5">网络错误,请检查网络后重新登录</string>
+    <string name="login_error6">手机号应为11位</string>
+    <string name="login_error7">邮箱不能为空</string>
+    <string name="login_error8">账号不存在</string>
+    <string name="login_error9">验证码的是4位数字</string>
+    <string name="login_forgetpwd"><u>忘记密码</u></string>
+    <string name="login_form_account">请输入您的用户名</string>
+    <string name="login_form_btn_forgetpsw">忘记密码</string>
+    <string name="login_form_btn_forgetpsw_message">邮件已发送至您邮箱,请核对!</string>
+    <string name="login_form_btn_login">登录</string>
+    <string name="login_form_btn_register">注册</string>
+    <string name="login_form_cb_rememberpsw">记住登录账号？</string>
+    <string name="login_form_error">连接服务器失败！</string>
+    <string name="login_form_error_message">登录失败!</string>
+    <string name="login_form_error_psw_message">您输入的账户或密码不正确，请重新输入!</string>
+    <string name="login_form_error_psw_tip">账号验证失败</string>
+    <string name="login_form_exit_app_tip">是否退出应用?</string>
+    <string name="login_form_forgot_password">找回密码 >></string>
+    <string name="login_form_have_latest_version">新版更新提示</string>
+    <string name="login_form_have_latest_version_descrption">我们强烈建议你更新到最新版以便获得更好的服务。如需寻求帮助可联系\"support@linkloving.com\"。</string>
+    <string name="login_form_have_latest_version_ignore">稍后再说</string>
+    <string name="login_form_have_latest_version_update_now">现在更新!</string>
+    <string name="login_form_hint_loginname">登录邮箱</string>
+    <string name="login_form_hint_loginpassword">密码</string>
+    <string name="login_form_loading_login">登录中...</string>
+    <string name="login_form_login">立 即 登 录</string>
+    <string name="login_form_login_quickly">快 速 登 录</string>
+    <string name="login_form_logining">正在登录中...</string>
+    <string name="login_form_password">请输入用户密码</string>
+    <string name="login_form_qq_login">QQ 登 录</string>
+    <string name="login_form_register">免 费 注 册</string>
+    <string name="login_form_relogin_text">切换账号</string>
+    <string name="login_form_title">登录连爱手表</string>
+    <string name="login_form_validate_login_name_empty">请输入登录账号！</string>
+    <string name="login_form_validate_login_psw_length_less_six">请输入密码！</string>
+    <string name="login_form_version_error">更新版本时出错了。</string>
+    <string name="login_form_version_info">版本: {0}({1})</string>
+    <string name="login_form_wx_login">微信 登 录</string>
+    <string name="login_from_email">您的电子邮件地址</string>
+    <string name="login_message">短信验证登录</string>
+    <string name="login_other"><u>使用其他登录</u></string>
+    <string name="login_phone_phonenumber">您的手机号码</string>
+    <string name="login_phone_pwd">输入6~20位的密码</string>
+    <string name="login_phone_pwd1">输入6~20位的密码</string>
+    <string name="login_support_country">中国</string>
+    <string name="login_wechat">微信登录</string>
+    <string name="login_yanzhen_phone">正在验证手机号码...</string>
+    <string name="login_yanzhengma">输入验证码</string>
+    <string name="long_sit_end_time">结束时间</string>
+    <string name="long_sit_end_time_text">设置结束生效时间</string>
+    <string name="long_sit_notice_end">次，提醒您活动一下</string>
+    <string name="long_sit_notice_head">如果您坐的时间过长，手表会连续轻微震动</string>
+    <string name="long_sit_onset_text">生效时段</string>
+    <string name="long_sit_start_time">开始时间</string>
+    <string name="long_sit_start_time_text">设置起始生效时间</string>
+    <string name="long_sit_switch_title">开启/关闭</string>
+    <string name="long_sit_text">久坐提醒</string>
+    <string name="long_sit_time_error_message">结束时间必须晚于起始时间!</string>
+    <string name="long_sit_time_error_title">生效时间无效</string>
+    <string name="long_sit_title">久坐提醒设置</string>
+    <string name="long_sit_to">至</string>
+    <string name="longsit_dialog_title">设置时间</string>
+    <string name="main_about_adv_feedback">问题咨询</string>
+    <string name="main_about_adv_nomore">没有更多的记录了</string>
+    <string name="main_about_adv_title">问题与反馈</string>
+    <string name="main_about_douban">豆瓣</string>
+    <string name="main_about_mail">support@linkloving.com</string>
+    <string name="main_about_official_website">www.linkloving.com</string>
+    <string name="main_about_privacy_policy">隐私政策</string>
+    <string name="main_about_publish_by">Producted by LINKLOVING CO., LTD</string>
+    <string name="main_about_send_adv_content">未输入反馈内容或输入超出200字！</string>
+    <string name="main_about_send_mail_content">请输入邮件内容！</string>
+    <string name="main_about_send_mail_title">反馈</string>
+    <string name="main_about_terms_conditions">条款</string>
+    <string name="main_about_title">更多</string>
+    <string name="main_about_us">关于连爱</string>
+    <string name="main_about_weibo">微博</string>
+    <string name="main_more_QQ">客服QQ</string>
+    <string name="main_more_QQ_copy">QQ号码已复制到剪切板</string>
+    <string name="main_more_WX">微信公众号</string>
+    <string name="main_more_about">关于连爱</string>
+    <string name="main_more_adv">咨询反馈</string>
+    <string name="main_more_adv_liuyan">留言</string>
+    <string name="main_more_adv_nores">未回复</string>
+    <string name="main_more_adv_res">已回复</string>
+    <string name="main_more_app">赶紧下载安装这个App吧!</string>
+    <string name="main_more_exit">退出</string>
+    <string name="main_more_exit_ent">退出群组</string>
+    <string name="main_more_exit_ent_faliure">退出失败!</string>
+    <string name="main_more_exit_ent_message">您确定要退出 \"{0}\" ?</string>
+    <string name="main_more_exit_ent_success">退出成功!</string>
+    <string name="main_more_exit_group">群组</string>
+    <string name="main_more_faq">常见问题</string>
+    <string name="main_more_from_qq_login">来自QQ号登录</string>
+    <string name="main_more_from_wx_login">来自微信号登录</string>
+    <string name="main_more_rexian">服务热线</string>
+    <string name="main_more_rexian_title">确定拨打服务热线么？</string>
+    <string name="main_more_sycing">同步中...</string>
+    <string name="main_more_sycn">云同步</string>
+    <string name="main_more_sycn_fail">当前网络不可用，请检查您的网络设置</string>
+    <string name="main_more_sycn_message">云同步时会将最新的云端数据下载到本地,估计耗时30秒左右,需要云同步吗?</string>
+    <string name="main_more_sycn_title">云同步确认</string>
+    <string name="main_more_sync_end">同步完成</string>
+    <string name="main_more_tiaozhuan">进入充值</string>
+    <string name="main_more_understand">了解手表</string>
+    <string name="main_more_version">软件版本</string>
+    <string name="main_more_version_check_is_latest">当前版本为最新版本</string>
+    <string name="main_more_version_check_nofind">查找不到对应的固件</string>
+    <string name="menu_body">身体信息</string>
+    <string name="menu_clock">闹钟设置</string>
+    <string name="menu_exit">退出系统</string>
+    <string name="menu_exit_app">退出应用</string>
+    <string name="menu_exit_mode">请选择退出方式</string>
+    <string name="menu_goal">目标设置</string>
+    <string name="menu_hubei_pay">信用卡</string>
+    <string name="menu_more">更多  </string>
+    <string name="menu_notify_call">来电提醒</string>
+    <string name="menu_notify_link">连爱</string>
+    <string name="menu_notify_msg">短信提醒</string>
+    <string name="menu_notify_qq">QQ提醒</string>
+    <string name="menu_notify_sys">系统消息提醒开关</string>
+    <string name="menu_notify_wx">微信提醒</string>
+    <string name="menu_pay">钱包</string>
+    <string name="menu_pay_account">卡号</string>
+    <string name="menu_pay_balance">卡片余额 : </string>
+    <string name="menu_pay_chongzhi">充值</string>
+    <string name="menu_pay_in">充值</string>
+    <string name="menu_pay_out">消费</string>
+    <string name="menu_pay_read_fail">读取失败</string>
+    <string name="menu_pay_reading">正在读取...</string>
+    <string name="menu_pay_time">{0}年{1}月{2}日  {3}:{4}:{5}</string>
+    <string name="menu_pay_transactions">电子账单</string>
+    <string name="menu_pay_type">卡片类型 : </string>
+    <string name="menu_pay_unknow">未知的卡号</string>
+    <string name="menu_pay_yuan">¥ </string>
+    <string name="menu_pay_yue">余额  </string>
+    <string name="menu_power_I">节能模式一(PM1)</string>
+    <string name="menu_power_II">节能模式二(PM2)</string>
+    <string name="menu_power_help1">若不进行设置，所有提醒以及震动都为打开状态</string>
+    <string name="menu_power_help2">关闭抬手显屏功能，以节省电量</string>
+    <string name="menu_power_help3">关闭抬手显屏功能，关闭所有提醒震动(但闹钟,倒计时均正常使用)</string>
+    <string name="menu_power_help4">电量低于10%时，将会自动进入PM3模式，此时闹钟，倒计时震动降低为1次，其余所有震动关闭</string>
+    <string name="menu_ranking">排行榜</string>
+    <string name="menu_sedentary">久坐提醒</string>
+    <string name="menu_sport_data">运动数据</string>
+    <string name="menu_wxsport">微信运动</string>
+    <string name="metric_system">公制</string>
+    <string name="mon">一</string>
+    <string name="monday">周一</string>
+    <string name="more_inch">英制</string>
+    <string name="move_device_title"> 删除设备</string>
+    <string name="my_message">我的消息</string>
+    <string name="myattention">我的关注</string>
+    <string name="myfans">我的粉丝</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="near_people">附近的人</string>
+    <string name="nearby_10_hour_ago">10小时前</string>
+    <string name="nearby_10_minute_ago">10分钟前</string>
+    <string name="nearby_11_hour_ago">11小时前</string>
+    <string name="nearby_12_hour_ago">12小时前</string>
+    <string name="nearby_13_hour_ago">13小时前</string>
+    <string name="nearby_14_hour_ago">14小时前</string>
+    <string name="nearby_15_hour_ago">15小时前</string>
+    <string name="nearby_16_hour_ago">16小时前</string>
+    <string name="nearby_17_hour_ago">17小时前</string>
+    <string name="nearby_18_hour_ago">18小时前</string>
+    <string name="nearby_19_hour_ago">19小时前</string>
+    <string name="nearby_1_day_ago">1天前</string>
+    <string name="nearby_1_hour_ago">1小时前</string>
+    <string name="nearby_1_month_ago">1个月前</string>
+    <string name="nearby_1_week_ago">1周前</string>
+    <string name="nearby_20_hour_ago">20小时前</string>
+    <string name="nearby_21_hour_ago">21小时前</string>
+    <string name="nearby_22_hour_ago">22小时前</string>
+    <string name="nearby_23_hour_ago">23小时前</string>
+    <string name="nearby_2_day_ago">2天前</string>
+    <string name="nearby_2_hour_ago">2小时前</string>
+    <string name="nearby_2_week_ago">2周前</string>
+    <string name="nearby_30_minute_ago">30分钟前</string>
+    <string name="nearby_3_day_ago">3天前</string>
+    <string name="nearby_3_hour_ago">3小时前</string>
+    <string name="nearby_3_week_ago">3周前</string>
+    <string name="nearby_4_day_ago">4天前</string>
+    <string name="nearby_4_hour_ago">4小时前</string>
+    <string name="nearby_5_day_ago">5天前</string>
+    <string name="nearby_5_hour_ago">5小时前</string>
+    <string name="nearby_5_minute_ago">5分钟前</string>
+    <string name="nearby_6_day_ago">6天前</string>
+    <string name="nearby_6_hour_ago">6小时前</string>
+    <string name="nearby_7_hour_ago">7小时前</string>
+    <string name="nearby_8_hour_ago">8小时前</string>
+    <string name="nearby_9_hour_ago">9小时前</string>
+    <string name="nearby_empty">没有附近的人！</string>
+    <string name="nearby_list_item_distance_desc">{0}以内 | {1}</string>
+    <string name="nearby_title">附近的人</string>
+    <string name="nearby_too_long_ago">很久没上啦!</string>
+    <string name="nearby_unit_km">公里</string>
+    <string name="nearby_unit_m">米</string>
+    <string name="new_bound_step1">一、取出机芯，连接充电线</string>
+    <string name="new_bound_step2">二、在设备列表中找到与手环背面相同的ID号，选择并绑定，当连接成功后，机芯将会震动一次</string>
+    <string name="new_bound_step3">请断开充电线</string>
+    <string name="nick_name">昵称</string>
+    <string name="no_storage_card">没有存储卡</string>
+    <string name="not_enough_space">空间不足</string>
+    <string name="notification_title">消息提醒</string>
+    <string name="notifications_no_res">消息不提醒？</string>
+    <string name="password_modification_success">密码修改成功</string>
+    <string name="pay_isreading">正在读取余额信息,请稍后...</string>
+    <string name="pay_loading">正在读取，请稍等...</string>
+    <string name="pay_no_bound">您没有绑定手表哦-.-</string>
+    <string name="pay_no_connect">请连接蓝牙哦-.-</string>
+    <string name="pay_no_function">您的手表暂不支持支付功能哦-.-</string>
+    <string name="permission_ble">打开位置权限才可以使用连爱蓝牙功能哦~</string>
+    <string name="pesonal_activity_title">个人资料</string>
+    <string name="pm1">节能模式一(pm1)</string>
+    <string name="pm1_content_1">pm1模式下:</string>
+    <string name="pm1_content_2">抬手显屏功能关闭</string>
+    <string name="pm2">节能模式二(pm2)</string>
+    <string name="pm2_content_1">pm2模式下:</string>
+    <string name="pm2_content_2">1.抬手显屏功能关闭</string>
+    <string name="pm2_content_3">2.关闭所有提醒震动(但闹钟,倒计时均正常使用)</string>
+    <string name="pm3">电量低于10%时，手表将会自动进入节能模式三（pm3）</string>
+    <string name="pm3_content_1">pm3模式下:</string>
+    <string name="pm3_content_2">1.抬手显屏功能关闭</string>
+    <string name="pm3_content_3">2.闹钟，倒计时震动降低为1次，其他震动关闭</string>
+    <string name="portal_activity_more">更多</string>
+    <string name="portal_main_battery_ble_timeout">蓝牙扫描超时, 请稍后重试.</string>
+    <string name="portal_main_battery_low">电量不足</string>
+    <string name="portal_main_battery_low_msg">您的手表当前电量低于10%，请尽快充电!</string>
+    <string name="portal_main_be_bounded_hint">此手表已被用户{0}绑定了，本次绑定失败！</string>
+    <string name="portal_main_bound_failed">绑定设备失败</string>
+    <string name="portal_main_bound_failed_ble_dis">请退出app重启手机蓝牙,再进行绑定</string>
+    <string name="portal_main_bound_failed_nocharge">请连接充电线去绑定</string>
+    <string name="portal_main_bound_success">设备绑定成功！</string>
+    <string name="portal_main_bounding">请注意观察手机与手表的提示信息.</string>
+    <string name="portal_main_data_calculating">数据计算中..</string>
+    <string name="portal_main_data_chose">日期选择</string>
+    <string name="portal_main_data_loading">数据加载中..</string>
+    <string name="portal_main_date_format_error">日期格式错误！</string>
+    <string name="portal_main_finish">步数完成</string>
+    <string name="portal_main_goal">目标{0}步</string>
+    <string name="portal_main_gobound">绑定设备</string>
+    <string name="portal_main_has_bound">您的账号已在其它手机上绑定了设备, 本次绑定无法继续, 请重新登录后再试!</string>
+    <string name="portal_main_has_bound_drop">设备已绑定用户ID({0})您无法再次绑定该设备，请先解绑该设备后再试！</string>
+    <string name="portal_main_has_bound_other">您的设备已被账号{0}绑定，请先通知此账号解绑设备后再试！</string>
+    <string name="portal_main_history_data_saving">历史汇总数据保存中..</string>
+    <string name="portal_main_isbounding">绑定中..</string>
+    <string name="portal_main_local_sport_data_save_success">离线存储:当日实时汇总数据也已成功保存.</string>
+    <string name="portal_main_new_feedback_msg">您提交的问题咨询有了回信！</string>
+    <string name="portal_main_sleep_data_saving">正在计算睡眠数据..</string>
+    <string name="portal_main_sport_data_saving">运动数据保存中..</string>
+    <string name="portal_main_state_connected">已连接</string>
+    <string name="portal_main_state_connecting">连接中..</string>
+    <string name="portal_main_state_unbound">未绑定</string>
+    <string name="portal_main_state_unconnect">未连接</string>
+    <string name="portal_main_sync_data">MM月dd日 HH:mm</string>
+    <string name="portal_main_timing">正在校准世界标准零时..</string>
+    <string name="portal_main_timing_failed">标准世界零时校准失败，请检查您的网络后再试！</string>
+    <string name="portal_main_today">今日</string>
+    <string name="portal_main_unbound">未绑定设备</string>
+    <string name="portal_main_unbound_msg">立即绑定linkloving智能设备</string>
+    <string name="portal_main_waiting_tomorrow">请期待明天的到来！</string>
+    <string name="power_setting">省电管理</string>
+    <string name="preparing_card">正在准备...</string>
+    <string name="privacy_clause">隐私条款</string>
+    <string name="privacy_setting">隐私设置</string>
+    <string name="prompt_email">邮箱</string>
+    <string name="prompt_password">密码</string>
+    <string name="pull_to_refresh_pull_label">下拉同步数据…</string>
+    <string name="pull_to_refresh_refreshing_label">正在同步中…</string>
+    <string name="pull_to_refresh_release_label">放开即开始同步数据…</string>
+    <string name="pwd">密码</string>
+    <string name="queren">确认</string>
+    <string name="ranking_all">全网排名</string>
+    <string name="ranking_come_from">来自</string>
+    <string name="ranking_ent">企业排名</string>
+    <string name="ranking_item_desc">他击败了全国{0}%的人</string>
+    <string name="ranking_no_data">当日无数据</string>
+    <string name="ranking_people_count">当前参与排名人数:</string>
+    <string name="ranking_rank">第{0}名</string>
+    <string name="ranking_title">排行榜</string>
+    <string name="ranking_wait_tomorrow">请期待明天的到来！</string>
+    <string name="record_weight">记录体重</string>
+    <string name="refresh_data">数据同步中...剩余{0}条</string>
+    <string name="refresh_time">时间设置成功...</string>
+    <string name="register_agreelisenc_1">使用连爱，即表示您同意连爱的</string>
+    <string name="register_agreelisenc_2">使用条款</string>
+    <string name="register_agreelisenc_3">和</string>
+    <string name="register_agreelisenc_4">隐私政策</string>
+    <string name="register_avater">注册成功,请完善您的个人资料</string>
+    <string name="register_birth">您的生日</string>
+    <string name="register_continue">继续</string>
+    <string name="register_email"><u>邮箱注册</u></string>
+    <string name="register_form_btn_submit">注册</string>
+    <string name="register_form_error_age">注册失败, 未知错误！</string>
+    <string name="register_form_error_height">注册失败, 未知错误！</string>
+    <string name="register_form_error_mail_exist">注册失败，此邮箱已被注册过！</string>
+    <string name="register_form_error_message">注册失败, 未知错误！</string>
+    <string name="register_form_error_weight">注册失败, 未知错误！</string>
+    <string name="register_form_mail_have_exist">该邮箱已被注册</string>
+    <string name="register_form_mail_ok">邮箱可用</string>
+    <string name="register_form_next_step">下一步（共2步）</string>
+    <string name="register_form_title">注册账号</string>
+    <string name="register_form_valid_agree_role">注册之前请阅读条款！</string>
+    <string name="register_form_valid_mail">邮箱不能为空！</string>
+    <string name="register_form_valid_nick_name">昵称不能为空！ </string>
+    <string name="register_form_valid_psw">密码不能为空</string>
+    <string name="register_form_valid_psw_not_same">密码前后输入不一致！</string>
+    <string name="register_form_valid_psw_notenouph">密码长度应大于或等于6个字符！</string>
+    <string name="register_form_view_age">年龄：</string>
+    <string name="register_form_view_agreelisence">我已经阅读并同意条款</string>
+    <string name="register_form_view_confirmpsw">确认密码</string>
+    <string name="register_form_view_eMail">登录邮箱</string>
+    <string name="register_form_view_height">身高：</string>
+    <string name="register_form_view_look_caluse">《服务条款》</string>
+    <string name="register_form_view_man">男性</string>
+    <string name="register_form_view_nickname">昵称</string>
+    <string name="register_form_view_password">密码</string>
+    <string name="register_form_view_weight">体重：</string>
+    <string name="register_form_view_woman">女性</string>
+    <string name="register_height">您的身高</string>
+    <string name="register_nickname">昵称：</string>
+    <string name="register_sex">您的性别</string>
+    <string name="register_success_experience">立即体验</string>
+    <string name="register_success_mail">注册邮箱：</string>
+    <string name="register_success_title">注册成功</string>
+    <string name="register_updata_avater">上传头像</string>
+    <string name="register_weight">您的体重</string>
+    <string name="relationship">朋友圈</string>
+    <string name="relationship_attention">关注</string>
+    <string name="relationship_attention_failed">关注失败！</string>
+    <string name="relationship_attention_success">关注成功！</string>
+    <string name="relationship_best_record">个人最好记录</string>
+    <string name="relationship_cancel_attention">取消关注</string>
+    <string name="relationship_cancel_attention_failed">取消关注失败！</string>
+    <string name="relationship_cancel_attention_success">取消关注成功！</string>
+    <string name="relationship_comment">评论</string>
+    <string name="relationship_comment_empty">评论内容不能为空！</string>
+    <string name="relationship_comment_failed">评论失败！</string>
+    <string name="relationship_comments">评论我的</string>
+    <string name="relationship_concern_about">我关注的</string>
+    <string name="relationship_concern_me">关注我的</string>
+    <string name="relationship_current_steps">当日步数</string>
+    <string name="relationship_hot_comments">热门评论</string>
+    <string name="relationship_nearby">附近的人</string>
+    <string name="relationship_not_reply_self">不能回复自己！</string>
+    <string name="relationship_reply">回复</string>
+    <string name="relationship_reply_empty">回复内容不能为空！</string>
+    <string name="relationship_reply_failed">回复失败！</string>
+    <string name="relationship_search">查找</string>
+    <string name="relationship_search_already_group_message">你已经加入\"{0}\".</string>
+    <string name="relationship_search_already_group_message_other">你已经加入了 \"{0}\"</string>
+    <string name="relationship_search_condition_empty">关键词不能为空！</string>
+    <string name="relationship_search_empty">没有匹配的用户！</string>
+    <string name="relationship_search_group_continue">继续..</string>
+    <string name="relationship_search_group_errpasword">密码错误</string>
+    <string name="relationship_search_group_features">群组功能</string>
+    <string name="relationship_search_group_inputpsd">输入密码</string>
+    <string name="relationship_search_group_msg">在加入群组后,其他的群组成员可以查看您的信息</string>
+    <string name="relationship_search_group_nopasword">请输入密码</string>
+    <string name="relationship_search_group_psderror">密码错误</string>
+    <string name="relationship_search_group_success">加入成功!</string>
+    <string name="relationship_search_group_success1">您可以在更多页面随时退出群组功能</string>
+    <string name="relationship_search_group_success2">您可以在更多页面查看群组信息</string>
+    <string name="relationship_search_hint">输入对方邮件或昵称（可模糊查找）</string>
+    <string name="relationship_search_join_failure">加入失败!</string>
+    <string name="relationship_search_join_group_message">确定加入 \"{0}\"?</string>
+    <string name="relationship_search_join_succeed">加入成功!</string>
+    <string name="relationship_search_people_count">{0}人</string>
+    <string name="relationship_user_info">个人信息</string>
+    <string name="reminder_step">最少运动步数</string>
+    <string name="report_calories">卡路里</string>
+    <string name="report_data_reading">周/月图数据读取中...</string>
+    <string name="report_day_activte_lengend_ca_run">跑步消耗（千卡）</string>
+    <string name="report_day_activte_lengend_ca_work">走路消耗（千卡）</string>
+    <string name="report_day_activte_lengend_deepsleep">深睡（小时）</string>
+    <string name="report_day_activte_lengend_distance_run">跑步（米）</string>
+    <string name="report_day_activte_lengend_distance_work">走路（米）</string>
+    <string name="report_day_activte_lengend_sleep">浅睡（小时）</string>
+    <string name="report_day_activte_lengend_step_run">跑步（步）</string>
+    <string name="report_day_activte_lengend_step_work">走路（步）</string>
+    <string name="report_day_view">按日查找</string>
+    <string name="report_distance">距离</string>
+    <string name="report_month_view">按月查看</string>
+    <string name="report_sleep">睡眠</string>
+    <string name="report_steps">步数</string>
+    <string name="report_week_view">按周查看</string>
+    <string name="sat">六</string>
+    <string name="saturday">周六</string>
+    <string name="save">保存</string>
+    <string name="save_settings_successfully">保存设置成功</string>
+    <string name="saved_to_local">已保存到本地</string>
+    <string name="saving_image">图片保存中...</string>
+    <string name="send">发送</string>
+    <string name="send_confirm">我们将发送信息到</string>
+    <string name="service_center_title">客服中心</string>
+    <string name="service_phone_number">400-998-3282</string>
+    <string name="service_provision">服务条款</string>
+    <string name="setting_success">设置成功!</string>
+    <string name="sex">性别</string>
+    <string name="share_content">连爱智能手表陪你一起分享运动状况，期待你的加入。</string>
+    <string name="share_content_fail">分享失败</string>
+    <string name="share_content_short">一起分享运动状况!</string>
+    <string name="shop">商城</string>
+    <string name="shujumingxi">数据明细</string>
+    <string name="sign">个性签名</string>
+    <string name="smssdk_add_contact">添加</string>
+    <string name="smssdk_back">返回 </string>
+    <string name="smssdk_cancel">取消</string>
+    <string name="smssdk_choice_invite_phones">选择一个号码发送邀请</string>
+    <string name="smssdk_choose_country">选择国家和地区</string>
+    <string name="smssdk_close_identify_page_dialog">验证码短信可能略有延迟，确定返回并重新开始？</string>
+    <string name="smssdk_contacts_detail">详细资料</string>
+    <string name="smssdk_contacts_in_app">已加入的用戶</string>
+    <string name="smssdk_contacts_out_app">待邀请的好友</string>
+    <string name="smssdk_contacts_phones">手机号码: </string>
+    <string name="smssdk_country">国家和地区</string>
+    <string name="smssdk_country_List">国家列表</string>
+    <string name="smssdk_country_not_support_currently">当前服务暂不支持此国家，请选择其它国家</string>
+    <string name="smssdk_error_desc_400">无效请求</string>
+    <string name="smssdk_error_desc_401">token为空</string>
+    <string name="smssdk_error_desc_402">token不存在</string>
+    <string name="smssdk_error_desc_403">CRC32为空</string>
+    <string name="smssdk_error_desc_404">CRC32非法</string>
+    <string name="smssdk_error_desc_405">AppKey为空</string>
+    <string name="smssdk_error_desc_406">AppKey错误</string>
+    <string name="smssdk_error_desc_407">缺少数据</string>
+    <string name="smssdk_error_desc_408">无效的参数</string>
+    <string name="smssdk_error_desc_418">内部接口调用失败</string>
+    <string name="smssdk_error_desc_419">duid对应的token不存在</string>
+    <string name="smssdk_error_desc_450">权限不足</string>
+    <string name="smssdk_error_desc_451">User-Agent为空</string>
+    <string name="smssdk_error_desc_452">User-Agent格式错误</string>
+    <string name="smssdk_error_desc_453">解密错误</string>
+    <string name="smssdk_error_desc_454">数据格式错误</string>
+    <string name="smssdk_error_desc_455">签名无效</string>
+    <string name="smssdk_error_desc_456">手机号码错误</string>
+    <string name="smssdk_error_desc_457">非法手机号</string>
+    <string name="smssdk_error_desc_458">手机号码在黑名单中</string>
+    <string name="smssdk_error_desc_459">无appKey的控制数据</string>
+    <string name="smssdk_error_desc_460">无权限发送短信</string>
+    <string name="smssdk_error_desc_461">不支持该地区发送短信</string>
+    <string name="smssdk_error_desc_462">每分钟发送次数超限</string>
+    <string name="smssdk_error_desc_463">手机号码每天发送次数超限</string>
+    <string name="smssdk_error_desc_464">每台手机每天发送次数超限</string>
+    <string name="smssdk_error_desc_465">号码在App中每天发送短信的次数超限</string>
+    <string name="smssdk_error_desc_466">校验的验证码为空</string>
+    <string name="smssdk_error_desc_467">校验验证码请求频繁</string>
+    <string name="smssdk_error_desc_468">需要校验的验证码错误</string>
+    <string name="smssdk_error_desc_469">未开启web发送短信</string>
+    <string name="smssdk_error_desc_470">账户余额不足</string>
+    <string name="smssdk_error_desc_471">请求IP错误</string>
+    <string name="smssdk_error_desc_472">获取客户端平台错误</string>
+    <string name="smssdk_error_desc_473">服务端根据duid获取平台错误 </string>
+    <string name="smssdk_error_desc_474">没有打开服务端验证开关</string>
+    <string name="smssdk_error_desc_475">appKey的应用信息不存在</string>
+    <string name="smssdk_error_desc_476">当前appkey发送短信的数量超过限额</string>
+    <string name="smssdk_error_desc_477">当前手机号发送短信的数量超过限额</string>
+    <string name="smssdk_error_desc_478">当前手机号在当前应用内发送超过限额</string>
+    <string name="smssdk_error_desc_500">服务器内部错误</string>
+    <string name="smssdk_error_desc_600">API使用受限制</string>
+    <string name="smssdk_error_desc_601">短信发送受限</string>
+    <string name="smssdk_error_desc_602">无法发送此地区短信</string>
+    <string name="smssdk_error_desc_603">请填写正确的手机号码</string>
+    <string name="smssdk_error_desc_604">当前服务暂不支持此国家，请选择其它国家</string>
+    <string name="smssdk_error_desc_server_busy">服务器繁忙</string>
+    <string name="smssdk_error_detail_400">客户端请求不能被识别。</string>
+    <string name="smssdk_error_detail_401">请求的token为空。</string>
+    <string name="smssdk_error_detail_402">请求的token不存在。</string>
+    <string name="smssdk_error_detail_403">请求Header中的hash为空。</string>
+    <string name="smssdk_error_detail_404">请求Header中的hash非法。</string>
+    <string name="smssdk_error_detail_405">请求的AppKey为空。</string>
+    <string name="smssdk_error_detail_406">请求的AppKey不存在。</string>
+    <string name="smssdk_error_detail_407">请求提交的数据缺少必要的数据。</string>
+    <string name="smssdk_error_detail_408">无效的请求参数。</string>
+    <string name="smssdk_error_detail_418">内部接口调用失败。</string>
+    <string name="smssdk_error_detail_419">appKey_token对应的duid不存在</string>
+    <string name="smssdk_error_detail_450">无权执行该操作。</string>
+    <string name="smssdk_error_detail_451">所有访问服务器的接口，在请求的头部必须加入指定格式的User-Agent。</string>
+    <string name="smssdk_error_detail_452">请求头中的User-Agent格式错误。</string>
+    <string name="smssdk_error_detail_453">解密请求数据错误。</string>
+    <string name="smssdk_error_detail_454">请求传递的数据格式错误，服务器无法转换为JSON格式的数据。</string>
+    <string name="smssdk_error_detail_455">签名检验。</string>
+    <string name="smssdk_error_detail_456">提交的手机号码或者区号为空。</string>
+    <string name="smssdk_error_detail_457">提交的手机号格式不正确（包括手机的区号）。</string>
+    <string name="smssdk_error_detail_458">手机号码在发送黑名单中。</string>
+    <string name="smssdk_error_detail_459">获取appKey控制发送短信的数据失败。</string>
+    <string name="smssdk_error_detail_460">没有打开客户端发送短信的开关。</string>
+    <string name="smssdk_error_detail_461">没有开通给当前地区发送短信的功能。</string>
+    <string name="smssdk_error_detail_462">每分钟发送短信的数量超过限制。</string>
+    <string name="smssdk_error_detail_463">手机号码每天发送短信的次数超出限制。</string>
+    <string name="smssdk_error_detail_464">每台手机每天发送短信的次数超限。</string>
+    <string name="smssdk_error_detail_465">手机号码在APP中每天发送短信的数量超限。</string>
+    <string name="smssdk_error_detail_466">提交的校验验证码为空。</string>
+    <string name="smssdk_error_detail_467">验证失败3次，验证码失效，请重新请求</string>
+    <string name="smssdk_error_detail_468">用户提交校验的验证码错误。</string>
+    <string name="smssdk_error_detail_469">没有打开通过网页端发送短信的开关。</string>
+    <string name="smssdk_error_detail_470">账户的短信余额不足。</string>
+    <string name="smssdk_error_detail_471">通过服务端发送或验证短信的IP错误</string>
+    <string name="smssdk_error_detail_472">服务端根据duid获取平台错误。</string>
+    <string name="smssdk_error_detail_473">服务端根据duid获取平台错误 </string>
+    <string name="smssdk_error_detail_474">没有打开服务端验证开关</string>
+    <string name="smssdk_error_detail_475">appKey的应用信息不存在</string>
+    <string name="smssdk_error_detail_476">如果当前appkey对应的包名没有通过审核，每天次appkey+包名最多可以发送20条短信</string>
+    <string name="smssdk_error_detail_477">当前手机号码每天最多可发送短信10条，包括客户端发送和WebApi发送</string>
+    <string name="smssdk_error_detail_478">当前手机号码在当前应用下12小时内最多可发送文本验证码5条</string>
+    <string name="smssdk_error_detail_500">服务端程序报错。</string>
+    <string name="smssdk_error_detail_600">API使用受限制</string>
+    <string name="smssdk_error_detail_601">短信发送受限</string>
+    <string name="smssdk_error_detail_602">无法发送此地区短信</string>
+    <string name="smssdk_error_detail_603">请填写正确的手机号码</string>
+    <string name="smssdk_error_detail_604">当前服务暂不支持此国家，请选择其它国家</string>
+    <string name="smssdk_get_phone_verifycode_today_frequentlly">很抱歉，该手机号申请验证码次数过多，请明天重试！</string>
+    <string name="smssdk_get_verifycode_frequentlly">发送验证码太频繁，请稍后再发！</string>
+    <string name="smssdk_identify_code">验证码</string>
+    <string name="smssdk_invite">邀请</string>
+    <string name="smssdk_invite_content">Mob最新短信SDK,欢迎大家使用，你的好友邀请你加入；下载地址： http://www.mob.com</string>
+    <string name="smssdk_make_sure_country_mobile">请确认你的国家或地区并输入手机号码</string>
+    <string name="smssdk_make_sure_mobile_detail"><Data>我们将发送&lt;font color=#3cac17>验证码&lt;/font>短信到这个号码:</Data></string>
+    <string name="smssdk_make_sure_mobile_num">确认手机号码</string>
+    <string name="smssdk_make_sure_send_sounds">确认发送？</string>
+    <string name="smssdk_network_error">网络异常，请稍后重试</string>
+    <string name="smssdk_next">下一步</string>
+    <string name="smssdk_not_invite"><Data>&lt;font color=#209526> %s &lt;/font></Data>还未加入</string>
+    <string name="smssdk_ok">好</string>
+    <string name="smssdk_receive_msg"><Data>接收短信大约需要&lt;font color=#209526>%s&lt;/font>秒</Data></string>
+    <string name="smssdk_regist">使用手机号码注册</string>
+    <string name="smssdk_resend_identify_code">重新获取</string>
+    <string name="smssdk_search">搜索</string>
+    <string name="smssdk_search_contact">好友搜索</string>
+    <string name="smssdk_send_invitation">发送邀请</string>
+    <string name="smssdk_send_mobile_detail"><Data>我们已发送&lt;font color=#209526>验证码&lt;/font>短信到这个号码:</Data></string>
+    <string name="smssdk_send_sounds">点击发送语音验证</string>
+    <string name="smssdk_send_sounds_identify_code">确定后将致电您的手机号，语音播报验证码.\n如不希望被来电打扰请使用短信验证码。</string>
+    <string name="smssdk_send_sounds_success">语音验证码发送成功</string>
+    <string name="smssdk_smart_verify_already">您的手机号码已验证成功</string>
+    <string name="smssdk_smart_verify_tips">以下号码为诚信号码,无需验证短信:</string>
+    <string name="smssdk_submit">提交</string>
+    <string name="smssdk_unreceive_identify_code"><Data>&lt;font color=#a8b8cb> 收不到验证码？&lt;/font></Data></string>
+    <string name="smssdk_user_info_submited">用户资料已提交</string>
+    <string name="smssdk_virificaition_code_sent">验证码已发送</string>
+    <string name="smssdk_virificaition_code_wrong">验证码不正确，请重新输入</string>
+    <string name="smssdk_wait">等待 </string>
+    <string name="smssdk_write_identify_code">填写验证码</string>
+    <string name="smssdk_write_mobile_phone">请填写手机号码</string>
+    <string name="smssdk_write_right_mobile_phone">请填写正确的手机号码</string>
+    <string name="smssdk_your_ccount_is_verified">验证成功</string>
+    <string name="sport_exercise">锻炼</string>
+    <string name="start_upgrading">下载完成,开始升级</string>
+    <string name="step_count">总步数</string>
+    <string name="stored_value">预存金额</string>
+    <string name="successfully_registered">您已注册成功！</string>
+    <string name="summarizing_data">正在汇总数据...</string>
+    <string name="sun">日</string>
+    <string name="sunday">周日</string>
+    <string name="synchronized_to_device">已同步到设备</string>
+    <string name="thismonth">本月</string>
+    <string name="thisweek">本周</string>
+    <string name="thisyear">今年</string>
+    <string name="thurs">四</string>
+    <string name="thursday">周四</string>
+    <string name="title_activity_about_us">AboutUsActivity</string>
+    <string name="title_activity_blelist">BLEListActivity</string>
+    <string name="title_activity_body">BodyActivity</string>
+    <string name="title_activity_bound">BoundActivity</string>
+    <string name="title_activity_bound_activity_2">BoundActivity_2</string>
+    <string name="title_activity_common_web">CommonWebActivity</string>
+    <string name="title_activity_customer_service">CustomerServiceActivity</string>
+    <string name="title_activity_device_info">设备信息</string>
+    <string name="title_activity_firmware_update">FirmwareUpdateActivity</string>
+    <string name="title_activity_hand_up">HandUpActivity</string>
+    <string name="title_activity_incoming_tel">IncomingTel</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login_page">LoginPageActivity</string>
+    <string name="title_activity_long_sit">LongSitActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_more">MoreActivity</string>
+    <string name="title_activity_move_device">MoveDeviceActivity</string>
+    <string name="title_activity_power">PowerActivity</string>
+    <string name="title_activity_ranking">RankingActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_register_phone">RegisterPhoneActivity</string>
+    <string name="title_activity_registered_success">RegisteredSuccessActivity</string>
+    <string name="title_activity_send_mail">SendMailActivity</string>
+    <string name="title_activity_set_alarm">SetAlarmActivity</string>
+    <string name="title_activity_spor_goal_setting">SporGoalSetting</string>
+    <string name="today">今天</string>
+    <string name="tues">二</string>
+    <string name="tuesday">周二</string>
+    <string name="unbound_success">解绑成功</string>
+    <string name="unbound_success_msg">解绑成功,请关闭系统消息提醒</string>
+    <string name="unit_age">岁</string>
+    <string name="unit_cal">卡路里</string>
+    <string name="unit_cal_big">千卡</string>
+    <string name="unit_cm">厘米</string>
+    <string name="unit_day">日</string>
+    <string name="unit_day4date">日</string>
+    <string name="unit_hour">小时</string>
+    <string name="unit_kilogramme">公斤</string>
+    <string name="unit_km">公里</string>
+    <string name="unit_km_en">km</string>
+    <string name="unit_km_metric">千米</string>
+    <string name="unit_km_per_hour">Km/hr</string>
+    <string name="unit_km_per_hour_metric">Km/hr</string>
+    <string name="unit_m">米</string>
+    <string name="unit_mile">英里</string>
+    <string name="unit_mileage">里程</string>
+    <string name="unit_minute">分钟</string>
+    <string name="unit_month">月</string>
+    <string name="unit_month4date">月</string>
+    <string name="unit_pound">镑</string>
+    <string name="unit_second">秒</string>
+    <string name="unit_settings">单位设置</string>
+    <string name="unit_short_hour">小时</string>
+    <string name="unit_step">步</string>
+    <string name="unit_week">周</string>
+    <string name="unit_year">年</string>
+    <string name="unit_year4date">年</string>
+    <string name="update_firmware">更新固件</string>
+    <string name="update_message">您的手机了已经存在该版本app了,是否直接安装?</string>
+    <string name="update_title">注意</string>
+    <string name="user_info_avatar_image_not_exists">头像图片没找到！</string>
+    <string name="user_info_avatar_upload_faild1">头像上传失败，请检查你的SD卡！</string>
+    <string name="user_info_avatar_upload_faild2">抱歉，头像上传失败（文件太大了）！</string>
+    <string name="user_info_avatar_upload_faild3">抱歉，头像上传失败（手机内存不足，请重新启动程序）！</string>
+    <string name="user_info_avatar_upload_faild4">抱歉，头像上传失败！</string>
+    <string name="user_info_avatar_upload_sucess">头像更新成功.</string>
+    <string name="user_info_avatar_uploading">头像上传中...</string>
+    <string name="user_info_body">身体信息</string>
+    <string name="user_info_body_info_text">{0}cm, {1}kg, {2}岁, {3}</string>
+    <string name="user_info_check_child">查看家庭账号列表</string>
+    <string name="user_info_child_account">输入队员账号昵称</string>
+    <string name="user_info_child_account_desc">队员</string>
+    <string name="user_info_child_add_title">注册身体信息</string>
+    <string name="user_info_child_item_delete_msg">是否确定删除{0}?</string>
+    <string name="user_info_child_item_not_change">无法切换账号</string>
+    <string name="user_info_child_item_not_change_msg">当前正在使用中的账号无需切换。</string>
+    <string name="user_info_child_item_not_delete_msg">当前正在使用中的账号无法删除。</string>
+    <string name="user_info_child_switch">切换子账号</string>
+    <string name="user_info_child_switch_message">是否切换到账号{0}?</string>
+    <string name="user_info_child_title">家庭号管理</string>
+    <string name="user_info_choose_photo">从相册中选择</string>
+    <string name="user_info_mail">邮箱</string>
+    <string name="user_info_main_account_desc">健康队队长</string>
+    <string name="user_info_nick_name">昵称</string>
+    <string name="user_info_password">密码</string>
+    <string name="user_info_profile_photo">头像</string>
+    <string name="user_info_take_photo">拍照</string>
+    <string name="user_info_title">个人信息</string>
+    <string name="user_info_update_body_title">更新身体信息</string>
+    <string name="user_info_update_failure">更新失败.</string>
+    <string name="user_info_update_nick_name_title">修改昵称</string>
+    <string name="user_info_update_nick_name_validate">昵称不能为空!</string>
+    <string name="user_info_update_psw_title">修改密码</string>
+    <string name="user_info_update_success">更新成功</string>
+    <string name="user_info_update_user_age">年龄(岁)</string>
+    <string name="user_info_update_user_age_not_valid">请输入有效年龄值!</string>
+    <string name="user_info_update_user_height">身高(cm)</string>
+    <string name="user_info_update_user_height_not_valid">请输入有效身高值!</string>
+    <string name="user_info_update_user_psw_length">密码不能少于6个字符</string>
+    <string name="user_info_update_user_psw_new_psw">新密码:</string>
+    <string name="user_info_update_user_psw_new_psw_not_equal">确认错误!</string>
+    <string name="user_info_update_user_psw_old_equal_new">新密码和旧密码相同</string>
+    <string name="user_info_update_user_psw_old_psw">密码:</string>
+    <string name="user_info_update_user_psw_old_psw_false">错误密码</string>
+    <string name="user_info_update_user_psw_repeat_new_psw">确认密码:</string>
+    <string name="user_info_update_user_weight">体重(kg)</string>
+    <string name="user_info_update_user_weight_not_valid">请输入有效体重值!</string>
+    <string name="user_info_update_whats_up_count">历史签名{0}条</string>
+    <string name="user_info_what_s_up">个性签名</string>
+    <string name="user_info_what_s_up_enter_hint">说点什么吧</string>
+    <string name="watch_setting">设备</string>
+    <string name="wed">三</string>
+    <string name="wednesday">周三</string>
+    <string name="weight">体重</string>
+    <string name="whats_up_detail_comments">评论</string>
+    <string name="whats_up_detail_null_data">暂无评论</string>
+    <string name="whats_up_detail_reply">回复</string>
+    <string name="whats_up_detail_sendMsg">发消息</string>
+    <string name="whats_up_detail_title">签名档</string>
+    <string name="whats_up_history_add">发表</string>
+    <string name="whats_up_history_add_whats_up">添加个性签名</string>
+    <string name="whats_up_history_comments">评论</string>
+    <string name="whats_up_history_comments_empty">评论不能为空！</string>
+    <string name="whats_up_history_date">yyyy年MM月dd日</string>
+    <string name="whats_up_history_delete">删除</string>
+    <string name="whats_up_history_delete_msg">确定删除签名？</string>
+    <string name="whats_up_history_edit">编辑</string>
+    <string name="whats_up_history_edit_whats_up">编辑个性签名</string>
+    <string name="whats_up_history_title">个人签名档</string>
+    <string name="wurao_notify">勿扰模式</string>
+    <string name="wxsopar_no_au">请授权你的微信帐号！</string>
+    <string name="xiaoxi_notify">消息提醒</string>
+    <string name="yesterday">昨天</string>
+</resources>

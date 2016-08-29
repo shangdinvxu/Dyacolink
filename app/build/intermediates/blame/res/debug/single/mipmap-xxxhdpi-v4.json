@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\rank_off_144px.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xxxhdpi\\rank_off_144px.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\no1_144px.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xxxhdpi\\no1_144px.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\rank_144px.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xxxhdpi\\rank_144px.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\no2_144px.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xxxhdpi\\no2_144px.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\ic_launcher.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\no3_144px.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xxxhdpi\\no3_144px.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\bg_clock_1080px.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xxxhdpi\\bg_clock_1080px.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\ic_appicon.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_appicon.png"
+    }
+]
