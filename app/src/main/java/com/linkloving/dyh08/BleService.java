@@ -647,7 +647,6 @@ public class BleService extends Service {
             mBroadcastReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-
                     if (MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity() != null) {
                         ////获得本地用户信息提供者并获得最后同步设备的ID非空                   //获得本地用户信息提供者，并且成功获取。
                         if (!CommonUtils.isStringEmpty(MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id()) && isNEED_SCAN() && !isCANCLE_ANCS()
