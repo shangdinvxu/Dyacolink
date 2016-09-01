@@ -191,7 +191,7 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
             // 添加entity回调接口
             public void onAddEntityCallback(String arg0) {
                 // TODO Auto-generated method stub
-                TrackApplication.showMessage("添加entity回调接口消息 : " + arg0);
+//                TrackApplication.showMessage("添加entity回调接口消息 : " + arg0);
             }
 
             // 查询entity列表回调接口

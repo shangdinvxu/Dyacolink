@@ -5,42 +5,37 @@
     android:orientation="horizontal"
     android:background="@drawable/tw_listview_selector">
     >
+            <LinearLayout
+                android:layout_width="210dp"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/equipment_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="DYACO 1"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
+                <TextView
+                    android:id="@+id/equipment_adress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="000000000000" />
 
-        <LinearLayout
-            android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/equipment_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="DYACO 1"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/equipment_adress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="000000000000" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/list_item_imageview"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@mipmap/wait"
-            android:visibility="invisible"
-            />
-
-
+            <ImageView
+                android:id="@+id/list_item_imageview"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/wait"
+                android:visibility="invisible"
+                />
 </LinearLayout>
 
 

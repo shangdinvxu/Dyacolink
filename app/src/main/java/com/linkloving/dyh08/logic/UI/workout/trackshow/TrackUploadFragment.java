@@ -193,7 +193,7 @@ public class TrackUploadFragment extends Fragment {
 
             public void onClick(View v) {
                 if (clickType == 0) {
-                    Toast.makeText(getActivity(), "正在开启轨迹服务，请稍候", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "开启轨迹服务", Toast.LENGTH_LONG).show();
                     startTrace();
 //                    把开始时间等数据记录下来,等按结束时一起记录.
                     //  成功开启轨迹服务,说明开始跑了,记录开始时间.
@@ -233,7 +233,7 @@ public class TrackUploadFragment extends Fragment {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 if (clickType == 1) {
-                    Toast.makeText(getActivity(), "正在停止轨迹服务，请稍候", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "停止轨迹服务", Toast.LENGTH_SHORT).show();
                     stopTrace();
 //                    把开始时间取出来,记录下来
                     SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
@@ -376,7 +376,7 @@ public class TrackUploadFragment extends Fragment {
             // 开启轨迹服务回调接口（arg0 : 消息编码，arg1 : 消息内容，详情查看类参考）
             public void onTraceCallback(int arg0, String arg1) {
                 // TODO Auto-generated method stub
-                showMessage(" " + arg1, Integer.valueOf(arg0));
+//                showMessage(" " + arg1, Integer.valueOf(arg0));
 //                showMessage("开启轨迹服务回调接口消息 [消息编码 : " + arg0 + "，消息内容 : " + arg1 + "]", Integer.valueOf(arg0));
                 if (0 == arg0 || 10006 == arg0 || 10008 == arg0 || 10009 == arg0) {
                     isTraceStart = true;
@@ -396,15 +396,15 @@ public class TrackUploadFragment extends Fragment {
                             String action = dataJson.getInt("action") == 1 ? "进入" : "离开";
                             String date = DateUtils.getDate(dataJson.getInt("time"));
                             long fenceId = dataJson.getLong("fence_id");
-                            showMessage("监控对象[" + mPerson + "]于" + date + " [" + action + "][" + fenceId + "号]围栏",
-                                    null);
+//                            showMessage("监控对象[" + mPerson + "]于" + date + " [" + action + "][" + fenceId + "号]围栏",
+//                                    null);
                         }
                     } catch (JSONException e) {
                         // TODO Auto-generated catch block
-                        showMessage("轨迹服务推送接口消息 [消息类型 : " + arg0 + "，消息内容 : " + arg1 + "]", null);
+//                        showMessage("轨迹服务推送接口消息 [消息类型 : " + arg0 + "，消息内容 : " + arg1 + "]", null);
                     }
                 } else {
-                    showMessage("轨迹服务推送接口消息 [消息类型 : " + arg0 + "，消息内容 : " + arg1 + "]", null);
+//                    showMessage("轨迹服务推送接口消息 [消息类型 : " + arg0 + "，消息内容 : " + arg1 + "]", null);
                 }
             }
 
@@ -421,7 +421,7 @@ public class TrackUploadFragment extends Fragment {
             // 轨迹服务停止成功
             public void onStopTraceSuccess() {
                 // TODO Auto-generated method stub
-                showMessage("停止轨迹服务成功", Integer.valueOf(1));
+//                showMessage("停止轨迹服务成功", Integer.valueOf(1));
 
 
                 isTraceStart = false;
@@ -432,7 +432,7 @@ public class TrackUploadFragment extends Fragment {
             // 轨迹服务停止失败（arg0 : 错误编码，arg1 : 消息内容，详情查看类参考）
             public void onStopTraceFailed(int arg0, String arg1) {
                 // TODO Auto-generated method stub
-                showMessage("停止轨迹服务接口消息 [错误编码 : " + arg0 + "，消息内容 : " + arg1 + "]", null);
+//                showMessage("停止轨迹服务接口消息 [错误编码 : " + arg0 + "，消息内容 : " + arg1 + "]", null);
                 startRefreshThread(false);
             }
         };

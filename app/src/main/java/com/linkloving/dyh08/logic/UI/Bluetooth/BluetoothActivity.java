@@ -7,9 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -40,7 +43,7 @@ import butterknife.InjectView;
  * Created by leo.wang on 2016/7/25.
  */
 public class BluetoothActivity extends ToolBarActivity {
-
+    private static final String TAG = BluetoothActivity.class.getSimpleName();
     @InjectView(R.id.blue_middle_changeIV)
     ImageView middleChangeIV;
     @InjectView(R.id.bluetooth_list)
@@ -55,9 +58,9 @@ public class BluetoothActivity extends ToolBarActivity {
     private BLEProviderObserver observerAdapter;
     private BLEListHandler handler;
     private BLEListProvider listProvider;
-    private List<DeviceVO>macList = new ArrayList();
-    private macListAdapter mAdapter;
-    private int selectionPostion ;
+    private List<DeviceVO> macList = new ArrayList();
+    private int selectionPostion;
+    private BluetoothActivity.macListAdapterNew macListAdapterNew;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,24 +75,25 @@ public class BluetoothActivity extends ToolBarActivity {
         handler = new BLEListHandler(BluetoothActivity.this) {
             @Override
             protected void handleData(BluetoothDevice bluetoothDevice) {
-                    for (DeviceVO v :macList){
-                        if (v.mac.equals(bluetoothDevice.getAddress()))
-                            return;
-                    }
+                for (DeviceVO v : macList) {
+                    if (v.mac.equals(bluetoothDevice.getAddress()))
+                        return;
+                }
                 DeviceVO vo = new DeviceVO();
-                vo.mac= bluetoothDevice.getAddress();
-                vo.name =bluetoothDevice.getName();
-                vo.bledevice=bluetoothDevice ;
+                vo.mac = bluetoothDevice.getAddress();
+                vo.name = bluetoothDevice.getName();
+                vo.bledevice = bluetoothDevice;
                 macList.add(vo);
-                mAdapter.notifyDataSetChanged();
+                macListAdapterNew.notifyDataSetChanged();
             }
         };
         listProvider = new BLEListProvider(this, handler);
-        mAdapter = new macListAdapter(this, macList);
+//        mAdapter = new macListAdapter(this, macList);
+        macListAdapterNew = new macListAdapterNew();
         listProvider.scanDeviceList();
         mlistview.setDivider(null);
         mlistview.setDividerHeight(10);
-        mlistview.setAdapter(mAdapter);
+        mlistview.setAdapter(macListAdapterNew);
         mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -98,7 +102,6 @@ public class BluetoothActivity extends ToolBarActivity {
                 provider.connect_mac(macList.get(position).mac);
                 ImageView stateIV = (ImageView) view.findViewById(R.id.list_item_imageview);
                 stateIV.setVisibility(View.VISIBLE);
-
             }
         });
 
@@ -110,10 +113,6 @@ public class BluetoothActivity extends ToolBarActivity {
             }
         });
     }
-
-
-
-
 
     @Override
     protected void getIntentforActivity() {
@@ -130,53 +129,85 @@ public class BluetoothActivity extends ToolBarActivity {
 
     }
 
-    class macListAdapter extends CommonAdapter<DeviceVO>{
-        public class ViewHolder{
-            public TextView equipment_name ;
-            public TextView equipment_adress ;
-            public ImageView item_state ;
+    class macListAdapterNew extends BaseAdapter {
+        private TextView equipment_nameTV;
+        private TextView equipment_adressTV;
+        private ImageView item_stateIV;
 
-        }
-        ViewHolder holder ;
 
-        public macListAdapter(Context context, List<DeviceVO> list) {
-            super(context, list);
+        @Override
+        public int getCount() {
+            return macList.size();
         }
 
         @Override
-        protected View noConvertView(int position, View convertView, ViewGroup parent) {
-            convertView = inflater.inflate(R.layout.bluetooth_listviewitem, parent, false);
-
-            holder = new ViewHolder();
-            holder.equipment_name = (TextView) convertView.findViewById(R.id.equipment_name);
-            holder.equipment_adress = (TextView) convertView.findViewById(R.id.equipment_adress);
-            holder.item_state = (ImageView) convertView.findViewById(R.id.list_item_imageview);
-
-            convertView.setTag(holder);
-            return convertView;
+        public Object getItem(int position) {
+            return position;
         }
 
         @Override
-        protected View hasConvertView(int position, View convertView, ViewGroup parent) {
-            holder = (ViewHolder) convertView.getTag();
-            return convertView;
+        public long getItemId(int position) {
+            return position;
         }
 
         @Override
-        protected View initConvertView(int position, View convertView, ViewGroup parent) {
-            String name = list.get(position).name;
-            MyLog.e("name是",name);
-            holder.equipment_name.setText(name);
-//            String mac = list.get(position).mac.substring(list.get(position).mac.length() - 5, list.get(position).mac.length());
-//            holder.equipment_adress.setText("ID:   " + removeCharAt(mac, 2));
-            String mac = list.get(position).mac;
-            holder.equipment_adress.setText(mac);
-            return convertView;
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = LayoutInflater.from(BluetoothActivity.this).inflate(R.layout.bluetooth_listviewitem, null);
+            equipment_nameTV = (TextView) view.findViewById(R.id.equipment_name);
+            equipment_adressTV = (TextView) view.findViewById(R.id.equipment_adress);
+            item_stateIV = (ImageView) view.findViewById(R.id.list_item_imageview);
+            String name = macList.get(position).name;
+            MyLog.e("name是", name);
+            equipment_nameTV.setText(name);
+            String mac = macList.get(position).mac;
+            equipment_adressTV.setText(mac);
+            return view;
         }
     }
+
+    /*  class macListAdapter extends CommonAdapter<DeviceVO>{
+          public class ViewHolder{
+              public TextView equipment_name ;
+              public TextView equipment_adress ;
+              public ImageView item_state ;
+
+          }
+          ViewHolder holder ;
+
+          public macListAdapter(Context context, List<DeviceVO> list) {
+              super(context, list);
+          }
+          @Override
+          protected View noConvertView(int position, View convertView, ViewGroup parent) {
+              convertView = inflater.inflate(R.layout.bluetooth_listviewitem, parent, false);
+  //            holder = new ViewHolder();
+  //            holder.equipment_name = (TextView) convertView.findViewById(R.id.equipment_name);
+  //            holder.equipment_adress = (TextView) convertView.findViewById(R.id.equipment_adress);
+  //            holder.item_state = (ImageView) convertView.findViewById(R.id.list_item_imageview);
+              convertView.setTag(holder);
+              return convertView;
+          }
+          @Override
+          protected View hasConvertView(int position, View convertView, ViewGroup parent) {
+              holder = (ViewHolder) convertView.getTag();
+              return convertView;
+          }
+          @Override
+          protected View initConvertView(int position, View convertView, ViewGroup parent) {
+              String name = list.get(position).name;
+              MyLog.e("name是",name);
+  //            equipment_nameTV.setText(name);
+  ////            String mac = list.get(position).mac.substring(list.get(position).mac.length() - 5, list.get(position).mac.length());
+  ////            holder.equipment_adress.setText("ID:   " + removeCharAt(mac, 2));
+  //            String mac = list.get(position).mac;
+  //            equipment_adressTV.setText(mac);
+              return convertView;
+          }
+      }*/
     public static String removeCharAt(String s, int pos) {
         return s.substring(0, pos) + s.substring(pos + 1);
     }
+
     @Override
     protected void onPostResume() {
         super.onPostResume();
@@ -188,13 +219,11 @@ public class BluetoothActivity extends ToolBarActivity {
     }
 
 
-
-
-    private class BLEProviderObserver extends BLEHandler.BLEProviderObserverAdapter{
+    private class BLEProviderObserver extends BLEHandler.BLEProviderObserverAdapter {
 
         @Override
         protected Activity getActivity() {
-            return BluetoothActivity.this ;
+            return BluetoothActivity.this;
         }
 
         @Override
@@ -206,7 +235,7 @@ public class BluetoothActivity extends ToolBarActivity {
             middleChangeIV.setImageResource(R.mipmap.link);
             middleChangeIV.setVisibility(View.VISIBLE);
             btn_Next.setVisibility(View.VISIBLE);
-            Toast.makeText(BluetoothActivity.this,"绑定成功",Toast.LENGTH_SHORT).show();
+            Toast.makeText(BluetoothActivity.this, "绑定成功", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -215,7 +244,6 @@ public class BluetoothActivity extends ToolBarActivity {
             MyLog.e("BandListActivity", "断开连接");
             middleChangeIV.setImageResource(R.mipmap.nofind);
             middleChangeIV.setVisibility(View.VISIBLE);
-
             provider.clearProess();
             provider.setCurrentDeviceMac(null);
             provider.setmBluetoothDevice(null);
@@ -226,11 +254,12 @@ public class BluetoothActivity extends ToolBarActivity {
         }
 
     }
-    public void finish(){
+
+    public void finish() {
         super.finish();
         listProvider.stopScan();
         provider = BleService.getInstance(this).getCurrentHandlerProvider();
-        if (provider!=null)
+        if (provider != null)
             provider.setBleProviderObserver(null);
 
     }

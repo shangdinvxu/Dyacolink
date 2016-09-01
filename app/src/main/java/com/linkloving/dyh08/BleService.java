@@ -7,11 +7,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.baidu.trace.LBSTraceClient;
+import com.baidu.trace.LocationMode;
+import com.baidu.trace.OnEntityListener;
+import com.baidu.trace.TraceLocation;
 import com.example.android.bluetoothlegatt.BLEHandler;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
@@ -21,6 +27,9 @@ import com.linkloving.band.dto.SportRecord;
 import com.linkloving.dyh08.db.sport.UserDeviceRecord;
 import com.linkloving.dyh08.db.summary.DaySynopicTable;
 import com.linkloving.dyh08.logic.UI.device.incomingtel.IncomingTelActivity;
+import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
+import com.linkloving.dyh08.logic.UI.workout.trackshow.TrackApplication;
+import com.linkloving.dyh08.logic.UI.workout.trackshow.WorkoutActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
@@ -31,12 +40,17 @@ import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.dyh08.utils.sportUtils.SportDataHelper;
 import com.linkloving.dyh08.utils.sportUtils.TimeUtils;
+import com.baidu.trace.Trace;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import Trace.GreenDao.DaoMaster;
 
 /**
  *
@@ -67,6 +81,25 @@ public class BleService extends Service {
     private BLEProvider provider;
     private UserEntity userEntity;
     private static BleService self = null;
+    /**
+     * entity标识
+     */
+    protected static String entityName = "myTrace";
+
+    /**
+     * 鹰眼服务ID，开发者创建的鹰眼服务对应的服务ID
+     */
+    protected static long serviceId = 123056;
+
+    /**
+     * 轨迹服务类型（0 : 不建立socket长连接， 1 : 建立socket长连接但不上传位置数据，2 : 建立socket长连接并上传位置数据）
+     */
+    private int traceType = 2;
+
+    /**
+     * Entity监听器
+     */
+    protected static OnEntityListener entityListener = null;
 
     /**
      * APP是否退出
@@ -96,6 +129,13 @@ public class BleService extends Service {
 //	public static boolean IS_DESTORY = false;
 
     public LPDeviceInfo lpDeviceInfo_;
+    private LBSTraceClient client;
+    private Trace trace;
+    private TraceGreendao traGreendao ;
+
+    private SQLiteDatabase db;
+    private DaoMaster.DevOpenHelper devOpenHelper;
+    private int gatherInterval = 10;
 
 
     /********************
@@ -161,6 +201,89 @@ public class BleService extends Service {
         provider = initBLEProvider(); //初始化bLE提供者
         //启动ble连接并且每一分钟对连接状态检查一遍。确保所有型号的手机处于连接状态。未连接的启动连接。
         bleConnectAndCheckConnectStateInTime();
+        initOnEntityListener();
+        startTrace();
+        new RefreshThread().start();
+    }
+
+    /**
+     * 初始化OnEntityListener
+     */
+    private void initOnEntityListener() {
+        devOpenHelper = new DaoMaster.DevOpenHelper(this, "Note", null);
+        db = devOpenHelper.getReadableDatabase();
+        traGreendao = new TraceGreendao(this,db);
+        entityListener = new OnEntityListener() {
+
+            // 请求失败回调接口
+            @Override
+            public void onRequestFailedCallback(String arg0) {
+                // TODO Auto-generated method stub
+                // TrackApplication.showMessage("entity请求失败回调接口消息 : " + arg0);
+                System.out.println("entity请求失败回调接口消息 : " + arg0);
+            }
+
+            // 添加entity回调接口
+            public void onAddEntityCallback(String arg0) {
+                // TODO Auto-generated method stub
+                TrackApplication.showMessage("添加entity回调接口消息 : " + arg0);
+            }
+
+            // 查询entity列表回调接口
+            @Override
+            public void onQueryEntityListCallback(String message) {
+                // TODO Auto-generated method stub
+                System.out.println("entityList回调消息 : " + message);
+            }
+
+            @Override
+            public void onReceiveLocation(TraceLocation location) {
+                // TODO Auto-generated method stub
+                    Date date = new Date();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    String format = simpleDateFormat.format(date);
+                MyLog.e(TAG,"服务里面的坐标"+location.getLongitude());
+                    traGreendao.addNote(format, date, date, location.getLatitude(), location.getLongitude());
+                }
+            };
+
+
+    }
+
+    protected class RefreshThread extends Thread {
+
+        protected boolean refresh = true;
+
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            Looper.prepare();
+            while (refresh) {
+                // 查询实时位置
+                queryRealtimeLoc();
+
+                try {
+                    Thread.sleep(gatherInterval * 1000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    System.out.println("线程休眠失败");
+                }
+            }
+            Looper.loop();
+        }
+    }
+    /**
+     * 查询实时轨迹
+     */
+    private void queryRealtimeLoc() {
+        client.queryRealtimeLoc(serviceId, entityListener);
+    }
+    private void startTrace() {
+        client = new LBSTraceClient(this);
+        client.setLocationMode(LocationMode.High_Accuracy);
+        trace = new Trace(this, serviceId, entityName, traceType);
+        client.startTrace(trace);
+
     }
 
     /**
