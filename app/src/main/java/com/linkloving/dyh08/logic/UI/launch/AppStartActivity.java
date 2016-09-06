@@ -127,9 +127,8 @@ public class AppStartActivity extends AppCompatActivity {
                 userAuthedInfo.getUserBase().setNickname("User");
                 userAuthedInfo.getUserBase().setUser_weight(60);
                 userAuthedInfo.getUserBase().setUser_height(175);
-//
+//                userAuthedInfo.getDeviceEntity().setLast_sync_device_id("");
             }
-//        userAuthedInfo.getDeviceEntity().setLast_sync_device_id("");
             MyApplication.getInstance(this).setLocalUserInfoProvider(userAuthedInfo);
             startActivity(IntentFactory.createPortalActivityIntent(AppStartActivity.this));
             AppStartActivity.this.finish();

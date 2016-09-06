@@ -34,8 +34,8 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <!-- 蓝牙分享所需的权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -103,8 +103,6 @@
             android:exported="true"></service>
 
 
-
-
         <service android:name=".BleService">
             <intent-filter android:priority="9998">
                 <action android:name="com.linkloving.watch.BLE_SERVICE" />
@@ -151,11 +149,11 @@
         <!-- android:name="com.baidu.lbsapi.API_KEY" -->
         <!-- android:value="请输入申请的APIKEY" /> -->
         <!-- 正式的百度KEY -->
-<!--
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="FZ2vSGQCexjK2DMujR3oTCqmgGg7Zy6R" />
--->
+        <!--
+                <meta-data
+                    android:name="com.baidu.lbsapi.API_KEY"
+                    android:value="FZ2vSGQCexjK2DMujR3oTCqmgGg7Zy6R" />
+        -->
 
         <!--
           <meta-data
@@ -398,40 +396,74 @@
         <activity
             android:name=".logic.UI.weight.WeightActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar"/>
+            android:theme="@style/AppThemeNoActionBar" />
 
-        <activity android:name=".logic.UI.Bluetooth.BluetoothActivity"
+        <activity
+            android:name=".logic.UI.Bluetooth.BluetoothActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar"/>
+            android:theme="@style/AppThemeNoActionBar" />
 
-        <activity android:name=".logic.UI.settings.UserSettingsActivity"
+        <activity
+            android:name=".logic.UI.settings.UserSettingsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar"/>
+            android:theme="@style/AppThemeNoActionBar" />
 
-        <activity android:name=".logic.UI.step.StepActivity"
+        <activity
+            android:name=".logic.UI.step.StepActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar"/>
+            android:theme="@style/AppThemeNoActionBar" />
 
-        <activity android:name=".logic.UI.calories.CaloriesActivity"
+        <activity
+            android:name=".logic.UI.calories.CaloriesActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar"/>
+            android:theme="@style/AppThemeNoActionBar" />
 
-        <activity android:name=".logic.UI.sleep.SleepActivity"
+        <activity
+            android:name=".logic.UI.sleep.SleepActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar"/>
+            android:theme="@style/AppThemeNoActionBar" />
 
-        <activity android:name=".logic.UI.distance.DistanceActivity"
+        <activity
+            android:name=".logic.UI.distance.DistanceActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar"/>
-        <activity android:name=".logic.UI.Groups.baidu.GroupsActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".logic.UI.Groups.baidu.GroupsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar"
-            />
-        <activity android:name=".logic.UI.Groups.baidu.GroupsDetailsActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".logic.UI.Groups.baidu.GroupsDetailsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar"
-            />
-        <activity android:name=".logic.UI.workout.trackshow.WorkoutActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".logic.UI.workout.trackshow.WorkoutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".logic.UI.login.BirthdayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".logic.UI.login.GenderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".logic.UI.login.HeightActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".logic.UI.login.LoginFinishActivity"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppThemeNoActionBar"
+        />
+        <activity
+            android:name=".logic.UI.login.UsernameActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".logic.UI.login.WeightActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".logic.UI.login.WearingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             />
@@ -440,21 +472,23 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <activity android:name=".logic.UI.Groups.baidu.GroupsShareActivity"
+
+        <activity
+            android:name=".logic.UI.Groups.baidu.GroupsShareActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar"
-            />
+            android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
 
             <!-- QQ和QQ空间分享 QQ登录的回调必须要配置的 -->
             <intent-filter>
                 <data android:scheme="tencent100371282" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

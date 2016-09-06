@@ -88,7 +88,9 @@
 
     <color name="header_normal">#ffe74c3c</color>
     <color name="header_pressed">#ffc0392b</color>
-
-
-
+<!--logincolor-->
+    <color name="darkblack">#3E4341</color>
+    <color name="loginblue">#202A67</color>
+    <color name="loginhintcolor">#C9CACB</color>
+    <color name="yellow">#F3BD1D</color>
 </resources>

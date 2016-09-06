@@ -30,6 +30,9 @@ import com.linkloving.dyh08.logic.UI.launch.register.RegisterPhoneActivity;
 import com.linkloving.dyh08.logic.UI.launch.register.RegisteredSuccessActivity;
 import com.linkloving.dyh08.logic.UI.launch.register.SexActivity;
 import com.linkloving.dyh08.logic.UI.launch.register.UpdataAvatarActivity;
+import com.linkloving.dyh08.logic.UI.login.BirthdayActivity;
+import com.linkloving.dyh08.logic.UI.login.GenderActivity;
+import com.linkloving.dyh08.logic.UI.login.UsernameActivity;
 import com.linkloving.dyh08.logic.UI.main.BundTypeActivity;
 import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.UI.main.bundband.bundbandstep1;
@@ -43,6 +46,7 @@ import com.linkloving.dyh08.logic.UI.workout.trackshow.WorkoutActivity;
 import com.linkloving.dyh08.logic.UI.workout.trackshow.work_outActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.utils.ToolKits;
+import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.utils.CommonUtils;
 
 //import com.linkloving.dyh08.logic.UI.step.StepActivity;
@@ -326,4 +330,37 @@ public class IntentFactory {
         activity.startActivity(intent);
     }
 
+    /*login界面*/
+
+    public static void startUsername(Activity activity){
+        Intent intent = new Intent(activity, UsernameActivity.class);
+        activity.startActivity(intent);
+    }
+
+    public static void startBirthday(Activity activity){
+        Intent intent = new Intent(activity, BirthdayActivity.class);
+        activity.startActivity(intent);
+    }
+    public static void startGender(Activity activity){
+        Intent intent = new Intent(activity, GenderActivity.class);
+        activity.startActivity(intent);
+    }
+
+    public static void startWeight(Activity activity){
+        Intent intent = new Intent(activity, com.linkloving.dyh08.logic.UI.login.WeightActivity.class);
+        activity.startActivity(intent);
+    }
+    public static void startHeight(Activity activity){
+        Intent intent = new Intent(activity, com.linkloving.dyh08.logic.UI.login.HeightActivity.class);
+        activity.startActivity(intent);
+    }
+    public static void startWearing(Activity activity){
+        Intent intent = new Intent(activity, com.linkloving.dyh08.logic.UI.login.WearingActivity.class);
+        MyLog.e("kaishi","kais");
+        activity.startActivity(intent);
+    }
+    public static void startLoginFinish(Activity activity){
+        Intent intent = new Intent(activity, com.linkloving.dyh08.logic.UI.login.LoginFinishActivity.class);
+        activity.startActivity(intent);
+    }
 }

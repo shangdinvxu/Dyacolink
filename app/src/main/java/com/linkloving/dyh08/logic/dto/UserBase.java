@@ -21,7 +21,7 @@ public class UserBase implements Serializable
 	private static final long serialVersionUID = -8760727274257939834L;
 	protected transient Observer propertyChangedObserver = null;
 
-	private int user_id, user_type, user_status, user_sex, user_height, user_weight, play_calory, channel;
+	private int user_id, user_type, user_status, user_sex, user_height, user_weight, play_calory, channel,user_wearingStyle;
 
 	private String user_mail, user_mobile, nickname, user_psw, user_avatar_file_name, birthdate, longitude, latitude, register_ip, register_time, latest_login_time,
 			latest_login_ip, thirdparty_access_token, thirdparty_expire_time, use_os_type, register_os_type, what_s_up;
@@ -39,6 +39,14 @@ public class UserBase implements Serializable
 		this.propertyChangedObserver = propertyChangedObserver;
 	}
 
+	public int getUser_wearingStyle(){
+		return user_wearingStyle ;
+	}
+	public void setUser_wearingStyle(int user_wearingStyle){
+		this.user_wearingStyle = user_wearingStyle ;
+		if (this.propertyChangedObserver != null)
+			this.propertyChangedObserver.update(null, "user_wearingStyle");
+	}
 	public int getUser_id()
 	{
 		return user_id;

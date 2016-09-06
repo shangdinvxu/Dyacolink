@@ -164,9 +164,9 @@
         <!-- android:value="请输入申请的APIKEY" /> -->
         <!-- 正式的百度KEY -->
         <!--
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="FZ2vSGQCexjK2DMujR3oTCqmgGg7Zy6R" />
+                <meta-data
+                    android:name="com.baidu.lbsapi.API_KEY"
+                    android:value="FZ2vSGQCexjK2DMujR3oTCqmgGg7Zy6R" />
         -->
 
 
@@ -445,6 +445,34 @@
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name="com.linkloving.dyh08.logic.UI.workout.trackshow.WorkoutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name="com.linkloving.dyh08.logic.UI.login.BirthdayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name="com.linkloving.dyh08.logic.UI.login.GenderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name="com.linkloving.dyh08.logic.UI.login.HeightActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name="com.linkloving.dyh08.logic.UI.login.LoginFinishActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name="com.linkloving.dyh08.logic.UI.login.UsernameActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name="com.linkloving.dyh08.logic.UI.login.WeightActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name="com.linkloving.dyh08.logic.UI.login.WearingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar" />
         <!--

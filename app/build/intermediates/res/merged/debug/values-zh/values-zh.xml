@@ -789,7 +789,7 @@
     <string name="portal_main_bound_failed">绑定设备失败</string>
     <string name="portal_main_bound_failed_ble_dis">请退出app重启手机蓝牙,再进行绑定</string>
     <string name="portal_main_bound_failed_nocharge">请连接充电线去绑定</string>
-    <string name="portal_main_bound_success">设备绑定成功！</string>
+    <string name="portal_main_bound_success">设备已绑定成功！</string>
     <string name="portal_main_bounding">请注意观察手机与手表的提示信息.</string>
     <string name="portal_main_data_calculating">数据计算中..</string>
     <string name="portal_main_data_chose">日期选择</string>

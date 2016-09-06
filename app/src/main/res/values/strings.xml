@@ -968,6 +968,38 @@
 
 
     <!--                        000000000000000000                     -->
+
+    <!--登录界面-->
+    <string name="member_login">Member Login</string>
+    <string name="Account">Account number(Email)</string>
+    <string name="YourEmailAddress">Your email address</string>
+    <string name="password">Password</string>
+    <string name="enter8to10">Enter 8 to 10 characters</string>
+    <string name="ForgetPassword">Forget Password?</string>
+    <string name="Username">Username</string>
+    <string name="Gender">Gender</string>
+    <string name="Man">Man</string>
+    <string name="Woman">Woman</string>
+    <string name="Birthday">Birthday</string>
+    <string name="year">year</string>
+    <string name="month">month</string>
+    <string name="day">day</string>
+    <string name="yyyy">yyyy</string>
+    <string name="mm">mm</string>
+    <string name="dd">dd</string>
+    <string name="WearingStyles">Wearing Styles</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="Welcometo">Welcome to the ranks of the movement</string>
+    <string name="OpenThe">Open The Bluetooth And Link Equipment</string>
+    <string name="yourUsername">Your Username</string>
+
+
+
+
+
+
+
     <!--侧滑栏-->
 
     <!--蓝牙-->

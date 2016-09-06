@@ -89,12 +89,12 @@ public class TrackUploadFragment extends Fragment {
     /**
      * 采集周期（单位 : 秒）
      */
-    private int gatherInterval = 10;
+    private int gatherInterval = 5;
 
     /**
      * 打包周期（单位 : 秒）
      */
-    private int packInterval = 20;
+    private int packInterval = 5;
 
     /**
      * 图标
@@ -156,7 +156,6 @@ public class TrackUploadFragment extends Fragment {
         mInflater = inflater;
         SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
          clickType = sharedPreferences.getInt("clickType", 0);
-
         // 初始化
         init();
         // 初始化监听器
@@ -194,7 +193,7 @@ public class TrackUploadFragment extends Fragment {
             public void onClick(View v) {
                 if (clickType == 0) {
                     Toast.makeText(getActivity(), "开启轨迹服务", Toast.LENGTH_LONG).show();
-                    startTrace();
+//                    startTrace();
 //                    把开始时间等数据记录下来,等按结束时一起记录.
                     //  成功开启轨迹服务,说明开始跑了,记录开始时间.
                     dateStartTrace = new Date();
@@ -234,7 +233,7 @@ public class TrackUploadFragment extends Fragment {
                 // TODO Auto-generated method stub
                 if (clickType == 1) {
                     Toast.makeText(getActivity(), "停止轨迹服务", Toast.LENGTH_SHORT).show();
-                    stopTrace();
+//                    stopTrace();
 //                    把开始时间取出来,记录下来
                     SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
                     String formatStartTime = sharedPreferences.getString("formatStartTime", "");

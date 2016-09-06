@@ -16,6 +16,7 @@ import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.utils.ToolKits;
+import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.util.List;
 
@@ -93,10 +94,10 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                         UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(mContext);
                         String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
                         if (last_sync_device_id==null||last_sync_device_id.length()==0){
-                            ToolKits.showCommonTosat(mContext, true, ToolKits.getStringbyId(mContext, R.string.portal_main_bound_success), Toast.LENGTH_LONG);
+                            IntentFactory.start_Bluetooth((Activity) mContext);
                         }else{
+                            ToolKits.showCommonTosat(mContext, true, ToolKits.getStringbyId(mContext, R.string.portal_main_bound_success), Toast.LENGTH_LONG);
                         }
-                        IntentFactory.start_Bluetooth((Activity) mContext);
                         break;
 
                     case Left_viewVO1.Settings:
@@ -123,6 +124,7 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                         break;
 
                     case Left_viewVO1.Sign_out:
+                        IntentFactory.startUsername((Activity) mContext);
                         break;
                     default :
                 }

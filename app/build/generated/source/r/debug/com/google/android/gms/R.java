@@ -23,8 +23,8 @@ public final class R {
 		public static final int common_signin_btn_light_text_disabled = 0x7f0d001f;
 		public static final int common_signin_btn_light_text_focused = 0x7f0d0020;
 		public static final int common_signin_btn_light_text_pressed = 0x7f0d0021;
-		public static final int common_signin_btn_text_dark = 0x7f0d00a1;
-		public static final int common_signin_btn_text_light = 0x7f0d00a2;
+		public static final int common_signin_btn_text_dark = 0x7f0d00a5;
+		public static final int common_signin_btn_text_light = 0x7f0d00a6;
 	}
 	public static final class drawable {
 		public static final int common_full_open_on_phone = 0x7f02006d;
@@ -43,8 +43,8 @@ public final class R {
 	public static final class raw {
 	}
 	public static final class string {
-		public static final int auth_google_play_services_client_facebook_display_name = 0x7f070472;
-		public static final int auth_google_play_services_client_google_display_name = 0x7f070473;
+		public static final int auth_google_play_services_client_facebook_display_name = 0x7f07047d;
+		public static final int auth_google_play_services_client_google_display_name = 0x7f07047e;
 		public static final int common_android_wear_notification_needs_update_text = 0x7f070013;
 		public static final int common_android_wear_update_text = 0x7f070014;
 		public static final int common_android_wear_update_title = 0x7f070015;

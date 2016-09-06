@@ -11,6 +11,8 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -25,6 +27,7 @@ import com.example.android.bluetoothlegatt.BLEListProvider;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.linkloving.dyh08.BleService;
 import com.linkloving.dyh08.IntentFactory;
+import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.logic.UI.main.PortalActivity;
@@ -61,6 +64,7 @@ public class BluetoothActivity extends ToolBarActivity {
     private List<DeviceVO> macList = new ArrayList();
     private int selectionPostion;
     private BluetoothActivity.macListAdapterNew macListAdapterNew;
+    private ImageView stateIV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +104,10 @@ public class BluetoothActivity extends ToolBarActivity {
                 provider.setCurrentDeviceMac(macList.get(position).mac);
                 provider.setmBluetoothDevice(macList.get(position).bledevice);
                 provider.connect_mac(macList.get(position).mac);
-                ImageView stateIV = (ImageView) view.findViewById(R.id.list_item_imageview);
+                stateIV = (ImageView) view.findViewById(R.id.list_item_imageview);
+                RotateAnimation rotateAnimation = getRotateAnimation();
+                stateIV.setAnimation(rotateAnimation);
+                rotateAnimation.start();
                 stateIV.setVisibility(View.VISIBLE);
             }
         });
@@ -113,6 +120,20 @@ public class BluetoothActivity extends ToolBarActivity {
             }
         });
     }
+/*    final RotateAnimation animation =new RotateAnimation(0f,360f,Animation.RELATIVE_TO_SELF,
+            0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+    animation.setDuration(3000);//设置动画持续时间
+    *//** 常用方法 *//*
+//animation.setRepeatCount(int repeatCount);//设置重复次数
+//animation.setFillAfter(boolean);//动画执行完后是否停留在执行完的状态*/
+
+    public  RotateAnimation  getRotateAnimation(){
+        RotateAnimation rotateAnimation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateAnimation.setDuration(1000);
+        rotateAnimation.setRepeatCount(20);
+        return  rotateAnimation ;
+    }
+
 
     @Override
     protected void getIntentforActivity() {
@@ -228,11 +249,15 @@ public class BluetoothActivity extends ToolBarActivity {
 
         @Override
         public void updateFor_handleConnectSuccessMsg() {
-            MyLog.e("BandListActivity", "连接成功");
 //            provider.requestbound_fit(BluetoothActivity.this);
             UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(BluetoothActivity.this);
             userAuthedInfo.getDeviceEntity().setLast_sync_device_id(macList.get(selectionPostion).mac);
+            MyApplication.getInstance(BluetoothActivity.this).setLocalUserInfoProvider(userAuthedInfo);
+            String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
+            MyLog.e(TAG,last_sync_device_id);
+            MyLog.e(TAG, macList.get(selectionPostion).mac);
             middleChangeIV.setImageResource(R.mipmap.link);
+            stateIV.setVisibility(View.INVISIBLE);
             middleChangeIV.setVisibility(View.VISIBLE);
             btn_Next.setVisibility(View.VISIBLE);
             Toast.makeText(BluetoothActivity.this, "绑定成功", Toast.LENGTH_SHORT).show();
@@ -245,6 +270,7 @@ public class BluetoothActivity extends ToolBarActivity {
             middleChangeIV.setImageResource(R.mipmap.nofind);
             middleChangeIV.setVisibility(View.VISIBLE);
             provider.clearProess();
+//            stateIV.setVisibility(View.INVISIBLE);
             provider.setCurrentDeviceMac(null);
             provider.setmBluetoothDevice(null);
             provider.resetDefaultState();

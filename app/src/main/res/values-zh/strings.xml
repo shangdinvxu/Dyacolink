@@ -676,7 +676,7 @@
     <string name="menu_wxsport">微信运动</string>
     <string name="portal_main_sync_data">MM月dd日 HH:mm</string>
     <string name="portal_main_bound_failed">绑定设备失败</string>
-    <string name="portal_main_bound_success">设备绑定成功！</string>
+    <string name="portal_main_bound_success">设备已绑定成功！</string>
     <string name="portal_main_unbound">未绑定设备</string>
     <string name="portal_main_gobound">绑定设备</string>
     <string name="portal_main_isbounding">绑定中..</string>

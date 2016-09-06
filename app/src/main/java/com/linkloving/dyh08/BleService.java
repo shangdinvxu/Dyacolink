@@ -207,6 +207,9 @@ public class BleService extends Service {
     }
 
     /**
+     *地图记录坐标移到服务里面
+     */
+    /**
      * 初始化OnEntityListener
      */
     private void initOnEntityListener() {

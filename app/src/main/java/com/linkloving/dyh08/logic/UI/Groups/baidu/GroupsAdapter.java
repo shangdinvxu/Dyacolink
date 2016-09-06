@@ -78,10 +78,9 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         traGreendao = new TraceGreendao(context,db);
         list = traGreendao.searchAlltimes();
         mMonthData = new String[list.size()];
-        MyLog.e(TAG,"执行了");
         for (int i = 0 ;i< list.size();i++){
             mMonthData[i]= list.get(i).getDate();
-            MyLog.e(TAG,mMonthData[i].toString());
+            MyLog.e(TAG,"mMonthData[i].toString():"+mMonthData[i].toString());
         }
 /*        //获取A.B.C的 index
         mSectionIndices = getSectionIndices();
@@ -202,7 +201,10 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
 
     @Override
     public long getHeaderId(int position) {
+        MyLog.e(TAG, "getHeardId执行了");
+        MyLog.e(TAG, "heardID是:  " + mMonthData[position].charAt(0));
         return mMonthData[position].charAt(0);
+//        return position ;
     }
 
     @Override
