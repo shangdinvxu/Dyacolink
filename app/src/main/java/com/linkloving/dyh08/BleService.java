@@ -14,6 +14,7 @@ import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.LocationMode;
 import com.baidu.trace.OnEntityListener;
@@ -196,6 +197,7 @@ public class BleService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        SDKInitializer.initialize(getApplicationContext());
         Log.e(TAG, "onCreate");
         self = this;
         provider = initBLEProvider(); //初始化bLE提供者
@@ -284,6 +286,7 @@ public class BleService extends Service {
     private void startTrace() {
         client = new LBSTraceClient(this);
         client.setLocationMode(LocationMode.High_Accuracy);
+        entityName = "myTrace";
         trace = new Trace(this, serviceId, entityName, traceType);
         client.startTrace(trace);
 

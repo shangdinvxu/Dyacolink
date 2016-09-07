@@ -120,12 +120,7 @@ public class BluetoothActivity extends ToolBarActivity {
             }
         });
     }
-/*    final RotateAnimation animation =new RotateAnimation(0f,360f,Animation.RELATIVE_TO_SELF,
-            0.5f,Animation.RELATIVE_TO_SELF,0.5f);
-    animation.setDuration(3000);//设置动画持续时间
-    *//** 常用方法 *//*
-//animation.setRepeatCount(int repeatCount);//设置重复次数
-//animation.setFillAfter(boolean);//动画执行完后是否停留在执行完的状态*/
+
 
     public  RotateAnimation  getRotateAnimation(){
         RotateAnimation rotateAnimation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -257,10 +252,10 @@ public class BluetoothActivity extends ToolBarActivity {
             MyLog.e(TAG,last_sync_device_id);
             MyLog.e(TAG, macList.get(selectionPostion).mac);
             middleChangeIV.setImageResource(R.mipmap.link);
-            stateIV.setVisibility(View.INVISIBLE);
             middleChangeIV.setVisibility(View.VISIBLE);
             btn_Next.setVisibility(View.VISIBLE);
             Toast.makeText(BluetoothActivity.this, "绑定成功", Toast.LENGTH_SHORT).show();
+            stateIV.setVisibility(View.INVISIBLE);
 
         }
 
@@ -270,7 +265,7 @@ public class BluetoothActivity extends ToolBarActivity {
             middleChangeIV.setImageResource(R.mipmap.nofind);
             middleChangeIV.setVisibility(View.VISIBLE);
             provider.clearProess();
-//            stateIV.setVisibility(View.INVISIBLE);
+            stateIV.setVisibility(View.INVISIBLE);
             provider.setCurrentDeviceMac(null);
             provider.setmBluetoothDevice(null);
             provider.resetDefaultState();
