@@ -39,6 +39,9 @@ import java.util.Locale;
     TextView sleepLightSleep ;
     TextView textView ;
     Context context ;
+    private String sleepHourString;
+    private String sleepMinuteString;
+
 
     /**
      *
@@ -106,8 +109,19 @@ import java.util.Locale;
         int sleepHour = (int) (deephour+lighthour);
         int  sleepMinute = (int) ((deephour+lighthour-sleepHour)*60);
         MyLog.e(TAG,"sleepHour"+sleepHour+"sleepMinute"+sleepMinute);
-        sleepHourTv.setText(sleepHour+"");
-        sleepMinuteTv.setText(sleepMinute+"");
+        //       时间显示前面做加0操作
+        if(sleepHour<10){
+            sleepHourString = "0"+sleepHour;
+        }else{
+            sleepHourString = sleepHour+"" ;
+        }
+        if(sleepMinute<10){
+            sleepMinuteString = "0"+sleepMinute;
+        }else{
+            sleepMinuteString = sleepMinute+"";
+        }
+        sleepHourTv.setText(sleepHourString+"");
+        sleepMinuteTv.setText(sleepMinuteString+"");
         sleepDeepSleep.setText(CommonUtils.getScaledDoubleValue(deephour,1)+"");
         sleepLightSleep.setText(CommonUtils.getScaledDoubleValue(lighthour,1)+"");
         textView.setText(startData+" - "+endData);

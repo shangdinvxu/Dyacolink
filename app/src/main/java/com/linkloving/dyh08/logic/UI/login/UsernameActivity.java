@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
@@ -42,6 +43,7 @@ public class UsernameActivity extends Activity {
             public void onClick(View v) {
                 String name = userName.getText().toString();
                 if (name==null||name.length()<=0){
+                    Toast.makeText(UsernameActivity.this, R.string.usernamecannot,Toast.LENGTH_SHORT).show();
                     return;
                 }
                userEntity.getUserBase().setNickname(name);

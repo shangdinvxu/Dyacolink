@@ -993,15 +993,7 @@
     <string name="Welcometo">Welcome to the ranks of the movement</string>
     <string name="OpenThe">Open The Bluetooth And Link Equipment</string>
     <string name="yourUsername">Your Username</string>
-
-
-
-
-
-
-
     <!--侧滑栏-->
-
     <!--蓝牙-->
     <string name="Bluetooth">Bluetooth</string>
     <!-- Settings-->
@@ -1018,6 +1010,12 @@
     <string name="Weight">Weight</string>
     <!-- Sign Out-->
     <string name="Sign_Out">Sign Out</string>
+
+    <!--登录界面-->
+    <string name="usernamecannot">Username不能为空</string>
+    <string name="choosewearingstyles">请选择佩戴方式</string>
+    <string name="pleasebirthday">请填写正确的生日</string>
+    <string name="pleaseGender">请选择性别</string>
 
 
     <!-- 主界面-->

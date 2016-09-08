@@ -27,6 +27,8 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
     TextView textView ;
     Context context ;
     TextView stepNumber ;
+    private Double distanceDB;
+
     /**
      *
      * @param object  用于传Asynck执行的对象
@@ -75,7 +77,11 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
         float stepPercent  = (float)distance/stepGoal ;
         //此时去更新UI
         double i = (double)distance / 1000;
-        Double distanceDB = (Math.round(i * 100 + 0.5) / 100.0);
+        if (i==0){
+            distanceDB = 0.0 ;
+        }else{
+            distanceDB = (Math.round(i * 100 + 0.5) / 100.0);
+        }
         stepNumber.setText(Double.toString(distanceDB));
         drawArc.setPercent(stepPercent);
         textView.setText(datasdf);

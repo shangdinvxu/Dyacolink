@@ -28,6 +28,7 @@ public class DayViewFragment extends Fragment {
     private IDataChangeListener dataChangeListener;
     private View view;
     public String date;
+    private int type = 0;
 
     public void setDataChangeListener(IDataChangeListener dataChangeListener) {
         this.dataChangeListener = dataChangeListener;
@@ -49,31 +50,37 @@ public class DayViewFragment extends Fragment {
                 if (monthDateView.getmSelDay() == 0) {
                     return;
                 }
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                DaychartviewFragment daychartviewFragment = new DaychartviewFragment();
                 String checkDate = monthDateView.getmSelYear() + "-" + monthDateView.getmSelMonth() + "-" + monthDateView.getmSelDay();
 //                回调日期到主页面。
                 dataChangeListener.onDataChange(checkDate);
-                Bundle bundle = new Bundle();
-                bundle.putString("checkDate",checkDate);
-                daychartviewFragment.setArguments(bundle);
-                transaction.replace(R.id.step_middle, daychartviewFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                if (type == 0) {
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    DaychartviewFragment daychartviewFragment = new DaychartviewFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("checkDate", checkDate);
+                    daychartviewFragment.setArguments(bundle);
+                    transaction.replace(R.id.step_middle, daychartviewFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
             }
         });
         left_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                type = 1;
                 monthDateView.onLeftClick();
+                type = 0;
             }
         });
         right_btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                type = 1;
                 monthDateView.onRightClick();
+                type = 0;
             }
         });
 

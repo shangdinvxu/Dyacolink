@@ -54,7 +54,9 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/groups_tv_Step"
-                        style="@style/main_UI_text_set" />
+                        style="@style/main_UI_text_set"
+                        android:layout_marginTop="40dp"
+                        />
 
                 </RelativeLayout>
                 <!-- 卡路里-->
@@ -74,7 +76,8 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/groups_tv_Calories"
-                        style="@style/main_UI_text_set" />
+                        style="@style/main_UI_text_set"
+                        android:layout_marginTop="40dp"/>
 
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"

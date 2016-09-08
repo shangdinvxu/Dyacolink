@@ -6,9 +6,11 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,6 +31,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.util.TypeUtils;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -66,6 +69,7 @@ import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.DateSwitcher;
 import com.linkloving.dyh08.utils.ScreenUtils;
 import com.linkloving.dyh08.utils.ToolKits;
+import com.linkloving.dyh08.utils.TypefaceUtils;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.dyh08.utils.manager.AsyncTaskManger;
 import com.linkloving.dyh08.utils.sportUtils.SportDataHelper;
@@ -230,7 +234,6 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         /*-------------------日历----------------*/
 
 }
-
     /*-----------------------------------------------------------------------*/
 
     @OnClick(R.id.Rl_step)
@@ -255,21 +258,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-
-
-       /* switch (v.getId()){
-            case R.id.iv_left:
-
-                monthDateView.onLeftClick();
-            case R.id.iv_right:
-
-                monthDateView.onRightClick();
-        }*/
     }
-
-
-
-
 
     private void initLocation() {
         mLocationClient = new LocationClient(PortalActivity.this.getApplicationContext());
@@ -480,6 +469,10 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
             @Override
             protected void onPostExecute(DaySynopic mDaySynopic) {
                 super.onPostExecute(mDaySynopic);
+                TypefaceUtils.setNumberType(PortalActivity.this, stepView);
+                TypefaceUtils.setNumberType(PortalActivity.this, distanceView);
+                TypefaceUtils.setNumberType(PortalActivity.this, sleepView);
+                TypefaceUtils.setNumberType(PortalActivity.this, calView);
                 //=============计算基础卡路里=====START========//
 //                if (timeNow.equals(sdf.format(new Date()))) {
 //                    int hour = Integer.parseInt(new SimpleDateFormat("HH").format(new Date()));
@@ -553,6 +546,8 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
      * 更新时钟上的UI显示
      */
     private void updateTimeThread() {
+        TypefaceUtils.setNumberType(PortalActivity.this, main_tv_day);
+        TypefaceUtils.setNumberType(PortalActivity.this, main_tv_hour);
         new Thread() {
             @Override
             public void run() {

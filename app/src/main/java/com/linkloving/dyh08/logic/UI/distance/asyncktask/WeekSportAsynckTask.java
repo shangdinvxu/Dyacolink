@@ -35,6 +35,7 @@ import java.util.Locale;
     TextView textView ;
     Context context ;
     TextView stepNumber ;
+    private Double distanceDB;
 
     /**
      *
@@ -99,7 +100,11 @@ import java.util.Locale;
         int stepGoal = Integer.parseInt(PreferencesToolkits.getGoalInfo(context, PreferencesToolkits.KEY_GOAL_DISTANCE));
         float stepPercent  = (float)stepnumber/stepGoal ;
         double i = (double)stepnumber / 1000;
-        Double distanceDB = (Math.round(i * 100 + 0.5) / 100.0);
+        if (i==0){
+            distanceDB = 0.0 ;
+        }else{
+            distanceDB = (Math.round(i * 100 + 0.5) / 100.0);
+        }
         stepNumber.setText(Double.toString(distanceDB));
         //此时去更新UI
         drawArc.setPercent(stepPercent);

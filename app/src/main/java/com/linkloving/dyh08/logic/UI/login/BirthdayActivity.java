@@ -6,6 +6,7 @@ import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
@@ -57,6 +58,7 @@ public class BirthdayActivity extends Activity {
                 String day = dayET.getText().toString().trim();
                 String birthday = year+"-"+month+"-"+day ;
                 if (year.length()<=0||month.length()<=0||day.length()<=0){
+                    Toast.makeText(BirthdayActivity.this, "请填写正确的生日", Toast.LENGTH_SHORT).show();
                     return;
                 }else {
                     userEntity.getUserBase().setBirthdate(birthday);

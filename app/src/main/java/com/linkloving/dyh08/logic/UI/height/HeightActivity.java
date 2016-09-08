@@ -54,6 +54,4 @@ public class HeightActivity extends AutoLayoutActivity {
         HeightActivity.this.finish();
     }
 
-
-
 }

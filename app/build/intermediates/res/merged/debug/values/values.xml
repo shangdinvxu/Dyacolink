@@ -1148,6 +1148,7 @@
     <string name="chat_sendpic_image_view_sendpic">Send image</string>
     <string name="chat_sendpic_image_view_title">View image</string>
     <string name="choose_date">Please select repeat cycle</string>
+    <string name="choosewearingstyles">请选择佩戴方式</string>
     <string name="circular_fence">圆形围栏</string>
     <string name="circular_fence_caption">请点击地图标记围栏圆心</string>
     <string name="comeback">Back</string>
@@ -1575,6 +1576,8 @@
     <string name="pay_no_function">Your device does not apply this function!</string>
     <string name="permission_ble">打开位置权限才可以使用连爱蓝牙功能哦~</string>
     <string name="pesonal_activity_title">Personal Information</string>
+    <string name="pleaseGender">请选择性别</string>
+    <string name="pleasebirthday">请填写正确的生日</string>
     <string name="pm1">PM1</string>
     <string name="pm1_content_1">pm1 mode:</string>
     <string name="pm1_content_2">Function of raising hand to show the screen closed</string>
@@ -2212,6 +2215,7 @@ function login(form){
     <string name="user_info_update_whats_up_count">personal signature{0}tips</string>
     <string name="user_info_what_s_up">What\'s Up</string>
     <string name="user_info_what_s_up_enter_hint">Say something...</string>
+    <string name="usernamecannot">Username不能为空</string>
     <string name="vertex_number">顶点数量</string>
     <string name="vertexes_fence">多边形围栏</string>
     <string name="vertexes_fence_caption">请按顺时针或逆时针方向点击地图</string>
@@ -3836,7 +3840,7 @@ function login(form){
     <style name="main_UI_text_set">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">80dp</item>
+        <item name="android:layout_marginLeft">82dp</item>
         <item name="android:text">0</item>
         <item name="android:layout_marginTop">40dp</item>
         <item name="android:textSize">36sp</item>
@@ -3887,7 +3891,7 @@ function login(form){
         <item name="android:layout_height">wrap_content</item>
         <item name="android:text">08</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">70sp</item>
+        <item name="android:textSize">80sp</item>
     </style>
     <style name="sleep_top_hour">
         <item name="android:layout_width">wrap_content</item>

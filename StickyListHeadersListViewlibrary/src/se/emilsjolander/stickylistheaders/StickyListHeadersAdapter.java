@@ -4,6 +4,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 
+import java.text.ParseException;
+
 public interface StickyListHeadersAdapter extends ListAdapter {
 	/**
 	 * Get a View that displays the header data at the specified position in the

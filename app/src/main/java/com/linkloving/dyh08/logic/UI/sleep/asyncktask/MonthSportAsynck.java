@@ -26,6 +26,8 @@ public class MonthSportAsynck extends AsyncTask<Object, Object, List<DaySynopic>
     Object object;
     DrawArc drawArc;
     TextView stepNumber ;
+    private String sleepHourString;
+    private String sleepMinuteString;
 
     private static final String[] PLANETS = new String[]{"January", "February", "March", "April", "May", "June", "July",
             "August", "September", "October", "November", "December"};
@@ -97,8 +99,19 @@ public class MonthSportAsynck extends AsyncTask<Object, Object, List<DaySynopic>
         int sleepHour = (int) (CommonUtils.getScaledDoubleValue(deephour, 1) + CommonUtils.getScaledDoubleValue(lighthour, 1));
         int  sleepMinute = (int) ((CommonUtils.getScaledDoubleValue(deephour,1)+CommonUtils.getScaledDoubleValue(lighthour,1)-sleepHour)*60);
         MyLog.e(TAG, "sleepHour" + sleepHour + "sleepMinute" + sleepMinute);
-        sleepHourTv.setText(sleepHour+"");
-        sleepMinuteTv.setText(sleepMinute+"");
+        //       时间显示前面做加0操作
+        if(sleepHour<10){
+            sleepHourString = "0"+sleepHour;
+        }else{
+            sleepHourString = sleepHour+"" ;
+        }
+        if(sleepMinute<10){
+            sleepMinuteString = "0"+sleepMinute;
+        }else{
+            sleepMinuteString = sleepMinute+"";
+        }
+        sleepHourTv.setText(sleepHourString+"");
+        sleepMinuteTv.setText(sleepMinuteString+"");
         sleepDeepSleep.setText(CommonUtils.getScaledDoubleValue(deephour, 1)+"");
         sleepLightSleep.setText(CommonUtils.getScaledDoubleValue(lighthour, 1)+"");
           textView.setText(param);

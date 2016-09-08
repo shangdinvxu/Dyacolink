@@ -1,6 +1,7 @@
 package com.linkloving.dyh08.logic.UI.sleep;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -54,11 +55,11 @@ public class DayViewFragment extends Fragment {
                 }
                 checkDate = monthDateView.getmSelYear() + "-" + monthDateView.getmSelMonth() + "-" + monthDateView.getmSelDay();
                 dataChangeListener.onDataChange(checkDate);
-//加载下面的buttom
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                SleepDayButtomFragment sleepDayButtomFragment = new SleepDayButtomFragment();
-                fragmentTransaction.replace(R.id.tw_sleep_buttomfragment, sleepDayButtomFragment).commit();
                 if (type == 0) {
+                    //加载下面的buttom
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    SleepDayButtomFragment sleepDayButtomFragment = new SleepDayButtomFragment();
+                    fragmentTransaction.replace(R.id.tw_sleep_buttomfragment, sleepDayButtomFragment).commit();
                     FragmentManager fragmentManager = getFragmentManager();
                     FragmentTransaction transaction = fragmentManager.beginTransaction();
                     DaychartviewFragment daychartviewFragment = new DaychartviewFragment();
@@ -75,7 +76,10 @@ public class DayViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 type = 1;
+                SleepActivity activity = (SleepActivity) getActivity();
+                activity.setDayButtomTag(0);
                 monthDateView.onLeftClick();
+                activity.setDayButtomTag(1);
                 type = 0;
 
             }
@@ -85,7 +89,10 @@ public class DayViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 type = 1;
+                SleepActivity activity = (SleepActivity) getActivity();
+                activity.setDayButtomTag(0);
                 monthDateView.onRightClick();
+                activity.setDayButtomTag(1);
                 type = 0;
             }
         });

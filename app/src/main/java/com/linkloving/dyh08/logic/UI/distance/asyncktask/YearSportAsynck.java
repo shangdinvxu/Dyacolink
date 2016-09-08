@@ -28,6 +28,7 @@ public class YearSportAsynck extends AsyncTask<Object, Object, Integer> {
     Context context;
     private int year;
     TextView stepNumber ;
+    private Double distanceDB;
 
     /**
      * @param object   用于传Asynck执行的对象
@@ -79,7 +80,11 @@ public class YearSportAsynck extends AsyncTask<Object, Object, Integer> {
         int stepGoal = Integer.parseInt(PreferencesToolkits.getGoalInfo(context, PreferencesToolkits.KEY_GOAL_DISTANCE));
         float stepPercent  = (float)step/stepGoal ;
         double i = (double)step / 1000;
-        Double distanceDB = (Math.round(i * 100 + 0.5) / 100.0);
+        if (i==0){
+            distanceDB = 0.0 ;
+        }else{
+            distanceDB = (Math.round(i * 100 + 0.5) / 100.0);
+        }
         stepNumber.setText(Double.toString(distanceDB));
         //此时去更新UI
         drawArc.setPercent(stepPercent);

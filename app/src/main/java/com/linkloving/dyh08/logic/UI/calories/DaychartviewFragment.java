@@ -90,9 +90,7 @@ public class DaychartviewFragment extends Fragment {
                 Date time2 = instance.getTime();
                 String format1 = simpleDateFormat.format(time2);
                 stringTimeList.add(format1);
-
             }
-
             for (int i=0;i<24;i++){
                 startdata = stringTimeList.get(i);
                 enddata = stringTimeList.get(i+1);
@@ -120,7 +118,6 @@ public class DaychartviewFragment extends Fragment {
         }
         protected void onPostExecute(final List<BarChartView.BarChartItemBean> dayhour) {
             super.onPostExecute(dayhour);
-
             barChartView.setItems(dayhour);
             barChartView.setDialogListerer(new BarChartView.DialogListerer() {
                 @Override

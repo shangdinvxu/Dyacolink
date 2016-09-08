@@ -24,6 +24,7 @@ import com.linkloving.dyh08.logic.UI.sleep.asyncktask.DaySportAsynck;
 import com.linkloving.dyh08.logic.UI.sleep.asyncktask.MonthSportAsynck;
 import com.linkloving.dyh08.logic.UI.sleep.asyncktask.WeekSportAsynckTask;
 import com.linkloving.dyh08.utils.CommonUtils;
+import com.linkloving.dyh08.utils.TypefaceUtils;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.dyh08.utils.sportUtils.DateSwitcher;
 
@@ -72,6 +73,15 @@ public class SleepActivity extends ToolBarActivity {
 
     private int fragmentReplaceTag = 0 ;
 
+    public int getDayButtomTag() {
+        return dayButtomTag;
+    }
+    public void setDayButtomTag(int dayButtomTag) {
+        this.dayButtomTag = dayButtomTag;
+    }
+
+    private int  dayButtomTag = 0 ;
+
 
 
     DateSwitcher weekSwitcher;
@@ -98,6 +108,11 @@ public class SleepActivity extends ToolBarActivity {
         //更新灰色小字日期
         updataData();
         setSelection(selectionIndex);
+//        设置字体
+        TypefaceUtils.setNumberType(SleepActivity.this, sleepHourTv);
+        TypefaceUtils.setNumberType(SleepActivity.this,sleepMinuteTv);
+        TypefaceUtils.setNumberType(SleepActivity.this,sleepLightSleep);
+        TypefaceUtils.setNumberType(SleepActivity.this,sleepDeepSleep);
 
     }
 
@@ -107,8 +122,8 @@ public class SleepActivity extends ToolBarActivity {
         switch (fragmentReplaceTag){
             case 1:
                 new DaySportAsynck(sleepHourTv,sleepMinuteTv,sleepDeepSleep,sleepLightSleep, step_tv_date, SleepActivity.this).execute(flushDate);
-                sleepButtom.setVisibility(View.VISIBLE);
-                sleepButtom.bringToFront();
+                    sleepButtom.setVisibility(View.VISIBLE);
+                    sleepButtom.bringToFront();
                fragmentTransaction.show(dayViewFragment);
                 setFragmentReplaceTag(0);
 
@@ -132,7 +147,6 @@ public class SleepActivity extends ToolBarActivity {
                 fragmentTransaction.show(sleepCalendarButtomFragment);
                 fragmentTransaction.replace(R.id.tw_sleep_buttomfragment,sleepCalendarButtomFragment).commit();
                 setFragmentReplaceTag(3);
-
                 break;
             case 0 :
                 Intent intent = new Intent(SleepActivity.this, PortalActivity.class);
@@ -170,9 +184,10 @@ public class SleepActivity extends ToolBarActivity {
                     public void onDataChange(String data) {
                         MyLog.e(TAG, "日界面点击的日期是:" + data);
                         new DaySportAsynck(sleepHourTv,sleepMinuteTv,sleepDeepSleep,sleepLightSleep, step_tv_date, SleepActivity.this).execute(data);
-                        sleepButtom.setVisibility(View.GONE);
+                        if (dayButtomTag==1) {
+                            sleepButtom.setVisibility(View.GONE);
+                        }
                         fragmentReplaceTag = 1 ;
-
                     }
                 });
                 transaction.replace(R.id.step_middle, dayViewFragment);

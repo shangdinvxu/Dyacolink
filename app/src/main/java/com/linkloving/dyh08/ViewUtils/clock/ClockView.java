@@ -171,16 +171,16 @@ public class ClockView extends View {
 //根据时间判断画点
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         int width = wm.getDefaultDisplay().getWidth();
-        for (int i = 0; i < 12; i++) {
+        for (int i = -1; i < 11; i++) {
             float[] temp = calculatePoint((i + 1) * 30, r - DEFAULT_LONG_DEGREE_LENGTH - degressNumberSize / 2 - 15);
           /*  canvas.drawText((i+1)+"", temp[2], temp[3] + degressNumberSize/2-6, paintDegreeNumber);*/
             if (i == hour_clock) {
                 Bitmap bitmap = loadBallView(getContext(), R.mipmap.point_3, (int) (0.074*width), (int) (0.074*width));
                 canvas.drawBitmap(bitmap, temp[2]-30, temp[3]-30, paintDegreeNumber);
 
-            } else {
+            }else {
 
-                if (i == 2 | i == 5 | i == 8 | i == 11) {
+                if (i==-1|i == 2 | i == 5 | i == 8 ) {
                     canvas.drawCircle(temp[2], temp[3] + degressNumberSize / 2 - 6, (int) (0.037*width), paintDegreeNumber);
                 } else {
                     canvas.drawCircle(temp[2], temp[3] + degressNumberSize / 2 - 6, (int) (0.015*width), paintDegreeNumber);

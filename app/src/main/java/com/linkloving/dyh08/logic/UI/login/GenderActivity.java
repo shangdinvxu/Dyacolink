@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
@@ -63,6 +64,7 @@ public class GenderActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (type ==2  ){
+                    Toast.makeText(GenderActivity.this, "请选择性别", Toast.LENGTH_SHORT).show();
                     return;
                 }
                userEntity.getUserBase().setUser_sex(type);

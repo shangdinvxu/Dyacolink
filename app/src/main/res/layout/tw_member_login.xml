@@ -50,6 +50,7 @@
             android:layout_height="40dp"
             android:background="@mipmap/input"
             android:textColorHint="#C9CACB"
+            android:maxLength="10"
             android:hint="@string/enter8to10"
             />
 

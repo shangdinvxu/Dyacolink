@@ -136,7 +136,15 @@ public class BleService extends Service {
 
     private SQLiteDatabase db;
     private DaoMaster.DevOpenHelper devOpenHelper;
-    private int gatherInterval = 10;
+    /**
+     * 采集周期（单位 : 秒）
+     */
+    private int gatherInterval = 5;
+
+    /**
+     * 打包周期（单位 : 秒）
+     */
+    private int packInterval = 5;
 
 
     /********************
@@ -266,7 +274,6 @@ public class BleService extends Service {
             while (refresh) {
                 // 查询实时位置
                 queryRealtimeLoc();
-
                 try {
                     Thread.sleep(gatherInterval * 1000);
                 } catch (InterruptedException e) {
@@ -285,11 +292,11 @@ public class BleService extends Service {
     }
     private void startTrace() {
         client = new LBSTraceClient(this);
+        client.setInterval(gatherInterval,packInterval);
         client.setLocationMode(LocationMode.High_Accuracy);
         entityName = "myTrace";
         trace = new Trace(this, serviceId, entityName, traceType);
         client.startTrace(trace);
-
     }
 
     /**

@@ -356,12 +356,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\other.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_check_box_selector.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\common_check_box_selector.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\unbackground.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\unbackground.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_check_box_selector.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\common_check_box_selector.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_textfield_background_material.xml",

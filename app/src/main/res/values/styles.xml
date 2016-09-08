@@ -291,7 +291,7 @@
     <style name="main_UI_text_set">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">80dp</item>
+        <item name="android:layout_marginLeft">82dp</item>
         <item name="android:text">0</item>
         <item name="android:layout_marginTop">40dp</item>
         <item name="android:textSize">36sp</item>
@@ -350,7 +350,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:text">08</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">70sp</item>
+        <item name="android:textSize">80sp</item>
     </style>
 
  <style name="sleep_top_hour">

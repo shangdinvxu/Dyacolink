@@ -67,10 +67,8 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
 
     public GroupsAdapter(Context context) {
         this.mContext = context;
-
         userEntity = MyApplication.getInstance(mContext).getLocalUserInfoProvider();
         user_id   = userEntity.getUser_id();
-
         mInflater = LayoutInflater.from(mContext);
         //源数据
         devOpenHelper = new DaoMaster.DevOpenHelper(context, "Note", null);
@@ -86,7 +84,6 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         mSectionIndices = getSectionIndices();
 //        //获取所有字母头的方法（去重复）
         mSectionLetters = getSectionLetters();*/
-
         startTimeList = traGreendao.searchAllStarttime();
         endTimeList = traGreendao.searchAllEndTime();
     }
@@ -200,11 +197,20 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     }
 
     @Override
-    public long getHeaderId(int position) {
-        MyLog.e(TAG, "getHeardId执行了");
+    public long getHeaderId(int position){
         MyLog.e(TAG, "heardID是:  " + mMonthData[position].charAt(0));
-        return mMonthData[position].charAt(0);
-//        return position ;
+        String s = mMonthData[position].toString();
+//        return mMonthData[position].charAt(0);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+        Date parse= null ;
+        try {
+             parse = simpleDateFormat.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long time = parse.getTime();
+        MyLog.e(TAG, "position" + position);
+        return time ;
     }
 
     @Override

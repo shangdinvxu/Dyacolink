@@ -29,6 +29,8 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
     TextView sleepLightSleep ;
     TextView textView ;
     Context context ;
+    private String sleepHourString;
+    private String sleepMinuteString;
 
     /**
      *
@@ -77,8 +79,19 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
         //此时去更新UI
         int sleepHour = (int) sleepTime;
         int sleepMinute = (int) ((sleepTime-sleepHour)*60);
-        sleepHourTv.setText(sleepHour+"");
-        sleepMinuteTv.setText(sleepMinute+"");
+//       时间显示前面做加0操作
+        if(sleepHour<10){
+            sleepHourString = "0"+sleepHour;
+        }else{
+            sleepHourString = sleepHour+"" ;
+        }
+        if(sleepMinute<10){
+            sleepMinuteString = "0"+sleepMinute;
+        }else{
+            sleepMinuteString = sleepMinute+"";
+        }
+        sleepHourTv.setText(sleepHourString+"");
+        sleepMinuteTv.setText(sleepMinuteString+"");
         sleepDeepSleep.setText(deepSleepHour+"");
         sleepLightSleep.setText(lightSleepHour+"");
         textView.setText(datasdf);
