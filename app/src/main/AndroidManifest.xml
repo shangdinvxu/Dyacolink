@@ -71,6 +71,14 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
+    <!--开gps权限-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <!-- 获取打电话权限 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
@@ -464,6 +472,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar" />
         <activity android:name=".logic.UI.login.WearingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            />
+        <activity android:name=".logic.UI.Bluetooth.BluetoothBindActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            />
+        <activity android:name=".logic.UI.Bluetooth.BluetoothDisconnectActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            />
+        <activity android:name=".logic.UI.Bluetooth.BluetoothBindActivity3"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             />

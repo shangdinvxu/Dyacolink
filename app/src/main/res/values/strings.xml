@@ -996,6 +996,13 @@
     <!--侧滑栏-->
     <!--蓝牙-->
     <string name="Bluetooth">Bluetooth</string>
+    <string name="Thisaction">This action will reset all data,still want to disconnect?</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Confirm">Confirm</string>
+    <string name="Reconnect">Reconnect</string>
+    <string name="Disconnect">Disconnect</string>
+
+
     <!-- Settings-->
     <string name="Settings">Settings</string>
     <!-- Workout-->
@@ -1058,13 +1065,20 @@
     <string name="setting_rem_on">ON</string>
     <string name="setting_rem_off">OFF</string>
     <string name="setting_enter">Enter</string>
+    <string name="Attention">Attention!</string>
+    <string name="Gps">GPS</string>
+    <string name="must_be">must be turned on</string>
+    <string name="ok">ok</string>
+    <string name="start_">start!</string>
+
+
 
 
     <!--百度鹰眼-->
 
     <string name="app_title">百度鹰眼</string>
-    <string name="start_trace">开始</string>
-    <string name="stop_trace">停止</string>
+    <string name="start_trace">Start</string>
+    <string name="stop_trace">Stop</string>
     <string name="select_date">日期</string>
     <string name="fence_operator">操作</string>
     <string name="is_processed">纠偏</string>

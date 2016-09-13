@@ -12,11 +12,17 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Chronometer;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +44,8 @@ import com.baidu.trace.TraceLocation;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.UI.workout.trackutils.DateUtils;
+import com.linkloving.dyh08.utils.GpsUtils;
+import com.linkloving.dyh08.utils.TimeUtils;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import org.json.JSONException;
@@ -48,9 +56,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import Trace.GreenDao.DaoMaster;
-import Trace.GreenDao.Note;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 
 /**
@@ -59,7 +70,12 @@ import Trace.GreenDao.Note;
 @SuppressLint("NewApi")
 public class TrackUploadFragment extends Fragment {
     private static final String TAG = TrackUploadFragment.class.getSimpleName();
-
+    @InjectView(R.id.OK_btn)
+    Button OKBtn;
+    @InjectView(R.id.first_middle)
+    LinearLayout firstMiddle;
+    @InjectView(R.id.second_middle)
+    LinearLayout secondMiddle;
 
     private Button btnStartTrace = null;
 
@@ -74,7 +90,6 @@ public class TrackUploadFragment extends Fragment {
     /**
      * 舒适化数据查找对象
      */
-
 
     /**
      * 开启轨迹服务监听器
@@ -137,25 +152,31 @@ public class TrackUploadFragment extends Fragment {
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private SimpleDateFormat simMonth = new SimpleDateFormat("yyyy-MM");
-
-
     private SQLiteDatabase db;
     private DaoMaster.DevOpenHelper devOpenHelper;
     private TraceGreendao traGreendao;
     private int clickType = 0;
+    private boolean isClickStart = false;
     private Date dateStartTrace;
     private String formatMonth;
     private String formatStartTime;
     private Date dateStopTrace;
     private String formatEndTime;
+    private boolean startTimer = false;
+
+    @InjectView(R.id.chronometer)
+    Chronometer chronometer;
+    private RelativeLayout relativeLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tw_trace_fragment_trackupload, container, false);
+        relativeLayout = (RelativeLayout) view.findViewById(R.id.uploadRelative);
+        ButterKnife.inject(this, view);
         mInflater = inflater;
         SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
-         clickType = sharedPreferences.getInt("clickType", 0);
+        clickType = sharedPreferences.getInt("clickType", 0);
         // 初始化
         init();
         // 初始化监听器
@@ -174,11 +195,34 @@ public class TrackUploadFragment extends Fragment {
     public void onDestroy() {
         SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
-        edit.putInt("clickType",clickType);
+        edit.putInt("clickType", clickType);
         edit.commit();
 
         super.onDestroy();
     }
+
+    /**
+     * 按下ok后帮用户开启gps
+     */
+    @OnClick(R.id.OK_btn)
+    void setOKBtn(View view) {
+//        GpsUtils.openGPS(getContext());
+        Intent intent = new Intent(
+                Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isClickStart && GpsUtils.isOPen(getContext())) {
+            firstMiddle.setVisibility(View.GONE);
+            secondMiddle.setVisibility(View.VISIBLE);
+            startTimer = true;
+        }
+
+    }
+
 
     /**
      * 初始化
@@ -188,39 +232,53 @@ public class TrackUploadFragment extends Fragment {
         btnStartTrace = (Button) view.findViewById(R.id.btn_startTrace);
 
         btnStopTrace = (Button) view.findViewById(R.id.btn_stopTrace);
+        String format = chronometer.getFormat();
+        MyLog.e(TAG, "format--------" + format);
         btnStartTrace.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+                isClickStart = true;
                 if (clickType == 0) {
-                    Toast.makeText(getActivity(), "开启轨迹服务", Toast.LENGTH_LONG).show();
-//                    startTrace();
+                    //先判断Gps有没有开,要是GPs没有开则在用户点确定后开启
+                    if (!GpsUtils.isOPen(getContext())) {
+                        firstMiddle.setVisibility(View.VISIBLE);
+                    }else{
+                        secondMiddle.setVisibility(View.VISIBLE);
+                        chronometer.setBase(SystemClock.elapsedRealtime());
+                        chronometer.start();
+                        Toast.makeText(getActivity(), "开启轨迹服务", Toast.LENGTH_LONG).show();
+                        relativeLayout.setBackgroundColor(Color.BLACK);
+                        relativeLayout.getBackground().setAlpha(150);
+
+                        startTrace();
 //                    把开始时间等数据记录下来,等按结束时一起记录.
-                    //  成功开启轨迹服务,说明开始跑了,记录开始时间.
-                    dateStartTrace = new Date();
-                    long startTimeLong = dateStartTrace.getTime();
-                    formatMonth = simMonth.format(dateStartTrace);
-                    formatStartTime = simpleDateFormat.format(dateStartTrace);
-                    SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor edit = sharedPreferences.edit();
-                    edit.putString("formatMonth", formatMonth);
-                    edit.putString("formatStartTime", formatStartTime);
-                    edit.putLong("startTimeLong", startTimeLong);
-                    edit.commit();
-                    if (!isRegister) {
-                        if (null == pm) {
-                            pm = (PowerManager) WorkoutActivity.mContext.getSystemService(Context.POWER_SERVICE);
+                        //  成功开启轨迹服务,说明开始跑了,记录开始时间.
+                        dateStartTrace = new Date();
+                        long startTimeLong = dateStartTrace.getTime();
+                        formatMonth = simMonth.format(dateStartTrace);
+                        formatStartTime = TrackUploadFragment.this.simpleDateFormat.format(dateStartTrace);
+                        SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor edit = sharedPreferences.edit();
+                        edit.putString("formatMonth", formatMonth);
+                        edit.putString("formatStartTime", formatStartTime);
+                        edit.putLong("startTimeLong", startTimeLong);
+                        edit.commit();
+                        if (!isRegister) {
+                            if (null == pm) {
+                                pm = (PowerManager) WorkoutActivity.mContext.getSystemService(Context.POWER_SERVICE);
+                            }
+                            if (null == wakeLock) {
+                                wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "track upload");
+                            }
+                            IntentFilter filter = new IntentFilter();
+                            filter.addAction(Intent.ACTION_SCREEN_OFF);
+                            filter.addAction(Intent.ACTION_SCREEN_ON);
+                            WorkoutActivity.mContext.registerReceiver(powerReceiver, filter);
+                            isRegister = true;
+                            clickType = 1;
                         }
-                        if (null == wakeLock) {
-                            wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "track upload");
-                        }
-                        IntentFilter filter = new IntentFilter();
-                        filter.addAction(Intent.ACTION_SCREEN_OFF);
-                        filter.addAction(Intent.ACTION_SCREEN_ON);
-                        WorkoutActivity.mContext.registerReceiver(powerReceiver, filter);
-                        isRegister = true;
-                        clickType = 1 ;
                     }
-                }else {
+                } else {
                     Toast.makeText(getActivity(), "轨迹服务已开启,请关闭轨迹服务", Toast.LENGTH_LONG).show();
                 }
             }
@@ -232,8 +290,9 @@ public class TrackUploadFragment extends Fragment {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 if (clickType == 1) {
+                    chronometer.start();
                     Toast.makeText(getActivity(), "停止轨迹服务", Toast.LENGTH_SHORT).show();
-//                    stopTrace();
+                    stopTrace();
 //                    把开始时间取出来,记录下来
                     SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
                     String formatStartTime = sharedPreferences.getString("formatStartTime", "");
@@ -241,7 +300,7 @@ public class TrackUploadFragment extends Fragment {
                     long startTimeLong = sharedPreferences.getLong("startTimeLong", 0);
                     Calendar c = Calendar.getInstance();
                     c.setTimeInMillis(startTimeLong);
-                   Date dateStartTrace =  c.getTime();
+                    Date dateStartTrace = c.getTime();
                     traGreendao.addStartTime(formatStartTime, dateStartTrace);
                     //                记录月份格式的日期type为0,方便索引排序;
                     traGreendao.addStartMonth(formatMonth, dateStartTrace);
@@ -251,6 +310,11 @@ public class TrackUploadFragment extends Fragment {
                     formatEndTime = simpleDateFormat.format(dateStopTrace);
                     MyLog.e(TAG, "结束的时间是" + dateStopTrace.toString());
                     traGreendao.addEndTime(formatEndTime, dateStopTrace);
+//                    停止后更新ui界面
+                    secondMiddle.setVisibility(View.GONE);
+                    relativeLayout.setBackgroundColor(Color.BLACK);
+                    relativeLayout.getBackground().setAlpha(0);
+
                     if (isRegister) {
                         try {
                             WorkoutActivity.mContext.unregisterReceiver(powerReceiver);
@@ -259,14 +323,13 @@ public class TrackUploadFragment extends Fragment {
                             // TODO: handle
                         }
                     }
-                    clickType = 0 ;
-                }else{
+                    clickType = 0;
+                } else {
                     Toast.makeText(getActivity(), "请开启轨迹服务", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
 
 
     public void startMonitorService() {
@@ -381,9 +444,10 @@ public class TrackUploadFragment extends Fragment {
                     isTraceStart = true;
                     // TODO: 2016/8/25
 //                    startRefreshThread(true);
-                     startRefreshThread(true);
+                    startRefreshThread(true);
                 }
             }
+
             // 轨迹服务推送接口（用于接收服务端推送消息，arg0 : 消息类型，arg1 : 消息内容，详情查看类参考）
             public void onTracePushCallback(byte arg0, String arg1) {
                 // TODO Auto-generated method stub
@@ -435,6 +499,12 @@ public class TrackUploadFragment extends Fragment {
                 startRefreshThread(false);
             }
         };
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
     }
 
     //    设置多少秒去获取数据
@@ -592,4 +662,7 @@ public class TrackUploadFragment extends Fragment {
         });
 
     }
+
+
 }
+

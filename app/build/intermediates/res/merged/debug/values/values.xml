@@ -527,9 +527,11 @@
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
     <color name="background_material_light">@color/material_grey_50</color>
+    <color name="backgroundyellow">#FEF0BF</color>
     <color name="bg_gray">#A5A5A5</color>
     <color name="black">#000000</color>
     <color name="blue">#1A2B5F</color>
+    <color name="blueBackground">#1A2459</color>
     <color name="blue_text">#2B9DD1</color>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
@@ -537,6 +539,7 @@
     <color name="bright_foreground_inverse_material_light">@color/bright_foreground_material_dark</color>
     <color name="bright_foreground_material_dark">@android:color/white</color>
     <color name="bright_foreground_material_light">@android:color/black</color>
+    <color name="button_gray">#BCBDC2</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
     <color name="chat_view_orange">#ffa737</color>
@@ -581,6 +584,7 @@
     <color name="dim_foreground_material_light">#ff323232</color>
     <color name="foreground_material_dark">@android:color/white</color>
     <color name="foreground_material_light">@android:color/black</color>
+    <color name="gray">#CECECE</color>
     <color name="gray_dark_for_text">#666666</color>
     <color name="gray_for_background">#e7e6e6</color>
     <color name="gray_for_text2">#C4C4C4</color>
@@ -967,14 +971,19 @@
     <integer name="google_play_services_version">8115000</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
     <string name="Account">Account number(Email)</string>
+    <string name="Attention">Attention!</string>
     <string name="Birthday">Birthday</string>
     <string name="Bluetooth">Bluetooth</string>
     <string name="Calories">Calories</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Confirm">Confirm</string>
     <string name="D">D</string>
     <string name="Day_View">Day View</string>
+    <string name="Disconnect">Disconnect</string>
     <string name="Distance">Distance</string>
     <string name="ForgetPassword">Forget Password?</string>
     <string name="Gender">Gender</string>
+    <string name="Gps">GPS</string>
     <string name="Groups">Groups</string>
     <string name="Heart_Rate">Heart Rate</string>
     <string name="Height">Height</string>
@@ -983,11 +992,13 @@
     <string name="Man">Man</string>
     <string name="Month_View">Month View</string>
     <string name="OpenThe">Open The Bluetooth And Link Equipment</string>
+    <string name="Reconnect">Reconnect</string>
     <string name="STEP">STEP</string>
     <string name="Settings">Settings</string>
     <string name="Sign_Out">Sign Out</string>
     <string name="Sleep">Sleep</string>
     <string name="Step">Step</string>
+    <string name="Thisaction">This action will reset all data,still want to disconnect?</string>
     <string name="Username">Username</string>
     <string name="W">W</string>
     <string name="WearingStyles">Wearing Styles</string>
@@ -1511,6 +1522,7 @@
     <string name="month">month</string>
     <string name="more_inch">Inch</string>
     <string name="move_device_title"> Delete device</string>
+    <string name="must_be">must be turned on</string>
     <string name="my_message">Message</string>
     <string name="myattention">Follow</string>
     <string name="myfans">Follower</string>
@@ -1567,6 +1579,7 @@
     <string name="not_enough_space">Not enough space</string>
     <string name="notification_title">Notifications</string>
     <string name="notifications_no_res">No Reminder</string>
+    <string name="ok">ok</string>
     <string name="password">Password</string>
     <string name="password_modification_success">Password modification success</string>
     <string name="pay_isreading">reading balance...</string>
@@ -2085,12 +2098,13 @@ function login(form){
     <string name="ssdk_yixin_client_inavailable">目前您的易信版本过低或未安装，需要安装易信才能使用</string>
     <string name="ssdk_yixinmoments">易信朋友圈</string>
     <string name="ssdk_youdao">有道云笔记</string>
-    <string name="start_trace">开始</string>
+    <string name="start_">start!</string>
+    <string name="start_trace">Start</string>
     <string name="start_upgrading">Download completed, start upgrading</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="step_count">Step Count</string>
     <string name="steps">steps</string>
-    <string name="stop_trace">停止</string>
+    <string name="stop_trace">Stop</string>
     <string name="stored_value">Prestore amount</string>
     <string name="successfully_registered">Successfully Registered！</string>
     <string name="summarizing_data">loading...</string>
@@ -3817,6 +3831,15 @@ function login(form){
         <item name="android:paddingLeft">5dp</item>
         <item name="android:paddingRight">5dp</item>
     </style>
+    <style name="groups_UI_text_set">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">82dp</item>
+        <item name="android:text">0</item>
+        <item name="android:layout_marginTop">40dp</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
     <style name="loginTextview">
         <item name="android:layout_marginTop">90dp</item>
         <item name="android:textSize">25sp</item>
@@ -3842,10 +3865,9 @@ function login(form){
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">82dp</item>
         <item name="android:text">0</item>
-        <item name="android:layout_marginTop">40dp</item>
+        <item name="android:layout_marginTop">45dp</item>
         <item name="android:textSize">36sp</item>
         <item name="android:textColor">#000000</item>
-
     </style>
     <style name="settings_item_bg_group_bottom">
         <item name="android:layout_height">45dp</item>

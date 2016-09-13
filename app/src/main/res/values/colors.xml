@@ -29,8 +29,11 @@
     <color name="text_bluesky1">#3A87AD</color> <!-- 天空深蓝 -->
     <color name="sleep_blue">#30C3F9</color> <!-- 睡眠数据蓝色 -->
     <color name="blue">#1A2B5F</color>
+    <color name="blueBackground">#1A2459</color>
     <color name="blue_text">#2B9DD1</color>
     <color name="bg_gray">#A5A5A5</color>
+    <color name="gray">#CECECE</color>
+    <color name="button_gray">#BCBDC2</color>
     <drawable name="smssdk_dialog_btn_nor">#00000000</drawable>
     <drawable name="smssdk_dialog_btn_pre">#ff282a2b</drawable>
     <color name="newyellow">#F99D4E</color>
@@ -43,6 +46,7 @@
     <color name="smssdk_lv_item_divider">#ffd9d9da</color>
     <color name="smssdk_black">#ff000000</color>
     <color name="smssdk_gray">#ff898989</color>
+    <color name="backgroundyellow">#FEF0BF</color>
 
     <!-- 侧滑栏背景黑 -->
     <color name="navigation_bcakground">#2f2f2f</color>

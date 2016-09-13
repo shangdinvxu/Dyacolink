@@ -293,10 +293,18 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">82dp</item>
         <item name="android:text">0</item>
+        <item name="android:layout_marginTop">45dp</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+    <style name="groups_UI_text_set">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">82dp</item>
+        <item name="android:text">0</item>
         <item name="android:layout_marginTop">40dp</item>
         <item name="android:textSize">36sp</item>
         <item name="android:textColor">#000000</item>
-
     </style>
 
     <style name="step_buttom_image_style">

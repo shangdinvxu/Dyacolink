@@ -211,9 +211,9 @@ public class BleService extends Service {
         provider = initBLEProvider(); //初始化bLE提供者
         //启动ble连接并且每一分钟对连接状态检查一遍。确保所有型号的手机处于连接状态。未连接的启动连接。
         bleConnectAndCheckConnectStateInTime();
-        initOnEntityListener();
-        startTrace();
-        new RefreshThread().start();
+//        initOnEntityListener();
+//        startTrace();
+//        new RefreshThread().start();
     }
 
     /**

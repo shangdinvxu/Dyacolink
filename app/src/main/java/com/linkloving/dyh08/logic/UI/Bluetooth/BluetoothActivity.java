@@ -251,11 +251,11 @@ public class BluetoothActivity extends ToolBarActivity {
             String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
             MyLog.e(TAG,last_sync_device_id);
             MyLog.e(TAG, macList.get(selectionPostion).mac);
+            stateIV.setVisibility(View.INVISIBLE);
             middleChangeIV.setImageResource(R.mipmap.link);
             middleChangeIV.setVisibility(View.VISIBLE);
             btn_Next.setVisibility(View.VISIBLE);
             Toast.makeText(BluetoothActivity.this, "绑定成功", Toast.LENGTH_SHORT).show();
-            stateIV.setVisibility(View.INVISIBLE);
 
         }
 

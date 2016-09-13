@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.linkloving.dyh08.logic.UI.Bluetooth.BluetoothActivity;
+import com.linkloving.dyh08.logic.UI.Bluetooth.BluetoothBindActivity;
+import com.linkloving.dyh08.logic.UI.Bluetooth.BluetoothBindActivity3;
+import com.linkloving.dyh08.logic.UI.Bluetooth.BluetoothDisconnectActivity;
 import com.linkloving.dyh08.logic.UI.Groups.baidu.GroupsDetailsActivity;
 import com.linkloving.dyh08.logic.UI.calories.CaloriesActivity;
 import com.linkloving.dyh08.logic.UI.customerservice.CustomerServiceActivity;
@@ -164,7 +167,10 @@ public class IntentFactory {
         Intent intent = new Intent(activity, PortalActivity.class);
         return intent;
     }
-
+    public static void startPortalActivityIntent(Activity activity) {
+        Intent intent = new Intent(activity, PortalActivity.class);
+        activity.startActivity(intent);
+    }
 
     public static void start_LoginPage_Activity(Activity activity) {
 
@@ -356,11 +362,24 @@ public class IntentFactory {
     }
     public static void startWearing(Activity activity){
         Intent intent = new Intent(activity, com.linkloving.dyh08.logic.UI.login.WearingActivity.class);
-        MyLog.e("kaishi","kais");
         activity.startActivity(intent);
     }
-    public static void startLoginFinish(Activity activity){
+
+    public static void startLoginFinish(Activity activity) {
         Intent intent = new Intent(activity, com.linkloving.dyh08.logic.UI.login.LoginFinishActivity.class);
         activity.startActivity(intent);
     }
+    public static void startBindActivity1(Activity activity) {
+        Intent intent = new Intent(activity, BluetoothBindActivity.class);
+        activity.startActivity(intent);
+    }
+    public static void startBindActivity2(Activity activity) {
+        Intent intent = new Intent(activity, BluetoothDisconnectActivity.class);
+        activity.startActivity(intent);
+    }
+    public static void startBindActivity3(Activity activity) {
+        Intent intent = new Intent(activity, BluetoothBindActivity3.class);
+        activity.startActivity(intent);
+    }
+
 }

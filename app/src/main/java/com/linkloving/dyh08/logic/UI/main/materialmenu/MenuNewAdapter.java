@@ -96,7 +96,7 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                         if (last_sync_device_id==null||last_sync_device_id.length()==0){
                             IntentFactory.start_Bluetooth((Activity) mContext);
                         }else{
-                            ToolKits.showCommonTosat(mContext, true, ToolKits.getStringbyId(mContext, R.string.portal_main_bound_success), Toast.LENGTH_LONG);
+                           IntentFactory.startBindActivity1((Activity) mContext);
                         }
                         break;
 
