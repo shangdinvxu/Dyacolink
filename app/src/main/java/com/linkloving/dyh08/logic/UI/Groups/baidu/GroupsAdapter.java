@@ -11,9 +11,6 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.linkloving.band.dto.SportRecord;
-import com.linkloving.band.sleep.DLPSportData;
-import com.linkloving.band.sleep.SleepDataHelper;
-import com.linkloving.band.ui.DatasProcessHelper;
 import com.linkloving.band.ui.DetailChartCountData;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
@@ -21,7 +18,6 @@ import com.linkloving.dyh08.db.sport.UserDeviceRecord;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.utils.CommonUtils;
-import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.utils.TimeZoneHelper;
 
@@ -50,8 +46,8 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     private TraceGreendao traGreendao ;
     private SQLiteDatabase db;
     private DaoMaster.DevOpenHelper devOpenHelper;
-    private final List<Note>startTimeList;
-    private final List<Note> endTimeList;
+    public final List<Note>startTimeList;
+    public final List<Note> endTimeList;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
     private final int user_id;
     private long itemDuration;
@@ -74,7 +70,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         devOpenHelper = new DaoMaster.DevOpenHelper(context, "Note", null);
         db = devOpenHelper.getReadableDatabase();
         traGreendao = new TraceGreendao(context,db);
-        list = traGreendao.searchAlltimes();
+        list = traGreendao.searchAllMonthtimes();
         mMonthData = new String[list.size()];
         for (int i = 0 ;i< list.size();i++){
             mMonthData[i]= list.get(i).getDate();
@@ -86,6 +82,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         mSectionLetters = getSectionLetters();*/
         startTimeList = traGreendao.searchAllStarttime();
         endTimeList = traGreendao.searchAllEndTime();
+
     }
 
     private int[] getSectionIndices() {
@@ -118,7 +115,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     }
 
     public View getHeaderView(int i, View convertView, ViewGroup parent) {
-        HeaderViewHolder holder;
+        final HeaderViewHolder holder;
         if(convertView == null){
             holder = new HeaderViewHolder();
             convertView = mInflater.inflate(R.layout.tw_groups_itemheard, parent, false);
@@ -138,12 +135,15 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
             }
         }
         holder.activityNumbers.setText(amount+" activities");
+        final int finalAmount = amount;
+
         return convertView;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
+        MyLog.e(TAG,"getView的position是---------"+position);
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.sticklist_item_layout, parent, false);
@@ -155,6 +155,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        MyLog.e(TAG,startTimeList.get(position).getDate()+"-------------startTimeList的getDate");
         holder.dataTime.setText(startTimeList.get(position).getDate());
 //      每个item的开始时间和结束时间
         itemStartDate = startTimeList.get(position).getStartDate();
@@ -215,7 +216,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
 
     @Override
     public int getCount() {
-        return mMonthData.length;
+        return startTimeList.size() ;
     }
 
     @Override

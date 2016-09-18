@@ -1,13 +1,13 @@
 package com.linkloving.dyh08.logic.UI.Groups.baidu;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.linkloving.dyh08.R;
@@ -17,8 +17,6 @@ import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import Trace.GreenDao.DaoMaster;
@@ -45,6 +43,14 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
         @InjectView(R.id.stickyList)
         StickyListHeadersListView stickyList;
         private boolean fadeHeader = true; //隐藏头
+    private GroupsAdapter groupsAdapter;
+    private Long deleteStartTime;
+    private Long deleteEndTime;
+    private View itemView ;
+    private List<Note> listMonth;
+    private Long deleteMonthTime;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +58,15 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
         devOpenHelper = new DaoMaster.DevOpenHelper(GroupsActivity.this, "Note", null);
         db = devOpenHelper.getReadableDatabase();
         traGreendao = new TraceGreendao(GroupsActivity.this, db);
-        startTimeList = traGreendao.searchAllStarttime();
-        endTimeList = traGreendao.searchAllEndTime();
+//        startTimeList = traGreendao.searchAllStarttime();
+//        endTimeList = traGreendao.searchAllEndTime();
+        groupsAdapter = new GroupsAdapter(GroupsActivity.this);
+        stickyList.setAdapter(groupsAdapter);
+        startTimeList = groupsAdapter.startTimeList ;
+        endTimeList = groupsAdapter.endTimeList ;
+        listMonth = traGreendao.searchAllMonthtimes();
         initView();
+
     }
     protected void getIntentforActivity() {
     }
@@ -70,6 +82,8 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
                 startActivity(intent);
             }
         });
+
+
         stickyList.setOnHeaderClickListener(new StickyListHeadersListView.OnHeaderClickListener() {
             @Override
             public void onHeaderClick(StickyListHeadersListView l, View header, int itemPosition, long headerId, boolean currentlySticky) {
@@ -96,12 +110,49 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
 //        stickyList.setEmptyView(findViewById(R.id.empty));
         stickyList.setDrawingListUnderStickyHeader(true);
         stickyList.setAreHeadersSticky(true);
-        GroupsAdapter groupsAdapter = new GroupsAdapter(GroupsActivity.this);
-        stickyList.setAdapter(groupsAdapter);
+
         stickyList.setStickyHeaderTopOffset(-20);
+        stickyList.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                MyLog.e(TAG,"position"+position);
+                itemView = view ;
+                ImageView nextIV = (ImageView) view.findViewById(R.id.next);
+                ImageView mapState = (ImageView) view.findViewById(R.id.mapState);
+                ImageView delete = (ImageView) view.findViewById(R.id.delete);
+                nextIV.setVisibility(GONE);
+                mapState.setVisibility(GONE);
+                delete.setVisibility(VISIBLE);
+                deleteStartTime = startTimeList.get(position).getId();
+                deleteEndTime = endTimeList.get(position).getId();
+                deleteMonthTime = listMonth.get(position).getId();
+                MyLog.e(TAG, deleteStartTime +"");
+                MyLog.e(TAG, deleteEndTime +"");
+                delete.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MyLog.e(TAG,"onClick执行了");
+                        traGreendao.deleteByKey(deleteEndTime);
+                        traGreendao.deleteByKey(deleteStartTime);
+                        traGreendao.deleteByKey(deleteMonthTime);
+                                groupsAdapter = new GroupsAdapter(GroupsActivity.this);
+                                stickyList.setAdapter(groupsAdapter);
+//                        groupsAdapter.notifyDataSetChanged();
+                    }
+                });
+
+                return true;
+            }
+        });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        groupsAdapter.notifyDataSetChanged();
     }
 
     protected void initListeners() {
+
 
     }
     }

@@ -10,10 +10,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -44,9 +46,11 @@ import com.baidu.trace.TraceLocation;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.UI.workout.trackutils.DateUtils;
+import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.GpsUtils;
 import com.linkloving.dyh08.utils.TimeUtils;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
+import com.linkloving.utils.TimeZoneHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -165,8 +169,13 @@ public class TrackUploadFragment extends Fragment {
     private boolean startTimer = false;
 
     @InjectView(R.id.chronometer)
-    Chronometer chronometer;
+    TextView chronometer;
     private RelativeLayout relativeLayout;
+    private SharedPreferences sharedPreferences;
+    private Handler handler;
+    private Runnable update_thread;
+    private long startTimeLong;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -185,10 +194,81 @@ public class TrackUploadFragment extends Fragment {
         setInterval();
         // 设置http请求协议类型
         setRequestType();
+        getRuntime();
         devOpenHelper = new DaoMaster.DevOpenHelper(getContext(), "Note", null);
         db = devOpenHelper.getReadableDatabase();
         traGreendao = new TraceGreendao(getContext(), db);
+        SharedPreferences sharedPreferencesbegin = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
+        isClickStart = sharedPreferencesbegin.getBoolean("isClickStart", false);
+        startTimeLong = sharedPreferencesbegin.getLong("startTimeLong", 0);
+        if (isClickStart){
+            secondMiddle.setVisibility(View.VISIBLE);
+            relativeLayout.setBackgroundColor(Color.BLACK);
+            relativeLayout.getBackground().setAlpha(150);
+
+        }
         return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.tw_trace_fragment_trackupload, null);
+        chronometer = (TextView) inflate.findViewById(R.id.chronometer);
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what){
+                    case 1:
+                        long  time = (long) msg.obj;
+                        long runtimeDuration = time-startTimeLong;
+                        Date date = new Date(runtimeDuration);
+                        String format = simpleDateFormat.format(date);
+                        if (chronometer!=null){
+                            chronometer.setText(format);
+                        }
+                }
+            }
+        };
+    }
+
+
+    public void getRuntime() {
+        //延时1s后又将线程加入到线程队列中
+         MyLog.e(TAG,"postDelayed执行了");
+        if (isClickStart){
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        while (true) {
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Calendar instance = Calendar.getInstance();
+                                    instance.add(Calendar.MINUTE,-TimeZoneHelper.getTimeZoneOffsetMinute());
+                                    long timeInMillis = instance.getTimeInMillis();
+                                    Message message = new Message();
+                                    message.what=1 ;
+                                    message.obj=timeInMillis ;
+                                    handler.sendMessage(message);
+                                    handler.postDelayed(update_thread, 1000);
+                                }
+                            });
+                            sleep(1000);
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.start();
+        }else{
+
+        }
+
+
     }
 
     @Override
@@ -196,6 +276,7 @@ public class TrackUploadFragment extends Fragment {
         SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putInt("clickType", clickType);
+        edit.putBoolean("isClickStart",isClickStart);
         edit.commit();
 
         super.onDestroy();
@@ -219,6 +300,7 @@ public class TrackUploadFragment extends Fragment {
             firstMiddle.setVisibility(View.GONE);
             secondMiddle.setVisibility(View.VISIBLE);
             startTimer = true;
+            getRuntime();
         }
 
     }
@@ -232,8 +314,6 @@ public class TrackUploadFragment extends Fragment {
         btnStartTrace = (Button) view.findViewById(R.id.btn_startTrace);
 
         btnStopTrace = (Button) view.findViewById(R.id.btn_stopTrace);
-        String format = chronometer.getFormat();
-        MyLog.e(TAG, "format--------" + format);
         btnStartTrace.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -244,20 +324,18 @@ public class TrackUploadFragment extends Fragment {
                         firstMiddle.setVisibility(View.VISIBLE);
                     }else{
                         secondMiddle.setVisibility(View.VISIBLE);
-                        chronometer.setBase(SystemClock.elapsedRealtime());
-                        chronometer.start();
+                        getRuntime();
                         Toast.makeText(getActivity(), "开启轨迹服务", Toast.LENGTH_LONG).show();
                         relativeLayout.setBackgroundColor(Color.BLACK);
                         relativeLayout.getBackground().setAlpha(150);
-
                         startTrace();
 //                    把开始时间等数据记录下来,等按结束时一起记录.
                         //  成功开启轨迹服务,说明开始跑了,记录开始时间.
                         dateStartTrace = new Date();
-                        long startTimeLong = dateStartTrace.getTime();
+                        startTimeLong = dateStartTrace.getTime();
                         formatMonth = simMonth.format(dateStartTrace);
                         formatStartTime = TrackUploadFragment.this.simpleDateFormat.format(dateStartTrace);
-                        SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
+                        sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
                         SharedPreferences.Editor edit = sharedPreferences.edit();
                         edit.putString("formatMonth", formatMonth);
                         edit.putString("formatStartTime", formatStartTime);
@@ -290,7 +368,7 @@ public class TrackUploadFragment extends Fragment {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 if (clickType == 1) {
-                    chronometer.start();
+                    isClickStart=false ;
                     Toast.makeText(getActivity(), "停止轨迹服务", Toast.LENGTH_SHORT).show();
                     stopTrace();
 //                    把开始时间取出来,记录下来
@@ -314,7 +392,6 @@ public class TrackUploadFragment extends Fragment {
                     secondMiddle.setVisibility(View.GONE);
                     relativeLayout.setBackgroundColor(Color.BLACK);
                     relativeLayout.getBackground().setAlpha(0);
-
                     if (isRegister) {
                         try {
                             WorkoutActivity.mContext.unregisterReceiver(powerReceiver);

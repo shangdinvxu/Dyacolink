@@ -480,7 +480,7 @@ startRefreshThread(true);
                 Date date = new Date();
                 String formatMonth = simMonth.format(date);
                 String format = simpleDateFormat.format(date);
-                    traGreendao.addStartTime(format, date);
+//                    traGreendao.addStartTime(format, date);
 //                记录月份格式的日期type为0,方便索引排序;
                     traGreendao.addStartMonth(formatMonth,date);
                 showMessage(" " + arg1, Integer.valueOf(arg0));

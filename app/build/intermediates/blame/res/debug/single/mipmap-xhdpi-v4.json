@@ -244,6 +244,10 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\ranking_2.png"
     },
     {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\mapoff.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\mapoff.png"
+    },
+    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\target.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\target.png"
     },
@@ -342,6 +346,10 @@
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\cai_not_clicked.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\cai_not_clicked.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\mapon.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\mapon.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\nofind.png",

@@ -79,7 +79,7 @@
         android:src="@mipmap/line"
         android:layout_marginTop="4dp"
         />
-    <Chronometer
+    <TextView
         android:id="@+id/chronometer"
         android:textColor="@color/white"
         android:textSize="40sp"

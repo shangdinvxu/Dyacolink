@@ -57,15 +57,10 @@ public class TraceGreendao {
     public void addNote(String date ,Date startDate ,Date runDate, double latitude,double longitude){
 
 //        public Note(Long id, java.util.Date date, java.util.Date startDate, java.util.Date runDate, String TraceLocation)
-        MyLog.e(TAG,"addNote方法执行了");
+//        MyLog.e(TAG,"addNote方法执行了");
         Note note = new Note(null, date,  startDate, runDate,3, latitude,longitude);
         getNoteDao().insert(note);
     }
-
-
-
-
-
 
     /**
      * 添加开始时间
@@ -78,7 +73,7 @@ public class TraceGreendao {
         getNoteDao().insert(note);
     }
     public void addStartMonth(String date,Date startDate){
-        MyLog.e(TAG,"addStartTime方法执行了");
+        MyLog.e(TAG,"addStartMoth方法执行了");
         Note note = new Note(null, date,  startDate, null,0, null,null);
         getNoteDao().insert(note);
     }
@@ -131,6 +126,9 @@ public class TraceGreendao {
                 .orderAsc(NoteDao.Properties.Id)
                 .build();
         List<Note> list = query.list();
+        for (int i=0 ; i<list.size();i++){
+            MyLog.e(TAG,list.get(i).getId()+"-------------"+"======searchAllStarttime"+"---的id");
+        }
         return list ;
     }
     public List<Note>searchAllEndTime(){
@@ -139,21 +137,35 @@ public class TraceGreendao {
                 .orderAsc(NoteDao.Properties.Id)
                 .build();
         List<Note> list = query.list();
+        for (int i=0 ; i<list.size();i++){
+            MyLog.e(TAG,list.get(i).getId()+"-------------"+"searchAllEndTime"+"---的id");
+        }
         return list ;
     }
 
     /**
      * 查询所有的开始时间
      */
-    public List<Note> searchAlltimes(){
-        MyLog.e(TAG, "searchAlltimes方法执行了");
+    public List<Note> searchAllMonthtimes(){
+//        MyLog.e(TAG, "searchAlltimes方法执行了");
         Query<Note> query = getNoteDao().queryBuilder().where(NoteDao.Properties.Type.eq(0))
                 .orderAsc(NoteDao.Properties.Id)
                 .build();
         List<Note> list = query.list();
+//        for (int i=0 ; i<list.size();i++){
+//            MyLog.e(TAG,list.get(i).getId()+"-------------"+"------searchAllMonthtimes"+list.get(i)+"---的id");
+//        }
         return list ;
     }
 
+    /**
+     * 删除特定位置的数据
+     */
+    public void deleteByKey(long postion){
+        getNoteDao().deleteByKey(postion);
+        MyLog.e(TAG,"deleteByKey()"+postion);
+
+    }
 
     /**
      * 根据开始时间运动时的坐标点集合

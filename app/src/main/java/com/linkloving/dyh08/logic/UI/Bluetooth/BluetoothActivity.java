@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.view.menu.MenuView;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -61,7 +62,7 @@ public class BluetoothActivity extends ToolBarActivity {
     private BLEProviderObserver observerAdapter;
     private BLEListHandler handler;
     private BLEListProvider listProvider;
-    private List<DeviceVO> macList = new ArrayList();
+    private List<DeviceVO> macList =  new ArrayList();
     private int selectionPostion;
     private BluetoothActivity.macListAdapterNew macListAdapterNew;
     private ImageView stateIV;
@@ -119,6 +120,7 @@ public class BluetoothActivity extends ToolBarActivity {
                 startActivity(intent);
             }
         });
+
     }
 
 

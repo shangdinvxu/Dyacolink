@@ -688,12 +688,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\nearby_activity_listview_item.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_main_time_xml.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_main_time_xml.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\login_height.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\login_height.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_main_time_xml.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_main_time_xml.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_timepicker.xml",

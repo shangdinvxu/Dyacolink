@@ -81,7 +81,7 @@
 //        devOpenHelper = new DaoMaster.DevOpenHelper(context, "Note", null);
 //        db = devOpenHelper.getReadableDatabase();
 //        traGreendao = new TraceGreendao(context,db);
-//        list = traGreendao.searchAlltimes();
+//        list = traGreendao.searchAllMonthtimes();
 //        mMonthData = new String[list.size()];
 //        for (int i = 0 ;i< list.size();i++){
 //            mMonthData[i]= list.get(i).getDate();

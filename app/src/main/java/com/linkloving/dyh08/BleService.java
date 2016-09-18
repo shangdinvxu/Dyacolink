@@ -533,7 +533,7 @@ public class BleService extends Service {
 
             @Override
             protected void notifyFor0x13ExecSucess_D(LPDeviceInfo latestDeviceInfo) {
-                MyLog.e(TAG, "notifyFor0x13ExecSucess_D");
+//                MyLog.e(TAG, "notifyFor0x13ExecSucess_D");
                 if (!IS_SYNING) { // 判断app是否存在状态
                     if (latestDeviceInfo != null) {
                         IS_SYNING = true;  //正在同步 不然用户再次刷新 会发两次指令

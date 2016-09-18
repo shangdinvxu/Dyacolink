@@ -700,7 +700,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
          *********/
         @Override
         public void updateFor_notifyFor0x13ExecSucess_D(LPDeviceInfo latestDeviceInfo) {
-            MyLog.e(TAG, "updateFor_notifyFor0x13ExecSucess_D");
+//            MyLog.e(TAG, "updateFor_notifyFor0x13ExecSucess_D");
         }
 
         @Override
