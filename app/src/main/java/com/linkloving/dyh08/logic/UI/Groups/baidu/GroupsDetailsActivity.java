@@ -96,10 +96,8 @@ public class GroupsDetailsActivity extends ToolBarActivity {
     private static PolylineOptions polyline = null;
     protected static OverlayOptions overlayOptions;
     private static BitmapDescriptor realtimeBitmap;
-
     private TraceGreendao traGreendao;
     private static List<LatLng> pointList = new ArrayList<LatLng>();
-
     private SQLiteDatabase db;
     private DaoMaster.DevOpenHelper devOpenHelper;
     private List<Note> startTimeList;
@@ -154,8 +152,8 @@ public class GroupsDetailsActivity extends ToolBarActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        float x = count.runing_duation + count.walking_duration;
-        float v = count.runing_distance + count.walking_distance;
+//        float x = count.runing_duation + count.walking_duration;
+//        float v = count.runing_distance + count.walking_distance;
         int walkCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.walking_distance)),
                 (int) count.walking_duration * 60, userEntity.getUserBase().getUser_weight());
         MyLog.e("walkCal", walkCal + "");

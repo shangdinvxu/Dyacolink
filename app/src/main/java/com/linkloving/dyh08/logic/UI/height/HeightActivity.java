@@ -5,9 +5,11 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.AppManager;
 import com.linkloving.dyh08.logic.UI.launch.view.ScaleRulerView;
+import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import butterknife.ButterKnife;
@@ -26,6 +28,7 @@ public class HeightActivity extends AutoLayoutActivity {
     private float mHeight = 158;
     private float mMaxHeight = 220;
     private float mMinHeight = 100;
+    private UserEntity userEntity;
 
     @Override
     public void finish() {
@@ -39,6 +42,7 @@ public class HeightActivity extends AutoLayoutActivity {
         setContentView(R.layout.tw_activity_height);
         AppManager.getAppManager().addActivity(this);
         ButterKnife.inject(this);
+        userEntity = MyApplication.getInstance(HeightActivity.this).getLocalUserInfoProvider();
         heightRulerView.initViewParam(mHeight,mMaxHeight,mMinHeight);
         heightRulerView.setValueChangeListener(new ScaleRulerView.OnValueChangeListener() {
             @Override
@@ -51,6 +55,9 @@ public class HeightActivity extends AutoLayoutActivity {
 
     @OnClick(R.id.back)
     void back(View view){
+        String heightString = height.getText().toString().trim();
+        int heightInt = Integer.parseInt(heightString);
+        userEntity.getUserBase().setUser_height(heightInt);
         HeightActivity.this.finish();
     }
 

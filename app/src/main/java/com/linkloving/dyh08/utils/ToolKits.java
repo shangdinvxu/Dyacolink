@@ -30,10 +30,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mapapi.map.BaiduMap;
 import com.linkloving.band.dto.DaySynopic;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.db.summary.DaySynopicTable;
+import com.linkloving.dyh08.logic.UI.Groups.baidu.GroupsShareActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.notify.NotificationCollectorService;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
@@ -45,6 +47,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -750,7 +753,60 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		canvas.drawBitmap(tempBitmapB, bottomRect, bottomRectT, null);
 		return bitmap;
 	}
-    
+
+	/**
+	 * 保存百度mapview的图片
+	 *
+	 * @param mBaiduMap
+	 */
+	public static void getScreenHot(BaiduMap mBaiduMap, final String filePathCache) {
+		// 截图，在SnapshotReadyCallback中保存图片到 sd 卡
+		mBaiduMap.snapshot(new BaiduMap.SnapshotReadyCallback() {
+			public void onSnapshotReady(Bitmap snapshot) {
+				File file = new File(filePathCache);
+				FileOutputStream out;
+				try {
+					out = new FileOutputStream(file);
+					if (snapshot.compress(
+							Bitmap.CompressFormat.PNG, 100, out)) {
+						out.flush();
+						out.close();
+					}
+
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+	}
+
+	/**
+	 * 保存图片
+	 * @param bmp
+	 * @param filename
+     * @return
+     */
+	public static boolean saveBitmap2file(Bitmap bmp, String filename) {
+		Bitmap.CompressFormat format = Bitmap.CompressFormat.JPEG;
+		int quality = 100;
+		OutputStream stream = null;
+		try {
+			stream = new FileOutputStream(filename);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return bmp.compress(format, quality, stream);
+	}
+
+
+
+
+
 	// string类型转换为long类型
  	// strTime要转换的String类型的时间
  	// formatType时间格式

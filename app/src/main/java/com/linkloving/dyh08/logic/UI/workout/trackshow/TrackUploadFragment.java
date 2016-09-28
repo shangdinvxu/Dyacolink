@@ -302,6 +302,9 @@ public class TrackUploadFragment extends Fragment {
             startTimer = true;
             getRuntime();
         }
+        if (GpsUtils.isOPen(getContext())){
+            firstMiddle.setVisibility(View.GONE);
+        }
 
     }
 
@@ -318,12 +321,12 @@ public class TrackUploadFragment extends Fragment {
 
             public void onClick(View v) {
                 MyLog.e(TAG,"clicktype====="+clickType);
-                isClickStart = true;
                 if (clickType == 0) {
                     //先判断Gps有没有开,要是GPs没有开则在用户点确定后开启
                     if (!GpsUtils.isOPen(getContext())) {
                         firstMiddle.setVisibility(View.VISIBLE);
                     }else{
+                        isClickStart = true;
                         secondMiddle.setVisibility(View.VISIBLE);
                         getRuntime();
                         Toast.makeText(getActivity(), "开启轨迹服务", Toast.LENGTH_LONG).show();

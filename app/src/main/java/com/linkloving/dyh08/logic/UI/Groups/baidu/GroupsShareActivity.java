@@ -202,28 +202,6 @@ public class GroupsShareActivity extends ToolBarActivity {
 
     }
 
-    /**
-     * 把两个位图覆盖合成为一个位图，以底层位图的长宽为基准
-     *
-     * @param backBitmap
-     * @param frontBitmap
-     * @return
-     */
-    public static Bitmap mergeBitmap(Bitmap backBitmap, Bitmap frontBitmap) {
-
-        if (backBitmap == null || backBitmap.isRecycled()
-                || frontBitmap == null || frontBitmap.isRecycled()) {
-            Log.e(TAG, "backBitmap=" + backBitmap + ";frontBitmap=" + frontBitmap);
-            return null;
-        }
-        Bitmap bitmap = backBitmap.copy(Bitmap.Config.ARGB_8888, true);
-        Canvas canvas = new Canvas(bitmap);
-        Rect baseRect = new Rect(0, 0, backBitmap.getWidth(), backBitmap.getHeight());
-        Rect frontRect = new Rect(0, 0, frontBitmap.getWidth(), frontBitmap.getHeight());
-        canvas.drawBitmap(frontBitmap, frontRect, baseRect, null);
-        return bitmap;
-    }
-
 
     /**
      * 保存百度mapview的图片
@@ -255,7 +233,6 @@ public class GroupsShareActivity extends ToolBarActivity {
         });
         Toast.makeText(GroupsShareActivity.this, "正在截取屏幕图片...",
                 Toast.LENGTH_SHORT).show();
-
     }
 
 
@@ -286,13 +263,11 @@ public class GroupsShareActivity extends ToolBarActivity {
                 /**把下面的部分截图*/
                 ToolKits.saveFile(ToolKits.getViewBitmap(screenhot), filePathCacheUnder);
                 /**百度截图*/
-                getScreenHot(map);
-
+                ToolKits.getScreenHot(map,filePathCache);
                 final Bitmap bitmap = ToolKits.mergeBitmap_TB(BitmapFactory.decodeFile(filePathCache),
                         BitmapFactory.decodeFile(filePathCacheUnder), true);
-                ToolKits.mergeBitmap_TB(BitmapFactory.decodeFile(filePathCache),
-                        BitmapFactory.decodeFile(filePathCacheUnder), true);
-                saveBitmap2file(bitmap, filePathCacheTotal);
+                ToolKits.saveBitmap2file(bitmap, filePathCacheTotal);
+
             }
         });
         share();
