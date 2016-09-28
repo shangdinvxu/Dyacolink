@@ -45,8 +45,14 @@ public class BluetoothBindActivity extends ToolBarActivity {
         String model_name = deviceEntity.getModel_name();
         deviceEntity.getCard_number();
         String last_sync_device_id = deviceEntity.getLast_sync_device_id();
+
         equipmentName.setText(model_name);
         equipmentAdress.setText(last_sync_device_id);
+        init();
+    }
+
+    private void init() {
+
     }
 
     @Override

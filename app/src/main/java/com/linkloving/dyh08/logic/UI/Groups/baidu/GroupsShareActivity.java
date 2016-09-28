@@ -1,20 +1,24 @@
 package com.linkloving.dyh08.logic.UI.Groups.baidu;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
-import android.os.AsyncTask;
+import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.support.v7.widget.AppCompatTextView;
-import android.text.Editable;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +26,6 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.BMapManager;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -34,29 +37,30 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.PolylineOptions;
-import com.baidu.mapapi.map.offline.MKOLSearchRecord;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.model.inner.GeoPoint;
 import com.baidu.mapapi.utils.CoordinateConverter;
+import com.example.android.bluetoothlegatt.utils.ToastUtil;
 import com.linkloving.band.dto.SportRecord;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.db.sport.UserDeviceRecord;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
-import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.utils.CommonUtils;
-import com.linkloving.dyh08.utils.MyToast;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.utils.TimeZoneHelper;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -67,12 +71,14 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import cn.sharesdk.facebook.Facebook;
 import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.google.GooglePlus;
-import cn.sharesdk.instagram.Instagram;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.twitter.Twitter;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Daniel.Xu on 2016/8/22.
@@ -92,18 +98,22 @@ public class GroupsShareActivity extends ToolBarActivity {
     @InjectView(R.id.main_tv_Duration)
     AppCompatTextView groupsTvDuration;
     private static Overlay overlay = null;
-    @InjectView(R.id.twitter_share)
-    ImageView twitterShare;
-    @InjectView(R.id.instagram_share)
-    ImageView instagramShare;
-    @InjectView(R.id.fb_share)
-    ImageView fbShare;
-    @InjectView(R.id.google_share)
-    ImageView googleShare;
+    //    @InjectView(R.id.twitter_share)
+//    ImageView twitterShare;
+//    @InjectView(R.id.instagram_share)
+//    ImageView instagramShare;
+//    @InjectView(R.id.fb_share)
+//    ImageView fbShare;
+//    @InjectView(R.id.google_share)
+//    ImageView googleShare;
     @InjectView(R.id.shareET)
     EditText shareText;
     @InjectView(R.id.shareWhere)
-    EditText shareWhereText ;
+    EditText shareWhereText;
+    @InjectView(R.id.sharebutton)
+    Button shareButton;
+    @InjectView(R.id.screenhot)
+    LinearLayout screenhot;
 
     private int user_id;
     private static BaiduMap map = null;
@@ -127,20 +137,26 @@ public class GroupsShareActivity extends ToolBarActivity {
     protected static OverlayOptions overlayOptions;
     private static BitmapDescriptor realtimeBitmap;
     private static List<LatLng> pointList = new ArrayList<LatLng>();
-    private String filePathCache = "/sdcard/ranking_v0.png";
+    private String filePathCache = "/sdcard/ranking_v111.png";
+    private String filePathCacheUnder = "/sdcard/ranking_v222.png";
+    private String filePathCacheTotal = "/sdcard/ranking_v333.png";
     private LocationClient mlocationClient;
     private MyLocationListener mMyLocationListener;
+    private ImageView fb;
+    private ImageView twitter;
+    private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tw_groups_share);
+        view = LayoutInflater.from(GroupsShareActivity.this).inflate(R.layout.tw_share_day, null);
+
         ButterKnife.inject(this);
 
         ShareSDK.initSDK(GroupsShareActivity.this);
         user_id = MyApplication.getInstance(GroupsShareActivity.this).getLocalUserInfoProvider().getUser_id();
         map = gourpsTopmap.getMap();
-
         Intent intent = getIntent();
         String postionStr = intent.getStringExtra("postion");
         position = Integer.valueOf(postionStr);
@@ -164,14 +180,14 @@ public class GroupsShareActivity extends ToolBarActivity {
         }
         groupsTvStep.setText(getStep() + "");
         groupsTime.setText(getMiddleTime());
-
+        initPopupWindow();
 
 
     }
 
     @OnClick(R.id.earthImageview)
-    void setLocation(View view){
-        MyLog.e("方法执行了","执行了");
+    void setLocation(View view) {
+        MyLog.e("方法执行了", "执行了");
         mlocationClient = new LocationClient(GroupsShareActivity.this.getApplicationContext());
         mMyLocationListener = new MyLocationListener();
         mlocationClient.registerLocationListener(mMyLocationListener);
@@ -183,20 +199,158 @@ public class GroupsShareActivity extends ToolBarActivity {
         mlocationClient.setLocOption(option);
         mlocationClient.start();
 
+
+    }
+
+    /**
+     * 把两个位图覆盖合成为一个位图，以底层位图的长宽为基准
+     *
+     * @param backBitmap
+     * @param frontBitmap
+     * @return
+     */
+    public static Bitmap mergeBitmap(Bitmap backBitmap, Bitmap frontBitmap) {
+
+        if (backBitmap == null || backBitmap.isRecycled()
+                || frontBitmap == null || frontBitmap.isRecycled()) {
+            Log.e(TAG, "backBitmap=" + backBitmap + ";frontBitmap=" + frontBitmap);
+            return null;
+        }
+        Bitmap bitmap = backBitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Canvas canvas = new Canvas(bitmap);
+        Rect baseRect = new Rect(0, 0, backBitmap.getWidth(), backBitmap.getHeight());
+        Rect frontRect = new Rect(0, 0, frontBitmap.getWidth(), frontBitmap.getHeight());
+        canvas.drawBitmap(frontBitmap, frontRect, baseRect, null);
+        return bitmap;
+    }
+
+
+    /**
+     * 保存百度mapview的图片
+     *
+     * @param mBaiduMap
+     */
+    public void getScreenHot(BaiduMap mBaiduMap) {
+        // 截图，在SnapshotReadyCallback中保存图片到 sd 卡
+        mBaiduMap.snapshot(new BaiduMap.SnapshotReadyCallback() {
+            public void onSnapshotReady(Bitmap snapshot) {
+                File file = new File(filePathCache);
+                FileOutputStream out;
+                try {
+                    out = new FileOutputStream(file);
+                    if (snapshot.compress(
+                            Bitmap.CompressFormat.PNG, 100, out)) {
+                        out.flush();
+                        out.close();
+                    }
+                    Toast.makeText(GroupsShareActivity.this,
+                            "屏幕截图成功，图片存在: " + file.toString(),
+                            Toast.LENGTH_SHORT).show();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Toast.makeText(GroupsShareActivity.this, "正在截取屏幕图片...",
+                Toast.LENGTH_SHORT).show();
+
     }
 
 
     private class MyLocationListener implements BDLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {
-                String city = location.getCity();
+            String city = location.getCity();
             shareWhereText.setText(city);
-                MyLog.e("city", city);
+            MyLog.e("city", city);
         }
     }
 
 
+    private void initPopupWindow() {
+        final View popupView = LayoutInflater.from(GroupsShareActivity.this).inflate(R.layout.tw_share_popuwindow, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setContentView(popupView);
+        fb = (ImageView) popupView.findViewById(R.id.fb);
+        twitter = (ImageView) popupView.findViewById(R.id.twitter);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0xffffffff));
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+//                ToolKits.getScreenHot(MapActivity.this.getWindow().getDecorView(), filePathCache);
+//               截图分两步
+                /**把下面的部分截图*/
+                ToolKits.saveFile(ToolKits.getViewBitmap(screenhot), filePathCacheUnder);
+                /**百度截图*/
+                getScreenHot(map);
 
+                final Bitmap bitmap = ToolKits.mergeBitmap_TB(BitmapFactory.decodeFile(filePathCache),
+                        BitmapFactory.decodeFile(filePathCacheUnder), true);
+                ToolKits.mergeBitmap_TB(BitmapFactory.decodeFile(filePathCache),
+                        BitmapFactory.decodeFile(filePathCacheUnder), true);
+                saveBitmap2file(bitmap, filePathCacheTotal);
+            }
+        });
+        share();
+    }
+
+
+    private boolean saveBitmap2file(Bitmap bmp, String filename) {
+        Bitmap.CompressFormat format = Bitmap.CompressFormat.JPEG;
+        int quality = 100;
+        OutputStream stream = null;
+        try {
+            stream = new FileOutputStream(filename);
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return bmp.compress(format, quality, stream);
+    }
+
+    private void share() {
+        fb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Facebook.ShareParams shareParams = new Facebook.ShareParams();
+//                shareParams.setFilePath(filePathCache);
+                shareParams.setImagePath(filePathCacheTotal);
+                Platform facebook = ShareSDK.getPlatform(Facebook.NAME);
+                facebook.share(shareParams);
+                boolean b = facebook.hasShareCallback();
+                showToast(b);
+            }
+        });
+        twitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Twitter.ShareParams shareParams = new Twitter.ShareParams();
+//                shareParams.setFilePath(filePathCache);
+                shareParams.setImagePath(filePathCache);
+                Platform platform = ShareSDK.getPlatform(Twitter.NAME);
+                platform.share(shareParams);
+                boolean b = platform.hasShareCallback();
+                showToast(b);
+            }
+        });
+    }
+
+    private void showToast(boolean b) {
+        if (b) {
+            ToastUtil.showMyToast(GroupsShareActivity.this, "success");
+        } else {
+            ToastUtil.showMyToast(GroupsShareActivity.this, "failed");
+        }
+
+    }
+
+
+/*
 // 四个分享按钮的点击事件
    @OnClick(R.id.fb_share)
    void fbShare(View view){
@@ -290,6 +444,7 @@ public class GroupsShareActivity extends ToolBarActivity {
             }
         });
     }
+*/
 
 
     private String getMiddleTime() {
@@ -354,7 +509,7 @@ public class GroupsShareActivity extends ToolBarActivity {
 //        这一步吧distance转换成如5.3 的用来加km
         MyLog.e("distance", distance + "");
         double distanceKM = CommonUtils.getDoubleValue(distance / 1000, 1);
-        return  new Formatter().format("%.1f", distanceKM).toString();
+        return new Formatter().format("%.1f", distanceKM).toString();
     }
 
 
@@ -465,9 +620,6 @@ public class GroupsShareActivity extends ToolBarActivity {
     protected void initListeners() {
 
     }
-
-
-
 
 
 }

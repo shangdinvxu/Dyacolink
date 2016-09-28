@@ -39,9 +39,12 @@ import com.linkloving.dyh08.notify.NotificationCollectorService;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.dyh08.utils.sportUtils.SportDataHelper;
 import com.linkloving.utils.TimeZoneHelper;
+import com.nostra13.universalimageloader.utils.L;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -433,7 +436,109 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		context.startActivity(Intent.createChooser(intent, activityTitle));
 
 	}
-	
+
+
+
+	public static Bitmap getViewBitmap(View v) {
+
+		v.clearFocus(); //
+
+		v.setPressed(false); //
+
+		// 能画缓存就返回false
+
+		boolean willNotCache = v.willNotCacheDrawing();
+
+		v.setWillNotCacheDrawing(false);
+
+		int color = v.getDrawingCacheBackgroundColor();
+
+		v.setDrawingCacheBackgroundColor(0);
+
+		if (color != 0) {
+
+			v.destroyDrawingCache();
+
+		}
+
+		v.buildDrawingCache();
+
+		Bitmap cacheBitmap = v.getDrawingCache();
+
+		if (cacheBitmap == null) {
+
+			return null;
+
+		}
+
+		Bitmap bitmap = Bitmap.createBitmap(cacheBitmap);
+
+		// Restore the view
+
+		v.destroyDrawingCache();
+
+		v.setWillNotCacheDrawing(willNotCache);
+
+		v.setDrawingCacheBackgroundColor(color);
+
+		return bitmap;
+
+	}
+
+	/**
+	 * view 转Bitmap
+	 * @param view
+	 * @return
+     */
+	public static Bitmap convertViewToBitmap(View view){
+		view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+		view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+		view.buildDrawingCache();
+		Bitmap bitmap = view.getDrawingCache();
+		return bitmap;
+	}
+
+	/**
+
+	 * 保存Bitmap图片为本地文件
+
+	 */
+
+	public static void saveFile(Bitmap bitmap, String filename) {
+
+		FileOutputStream fileOutputStream = null;
+
+		try {
+
+			fileOutputStream = new FileOutputStream(filename);
+
+			if (fileOutputStream != null) {
+
+				bitmap.compress(Bitmap.CompressFormat.PNG, 90, fileOutputStream);
+
+				fileOutputStream.flush();
+
+				fileOutputStream.close();
+
+			}
+
+		} catch (FileNotFoundException e) {
+
+			L.d("Exception:FileNotFoundException");
+
+			e.printStackTrace();
+
+		} catch (IOException e) {
+
+			L.d("IOException:IOException");
+
+			e.printStackTrace();
+
+		}
+
+	}
+
+
 	
 	public static String getStringbyId(Context context,int id)
 	{
@@ -604,7 +709,47 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		}
 		return tmp;
     }
-    
+
+	/**
+	 * 把两个位图覆盖合成为一个位图，上下拼接
+	 * @param isBaseMax 是否以高度大的位图为准，true则小图等比拉伸，false则大图等比压缩
+	 * @return
+	 */
+	public static Bitmap mergeBitmap_TB(Bitmap topBitmap, Bitmap bottomBitmap, boolean isBaseMax) {
+
+		if (topBitmap == null || topBitmap.isRecycled()
+				|| bottomBitmap == null || bottomBitmap.isRecycled()) {
+			return null;
+		}
+		int width = 0;
+		if (isBaseMax) {
+			width = topBitmap.getWidth() > bottomBitmap.getWidth() ? topBitmap.getWidth() : bottomBitmap.getWidth();
+		} else {
+			width = topBitmap.getWidth() < bottomBitmap.getWidth() ? topBitmap.getWidth() : bottomBitmap.getWidth();
+		}
+		Bitmap tempBitmapT = topBitmap;
+		Bitmap tempBitmapB = bottomBitmap;
+
+		if (topBitmap.getWidth() != width) {
+			tempBitmapT = Bitmap.createScaledBitmap(topBitmap, width, (int)(topBitmap.getHeight()*1f/topBitmap.getWidth()*width), false);
+		} else if (bottomBitmap.getWidth() != width) {
+			tempBitmapB = Bitmap.createScaledBitmap(bottomBitmap, width, (int)(bottomBitmap.getHeight()*1f/bottomBitmap.getWidth()*width), false);
+		}
+
+		int height = tempBitmapT.getHeight() + tempBitmapB.getHeight();
+
+		Bitmap bitmap = Bitmap.createBitmap(width, height, Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmap);
+
+		Rect topRect = new Rect(0, 0, tempBitmapT.getWidth(), tempBitmapT.getHeight());
+		Rect bottomRect  = new Rect(0, 0, tempBitmapB.getWidth(), tempBitmapB.getHeight());
+
+		Rect bottomRectT  = new Rect(0, tempBitmapT.getHeight(), width, height);
+
+		canvas.drawBitmap(tempBitmapT, topRect, topRect, null);
+		canvas.drawBitmap(tempBitmapB, bottomRect, bottomRectT, null);
+		return bitmap;
+	}
     
 	// string类型转换为long类型
  	// strTime要转换的String类型的时间

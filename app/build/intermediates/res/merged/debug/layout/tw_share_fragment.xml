@@ -10,7 +10,7 @@
         android:layout_marginTop="5dp"
         android:paddingLeft="40dp"
         android:background="@null"
-        android:hint="leave a message"
+        android:hint="@string/Leaveamessage"
         android:layout_width="match_parent"
         android:layout_weight="2"
         android:layout_height="0dp" />
@@ -43,7 +43,30 @@
             android:background="@null"
             />
     </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@color/lightgrey"
+        >
+        <Button
+            android:id="@+id/sharebutton"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:text="@string/share"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            android:textColor="@color/yellow"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/share_button_selector"
+            android:layout_width="300dp"
+            android:layout_height="40dp" />
+
+    </LinearLayout>
         <LinearLayout
+            android:visibility="gone"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"

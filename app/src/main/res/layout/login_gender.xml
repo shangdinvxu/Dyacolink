@@ -18,6 +18,7 @@
         android:layout_height="80dp"
         android:clickable="true"
         android:focusable="true"
+
         android:layout_marginLeft="60dp"
         android:background="@drawable/tw_gender_man_selector"
         />

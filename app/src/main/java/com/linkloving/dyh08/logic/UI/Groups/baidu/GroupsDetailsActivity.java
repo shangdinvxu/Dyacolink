@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -76,16 +77,16 @@ public class GroupsDetailsActivity extends ToolBarActivity {
     AppCompatTextView groupsTvDistance;
     @InjectView(R.id.main_tv_Duration)
     AppCompatTextView groupsTvDuration;
-    @InjectView(R.id.AvgPace)
-    AppCompatTextView AvgPace;
-    @InjectView(R.id.AvgSpeed)
-    AppCompatTextView AvgSpeed;
-    @InjectView(R.id.AvgHeart)
-    AppCompatTextView AvgHeart;
-    @InjectView(R.id.MaxHeart)
-    AppCompatTextView MaxHeart;
-    @InjectView(R.id.shareIcon)
-    ImageView shareIcon;
+//    @InjectView(R.id.AvgPace)
+//    AppCompatTextView AvgPace;
+//    @InjectView(R.id.AvgSpeed)
+//    AppCompatTextView AvgSpeed;
+//    @InjectView(R.id.AvgHeart)
+//    AppCompatTextView AvgHeart;
+//    @InjectView(R.id.MaxHeart)
+//    AppCompatTextView MaxHeart;
+    @InjectView(R.id.sharebutton)
+    Button shareIcon;
 
 
     private int[] mSectionIndices; //源数据中每种类型头索引
@@ -166,7 +167,7 @@ public class GroupsDetailsActivity extends ToolBarActivity {
         float hourtime = (float) itemDuration / 3600000;
         float avgSpeed = (distance / 1000) / hourtime;
         String avgSpeedStr = new Formatter().format("%.1f", avgSpeed).toString();
-        AvgSpeed.setText(avgSpeedStr + "km/h");
+//        AvgSpeed.setText(avgSpeedStr + "km/h");
         for (int i = 0; i < lists.size(); i++) {
             Date runDate = lists.get(i).getRunDate();
             SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -174,7 +175,7 @@ public class GroupsDetailsActivity extends ToolBarActivity {
             showRealtimeTrack(lists.get(i).getLatitude(), lists.get(i).getLongitude());
         }
         String avgPace = getAvgPace();
-        AvgPace.setText(avgPace + "/km");
+//        AvgPace.setText(avgPace + "/km");
         groupsTvStep.setText(getStep() + "");
         groupsTime.setText(getMiddleTime());
         shareIcon.setOnClickListener(new View.OnClickListener() {

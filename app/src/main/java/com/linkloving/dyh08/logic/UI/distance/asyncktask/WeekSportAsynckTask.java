@@ -72,7 +72,6 @@ import java.util.Locale;
          startData = sdf.format(mondayOfThisWeek);
          endData = simYearMonth.format(sundayofThisWeek);
 
-
         SimpleDateFormat sdfStandard = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         startDateformat = sdfStandard.format(mondayOfThisWeek);
         endDateformat = sdfStandard.format(sundayofThisWeek);

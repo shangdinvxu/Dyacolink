@@ -23,6 +23,12 @@ import Trace.GreenDao.DaoMaster;
 import Trace.GreenDao.Note;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.schedulers.Schedulers;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 import static android.widget.AdapterView.*;
@@ -137,7 +143,6 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
                         traGreendao.deleteByKey(deleteMonthTime);
                                 groupsAdapter = new GroupsAdapter(GroupsActivity.this);
                                 stickyList.setAdapter(groupsAdapter);
-//                        groupsAdapter.notifyDataSetChanged();
                     }
                 });
 
@@ -145,6 +150,9 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
             }
         });
     }
+
+
+
     @Override
     protected void onResume() {
         super.onResume();

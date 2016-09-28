@@ -317,6 +317,7 @@ public class TrackUploadFragment extends Fragment {
         btnStartTrace.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+                MyLog.e(TAG,"clicktype====="+clickType);
                 isClickStart = true;
                 if (clickType == 0) {
                     //先判断Gps有没有开,要是GPs没有开则在用户点确定后开启
@@ -341,6 +342,7 @@ public class TrackUploadFragment extends Fragment {
                         edit.putString("formatStartTime", formatStartTime);
                         edit.putLong("startTimeLong", startTimeLong);
                         edit.commit();
+                        clickType = 1;
                         if (!isRegister) {
                             if (null == pm) {
                                 pm = (PowerManager) WorkoutActivity.mContext.getSystemService(Context.POWER_SERVICE);
@@ -353,7 +355,6 @@ public class TrackUploadFragment extends Fragment {
                             filter.addAction(Intent.ACTION_SCREEN_ON);
                             WorkoutActivity.mContext.registerReceiver(powerReceiver, filter);
                             isRegister = true;
-                            clickType = 1;
                         }
                     }
                 } else {
@@ -366,6 +367,7 @@ public class TrackUploadFragment extends Fragment {
         btnStopTrace.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+                MyLog.e(TAG,"clicktype====="+clickType);
                 // TODO Auto-generated method stub
                 if (clickType == 1) {
                     isClickStart=false ;

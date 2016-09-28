@@ -111,7 +111,9 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                     case Left_viewVO1.Groups:
                         IntentFactory.start2GroupsActivity((Activity) mContext);
                         break;
-
+                    case Left_viewVO1.map:
+                        IntentFactory.start2MapActivity((Activity) mContext);
+                        break;
                     case Left_viewVO1.Heart_Rate:
                         break;
 
@@ -124,7 +126,7 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                         break;
 
                     case Left_viewVO1.Sign_out:
-                        IntentFactory.startUsername((Activity) mContext);
+//                        IntentFactory.startUsername((Activity) mContext);
                         break;
                     default :
                 }

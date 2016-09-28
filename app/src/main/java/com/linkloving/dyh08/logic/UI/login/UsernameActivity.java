@@ -14,9 +14,19 @@ import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.logic.dto.UserBase;
 import com.linkloving.dyh08.logic.dto.UserEntity;
+import com.linkloving.dyh08.utils.logUtils.MyLog;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Daniel.Xu on 2016/9/5.
@@ -35,6 +45,7 @@ public class UsernameActivity extends Activity {
         ButterKnife.inject(this);
         userEntity = MyApplication.getInstance(UsernameActivity.this).getLocalUserInfoProvider();
         initView();
+
     }
 
     private void initView() {

@@ -1007,8 +1007,12 @@
     <string name="Settings">Settings</string>
     <!-- Workout-->
     <string name="Workout">Workout</string>
+    <!--Map-->
+    <string name="Map">Map</string>
     <!-- Groups-->
     <string name="Groups">Groups</string>
+    <string name="Leaveamessage">Leave a message</string>
+    <string name="share">Share!</string>
     <!-- Heart Rate-->
     <string name="Heart_Rate">Heart Rate</string>
     <!-- Height-->

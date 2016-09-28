@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/fb"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/fb"/>
+            <ImageView
+                android:id="@+id/twitter"
+                android:layout_marginLeft="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/twitter"/>
+
+
+        </LinearLayout>
+        <Button
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="@string/share"
+            android:textAllCaps="false"
+            android:textSize="38sp"
+            android:textColor="@color/yellow"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/share_button_selector"
+            android:layout_width="300dp"
+            android:layout_height="50dp" />
+    </LinearLayout>
+
+
+</LinearLayout>

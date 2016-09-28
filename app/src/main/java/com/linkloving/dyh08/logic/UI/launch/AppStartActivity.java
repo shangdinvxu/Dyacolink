@@ -1,6 +1,7 @@
 package com.linkloving.dyh08.logic.UI.launch;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,6 +26,7 @@ public class AppStartActivity extends AppCompatActivity {
     private final static String TAG = AppStartActivity.class.getSimpleName();
     public static String SHAREDPREFERENCES_NAME = "first_pref";
     private RelativeLayout startLL = null;
+    private int logined = 0 ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // FIX: 以下代码是为了解决Android自level 1以来的[安装完成点击“Open”后导致的应用被重复启动]的Bug
@@ -130,7 +132,19 @@ public class AppStartActivity extends AppCompatActivity {
 //                userAuthedInfo.getDeviceEntity().setLast_sync_device_id("");
             }
             MyApplication.getInstance(this).setLocalUserInfoProvider(userAuthedInfo);
-            startActivity(IntentFactory.createPortalActivityIntent(AppStartActivity.this));
+//        开始跳转到用户信息设置界面
+        SharedPreferences logined1 = getSharedPreferences("logined", MODE_PRIVATE);
+        int login = logined1.getInt("login", 0);
+        logined=login ;
+        if (logined==0){
+            IntentFactory.startUsername(AppStartActivity.this);
+            SharedPreferences logined = getSharedPreferences("logined", MODE_PRIVATE);
+            SharedPreferences.Editor edit = logined.edit();
+            edit.putInt("login",1);
+            edit.commit();
+        }else{
+                        startActivity(IntentFactory.createPortalActivityIntent(AppStartActivity.this));
+        }
             AppStartActivity.this.finish();
     }
 

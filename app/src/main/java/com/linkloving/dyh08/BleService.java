@@ -699,6 +699,7 @@ public class BleService extends Service {
     }
 
     /**
+     *
      * 自动同步所有设备信息：观察者更新，提供者检查蓝牙连接，将设备地址保存至用户信息内，并连接好设备，同步所有设备信息。boolean isScaned
      */
     public static void syncAllDeviceInfoAuto(Context context, boolean needscan, Observer obsForHint) {

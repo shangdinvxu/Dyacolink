@@ -69,6 +69,8 @@ public class DayViewFragment extends Fragment {
                     transaction.replace(R.id.step_middle, daychartviewFragment);
                     transaction.addToBackStack(null);
                     transaction.commit();
+                    SleepActivity activity = (SleepActivity) getActivity();
+                    activity.videGone();
                 }
             }
         });

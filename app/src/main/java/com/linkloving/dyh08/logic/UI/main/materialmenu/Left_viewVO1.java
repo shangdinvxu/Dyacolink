@@ -7,17 +7,19 @@ import com.linkloving.dyh08.R;
  */
 public class Left_viewVO1 {
     public static final int Bluetooth = 0;
-    public static final int Settings = 1;
-    public static final int Workout = 2;
-    public static final int Groups = 3;
-    public static final int Heart_Rate = 4;
-    public static final int Height = 5;
-    public static final int Weight = 6;
-    public static final int Sign_out = 7;
+    public static final int Settings = Bluetooth+1;
+    public static final int Workout = Settings+1;
+    public static final  int map = Workout+1 ;
+    public static final int Groups = map+1;
+    public static final int Heart_Rate = Groups+1;
+    public static final int Height = Heart_Rate+1;
+    public static final int Weight = Height+1;
+    public static final int Sign_out = Weight+1;
 
     public static int[] menuIcon = {
             R.mipmap.imageblueicon,
             R.mipmap.imageseticon,
+            R.mipmap.imageworkouticon,
             R.mipmap.imageworkouticon,
             R.mipmap.imagegroupsicon,
             R.mipmap.imageheartsicon,
@@ -29,6 +31,7 @@ public class Left_viewVO1 {
            R.string.Bluetooth,
             R.string.Settings,
             R.string.Workout,
+            R.string.Map,
                     R.string.Groups,
                     R.string.Heart_Rate,
                     R.string.Height,

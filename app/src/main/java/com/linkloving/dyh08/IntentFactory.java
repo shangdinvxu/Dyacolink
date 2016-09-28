@@ -39,6 +39,7 @@ import com.linkloving.dyh08.logic.UI.login.UsernameActivity;
 import com.linkloving.dyh08.logic.UI.main.BundTypeActivity;
 import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.UI.main.bundband.bundbandstep1;
+import com.linkloving.dyh08.logic.UI.map.MapActivity;
 import com.linkloving.dyh08.logic.UI.more.MoreActivity;
 import com.linkloving.dyh08.logic.UI.settings.UserSettingsActivity;
 import com.linkloving.dyh08.logic.UI.sleep.SleepActivity;
@@ -325,6 +326,17 @@ public class IntentFactory {
         Intent intent = new Intent(activity, GroupsActivity.class);
         activity.startActivity(intent);
     }
+
+    /**
+     * map就是改动后的groups,
+      * @param activity
+     */
+    // 开启map
+    public static  void start2MapActivity(Activity activity){
+        Intent intent = new Intent(activity, MapActivity.class);
+        activity.startActivity(intent);
+    }
+
 
     //开启workout
     public static void start2WorkoutActivity(Activity activity){

@@ -54,8 +54,6 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     private Date itemStartDate ;
     private Date itemEndDate ;
     private String duration;
-    private TextView heardYearMonth;
-    private TextView activityNumbers;
     private ArrayList<Integer> sectionIndices;
     private final List<Note> list;
     private DetailChartCountData count;
@@ -144,17 +142,17 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         MyLog.e(TAG,"getView的position是---------"+position);
-        if (convertView == null) {
+//        if (convertView == null) {
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.sticklist_item_layout, parent, false);
             holder.dataTime = (AutoCompleteTextView) convertView.findViewById(R.id.dataTime);
             holder.distance = (AutoCompleteTextView) convertView.findViewById(R.id.distance);
             holder.duration = (AutoCompleteTextView) convertView.findViewById(R.id.duration);
             holder.avgSpeed = (AutoCompleteTextView) convertView.findViewById(R.id.avgSpeed);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+//            convertView.setTag(holder);
+//        } else {
+//            holder = (ViewHolder) convertView.getTag();
+//        }
         MyLog.e(TAG,startTimeList.get(position).getDate()+"-------------startTimeList的getDate");
         holder.dataTime.setText(startTimeList.get(position).getDate());
 //      每个item的开始时间和结束时间

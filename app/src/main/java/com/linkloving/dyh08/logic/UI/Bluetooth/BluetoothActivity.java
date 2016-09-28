@@ -62,10 +62,12 @@ public class BluetoothActivity extends ToolBarActivity {
     private BLEProviderObserver observerAdapter;
     private BLEListHandler handler;
     private BLEListProvider listProvider;
-    private List<DeviceVO> macList =  new ArrayList();
+    private List<DeviceVO> macList =
+            new ArrayList();
     private int selectionPostion;
     private BluetoothActivity.macListAdapterNew macListAdapterNew;
     private ImageView stateIV;
+    private RotateAnimation rotateAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +108,7 @@ public class BluetoothActivity extends ToolBarActivity {
                 provider.setmBluetoothDevice(macList.get(position).bledevice);
                 provider.connect_mac(macList.get(position).mac);
                 stateIV = (ImageView) view.findViewById(R.id.list_item_imageview);
-                RotateAnimation rotateAnimation = getRotateAnimation();
+                rotateAnimation = getRotateAnimation();
                 stateIV.setAnimation(rotateAnimation);
                 rotateAnimation.start();
                 stateIV.setVisibility(View.VISIBLE);
@@ -253,7 +255,9 @@ public class BluetoothActivity extends ToolBarActivity {
             String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
             MyLog.e(TAG,last_sync_device_id);
             MyLog.e(TAG, macList.get(selectionPostion).mac);
-            stateIV.setVisibility(View.INVISIBLE);
+//            stateIV.setVisibility(View.GONE);
+            stateIV.clearAnimation();
+            stateIV.setImageResource(R.mipmap.selected);
             middleChangeIV.setImageResource(R.mipmap.link);
             middleChangeIV.setVisibility(View.VISIBLE);
             btn_Next.setVisibility(View.VISIBLE);

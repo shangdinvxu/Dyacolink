@@ -163,7 +163,9 @@ public class SleepActivity extends ToolBarActivity {
     @Override
     protected void getIntentforActivity() {
     }
-
+public void videGone(){
+    sleepButtom.setVisibility(View.GONE);
+}
     /**
      * 选择Fragment
      */

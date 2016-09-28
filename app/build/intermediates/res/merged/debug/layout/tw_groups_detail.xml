@@ -154,12 +154,34 @@
             </LinearLayout>
 
         </LinearLayout>
-        <include
+    <!--    <include
             android:id="@+id/groups_fragment"
             layout="@layout/tw_groups_fourtextview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </include>
+        </include>-->
+        <LinearLayout
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="130dp">
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/sharebutton"
+            android:gravity="center"
+            android:text="@string/share"
+            android:textAllCaps="false"
+            android:textSize="38sp"
+            android:textColor="@color/blue"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/share_button_selector"
+            android:layout_width="300dp"
+            android:layout_height="70dp" />
+    </LinearLayout>
+
+
+
     </LinearLayout>
 
 

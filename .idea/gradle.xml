@@ -17,17 +17,7 @@
             <option value="$PROJECT_DIR$/sqlitegreendao" />
           </set>
         </option>
-        <option name="myModules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/PullToRefreshLibrary" />
-            <option value="$PROJECT_DIR$/StickyListHeadersListViewlibrary" />
-            <option value="$PROJECT_DIR$/ViewPagerIndicator" />
-            <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/onkeyshare" />
-            <option value="$PROJECT_DIR$/sqlitegreendao" />
-          </set>
-        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
