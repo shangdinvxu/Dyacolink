@@ -559,7 +559,7 @@ public class BleService extends Service {
                     } else {
                         //返回的latestDeviceInfo是null的时候 重新获取一次
                         if (provider.isConnectedAndDiscovered()) {
-                            provider.getAllDeviceInfoNew(BleService.this);
+                            provider.getAllDeviceInfoNew(BleService.this,getDeviceInfo());
                         }
                     }
                 }
@@ -738,7 +738,11 @@ public class BleService extends Service {
     public void syncAllDeviceInfo(Context context) {
         MyLog.i(TAG, "同步所有设备信息：获得所有设备新的信息+用户信息");
         BLEProvider provider = BleService.getInstance(context).getCurrentHandlerProvider();
-        provider.getAllDeviceInfoNew(context); //获得设备信息
+        LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
+        UserEntity localUserInfoForLaunch = PreferencesToolkits.getLocalUserInfoForLaunch(this);
+        int user_id = localUserInfoForLaunch.getUser_id();
+        lpDeviceInfo.setUserId(user_id);
+        provider.getAllDeviceInfoNew(context,lpDeviceInfo); //获得设备信息
 //        BleSynchronImpl bleSynchronImpl = new BleSynchronImpl(context,provider);
 //        bleSynchronImpl.synchronAll();
     }

@@ -1,4 +1,4 @@
 include ':app', ':sqlitegreendao', 'StickyListHeadersListViewlibrary'
 include ':ViewPagerIndicator', ':PullToRefreshLibrary'
-include ':onkeyshare'
+include ':onkeyshare',':linkloving_ble4.0_lib'
 //, ':LntsdkResourceFile'

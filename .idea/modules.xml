@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/ViewPagerIndicator/ViewPagerIndicator.iml" filepath="$PROJECT_DIR$/ViewPagerIndicator/ViewPagerIndicator.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dyh08.iml" filepath="$PROJECT_DIR$/dyh08.iml" />
+      <module fileurl="file://$PROJECT_DIR$/linkloving_ble4.0_lib/linkloving_ble4.0_lib.iml" filepath="$PROJECT_DIR$/linkloving_ble4.0_lib/linkloving_ble4.0_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/onkeyshare/onkeyshare.iml" filepath="$PROJECT_DIR$/onkeyshare/onkeyshare.iml" />
       <module fileurl="file://$PROJECT_DIR$/sqlitegreendao/sqlitegreendao.iml" filepath="$PROJECT_DIR$/sqlitegreendao/sqlitegreendao.iml" />
     </modules>

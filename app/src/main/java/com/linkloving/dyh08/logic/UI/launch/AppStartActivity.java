@@ -121,7 +121,10 @@ public class AppStartActivity extends AppCompatActivity {
             if( userAuthedInfo == null)
             {
                 userAuthedInfo = new UserEntity();
-                userAuthedInfo.setUser_id(123456);
+                //1,000,000,00
+                int ran = (int)((10000000)*Math.random()+10000);
+                userAuthedInfo.setUser_id(ran);
+//                userAuthedInfo.setUser_id(123456);
                 userAuthedInfo.setDeviceEntity(new SportDeviceEntity());
                 userAuthedInfo.setUserBase(new UserBase("1980-01-01"));
                 userAuthedInfo.setEntEntity(new EntEntity());

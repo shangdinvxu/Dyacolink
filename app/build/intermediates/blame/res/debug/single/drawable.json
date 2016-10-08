@@ -20,12 +20,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_input_bg_focus.9.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\cai_item.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\cai_item.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_input_bg_special_focus.9.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_input_bg_special_focus.9.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\cai_item.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\cai_item.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_checkbox_nor.9.png",
@@ -36,12 +36,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\common_login_btn.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\durationicon.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\durationicon.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\woman.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\woman.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\durationicon.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\durationicon.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\share_button_selector.xml",
@@ -132,24 +132,24 @@
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_holo_light.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_btn_enable.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_btn_enable.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\body_input_bg.9.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\body_input_bg.9.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_dialog_back.9.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_dialog_back.9.png"
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_btn_enable.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_btn_enable.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_search_icon.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_search_icon.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\body_reduce_btn_bg.9.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\body_reduce_btn_bg.9.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_search_icon.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_search_icon.png"
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_dialog_back.9.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_dialog_back.9.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_login_btn_normal.9.png",

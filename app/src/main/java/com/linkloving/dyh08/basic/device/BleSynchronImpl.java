@@ -57,6 +57,7 @@ public class BleSynchronImpl implements BleSynchron {
             bleProviderObserver = new BLEProviderObserverAdapterImpl();
             this.provider.setBleProviderObserver(bleProviderObserver);
         }
+
     }
 
     public static BleSynchronImpl instance ;
@@ -78,7 +79,8 @@ public class BleSynchronImpl implements BleSynchron {
     public void synchronAll() {
         if(provider.isConnectedAndDiscovered())
         {
-            provider.getAllDeviceInfoNew(context); //获得设备信息
+            LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
+            provider.getAllDeviceInfoNew(context,lpDeviceInfo); //获得设备信息
         }
     }
 
