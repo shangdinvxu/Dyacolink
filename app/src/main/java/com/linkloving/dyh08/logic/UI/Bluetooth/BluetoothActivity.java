@@ -104,6 +104,7 @@ public class BluetoothActivity extends ToolBarActivity {
         mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectionPostion = position ;
                 provider.setCurrentDeviceMac(macList.get(position).mac);
                 provider.setmBluetoothDevice(macList.get(position).bledevice);
                 provider.connect_mac(macList.get(position).mac);
@@ -122,14 +123,11 @@ public class BluetoothActivity extends ToolBarActivity {
                 startActivity(intent);
             }
         });
-
     }
-
-
     public  RotateAnimation  getRotateAnimation(){
         RotateAnimation rotateAnimation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotateAnimation.setDuration(1000);
-        rotateAnimation.setRepeatCount(20);
+        rotateAnimation.setRepeatCount(2000);
         return  rotateAnimation ;
     }
 
@@ -251,12 +249,12 @@ public class BluetoothActivity extends ToolBarActivity {
 //            provider.requestbound_fit(BluetoothActivity.this);
             UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(BluetoothActivity.this);
             userAuthedInfo.getDeviceEntity().setLast_sync_device_id(macList.get(selectionPostion).mac);
+            userAuthedInfo.getDeviceEntity().setModel_name(macList.get(selectionPostion).name);
             MyApplication.getInstance(BluetoothActivity.this).setLocalUserInfoProvider(userAuthedInfo);
             String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
             MyLog.e(TAG,last_sync_device_id);
             MyLog.e(TAG, macList.get(selectionPostion).mac);
-//            stateIV.setVisibility(View.GONE);
-            stateIV.clearAnimation();
+            rotateAnimation.cancel();
             stateIV.setImageResource(R.mipmap.selected);
             middleChangeIV.setImageResource(R.mipmap.link);
             middleChangeIV.setVisibility(View.VISIBLE);
@@ -271,7 +269,7 @@ public class BluetoothActivity extends ToolBarActivity {
             middleChangeIV.setImageResource(R.mipmap.nofind);
             middleChangeIV.setVisibility(View.VISIBLE);
             provider.clearProess();
-            stateIV.setVisibility(View.INVISIBLE);
+//            stateIV.setVisibility(View.INVISIBLE);
             provider.setCurrentDeviceMac(null);
             provider.setmBluetoothDevice(null);
             provider.resetDefaultState();

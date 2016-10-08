@@ -62,6 +62,7 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
     private int selectionPostion;
     private BluetoothBindActivity3.macListAdapterNew macListAdapterNew;
     private ImageView stateIV;
+    private RotateAnimation rotateAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,10 +121,10 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
 
 
     public  RotateAnimation  getRotateAnimation(){
-        RotateAnimation rotateAnimation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateAnimation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotateAnimation.setDuration(1000);
-        rotateAnimation.setRepeatCount(20);
-        return  rotateAnimation ;
+        rotateAnimation.setRepeatCount(2000);
+        return rotateAnimation;
     }
 
 
@@ -244,11 +245,14 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
 //            provider.requestbound_fit(BluetoothBindActivity3.this);
             UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(BluetoothBindActivity3.this);
             userAuthedInfo.getDeviceEntity().setLast_sync_device_id(macList.get(selectionPostion).mac);
+            userAuthedInfo.getDeviceEntity().setModel_name(macList.get(selectionPostion).name);
             MyApplication.getInstance(BluetoothBindActivity3.this).setLocalUserInfoProvider(userAuthedInfo);
             String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
             MyLog.e(TAG,last_sync_device_id);
             MyLog.e(TAG, macList.get(selectionPostion).mac);
 //            stateIV.setVisibility(View.INVISIBLE);
+            rotateAnimation.cancel();
+            stateIV.setImageResource(R.mipmap.selected);
             middleChangeIV.setImageResource(R.mipmap.link);
             middleChangeIV.setVisibility(View.VISIBLE);
             btn_Next.setVisibility(View.VISIBLE);
@@ -267,10 +271,15 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
             provider.setmBluetoothDevice(null);
             provider.resetDefaultState();
             setResult(RESULT_DISCONNECT);
-            Toast.makeText(BluetoothBindActivity3.this, "绑定失败", Toast.LENGTH_SHORT).show();
-            finish();
+//            Toast.makeText(BluetoothBindActivity3.this, "绑定失败", Toast.LENGTH_SHORT).show();
+            myfinish();
         }
-
+    }
+    public void myfinish(){
+        listProvider.stopScan();
+        provider = BleService.getInstance(this).getCurrentHandlerProvider();
+        if (provider != null)
+            provider.setBleProviderObserver(null);
     }
 
     public void finish() {

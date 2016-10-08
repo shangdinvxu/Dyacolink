@@ -11,17 +11,26 @@ import android.widget.Toast;
 import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
+import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.dto.UserBase;
 import com.linkloving.dyh08.logic.dto.UserEntity;
+import com.linkloving.dyh08.utils.logUtils.MyLog;
+
+import java.util.Calendar;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
+import rx.functions.Action0;
+import rx.functions.Action1;
 
 /**
  * Created by Daniel.Xu on 2016/9/5.
  */
 public class BirthdayActivity extends Activity {
-
+    private static final String TAG = PortalActivity.class.getSimpleName();
     @InjectView(R.id.yearET)
     EditText yearET;
     @InjectView(R.id.monthET)
@@ -33,6 +42,8 @@ public class BirthdayActivity extends Activity {
     @InjectView(R.id.right)
     ImageView right;
     private UserEntity userEntity;
+    private int monthInt;
+    private int dayInt;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,14 +64,22 @@ public class BirthdayActivity extends Activity {
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String year = yearET.getText().toString().trim();
+                final String year = yearET.getText().toString().trim();
+                int nowYearInt = Calendar.getInstance().get(Calendar.YEAR);
                 String month = monthET.getText().toString().trim();
+                if (month.length()>0){
+                    monthInt = Integer.parseInt(month);
+                }
                 String day = dayET.getText().toString().trim();
-                String birthday = year+"-"+month+"-"+day ;
-                if (year.length()<=0||month.length()<=0||day.length()<=0){
+                if(day.length()>0) {
+                    dayInt = Integer.parseInt(day);
+                }
+                String birthday = year + "-" + month + "-" + day;
+                if (year.length() <= 0 || month.length() <= 0 || day.length() <= 0||
+                        monthInt ==0|| monthInt >12
+                        ||dayInt==0||dayInt>31) {
                     Toast.makeText(BirthdayActivity.this, "请填写正确的生日", Toast.LENGTH_SHORT).show();
-                    return;
-                }else {
+                } else {
                     userEntity.getUserBase().setBirthdate(birthday);
                     IntentFactory.startWeight(BirthdayActivity.this);
                 }

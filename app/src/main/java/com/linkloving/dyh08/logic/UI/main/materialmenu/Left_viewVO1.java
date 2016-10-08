@@ -20,7 +20,7 @@ public class Left_viewVO1 {
             R.mipmap.imageblueicon,
             R.mipmap.imageseticon,
             R.mipmap.imageworkouticon,
-            R.mipmap.imageworkouticon,
+            R.mipmap.mapon,
             R.mipmap.imagegroupsicon,
             R.mipmap.imageheartsicon,
             R.mipmap.imageheighticon,

@@ -55,7 +55,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     private Date itemEndDate ;
     private String duration;
     private ArrayList<Integer> sectionIndices;
-    private final List<Note> list;
+    public final List<Note> list;
     private DetailChartCountData count;
     private final UserEntity userEntity;
 

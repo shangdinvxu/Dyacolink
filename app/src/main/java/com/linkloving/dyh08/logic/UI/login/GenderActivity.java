@@ -46,12 +46,16 @@ public class GenderActivity extends Activity {
             @Override
             public void onClick(View v) {
                 type = 1 ;
+                man.setImageResource(R.drawable.manon);
+                woman.setImageResource(R.drawable.woman);
             }
         });
         woman.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 type = 0 ;
+                woman.setImageResource(R.drawable.womanon);
+                man.setImageResource(R.drawable.man);
             }
         });
         left.setOnClickListener(new View.OnClickListener() {
@@ -71,5 +75,8 @@ public class GenderActivity extends Activity {
                 IntentFactory.startBirthday(GenderActivity.this);
             }
         });
+
+
     }
+
 }

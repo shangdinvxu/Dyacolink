@@ -70,7 +70,7 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
         stickyList.setAdapter(groupsAdapter);
         startTimeList = groupsAdapter.startTimeList ;
         endTimeList = groupsAdapter.endTimeList ;
-        listMonth = traGreendao.searchAllMonthtimes();
+        listMonth=   groupsAdapter.list;
         initView();
 
     }
@@ -138,11 +138,18 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
                     @Override
                     public void onClick(View v) {
                         MyLog.e(TAG,"onClick执行了");
+//                        数据库删除数据
                         traGreendao.deleteByKey(deleteEndTime);
                         traGreendao.deleteByKey(deleteStartTime);
                         traGreendao.deleteByKey(deleteMonthTime);
-                                groupsAdapter = new GroupsAdapter(GroupsActivity.this);
-                                stickyList.setAdapter(groupsAdapter);
+//                         刷新数据源刷新View
+                        startTimeList.remove(position);
+                        endTimeList.remove(position);
+                        listMonth.remove(position);
+
+                        groupsAdapter.notifyDataSetChanged();
+//                                groupsAdapter = new GroupsAdapter(GroupsActivity.this);
+//                                stickyList.setAdapter(groupsAdapter);
                     }
                 });
 

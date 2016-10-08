@@ -136,7 +136,7 @@
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/mapoff"
+            android:src="@mipmap/deleterecord"
             /></RelativeLayout>
 
     </LinearLayout>

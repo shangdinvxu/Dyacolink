@@ -68,10 +68,10 @@
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:background="@color/button_gray"
+            android:gravity="center"
             >
             <TextView
                 android:textColor="@color/black"
-                android:layout_marginTop="3dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,6 +79,7 @@
                 android:text="@string/Reconnect"
                 />
             <TextView
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12345"
@@ -90,6 +91,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:gravity="center"
             android:orientation="vertical"
             android:id="@+id/Disconnect"
             android:layout_alignParentBottom="true"
@@ -102,7 +104,6 @@
             >
             <TextView
                 android:textColor="@color/black"
-                android:layout_marginTop="3dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,6 +111,7 @@
                 android:text="@string/Disconnect"
                 />
             <TextView
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12345"

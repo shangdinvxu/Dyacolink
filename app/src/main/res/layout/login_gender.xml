@@ -20,7 +20,7 @@
         android:focusable="true"
 
         android:layout_marginLeft="60dp"
-        android:background="@drawable/tw_gender_man_selector"
+        android:background="@drawable/man"
         />
     <TextView
         android:textColor="@color/white"
@@ -44,7 +44,7 @@
 
         android:layout_toRightOf="@+id/man"
         android:layout_marginLeft="60dp"
-        android:background="@drawable/tw_gender_woman_selector"
+        android:background="@drawable/woman"
         />
     <TextView
         android:textColor="@color/white"

@@ -99,20 +99,19 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                            IntentFactory.startBindActivity1((Activity) mContext);
                         }
                         break;
-
                     case Left_viewVO1.Settings:
                         IntentFactory.start2SettingsActivity((Activity) mContext);
                         break;
 
                     case Left_viewVO1.Workout:
-                        IntentFactory.start2WorkoutActivity((Activity) mContext);
+                        IntentFactory.start2GroupsActivity((Activity) mContext);
                         break;
 
                     case Left_viewVO1.Groups:
-                        IntentFactory.start2GroupsActivity((Activity) mContext);
+                        IntentFactory.start2MapActivity((Activity) mContext);
                         break;
                     case Left_viewVO1.map:
-                        IntentFactory.start2MapActivity((Activity) mContext);
+                        IntentFactory.start2WorkoutActivity((Activity) mContext);
                         break;
                     case Left_viewVO1.Heart_Rate:
                         break;

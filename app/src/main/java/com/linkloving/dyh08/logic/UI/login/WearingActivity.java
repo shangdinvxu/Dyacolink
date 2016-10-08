@@ -47,12 +47,16 @@ public class WearingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 wearingStyle = 0 ;
+                restartState();
+                lefthand.setImageResource(R.mipmap.lefton);
             }
         });
         righthand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 wearingStyle = 1 ;
+                restartState();
+                righthand.setImageResource(R.mipmap.righthandon);
             }
         });
         left.setOnClickListener(new View.OnClickListener() {
@@ -73,5 +77,9 @@ public class WearingActivity extends Activity {
             }
         });
 
+    }
+    private void restartState(){
+        lefthand.setImageResource(R.mipmap.left);
+        righthand.setImageResource(R.mipmap.righthand);
     }
 }

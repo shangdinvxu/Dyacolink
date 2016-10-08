@@ -19,7 +19,7 @@
         android:clickable="true"
         android:focusable="true"
         android:layout_marginLeft="60dp"
-        android:background="@drawable/tw_gender_lefthand_selector"
+        android:background="@mipmap/left"
         />
     <TextView
         android:textColor="@color/white"
@@ -42,7 +42,7 @@
         android:focusable="true"
         android:layout_toRightOf="@+id/lefthand"
         android:layout_marginLeft="60dp"
-        android:background="@drawable/tw_gender_righthand_selector"
+        android:background="@mipmap/righthand"
         />
     <TextView
         android:textColor="@color/white"

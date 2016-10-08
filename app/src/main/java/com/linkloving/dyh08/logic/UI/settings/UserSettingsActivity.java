@@ -6,6 +6,7 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.view.View;
 
+import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
@@ -79,7 +80,7 @@ public class UserSettingsActivity extends ToolBarActivity {
         userBase.setBirthdate(birthday);
         userBase.setUser_wearingStyle(wearingStyle);
 
-
+        IntentFactory.startPortalActivityIntent(UserSettingsActivity.this);
     }
 
 

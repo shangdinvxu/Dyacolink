@@ -134,6 +134,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginEnd="5px"
                             android:background="@null"
+                            android:inputType="number"
                             android:hint="@string/setting_yyyy"
                             android:singleLine="true" />
 
@@ -147,6 +148,7 @@
                             android:textColor="@color/black" />
 
                         <android.support.v7.widget.AppCompatEditText
+                            android:inputType="number"
                             android:id="@+id/edit_mon"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -165,6 +167,7 @@
                             android:textColor="@color/black" />
 
                         <android.support.v7.widget.AppCompatEditText
+                            android:inputType="number"
                             android:id="@+id/edit_day"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
