@@ -132,7 +132,8 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
                 amount = amount +1 ;
             }
         }
-        holder.activityNumbers.setText(amount+" activities");
+
+        holder.activityNumbers.setText(amount+" "+mContext.getString(R.string.activities));
         final int finalAmount = amount;
 
         return convertView;

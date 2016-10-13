@@ -19,7 +19,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SLEEP"
+            android:text="@string/SLEEP"
             android:textColor="@color/white"
             android:textSize="20sp"
             />
@@ -46,7 +46,7 @@
     </LinearLayout>
     <TextView
             android:layout_gravity="center_horizontal"
-        android:text="avg.time"
+        android:text="@string/avgtime"
         style="@style/sleep_top_hour"
         />
   <LinearLayout
@@ -70,7 +70,7 @@
              android:id="@+id/Lightsleep"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="Light Sleep"
+             android:text="@string/lightsleep"
              android:textColor="@color/white"
              android:layout_marginLeft="3dp"
              android:textSize="15sp"
@@ -106,7 +106,7 @@
               android:id="@+id/Deep_sleep"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Deep Sleep"
+              android:text="@string/deepsleep"
               android:textColor="@color/white"
               android:layout_marginLeft="3dp"
               android:textSize="15sp"

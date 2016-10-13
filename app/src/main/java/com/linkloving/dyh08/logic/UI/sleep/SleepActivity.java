@@ -126,7 +126,6 @@ public class SleepActivity extends ToolBarActivity {
                     sleepButtom.bringToFront();
                fragmentTransaction.show(dayViewFragment);
                 setFragmentReplaceTag(0);
-
             break;
             case 2:
                 new WeekSportAsynckTask(sleepHourTv,sleepMinuteTv,sleepDeepSleep,sleepLightSleep, step_tv_date,  SleepActivity.this).execute(flushWeek);

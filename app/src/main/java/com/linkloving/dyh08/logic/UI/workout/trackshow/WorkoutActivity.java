@@ -45,12 +45,12 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
     /**
      * entity标识
      */
-    protected static String entityName = null;
+    public static String entityName = null;
 
     /**
      * 鹰眼服务ID，开发者创建的鹰眼服务对应的服务ID
      */
-    protected static long serviceId = 123056;
+    public static long serviceId = 123056;
 
     /**
      * 轨迹服务类型（0 : 不建立socket长连接， 1 : 建立socket长连接但不上传位置数据，2 : 建立socket长连接并上传位置数据）
@@ -60,7 +60,7 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
     /**
      * 轨迹服务客户端
      */
-    protected static LBSTraceClient client = null;
+    public static LBSTraceClient client = null;
 
     /**
      * Entity监听器

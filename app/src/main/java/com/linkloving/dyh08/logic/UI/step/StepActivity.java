@@ -186,7 +186,7 @@ public class StepActivity extends ToolBarActivity{
         switch (index){
             case 0:
                 selectionIndex =0 ;
-                stepTV.setText("steps");
+                stepTV.setText(getString(R.string.steps));
                 step_button_day_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.d_on_72px, 0, 0);
                 new DaySportAsynck(flushDate,step_number,stepCircleView,step_tv_date,StepActivity.this).execute(flushDate);
                     dayViewFragment = new DayViewFragment();
@@ -202,7 +202,7 @@ public class StepActivity extends ToolBarActivity{
                 break;
             case 1:
                 selectionIndex =1 ;
-                stepTV.setText("avg.steps");
+                stepTV.setText(R.string.avgsteps);
                 step_button_week_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.w_on_72px, 0, 0);
                 new WeekSportAsynckTask(null,step_number,stepCircleView,step_tv_date,StepActivity.this).execute(flushWeek);
                 weekViewFragment = new WeekViewFragment();
@@ -218,7 +218,7 @@ public class StepActivity extends ToolBarActivity{
                 break;
             case 2:
                 selectionIndex =2 ;
-                stepTV.setText("avg.steps");
+                stepTV.setText(R.string.avgsteps);
                 step_button_month_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.m_on_72px, 0, 0);
                 new MonthSportAsynck(null,step_number, stepCircleView, step_tv_date, StepActivity.this).execute(flushMonth);
                 monthViewFragment  = new MonthViewFragment();
@@ -234,7 +234,7 @@ public class StepActivity extends ToolBarActivity{
                 break;
             case 3:
                 selectionIndex =3 ;
-                stepTV.setText("avg.steps");
+                stepTV.setText(R.string.avgsteps);
                 step_button_year_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.y_on_72px, 0, 0);
                 yearViewFragment = new YearViewFragment();
                 flushYear = CommonUtils.getFlushYear();

@@ -742,6 +742,7 @@ public class BleService extends Service {
         UserEntity localUserInfoForLaunch = PreferencesToolkits.getLocalUserInfoForLaunch(this);
         int user_id = localUserInfoForLaunch.getUser_id();
         lpDeviceInfo.setUserId(user_id);
+        MyLog.e("syncAllDeviceInfo",user_id+"bleservice里面的id");
         provider.getAllDeviceInfoNew(context,lpDeviceInfo); //获得设备信息
 //        BleSynchronImpl bleSynchronImpl = new BleSynchronImpl(context,provider);
 //        bleSynchronImpl.synchronAll();

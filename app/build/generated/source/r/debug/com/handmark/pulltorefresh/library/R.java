@@ -72,9 +72,9 @@ public final class R {
 		public static final int pull_to_refresh_header_vertical = 0x7f04009e;
 	}
 	public static final class string {
-		public static final int pull_to_refresh_from_bottom_pull_label = 0x7f0700e6;
-		public static final int pull_to_refresh_from_bottom_refreshing_label = 0x7f0700e7;
-		public static final int pull_to_refresh_from_bottom_release_label = 0x7f0700e8;
+		public static final int pull_to_refresh_from_bottom_pull_label = 0x7f0704c6;
+		public static final int pull_to_refresh_from_bottom_refreshing_label = 0x7f0704c7;
+		public static final int pull_to_refresh_from_bottom_release_label = 0x7f0704c8;
 		public static final int pull_to_refresh_pull_label = 0x7f070032;
 		public static final int pull_to_refresh_refreshing_label = 0x7f070033;
 		public static final int pull_to_refresh_release_label = 0x7f070034;

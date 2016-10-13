@@ -35,7 +35,7 @@
             <AutoCompleteTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Distance"
+                android:text="@string/Distance"
                 android:textColor="@color/step_data_gray"
                 android:textSize="@dimen/m00_font_size_22pt"
                 android:background="@null"/>
@@ -59,7 +59,7 @@
             <AutoCompleteTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Duration"
+                android:text="@string/Duration"
                 android:textColor="@color/step_data_gray"
                 android:textSize="@dimen/m00_font_size_22pt"
                 android:background="@null"/>

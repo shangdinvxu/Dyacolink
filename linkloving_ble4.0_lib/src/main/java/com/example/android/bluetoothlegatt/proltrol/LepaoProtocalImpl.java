@@ -1,6 +1,7 @@
 package com.example.android.bluetoothlegatt.proltrol;
 
 import android.bluetooth.BluetoothGattCharacteristic;
+import android.util.Log;
 
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.example.android.bluetoothlegatt.exception.BLException;
@@ -873,21 +874,23 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			LPUtil.printData(resp, "接收到的绑定信息(首次)");
 				if( resp[5] == 1)
 				{
+					Log.e("bluetooth","BLEProvider.INDEX_BOUND_GOON");
 					return BLEProvider.INDEX_BOUND_GOON;
-					
-			    }
+				}
 				else if(resp[5] == 0) {  //继续发绑定命令
-					
+					Log.e("bluetooth","BLEProvider.INDEX_BOUND_NOCHARGE");
 					return BLEProvider.INDEX_BOUND_NOCHARGE;
 			    }
 				else if(resp[5] == 0x0F) {  //已经被绑定了
-
+					Log.e("bluetooth","BLEProvider.INDEX_INVALID_USER");
 					return BLEProvider.INDEX_INVALID_USER;
 				}
+		 Log.e("bluetooth","BLEProvider.INDEX_BOUND_FAIL");
 			    return BLEProvider.INDEX_BOUND_FAIL;
 		 };
 		 
 		 public int requestbound_recy() throws BLException, LPException {
+			 Log.e("bluetooth","requestbound_recy+这方法执行了");
 				WatchRequset req = new WatchRequset();
 				byte[] resp;
 				byte peidui=3;  //手表

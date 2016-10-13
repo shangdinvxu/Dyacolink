@@ -6,11 +6,12 @@
 
 
     <TextView
+        android:gravity="center"
         android:layout_marginTop="40dp"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:lines="2"
-        android:text="Open The Bluetooth And Link Equipment"
+        android:text="@string/OpenThe"
         android:textSize="30dp"
         android:textColor="@color/blue"
         />
@@ -44,7 +45,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Link Equipment"
+        android:text="@string/LinkEquip"
         android:textSize="28sp"
         android:textColor="@color/blue_text"
         />

@@ -60,20 +60,14 @@ public class BluetoothDisconnectActivity extends ToolBarActivity {
         provider = BleService.getInstance(BluetoothDisconnectActivity.this).getCurrentHandlerProvider();
         modelInfo = PreferencesToolkits.getInfoBymodelName(BluetoothDisconnectActivity.this, userEntity.getDeviceEntity().getModel_name());
     }
-
     @Override
     protected void getIntentforActivity() {
-
     }
-
     @Override
     protected void initView() {
-
     }
-
     @Override
     protected void initListeners() {
-
     }
 
     @OnClick(R.id.cancel)
@@ -83,18 +77,24 @@ public class BluetoothDisconnectActivity extends ToolBarActivity {
 
     @OnClick(R.id.confirm)
     void onConfirm(View view) {
-        if (provider.isConnectedAndDiscovered()) {
-            //连接才去下这个指令
-            provider.unBoundDevice(BluetoothDisconnectActivity.this);
+        MyLog.e("BluetoothActivity",provider.isConnectedAndDiscovered()+"provider.isConnectedAndDiscovered()");
+        UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(BluetoothDisconnectActivity.this);
+        String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
+        if (last_sync_device_id==null||last_sync_device_id.length()==0){
+        }else{
+            if (provider.isConnectedAndDiscovered()) {
+                //连接才去下这个指令
+                provider.unBoundDevice(BluetoothDisconnectActivity.this);
+            }
+            UserEntity userEntity = MyApplication.getInstance(BluetoothDisconnectActivity.this).getLocalUserInfoProvider();
+            //设备号置空
+            userEntity.getDeviceEntity().setLast_sync_device_id(null);
+            //设备类型置空
+            userEntity.getDeviceEntity().setDevice_type(0);
+            //*******模拟断开   不管有没有连接 先执行这个再说
+            BleService.getInstance(BluetoothDisconnectActivity.this).releaseBLE();
+            ToolKits.showCommonTosat(BluetoothDisconnectActivity.this, false, ToolKits.getStringbyId(BluetoothDisconnectActivity.this, R.string.unbound_success), Toast.LENGTH_SHORT);
         }
-        UserEntity userEntity = MyApplication.getInstance(BluetoothDisconnectActivity.this).getLocalUserInfoProvider();
-        //设备号置空
-        userEntity.getDeviceEntity().setLast_sync_device_id(null);
-        //设备类型置空
-        userEntity.getDeviceEntity().setDevice_type(0);
-        //*******模拟断开   不管有没有连接 先执行这个再说
-        BleService.getInstance(BluetoothDisconnectActivity.this).releaseBLE();
-        ToolKits.showCommonTosat(BluetoothDisconnectActivity.this, false, ToolKits.getStringbyId(BluetoothDisconnectActivity.this, R.string.unbound_success), Toast.LENGTH_SHORT);
             IntentFactory.startBindActivity3(BluetoothDisconnectActivity.this);
     }
     private HttpCallback<String> httpCallback = new HttpCallback<String>() {

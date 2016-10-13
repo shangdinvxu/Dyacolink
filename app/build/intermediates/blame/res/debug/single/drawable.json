@@ -20,12 +20,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_input_bg_focus.9.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\cai_item.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\cai_item.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_input_bg_special_focus.9.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_input_bg_special_focus.9.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\cai_item.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\cai_item.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_checkbox_nor.9.png",
@@ -36,12 +36,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\common_login_btn.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\durationicon.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\durationicon.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\woman.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\woman.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\durationicon.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\durationicon.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\share_button_selector.xml",
@@ -84,12 +84,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\share_button_press.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_sharesdk_icon.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_sharesdk_icon.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_settings_item_bg_group_full_gray.9.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\common_settings_item_bg_group_full_gray.9.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_sharesdk_icon.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_sharesdk_icon.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\indicator_bg_bottom.xml",
@@ -132,12 +132,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_holo_light.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_btn_enable.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_btn_enable.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\body_input_bg.9.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\body_input_bg.9.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_btn_enable.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_btn_enable.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\body_reduce_btn_bg.9.png",
@@ -336,24 +336,24 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\bracelet_whilte_bg.9.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\main_report_page_top_timetype_radio_btn_day_selector.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\main_report_page_top_timetype_radio_btn_day_selector.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\widget_toast_icon_ok.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\widget_toast_icon_ok.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\main_report_page_top_timetype_radio_btn_day_selector.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\main_report_page_top_timetype_radio_btn_day_selector.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_country_bg_selector.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_country_bg_selector.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\main_report_page_top_timetype_radio_btn_week_selector.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\main_report_page_top_timetype_radio_btn_week_selector.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\view_on_50x50px.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\view_on_50x50px.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\main_report_page_top_timetype_radio_btn_week_selector.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\main_report_page_top_timetype_radio_btn_week_selector.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_btn_blue.xml",
@@ -384,12 +384,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\sns_add_friend_form_say_hi_greet_bg.9.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\alarm_list_item_bg_normal.9.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\alarm_list_item_bg_normal.9.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_full_material.xml",
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_full_material.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\alarm_list_item_bg_normal.9.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\alarm_list_item_bg_normal.9.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\fb_selector.xml",
@@ -432,12 +432,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\main_report_page_dataselect_left_btn_normal.9.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\widget_toast_icon_error.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\widget_toast_icon_error.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\chat_put_in.9.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\chat_put_in.9.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\widget_toast_icon_error.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\widget_toast_icon_error.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\tw_share_selector.xml",
@@ -560,12 +560,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\seek_thumb.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\button.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\button.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\bar_middel_on.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\bar_middel_on.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\button.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\button.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_indicator_material.xml",
@@ -588,16 +588,16 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\relationship_tab_on.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_style_alert_dialog_cancel.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\btn_style_alert_dialog_cancel.xml"
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\vpi__tab_indicator.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\dyh08\\ViewPagerIndicator\\unspecified\\res\\drawable\\vpi__tab_indicator.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\view_off_50x50px.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\view_off_50x50px.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\vpi__tab_indicator.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\dyh08\\ViewPagerIndicator\\unspecified\\res\\drawable\\vpi__tab_indicator.xml"
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_style_alert_dialog_cancel.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\btn_style_alert_dialog_cancel.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\arrow_up.png",
@@ -736,12 +736,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\menu_item_pressed.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_clear_search.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_clear_search.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\main_report_page_dataselect_left_btn.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\main_report_page_dataselect_left_btn.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_clear_search.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_clear_search.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_raido_man_bg.xml",
@@ -760,12 +760,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\title_add.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\side_nav_bar.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\side_nav_bar.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_toast_bg.9.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\common_toast_bg.9.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\side_nav_bar.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\side_nav_bar.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_corners_bg_nor.xml",

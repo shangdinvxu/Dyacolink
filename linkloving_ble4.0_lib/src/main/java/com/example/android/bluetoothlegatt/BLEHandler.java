@@ -1255,6 +1255,7 @@ public abstract class BLEHandler extends Handler {
 	protected void notifyForDeviceUnboundSucess_D() {
 		if (bleProviderObserver != null)
 			bleProviderObserver.updateFor_notifyForDeviceUnboundSucess_D();
+		OwnLog.e("BluetoothActivity","解绑成功+notifyForDeviceUnboundSucess_D");
 	}
 
 	/**

@@ -1651,6 +1651,7 @@ public  class BLEProvider
 				    	msg = mHandler.obtainMessage();
 						msg.what = MSG_BLE_DATA;
 						msg.arg1 = INDEX_GAT_ALL_INFO_NEW;
+// // TODO: 2016/10/10 userId
 						msg.obj = mLepaoProtocalImpl.getAllDeviceInfoNew(serverDeviceInfo.userId);
 			    		msg.sendToTarget();
 						break;

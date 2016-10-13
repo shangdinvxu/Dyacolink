@@ -32,6 +32,7 @@ public class LoginFinishActivity extends Activity {
     void finishLogin(View view){
         Intent portalActivityIntent = IntentFactory.createPortalActivityIntent(LoginFinishActivity.this);
         startActivity(portalActivityIntent);
+//        IntentFactory.start_Bluetooth(LoginFinishActivity.this);
     }
 
     private void init() {

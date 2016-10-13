@@ -192,7 +192,7 @@ TextView caloriesTV ;
         switch (index){
             case 0:
                 selectionIndex =0 ;
-                caloriesTV.setText("kcal");
+                caloriesTV.setText(R.string.kcal);
                 step_button_day_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.d_on_72px, 0, 0);
                 new DaySportAsynck(flushDate,step_number,stepCircleView,step_tv_date,CaloriesActivity.this).execute(flushDate);
                     dayViewFragment = new DayViewFragment();
@@ -208,7 +208,7 @@ TextView caloriesTV ;
                 break;
             case 1:
                 selectionIndex =1 ;
-                caloriesTV.setText("avg.kcal");
+                caloriesTV.setText(R.string.avgkcal);
                 step_button_week_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.w_on_72px, 0, 0);
                 new WeekSportAsynckTask(null,step_number,stepCircleView,step_tv_date,CaloriesActivity.this).execute(flushWeek);
                 weekViewFragment = new WeekViewFragment();
@@ -224,7 +224,7 @@ TextView caloriesTV ;
                 break;
             case 2:
                 selectionIndex =2 ;
-                caloriesTV.setText("avg.kcal");
+                caloriesTV.setText(R.string.avgkcal);
                 step_button_month_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.m_on_72px, 0, 0);
                 new MonthSportAsynck(null,step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushMonth);
                 monthViewFragment  = new MonthViewFragment();
@@ -240,7 +240,7 @@ TextView caloriesTV ;
                 break;
             case 3:
                 selectionIndex =3 ;
-                caloriesTV.setText("avg.kcal");
+                caloriesTV.setText(R.string.avgkcal);
                 step_button_year_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.y_on_72px, 0, 0);
                 yearViewFragment = new YearViewFragment();
                 flushYear = CommonUtils.getFlushYear();

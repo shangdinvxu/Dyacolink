@@ -142,7 +142,7 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/main_UI_Text"
-                        android:text="Duration" />
+                        android:text="@string/Duration" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/main_tv_Duration"

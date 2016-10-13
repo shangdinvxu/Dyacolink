@@ -8,16 +8,16 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\help_one.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\bg_dashed.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\bg_dashed.png"
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\ic_menu_friends.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\ic_menu_friends.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\bound_step_one_watch.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\bound_step_one_watch.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\ic_menu_friends.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\ic_menu_friends.png"
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\bg_dashed.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\bg_dashed.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\ble_list_item_img.png",
@@ -46,6 +46,10 @@
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\s_inactive_on_144px.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\s_inactive_on_144px.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\start2.jpg",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\start2.jpg"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\instagram_on.png",
@@ -84,12 +88,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\battery_pm1.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\un850px.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\un850px.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\safe.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\safe.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\un850px.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\un850px.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\smssdk_clear_search.png",
@@ -116,12 +120,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\nextpageright.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\s_disturb_off_144px.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\s_disturb_off_144px.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\set_phone_off.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\set_phone_off.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\s_disturb_off_144px.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\s_disturb_off_144px.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\atention30px.png",
@@ -204,12 +208,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\eye_open.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\main_run.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\main_run.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\logoin_wechat.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\logoin_wechat.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\main_run.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\main_run.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\icon_mark10.png",
@@ -240,12 +244,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\imageworkouticon.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\stepicon.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\stepicon.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\ranking_2.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\ranking_2.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\stepicon.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\stepicon.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\mapoff.png",
@@ -264,12 +268,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\ranking_1.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\logoin_qq.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\logoin_qq.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\main_sleep_off.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\main_sleep_off.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\logoin_qq.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\logoin_qq.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\null_data.png",
@@ -336,24 +340,24 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\sleepicon.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\yct_logo.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\yct_logo.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\icon_mark3.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\icon_mark3.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\yct_logo.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\yct_logo.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\icon_end.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\icon_end.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\cai_not_clicked.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\cai_not_clicked.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\mapon.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\mapon.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\cai_not_clicked.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\cai_not_clicked.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\nofind.png",
@@ -388,10 +392,6 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\deepsleep30px.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\tw_calories.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\tw_calories.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\unread_bg1.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\unread_bg1.png"
     },
@@ -400,12 +400,16 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\icon_mark8.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\twitter_on.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\twitter_on.png"
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\tw_calories.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\tw_calories.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\set_qq_off.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\set_qq_off.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\twitter_on.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\twitter_on.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\set_message_off.png",
@@ -428,12 +432,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\shareiconoff.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\login_google.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\login_google.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\battery_pm3.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\battery_pm3.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\login_google.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\login_google.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\common_radio_button_man_checked.png",
@@ -444,12 +448,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\set_linkloving_off.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\point_3.jpg",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\point_3.jpg"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\icon_mark9.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\icon_mark9.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\point_3.jpg",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\point_3.jpg"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\goal_image.png",
@@ -556,12 +560,16 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\signout.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\btn_on.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\btn_on.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\main_run_off.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\main_run_off.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\start3.jpg",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\start3.jpg"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\btn_on.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\btn_on.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\alarm_item_icon_nor.png",
@@ -664,12 +672,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\smssdk_sharesdk_icon.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\hotline.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\hotline.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\btn_share.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\btn_share.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\hotline.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\hotline.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\main_weight_off.png",
@@ -718,6 +726,10 @@
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\battery_pm2.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\battery_pm2.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\start1.jpg",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\start1.jpg"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\common_radio_button_man_nor.png",
@@ -772,12 +784,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\line.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\default_avatar.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\default_avatar.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\fb.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\fb.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\default_avatar.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\default_avatar.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\set_linkloving_on.png",
@@ -816,6 +828,10 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\birthday.png"
     },
     {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\battery_pm1_off.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\battery_pm1_off.png"
+    },
+    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\watch.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\watch.png"
     },
@@ -824,16 +840,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\bar_left_on.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\battery_pm1_off.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\battery_pm1_off.png"
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\help_two.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\help_two.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\login_facebook.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\login_facebook.png"
-    },
-    {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\help_two.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\help_two.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\commend.png",
@@ -936,12 +948,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\ranking_3.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\device_inactive.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\device_inactive.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\detail_on.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\detail_on.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\device_inactive.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\device_inactive.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\icon_mark6.png",
@@ -1020,12 +1032,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\pm2_icon.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\caloriesicon.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\caloriesicon.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\loop.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\loop.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\caloriesicon.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\caloriesicon.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\smssdk_cp_default_avatar.png",
@@ -1084,12 +1096,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\nextpageye80.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\w_off_72px.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\w_off_72px.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\imageblueicon.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\imageblueicon.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\w_off_72px.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\mipmap-xhdpi\\w_off_72px.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\common_toast_image_right.png",

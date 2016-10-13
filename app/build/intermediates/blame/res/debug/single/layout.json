@@ -20,12 +20,16 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_app_start.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\adapter_pay_list.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\adapter_pay_list.xml"
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_start2.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_start2.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_separator.xml",
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.4.0\\res\\layout\\design_navigation_item_separator.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\adapter_pay_list.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\adapter_pay_list.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\list_item_menu.xml",
@@ -52,20 +56,20 @@
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\dyh08\\PullToRefreshLibrary\\unspecified\\res\\layout\\pull_to_refresh_header_vertical.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_more.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_more.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_change_info.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_change_info.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_about_us.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_about_us.xml"
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_more.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_more.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines.xml",
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_lines.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_about_us.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_about_us.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_distance_top.xml",
@@ -100,24 +104,24 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_bluetooth.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_big_media_narrow.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_device.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_device.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_big_media_narrow.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_groups_share.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_groups_share.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_layout_sport.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\dialog_layout_sport.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\bound_xiangxi.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\bound_xiangxi.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_layout_sport.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\dialog_layout_sport.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_attention_me.xml",
@@ -176,24 +180,24 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_app_bar_step.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_distance_data.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_distance_data.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_calories_avg_popupwiew.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_calories_avg_popupwiew.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_distance_data.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_distance_data.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_help.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_help.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\comment_item_left.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\comment_item_left.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_sleep_data.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_sleep_data.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\comment_item_left.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\comment_item_left.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
@@ -344,12 +348,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_bar_title_item.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\dyh08\\PullToRefreshLibrary\\unspecified\\res\\layout\\pull_to_refresh_header_horizontal.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\dyh08\\PullToRefreshLibrary\\unspecified\\res\\layout\\pull_to_refresh_header_horizontal.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_bound_band3.xml",
@@ -372,28 +376,32 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\phone_login_layout.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_my_attention.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\fragment_my_attention.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\toast_synchronize.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\toast_synchronize.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_my_attention.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\fragment_my_attention.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_main_clock.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_main_clock.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_groups_fourtextview.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_groups_fourtextview.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_list_menu_item_layout.xml"
     },
     {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_groups_fourtextview.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_groups_fourtextview.xml"
+    },
+    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_layout.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\dialog_layout.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\login_birthday.xml",
@@ -402,10 +410,6 @@
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\feedback_item_right.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\feedback_item_right.xml"
-    },
-    {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_layout.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\dialog_layout.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_activity_weight.xml",
@@ -420,12 +424,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\comment_item_right.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_binding_bluetooth_activity3.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_binding_bluetooth_activity3.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_sleep_buttom.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_sleep_buttom.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_binding_bluetooth_activity3.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_binding_bluetooth_activity3.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_calories_activity.xml",
@@ -492,12 +496,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_member_login.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\login_weight.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\login_weight.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_blelist.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_blelist.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\login_weight.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\login_weight.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_comment_me.xml",
@@ -516,12 +520,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_screen_simple.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\actionbar_layout_menu.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\actionbar_layout_menu.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_sleep_calendar_buttom.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_sleep_calendar_buttom.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\actionbar_layout_menu.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\actionbar_layout_menu.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar_include.xml",
@@ -544,12 +548,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\login_gender.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\step_listview_item.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\step_listview_item.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\login_wearingstyles.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\login_wearingstyles.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\step_listview_item.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\step_listview_item.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tv_activity_portal_main.xml",
@@ -562,6 +566,10 @@
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_year_view_fragment.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_year_view_fragment.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_start1.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_start1.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\my_auto_complete_text_view_item.xml",
@@ -644,12 +652,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_cal_date.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\modify_sex_dialog.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\modify_sex_dialog.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_month_barchartview_fragment.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_month_barchartview_fragment.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\modify_sex_dialog.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\modify_sex_dialog.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_move_device.xml",
@@ -678,6 +686,10 @@
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_personal_info.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_personal_info.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_start3.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_start3.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_change_weight.xml",
@@ -760,12 +772,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_trace_fragment_title.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\view_date_picker.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\view_date_picker.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_hand_up.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_hand_up.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\view_date_picker.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\view_date_picker.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_registered_success.xml",
@@ -788,16 +800,20 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\toast_layout.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\login_other.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\login_other.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\diatance_data_view.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\diatance_data_view.xml"
     },
     {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\login_other.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\login_other.xml"
+    },
+    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_message_register.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_message_register.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_start_activity.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_start_activity.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
@@ -976,12 +992,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_bound_activity_2.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\login_from_email.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\login_from_email.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_bund_type.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_bund_type.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\login_from_email.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\login_from_email.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_device_notify.xml",

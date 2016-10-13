@@ -1,9 +1,15 @@
 package com.linkloving.dyh08.logic.UI.Bluetooth;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +27,9 @@ import com.example.android.bluetoothlegatt.BLEHandler;
 import com.example.android.bluetoothlegatt.BLEListHandler;
 import com.example.android.bluetoothlegatt.BLEListProvider;
 import com.example.android.bluetoothlegatt.BLEProvider;
+import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
 import com.linkloving.dyh08.BleService;
+import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
@@ -32,6 +40,8 @@ import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -55,7 +65,7 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
     public static final int RESULT_FAIL = 998;
     public static final int RESULT_NOCHARGE = 997;
     public static final int RESULT_DISCONNECT = 996;
-    private BLEProviderObserver observerAdapter;
+    private BLEProviderObserver1 observerAdapter;
     private BLEListHandler handler;
     private BLEListProvider listProvider;
     private List<DeviceVO> macList = new ArrayList();
@@ -63,7 +73,14 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
     private BluetoothBindActivity3.macListAdapterNew macListAdapterNew;
     private ImageView stateIV;
     private RotateAnimation rotateAnimation;
+    public static final int sendcount_MAX = 15;
+    private int sendcount = 0;
+    public static final int sendcount_time = 2000;
+    public  String modelName = null;
+    private Timer timer;
+    private AlertDialog dialog_bound;
 
+    public static final int REFRESH_BUTTON = 0x123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +88,7 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
         ButterKnife.inject(this);
         middleChangeIV.setVisibility(View.INVISIBLE);
 //        btn_Next.setVisibility(View.GONE);
-        observerAdapter = new BLEProviderObserver();
+        observerAdapter = new BLEProviderObserver1();
         provider = BleService.getInstance(this).getCurrentHandlerProvider();
         provider.setBleProviderObserver(observerAdapter);
         handler = new BLEListHandler(BluetoothBindActivity3.this) {
@@ -99,14 +116,15 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
         mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                provider.setCurrentDeviceMac(macList.get(position).mac);
-                provider.setmBluetoothDevice(macList.get(position).bledevice);
-                provider.connect_mac(macList.get(position).mac);
                 stateIV = (ImageView) view.findViewById(R.id.list_item_imageview);
                 RotateAnimation rotateAnimation = getRotateAnimation();
                 stateIV.setAnimation(rotateAnimation);
                 rotateAnimation.start();
                 stateIV.setVisibility(View.VISIBLE);
+                provider.setCurrentDeviceMac(macList.get(position).mac);
+                provider.setmBluetoothDevice(macList.get(position).bledevice);
+                provider.connect_mac(macList.get(position).mac);
+                new AlertDialog.Builder(BluetoothBindActivity3.this).setMessage("连接中").setCancelable(false).show();
             }
         });
 
@@ -297,6 +315,373 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
         public BluetoothDevice bledevice;
 
     }
+    Runnable butttonRunnable = new Runnable() {
+        @Override
+        public void run() {
+            Message msg = new Message();
+            msg.what = REFRESH_BUTTON;
+            boundhandler.sendMessage(msg);
+        }
 
+        ;
+    };
+
+    Runnable boundRunnable = new Runnable() {
+        @Override
+        public void run() {
+            Message msg = new Message();
+            msg.what = 0x333;
+            boundhandler.sendMessage(msg);
+        }
+
+        ;
+    };
+    Handler boundhandler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0x333:
+                    provider.requestbound_recy(BluetoothBindActivity3.this);
+                    break;
+//                case REFRESH_BUTTON:
+//                    button_txt[0] = button_txt_count;
+//                    Log.e(TAG, button_txt_count + "");
+//                    String second_txt = MessageFormat.format(getString(R.string.bound_scan_sqr), button_txt);
+//                    boundBtn.setText(second_txt);
+//                    if (button_txt_count == 0) {
+//                        if (dialog_bound != null && dialog_bound.isShowing()) {
+//                            if (timer != null)
+//                                timer.cancel();
+//                            dialog_bound.dismiss();
+//                        }
+//                        BleService.getInstance(BandListActivity.this).releaseBLE();
+//                        setResult(RESULT_FAIL);
+//                        finish();
+//                    }
+//                    break;
+            }
+        }
+
+        ;
+    };
+
+    private class BLEProviderObserver1 extends BLEHandler.BLEProviderObserverAdapter {
+
+        @Override
+        protected Activity getActivity() {
+            return BluetoothBindActivity3.this;
+        }
+
+        @Override
+        public void updateFor_handleNotEnableMsg() {
+            super.updateFor_handleNotEnableMsg();
+            MyLog.e(TAG,"updateFor_handleNotEnableMsg");
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            BluetoothBindActivity3.this.startActivityForResult(enableBtIntent, BleService.REQUEST_ENABLE_BT);
+        }
+
+        @Override
+        public void updateFor_handleSendDataError() {
+            MyLog.e(TAG,"updateFor_handleSendDataError");
+            super.updateFor_handleSendDataError();
+            if (dialog_bound != null && dialog_bound.isShowing()) {
+                dialog_bound.dismiss();
+            }
+        }
+
+        @Override
+        public void updateFor_handleConnectLostMsg() {
+            Log.e("BluetoothBindActivity3", "updateFor_handleConnectLostMsg");
+            listProvider.stopScan();
+            if (dialog_bound != null && dialog_bound.isShowing()) {
+                dialog_bound.dismiss();
+            }
+//            provider.connect_mac(provider.getCurrentDeviceMac());
+//
+            provider.clearProess();
+            provider.setCurrentDeviceMac(null);
+            provider.setmBluetoothDevice(null);
+            provider.resetDefaultState();
+            setResult(RESULT_FAIL);
+            Toast.makeText(BluetoothBindActivity3.this,"绑定失败", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+        @Override
+        public void updateFor_handleConnectFailedMsg() {
+            super.updateFor_handleConnectFailedMsg();
+            MyLog.e(TAG,"updateFor_handleConnectFailedMsg");
+            if (dialog_bound != null && dialog_bound.isShowing()) {
+                dialog_bound.dismiss();
+            }
+            provider.release();
+            provider.setCurrentDeviceMac(null);
+            provider.setmBluetoothDevice(null);
+            provider.resetDefaultState();
+            setResult(RESULT_FAIL);
+            finish();
+        }
+
+        @Override
+        public void updateFor_handleConnectSuccessMsg() {
+            MyLog.e(TAG,"updateFor_handleConnectSuccessMsg");
+            listProvider.stopScan();
+            Log.e("BluetoothBindActivity3", "连接成功");
+            try {
+                new Thread().sleep(BleService.TIMEOUT);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            BleService.getInstance(BluetoothBindActivity3.this).syncAllDeviceInfo(BluetoothBindActivity3.this);
+//
+        }
+
+        @Override
+        public void updateFor_notifyFor0x13ExecSucess_D(LPDeviceInfo latestDeviceInfo) {
+            super.updateFor_notifyFor0x13ExecSucess_D(latestDeviceInfo);
+            MyLog.e(TAG,"updateFor_notifyFor0x13ExecSucess_D");
+            if(latestDeviceInfo!=null && latestDeviceInfo.recoderStatus==5){
+                Log.e("BluetoothBindActivity3", "用户非法");
+                Toast.makeText(BluetoothBindActivity3.this,"设备已经被其他用户绑定", Toast.LENGTH_SHORT).show();
+                provider.release();
+                provider.setCurrentDeviceMac(null);
+                provider.setmBluetoothDevice(null);
+                provider.resetDefaultState();
+                provider.clearProess();
+                finish();
+             /*   new AlertDialog.Builder(BluetoothBindActivity3.this)
+                        .setTitle(R.string.portal_main_gobound)
+                        .setMessage(R.string.portal_main_mustbund)
+                        //
+                        .setPositiveButton(R.string.general_ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                provider.unBoundDevice(BluetoothBindActivity3.this);
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton(R.string.general_cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                if (dialog_bound != null && dialog_bound.isShowing()) {
+                                    dialog_bound.dismiss();
+                                }
+                                provider.release();
+                                provider.setCurrentDeviceMac(null);
+                                provider.setmBluetoothDevice(null);
+                                provider.resetDefaultState();
+                                setResult(RESULT_FAIL);
+                                finish();
+                            }
+                        }).create().show();*/
+            }else{
+                provider.requestbound_fit(BluetoothBindActivity3.this);
+            }
+
+        }
+
+
+
+        //非法用户
+        @Override
+        public void notifyForInvaildUser() {
+            super.notifyForInvaildUser();
+            Log.e("BluetoothBindActivity3", "notifyForInvaildUser");
+            new AlertDialog.Builder(BluetoothBindActivity3.this)
+                    .setTitle(R.string.portal_main_gobound)
+                    .setMessage(R.string.portal_main_mustbund)
+                    //
+                    .setPositiveButton(R.string.general_ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            provider.unBoundDevice(BluetoothBindActivity3.this);
+                            dialog.dismiss();
+                        }
+                    })
+                    .setNegativeButton(R.string.general_cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            if (dialog_bound != null && dialog_bound.isShowing()) {
+                                dialog_bound.dismiss();
+                            }
+                            provider.release();
+                            provider.setCurrentDeviceMac(null);
+                            provider.setmBluetoothDevice(null);
+                            provider.resetDefaultState();
+                            setResult(RESULT_FAIL);
+                            finish();
+                        }
+                    }).create().show();
+        }
+
+        @Override
+        public void updateFor_notifyForDeviceUnboundSucess_D() {
+            super.updateFor_notifyForDeviceUnboundSucess_D();
+            Log.e("BluetoothBindActivity3", "updateFor_notifyForDeviceUnboundSucess_D");
+            Log.e("BluetoothBindActivity3", "清除设备信息/解绑成功");
+            provider.clearProess();
+            finish();
+
+        }
+
+        @Override
+        public void updateFor_BoundNoCharge() {
+            super.updateFor_BoundNoCharge();
+            Log.e("BluetoothBindActivity3", "updateFor_BoundNoCharge");
+            if (dialog_bound != null && dialog_bound.isShowing()) {
+                dialog_bound.dismiss();
+            }
+            setResult(RESULT_NOCHARGE);
+            finish();
+        }
+
+        @Override
+        public void updateFor_BoundContinue() {
+            super.updateFor_BoundContinue();
+            Log.e("BluetoothBindActivity3", "updateFor_BoundContinue");
+            if(dialog_bound!=null && !dialog_bound.isShowing() )
+                dialog_bound.show();
+            if (dialog_bound != null && dialog_bound.isShowing()) {
+                if(timer==null){
+                    timer = new Timer(); // 每1s更新一下
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            boundhandler.post(butttonRunnable);
+//                            MyLog.e(TAG, "Timer开始了");
+                        }
+                    }, 0, 1000);
+                }
+            }
+            if (sendcount < sendcount_MAX) {
+                boundhandler.postDelayed(boundRunnable, sendcount_time);
+                sendcount++;
+            } else {
+                Log.e("BluetoothBindActivity3", "已经发送超出15次");
+                provider.clearProess();
+                BleService.getInstance(BluetoothBindActivity3.this).releaseBLE();
+                setResult(RESULT_FAIL);
+                finish();
+            }
+        }
+
+        @Override
+        public void updateFor_BoundSucess() {
+            Log.e("BluetoothBindActivity3", "updateFor_BoundSucess");
+            provider.SetDeviceTime(BluetoothBindActivity3.this);
+            if (dialog_bound != null && dialog_bound.isShowing()){
+                dialog_bound.dismiss();
+            }
+            //获取成功
+            startBound();
+        }
+
+//        @Override
+//        public void updateFor_handleSetTime() {
+//            provider.getModelName(BluetoothBindActivity3.this);
+//        }
+
+        @Override
+        public void updateFor_notifyForModelName(LPDeviceInfo latestDeviceInfo) {
+            Log.e("BluetoothBindActivity3", "updateFor_notifyForModelName");
+            if(latestDeviceInfo==null){
+                //未获取成功  重新获取
+                provider.getModelName(BluetoothBindActivity3.this);
+            }else{
+                modelName = latestDeviceInfo.modelName;
+                if (dialog_bound != null && dialog_bound.isShowing()){
+                    dialog_bound.dismiss();
+                }
+                //获取成功
+                startBound();
+            }
+        }
+
+        /**
+         * 通知：设备绑定信息同步到服务端完成
+         */
+        @Override
+        public void updateFor_boundInfoSyncToServerFinish(Object resultFromServer) {
+            Log.e("BluetoothBindActivity3", "updateFor_boundInfoSyncToServerFinish");
+            if (resultFromServer != null) {
+                if (((String) resultFromServer).equals("1")) {
+                    Log.e(TAG, "绑定成功！");
+                    Toast.makeText(BluetoothBindActivity3.this,"绑定成功", Toast.LENGTH_SHORT).show();
+                    provider.getModelName(BluetoothBindActivity3.this);
+                    MyApplication.getInstance(BluetoothBindActivity3.this).getLocalUserInfoProvider().getDeviceEntity().setLast_sync_device_id(provider.getCurrentDeviceMac());
+                    MyApplication.getInstance(BluetoothBindActivity3.this).getLocalUserInfoProvider().getDeviceEntity().setDevice_type(MyApplication.DEVICE_BAND);
+                    setResult(RESULT_OK);
+//                    finish();
+                    Intent intent = new Intent(BluetoothBindActivity3.this, PortalActivity.class);
+                    startActivity(intent);
+                } else if (((String) resultFromServer).equals("10024")) {
+                    MyLog.e(TAG, "========绑定失败！========");
+                    new android.support.v7.app.AlertDialog.Builder(BluetoothBindActivity3.this)
+                            .setTitle(getActivity().getResources().getString(R.string.general_prompt))
+                            .setPositiveButton(getActivity().getResources().getString(R.string.general_ok), new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog_, int which) {
+                                    dialog_.dismiss();
+                                    BleService.getInstance(getActivity()).releaseBLE();
+                                    setResult(RESULT_FAIL);
+                                    finish();
+                                }
+                            })
+                            .show();
+                }
+            } else {
+
+                Log.e(TAG, "boundAsyncTask result is null!!!!!!!!!!!!!!!!!");
+                BleService.getInstance(getActivity()).releaseBLE();
+            }
+        }
+
+
+        @Override
+        public void updateFor_BoundFail() {
+            Log.e(TAG, "boundAsyncTask 绑定失败");
+            // BluetoothBindActivity3.this.notifyAll();
+            if (dialog_bound != null && dialog_bound.isShowing()) {
+                dialog_bound.dismiss();
+            }
+            provider.clearProess();
+//            provider.unBoundDevice(BluetoothBindActivity3.this);
+            setResult(RESULT_FAIL);
+            finish();
+        }
+
+    }
+
+    private void startBound() {
+        // 绑定设备时必须保证首先从服务端取来标准UTC时间，以便给设备校时(要看看网络是否连接)
+        MyLog.e(TAG, "startBound()");
+//        if (ToolKits.isNetworkConnected(BluetoothBindActivity3.this)) {
+        if (true) {
+            UserEntity ue = MyApplication.getInstance(getApplicationContext()).getLocalUserInfoProvider();
+            String user_id = ue.getUser_id() + "";
+            if (ue != null && provider != null && provider.getCurrentDeviceMac() != null) {
+                // 将用户id 和 MAC地址交到服务端进行匹配
+//                submitBoundMACToServer(user_id, provider.getCurrentDeviceMac());
+                //***********************************台湾离线版本**********************************************************//
+                UserEntity userEntity = MyApplication.getInstance(BluetoothBindActivity3.this).getLocalUserInfoProvider();
+                userEntity.getDeviceEntity().setLast_sync_device_id(provider.getCurrentDeviceMac());
+                userEntity.getDeviceEntity().setDevice_type(MyApplication.DEVICE_BAND);
+                userEntity.getDeviceEntity().setModel_name(modelName);
+                MyApplication.getInstance(BluetoothBindActivity3.this).setLocalUserInfoProvider(userEntity);
+                if (observerAdapter != null)
+                    observerAdapter.updateFor_boundInfoSyncToServerFinish("1");
+                //****************************************台湾离线版本****************************************************//
+            } else {
+                BleService.getInstance(BluetoothBindActivity3.this).releaseBLE();
+                setResult(RESULT_FAIL);
+                finish();
+            }
+        } else {
+            BleService.getInstance(BluetoothBindActivity3.this).releaseBLE(); // 没有网络去绑定设备
+            // 就断开连接
+        }
+    }
 
 }
