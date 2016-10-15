@@ -68,7 +68,7 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
     private BLEProviderObserver1 observerAdapter;
     private BLEListHandler handler;
     private BLEListProvider listProvider;
-    private List<DeviceVO> macList = new ArrayList();
+    private List<DeviceVO> macList = new ArrayList<DeviceVO>();
     private int selectionPostion;
     private BluetoothBindActivity3.macListAdapterNew macListAdapterNew;
     private ImageView stateIV;

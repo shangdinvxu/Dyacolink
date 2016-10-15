@@ -1043,6 +1043,10 @@
 
     <string name="Calories">Calories</string>
     <string name="CALORIES">CALORIES</string>
+    <string name="kcal">kcal</string>
+    <string name="avgkcal">avg. kcal</string>
+
+
     <string name="Distance">Distance</string>
     <string name="DISTANCE">DISTANCE</string>
 

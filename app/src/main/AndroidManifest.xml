@@ -501,6 +501,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             />
+        <activity android:name=".logic.UI.HeartRate.HeartRateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            />
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"

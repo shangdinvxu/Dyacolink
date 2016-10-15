@@ -94,7 +94,7 @@ public class TraceGreendao {
      * @param endDate
      * @return
      */
-    public List searchLocation(Date startdate,Date endDate){
+    public List<Note> searchLocation(Date startdate,Date endDate){
         Query<Note> query = getNoteDao().queryBuilder().where(NoteDao.Properties.StartDate.between(startdate, endDate),
                 NoteDao.Properties.Type.eq(3)).orderAsc(NoteDao.Properties.Id).build();
         List<Note> list = query.list();

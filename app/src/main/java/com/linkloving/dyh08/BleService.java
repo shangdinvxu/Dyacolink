@@ -586,6 +586,7 @@ public class BleService extends Service {
                 }
                 return false;
             }
+       
 
             /**
              * 设置消息提醒

@@ -972,7 +972,7 @@
     <!--登录界面-->
     <string name="member_login">会员登陆</string>
     <string name="Account">帐户（email）</string>
-    <string name="YourEmailAddress">帐户（email）</string>
+    <string name="YourEmailAddress">邮箱地址</string>
     <string name="password">密码</string>
     <string name="enter8to10">输入8～10字符</string>
     <string name="ForgetPassword">忘记密码？</string>

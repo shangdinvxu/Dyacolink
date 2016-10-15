@@ -38,7 +38,7 @@
         android:id="@+id/tv_STEP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DISTANCE"
+        android:text="@string/DISTANCE"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/step_image"
         android:layout_centerHorizontal="true"

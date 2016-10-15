@@ -274,10 +274,12 @@
     <string name="Attention">Attention!</string>
     <string name="Birthday">Birthday</string>
     <string name="Bluetooth">Bluetooth</string>
+    <string name="CALORIES">CALORIES</string>
     <string name="Calories">Calories</string>
     <string name="Cancel">Cancel</string>
     <string name="Confirm">Confirm</string>
     <string name="D">D</string>
+    <string name="DISTANCE">DISTANCE</string>
     <string name="Day_View">Day View</string>
     <string name="Disconnect">Disconnect</string>
     <string name="Distance">Distance</string>
@@ -297,6 +299,7 @@
     <string name="Month_View">Month View</string>
     <string name="OpenThe">Open The Bluetooth And Link Equipment</string>
     <string name="Reconnect">Reconnect</string>
+    <string name="SLEEP">SLEEP</string>
     <string name="STEP">STEP</string>
     <string name="Settings">Settings</string>
     <string name="Sign_Out">Sign Out</string>
@@ -318,6 +321,7 @@
     <string name="achieve_target">Congratulations on reaching your goal</string>
     <string name="action_settings">Settings</string>
     <string name="action_sign_in">Sign in</string>
+    <string name="activities">activities</string>
     <string name="address">Region</string>
     <string name="alarm_activity_manage_title"> Alarm setting </string>
     <string name="alarm_desc_everyday">Every day</string>
@@ -341,8 +345,11 @@
     <string name="app_name">DYACO LINK</string>
     <string name="app_start">Welcome to Linkloving</string>
     <string name="app_title">百度鹰眼</string>
+    <string name="atention">atention</string>
     <string name="attention_activity_title">Follow</string>
+    <string name="avgkcal">avg. kcal</string>
     <string name="avgsteps">avg.steps</string>
+    <string name="avgtime">avg.time</string>
     <string name="being_written">Being written</string>
     <string name="birthday">Birthday</string>
     <string name="body_activity">"Body Settings"</string>
@@ -450,6 +457,7 @@
     <string name="common_sleep_sound"> Deep sleep</string>
     <string name="confirm">确定</string>
     <string name="count_title">Time Spent</string>
+    <string name="danger">danger</string>
     <string name="data_by_month">Monthly Data</string>
     <string name="data_by_week">Weekly Data</string>
     <string name="data_by_year">Year Data</string>
@@ -461,6 +469,7 @@
     <string name="dd">dd</string>
     <string name="debug_device_set_success">DEBUG(设备反馈): 设置用户信息成功!</string>
     <string name="debug_device_unbound_failed"> Unbundling failed!</string>
+    <string name="deepsleep">Deep Sleep</string>
     <string name="delay_alarm">延迟报警</string>
     <string name="delete_fence">删除围栏</string>
     <string name="detail_sport_data_content_reading">Loading...</string>
@@ -595,11 +604,13 @@
     <string name="home_state_walk">Walk</string>
     <string name="imageView">imageView</string>
     <string name="is_processed">纠偏</string>
+    <string name="kcal">kcal</string>
     <string name="lastmonth">lastmonth</string>
     <string name="lastweek">lastweek</string>
     <string name="lastyear">lastyear</string>
     <string name="left">Left</string>
     <string name="lenth">Height</string>
+    <string name="lightsleep">Light Sleep</string>
     <string name="loadmore">Pull down to load more...</string>
     <string name="login_QQ">Log in via QQ ID</string>
     <string name="login_activity_wechat">请安装微信客户端</string>
@@ -1015,6 +1026,7 @@
     <string name="report_steps">Steps</string>
     <string name="report_week_view">By Week</string>
     <string name="right">Right</string>
+    <string name="safe">safe</string>
     <string name="sat">sat</string>
     <string name="saturday">saturday</string>
     <string name="save">Save</string>
@@ -1322,6 +1334,7 @@
     <string name="title_activity_set_alarm">SetAlarmActivity</string>
     <string name="title_activity_spor_goal_setting">SporGoalSetting</string>
     <string name="today">today</string>
+    <string name="totalsleep">Total Sleep</string>
     <string name="track_distance">里程</string>
     <string name="track_query">历史轨迹</string>
     <string name="track_upload">轨迹追踪</string>
@@ -1413,6 +1426,7 @@
     <string name="vertex_number">顶点数量</string>
     <string name="vertexes_fence">多边形围栏</string>
     <string name="vertexes_fence_caption">请按顺时针或逆时针方向点击地图</string>
+    <string name="wakeup">Wake up</string>
     <string name="watch_setting">Device</string>
     <string name="wed">wed</string>
     <string name="wednesday">wednesday</string>

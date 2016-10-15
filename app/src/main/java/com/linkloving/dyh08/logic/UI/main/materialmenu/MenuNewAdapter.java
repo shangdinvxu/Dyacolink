@@ -114,8 +114,8 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                         IntentFactory.start2WorkoutActivity((Activity) mContext);
                         break;
                     case Left_viewVO1.Heart_Rate:
+                        IntentFactory.startHeartrateActivity((Activity) mContext);
                         break;
-
                     case Left_viewVO1.Height:
                         IntentFactory.start2HeightActivity((Activity) mContext);
                         break;

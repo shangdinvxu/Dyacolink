@@ -24,24 +24,24 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_start2.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_separator.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.4.0\\res\\layout\\design_navigation_item_separator.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\adapter_pay_list.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\adapter_pay_list.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_separator.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.4.0\\res\\layout\\design_navigation_item_separator.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\list_item_menu.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\list_item_menu.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_distance_avg_popupwiew.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_distance_avg_popupwiew.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\comm_toolbar.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\comm_toolbar.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_distance_avg_popupwiew.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_distance_avg_popupwiew.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_power.xml",
@@ -64,12 +64,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_more.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_lines.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_about_us.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_about_us.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_lines.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_distance_top.xml",
@@ -116,12 +116,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_groups_share.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\bound_xiangxi.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\bound_xiangxi.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_layout_sport.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\dialog_layout_sport.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\bound_xiangxi.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\bound_xiangxi.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_attention_me.xml",
@@ -504,6 +504,10 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\login_weight.xml"
     },
     {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_heartrate.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_heartrate.xml"
+    },
+    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_comment_me.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\fragment_comment_me.xml"
     },
@@ -814,6 +818,10 @@
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_start_activity.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_start_activity.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_heartrate_day.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_heartrate_day.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",

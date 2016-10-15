@@ -970,29 +970,30 @@
     <!--                        000000000000000000                     -->
 
     <!--登录界面-->
-    <string name="member_login">Member Login</string>
-    <string name="Account">Account number(Email)</string>
-    <string name="YourEmailAddress">Your email address</string>
+    <string name="member_login">Anmelden</string>
+    <string name="Account">Benutzername(E-Mail)</string>
+    <string name="YourEmailAddress">E-Mail</string>
     <string name="password">Password</string>
-    <string name="enter8to10">Enter 8 to 10 characters</string>
-    <string name="ForgetPassword">Forget Password?</string>
-    <string name="Username">Username</string>
-    <string name="Gender">Gender</string>
-    <string name="Man">Man</string>
-    <string name="Woman">Woman</string>
-    <string name="Birthday">Birthday</string>
-    <string name="year">year</string>
-    <string name="month">month</string>
-    <string name="day">day</string>
+    <string name="enter8to10">8 bis 10 Zeichen</string>
+    <string name="ForgetPassword">Passwort vergessen?</string>
+    <string name="Username">Benutzername</string>
+    <string name="Gender">geschlecht</string>
+    <string name="Man">männlich</string>
+    <string name="Woman">weiblich</string>
+    <string name="Birthday">Gebrtsdatum</string>
+    <string name="year">Jahresansicht</string>
+    <string name="month">Monatsansicht</string>
+    <string name="day">Tagesansicht</string>
     <string name="yyyy">yyyy</string>
     <string name="mm">mm</string>
     <string name="dd">dd</string>
-    <string name="WearingStyles">Wearing Styles</string>
-    <string name="left">Left</string>
-    <string name="right">Right</string>
+    <string name="WearingStyles">Trageseite (Art des Tragens)</string>
+    <string name="left">links</string>
+    <string name="right">rechts</string>
     <string name="Welcometo">Welcome to the ranks of the movement</string>
-    <string name="OpenThe">Open The Bluetooth And Link Equipment</string>
-    <string name="yourUsername">Your Username</string>
+    <string name="OpenThe">Bluetooth anschalten</string>
+    <string name="LinkEquip">Gerät wird verbunden</string>
+    <string name="yourUsername">Benutzername</string>
     <!--侧滑栏-->
     <!--蓝牙-->
     <string name="Bluetooth">Bluetooth</string>
@@ -1004,23 +1005,27 @@
 
 
     <!-- Settings-->
-    <string name="Settings">Settings</string>
+    <string name="Settings">Einstellungen</string>
     <!-- Workout-->
-    <string name="Workout">Workout</string>
+    <string name="Workout">Historie</string>
     <!--Map-->
     <string name="Map">Map</string>
     <!-- Groups-->
-    <string name="Groups">Groups</string>
-    <string name="Leaveamessage">Leave a message</string>
-    <string name="share">Share!</string>
+    <string name="Groups">Communities</string>
+    <string name="Duration">Dauer</string>
+    <string name="activities">Aktivitäten</string>
+
+
+    <string name="Leaveamessage">Nachricht hinterlassen</string>
+    <string name="share">Teilen!</string>
     <!-- Heart Rate-->
-    <string name="Heart_Rate">Heart Rate</string>
+    <string name="Heart_Rate">Herzfrequenz</string>
     <!-- Height-->
-    <string name="Height">Height</string>
+    <string name="Height">Größe</string>
     <!-- Weight-->
-    <string name="Weight">Weight</string>
+    <string name="Weight">Gewicht</string>
     <!-- Sign Out-->
-    <string name="Sign_Out">Sign Out</string>
+    <string name="Sign_Out">Abmelden</string>
 
     <!--登录界面-->
     <string name="usernamecannot">Username不能为空</string>
@@ -1030,42 +1035,59 @@
 
 
     <!-- 主界面-->
-    <string name="Step">Step</string>
-    <string name="STEP">STEP</string>
-    <string name="steps">steps</string>
+    <string name="Step">Schritte</string>
+    <string name="STEP">Schritte</string>
+    <string name="steps">Schritte</string>
+    <string name="avgsteps">durchschnittliche Schritte</string>
 
 
-    <string name="Calories">Calories</string>
-    <string name="Distance">Distance</string>
-    <string name="Sleep">Sleep</string>
+    <string name="Calories">Kalorien</string>
+    <string name="CALORIES">Kalorien</string>
 
 
-    <string name="Day_View">Day View</string>
+    <string name="Distance">Distanz</string>
+    <string name="DISTANCE">Distanz</string>
+
+    <!--睡眠-->
+    <string name="Sleep">Schlaf</string>
+    <string name="SLEEP">Schlaf</string>
+    <string name="avgtime">durschnittliche Dauer</string>
+    <string name="lightsleep">Zeit im Leichtschlaf</string>
+    <string name="deepsleep">Zeit im Tiefschlaf</string>
+    <string name="wakeup">Aufwachen</string>
+    <string name="totalsleep">Gesamt Schlafdauer</string>
+    <string name="safe">Speichern</string>
+    <string name="atention">Achtung</string>
+    <string name="danger">Warnung</string>
+
+
+
+    <string name="Day_View">Tagesansicht</string>
     <string name="D">D</string>
 
-    <string name="Week_View">Week View</string>
+    <string name="Week_View">Wochenansicht</string>
     <string name="W">W</string>
 
-    <string name="Month_View">Month View</string>
+    <string name="Month_View">Monatsansicht</string>
     <string name="M">M</string>
 
-    <string name="Year_View">Year View</string>
+    <string name="Year_View">Jahresansicht</string>
     <string name="Y">Y</string>
 
     <!-- Settings-->
     <string name="setting_name">Name</string>
     <string name="setting_name_hint">Your Name</string>
-    <string name="setting_sex">Gender</string>
-    <string name="setting_man">Man</string>
-    <string name="setting_woman">Woman</string>
-    <string name="setting_bir">Birthday</string>
+    <string name="setting_sex">geschlecht</string>
+    <string name="setting_man">männlich</string>
+    <string name="setting_woman">weiblich</string>
+    <string name="setting_bir">Gebrtsdatum</string>
     <string name="setting_yyyy">YYYY</string>
     <string name="setting_mm">MM</string>
     <string name="setting_day">DAY</string>
-    <string name="setting_wear">Wear Way</string>
-    <string name="setting_wear_l">Left</string>
-    <string name="setting_wear_r">Right</string>
-    <string name="setting_rem">Reminder</string>
+    <string name="setting_wear">Trageseite (Art des Tragens)</string>
+    <string name="setting_wear_l">links</string>
+    <string name="setting_wear_r">rechts</string>
+    <string name="setting_rem">wiederholen</string>
     <string name="setting_rem_on">ON</string>
     <string name="setting_rem_off">OFF</string>
     <string name="setting_enter">Enter</string>

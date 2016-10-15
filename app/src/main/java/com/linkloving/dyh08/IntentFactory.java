@@ -9,6 +9,7 @@ import com.linkloving.dyh08.logic.UI.Bluetooth.BluetoothBindActivity;
 import com.linkloving.dyh08.logic.UI.Bluetooth.BluetoothBindActivity3;
 import com.linkloving.dyh08.logic.UI.Bluetooth.BluetoothDisconnectActivity;
 import com.linkloving.dyh08.logic.UI.Groups.baidu.GroupsDetailsActivity;
+import com.linkloving.dyh08.logic.UI.HeartRate.HeartRateActivity;
 import com.linkloving.dyh08.logic.UI.calories.CaloriesActivity;
 import com.linkloving.dyh08.logic.UI.customerservice.CustomerServiceActivity;
 import com.linkloving.dyh08.logic.UI.device.DeviceActivity;
@@ -391,6 +392,10 @@ public class IntentFactory {
     }
     public static void startBindActivity3(Activity activity) {
         Intent intent = new Intent(activity, BluetoothBindActivity3.class);
+        activity.startActivity(intent);
+    }
+    public static void startHeartrateActivity(Activity activity) {
+        Intent intent = new Intent(activity, HeartRateActivity.class);
         activity.startActivity(intent);
     }
 

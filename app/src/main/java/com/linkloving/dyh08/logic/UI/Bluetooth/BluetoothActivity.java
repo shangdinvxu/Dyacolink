@@ -76,7 +76,7 @@ public class BluetoothActivity extends ToolBarActivity {
     private BLEListHandler handler;
     private BLEListProvider listProvider;
     private List<DeviceVO> macList =
-            new ArrayList();
+            new ArrayList<DeviceVO>();
     private AlertDialog dialog_bound;
     private int selectionPostion;
     private BluetoothActivity.macListAdapterNew macListAdapterNew;
