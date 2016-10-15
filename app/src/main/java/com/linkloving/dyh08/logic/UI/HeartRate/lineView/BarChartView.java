@@ -63,10 +63,10 @@ public class BarChartView extends View {
         for (int i = 0 ; i<5;i++){
             canvas.drawLine( (float) (screenW * 0.1), (float) (oneHourHight * (4+6*i)), (float) (screenW ), (float) (oneHourHight * (4+6*i)), linePaint);
 //            画竖的小线.
-            if(i%2==0){
-                canvas.drawLine((float) (screenW * (0.15 + i * 0.18)), (float) (oneHourHight * 28),(float) (screenW * (0.15 + i * 0.18)),(float) (oneHourHight * 27.5) , linePaint);
+            if(i%2!=0){
+                canvas.drawLine((float) (screenW * (0.2 + i * 0.18)), (float) (oneHourHight * 28),(float) (screenW * (0.2 + i * 0.18)),(float) (oneHourHight * 27.5) , linePaint);
             }else{
-                canvas.drawLine((float) (screenW * (0.15 + i * 0.18)), (float) (oneHourHight * 28),(float) (screenW * (0.15 + i * 0.18)),(float) (oneHourHight * 27) , linePaint);
+                canvas.drawLine((float) (screenW * (0.2 + i * 0.18)), (float) (oneHourHight * 28),(float) (screenW * (0.2 + i * 0.18)),(float) (oneHourHight * 27) , linePaint);
             }
         }
 //        canvas.drawLine((float) (screenW * 0.1), (float) (oneHourHight * 23), (float) (screenW ), (float) (oneHourHight * 26), linePaint);
