@@ -5,11 +5,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.nfc.Tag;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.ViewUtils.barchartview.ScreenUtils;
+import com.linkloving.dyh08.logic.UI.goal.SportGoalActivity;
+import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,7 @@ import java.util.List;
  * 自定义组件：条形统计图
  */
 public class BarChartView extends View {
+    public static final String TAG = BarChartView.class.getSimpleName();
     private int screenW, screenH;
     private List<BarChartView.BarChartItemBean> mItems = new ArrayList<BarChartItemBean>();
     //第一个是深色,第二个是total色,第三是画横线
@@ -62,6 +66,7 @@ public class BarChartView extends View {
         linePaint.setColor(mBarColors[2]);
         for (int i = 0 ; i<5;i++){
             canvas.drawLine( (float) (screenW * 0.1), (float) (oneHourHight * (4+6*i)), (float) (screenW ), (float) (oneHourHight * (4+6*i)), linePaint);
+            MyLog.e(TAG,"2468横线"+(float) (oneHourHight * (4+6*i)));
 //            画竖的小线.
             if(i%2!=0){
                 canvas.drawLine((float) (screenW * (0.2 + i * 0.18)), (float) (oneHourHight * 28),(float) (screenW * (0.2 + i * 0.18)),(float) (oneHourHight * 27.5) , linePaint);
@@ -75,17 +80,37 @@ public class BarChartView extends View {
 //        canvas.drawLine((float) (screenW * 0.1), (float) (oneHourHight * 2), (float) (screenW ), (float) (oneHourHight * 2), linePaint);
         textPaint.setTextSize(ScreenUtils.dp2px(getContext(), 16));
         for (int i = 0; i < mItems.size(); i++) {
-//          画深睡的rect
-            barRect.left = (int) (screenW * 0.02 + barItemWidth * i + barSpace * (i + 1));
-            barRect.top = (int) (oneHourHight * 14 - mItems.get(i).itemDeepValue * oneHourHight * 1.25);
-            barRect.right = (int) (barRect.left + barItemWidth);
-            barRect.bottom = (int) (oneHourHight * 14);
-            barPaint.setColor(mBarColors[0]);
-            canvas.drawRect(barRect, barPaint);
-            barRect.bottom = barRect.top;
-            barRect.top = (int) (oneHourHight * 14 - (mItems.get(i).itemDeepValue+mItems.get(i).itemLightValue) * oneHourHight * 1.25);
-            barPaint.setColor(mBarColors[1]);
-            canvas.drawRect(barRect, barPaint);
+////          画深睡的rect
+//            barRect.left = (int) (screenW * 0.02 + barItemWidth * i + barSpace * (i + 1));
+//            barRect.top = (int) (oneHourHight * 14 - mItems.get(i).itemDeepValue * oneHourHight * 1.25);
+//            barRect.right = (int) (barRect.left + barItemWidth);
+//            barRect.bottom = (int) (oneHourHight * 14);
+//            barPaint.setColor(mBarColors[0]);
+//            canvas.drawRect(barRect, barPaint);
+//            barRect.bottom = barRect.top;
+//            barRect.top = (int) (oneHourHight * 14 - (mItems.get(i).itemDeepValue+mItems.get(i).itemLightValue) * oneHourHight * 1.25);
+//            barPaint.setColor(mBarColors[1]);
+//            canvas.drawRect(barRect, barPaint);
+//            画点连线
+//            如果间隔小于5就画线,不然就不画
+            if (i<mItems.size()-1){
+//                判断是否连续,连续才画线.
+//                if((mItems.get(i+1).itemType-mItems.get(i).itemType)<2){
+//                不乘以1000就会变成0.0
+                    canvas.drawLine((float) ((mItems.get(i).itemType*1000/288)*(screenW * 0.72)/1000+0.2*screenW),
+                            (float)(oneHourHight*28- (mItems.get(i).itemDeepValue*1000/200*oneHourHight * 24)/1000),
+                            (float) ((mItems.get(i+1).itemType*1000/288)*(screenW * 0.72)/1000+0.2*screenW),
+                            (float)(oneHourHight*28-(mItems.get(i+1).itemDeepValue*1000/200 *oneHourHight * 24)/1000),
+                            linePaint);
+MyLog.e(TAG,"(mItems.get(i).itemType/288)*(screenW * 0.72)"+(mItems.get(i).itemType/288)*(screenW * 0.72));
+                    MyLog.e(TAG,0.15*screenW+"________"+(float) ((mItems.get(i).itemType/288)*(screenW * 0.72)+0.15*screenW)+"x"+"-----"+ (float) (mItems.get(i).itemDeepValue/200 *oneHourHight * 28+oneHourHight*4)+"y");
+//                   288坐标对应的x坐标,
+//                    (mItems.get(i).itemType/288*(screenW * 0.72)+0.15+screenW)
+//                    200对应的y坐标
+//                    mItems.get(i).itemDeepValue/200 *oneHourHight * 30+oneHourHight*4
+
+//                }
+            }
 
 //            //draw bar rect
 //            deepSleepRect.left = (int) (screenW * 0.02 + barItemWidth * i + barSpace * (i + 1));
@@ -116,6 +141,7 @@ public class BarChartView extends View {
             String typeText = week[i];
             float texttypeStartx = (float) (screenW * (0.15 + i * 0.18));
             float texttypeStarty = (float) (oneHourHight * 31);
+            MyLog.e(TAG,texttypeStartx+"------"+texttypeStarty);
             canvas.drawText(typeText, texttypeStartx, texttypeStarty, textPaint);
         }
     }
@@ -135,12 +161,12 @@ public class BarChartView extends View {
      * A model class to keep the bar item info.
      */
     public static class BarChartItemBean {
-        public String itemType;
-        public double itemDeepValue;
-        public double itemLightValue;
+        public long itemType;
+        public float itemDeepValue;
+        public float itemLightValue;
 
 
-        public BarChartItemBean(String itemType, double itemDeepValue, double itemLightValue) {
+        public BarChartItemBean(long itemType, float itemDeepValue, float itemLightValue) {
             this.itemType = itemType;
             this.itemDeepValue = itemDeepValue;
             this.itemLightValue = itemLightValue;

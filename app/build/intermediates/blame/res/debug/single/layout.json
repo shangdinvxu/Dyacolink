@@ -64,6 +64,10 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_more.xml"
     },
     {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_setting_detail.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_setting_detail.xml"
+    },
+    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_about_us.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_about_us.xml"
     },
@@ -784,6 +788,10 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\view_date_picker.xml"
     },
     {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_heartrate_chat.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_heartrate_chat.xml"
+    },
+    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_registered_success.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_registered_success.xml"
     },
@@ -816,12 +824,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\activity_message_register.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_start_activity.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_start_activity.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_heartrate_day.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_heartrate_day.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_start_activity.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_start_activity.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
@@ -882,6 +890,10 @@
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_test_list.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_test_list.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_setting_activity.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_setting_activity.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",

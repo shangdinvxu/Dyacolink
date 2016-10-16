@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:composition="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,4 +13,16 @@
         android:id="@+id/Heartrate_day_barchartview"
         />
 
-</LinearLayout>
+        <com.linkloving.dyh08.logic.UI.HeartRate.lineView.DetailChartControl
+            android:id="@+id/activity_detailChartView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            composition:baseSlice="3600"
+            composition:deepSleepHeight="100dp"
+            composition:lightSleepHeight="50dp"
+            composition:lineWidth="1dp" >
+        </com.linkloving.dyh08.logic.UI.HeartRate.lineView.DetailChartControl>
+
+
+
+</FrameLayout>

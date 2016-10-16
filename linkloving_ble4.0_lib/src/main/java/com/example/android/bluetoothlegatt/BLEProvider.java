@@ -155,8 +155,10 @@ public  class BLEProvider
 	public static final int INDEX_SEND_OAD_BACK= INDEX_SEND_OAD_HEAD_BACK + 1;
 	/** 指令代码：发送设置手表时间指令 */
 	public static final int INDEX_SET_DEVICE_TIME= INDEX_SEND_OAD_BACK + 1;
+	/** 指令代码：发送读取心率的指令 */
+	public static final int INDEX_GET_HEART_RATE= INDEX_SET_DEVICE_TIME + 1;
 	/** 指令代码：发送设置手表时间指令FAIL */
-	public static final int INDEX_SET_DEVICE_TIME_FAIL= INDEX_SET_DEVICE_TIME + 1;
+	public static final int INDEX_SET_DEVICE_TIME_FAIL= INDEX_GET_HEART_RATE + 1;
 	/** 指令代码：发送设置手表时间指令(新的) */
 	public static final int INDEX_SET_DEVICE_TIME_NEW= INDEX_SET_DEVICE_TIME_FAIL + 1;
 	/** 指令代码：发送设置手表时间指令FAIL(新的) */
@@ -933,6 +935,12 @@ public  class BLEProvider
 	  OwnLog.i(TAG, "..................SetDeviceTime Thread........................");
 	   runIndexProess(context, INDEX_SET_DEVICE_TIME);
    }
+
+	public void GetHeartrate(Context context){
+		OwnLog.i(TAG, "..................GetHeartrate Thread........................");
+		runIndexProess(context,INDEX_GET_HEART_RATE);
+	}
+
    /* 设置闹钟*/
    public void SetClock(Context context,LPDeviceInfo deviceInfo)
    {
@@ -1707,6 +1715,16 @@ public  class BLEProvider
 				    	msg.obj = mLepaoProtocalImpl.setDeviceoffsetTime();
 				    	msg.sendToTarget();
 				    	break;
+//					发送获取心率的指令
+					case INDEX_GET_HEART_RATE:
+						Log.d(TAG, ".................INDEX_GET_HEART_RATE................");
+						msg = mHandler.obtainMessage();
+						msg.what = MSG_BLE_DATA;
+						msg.arg1 = INDEX_GET_HEART_RATE;
+						msg.obj =  mLepaoProtocalImpl.getHeartrate(0xfF,0x7F,0) ;
+						msg.sendToTarget();
+						break;
+
 				    //  发送设置闹钟指令
 				    case INDEX_SET_DEVICE_CLOCK:
 				    	Log.d(TAG, ".................INDEX_SET_DEVICE_CLOCK................");

@@ -637,7 +637,9 @@ public class BleService extends Service {
                 super.handleDataEnd();
                 MyLog.e(TAG, "【NEW离线数据同步】handleDataEnd" );
                 //设置时间指令
+
                 provider.SetDeviceTime(BleService.this);
+                provider.GetHeartrate(BleService.this);
 
             }
 

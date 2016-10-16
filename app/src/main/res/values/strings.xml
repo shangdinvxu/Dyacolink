@@ -1003,6 +1003,11 @@
     <string name="Reconnect">Reconnect</string>
     <string name="Disconnect">Disconnect</string>
 
+    <string name="Notificationsetting">Notification setting</string>
+    <string name="messagenoti">Message notification</string>
+    <string name="sendentarynotif">Sedentary notification</string>
+    <string name="alarmclock">Alarm clock setting</string>
+    <string name="timersetting">Timer setting</string>
 
     <!-- Settings-->
     <string name="Settings">Settings</string>
