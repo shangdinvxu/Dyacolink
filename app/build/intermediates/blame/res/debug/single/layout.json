@@ -168,6 +168,10 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_share_day.xml"
     },
     {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tw_heartrate_popupwindow.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\tw_heartrate_popupwindow.xml"
+    },
+    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\layout\\toobar_layout.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\layout\\toobar_layout.xml"
     },

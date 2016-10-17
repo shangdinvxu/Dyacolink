@@ -23,10 +23,12 @@ import com.example.android.bluetoothlegatt.BLEHandler;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPSportData;
+import com.example.android.bluetoothlegatt.proltrol.dto.LpHeartrateData;
 import com.linkloving.band.dto.DaySynopic;
 import com.linkloving.band.dto.SportRecord;
 import com.linkloving.dyh08.db.sport.UserDeviceRecord;
 import com.linkloving.dyh08.db.summary.DaySynopicTable;
+import com.linkloving.dyh08.logic.UI.HeartRate.GreendaoUtils;
 import com.linkloving.dyh08.logic.UI.device.incomingtel.IncomingTelActivity;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.UI.workout.trackshow.TrackApplication;
@@ -52,6 +54,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import Trace.GreenDao.DaoMaster;
+import Trace.GreenDao.heartrate;
 
 /**
  *
@@ -145,6 +148,7 @@ public class BleService extends Service {
      * 打包周期（单位 : 秒）
      */
     private int packInterval = 5;
+    private GreendaoUtils greendaoUtils;
 
 
     /********************
@@ -188,6 +192,9 @@ public class BleService extends Service {
     public static void setCANCLE_ANCS(boolean cANCLE_ANCS) {
         CANCLE_ANCS = cANCLE_ANCS;
     }
+    private DaoMaster.DevOpenHelper heartrateHelper;
+    private TraceGreendao traceGreendao;
+
 
     /*****》成员变量的get/set方法！end《******/
 
@@ -208,96 +215,17 @@ public class BleService extends Service {
         SDKInitializer.initialize(getApplicationContext());
         Log.e(TAG, "onCreate");
         self = this;
+         userEntity = MyApplication.getInstance(BleService.this).getLocalUserInfoProvider();
         provider = initBLEProvider(); //初始化bLE提供者
         //启动ble连接并且每一分钟对连接状态检查一遍。确保所有型号的手机处于连接状态。未连接的启动连接。
         bleConnectAndCheckConnectStateInTime();
-//        initOnEntityListener();
-//        startTrace();
-//        new RefreshThread().start();
-    }
-
-    /**
-     *地图记录坐标移到服务里面
-     */
-    /**
-     * 初始化OnEntityListener
-     */
-    private void initOnEntityListener() {
-        devOpenHelper = new DaoMaster.DevOpenHelper(this, "Note", null);
-        db = devOpenHelper.getReadableDatabase();
-        traGreendao = new TraceGreendao(this,db);
-        entityListener = new OnEntityListener() {
-
-            // 请求失败回调接口
-            @Override
-            public void onRequestFailedCallback(String arg0) {
-                // TODO Auto-generated method stub
-                // TrackApplication.showMessage("entity请求失败回调接口消息 : " + arg0);
-                System.out.println("entity请求失败回调接口消息 : " + arg0);
-            }
-
-            // 添加entity回调接口
-            public void onAddEntityCallback(String arg0) {
-                // TODO Auto-generated method stub
-                TrackApplication.showMessage("添加entity回调接口消息 : " + arg0);
-            }
-
-            // 查询entity列表回调接口
-            @Override
-            public void onQueryEntityListCallback(String message) {
-                // TODO Auto-generated method stub
-                System.out.println("entityList回调消息 : " + message);
-            }
-
-            @Override
-            public void onReceiveLocation(TraceLocation location) {
-                // TODO Auto-generated method stub
-                    Date date = new Date();
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    String format = simpleDateFormat.format(date);
-                MyLog.e(TAG,"服务里面的坐标"+location.getLongitude());
-                    traGreendao.addNote(format, date, date, location.getLatitude(), location.getLongitude());
-                }
-            };
+        heartrateHelper = new DaoMaster.DevOpenHelper(BleService.this, "heartrate", null);
+        SQLiteDatabase readableDatabase = heartrateHelper.getReadableDatabase();
+        greendaoUtils = new GreendaoUtils(BleService.this, readableDatabase);
 
 
     }
 
-    protected class RefreshThread extends Thread {
-
-        protected boolean refresh = true;
-
-        @Override
-        public void run() {
-            // TODO Auto-generated method stub
-            Looper.prepare();
-            while (refresh) {
-                // 查询实时位置
-                queryRealtimeLoc();
-                try {
-                    Thread.sleep(gatherInterval * 1000);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    System.out.println("线程休眠失败");
-                }
-            }
-            Looper.loop();
-        }
-    }
-    /**
-     * 查询实时轨迹
-     */
-    private void queryRealtimeLoc() {
-        client.queryRealtimeLoc(serviceId, entityListener);
-    }
-    private void startTrace() {
-        client = new LBSTraceClient(this);
-        client.setInterval(gatherInterval,packInterval);
-        client.setLocationMode(LocationMode.High_Accuracy);
-        entityName = "myTrace";
-        trace = new Trace(this, serviceId, entityName, traceType);
-        client.startTrace(trace);
-    }
 
     /**
      * 主要是检查连接状态并和ble同步数据。
@@ -320,6 +248,7 @@ public class BleService extends Service {
             if (!provider.isConnectedAndDiscovered()) {
                 provider.scanForConnnecteAndDiscovery();
             } else {
+                MyLog.e(TAG,"onStartCommand+++++++++");
                 syncAllDeviceInfo(BleService.this);
             }
         } else if (pay_app_msg == 0x02) {
@@ -425,6 +354,7 @@ public class BleService extends Service {
             }
         };
 
+
         //为提供者加载BLE处理器：BLE处理器,复写自定义方法。
         provider.setProviderHandler(new BLEHandler(this) {
             @Override
@@ -465,12 +395,14 @@ public class BleService extends Service {
                 // 这样很保险，但在诸如设置时的重置如果也要调用这方法的话，就体验不好了，目前先这样吧至少保证绑定等同步
                 // 的绝对可靠，只是保存设置时太恶心了（因每次都要同步所有数据，体验就有点恶心了），测试时先这样，不行
                 // 的话就取消吧（还是老方法，只是同步又不保险了而已）！
+
                 if (!CommonUtils.isStringEmpty(userEntity.getDeviceEntity().getLast_sync_device_id())) {
                     //退出app后连接成功 只去发送0x5f的命令
                     if (EXIT_APP) {
                         provider.keepstate(BleService.this); //保持连接
                     } else {
                         //app存在过程中 发送0x13
+                        MyLog.e(TAG,"//app存在过程中 发送0x13");
                         BleService.getInstance(BleService.this).syncAllDeviceInfo(BleService.this);
                     }
                 }
@@ -533,7 +465,11 @@ public class BleService extends Service {
 
             @Override
             protected void notifyFor0x13ExecSucess_D(LPDeviceInfo latestDeviceInfo) {
-//                MyLog.e(TAG, "notifyFor0x13ExecSucess_D");
+                MyLog.e(TAG, "notifyFor0x13ExecSucess_D");
+                super.notifyFor0x13ExecSucess_D(latestDeviceInfo);
+                if(CommonUtils.isStringEmpty(MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id())){
+                    return;
+                }
                 if (!IS_SYNING) { // 判断app是否存在状态
                     if (latestDeviceInfo != null) {
                         IS_SYNING = true;  //正在同步 不然用户再次刷新 会发两次指令
@@ -545,6 +481,7 @@ public class BleService extends Service {
                         provider.setTimestemp(latestDeviceInfo.timeStamp);
                         provider.setServertime(System.currentTimeMillis());
                         //==========================初始化数据OVER==========================//
+
                         //保存localvo
                         PreferencesToolkits.updateLocalDeviceInfo(BleService.this, lpDeviceInfo_);
 //                        LocalInfoVO LocalInfoVO = PreferencesToolkits.getLocalDeviceInfo(BleService.this);
@@ -557,13 +494,15 @@ public class BleService extends Service {
 
                         MyLog.e(TAG, "notifyFor0x13ExecSucess_D======进入了");
                     } else {
-                        //返回的latestDeviceInfo是null的时候 重新获取一次
-                        if (provider.isConnectedAndDiscovered()) {
-                            provider.getAllDeviceInfoNew(BleService.this,getDeviceInfo());
-                        }
+                        MyLog.e(TAG,"latestDeviceInfo是null的时候 重新获取一次");
+//                        //返回的latestDeviceInfo是null的时候 重新获取一次
+//                        if (provider.isConnectedAndDiscovered()) {
+//                            LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
+//                            lpDeviceInfo.userId = userEntity.getUser_id();
+//                            provider.getAllDeviceInfoNew(BleService.this,lpDeviceInfo);
+//                        }
                     }
                 }
-                super.notifyFor0x13ExecSucess_D(latestDeviceInfo);
             }
 
             /**
@@ -639,7 +578,6 @@ public class BleService extends Service {
                 //设置时间指令
 
                 provider.SetDeviceTime(BleService.this);
-                provider.GetHeartrate(BleService.this);
 
             }
 
@@ -648,6 +586,7 @@ public class BleService extends Service {
             public void notifyForSetDeviceTimeSucess() {
                 super.notifyForSetDeviceTimeSucess();
                 IS_SYNING = false;
+                provider.GetHeartrate(BleService.this);
                 //在绑定流程会首先去设置时间(但是此时还没有同步到  本地/服务端  就不去设置卡号什么的了)
                 if (!CommonUtils.isStringEmpty(MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id())) {
 
@@ -667,12 +606,25 @@ public class BleService extends Service {
                 }
             }
 
+            protected  void notifyforgerHeartList(ArrayList<LpHeartrateData>  obj){
+                super.notifyforgerHeartList(obj);
+                for (LpHeartrateData obj1: obj){
+                    greendaoUtils.add(obj1.getStartTime(),obj1.getMaxRate(),obj1.getAvgRate());
+                    List<heartrate> search = greendaoUtils.search(obj1.getStartTime());
+                    MyLog.e(TAG,search.get(0).getMax()+"");
+                    MyLog.e(TAG,"-----------------------");
+                }
+
+
+            }
+
             @Override
             protected void notifyForSetPowerSucess() {
                 super.notifyForSetPowerSucess();
                 provider.getModelName(BleService.this);
                 /***读deviceId***/
                 provider.getdeviceId(BleService.this);
+
             }
 
             @Override
@@ -680,7 +632,7 @@ public class BleService extends Service {
                 super.notifyForModelName(latestDeviceInfo);
                 if(CommonUtils.isStringEmpty(MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id()))
                     return;
-                if(latestDeviceInfo.modelName==null){
+                if(latestDeviceInfo.modelName==null||latestDeviceInfo.modelName.length()<=0){
                     lpDeviceInfo_.modelName= "LW100";
                 }else{
                     lpDeviceInfo_.modelName= latestDeviceInfo.modelName;
@@ -742,11 +694,9 @@ public class BleService extends Service {
         MyLog.i(TAG, "同步所有设备信息：获得所有设备新的信息+用户信息");
         BLEProvider provider = BleService.getInstance(context).getCurrentHandlerProvider();
         LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
-        UserEntity localUserInfoForLaunch = PreferencesToolkits.getLocalUserInfoForLaunch(this);
-        int user_id = localUserInfoForLaunch.getUser_id();
-        lpDeviceInfo.setUserId(user_id);
-        MyLog.e("syncAllDeviceInfo",user_id+"bleservice里面的id");
-        provider.getAllDeviceInfoNew(context,lpDeviceInfo); //获得设备信息
+        lpDeviceInfo.userId = userEntity.getUser_id();
+        MyLog.e(TAG,"syncAllDeviceInfo+++++++USERiD"+userEntity.getUser_id());
+        provider.getAllDeviceInfoNew(BleService.this,lpDeviceInfo);
 //        BleSynchronImpl bleSynchronImpl = new BleSynchronImpl(context,provider);
 //        bleSynchronImpl.synchronAll();
     }

@@ -34,6 +34,7 @@ import com.example.android.bluetoothlegatt.BLEListHandler;
 import com.example.android.bluetoothlegatt.BLEListProvider;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
+import com.example.android.bluetoothlegatt.proltrol.dto.LpHeartrateData;
 import com.linkloving.dyh08.BleService;
 import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
@@ -89,6 +90,7 @@ public class BluetoothActivity extends ToolBarActivity {
     private Timer timer;
 
     public static final int REFRESH_BUTTON = 0x123;
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +137,7 @@ public class BluetoothActivity extends ToolBarActivity {
                 provider.setCurrentDeviceMac(macList.get(position).mac);
                 provider.setmBluetoothDevice(macList.get(position).bledevice);
                 provider.connect_mac(macList.get(position).mac);
-                new AlertDialog.Builder(BluetoothActivity.this).setMessage("连接中").setCancelable(false).show();
+                dialog = new AlertDialog.Builder(BluetoothActivity.this).setMessage("连接中").setCancelable(false).show();
             }
         });
 
@@ -264,6 +266,14 @@ public class BluetoothActivity extends ToolBarActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (dialog != null && dialog.isShowing())
+        {
+            dialog.dismiss();
+        }
+    }
 
     public void finish() {
         super.finish();
@@ -490,6 +500,9 @@ public class BluetoothActivity extends ToolBarActivity {
 
         }
 
+
+
+
         @Override
         public void updateFor_BoundNoCharge() {
             super.updateFor_BoundNoCharge();
@@ -522,13 +535,14 @@ public class BluetoothActivity extends ToolBarActivity {
             if (sendcount < sendcount_MAX) {
                 boundhandler.postDelayed(boundRunnable, sendcount_time);
                 sendcount++;
-            } else {
-                Log.e("BluetoothActivity", "已经发送超出15次");
-                provider.clearProess();
-                BleService.getInstance(BluetoothActivity.this).releaseBLE();
-                setResult(RESULT_FAIL);
-                finish();
             }
+// else {
+//                Log.e("BluetoothActivity", "已经发送超出15次");
+//                provider.clearProess();
+//                BleService.getInstance(BluetoothActivity.this).releaseBLE();
+//                setResult(RESULT_FAIL);
+//                finish();
+//            }
         }
 
         @Override
@@ -574,6 +588,7 @@ public class BluetoothActivity extends ToolBarActivity {
                     Log.e(TAG, "绑定成功！");
                     Toast.makeText(BluetoothActivity.this, "绑定成功", Toast.LENGTH_SHORT).show();
                     provider.getModelName(BluetoothActivity.this);
+                    MyLog.e(TAG,provider.getCurrentDeviceMac()+"provider.getCurrentDeviceMac()");
                     MyApplication.getInstance(BluetoothActivity.this).getLocalUserInfoProvider().getDeviceEntity().setLast_sync_device_id(provider.getCurrentDeviceMac());
                     MyApplication.getInstance(BluetoothActivity.this).getLocalUserInfoProvider().getDeviceEntity().setDevice_type(MyApplication.DEVICE_BAND);
                     setResult(RESULT_OK);
@@ -625,6 +640,7 @@ public class BluetoothActivity extends ToolBarActivity {
             UserEntity ue = MyApplication.getInstance(getApplicationContext()).getLocalUserInfoProvider();
             String user_id = ue.getUser_id() + "";
             if (ue != null && provider != null && provider.getCurrentDeviceMac() != null) {
+              MyLog.e(TAG,"离线里面的方法执行了");
                 // 将用户id 和 MAC地址交到服务端进行匹配
 //                submitBoundMACToServer(user_id, provider.getCurrentDeviceMac());
                 //***********************************台湾离线版本**********************************************************//

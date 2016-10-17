@@ -3,6 +3,7 @@ package com.linkloving.dyh08.logic.UI.HeartRate.lineView;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,7 +45,7 @@ public class DetailChartControl extends RelativeLayout {
     ImageView dataView;
     ImageView lineView;
     FrameLayout linearLayout;
-    TextView timetv;
+//    TextView timetv;
 
     Context context;
     int imageWidth;
@@ -61,9 +64,14 @@ public class DetailChartControl extends RelativeLayout {
 
     private List<SportRecord> sportRecords=new ArrayList<>();
     private int screenW,screenH ;
+    public PopupWindow popupWindow = new PopupWindow();
+    private String nowtimeString;
 
     int dayindexNow;
     String timeNow;
+    private long nowtime;
+    private FrameLayout framelayout;
+    private int i = 0 ;
 
     public DetailChartControl(Context context) {
         super(context);
@@ -89,12 +97,13 @@ public class DetailChartControl extends RelativeLayout {
          screenW = ScreenUtils.getScreenW(context);
        screenH = ScreenUtils.getScreenH(context);
         View view = inflater.inflate(R.layout.tw_heartrate_chat, this);
-        FrameLayout framelayout = (FrameLayout) view.findViewById(R.id.chat);
+
+        framelayout = (FrameLayout) view.findViewById(R.id.chat);
         RelativeLayout.LayoutParams layoutParams = (LayoutParams) framelayout.getLayoutParams();
-        layoutParams.topMargin = (int) (screenH*0.01);
+        layoutParams.topMargin = (int) (screenH*0.05);
         layoutParams.leftMargin= (int) (screenW *0.198);
         layoutParams.width = (int) (screenW *0.724);
-        layoutParams.height = (int) (screenH*0.8);
+        layoutParams.height = (int) (screenH*0.43);
         MyLog.e(TAG, "-----topMargin+"+layoutParams.topMargin+"-----leftMargin+"+layoutParams.leftMargin+"-----width+"+layoutParams.width+"-----height+"+layoutParams.height);
         framelayout.setLayoutParams(layoutParams);
         InitView();
@@ -105,9 +114,35 @@ public class DetailChartControl extends RelativeLayout {
         this.dataView = (ImageView) findViewById(R.id.sleep_chat1);
         linearLayout= (FrameLayout) findViewById(R.id.chat);
         lineView = (ImageView) findViewById(R.id.line_chat);
-        timetv = (TextView) findViewById(R.id.time);
+//        timetv = (TextView) findViewById(R.id.time);
         linearLayout.setOnTouchListener(new OnTouchListenerImpl());
     }
+    /**
+     * 点击柱状图出提示框
+     *
+     * @param x
+     */
+    public void showPopupWindow(View view, String number, int x, int y) {
+
+             View popupView = LayoutInflater.from(getContext()).inflate(R.layout.tw_heartrate_popupwindow, null);
+
+        TextView time_popupwindow = (TextView) popupView.findViewById(R.id.popuptime);
+         time_popupwindow.setText(number);
+        popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setTouchable(true);
+        // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
+        popupWindow.setClippingEnabled(true);
+/*//        有参数的话，就是一view的左下角进行偏移，xoff正的向左，负的向右.
+//        View stepAcitvityLayout = findViewById(R.id.step_activity_layout);*/
+        popupWindow.showAsDropDown(view, x, y);
+        MyLog.e("点击", "调用了popupwindow");
+    }
+
+
+
+
 
     private class OnTouchListenerImpl implements OnTouchListener{
         @Override
@@ -116,17 +151,23 @@ public class DetailChartControl extends RelativeLayout {
             String time = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(chartDate);
             //获取今天开始时间的long值
             long timeLong = TimeUtils.stringToLong(time, "yyyy-MM-dd");
-
             MyLog.e(TAG,"chartDate:"+timeLong);//图表日期的-6点
             if(event.getX()> 0 && event.getX()<dataView.getWidth()){
                 MyLog.e(TAG,"当前的时间是："+( (long)(event.getX()*xlineScale) * 60+ timeLong ) );
-                long nowtime =(long)(event.getX() * xlineScale) * 60+ timeLong ;
-                timetv.setText(TimeUtils.formatTimeHHMM(nowtime));
+                nowtime = (long)(event.getX() * xlineScale) * 60+ timeLong;
+                nowtimeString = TimeUtils.formatTimeHHMM(nowtime);
+//                timetv.setText(nowtimeString);
                 moveLineViewWithFinger(lineView,event.getX());
-                moveTimeViewWithFinger(timetv,event.getX());
+//                moveTimeViewWithFinger(timetv,event.getX());
+            }
+            if (event.getAction()==MotionEvent.ACTION_UP){
+                i=0;
             }
             return true;
         }
+
+
+
     }
 
     private void moveTimeViewWithFinger(View view, float rawX) {
@@ -149,6 +190,23 @@ public class DetailChartControl extends RelativeLayout {
         layoutParams.leftMargin = (int) rawX - view.getWidth() / 2;
 //        layoutParams.leftMargin = (int) (rawX- screenW*0.15);
         view.setLayoutParams(layoutParams);
+
+
+    }
+    public void showFirstPopupWindow() {
+        View popupView = LayoutInflater.from(getContext()).inflate(R.layout.tw_heartrate_popupwindow, null);
+        TextView time_popupwindow = (TextView) popupView.findViewById(R.id.popuptime);
+        time_popupwindow.setText("00:00");
+        popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setTouchable(true);
+        // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
+        popupWindow.setClippingEnabled(false);
+/*//        有参数的话，就是一view的左下角进行偏移，xoff正的向左，负的向右.
+//        View stepAcitvityLayout = findViewById(R.id.step_activity_layout);*/
+        popupWindow.showAsDropDown(framelayout, 20, 20);
+        MyLog.e("点击", "调用了popupwindow");
     }
 
     /**
@@ -162,6 +220,12 @@ public class DetailChartControl extends RelativeLayout {
         layoutParams.leftMargin = (int) rawX - view.getWidth() / 2;
 //        layoutParams.leftMargin = (int) (rawX- screenW*0.15);
         view.setLayoutParams(layoutParams);
+        if (i ==0 ){
+            showFirstPopupWindow();
+            i++;
+        }else{
+            popupWindow.update((int) rawX+(int)(screenW*0.027), (int) (screenH*0.37),-1,-1,false);
+        }
     }
 
     private void initValues()

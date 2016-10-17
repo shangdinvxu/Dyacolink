@@ -6,6 +6,7 @@ import android.content.Context;
 import com.example.android.bluetoothlegatt.BLEHandler.BLEProviderObserverAdapter;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
+import com.example.android.bluetoothlegatt.proltrol.dto.LpHeartrateData;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.logic.UI.device.incomingtel.IncomingTelActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
@@ -13,6 +14,8 @@ import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.DeviceSetting;
 import com.linkloving.dyh08.utils.DeviceInfoHelper;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
+
+import java.util.ArrayList;
 
 /**
  * Created by zkx on 2016/3/21.
@@ -100,6 +103,8 @@ public class BleSynchronImpl implements BleSynchron {
             //命令停止
                     provider.regiesterNew(context, DeviceInfoHelper.fromUserEntity(context,userEntity));
         }
+
+
 
         /**设置身体信息成功失败*/
         @Override

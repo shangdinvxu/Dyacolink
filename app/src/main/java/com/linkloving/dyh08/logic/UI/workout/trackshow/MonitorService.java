@@ -28,15 +28,12 @@ public class MonitorService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // TODO Auto-generated method stub
-
         System.out.println("MonitorService onStartCommand");
-
         new Thread() {
 
             @Override
             public void run() {
                 // TODO Auto-generated method stub
-
                 while (isCheck) {
                     try {
                         Thread.sleep(5 * 1000);
@@ -45,7 +42,6 @@ public class MonitorService extends Service {
                         e.printStackTrace();
                         System.out.println("thread sleep failed");
                     }
-
                     if (!isServiceWork(getApplicationContext(), SERVICE_NAME)) {
                         System.out.println("轨迹服务已停止，重启轨迹服务");
                         if (null != WorkoutActivity.client && null != WorkoutActivity.trace) {
@@ -59,7 +55,6 @@ public class MonitorService extends Service {
             }
 
         }.start();
-
         return super.onStartCommand(intent, flags, startId);
 
     }

@@ -42,6 +42,7 @@ public class AppStartActivity extends AppCompatActivity {
     private View view1, view2, view3;
     private List<View> viewList;//view数组
     private PagerAdapter pagerAdapter;
+    private UserEntity userAuthedInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,14 +209,17 @@ public class AppStartActivity extends AppCompatActivity {
      */
     private void redirectTo()
     {
-            UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(this);
+        userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(this);
             if( userAuthedInfo == null)
             {
                 userAuthedInfo = new UserEntity();
                 //1,000,000,00
                 int ran = (int)((10000000)*Math.random()+10000);
+                SharedPreferences userid = getSharedPreferences("userid", MODE_PRIVATE);
+                SharedPreferences.Editor edit = userid.edit();
+                edit.putInt("id",ran);
+                edit.commit();
                 userAuthedInfo.setUser_id(ran);
-//                userAuthedInfo.setUser_id(123456);
                 userAuthedInfo.setDeviceEntity(new SportDeviceEntity());
                 userAuthedInfo.setUserBase(new UserBase("1980-01-01"));
                 userAuthedInfo.setEntEntity(new EntEntity());

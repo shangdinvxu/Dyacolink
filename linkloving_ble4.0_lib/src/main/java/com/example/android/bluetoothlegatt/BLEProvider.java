@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -155,10 +156,8 @@ public  class BLEProvider
 	public static final int INDEX_SEND_OAD_BACK= INDEX_SEND_OAD_HEAD_BACK + 1;
 	/** 指令代码：发送设置手表时间指令 */
 	public static final int INDEX_SET_DEVICE_TIME= INDEX_SEND_OAD_BACK + 1;
-	/** 指令代码：发送读取心率的指令 */
-	public static final int INDEX_GET_HEART_RATE= INDEX_SET_DEVICE_TIME + 1;
 	/** 指令代码：发送设置手表时间指令FAIL */
-	public static final int INDEX_SET_DEVICE_TIME_FAIL= INDEX_GET_HEART_RATE + 1;
+	public static final int INDEX_SET_DEVICE_TIME_FAIL= INDEX_SET_DEVICE_TIME + 1;
 	/** 指令代码：发送设置手表时间指令(新的) */
 	public static final int INDEX_SET_DEVICE_TIME_NEW= INDEX_SET_DEVICE_TIME_FAIL + 1;
 	/** 指令代码：发送设置手表时间指令FAIL(新的) */
@@ -233,6 +232,8 @@ public  class BLEProvider
 	public static final int INDEX_SEND_DATA_CARD= INDEX_SEND_DATA + 1;
 	/** 指令代码：获取modelName */
 	public static final int INDEX_GET_MODEL= INDEX_SEND_DATA_CARD + 1;
+	/** 指令代码：发送读取心率的指令 */
+	public static final int INDEX_GET_HEART_RATE= INDEX_GET_MODEL + 1;
 	// Stops scanning after 10 seconds.
 	private static final long SCAN_PERIOD = 10000;
 
@@ -1660,7 +1661,10 @@ public  class BLEProvider
 						msg.what = MSG_BLE_DATA;
 						msg.arg1 = INDEX_GAT_ALL_INFO_NEW;
 // // TODO: 2016/10/10 userId
-						msg.obj = mLepaoProtocalImpl.getAllDeviceInfoNew(serverDeviceInfo.userId);
+						SharedPreferences sp = mContext.getSharedPreferences("userid", Context.MODE_PRIVATE);
+						int id = sp.getInt("id", 0);
+						Log.e(TAG,"id++++++++++"+id);
+						msg.obj = mLepaoProtocalImpl.getAllDeviceInfoNew(id);
 			    		msg.sendToTarget();
 						break;
 				    case INDEX_GET_MODEL:

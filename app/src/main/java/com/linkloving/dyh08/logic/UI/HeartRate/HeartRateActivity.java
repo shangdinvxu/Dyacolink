@@ -7,6 +7,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.android.bluetoothlegatt.BLEProvider;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 
@@ -39,7 +40,6 @@ public class HeartRateActivity extends ToolBarActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.middle_framelayout,dayFragment);
         fragmentTransaction.commit();
-
     }
 
 

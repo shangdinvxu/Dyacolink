@@ -10,6 +10,7 @@ import com.example.android.bluetoothlegatt.proltrol.dto.LLXianJinCard;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPSportData;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPUser;
+import com.example.android.bluetoothlegatt.proltrol.dto.LpHeartrateData;
 import com.example.android.bluetoothlegatt.utils.OwnLog;
 import com.example.android.bluetoothlegatt.utils.TimeZoneHelper;
 import com.example.android.bluetoothlegatt.wapper.BLEWapper;
@@ -328,17 +329,18 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			return list;
 		}
 	}
-	public List<LPSportData> getHeartrate(int offset, int length,int detial)throws BLException, LPException{
+	public List<LpHeartrateData> getHeartrate(int offset, int length, int detial)throws BLException, LPException{
+		Log.e("getHeartrate","getHeartrate执行了");
 		WatchRequset req = new WatchRequset();
 		req.appendByte(seq++).appendByte(LepaoCommand.COMMAND_GET_HEARTRATE).appendByte((byte) offset)
 				.appendByte((byte) length).makeCheckSum();
 		LPUtil.printData(req.getData(), " getHeartrate");
 		WatchResponse resp = this.sendData2BLE(req);
-		LPUtil.printData(resp.getData(), " getHeartrate");
+		LPUtil.printData(resp.getData(), " getHeartrateresp");
 		if(resp.getData()[4]==0){
-			return resp.toLPSportDataList(detial);
+			return   resp.toLPHeartrateDataList(resp);
 		}else{
-			List<LPSportData> list = new ArrayList<LPSportData>();
+			List<LpHeartrateData> list = new ArrayList<LpHeartrateData>();
 			return list;
 		}
 	}

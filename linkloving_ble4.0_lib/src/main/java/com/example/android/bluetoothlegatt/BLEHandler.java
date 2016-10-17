@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.example.android.bluetoothlegatt.proltrol.LPUtil;
 import com.example.android.bluetoothlegatt.proltrol.dto.LLTradeRecord;
@@ -12,8 +13,10 @@ import com.example.android.bluetoothlegatt.proltrol.dto.LLXianJinCard;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPSportData;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPSportRecorder;
+import com.example.android.bluetoothlegatt.proltrol.dto.LpHeartrateData;
 import com.example.android.bluetoothlegatt.utils.OwnLog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BLEHandler extends Handler {
@@ -69,6 +72,7 @@ public abstract class BLEHandler extends Handler {
 				LPDeviceInfo deviceInfo);
 
 		public void updateFor_notifyForDeviceUnboundSucess_D();
+//		public void updateFor_notifyforgerHeartList(ArrayList<LpHeartrateData> obj);
 		public void updatefor_notifyforsendGoalSuccess();
 		public void updatefor_notifyforsendGoalFailed();
 
@@ -320,6 +324,8 @@ public abstract class BLEHandler extends Handler {
 
 		public void updateFor_notifyForDeviceUnboundSucess_D() {
 		}
+//		public void updateFor_notifyforgerHeartList(){
+//		}
 
 		public void updateFor_notifyForDeviceUnboundFaild_D() {
 		}
@@ -706,7 +712,10 @@ public abstract class BLEHandler extends Handler {
 				OwnLog.d(TAG, "手环解绑失败！");
 				notifyForDeviceUnboundFaild_D();
 			}
-		}else if(typeIndex ==BLEProvider.INDEX_STEP_TARGET){
+		}else if (typeIndex==BLEProvider.INDEX_GET_HEART_RATE)	{
+				notifyforgerHeartList((ArrayList<LpHeartrateData>) obj);
+		}
+		else if(typeIndex ==BLEProvider.INDEX_STEP_TARGET){
 			if ((boolean)obj){
 				notifyforsendGoalSuccess();
 			}else{
@@ -737,6 +746,7 @@ public abstract class BLEHandler extends Handler {
 				}
 			}
 		} else if (typeIndex == BLEProvider.INDEX_REQUEST_BOUND) {
+			Log.e("BleHandler","integer"+(Integer)obj);
 			if (obj instanceof Integer) {
 				if ((Integer) obj == BLEProvider.INDEX_BOUND_SUCCESS) {
 					notifyForBoundSucess();
@@ -822,48 +832,48 @@ public abstract class BLEHandler extends Handler {
 		} else if (typeIndex == BLEProvider.INDEX_SET_HAND_UP_FAIL) {
 			OwnLog.i(TAG, "抬手设置fail");
 			notifyForSetHandUpFail();
-		} 
-		else if (typeIndex == BLEProvider.INDEX_REGIESTER_INFO_NEW) 
+		}
+		else if (typeIndex == BLEProvider.INDEX_REGIESTER_INFO_NEW)
 		{
 			OwnLog.i(TAG, "身体信息设置成功");
 			notifyForSetBodySucess();
-		} 
-		else if (typeIndex == BLEProvider.INDEX_REGIESTER_INFO_NEW_FAIL) 
+		}
+		else if (typeIndex == BLEProvider.INDEX_REGIESTER_INFO_NEW_FAIL)
 		{
 			OwnLog.i(TAG, "身体信息设置fail");
 			notifyForSetBodyFail();
-		} 
-		else if (typeIndex == BLEProvider.INDEX_SEND_STEP) 
+		}
+		else if (typeIndex == BLEProvider.INDEX_SEND_STEP)
 		{
 			OwnLog.i(TAG, "重置步数设置成功");
 			notifyForSetStepSucess();
-		} 
-		else if (typeIndex == BLEProvider.INDEX_SEND_STEP_FAIL) 
+		}
+		else if (typeIndex == BLEProvider.INDEX_SEND_STEP_FAIL)
 		{
 			OwnLog.i(TAG, "重置步数设置失败");
 			notifyForSetStepFail();
-		} 
-		else if (typeIndex == BLEProvider.INDEX_POWER) 
+		}
+		else if (typeIndex == BLEProvider.INDEX_POWER)
 		{
 			OwnLog.i(TAG, "省电模式设置成功");
 			notifyForSetPowerSucess();
-		} 
-		else if (typeIndex == BLEProvider.INDEX_POWER_FAIL) 
+		}
+		else if (typeIndex == BLEProvider.INDEX_POWER_FAIL)
 		{
 			OwnLog.i(TAG, "省电模式设置失败");
 			notifyForSetPowerFail();
-		} 
-		else if (typeIndex == BLEProvider.INDEX_SET_NAME) 
+		}
+		else if (typeIndex == BLEProvider.INDEX_SET_NAME)
 		{
 			OwnLog.i(TAG, "名称设置成功");
 			notifyForSetNameSucess();
-		} 
-		else if (typeIndex == BLEProvider.INDEX_SET_NAME_FAIL) 
+		}
+		else if (typeIndex == BLEProvider.INDEX_SET_NAME_FAIL)
 		{
 			OwnLog.i(TAG, "名称设置失败");
 			notifyForSetNameFail();
-		} 
-		else if (typeIndex == BLEProvider.INDEX_SET_SMC_TRANSFER) 
+		}
+		else if (typeIndex == BLEProvider.INDEX_SET_SMC_TRANSFER)
 		{
 			if (((Boolean) obj).booleanValue()) {
 				// pin验证成功
@@ -872,31 +882,31 @@ public abstract class BLEHandler extends Handler {
 				// pin验证失败
 				nnotifyForcheckpinFaild_D();
 			}
-		} 
-		else if (typeIndex == BLEProvider.INDEX_SEND_DATA) 
+		}
+		else if (typeIndex == BLEProvider.INDEX_SEND_DATA)
 		{
 			notifyFor_response_ble((byte[]) obj);
-		} 
-		else if (typeIndex == BLEProvider.INDEX_SEND_DATA_CARD) 
+		}
+		else if (typeIndex == BLEProvider.INDEX_SEND_DATA_CARD)
 		{
 			notifyFor_response_ble_card(LPUtil.trans((byte[]) obj));
-		} 
-		else if (typeIndex == BLEProvider.INDEX_GET_DEVICEID) 
+		}
+		else if (typeIndex == BLEProvider.INDEX_GET_DEVICEID)
 		{
 			if (obj instanceof String) {
 				// pin验证成功
 				notifyForgetDeviceId_D((String) obj);
 			}
 		}
-		else if (typeIndex == BLEProvider.INDEX_ClOSE_FEIJIE) 
+		else if (typeIndex == BLEProvider.INDEX_ClOSE_FEIJIE)
 		{
 			notifyForClose7816card((Boolean) obj);
 		}
-		else if (typeIndex == BLEProvider.INDEX_OPEN_FEIJIE) 
+		else if (typeIndex == BLEProvider.INDEX_OPEN_FEIJIE)
 		{
 			notifyForOpen7816card((Boolean) obj);
-		} 
-		else 
+		}
+		else
 		{
 			// TODO
 			OwnLog.w(TAG, "未知的指令反馈！！！！！！！！！！！！！！！！" + typeIndex);
@@ -1256,6 +1266,12 @@ public abstract class BLEHandler extends Handler {
 		if (bleProviderObserver != null)
 			bleProviderObserver.updateFor_notifyForDeviceUnboundSucess_D();
 		OwnLog.e("BluetoothActivity","解绑成功+notifyForDeviceUnboundSucess_D");
+	}
+
+	protected  void notifyforgerHeartList(ArrayList<LpHeartrateData> obj){
+//		if (bleProviderObserver != null)
+//			bleProviderObserver.updateFor_notifyforgerHeartList( obj);
+//		OwnLog.e("BluetoothActivity","解绑成功+notifyforgerHeartList");
 	}
 
 	/**
