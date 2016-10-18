@@ -62,9 +62,7 @@ import Trace.GreenDao.heartrate;
  */
 public class BleService extends Service {
 
-
-
-    private static final String TAG = "BleService";
+    private static final String TAG = BleService.class.getSimpleName();
     //重连的次数
     private int retrycount = 0;
 
@@ -481,7 +479,6 @@ public class BleService extends Service {
                         provider.setTimestemp(latestDeviceInfo.timeStamp);
                         provider.setServertime(System.currentTimeMillis());
                         //==========================初始化数据OVER==========================//
-
                         //保存localvo
                         PreferencesToolkits.updateLocalDeviceInfo(BleService.this, lpDeviceInfo_);
 //                        LocalInfoVO LocalInfoVO = PreferencesToolkits.getLocalDeviceInfo(BleService.this);
@@ -495,12 +492,12 @@ public class BleService extends Service {
                         MyLog.e(TAG, "notifyFor0x13ExecSucess_D======进入了");
                     } else {
                         MyLog.e(TAG,"latestDeviceInfo是null的时候 重新获取一次");
-//                        //返回的latestDeviceInfo是null的时候 重新获取一次
-//                        if (provider.isConnectedAndDiscovered()) {
-//                            LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
-//                            lpDeviceInfo.userId = userEntity.getUser_id();
-//                            provider.getAllDeviceInfoNew(BleService.this,lpDeviceInfo);
-//                        }
+                        //返回的latestDeviceInfo是null的时候 重新获取一次
+                        if (provider.isConnectedAndDiscovered()) {
+                            LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
+                            lpDeviceInfo.userId = userEntity.getUser_id();
+                            provider.getAllDeviceInfoNew(BleService.this,lpDeviceInfo);
+                        }
                     }
                 }
             }
@@ -578,7 +575,7 @@ public class BleService extends Service {
                 //设置时间指令
 
                 provider.SetDeviceTime(BleService.this);
-
+                provider.GetHeartrate(BleService.this);
             }
 
             //时间设置成功--基本流程完毕
@@ -586,7 +583,7 @@ public class BleService extends Service {
             public void notifyForSetDeviceTimeSucess() {
                 super.notifyForSetDeviceTimeSucess();
                 IS_SYNING = false;
-                provider.GetHeartrate(BleService.this);
+
                 //在绑定流程会首先去设置时间(但是此时还没有同步到  本地/服务端  就不去设置卡号什么的了)
                 if (!CommonUtils.isStringEmpty(MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id())) {
 
@@ -606,7 +603,12 @@ public class BleService extends Service {
                 }
             }
 
+            /**
+             * 读取心率成功的返回
+             * @param obj
+             */
             protected  void notifyforgerHeartList(ArrayList<LpHeartrateData>  obj){
+                MyLog.e(TAG,"notifyforgerHeartListsuccess");
                 super.notifyforgerHeartList(obj);
                 for (LpHeartrateData obj1: obj){
                     greendaoUtils.add(obj1.getStartTime(),obj1.getMaxRate(),obj1.getAvgRate());
@@ -629,6 +631,7 @@ public class BleService extends Service {
 
             @Override
             protected void notifyForModelName(LPDeviceInfo latestDeviceInfo) {
+                MyLog.e(TAG,"notifyForModelName");
                 super.notifyForModelName(latestDeviceInfo);
                 if(CommonUtils.isStringEmpty(MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id()))
                     return;
@@ -637,10 +640,11 @@ public class BleService extends Service {
                 }else{
                     lpDeviceInfo_.modelName= latestDeviceInfo.modelName;
                 }
-
                 //==========================初始化数据OVER==========================//
+
                 //保存localvo
                 PreferencesToolkits.updateLocalDeviceInfo(BleService.this, lpDeviceInfo_);
+
             }
 
             @Override

@@ -504,7 +504,7 @@ public class BarChartView extends View {
 }
 //            onDraw 里面的方法 类型不需要
 //draw type text
-     /*       String typeText = mItems[i].itemType;
+     /*       String typeText = mItems[i].starttime;
             float textPathStartX = barRect.left + barItemWidth / 2 -
                     (float) (Math.sin(Math.PI / 6)) * textPaint.measureText("好") / 2;
             float textPathStartY = barRect.bottom;

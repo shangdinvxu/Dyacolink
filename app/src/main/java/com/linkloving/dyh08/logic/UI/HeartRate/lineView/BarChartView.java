@@ -5,15 +5,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.nfc.Tag;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.ViewUtils.barchartview.ScreenUtils;
-import com.linkloving.dyh08.logic.UI.goal.SportGoalActivity;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +30,8 @@ public class BarChartView extends View {
     private double barItemWidth, barSpace, oneHourHight;
     private Rect deepSleepRect;
     private Paint deepSleepPaint;
+    private SimpleDateFormat simpleDateFormat;
+    private final static long ONEDAYMILLISECOND = 86400 ;
 
     public BarChartView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -41,7 +41,7 @@ public class BarChartView extends View {
     private void init(Context context) {
         screenW = ScreenUtils.getScreenW(context);
         screenH = ScreenUtils.getScreenH(context);
-
+        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
         barPaint = new Paint();
         deepSleepPaint = new Paint();
         barPaint.setColor(mBarColors[0]);
@@ -56,6 +56,7 @@ public class BarChartView extends View {
         barSpace = screenW * 0.035;
 //        设置一个一小时的高度
         oneHourHight = screenH * 0.017;
+
     }
 
     @Override
@@ -74,57 +75,19 @@ public class BarChartView extends View {
                 canvas.drawLine((float) (screenW * (0.2 + i * 0.18)), (float) (oneHourHight * 28),(float) (screenW * (0.2 + i * 0.18)),(float) (oneHourHight * 27) , linePaint);
             }
         }
-//        canvas.drawLine((float) (screenW * 0.1), (float) (oneHourHight * 23), (float) (screenW ), (float) (oneHourHight * 26), linePaint);
-//        canvas.drawLine((float) (screenW * 0.1), (float) (oneHourHight * 16), (float) (screenW ), (float) (oneHourHight * 18), linePaint);
-//        canvas.drawLine((float) (screenW * 0.1), (float) (oneHourHight * 9), (float) (screenW ), (float) (oneHourHight * 10), linePaint);
-//        canvas.drawLine((float) (screenW * 0.1), (float) (oneHourHight * 2), (float) (screenW ), (float) (oneHourHight * 2), linePaint);
         textPaint.setTextSize(ScreenUtils.dp2px(getContext(), 16));
+        /** 先调用一下下面这方法将开始时间装换成相应的百分比*/
+        transformToPoint();
         for (int i = 0; i < mItems.size(); i++) {
-////          画深睡的rect
-//            barRect.left = (int) (screenW * 0.02 + barItemWidth * i + barSpace * (i + 1));
-//            barRect.top = (int) (oneHourHight * 14 - mItems.get(i).itemDeepValue * oneHourHight * 1.25);
-//            barRect.right = (int) (barRect.left + barItemWidth);
-//            barRect.bottom = (int) (oneHourHight * 14);
-//            barPaint.setColor(mBarColors[0]);
-//            canvas.drawRect(barRect, barPaint);
-//            barRect.bottom = barRect.top;
-//            barRect.top = (int) (oneHourHight * 14 - (mItems.get(i).itemDeepValue+mItems.get(i).itemLightValue) * oneHourHight * 1.25);
-//            barPaint.setColor(mBarColors[1]);
-//            canvas.drawRect(barRect, barPaint);
-//            画点连线
-//            如果间隔小于5就画线,不然就不画
             if (i<mItems.size()-1){
-//                判断是否连续,连续才画线.
-//                if((mItems.get(i+1).itemType-mItems.get(i).itemType)<2){
-//                不乘以1000就会变成0.0
-                    canvas.drawLine((float) ((mItems.get(i).itemType*1000/288)*(screenW * 0.72)/1000+0.2*screenW),
+                    canvas.drawLine( (float)(((((double)(mItems.get(i).starttime+28800)/ONEDAYMILLISECOND)*(screenW * 0.72))+0.2*screenW)),
                             (float)(oneHourHight*28- (mItems.get(i).itemDeepValue*1000/200*oneHourHight * 24)/1000),
-                            (float) ((mItems.get(i+1).itemType*1000/288)*(screenW * 0.72)/1000+0.2*screenW),
+                            (float)(((((double)(mItems.get(i+1).starttime+28800)/ONEDAYMILLISECOND)*(screenW * 0.72))+0.2*screenW)),
+//                            (float) ((mItems.get(i+1).starttime *1000/288)*(screenW * 0.72)/1000+0.2*screenW),
                             (float)(oneHourHight*28-(mItems.get(i+1).itemDeepValue*1000/200 *oneHourHight * 24)/1000),
                             linePaint);
-MyLog.e(TAG,"(mItems.get(i).itemType/288)*(screenW * 0.72)"+(mItems.get(i).itemType/288)*(screenW * 0.72));
-                    MyLog.e(TAG,0.15*screenW+"________"+(float) ((mItems.get(i).itemType/288)*(screenW * 0.72)+0.15*screenW)+"x"+"-----"+ (float) (mItems.get(i).itemDeepValue/200 *oneHourHight * 28+oneHourHight*4)+"y");
-//                   288坐标对应的x坐标,
-//                    (mItems.get(i).itemType/288*(screenW * 0.72)+0.15+screenW)
-//                    200对应的y坐标
-//                    mItems.get(i).itemDeepValue/200 *oneHourHight * 30+oneHourHight*4
-
-//                }
             }
-
-//            //draw bar rect
-//            deepSleepRect.left = (int) (screenW * 0.02 + barItemWidth * i + barSpace * (i + 1));
-//            deepSleepRect.top = (int) (oneHourHight * 14 - mItems.get(i).itemDeepValue * oneHourHight * 2);
-//            deepSleepRect.right = (int) (barRect.left + barItemWidth);
-//            deepSleepRect.bottom = (int) (oneHourHight * 14);
-//            deepSleepPaint.setColor(mBarColors[0]);
-//            canvas.drawRect(deepSleepRect, deepSleepPaint);
         }
-
-
-        //draw x-index line.
-//        canvas.drawLine(0, (float) (oneHourHight * 14), screenW, (float) (oneHourHight * 14), linePaint);
-
 
 //        画 2 4 6 8 10H 文字
         String[] twoHour = {"200", "150", "100", "50", "0"};
@@ -146,6 +109,18 @@ MyLog.e(TAG,"(mItems.get(i).itemType/288)*(screenW * 0.72)"+(mItems.get(i).itemT
         }
     }
 
+    /**
+     * 将时间转化成点
+     */
+    public  void  transformToPoint(){
+        MyLog.e(TAG,"transform执行了");
+        for (BarChartItemBean record :mItems) {
+            long l = record.starttime % ONEDAYMILLISECOND;
+             float per= (float)(l+28800) / ONEDAYMILLISECOND;
+            MyLog.e(TAG,"per是.........."+per);
+            record.starttime=l ;
+        }
+    }
 
     public List<BarChartItemBean> getItems() {
         return mItems;
@@ -161,15 +136,15 @@ MyLog.e(TAG,"(mItems.get(i).itemType/288)*(screenW * 0.72)"+(mItems.get(i).itemT
      * A model class to keep the bar item info.
      */
     public static class BarChartItemBean {
-        public long itemType;
+        public long starttime;
         public float itemDeepValue;
         public float itemLightValue;
 
 
-        public BarChartItemBean(long itemType, float itemDeepValue, float itemLightValue) {
-            this.itemType = itemType;
-            this.itemDeepValue = itemDeepValue;
-            this.itemLightValue = itemLightValue;
+        public BarChartItemBean(long time, float maxHeartrate, float minHeartrate) {
+            this.starttime = time;
+            this.itemDeepValue = maxHeartrate;
+            this.itemLightValue = minHeartrate;
         }
     }
 }

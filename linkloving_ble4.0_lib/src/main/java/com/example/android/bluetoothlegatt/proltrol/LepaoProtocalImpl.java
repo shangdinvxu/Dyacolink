@@ -204,6 +204,7 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			lpDeviceInfo.recoderStatus = 5;
 			return lpDeviceInfo;
 		}else {
+			OwnLog.w(TAG, "0x13 return null...");
 			return null;
 		}
 	}

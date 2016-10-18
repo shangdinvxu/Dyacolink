@@ -2,6 +2,7 @@ package com.linkloving.dyh08.logic.UI.HeartRate.lineView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -21,8 +22,10 @@ import android.widget.TextView;
 
 import com.linkloving.band.dto.SportRecord;
 import com.linkloving.band.ui.BRDetailData;
+import com.linkloving.dyh08.BleService;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.ViewUtils.barchartview.ScreenUtils;
+import com.linkloving.dyh08.logic.UI.HeartRate.GreendaoUtils;
 import com.linkloving.dyh08.logic.UI.sleep.chartview.ChartParameter;
 import com.linkloving.dyh08.logic.UI.sleep.chartview.DetailBitmapCreator;
 import com.linkloving.dyh08.utils.ToolKits;
@@ -34,6 +37,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import Trace.GreenDao.DaoMaster;
+import Trace.GreenDao.heartrate;
 
 /**
  * Created by leo.wang on 2016/4/12.
@@ -72,6 +78,11 @@ public class DetailChartControl extends RelativeLayout {
     private long nowtime;
     private FrameLayout framelayout;
     private int i = 0 ;
+    private TextView timeView;
+    private TextView avgView;
+    private TextView maxView;
+    private View popupView;
+    private GreendaoUtils greendaoUtils;
 
     public DetailChartControl(Context context) {
         super(context);
@@ -108,6 +119,11 @@ public class DetailChartControl extends RelativeLayout {
         framelayout.setLayoutParams(layoutParams);
         InitView();
         getViewHigh();
+        popupView = LayoutInflater.from(getContext()).inflate(R.layout.tw_heartrate_popupwindow, null);
+        timeView = (TextView) popupView.findViewById(R.id.popuptime);
+        avgView = (TextView) popupView.findViewById(R.id.avg);
+        maxView = (TextView) popupView.findViewById(R.id.max);
+        greendaoUtils = new GreendaoUtils(context);
     }
     private void InitView()
     {
@@ -123,11 +139,7 @@ public class DetailChartControl extends RelativeLayout {
      * @param x
      */
     public void showPopupWindow(View view, String number, int x, int y) {
-
-             View popupView = LayoutInflater.from(getContext()).inflate(R.layout.tw_heartrate_popupwindow, null);
-
-        TextView time_popupwindow = (TextView) popupView.findViewById(R.id.popuptime);
-         time_popupwindow.setText(number);
+        timeView.setText(number);
         popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setTouchable(true);
@@ -155,10 +167,22 @@ public class DetailChartControl extends RelativeLayout {
             if(event.getX()> 0 && event.getX()<dataView.getWidth()){
                 MyLog.e(TAG,"当前的时间是："+( (long)(event.getX()*xlineScale) * 60+ timeLong ) );
                 nowtime = (long)(event.getX() * xlineScale) * 60+ timeLong;
+                List<heartrate> heartrates = searRecord(nowtime);
+                if (heartrates.size()==0){
+                    MyLog.e(TAG,"heartrates.size()为0");
+                    maxView.setText("0");
+                    avgView.setText("0");
+                }else {
+                    MyLog.e(TAG,"heartrates.size()不为0");
+                    maxView.setText(heartrates.get(0).getMax()+"");
+                    avgView.setText(heartrates.get(0).getAvg()+"");
+                }
                 nowtimeString = TimeUtils.formatTimeHHMM(nowtime);
-//                timetv.setText(nowtimeString);
+                MyLog.e(TAG,"nowtimeString"+nowtimeString);
+                timeView.setText(nowtimeString);
+
                 moveLineViewWithFinger(lineView,event.getX());
-//                moveTimeViewWithFinger(timetv,event.getX());
+
             }
             if (event.getAction()==MotionEvent.ACTION_UP){
                 i=0;
@@ -166,8 +190,10 @@ public class DetailChartControl extends RelativeLayout {
             return true;
         }
 
-
-
+        private List<heartrate> searRecord(long nowtime) {
+            List<heartrate> heartrates = greendaoUtils.searchDurationFiveMinute(nowtime);
+            return heartrates;
+        }
     }
 
     private void moveTimeViewWithFinger(View view, float rawX) {
@@ -194,9 +220,8 @@ public class DetailChartControl extends RelativeLayout {
 
     }
     public void showFirstPopupWindow() {
-        View popupView = LayoutInflater.from(getContext()).inflate(R.layout.tw_heartrate_popupwindow, null);
-        TextView time_popupwindow = (TextView) popupView.findViewById(R.id.popuptime);
-        time_popupwindow.setText("00:00");
+//        View popupView = LayoutInflater.from(getContext()).inflate(R.layout.tw_heartrate_popupwindow, null);
+//        TextView time_popupwindow = (TextView) popupView.findViewById(R.id.popuptime);
         popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setTouchable(true);

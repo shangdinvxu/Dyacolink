@@ -22,12 +22,20 @@ public class GreendaoUtils {
     private Context context ;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
+    private final static long HALFFIVEMILLIONS=150 ;
 
     public GreendaoUtils(Context context,SQLiteDatabase db){
         this.db = db ;
         this.context = context ;
 //        dao = new DaoMaster(db).newSession().getHeartrateDao();
         init();
+    }
+    public GreendaoUtils(Context context){
+        this.context = context ;
+      DaoMaster.DevOpenHelper heartrateHelper = new DaoMaster.DevOpenHelper(context, "heartrate", null);
+        this.db = heartrateHelper.getReadableDatabase();
+        init();
+
     }
     private void init(){
         // 官方推荐将获取 DaoMaster 对象的方法放到 Application 层，这样将避免多次创建生成 Session 对象
@@ -67,13 +75,30 @@ public class GreendaoUtils {
     }
 
     /**
+     * 根据时间来查5分钟的数据
+     */
+    public List<heartrate> searchDurationFiveMinute(long starttime){
+        Query<heartrate> list = getHeartrateDao().queryBuilder().where(heartrateDao.Properties.StartTime.between(starttime - HALFFIVEMILLIONS, starttime + HALFFIVEMILLIONS))
+                .orderAsc(heartrateDao.Properties.Id).build();
+        List<heartrate> heartrateList = list.list();
+            return heartrateList ;
+    }
+
+    public List<heartrate> searchAllRecord(){
+        Query<heartrate> build = getHeartrateDao().queryBuilder().where(heartrateDao.Properties.Id.isNotNull())
+                .orderAsc(heartrateDao.Properties.Id).build();
+        List<heartrate> list = build.list();
+        return list ;
+    }
+
+    /**
      * 根据一天的开始时间和结束时间来找一天的数据
      * @param starttime
      * @param endtime
      * @return
      */
-    public   List<heartrate>  searchOneDay(int  starttime,int endtime){
-        Query<heartrate> list = getHeartrateDao().queryBuilder().where(heartrateDao.Properties.StartTime.between(starttime,endtime)).orderAsc(heartrateDao.Properties.Id)
+    public   List<heartrate>  searchOneDay(long  starttime,long endtime){
+        Query<heartrate> list = getHeartrateDao().queryBuilder().where(heartrateDao.Properties.StartTime.between(starttime/1000,endtime/1000)).orderAsc(heartrateDao.Properties.Id)
                 .build();
         List<heartrate> heartrateList = list.list();
         return heartrateList ;

@@ -355,7 +355,6 @@ startRefreshThread(true);
 
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-
                 Toast.makeText(work_outActivity.this, "正在停止轨迹服务，请稍候", Toast.LENGTH_SHORT).show();
                 stopTrace();
                 if (isRegister) {

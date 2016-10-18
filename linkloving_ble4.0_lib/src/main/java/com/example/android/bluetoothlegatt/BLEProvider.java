@@ -1341,7 +1341,7 @@ public  class BLEProvider
 	      {
 	    	  if(tmpSportDataList == null)
 	    	  { 
-	    		 tmpSportDataList = mLepaoProtocalImpl.getSportDataNew(0xfF, 0x7F,detail);
+	    		 tmpSportDataList = mLepaoProtocalImpl.getSportDataNew(0xfF,0x7F,detail);
 	    		OwnLog.i(TAG, "detail:"+detail);
 	    		  
 	    		//  sportData.addAll(tmpSportDataList);
@@ -1728,7 +1728,6 @@ public  class BLEProvider
 						msg.obj =  mLepaoProtocalImpl.getHeartrate(0xfF,0x7F,0) ;
 						msg.sendToTarget();
 						break;
-
 				    //  发送设置闹钟指令
 				    case INDEX_SET_DEVICE_CLOCK:
 				    	Log.d(TAG, ".................INDEX_SET_DEVICE_CLOCK................");
@@ -2068,9 +2067,7 @@ public  class BLEProvider
 //				release();
 				Log.e(TAG, e.getMessage());
 				clearProess();
-				
 				return;
-				
 			}
 			catch (LPException e)
 			{
