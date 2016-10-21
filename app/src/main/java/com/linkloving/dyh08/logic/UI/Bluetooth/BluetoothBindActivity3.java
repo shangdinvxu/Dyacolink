@@ -240,16 +240,6 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
         return s.substring(0, pos) + s.substring(pos + 1);
     }
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        if (provider != null) {
-            if (provider.getBleProviderObserver() == null) {
-                provider.setBleProviderObserver(observerAdapter);
-            }
-        }
-    }
-
 
     private class BLEProviderObserver extends BLEHandler.BLEProviderObserverAdapter {
 
@@ -308,6 +298,15 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
             provider.setBleProviderObserver(null);
 
     }
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if (provider != null) {
+            if (provider.getBleProviderObserver() == null) {
+                provider.setBleProviderObserver(observerAdapter);
+            }
+        }
+    }
 
     class DeviceVO {
         public String mac;
@@ -315,6 +314,7 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
         public BluetoothDevice bledevice;
 
     }
+
     Runnable butttonRunnable = new Runnable() {
         @Override
         public void run() {
@@ -374,14 +374,14 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
         @Override
         public void updateFor_handleNotEnableMsg() {
             super.updateFor_handleNotEnableMsg();
-            MyLog.e(TAG,"updateFor_handleNotEnableMsg");
+            MyLog.e(TAG, "updateFor_handleNotEnableMsg");
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             BluetoothBindActivity3.this.startActivityForResult(enableBtIntent, BleService.REQUEST_ENABLE_BT);
         }
 
         @Override
         public void updateFor_handleSendDataError() {
-            MyLog.e(TAG,"updateFor_handleSendDataError");
+            MyLog.e(TAG, "updateFor_handleSendDataError");
             super.updateFor_handleSendDataError();
             if (dialog_bound != null && dialog_bound.isShowing()) {
                 dialog_bound.dismiss();
@@ -402,14 +402,14 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
             provider.setmBluetoothDevice(null);
             provider.resetDefaultState();
             setResult(RESULT_FAIL);
-            Toast.makeText(BluetoothBindActivity3.this,"绑定失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(BluetoothBindActivity3.this, "绑定失败", Toast.LENGTH_SHORT).show();
             finish();
         }
 
         @Override
         public void updateFor_handleConnectFailedMsg() {
             super.updateFor_handleConnectFailedMsg();
-            MyLog.e(TAG,"updateFor_handleConnectFailedMsg");
+            MyLog.e(TAG, "updateFor_handleConnectFailedMsg");
             if (dialog_bound != null && dialog_bound.isShowing()) {
                 dialog_bound.dismiss();
             }
@@ -423,7 +423,7 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
 
         @Override
         public void updateFor_handleConnectSuccessMsg() {
-            MyLog.e(TAG,"updateFor_handleConnectSuccessMsg");
+            MyLog.e(TAG, "updateFor_handleConnectSuccessMsg");
             listProvider.stopScan();
             Log.e("BluetoothBindActivity3", "连接成功");
             try {
@@ -438,10 +438,10 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
         @Override
         public void updateFor_notifyFor0x13ExecSucess_D(LPDeviceInfo latestDeviceInfo) {
             super.updateFor_notifyFor0x13ExecSucess_D(latestDeviceInfo);
-            MyLog.e(TAG,"updateFor_notifyFor0x13ExecSucess_D");
-            if(latestDeviceInfo!=null && latestDeviceInfo.recoderStatus==5){
+            MyLog.e(TAG, "updateFor_notifyFor0x13ExecSucess_D");
+            if (latestDeviceInfo != null && latestDeviceInfo.recoderStatus == 5) {
                 Log.e("BluetoothBindActivity3", "用户非法");
-                Toast.makeText(BluetoothBindActivity3.this,"设备已经被其他用户绑定", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BluetoothBindActivity3.this, "设备已经被其他用户绑定", Toast.LENGTH_SHORT).show();
                 provider.release();
                 provider.setCurrentDeviceMac(null);
                 provider.setmBluetoothDevice(null);
@@ -474,12 +474,11 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
                                 finish();
                             }
                         }).create().show();*/
-            }else{
+            } else {
                 provider.requestbound_fit(BluetoothBindActivity3.this);
             }
 
         }
-
 
 
         //非法用户
@@ -525,6 +524,9 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
 
         }
 
+
+
+
         @Override
         public void updateFor_BoundNoCharge() {
             super.updateFor_BoundNoCharge();
@@ -540,10 +542,10 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
         public void updateFor_BoundContinue() {
             super.updateFor_BoundContinue();
             Log.e("BluetoothBindActivity3", "updateFor_BoundContinue");
-            if(dialog_bound!=null && !dialog_bound.isShowing() )
+            if (dialog_bound != null && !dialog_bound.isShowing())
                 dialog_bound.show();
             if (dialog_bound != null && dialog_bound.isShowing()) {
-                if(timer==null){
+                if (timer == null) {
                     timer = new Timer(); // 每1s更新一下
                     timer.schedule(new TimerTask() {
                         @Override
@@ -557,20 +559,21 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
             if (sendcount < sendcount_MAX) {
                 boundhandler.postDelayed(boundRunnable, sendcount_time);
                 sendcount++;
-            } else {
-                Log.e("BluetoothBindActivity3", "已经发送超出15次");
-                provider.clearProess();
-                BleService.getInstance(BluetoothBindActivity3.this).releaseBLE();
-                setResult(RESULT_FAIL);
-                finish();
             }
+// else {
+//                Log.e("BluetoothBindActivity3", "已经发送超出15次");
+//                provider.clearProess();
+//                BleService.getInstance(BluetoothBindActivity3.this).releaseBLE();
+//                setResult(RESULT_FAIL);
+//                finish();
+//            }
         }
 
         @Override
         public void updateFor_BoundSucess() {
             Log.e("BluetoothBindActivity3", "updateFor_BoundSucess");
             provider.SetDeviceTime(BluetoothBindActivity3.this);
-            if (dialog_bound != null && dialog_bound.isShowing()){
+            if (dialog_bound != null && dialog_bound.isShowing()) {
                 dialog_bound.dismiss();
             }
             //获取成功
@@ -585,12 +588,12 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
         @Override
         public void updateFor_notifyForModelName(LPDeviceInfo latestDeviceInfo) {
             Log.e("BluetoothBindActivity3", "updateFor_notifyForModelName");
-            if(latestDeviceInfo==null){
+            if (latestDeviceInfo == null) {
                 //未获取成功  重新获取
                 provider.getModelName(BluetoothBindActivity3.this);
-            }else{
+            } else {
                 modelName = latestDeviceInfo.modelName;
-                if (dialog_bound != null && dialog_bound.isShowing()){
+                if (dialog_bound != null && dialog_bound.isShowing()) {
                     dialog_bound.dismiss();
                 }
                 //获取成功
@@ -607,14 +610,14 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
             if (resultFromServer != null) {
                 if (((String) resultFromServer).equals("1")) {
                     Log.e(TAG, "绑定成功！");
-                    Toast.makeText(BluetoothBindActivity3.this,"绑定成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BluetoothBindActivity3.this, "绑定成功", Toast.LENGTH_SHORT).show();
                     provider.getModelName(BluetoothBindActivity3.this);
+                    MyLog.e(TAG,provider.getCurrentDeviceMac()+"provider.getCurrentDeviceMac()");
                     MyApplication.getInstance(BluetoothBindActivity3.this).getLocalUserInfoProvider().getDeviceEntity().setLast_sync_device_id(provider.getCurrentDeviceMac());
                     MyApplication.getInstance(BluetoothBindActivity3.this).getLocalUserInfoProvider().getDeviceEntity().setDevice_type(MyApplication.DEVICE_BAND);
                     setResult(RESULT_OK);
-//                    finish();
-                    Intent intent = new Intent(BluetoothBindActivity3.this, PortalActivity.class);
-                    startActivity(intent);
+                    IntentFactory.startPortalActivityIntent(BluetoothBindActivity3.this);
+                    myfinish();
                 } else if (((String) resultFromServer).equals("10024")) {
                     MyLog.e(TAG, "========绑定失败！========");
                     new android.support.v7.app.AlertDialog.Builder(BluetoothBindActivity3.this)
@@ -641,7 +644,7 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
 
         @Override
         public void updateFor_BoundFail() {
-            Log.e(TAG, "boundAsyncTask 绑定失败");
+            Log.e(TAG, "updateFor_BoundFail 绑定失败");
             // BluetoothBindActivity3.this.notifyAll();
             if (dialog_bound != null && dialog_bound.isShowing()) {
                 dialog_bound.dismiss();
@@ -662,6 +665,7 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
             UserEntity ue = MyApplication.getInstance(getApplicationContext()).getLocalUserInfoProvider();
             String user_id = ue.getUser_id() + "";
             if (ue != null && provider != null && provider.getCurrentDeviceMac() != null) {
+                MyLog.e(TAG,"离线里面的方法执行了");
                 // 将用户id 和 MAC地址交到服务端进行匹配
 //                submitBoundMACToServer(user_id, provider.getCurrentDeviceMac());
                 //***********************************台湾离线版本**********************************************************//
@@ -683,5 +687,6 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
             // 就断开连接
         }
     }
+
 
 }

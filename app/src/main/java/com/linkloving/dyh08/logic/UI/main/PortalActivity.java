@@ -6,11 +6,9 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,12 +24,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.util.TypeUtils;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -81,14 +79,19 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.yolanda.nohttp.Response;
 import com.zhy.autolayout.AutoLayoutActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+
 public class PortalActivity extends AutoLayoutActivity implements View.OnClickListener {
+    @InjectView(R.id.user_linerLayout)
+    LinearLayout userLinerLayout;
     private SimpleDateFormat sdf = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD);
     private static final String TAG = PortalActivity.class.getSimpleName();
     private static final int REQUSET_FOR_PERSONAL = 1;
@@ -130,24 +133,34 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
 
     /*--------------------------------------------------------*/
-    /** 侧滑栏适配器*/
+    /**
+     * 侧滑栏适配器
+     */
     private MenuNewAdapter menuAdapter;
-    /** 计算运动数据的进度条*/
+    /**
+     * 计算运动数据的进度条
+     */
     private ProgressDialog progressDialog;
-    /** 地理位置*/
+    /**
+     * 地理位置
+     */
     private LocationClient mLocationClient;
     private MyLocationListener mMyLocationListener;
 
     private String User_avatar_file_name;
-    /** 用户封装类*/
+    /**
+     * 用户封装类
+     */
     private UserEntity userEntity;
-    /** 蓝牙以及蓝牙回调事件*/
+    /**
+     * 蓝牙以及蓝牙回调事件
+     */
     private BLEProvider provider;
     private BLEHandler.BLEProviderObserverAdapter bleProviderObserver;
 
     private Handler timeHandler = new Handler();
 
-    private  FragmentTransaction transaction ;
+    private FragmentTransaction transaction;
 
     /**
      * 当前正在运行中的数据加载异步线程(放全局的目的是尽量控制当前只有一个在运行，防止用户恶意切换导致OOM)
@@ -180,7 +193,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         //绑定了蓝牙就去同步蓝牙数据
         if (!CommonUtils.isStringEmpty(userEntity.getDeviceEntity().getLast_sync_device_id())) {
 //            if (provider.isConnectedAndDiscovered())
-                BleService.getInstance(PortalActivity.this).syncAllDeviceInfoAuto(PortalActivity.this, false, null);
+            BleService.getInstance(PortalActivity.this).syncAllDeviceInfoAuto(PortalActivity.this, false, null);
         }
 
         if (userEntity.getUserBase().getUser_avatar_file_name() == null) {
@@ -233,8 +246,12 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
         /*-------------------日历----------------*/
 
-}
+    }
     /*-----------------------------------------------------------------------*/
+    @OnClick(R.id.user_linerLayout)
+    void setUserLinerLayout(View view){
+        IntentFactory.start2SettingsActivity(PortalActivity.this);
+    }
 
     @OnClick(R.id.Rl_step)
     void stepLayout(View view) {
@@ -243,15 +260,16 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
     @OnClick(R.id.Rl_calories)
     void caloriesLayout(View view) {
-       IntentFactory.start_calories(PortalActivity.this);
+        IntentFactory.start_calories(PortalActivity.this);
     }
 
     @OnClick(R.id.Rl_distance)
-    void distanceLayout(View view){
+    void distanceLayout(View view) {
         IntentFactory.start_distance(PortalActivity.this);
     }
+
     @OnClick(R.id.Rl_sleep)
-    void sleepLayout(View view ){
+    void sleepLayout(View view) {
         IntentFactory.start_sleep(PortalActivity.this);
     }
 
@@ -335,7 +353,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                 double longitude = location.getLongitude();
                 double latitude = location.getLatitude();
                 String city = location.getCity();
-                MyLog.e("city",city);
+                MyLog.e("city", city);
                 UserEntity userEntity = MyApplication.getInstance(PortalActivity.this).getLocalUserInfoProvider();
                 if (userEntity.getUserBase() == null) {
                     return;
@@ -442,6 +460,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         MyLog.e(TAG, "====================开始执行异步任务====================");
         AsyncTask<Object, Object, DaySynopic> dataAsyncTask = new AsyncTask<Object, Object, DaySynopic>() {
             String todyaStr;
+
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -451,19 +470,19 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
             @Override
             protected DaySynopic doInBackground(Object... params) {
-                    DaySynopic mDaySynopic = null;
-                    todyaStr = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(new Date());
-                    ArrayList<DaySynopic> mDaySynopicArrayList = new ArrayList<DaySynopic>();
-                    MyLog.e(TAG, "endDateString:" + todyaStr);
-                    //今天的话 无条件去汇总查询
-                    mDaySynopic = SportDataHelper.offlineReadMultiDaySleepDataToServer(PortalActivity.this, todyaStr, todyaStr);
-                    if (mDaySynopic.getTime_zone() == null) {
-                        return null;
-                    }
-                    MyLog.e(TAG, "daySynopic:" + mDaySynopic.toString());
-                    mDaySynopicArrayList.add(mDaySynopic);
-                    DaySynopicTable.saveToSqliteAsync(PortalActivity.this, mDaySynopicArrayList, userEntity.getUser_id() + "");
-                    return mDaySynopic;
+                DaySynopic mDaySynopic = null;
+                todyaStr = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(new Date());
+                ArrayList<DaySynopic> mDaySynopicArrayList = new ArrayList<DaySynopic>();
+                MyLog.e(TAG, "endDateString:" + todyaStr);
+                //今天的话 无条件去汇总查询
+                mDaySynopic = SportDataHelper.offlineReadMultiDaySleepDataToServer(PortalActivity.this, todyaStr, todyaStr);
+                if (mDaySynopic.getTime_zone() == null) {
+                    return null;
+                }
+                MyLog.e(TAG, "daySynopic:" + mDaySynopic.toString());
+                mDaySynopicArrayList.add(mDaySynopic);
+                DaySynopicTable.saveToSqliteAsync(PortalActivity.this, mDaySynopicArrayList, userEntity.getUser_id() + "");
+                return mDaySynopic;
             }
 
             @Override
@@ -498,23 +517,23 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                 int step = walkStep + runStep;
                 /****************今天的步数给到 方便OAD完成后回填步数 的变量里面去****************/
                 MyApplication.getInstance(PortalActivity.this).setOld_step(step);
-                stepView.setText(step+"");
+                stepView.setText(step + "");
 
                 //走路 里程
                 int walkDistance = (int) (CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getWork_distance()), 0));
                 //跑步 里程
                 int runDistance = (int) (CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getRun_distance()), 0));
                 int distance = walkDistance + runDistance;
-              float  distanceKm = (float)distance/1000 ;
+                float distanceKm = (float) distance / 1000;
                 String distancekm = DateSwitcher.oneFloat(distanceKm);
-                distanceView.setText(distancekm+"");
+                distanceView.setText(distancekm + "");
 
                 //浅睡 小时
                 double lightSleepHour = CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getSleepMinute()), 1);
                 //深睡 小时
                 double deepSleepHour = CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getDeepSleepMiute()), 1);
                 double sleepTime = CommonUtils.getScaledDoubleValue(lightSleepHour + deepSleepHour, 1);
-                sleepView.setText(sleepTime+"");
+                sleepView.setText(sleepTime + "");
 
                 //走路 分钟
                 double walktime = CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getWork_duration()), 1);
@@ -526,7 +545,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                 int walkCal = ToolKits.calculateCalories(Float.parseFloat(mDaySynopic.getWork_distance()), (int) walktime * 60, userEntity.getUserBase().getUser_weight());
                 int runCal = ToolKits.calculateCalories(Float.parseFloat(mDaySynopic.getRun_distance()), (int) runtime * 60, userEntity.getUserBase().getUser_weight());
                 int calValue = walkCal + runCal;
-                calView.setText(calValue+"");
+                calView.setText(calValue + "");
 
                 if (progressDialog != null && progressDialog.isShowing())
                     progressDialog.dismiss();
@@ -534,7 +553,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
             }
         };
         // 确保当前只有一个AsyncTask在运行，否则用户恶心切换会OOM
-        if (currentDataAsync != null){
+        if (currentDataAsync != null) {
             AsyncTaskManger.getAsyncTaskManger().removeAsyncTask(currentDataAsync, true);
         }
         AsyncTaskManger.getAsyncTaskManger().addAsyncTask(currentDataAsync = dataAsyncTask);

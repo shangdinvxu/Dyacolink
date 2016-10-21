@@ -1,17 +1,16 @@
-package com.linkloving.dyh08.logic.UI.HeartRate.lineView;
+package com.linkloving.dyh08.logic.UI.HeartRate.MonthView;
 
 import android.app.Activity;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -22,23 +21,20 @@ import android.widget.TextView;
 
 import com.linkloving.band.dto.SportRecord;
 import com.linkloving.band.ui.BRDetailData;
-import com.linkloving.dyh08.BleService;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.ViewUtils.barchartview.ScreenUtils;
 import com.linkloving.dyh08.logic.UI.HeartRate.GreendaoUtils;
 import com.linkloving.dyh08.logic.UI.sleep.chartview.ChartParameter;
 import com.linkloving.dyh08.logic.UI.sleep.chartview.DetailBitmapCreator;
-import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
-import com.linkloving.dyh08.utils.sportUtils.TimeUtils;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import Trace.GreenDao.DaoMaster;
 import Trace.GreenDao.heartrate;
 
 /**
@@ -62,7 +58,7 @@ public class DetailChartControl extends RelativeLayout {
     /** // 每个像素xxx分钟 */
     float xlineScale;
     //图表日期
-    Date chartDate;
+    Date firstSundayOfThisMonth;
     /** 图片生成器 */
     DetailBitmapCreator detailBitmapCreator2;
     // !!!!!!!!!!!!
@@ -83,6 +79,7 @@ public class DetailChartControl extends RelativeLayout {
     private TextView maxView;
     private View popupView;
     private GreendaoUtils greendaoUtils;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public DetailChartControl(Context context) {
         super(context);
@@ -108,9 +105,8 @@ public class DetailChartControl extends RelativeLayout {
          screenW = ScreenUtils.getScreenW(context);
        screenH = ScreenUtils.getScreenH(context);
         View view = inflater.inflate(R.layout.tw_heartrate_chat, this);
-
         framelayout = (FrameLayout) view.findViewById(R.id.chat);
-        RelativeLayout.LayoutParams layoutParams = (LayoutParams) framelayout.getLayoutParams();
+        LayoutParams layoutParams = (LayoutParams) framelayout.getLayoutParams();
         layoutParams.topMargin = (int) (screenH*0.05);
         layoutParams.leftMargin= (int) (screenW *0.198);
         layoutParams.width = (int) (screenW *0.724);
@@ -152,37 +148,37 @@ public class DetailChartControl extends RelativeLayout {
         MyLog.e("点击", "调用了popupwindow");
     }
 
-
-
-
-
     private class OnTouchListenerImpl implements OnTouchListener{
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             MyLog.e(TAG,"onTouch X:"+event.getX());
-            String time = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(chartDate);
-            //获取今天开始时间的long值
-            long timeLong = TimeUtils.stringToLong(time, "yyyy-MM-dd");
-            MyLog.e(TAG,"chartDate:"+timeLong);//图表日期的-6点
-            if(event.getX()> 0 && event.getX()<dataView.getWidth()){
-                MyLog.e(TAG,"当前的时间是："+( (long)(event.getX()*xlineScale) * 60+ timeLong ) );
-                nowtime = (long)(event.getX() * xlineScale) * 60+ timeLong;
-                List<heartrate> heartrates = searRecord(nowtime);
-                if (heartrates.size()==0){
-                    MyLog.e(TAG,"heartrates.size()为0");
-                    maxView.setText("0");
-                    avgView.setText("0");
-                }else {
-                    MyLog.e(TAG,"heartrates.size()不为0");
-                    maxView.setText(heartrates.get(0).getMax()+"");
-                    avgView.setText(heartrates.get(0).getAvg()+"");
+            int point = -1 ;
+            if(event.getX()> 0 && event.getX()<dataView.getWidth()) {
+                for (int i = 0; i < 31; i++) {
+                    if ((screenW * (i * 0.024 - 0.01)) < event.getX() && event.getX() < (screenW * (0.01 + i * 0.024))) {
+                        point = i;
+                        long time = firstSundayOfThisMonth.getTime();
+                        /**要注意都是long 类型的*/
+                        time = time + 86400000l * i;
+                        Date date = new Date(time);
+                        MyLog.e(TAG,"time"+time);
+                        String format = simpleDateFormat.format(date);
+                        List<heartrate> heartrates = searRecord(time);
+                        if (heartrates.size() == 0) {
+                            MyLog.e(TAG, "heartrates.size()为0");
+                            maxView.setText("0");
+                            avgView.setText("0");
+                        } else {
+                            MyLog.e(TAG, "heartrates.size()不为0");
+                            maxView.setText(heartrates.get(0).getMax() + "");
+                            avgView.setText(heartrates.get(0).getAvg() + "");
+                        }
+                        timeView.setText(format);
+                        MyLog.e(TAG, "时间是+" + format);
+                        MyLog.e(TAG, "point是" + point);
+                    }
                 }
-                nowtimeString = TimeUtils.formatTimeHHMM(nowtime);
-                MyLog.e(TAG,"nowtimeString"+nowtimeString);
-                timeView.setText(nowtimeString);
-
                 moveLineViewWithFinger(lineView,event.getX());
-
             }
             if (event.getAction()==MotionEvent.ACTION_UP){
                 i=0;
@@ -191,7 +187,7 @@ public class DetailChartControl extends RelativeLayout {
         }
 
         private List<heartrate> searRecord(long nowtime) {
-            List<heartrate> heartrates = greendaoUtils.searchDurationFiveMinute(nowtime);
+            List<heartrate> heartrates = greendaoUtils.searchOneDay(nowtime,nowtime+86400000);
             return heartrates;
         }
     }
@@ -304,50 +300,16 @@ public class DetailChartControl extends RelativeLayout {
         }.execute();
     }
 
-    public void initDayIndex(List<BRDetailData> list, int dayindex, Date date)
+    public void initDayIndex( Date date)
     {
         dataView.setImageBitmap(null);
-        chartDate=date;
-        detailDatas=list;
-        dayindexNow=dayindex;
+        firstSundayOfThisMonth =date;
 
-        if(detailDatas!=null && detailDatas.size()>0)
-            AsyncAddDetailChart();
+
     }
 
-    /**
-     * @param list
-     * @param startdata
-     */
-    /** @deprecated */
-    public void initDayIndex(List<SportRecord> list, String startdata)
-    {
-        dataView.setImageBitmap(null);
-        sportRecords=list;
-        timeNow=startdata;
-        if(sportRecords!=null && sportRecords.size()>0)
-            AsyncAddsportRecordDetailChart();
-    }
-    /**
-     * 添加图表新条目（分为 左边添加 和 右边添加 两种）
-     */
-    /** @deprecated */
-    private void AsyncAddsportRecordDetailChart()
-    {
-        new AsyncTask<Void,Void,List<Bitmap>>(){
-            @Override
-            protected List<Bitmap> doInBackground(Void... params) {
-                List<Bitmap> bitmaps=new ArrayList<Bitmap>();
-                Bitmap bitmapChart2=detailBitmapCreator2.drawDetailChart1(sportRecords,timeNow);
-                bitmaps.add(bitmapChart2);
-                return bitmaps;
-            }
-            @Override
-            protected void onPostExecute(List<Bitmap> bitmaps) {
-                dataView.setImageBitmap(bitmaps.get(0));
-            }
-        }.execute();
-    }
+
+
 
 
 

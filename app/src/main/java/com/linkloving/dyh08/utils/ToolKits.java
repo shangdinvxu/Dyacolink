@@ -35,7 +35,6 @@ import com.linkloving.band.dto.DaySynopic;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.db.summary.DaySynopicTable;
-import com.linkloving.dyh08.logic.UI.Groups.baidu.GroupsShareActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.notify.NotificationCollectorService;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
@@ -867,7 +866,7 @@ private final static String TAG = ToolKits.class.getSimpleName();
 
 
 	//当前周周六的日期
-	public static Date getSundayofThisWeek(Date date){
+	public static Date getStaurdayofThisWeek(Date date){
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		int day_of_week = c.get(Calendar.DAY_OF_WEEK) - 1;
@@ -911,6 +910,24 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		MyLog.i(TAG, arrayList.toString());
 		return arrayList;
 	}
+
+	/**
+	 * 获取这个日期有多少天.
+	 * @param date
+     * @return
+     */
+	public static int getMonthMount(Date date){
+		SimpleDateFormat sim=new SimpleDateFormat(com.linkloving.dyh08.utils.ToolKits.DATE_FORMAT_YYYY_MM_DD);
+		ArrayList<String> arrayList=new ArrayList<>();
+		//获取当前月第一天：
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		int days=c.getActualMaximum(Calendar.DAY_OF_MONTH);//这个月有多少天
+
+		return days;
+	}
+
+
 	//当前月份的第一天
 	public static Date getFirstofMonth(Date date){
 		//获取当前月第一天：
@@ -956,7 +973,7 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		ArrayList<DaySynopic> srsForReturn = new ArrayList<DaySynopic>();
 		MyLog.e(TAG, "传进来的时间:" + new SimpleDateFormat(com.linkloving.dyh08.utils.ToolKits.DATE_FORMAT_YYYY_MM_DD).format(date));
 		String startDateString = new SimpleDateFormat(com.linkloving.dyh08.utils.ToolKits.DATE_FORMAT_YYYY_MM_DD).format(ToolKits.getFirstSundayOfThisWeek(date));
-		String endDateString = new SimpleDateFormat(com.linkloving.dyh08.utils.ToolKits.DATE_FORMAT_YYYY_MM_DD).format(ToolKits.getSundayofThisWeek(date));
+		String endDateString = new SimpleDateFormat(com.linkloving.dyh08.utils.ToolKits.DATE_FORMAT_YYYY_MM_DD).format(ToolKits.getStaurdayofThisWeek(date));
 		MyLog.e(TAG, "这周的时间范围:" + startDateString + "~~~" + endDateString);
 		ArrayList<DaySynopic> mDaySynopicArrayList = DaySynopicTable.findDaySynopicRange(activity, userEntity.getUser_id() + "", startDateString, endDateString, String.valueOf(TimeZoneHelper.getTimeZoneOffsetMinute()));
 		ArrayList<DaySynopic> temp = new ArrayList<>();

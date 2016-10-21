@@ -100,7 +100,7 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                         }
                         break;
                     case Left_viewVO1.Settings:
-                        IntentFactory.start2SettingsActivity((Activity) mContext);
+                        IntentFactory.startSetting((Activity) mContext);
                         break;
 
                     case Left_viewVO1.Workout:

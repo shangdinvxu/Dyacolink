@@ -42,6 +42,8 @@ import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.UI.main.bundband.bundbandstep1;
 import com.linkloving.dyh08.logic.UI.map.MapActivity;
 import com.linkloving.dyh08.logic.UI.more.MoreActivity;
+import com.linkloving.dyh08.logic.UI.setting.NotificationSettingActivity;
+import com.linkloving.dyh08.logic.UI.setting.SettingActivity;
 import com.linkloving.dyh08.logic.UI.settings.UserSettingsActivity;
 import com.linkloving.dyh08.logic.UI.sleep.SleepActivity;
 import com.linkloving.dyh08.logic.UI.step.StepActivity;
@@ -303,6 +305,16 @@ public class IntentFactory {
         activity.startActivity(intent);
     }
 
+    //设置信息
+    public static void startSetting(Activity activity){
+        Intent intent = new Intent(activity, SettingActivity.class);
+        activity.startActivity(intent);
+    }
+
+    public static void startNotification(Activity activity){
+        Intent intent = new Intent(activity, NotificationSettingActivity.class);
+        activity.startActivity(intent);
+    }
 
     //设置信息
     public static void start2SettingsActivity(Activity activity){

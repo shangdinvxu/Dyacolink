@@ -22,8 +22,8 @@ public class GreendaoUtils {
     private Context context ;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
-    private final static long HALFFIVEMILLIONS=150 ;
-
+//    private final static long HALFFIVEMILLIONS=150 ;
+private final static long HALFFIVEMILLIONS=600 ;
     public GreendaoUtils(Context context,SQLiteDatabase db){
         this.db = db ;
         this.context = context ;
@@ -56,10 +56,16 @@ public class GreendaoUtils {
     }
 
 
-
+    /**
+     * time是秒数
+     * @param starttime
+     * @param max
+     * @param avg
+     */
     public void add(int starttime , int  max ,int avg){
         heartrate heartrate = new heartrate(null, starttime, max, avg);
-        getHeartrateDao().insert(heartrate);
+        getHeartrateDao().insertOrReplace(heartrate);
+
     }
 
     /**

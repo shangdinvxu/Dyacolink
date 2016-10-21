@@ -94,7 +94,7 @@ public class WeekViewFragment extends Fragment {
 ////        获取每周的第一天日期
             Date mondayOfThisWeek = ToolKits.getFirstSundayOfThisWeek(rightNow.getTime());
 ////        获取每周的周末日期
-//            Date sundayofThisWeek = ToolKits.getSundayofThisWeek(rightNow.getTime());
+//            Date sundayofThisWeek = ToolKits.getStaurdayofThisWeek(rightNow.getTime());
             week.add(date);
             rightNow.add(Calendar.DATE,-7);
         }

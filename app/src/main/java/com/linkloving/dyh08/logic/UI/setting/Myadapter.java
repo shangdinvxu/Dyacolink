@@ -14,18 +14,17 @@ import com.linkloving.dyh08.R;
 
 public class Myadapter extends BaseAdapter {
     private Context context ;
-    public Myadapter(Context context) {
-        this.context = context;
+    private String[] strings ;
+
+
+    public Myadapter(Context context,String[] obj){
+        this.context=context;
+        this.strings = obj ;
     }
 
-    private String[] name = {context.getString(R.string.messagenoti),
-            context.getString(  R.string.sendentarynotif),
-            context.getString(R.string.alarmclock),
-            context.getString(R.string.timersetting),
-            };
     @Override
     public int getCount() {
-        return name.length;
+        return strings.length;
     }
 
     @Override
@@ -42,7 +41,7 @@ public class Myadapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = View.inflate(context, R.layout.tw_setting_detail, null);
         TextView text = (TextView) view.findViewById(R.id.textView);
-        text.setText(name[position].toString());
+        text.setText(strings[position].toString());
         return view;
     }
 }

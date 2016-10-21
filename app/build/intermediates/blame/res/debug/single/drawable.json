@@ -592,12 +592,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\dyh08\\ViewPagerIndicator\\unspecified\\res\\drawable\\vpi__tab_indicator.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\view_off_50x50px.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\view_off_50x50px.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_style_alert_dialog_cancel.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\btn_style_alert_dialog_cancel.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\view_off_50x50px.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\view_off_50x50px.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\arrow_up.png",

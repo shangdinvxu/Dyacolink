@@ -1002,14 +1002,37 @@
     <string name="Confirm">Confirm</string>
     <string name="Reconnect">Reconnect</string>
     <string name="Disconnect">Disconnect</string>
+    <!-- Settings-->
+    <string name="General">General</string>
+    <string name="Goalsetting">Goal settings</string>
+    <string name="Searchingwearable">Searching wearable device</string>
+    <string name="unitsetting">Unit settings</string>
+    <string name="Selectthe">Select the map</string>
+    <string name="Communityweb">Community website settings</string>
+    <string name="AutomaticHR">Automatic HR measurement</string>
+
+
+    <string name="Datasync">Data synchronization</string>
 
     <string name="Notificationsetting">Notification setting</string>
     <string name="messagenoti">Message notification</string>
+    <string name="PhoneCall">Phone Call</string>
+    <string name="textmessage">Text Message</string>
+    <string name="Email">Email</string>
+    <string name="messagingapps">Messaging apps</string>
+
+
+
+
     <string name="sendentarynotif">Sedentary notification</string>
+    <string name="Starttime">Start time</string>
+    <string name="Endtime">End time</string>
+    <string name="interval">Interval</string>
+
+
     <string name="alarmclock">Alarm clock setting</string>
     <string name="timersetting">Timer setting</string>
 
-    <!-- Settings-->
     <string name="Settings">Settings</string>
     <!-- Workout-->
     <string name="Workout">Workout</string>

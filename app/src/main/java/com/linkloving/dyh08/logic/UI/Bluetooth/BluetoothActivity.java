@@ -252,9 +252,7 @@ public class BluetoothActivity extends ToolBarActivity {
               return convertView;
           }
       }*/
-    public static String removeCharAt(String s, int pos) {
-        return s.substring(0, pos) + s.substring(pos + 1);
-    }
+
 
     @Override
     protected void onPostResume() {

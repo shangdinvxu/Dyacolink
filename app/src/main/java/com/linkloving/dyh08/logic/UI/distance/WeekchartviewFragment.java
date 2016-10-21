@@ -88,14 +88,14 @@ public class WeekchartviewFragment extends Fragment {
             }
             try {
                 mondayOfThisWeek = ToolKits.getFirstSundayOfThisWeek(sdf.parse(dateStr));
-                sundayofThisWeek = ToolKits.getSundayofThisWeek(sdf.parse(dateStr));
+                sundayofThisWeek = ToolKits.getStaurdayofThisWeek(sdf.parse(dateStr));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 //            如果没有的话则说明选择的是今天的,手动给他一个日期
         if (mondayOfThisWeek==null){
             Date mondayOfThisWeekToday = ToolKits.getFirstSundayOfThisWeek(Calendar.getInstance().getTime());
-            Date sundayofThisWeekToday = ToolKits.getSundayofThisWeek(Calendar.getInstance().getTime());
+            Date sundayofThisWeekToday = ToolKits.getStaurdayofThisWeek(Calendar.getInstance().getTime());
             mondayOfThisWeek =mondayOfThisWeekToday ;
             sundayofThisWeek = sundayofThisWeekToday ;
         }

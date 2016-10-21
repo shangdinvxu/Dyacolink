@@ -70,7 +70,7 @@ import java.util.Locale;
         Date sundayofThisWeek = null;
         try {
             mondayOfThisWeek= ToolKits.getFirstSundayOfThisWeek(sdf.parse(dateStr));
-            sundayofThisWeek = ToolKits.getSundayofThisWeek(sdf.parse(dateStr));
+            sundayofThisWeek = ToolKits.getStaurdayofThisWeek(sdf.parse(dateStr));
         } catch (ParseException e) {
             e.printStackTrace();
         }

@@ -39,6 +39,7 @@
             <!-- 头像显示部分-->
             <!-- 侧滑栏中头像部分 -->
             <LinearLayout
+                android:id="@+id/user_linerLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/activity_horizontal_margin"

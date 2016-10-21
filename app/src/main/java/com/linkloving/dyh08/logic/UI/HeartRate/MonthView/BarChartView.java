@@ -1,4 +1,4 @@
-package com.linkloving.dyh08.logic.UI.HeartRate.lineView;
+package com.linkloving.dyh08.logic.UI.HeartRate.MonthView;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -63,16 +63,16 @@ public class BarChartView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawColor(Color.rgb(26, 43, 95));
-//        画2 4 6 8 10 线
+//        画0-200 线
         linePaint.setColor(mBarColors[2]);
-        for (int i = 0 ; i<5;i++){
+        for (int i = 0 ; i<11;i++){
             canvas.drawLine( (float) (screenW * 0.1), (float) (oneHourHight * (4+6*i)), (float) (screenW ), (float) (oneHourHight * (4+6*i)), linePaint);
             MyLog.e(TAG,"2468横线"+(float) (oneHourHight * (4+6*i)));
 //            画竖的小线.
             if(i%2!=0){
-                canvas.drawLine((float) (screenW * (0.2 + i * 0.18)), (float) (oneHourHight * 28),(float) (screenW * (0.2 + i * 0.18)),(float) (oneHourHight * 27.5) , linePaint);
+                canvas.drawLine((float) (screenW * (0.2 + i * 0.072)), (float) (oneHourHight * 28),(float) (screenW * (0.2 + i * 0.072)),(float) (oneHourHight * 27.5) , linePaint);
             }else{
-                canvas.drawLine((float) (screenW * (0.2 + i * 0.18)), (float) (oneHourHight * 28),(float) (screenW * (0.2 + i * 0.18)),(float) (oneHourHight * 27) , linePaint);
+                canvas.drawLine((float) (screenW * (0.2 + i * 0.072)), (float) (oneHourHight * 28),(float) (screenW * (0.2 + i * 0.072)),(float) (oneHourHight * 27) , linePaint);
             }
         }
         textPaint.setTextSize(ScreenUtils.dp2px(getContext(), 16));
@@ -80,9 +80,9 @@ public class BarChartView extends View {
         transformToPoint();
         for (int i = 0; i < mItems.size(); i++) {
             if (i<mItems.size()-1){
-                    canvas.drawLine( (float)(((((double)(mItems.get(i).starttime+28800)/ONEDAYMILLISECOND)*(screenW * 0.72))+0.2*screenW)),
+                    canvas.drawLine( (float) (screenW * (0.2 + i * 0.023)),
                             (float)(oneHourHight*28- (mItems.get(i).itemDeepValue*1000/200*oneHourHight * 24)/1000),
-                            (float)(((((double)(mItems.get(i+1).starttime+28800)/ONEDAYMILLISECOND)*(screenW * 0.72))+0.2*screenW)),
+                            (float) (screenW * (0.2 + (i+1) * 0.023)),
 //                            (float) ((mItems.get(i+1).starttime *1000/288)*(screenW * 0.72)/1000+0.2*screenW),
                             (float)(oneHourHight*28-(mItems.get(i+1).itemDeepValue*1000/200 *oneHourHight * 24)/1000),
                             linePaint);
@@ -99,10 +99,10 @@ public class BarChartView extends View {
             canvas.drawText(typeText, texttypeStartx, texttypeStarty, textPaint);
         }
 
-        String[] week = {"00:00", "06:00", "12:00", "18:00","24:00" };
-        for (int i = 0; i < 5; i++) {
+        String[] week = {"1", "4", "7", "10","13", "16", "19", "22","25", "28", "31"};
+        for (int i = 0; i < 11; i++) {
             String typeText = week[i];
-            float texttypeStartx = (float) (screenW * (0.15 + i * 0.18));
+            float texttypeStartx = (float) (screenW * (0.18 + i * 0.072));
             float texttypeStarty = (float) (oneHourHight * 31);
             MyLog.e(TAG,texttypeStartx+"------"+texttypeStarty);
             canvas.drawText(typeText, texttypeStartx, texttypeStarty, textPaint);

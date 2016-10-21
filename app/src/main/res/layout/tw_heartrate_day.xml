@@ -6,14 +6,14 @@
     android:background="@color/blue"
     >
 
-    <com.linkloving.dyh08.logic.UI.HeartRate.lineView.BarChartView
+    <com.linkloving.dyh08.logic.UI.HeartRate.DayView.BarChartView
         android:background="@color/blue"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/Heartrate_day_barchartview"
         />
 
-        <com.linkloving.dyh08.logic.UI.HeartRate.lineView.DetailChartControl
+        <com.linkloving.dyh08.logic.UI.HeartRate.DayView.DetailChartControl
             android:id="@+id/activity_detailChartView1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,7 +21,7 @@
             composition:deepSleepHeight="100dp"
             composition:lightSleepHeight="50dp"
             composition:lineWidth="1dp" >
-        </com.linkloving.dyh08.logic.UI.HeartRate.lineView.DetailChartControl>
+        </com.linkloving.dyh08.logic.UI.HeartRate.DayView.DetailChartControl>
 
 
 

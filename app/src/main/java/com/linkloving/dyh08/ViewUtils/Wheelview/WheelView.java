@@ -213,7 +213,7 @@ public class WheelView extends ScrollView {
             }else {
                 Date parse = simpleDateFormat.parse(item);
                 Date mondayOfThisWeek = ToolKits.getFirstSundayOfThisWeek(parse);
-                Date sundayofThisWeek = ToolKits.getSundayofThisWeek(parse);
+                Date sundayofThisWeek = ToolKits.getStaurdayofThisWeek(parse);
                 String monDay = monthAndDate.format(mondayOfThisWeek);
                 String sunDay = monthAndDate.format(sundayofThisWeek);
                 tv.setText(monDay + " - " + sunDay);

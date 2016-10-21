@@ -5,27 +5,18 @@ import android.app.ProgressDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.linkloving.band.ui.BRDetailData;
-import com.linkloving.dyh08.BleService;
-import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
-import com.linkloving.dyh08.logic.UI.HeartRate.lineView.BarChartView;
-import com.linkloving.dyh08.logic.UI.HeartRate.lineView.DetailChartControl;
-import com.linkloving.dyh08.logic.UI.launch.AppStartActivity;
-import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
-import com.linkloving.dyh08.utils.logUtils.MyLog;
-import com.linkloving.dyh08.utils.manager.AsyncTaskManger;
+import com.linkloving.dyh08.logic.UI.HeartRate.DayView.BarChartView;
+import com.linkloving.dyh08.logic.UI.HeartRate.DayView.DetailChartControl;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import Trace.GreenDao.DaoMaster;
@@ -50,6 +41,12 @@ public class DayFragment extends Fragment {
     private AsyncTask<Object, Object, List<BRDetailData>> dayDataAsync = null;
     private DaoMaster.DevOpenHelper heartrateHelper;
     private GreendaoUtils greendaoUtils;
+    private Date date;
+
+    private RestingBpm restingBpm ;
+    public  void setRestingBpmListener(RestingBpm restingBpm){
+            this.restingBpm = restingBpm ;
+    }
 
 
     @Override
@@ -63,21 +60,11 @@ public class DayFragment extends Fragment {
         barchartview.setItems(list);
 //   调滑动的线
         detailChartControl = (DetailChartControl)view.findViewById(R.id.activity_detailChartView1);
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage(getString(R.string.summarizing_data));
-        progressDialog.setCanceledOnTouchOutside(false);
-//        String date = getArguments().getString("date");
-        String date = "2016-10-18";
-        DaySleepAsynck sleepAsynck = new DaySleepAsynck(getActivity(),detailChartControl,progressDialog, MyApplication.getInstance(getActivity()).getLocalUserInfoProvider());
-        if (dayDataAsync != null){
-            AsyncTaskManger.getAsyncTaskManger().removeAsyncTask(sleepAsynck, true);
-        }
-        AsyncTaskManger.getAsyncTaskManger().addAsyncTask(dayDataAsync = sleepAsynck);
-        sleepAsynck.execute(date);
+        detailChartControl.initDayIndex(date);
         return view;
     }
     private List<BarChartView.BarChartItemBean>  getHeartPointoneDay(){
-        Date date=new Date();//取时间
+         date=new Date();//取时间
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_YEAR,-1);
         calendar.setTime(date);
@@ -95,11 +82,25 @@ public class DayFragment extends Fragment {
         System.out.println("结束时间："+calendar.getTime());
         List<heartrate> heartrates = greendaoUtils.searchOneDay(dayStart, dayEnd);
         ArrayList<BarChartView.BarChartItemBean> list = new ArrayList<>();
+        int rest = 0 ;
+        int avg = 0 ;
         for (heartrate record : heartrates){
             BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean
                     (record.getStartTime(), record.getMax(), record.getAvg());
             list.add(barChartItemBean);
+            rest = rest+record.getMax();
+            avg = avg+record.getAvg();
         }
+        int resting,avging ;
+        if (list.size()==0){
+             resting = 0 ;
+            avging = 0 ;
+        }else{
+             resting = rest / list.size();
+             avging = avg/list.size();
+        }
+
+        restingBpm.restAndAvg(resting,avging,date);
         return list ;
     }
 
