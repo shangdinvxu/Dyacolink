@@ -42,6 +42,7 @@ import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.UI.main.bundband.bundbandstep1;
 import com.linkloving.dyh08.logic.UI.map.MapActivity;
 import com.linkloving.dyh08.logic.UI.more.MoreActivity;
+import com.linkloving.dyh08.logic.UI.setting.GeneralActivity;
 import com.linkloving.dyh08.logic.UI.setting.NotificationSettingActivity;
 import com.linkloving.dyh08.logic.UI.setting.SettingActivity;
 import com.linkloving.dyh08.logic.UI.settings.UserSettingsActivity;
@@ -313,6 +314,11 @@ public class IntentFactory {
 
     public static void startNotification(Activity activity){
         Intent intent = new Intent(activity, NotificationSettingActivity.class);
+        activity.startActivity(intent);
+    }
+
+    public static void startGeneral(Activity activity){
+        Intent intent = new Intent(activity, GeneralActivity.class);
         activity.startActivity(intent);
     }
 

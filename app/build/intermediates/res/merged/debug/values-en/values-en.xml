@@ -272,6 +272,7 @@
     </string-array>
     <string name="Account">Account number(Email)</string>
     <string name="Attention">Attention!</string>
+    <string name="AutomaticHR">Automatic HR measurement</string>
     <string name="Birthday">Birthday</string>
     <string name="Bluetooth">Bluetooth</string>
     <string name="CALORIES">CALORIES</string>
@@ -286,6 +287,7 @@
     <string name="Duration">Duration</string>
     <string name="ForgetPassword">Forget Password?</string>
     <string name="Gender">Gender</string>
+    <string name="Google">Google</string>
     <string name="Gps">GPS</string>
     <string name="Groups">Groups</string>
     <string name="Heart_Rate">Heart Rate</string>
@@ -350,6 +352,7 @@
     <string name="avgkcal">avg. kcal</string>
     <string name="avgsteps">avg.steps</string>
     <string name="avgtime">avg.time</string>
+    <string name="baidu">Baidu</string>
     <string name="being_written">Being written</string>
     <string name="birthday">Birthday</string>
     <string name="body_activity">"Body Settings"</string>
@@ -603,6 +606,7 @@
     <string name="home_state_sit">Sit quietly</string>
     <string name="home_state_walk">Walk</string>
     <string name="imageView">imageView</string>
+    <string name="interval"/>
     <string name="is_processed">纠偏</string>
     <string name="kcal">kcal</string>
     <string name="lastmonth">lastmonth</string>
@@ -1369,6 +1373,7 @@
     <string name="unit_week">Week</string>
     <string name="unit_year">Year</string>
     <string name="unit_year4date">Year</string>
+    <string name="unitsetting"/>
     <string name="update_firmware">Update Firmware</string>
     <string name="update_message">Discover the new version already exists on the SD card, if not by downloading directly from the local installation?</string>
     <string name="update_title">Notice</string>

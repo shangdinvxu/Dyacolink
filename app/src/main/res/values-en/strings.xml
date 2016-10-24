@@ -1132,4 +1132,9 @@
     <string name="confirm">确定</string>
     <string name="circular_fence_caption">请点击地图标记围栏圆心</string>
     <string name="vertexes_fence_caption">请按顺时针或逆时针方向点击地图</string>
+    <string name="AutomaticHR">Automatic HR measurement</string>
+    <string name="Google">Google</string>
+    <string name="baidu">Baidu</string>
+    <string name="interval"></string>
+    <string name="unitsetting"></string>
 </resources>

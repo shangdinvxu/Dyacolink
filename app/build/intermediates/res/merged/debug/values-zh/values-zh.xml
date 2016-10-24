@@ -274,6 +274,7 @@
     </string-array>
     <string name="Account">帐户（email）</string>
     <string name="Attention">Attention!</string>
+    <string name="AutomaticHR">Automatische Herzfrequenzmessung</string>
     <string name="Birthday">生日</string>
     <string name="Bluetooth">蓝牙连接</string>
     <string name="CALORIES">消耗卡路里</string>
@@ -282,12 +283,18 @@
     <string name="Confirm">Confirm</string>
     <string name="D">D</string>
     <string name="DISTANCE">距离</string>
+    <string name="Datasync">数据同步</string>
     <string name="Day_View">日</string>
     <string name="Disconnect">Disconnect</string>
     <string name="Distance">距离</string>
     <string name="Duration">持续时间</string>
+    <string name="Email">邮件</string>
+    <string name="Endtime">结束时间</string>
     <string name="ForgetPassword">忘记密码？</string>
     <string name="Gender">性别</string>
+    <string name="General">常用功能</string>
+    <string name="Goalsetting">目標設定</string>
+    <string name="Google">Google</string>
     <string name="Gps">GPS</string>
     <string name="Groups">社交</string>
     <string name="Heart_Rate">心率</string>
@@ -299,14 +306,21 @@
     <string name="Man">男</string>
     <string name="Map">地图</string>
     <string name="Month_View">月</string>
+    <string name="Notificationsetting">通知设定</string>
     <string name="OpenThe">打开蓝牙设备</string>
+    <string name="PhoneCall">来电</string>
+    <string name="Pressthedecive">长按萤幕可开启心率测量</string>
     <string name="Reconnect">Reconnect</string>
     <string name="SLEEP">睡眠</string>
     <string name="STEP">步数</string>
+    <string name="Searchingwearable">寻找手环</string>
+    <string name="Selectthe">路线设定</string>
     <string name="Settings">设定</string>
     <string name="Sign_Out">退出</string>
     <string name="Sleep">睡眠</string>
+    <string name="Starttime">开始时间</string>
     <string name="Step">步数</string>
+    <string name="Thedevicewill">自动开启心率测量</string>
     <string name="Thisaction">This action will reset all data,still want to disconnect?</string>
     <string name="Username">用户名</string>
     <string name="W">W</string>
@@ -344,6 +358,7 @@
     <string name="alarm_repeat">Repeat</string>
     <string name="alarm_save">Save</string>
     <string name="alarm_week">Week</string>
+    <string name="alarmclock">闹钟设定</string>
     <string name="app_name">DYACO LINK</string>
     <string name="app_start">Welcome to Linkloving</string>
     <string name="app_title">百度鹰眼</string>
@@ -352,6 +367,7 @@
     <string name="avgkcal">平均消耗卡路里</string>
     <string name="avgsteps">平均步数</string>
     <string name="avgtime">平均时长</string>
+    <string name="baidu">百度</string>
     <string name="being_written">Being written</string>
     <string name="birthday">Birthday</string>
     <string name="body_activity">"Body Settings"</string>
@@ -604,7 +620,9 @@
     <string name="home_state_run">Run</string>
     <string name="home_state_sit">Sit quietly</string>
     <string name="home_state_walk">Walk</string>
+    <string name="hr">时</string>
     <string name="imageView">imageView</string>
+    <string name="interval">间隔时间</string>
     <string name="is_processed">纠偏</string>
     <string name="kcal">消耗卡路里</string>
     <string name="lastmonth">lastmonth</string>
@@ -778,7 +796,9 @@
     <string name="menu_sedentary">Sedentary</string>
     <string name="menu_sport_data">Trends</string>
     <string name="menu_wxsport">Wechat Sport</string>
+    <string name="messagenoti">消息提醒</string>
     <string name="metric_system">Metric</string>
+    <string name="min">分</string>
     <string name="mm">mm</string>
     <string name="mon">mon</string>
     <string name="monday">monday</string>
@@ -924,7 +944,10 @@
     <string name="ranking_rank">{0}th</string>
     <string name="ranking_title">Ranking</string>
     <string name="ranking_wait_tomorrow">Looking forward to tomorrow.</string>
+    <string name="realtime">自动同步</string>
     <string name="realtime_track">查询实时轨迹</string>
+    <string name="recent3">最近3个月数据</string>
+    <string name="recent6">最近6个月数据</string>
     <string name="record_weight">Record weight</string>
     <string name="refresh_data">syncdata...left{0}</string>
     <string name="refresh_time">set time successful...</string>
@@ -971,6 +994,7 @@
     <string name="register_success_title">Registeration completed! </string>
     <string name="register_updata_avater">Upload avatar</string>
     <string name="register_weight">Your Weight</string>
+    <string name="regularyear">最近1年数据</string>
     <string name="relationship">Friend</string>
     <string name="relationship_attention">Follow</string>
     <string name="relationship_attention_failed">Follow fail!</string>
@@ -1030,6 +1054,7 @@
     <string name="report_sleep">Sleep</string>
     <string name="report_steps">Steps</string>
     <string name="report_week_view">By Week</string>
+    <string name="retrievedata">找回数据</string>
     <string name="right">右手</string>
     <string name="safe">安全</string>
     <string name="sat">sat</string>
@@ -1041,6 +1066,7 @@
     <string name="select_date">日期</string>
     <string name="send">send</string>
     <string name="send_confirm">We will send messages to</string>
+    <string name="sendentarynotif">久坐提醒</string>
     <string name="service_center_title">Service center</string>
     <string name="service_phone_number">400-998-3282</string>
     <string name="service_provision">Service provision</string>
@@ -1223,7 +1249,9 @@
     <string name="summarizing_data">loading...</string>
     <string name="sun">sun</string>
     <string name="sunday">sunday</string>
+    <string name="syncdata">数据同步</string>
     <string name="synchronized_to_device">Synchronized to the device</string>
+    <string name="textmessage">短信</string>
     <string name="thismonth">thismonth</string>
     <string name="thisweek">thisweek</string>
     <string name="thisyear">thisyear</string>
@@ -1290,9 +1318,11 @@
     <string name="unit_week">Week</string>
     <string name="unit_year">Year</string>
     <string name="unit_year4date">Year</string>
+    <string name="unitsetting">單位設定</string>
     <string name="update_firmware">Update Firmware</string>
     <string name="update_message">Discover the new version already exists on the SD card, if not by downloading directly from the local installation?</string>
     <string name="update_title">Notice</string>
+    <string name="usecellilar">使用蜂窝网络</string>
     <string name="user_info_avatar_image_not_exists">Avatar not found!</string>
     <string name="user_info_avatar_upload_faild1">Avatar update faild, please check your sdcard!</string>
     <string name="user_info_avatar_upload_faild2">Sorry, your avatar update failed (image is so large)!</string>

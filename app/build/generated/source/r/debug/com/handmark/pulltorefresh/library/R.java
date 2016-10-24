@@ -51,7 +51,7 @@ public final class R {
 	public static final class id {
 		public static final int both = 0x7f0e0051;
 		public static final int disabled = 0x7f0e0052;
-		public static final int fl_inner = 0x7f0e027b;
+		public static final int fl_inner = 0x7f0e028b;
 		public static final int flip = 0x7f0e0058;
 		public static final int gridview = 0x7f0e0004;
 		public static final int manualOnly = 0x7f0e0053;
@@ -59,22 +59,22 @@ public final class R {
 		public static final int pullFromEnd = 0x7f0e0055;
 		public static final int pullFromStart = 0x7f0e0056;
 		public static final int pullUpFromBottom = 0x7f0e0057;
-		public static final int pull_to_refresh_image = 0x7f0e027c;
-		public static final int pull_to_refresh_progress = 0x7f0e027d;
-		public static final int pull_to_refresh_sub_text = 0x7f0e027f;
-		public static final int pull_to_refresh_text = 0x7f0e027e;
+		public static final int pull_to_refresh_image = 0x7f0e028c;
+		public static final int pull_to_refresh_progress = 0x7f0e028d;
+		public static final int pull_to_refresh_sub_text = 0x7f0e028f;
+		public static final int pull_to_refresh_text = 0x7f0e028e;
 		public static final int rotate = 0x7f0e0059;
 		public static final int scrollview = 0x7f0e000c;
 		public static final int webview = 0x7f0e0010;
 	}
 	public static final class layout {
-		public static final int pull_to_refresh_header_horizontal = 0x7f04009e;
-		public static final int pull_to_refresh_header_vertical = 0x7f04009f;
+		public static final int pull_to_refresh_header_horizontal = 0x7f0400a3;
+		public static final int pull_to_refresh_header_vertical = 0x7f0400a4;
 	}
 	public static final class string {
-		public static final int pull_to_refresh_from_bottom_pull_label = 0x7f0704d4;
-		public static final int pull_to_refresh_from_bottom_refreshing_label = 0x7f0704d5;
-		public static final int pull_to_refresh_from_bottom_release_label = 0x7f0704d6;
+		public static final int pull_to_refresh_from_bottom_pull_label = 0x7f0704f3;
+		public static final int pull_to_refresh_from_bottom_refreshing_label = 0x7f0704f4;
+		public static final int pull_to_refresh_from_bottom_release_label = 0x7f0704f5;
 		public static final int pull_to_refresh_pull_label = 0x7f070032;
 		public static final int pull_to_refresh_refreshing_label = 0x7f070033;
 		public static final int pull_to_refresh_release_label = 0x7f070034;
