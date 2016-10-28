@@ -32,7 +32,8 @@ public interface LepaoCommand {
 	
 	static final byte COMMAND_SET_ALARM = 0x0C;             // 设置闹钟
 	static final byte COMMAND_GET_ALARM = 0x0D;             // 获取可用闹钟个数(参数 0xFF) 或者 闹钟信息(参数 闹钟索引)
-	static final byte COMMAND_GET_VERSION = 0x0E;           // 获取设备版本号，是一个String
+//	static final byte COMMAND_GET_VERSION = 0x0E;           // 获取设备版本号，是一个String
+	byte TIMMERSETTING =0x0E ; //								定时器设置
 	static final byte COMMAND_SET_MOTION_REMIND = 0x0F;     // 运动提醒（久坐提醒）
 	static final byte COMMAND_REQUEST_BOUND = 0x10;         // 请求绑定
 	//static final byte COMMAND_SLEEP_PARAMS = 0x11;        // 设置睡眠参数

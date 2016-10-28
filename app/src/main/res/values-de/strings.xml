@@ -1150,7 +1150,7 @@
     <string name="interval">Intervall</string>
     <string name="kcal">Kalorien</string>
     <string name="messagenoti">Benachrichtigungsmeldung</string>
-    <string name="messagingapps"></string>
+    <string name="messagingapps">Instant-Messaging-Programme</string>
     <string name="min">Minute(n)</string>
     <string name="realtime">Automatische Synchronisation</string>
     <string name="recent3">Letzten 3 Monaten</string>
@@ -1162,4 +1162,9 @@
     <string name="textmessage">SMS</string>
     <string name="unitsetting">Maßeinheit einstellung</string>
     <string name="usecellilar">Internet</string>
+    <string name="Communityweb">Social Network Einstellung</string>
+    <string name="timersetting"></string>
+    <string name="wearabledevice">Tragbares Gerät</string>
+    <string name="themetric">Metrisches System</string>
+    <string name="thebritshunit">Englisches System</string>
 </resources>

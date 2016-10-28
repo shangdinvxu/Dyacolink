@@ -474,7 +474,18 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
                                 finish();
                             }
                         }).create().show();*/
-            } else {
+            }
+            else if(latestDeviceInfo != null && latestDeviceInfo.recoderStatus == 6){
+                Log.e("BluetoothActivity", "设备未授权");
+                Toast.makeText(BluetoothBindActivity3.this, "设备未授权", Toast.LENGTH_SHORT).show();
+                provider.release();
+                provider.setCurrentDeviceMac(null);
+                provider.setmBluetoothDevice(null);
+                provider.resetDefaultState();
+                provider.clearProess();
+                finish();
+            }
+            else {
                 provider.requestbound_fit(BluetoothBindActivity3.this);
             }
 

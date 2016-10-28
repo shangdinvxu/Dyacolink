@@ -339,4 +339,12 @@ public class LPUtil {
 		OwnLog.e(TAG, sb.toString());
 	}
 
+	public static byte[] intToByte(int number){
+		byte[] b = new byte[4];
+		for(int i=0;i<b.length;i++)
+		{
+			b[i] = (byte) ((number>>( i*8)) & 0xFF);
+		}
+		return b ;
+	}
 }

@@ -58,7 +58,11 @@ public class LPDeviceInfo {
 	public int charge10;
 	public int charge100;
 	public int charge;
+	/**
+	 * 定时器
+	 */
 
+	public int millions ;
 	/**
 	 * 时间
 	 */

@@ -780,6 +780,7 @@
     <string name="menu_sedentary">Sedentary</string>
     <string name="menu_sport_data">Trends</string>
     <string name="menu_wxsport">Wechat Sport</string>
+    <string name="messagingapps">Apps</string>
     <string name="metric_system">Metric</string>
     <string name="mm">mm</string>
     <string name="mon">mon</string>
@@ -1307,6 +1308,8 @@
     <string name="sun">sun</string>
     <string name="sunday">sunday</string>
     <string name="synchronized_to_device">Synchronized to the device</string>
+    <string name="thebritshunit">Imperial</string>
+    <string name="themetric">Metric</string>
     <string name="thismonth">thismonth</string>
     <string name="thisweek">thisweek</string>
     <string name="thisyear">thisyear</string>
@@ -1433,6 +1436,7 @@
     <string name="vertexes_fence_caption">请按顺时针或逆时针方向点击地图</string>
     <string name="wakeup">Wake up</string>
     <string name="watch_setting">Device</string>
+    <string name="wearabledevice">Manual</string>
     <string name="wed">wed</string>
     <string name="wednesday">wednesday</string>
     <string name="weight">Weight</string>

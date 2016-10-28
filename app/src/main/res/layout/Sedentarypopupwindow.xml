@@ -103,7 +103,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
-            android:id="@+id/switchEmail" />
+            android:id="@+id/switchinterval" />
     </RelativeLayout>
     <ImageView
         android:layout_width="250dp"

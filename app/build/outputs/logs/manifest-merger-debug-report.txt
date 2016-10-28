@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:2:1-545:12
+ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:2:1-554:12
 	package
 		ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:3:5-35
 		INJECTED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml
@@ -57,6 +57,7 @@ MERGED from [com.yolanda.nohttp:nohttp:1.0.0] F:\Daniel\dyh08\app\build\intermed
 uses-permission#android.permission.BLUETOOTH_ADMIN
 ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:16:5-74
 MERGED from [dyh08:linkloving_ble4.0_lib:unspecified] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\dyh08\linkloving_ble4.0_lib\unspecified\AndroidManifest.xml:12:5-74
+MERGED from [no.nordicsemi.android:dfu:1.0.4] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\no.nordicsemi.android\dfu\1.0.4\AndroidManifest.xml:12:5-74
 	android:name
 		ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:16:22-71
 uses-permission#android.permission.ACCESS_BLUETOOTH_SHARE
@@ -66,6 +67,7 @@ ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:18:5-81
 uses-permission#android.permission.BLUETOOTH
 ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:19:5-68
 MERGED from [dyh08:linkloving_ble4.0_lib:unspecified] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\dyh08\linkloving_ble4.0_lib\unspecified\AndroidManifest.xml:11:5-68
+MERGED from [no.nordicsemi.android:dfu:1.0.4] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\no.nordicsemi.android\dfu\1.0.4\AndroidManifest.xml:11:5-68
 	android:name
 		ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:19:22-65
 uses-permission#android.permission.NFC
@@ -140,12 +142,17 @@ ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:83:5-69
 	android:name
 		ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:83:22-66
 application
-ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:85:5-543:19
+ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:85:5-552:19
 MERGED from [com.zhy:autolayout:1.4.3] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.zhy\autolayout\1.4.3\AndroidManifest.xml:11:5-14:19
 MERGED from [com.android.support:appcompat-v7:23.4.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:animated-vector-drawable:23.4.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\AndroidManifest.xml:7:5-20
 MERGED from [com.android.support:support-vector-drawable:23.4.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-v4:23.4.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:24.2.1] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:24.2.1] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:25:5-20
 MERGED from [com.jaeger.statusbaruitl:library:1.1.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.jaeger.statusbaruitl\library\1.1.0\AndroidManifest.xml:11:5-20
 MERGED from [com.wx.wheelview:wheelview:1.3.3] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.wx.wheelview\wheelview\1.3.3\AndroidManifest.xml:11:5-14:19
 MERGED from [:SMSSDK-2.1.2:] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\SMSSDK-2.1.2\AndroidManifest.xml:11:5-12:19
@@ -930,13 +937,37 @@ action#com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY
 ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:538:17-92
 	android:name
 		ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:538:25-89
+service#com.linkloving.dyh08.logic.UI.OAD.DfuService
+ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:542:9-550:19
+	android:label
+		ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:545:13-54
+	android:exported
+		ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:544:13-36
+	android:name
+		ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:543:13-52
+intent-filter#android.intent.category.DEFAULT+no.nordicsemi.android.action.DFU_UPLOAD
+ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:546:13-549:29
+action#no.nordicsemi.android.action.DFU_UPLOAD
+ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:547:17-82
+	android:name
+		ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:547:25-79
+activity#com.linkloving.dyh08.logic.UI.OAD.NotificationActivity
+ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:551:9-70
+	android:name
+		ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:551:19-68
 uses-sdk
 INJECTED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:multidex:1.0.1] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\multidex\1.0.1\AndroidManifest.xml:18:5-42
 MERGED from [com.zhy:autolayout:1.4.3] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.zhy\autolayout\1.4.3\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:23.4.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:animated-vector-drawable:23.4.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\AndroidManifest.xml:5:5-44
 MERGED from [com.android.support:support-vector-drawable:23.4.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\AndroidManifest.xml:5:5-43
-MERGED from [com.android.support:support-v4:23.4.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:24.2.1] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-compat:24.2.1] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:24.2.1] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-ui:24.2.1] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-fragment:24.2.1] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:21:5-23:60
 MERGED from [com.yolanda.nohttp:nohttp:1.0.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.yolanda.nohttp\nohttp\1.0.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.jaeger.statusbaruitl:library:1.1.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.jaeger.statusbaruitl\library\1.1.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.wx.wheelview:wheelview:1.3.3] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.wx.wheelview\wheelview\1.3.3\AndroidManifest.xml:7:5-9:41
@@ -951,6 +982,7 @@ MERGED from [com.android.support:design:23.4.0] F:\Daniel\dyh08\app\build\interm
 MERGED from [com.android.support:recyclerview-v7:23.4.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\AndroidManifest.xml:20:5-43
 MERGED from [com.google.android.gms:play-services-appindexing:8.1.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\AndroidManifest.xml:18:5-42
 MERGED from [com.google.android.gms:play-services-basement:8.1.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\AndroidManifest.xml:18:5-42
+MERGED from [no.nordicsemi.android:dfu:1.0.4] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\no.nordicsemi.android\dfu\1.0.4\AndroidManifest.xml:7:5-9:41
 	tools:overrideLibrary
 		ADDED from [com.android.support:appcompat-v7:23.4.0] F:\Daniel\dyh08\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion

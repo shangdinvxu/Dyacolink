@@ -48,10 +48,11 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/steps_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="170dp"
-                android:text="0000"
+                android:text="2000"
                 android:textColor="@color/blue"
                 android:textSize="40sp" />
 
@@ -71,7 +72,7 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:max="500000"
+            android:max="50000"
             android:splitTrack="false" />
 
         <RelativeLayout
@@ -89,10 +90,11 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/distances_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="170dp"
-                android:text="0000"
+                android:text="2000"
                 android:textColor="@color/blue"
                 android:textSize="40sp" />
 
@@ -112,7 +114,7 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:max="500000"
+            android:max="50000"
             android:splitTrack="false" />
 
         <RelativeLayout
@@ -130,10 +132,11 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/calories_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="170dp"
-                android:text="0000"
+                android:text="2000"
                 android:textColor="@color/blue"
                 android:textSize="40sp" />
 
@@ -153,7 +156,7 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:max="500000"
+            android:max="50000"
             android:splitTrack="false" />
 
     </LinearLayout>

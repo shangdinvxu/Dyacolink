@@ -300,6 +300,10 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable-xhdpi\\ssdk_oks_classic_wechatmoments.png"
     },
     {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_stat_notify_dfu.png",
+        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\no.nordicsemi.android\\dfu\\1.0.4\\res\\drawable-xhdpi-v4\\ic_stat_notify_dfu.png"
+    },
+    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\vpi__tab_unselected_focused_holo.9.png",
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\dyh08\\ViewPagerIndicator\\unspecified\\res\\drawable-xhdpi-v4\\vpi__tab_unselected_focused_holo.9.png"
     },
@@ -350,6 +354,10 @@
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ssdk_title_div.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable-xhdpi\\ssdk_title_div.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_action_notify_cancel.png",
+        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\no.nordicsemi.android\\dfu\\1.0.4\\res\\drawable-xhdpi-v4\\ic_action_notify_cancel.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ssdk_oks_classic_sinaweibo.png",

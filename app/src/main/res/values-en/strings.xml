@@ -1137,4 +1137,8 @@
     <string name="baidu">Baidu</string>
     <string name="interval"></string>
     <string name="unitsetting"></string>
+    <string name="messagingapps">Apps</string>
+    <string name="wearabledevice">Manual</string>
+    <string name="thebritshunit">Imperial</string>
+    <string name="themetric">Metric</string>
 </resources>

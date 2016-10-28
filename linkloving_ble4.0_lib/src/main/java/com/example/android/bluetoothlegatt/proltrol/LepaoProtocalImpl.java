@@ -177,6 +177,17 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			return sendData2BLEImpl(req);
 		}
 	}
+	//	定时器
+	public LPDeviceInfo settimesetting(int millions) throws LPException, BLException {
+		Log.e("settimesetting","settimesetting执行了");
+		WatchRequset req = new WatchRequset();
+		byte[] bytes = LPUtil.intToByte(millions);
+		req.appendByte(seq++).appendByte(LepaoCommand.TIMMERSETTING).appendByte(bytes).makeCheckSum() ;
+		LPUtil.printData(req.getData(), "settimesetting");
+		WatchResponse resp = sendData2BLE(req);
+		LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
+		return lpDeviceInfo ;
+	}
 
 	// 获取设备信息
 	@Override
@@ -203,7 +214,12 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
 			lpDeviceInfo.recoderStatus = 5;
 			return lpDeviceInfo;
-		}else {
+		}else if (resp.getData()[4]==0x01 && resp.getData()[5]==0x0F){
+			OwnLog.w(TAG, "0x13 用户已经被绑定了...");
+			LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
+			lpDeviceInfo.recoderStatus = 6;
+			return lpDeviceInfo;
+		} else {
 			OwnLog.w(TAG, "0x13 return null...");
 			return null;
 		}

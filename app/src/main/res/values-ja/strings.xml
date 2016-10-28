@@ -1159,4 +1159,9 @@
     <string name="textmessage">メッセージ</string>
     <string name="unitsetting">ユニット設定</string>
     <string name="usecellilar">ネットワーク接続</string>
+    <string name="Communityweb">ソーシャルサイト</string>
+    <string name="messagingapps">アプリ</string>
+    <string name="wearabledevice">ウェアラブルデバイス</string>
+    <string name="themetric">キロメートル</string>
+    <string name="thebritshunit">マイル</string>
 </resources>

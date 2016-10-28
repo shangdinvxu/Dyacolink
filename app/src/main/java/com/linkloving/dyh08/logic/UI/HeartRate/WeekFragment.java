@@ -12,6 +12,7 @@ import com.linkloving.dyh08.logic.UI.HeartRate.WeekView.BarChartView;
 import com.linkloving.dyh08.logic.UI.HeartRate.WeekView.DetailChartControl;
 import com.linkloving.dyh08.utils.ToolKits;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

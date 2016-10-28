@@ -7,14 +7,18 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
+import com.linkloving.dyh08.prefrences.PreferencesToolkits;
+import com.linkloving.dyh08.utils.ToolKits;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -41,6 +45,7 @@ public class GeneralActivity extends ToolBarActivity {
                 getString(R.string.Communityweb),
                 getString(R.string.AutomaticHR)
         };
+
         layoutInflater = LayoutInflater.from(GeneralActivity.this);
         totalView = layoutInflater.inflate(R.layout.tw_setting_activity, null);
         Myadapter myadapter = new Myadapter(GeneralActivity.this, strings);
@@ -131,6 +136,20 @@ public class GeneralActivity extends ToolBarActivity {
 
     private void initUnitsetting() {
         View view = layoutInflater.inflate(R.layout.unitsettingpopupwindow, null);
+        Button metric = (Button) view.findViewById(R.id.metric);
+        metric.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PreferencesToolkits.setLocalSettingUnitInfo(GeneralActivity.this, ToolKits.UNIT_GONG);
+            }
+        });
+        Button britsh = (Button) view.findViewById(R.id.britsh);
+        britsh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PreferencesToolkits.setLocalSettingUnitInfo(GeneralActivity.this,ToolKits.UNIT_YING);
+            }
+        });
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
         final PopupWindow popupWindow = getnewPopupWindow(view);
         dismiss.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +174,61 @@ public class GeneralActivity extends ToolBarActivity {
 
     private void initGoalSettingsPopupWindow() {
         View view = layoutInflater.inflate(R.layout.goalsettingpopupwindow, null);
+        final SeekBar stepsSeekbar = (SeekBar) view.findViewById(R.id.stepsSeekbar);
+        final TextView distancesTextview = (TextView) view.findViewById(R.id.distances_textView);
+        final TextView caloriesTextview = (TextView) view.findViewById(R.id.calories_textView);
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
+        final TextView stepsTextview = (TextView) view.findViewById(R.id.steps_textView);
+        stepsSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                stepsTextview.setText((progress+2000)+"");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        SeekBar distanceSeekbar = (SeekBar) view.findViewById(R.id.DistanceBar);
+        distanceSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                distancesTextview.setText((progress+2000)+"");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        SeekBar caloriesSeekbar = (SeekBar) view.findViewById(R.id.caloriesBar);
+        caloriesSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                caloriesTextview.setText((progress+2000)+"");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         final PopupWindow popupWindow = getnewPopupWindow(view);
         dismiss.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,6 +236,18 @@ public class GeneralActivity extends ToolBarActivity {
                 popupWindow.dismiss();
             }
         });
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                PreferencesToolkits.setGoalInfo(GeneralActivity.this,
+                        PreferencesToolkits.KEY_GOAL_STEP,stepsTextview.getText().toString());
+                PreferencesToolkits.setGoalInfo(GeneralActivity.this,
+                        PreferencesToolkits.KEY_GOAL_DISTANCE,distancesTextview.getText().toString());
+                PreferencesToolkits.setGoalInfo(GeneralActivity.this,
+                        PreferencesToolkits.KEY_GOAL_CAL,caloriesTextview.getText().toString());
+            }
+        });
+
     }
 
     private PopupWindow getnewPopupWindow(View view){

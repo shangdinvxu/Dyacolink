@@ -53,7 +53,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
-            android:id="@+id/switchPhoneCall" />
+            android:id="@+id/clock1" />
     </RelativeLayout>
     <ImageView
         android:layout_width="250dp"
@@ -81,7 +81,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
-            android:id="@+id/switchTextmessage" />
+            android:id="@+id/clock22" />
     </RelativeLayout>
     <ImageView
         android:layout_width="250dp"
@@ -109,7 +109,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
-            android:id="@+id/switchEmail" />
+            android:id="@+id/clock3" />
     </RelativeLayout>
     <ImageView
         android:layout_width="250dp"
@@ -137,7 +137,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
-            android:id="@+id/switchMessagingapps" />
+            android:id="@+id/clock4" />
     </RelativeLayout>
     <ImageView
         android:layout_width="250dp"

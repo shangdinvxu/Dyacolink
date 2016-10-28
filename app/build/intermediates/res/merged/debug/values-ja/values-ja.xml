@@ -8,6 +8,7 @@
     <string name="CALORIES">消費カロリー</string>
     <string name="Calories">消費カロリー</string>
     <string name="Cancel">Cancel</string>
+    <string name="Communityweb">ソーシャルサイト</string>
     <string name="Confirm">Confirm</string>
     <string name="D">D</string>
     <string name="DISTANCE">距離</string>
@@ -573,6 +574,7 @@
     <string name="menu_sport_data">Trends</string>
     <string name="menu_wxsport">Wechat Sport</string>
     <string name="messagenoti">メッセージ</string>
+    <string name="messagingapps">アプリ</string>
     <string name="metric_system">Metric</string>
     <string name="min">分</string>
     <string name="mm">mm</string>
@@ -936,6 +938,8 @@
     <string name="syncdata">データ同期</string>
     <string name="synchronized_to_device">Synchronized to the device</string>
     <string name="textmessage">メッセージ</string>
+    <string name="thebritshunit">マイル</string>
+    <string name="themetric">キロメートル</string>
     <string name="thismonth">thismonth</string>
     <string name="thisweek">thisweek</string>
     <string name="thisyear">thisyear</string>
@@ -1063,6 +1067,7 @@
     <string name="vertexes_fence_caption">请按顺时针或逆时针方向点击地图</string>
     <string name="wakeup">起床</string>
     <string name="watch_setting">Device</string>
+    <string name="wearabledevice">ウェアラブルデバイス</string>
     <string name="wed">wed</string>
     <string name="wednesday">wednesday</string>
     <string name="weight">Weight</string>

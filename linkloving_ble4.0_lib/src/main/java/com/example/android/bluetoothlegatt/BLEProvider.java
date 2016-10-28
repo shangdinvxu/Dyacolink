@@ -234,6 +234,8 @@ public  class BLEProvider
 	public static final int INDEX_GET_MODEL= INDEX_SEND_DATA_CARD + 1;
 	/** 指令代码：发送读取心率的指令 */
 	public static final int INDEX_GET_HEART_RATE= INDEX_GET_MODEL + 1;
+	/** 指令代码：发送设置定时器的指令 */
+	public static final int INDEX_SET_TIME_SETTING= INDEX_GET_HEART_RATE + 1;
 	// Stops scanning after 10 seconds.
 	private static final long SCAN_PERIOD = 10000;
 
@@ -940,6 +942,11 @@ public  class BLEProvider
 	public void GetHeartrate(Context context){
 		OwnLog.i(TAG, "..................GetHeartrate Thread........................");
 		runIndexProess(context,INDEX_GET_HEART_RATE);
+	}
+//设置定时器
+	public void SetTimeSetting(Context context,LPDeviceInfo deviceinfo){
+		OwnLog.i(TAG, "..................GetHeartrate Thread........................");
+		runIndexProess(context,INDEX_SET_TIME_SETTING,deviceinfo);
 	}
 
    /* 设置闹钟*/
@@ -1660,12 +1667,20 @@ public  class BLEProvider
 				    	msg = mHandler.obtainMessage();
 						msg.what = MSG_BLE_DATA;
 						msg.arg1 = INDEX_GAT_ALL_INFO_NEW;
-// // TODO: 2016/10/10 userId
-						SharedPreferences sp = mContext.getSharedPreferences("userid", Context.MODE_PRIVATE);
-						int id = sp.getInt("id", 0);
-						Log.e(TAG,"id++++++++++"+id);
-						msg.obj = mLepaoProtocalImpl.getAllDeviceInfoNew(id);
+						// // TODO: 2016/10/10 userId
+//						SharedPreferences sp = mContext.getSharedPreferences("userid", Context.MODE_PRIVATE);
+//						int id = sp.getInt("id", 0);
+//						Log.e(TAG,"id++++++++++"+id);
+						msg.obj = mLepaoProtocalImpl.getAllDeviceInfoNew(serverDeviceInfo.userId);
 			    		msg.sendToTarget();
+						break;
+					case INDEX_SET_TIME_SETTING:
+						Log.i(TAG, "................INDEX_SET_TIME_SETTING.................");
+						msg = mHandler.obtainMessage();
+						msg.what = MSG_BLE_DATA;
+						msg.arg1 = INDEX_GAT_ALL_INFO_NEW;
+						msg.obj = mLepaoProtocalImpl.settimesetting(serverDeviceInfo.millions);
+						msg.sendToTarget();
 						break;
 				    case INDEX_GET_MODEL:
 				    	Log.d(TAG, ".................INDEX_GET_MODEL................");

@@ -1130,7 +1130,7 @@
     <string name="Email">郵件</string>
     <string name="Endtime">結束時間</string>
     <string name="General">常用功能</string>
-    <string name="Goalsetting">目标设定</string>
+    <string name="Goalsetting">目標設定</string>
     <string name="Google">Google</string>
     <string name="Notificationsetting">通知設定</string>
     <string name="PhoneCall">來電</string>
@@ -1153,6 +1153,13 @@
     <string name="sendentarynotif">久坐提醒</string>
     <string name="syncdata">數據同步</string>
     <string name="textmessage">短訊</string>
-    <string name="unitsetting">单位设定</string>
+    <string name="unitsetting">單位設定</string>
     <string name="usecellilar">使用網際網路</string>
+    <string name="Communityweb">社群網站設定</string>
+    <string name="timersetting">定时器</string>
+    <string name="timesetting">定时器</string>
+    <string name="messagingapps">通訊軟體</string>
+    <string name="wearabledevice">手環裝置</string>
+    <string name="thebritshunit">英制</string>
+    <string name="themetric">公制</string>
 </resources>

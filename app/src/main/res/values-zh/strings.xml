@@ -1125,12 +1125,12 @@
     <string name="confirm">确定</string>
     <string name="circular_fence_caption">请点击地图标记围栏圆心</string>
     <string name="vertexes_fence_caption">请按顺时针或逆时针方向点击地图</string>
-    <string name="AutomaticHR">Automatische Herzfrequenzmessung</string>
+    <string name="AutomaticHR">心率自动测量设定</string>
     <string name="Datasync">数据同步</string>
     <string name="Email">邮件</string>
     <string name="Endtime">结束时间</string>
     <string name="General">常用功能</string>
-    <string name="Goalsetting">目標設定</string>
+    <string name="Goalsetting">目标设定</string>
     <string name="Google">Google</string>
     <string name="Notificationsetting">通知设定</string>
     <string name="PhoneCall">来电</string>
@@ -1153,6 +1153,13 @@
     <string name="sendentarynotif">久坐提醒</string>
     <string name="syncdata">数据同步</string>
     <string name="textmessage">短信</string>
-    <string name="unitsetting">單位設定</string>
     <string name="usecellilar">使用蜂窝网络</string>
+    <string name="Communityweb">社群网站设定</string>
+    <string name="timersetting">定时器</string>
+    <string name="timesetting">定时器</string>
+    <string name="unitsetting">单位设定</string>
+    <string name="messagingapps">通讯软件</string>
+    <string name="wearabledevice">手环设置</string>
+    <string name="thebritshunit">英制</string>
+    <string name="themetric">公制</string>
 </resources>

@@ -31,14 +31,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:src="@mipmap/selectline_yellow" />
-    <TextView
+    <Button
+        android:id="@+id/metric"
         android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
+        android:textAllCaps="false"
         android:text="@string/themetric"/>
-        <TextView
-            android:layout_marginTop="30dp"
+        <Button
+            android:id="@+id/britsh"
+            android:textAllCaps="false"
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"

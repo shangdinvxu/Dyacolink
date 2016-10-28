@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:gravity="center_horizontal"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="50dp">
     <LinearLayout
         android:orientation="vertical"
         android:gravity="center_horizontal"
@@ -53,14 +54,14 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
-            android:id="@+id/switchPhoneCall" />
+            android:id="@+id/timesetting1" />
     </RelativeLayout>
     <ImageView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:src="@mipmap/selectline"
         />
-    <RelativeLayout
+   <!-- <RelativeLayout
         android:layout_width="250dp"
         android:gravity="center"
         android:layout_height="50dp">
@@ -81,7 +82,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
-            android:id="@+id/switchTextmessage" />
+            android:id="@+id/timesetting2" />
     </RelativeLayout>
     <ImageView
         android:layout_width="250dp"
@@ -109,7 +110,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
-            android:id="@+id/switchEmail" />
+            android:id="@+id/timesetting3" />
     </RelativeLayout>
     <ImageView
         android:layout_width="250dp"
@@ -137,13 +138,13 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
-            android:id="@+id/switchMessagingapps" />
-    </RelativeLayout>
-    <ImageView
+            android:id="@+id/timesetting4" />
+    </RelativeLayout>-->
+ <!--   <ImageView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:src="@mipmap/selectline"
-        />
+        />-->
     </LinearLayout>
 
 </LinearLayout>

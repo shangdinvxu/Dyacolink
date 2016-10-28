@@ -2,5 +2,9 @@
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\raw\\libs",
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\SMSSDK-2.1.2\\res\\raw\\libs"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\raw\\dyh01_alpha07_1017.zip",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\raw\\dyh01_alpha07_1017.zip"
     }
 ]

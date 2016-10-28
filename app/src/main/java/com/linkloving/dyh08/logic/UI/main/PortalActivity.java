@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,6 +53,7 @@ import com.linkloving.dyh08.http.basic.CallServer;
 import com.linkloving.dyh08.http.basic.HttpCallback;
 import com.linkloving.dyh08.http.basic.NoHttpRuquestFactory;
 import com.linkloving.dyh08.http.data.DataFromServer;
+import com.linkloving.dyh08.logic.UI.OAD.DfuService;
 import com.linkloving.dyh08.logic.UI.device.DeviceActivity;
 import com.linkloving.dyh08.logic.UI.device.FirmwareDTO;
 import com.linkloving.dyh08.logic.UI.main.boundwatch.BoundActivity;
@@ -88,6 +90,10 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import no.nordicsemi.android.dfu.DfuProgressListenerAdapter;
+import no.nordicsemi.android.dfu.DfuServiceController;
+import no.nordicsemi.android.dfu.DfuServiceInitiator;
+import no.nordicsemi.android.dfu.DfuServiceListenerHelper;
 
 public class PortalActivity extends AutoLayoutActivity implements View.OnClickListener {
     @InjectView(R.id.user_linerLayout)
@@ -323,8 +329,11 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
 /*--------------------------------Daniel-----------------------------------*/
 
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+            DfuServiceListenerHelper.registerProgressListener(this, mDfuProgressListener);
+    }
 
 
     /*--------------------------------------*/
@@ -624,11 +633,25 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         }
     }
 
+    public void onUploadClicked(){
+        MyLog.e(TAG,"onUploadClicked执行了");
+        DfuServiceInitiator starter = new DfuServiceInitiator("F6:B2:79:1F:47:E8")
+                .setDeviceName("DYH_01")
+                .setKeepBond(false)
+                .setForceDfu(false)
+                .setPacketsReceiptNotificationsEnabled(true)
+                .setPacketsReceiptNotificationsValue(12);
+        starter.setZip(R.raw.dyh01_alpha07_1017);
+        starter.start(this, DfuService.class);
+    }
+
+
+
     /**
      * 提示绑定的弹出框
      */
     private void showBundDialog() {
-        // 您还未绑定 请您绑定一个设备
+            // 您还未绑定 请您绑定一个设备
         AlertDialog dialog = new AlertDialog.Builder(PortalActivity.this)
                 .setTitle(ToolKits.getStringbyId(PortalActivity.this, R.string.portal_main_unbound))
                 .setMessage(ToolKits.getStringbyId(PortalActivity.this, R.string.portal_main_unbound_msg))
@@ -759,7 +782,9 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                         if (up_List.size() > 0) {
                             SportRecordUploadDTO sportRecordUploadDTO = new SportRecordUploadDTO();
                             final String startTime = up_List.get(0).getStart_time();
+                            MyLog.e(TAG,"starttime"+startTime);
                             final String endTime = up_List.get(up_List.size() - 1).getStart_time();
+                            MyLog.e(TAG,"starttime"+endTime);
                             sportRecordUploadDTO.setDevice_id("1");
                             sportRecordUploadDTO.setUtc_time("1");
                             sportRecordUploadDTO.setOffset(TimeZoneHelper.getTimeZoneOffsetMinute() + "");
@@ -795,6 +820,9 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         public void updateFor_notify() {
             super.updateFor_notify();
             MyLog.e(TAG, "消息提醒设置成功！");
+//            DfuServiceListenerHelper.registerProgressListener(PortalActivity.this,mDfuProgressListener);
+//            OAD升级
+//            onUploadClicked();
         }
 
         @Override
@@ -922,4 +950,25 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         }
     }
 
+     private final DfuProgressListenerAdapter mDfuProgressListener =  new DfuProgressListenerAdapter(){
+         @Override
+         public void onProgressChanged(String deviceAddress, int percent, float speed, float avgSpeed, int currentPart, int partsTotal) {
+             MyLog.e(TAG,"mDfuProgressListener"+percent+"----");
+         }
+
+         @Override
+         public void onDfuCompleted(String deviceAddress) {
+             super.onDfuCompleted(deviceAddress);
+             MyLog.e(TAG,"mDfuProgressListener"+"---onDfuCompleted-");
+         }
+
+         @Override
+         public void onError(String deviceAddress, int error, int errorType, String message) {
+             super.onError(deviceAddress, error, errorType, message);
+             MyLog.e(TAG,"mDfuProgressListener"+"--onError--");
+         }
+     };
 }
+
+
+

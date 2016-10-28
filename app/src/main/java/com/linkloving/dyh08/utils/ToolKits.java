@@ -860,6 +860,10 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		int day_of_week = c.get(Calendar.DAY_OF_WEEK) - 1;
 		if (day_of_week == 0)
 			day_of_week = 7;
+		/**日期改动*/
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
 		c.add(Calendar.DATE, -day_of_week );
 		return c.getTime();
 	}
@@ -936,6 +940,9 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		c.add(Calendar.MONTH, 0);
 		//设置为1号,当前日期既为本月第一天
 		c.set(Calendar.DAY_OF_MONTH, 1);
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
 		return c.getTime();
 	}
 	//当前月份的最后一天

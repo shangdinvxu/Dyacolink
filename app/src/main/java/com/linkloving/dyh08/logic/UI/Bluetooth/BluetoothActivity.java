@@ -448,7 +448,17 @@ public class BluetoothActivity extends ToolBarActivity {
                                 finish();
                             }
                         }).create().show();*/
-            } else {
+            }else if(latestDeviceInfo != null && latestDeviceInfo.recoderStatus == 6){
+                Log.e("BluetoothActivity", "设备未授权");
+                Toast.makeText(BluetoothActivity.this, "设备未授权", Toast.LENGTH_SHORT).show();
+                provider.release();
+                provider.setCurrentDeviceMac(null);
+                provider.setmBluetoothDevice(null);
+                provider.resetDefaultState();
+                provider.clearProess();
+                finish();
+            }
+            else {
                 provider.requestbound_fit(BluetoothActivity.this);
             }
 

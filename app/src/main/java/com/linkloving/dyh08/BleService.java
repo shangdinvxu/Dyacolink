@@ -633,7 +633,7 @@ public class BleService extends Service {
             protected void notifyForModelName(LPDeviceInfo latestDeviceInfo) {
                 MyLog.e(TAG,"notifyForModelName");
                 super.notifyForModelName(latestDeviceInfo);
-                if(CommonUtils.isStringEmpty(MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id()))
+                if(CommonUtils.isStringEmpty(MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id()) || lpDeviceInfo_ ==null)
                     return;
                 if(latestDeviceInfo.modelName==null||latestDeviceInfo.modelName.length()<=0){
                     lpDeviceInfo_.modelName= "LW100";
@@ -698,6 +698,7 @@ public class BleService extends Service {
         MyLog.i(TAG, "同步所有设备信息：获得所有设备新的信息+用户信息");
         BLEProvider provider = BleService.getInstance(context).getCurrentHandlerProvider();
         LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
+        userEntity = MyApplication.getInstance(BleService.this).getLocalUserInfoProvider();
         lpDeviceInfo.userId = userEntity.getUser_id();
         MyLog.e(TAG,"syncAllDeviceInfo+++++++USERiD"+userEntity.getUser_id());
         provider.getAllDeviceInfoNew(BleService.this,lpDeviceInfo);

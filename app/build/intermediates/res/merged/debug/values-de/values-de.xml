@@ -8,6 +8,7 @@
     <string name="CALORIES">Kalorien</string>
     <string name="Calories">Kalorien</string>
     <string name="Cancel">Cancel</string>
+    <string name="Communityweb">Social Network Einstellung</string>
     <string name="Confirm">Confirm</string>
     <string name="D">D</string>
     <string name="DISTANCE">Distanz</string>
@@ -573,7 +574,7 @@
     <string name="menu_sport_data">Trends</string>
     <string name="menu_wxsport">Wechat Sport</string>
     <string name="messagenoti">Benachrichtigungsmeldung</string>
-    <string name="messagingapps"/>
+    <string name="messagingapps">Instant-Messaging-Programme</string>
     <string name="metric_system">Metric</string>
     <string name="min">Minute(n)</string>
     <string name="mm">mm</string>
@@ -937,11 +938,14 @@
     <string name="syncdata">Datensynchronisierung</string>
     <string name="synchronized_to_device">Synchronized to the device</string>
     <string name="textmessage">SMS</string>
+    <string name="thebritshunit">Englisches System</string>
+    <string name="themetric">Metrisches System</string>
     <string name="thismonth">thismonth</string>
     <string name="thisweek">thisweek</string>
     <string name="thisyear">thisyear</string>
     <string name="thurs">thurs</string>
     <string name="thursday">thursday</string>
+    <string name="timersetting"/>
     <string name="title_activity_about_us">AboutUsActivity</string>
     <string name="title_activity_blelist">BLEListActivity</string>
     <string name="title_activity_body">BodyActivity</string>
@@ -1064,6 +1068,7 @@
     <string name="vertexes_fence_caption">请按顺时针或逆时针方向点击地图</string>
     <string name="wakeup">Aufwachen</string>
     <string name="watch_setting">Device</string>
+    <string name="wearabledevice">Tragbares Gerät</string>
     <string name="wed">wed</string>
     <string name="wednesday">wednesday</string>
     <string name="weight">Weight</string>

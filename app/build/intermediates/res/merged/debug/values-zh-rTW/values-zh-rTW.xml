@@ -8,6 +8,7 @@
     <string name="CALORIES">燃燒卡路里</string>
     <string name="Calories">燃燒卡路里</string>
     <string name="Cancel">Cancel</string>
+    <string name="Communityweb">社群網站設定</string>
     <string name="Confirm">Confirm</string>
     <string name="D">D</string>
     <string name="DISTANCE">距離</string>
@@ -21,7 +22,7 @@
     <string name="ForgetPassword">忘記密碼？</string>
     <string name="Gender">性別</string>
     <string name="General">常用功能</string>
-    <string name="Goalsetting">目标设定</string>
+    <string name="Goalsetting">目標設定</string>
     <string name="Google">Google</string>
     <string name="Gps">GPS</string>
     <string name="Groups">社群</string>
@@ -574,6 +575,7 @@
     <string name="menu_sport_data">Trends</string>
     <string name="menu_wxsport">Wechat Sport</string>
     <string name="messagenoti">訊息提醒</string>
+    <string name="messagingapps">通訊軟體</string>
     <string name="metric_system">Metric</string>
     <string name="min">分</string>
     <string name="mm">mm</string>
@@ -934,11 +936,15 @@
     <string name="syncdata">數據同步</string>
     <string name="synchronized_to_device">Synchronized to the device</string>
     <string name="textmessage">短訊</string>
+    <string name="thebritshunit">英制</string>
+    <string name="themetric">公制</string>
     <string name="thismonth">thismonth</string>
     <string name="thisweek">thisweek</string>
     <string name="thisyear">thisyear</string>
     <string name="thurs">thurs</string>
     <string name="thursday">thursday</string>
+    <string name="timersetting">定时器</string>
+    <string name="timesetting">定时器</string>
     <string name="title_activity_about_us">AboutUsActivity</string>
     <string name="title_activity_blelist">BLEListActivity</string>
     <string name="title_activity_body">BodyActivity</string>
@@ -1000,7 +1006,7 @@
     <string name="unit_week">Week</string>
     <string name="unit_year">Year</string>
     <string name="unit_year4date">Year</string>
-    <string name="unitsetting">单位设定</string>
+    <string name="unitsetting">單位設定</string>
     <string name="update_firmware">Update Firmware</string>
     <string name="update_message">Discover the new version already exists on the SD card, if not by downloading directly from the local installation?</string>
     <string name="update_title">Notice</string>
@@ -1061,6 +1067,7 @@
     <string name="vertexes_fence_caption">請按順時針或逆時針方向點擊地圖</string>
     <string name="wakeup">醒來</string>
     <string name="watch_setting">Device</string>
+    <string name="wearabledevice">手環裝置</string>
     <string name="wed">wed</string>
     <string name="wednesday">wednesday</string>
     <string name="weight">Weight</string>

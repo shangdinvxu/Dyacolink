@@ -80,9 +80,9 @@ public class BarChartView extends View {
         transformToPoint();
         for (int i = 0; i < mItems.size(); i++) {
             if (i<mItems.size()-1){
-                    canvas.drawLine( (float) (screenW * (0.2 + i * 0.023)),
+                    canvas.drawLine( (float) (screenW * (0.2 + 0.023+i * 0.023)),
                             (float)(oneHourHight*28- (mItems.get(i).itemDeepValue*1000/200*oneHourHight * 24)/1000),
-                            (float) (screenW * (0.2 + (i+1) * 0.023)),
+                            (float) (screenW * (0.2 + (i+2) * 0.023)),
 //                            (float) ((mItems.get(i+1).starttime *1000/288)*(screenW * 0.72)/1000+0.2*screenW),
                             (float)(oneHourHight*28-(mItems.get(i+1).itemDeepValue*1000/200 *oneHourHight * 24)/1000),
                             linePaint);
