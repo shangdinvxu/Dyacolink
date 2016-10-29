@@ -1,7 +1,7 @@
 package com.linkloving.dyh08.logic.UI.setting;
 
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,6 +28,7 @@ import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.DeviceSetting;
 import com.linkloving.dyh08.utils.DeviceInfoHelper;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
+import com.mob.tools.utils.SharePrefrenceHelper;
 
 import java.util.ArrayList;
 
@@ -92,7 +93,12 @@ public class NotificationSettingActivity extends ToolBarActivity {
     private int SMScall ;
     private int Emailcall ;
     private int appscall ;
+    private TextView timeSetting1;
     private TextView clock1;
+    private TextView clock2;
+    private TextView clock3;
+    private SharedPreferences.Editor edit;
+    private TextView clock4;
 
 
     @Override
@@ -102,6 +108,8 @@ public class NotificationSettingActivity extends ToolBarActivity {
         ButterKnife.inject(this);
         userEntity = MyApplication.getInstance(getApplicationContext()).getLocalUserInfoProvider();
         deviceSetting = LocalUserSettingsToolkits.getLocalSetting(NotificationSettingActivity.this, userEntity.getUser_id() + "");
+        SharedPreferences clock = getSharedPreferences("clock", MODE_PRIVATE);
+        edit = clock.edit();
         provider = BleService.getInstance(NotificationSettingActivity.this).getCurrentHandlerProvider();
         hrStrings = new ArrayList<>();
         for (int i = 0 ; i<=23;i++){
@@ -162,7 +170,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
     private void initTimeSettingPopupWindow() {
         View view = layoutInflater.inflate(R.layout.timesettingpopupwindow, null);
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
-        clock1 = (TextView) view.findViewById(R.id.clock_1);
+        timeSetting1 = (TextView) view.findViewById(R.id.clock_1);
 //        TextView clock2 = (TextView) view.findViewById(R.id.clock2);
 //        TextView clock3 = (TextView) view.findViewById(R.id.clock_3);
 //        TextView clock4 = (TextView) view.findViewById(R.id.clock_4);
@@ -182,7 +190,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 popupWindow.dismiss();
             }
         });
-        clock1.setOnClickListener(new View.OnClickListener() {
+        timeSetting1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 timeType=TIMESETTINGONE ;
@@ -194,8 +202,8 @@ public class NotificationSettingActivity extends ToolBarActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    MyLog.e(TAG,"clockone"+clock1.getText().toString());
-                    if (clock1.getText().toString().equals("00:00")){
+                    MyLog.e(TAG,"clockone"+ timeSetting1.getText().toString());
+                    if (timeSetting1.getText().toString().equals("00:00")){
                         //都为0就不发送命令
                     }else {
                         if (provider.isConnectedAndDiscovered()){
@@ -243,10 +251,10 @@ public class NotificationSettingActivity extends ToolBarActivity {
     private void initClockPopupWindow() {
         View view = layoutInflater.inflate(R.layout.alarmclockpopupwindow, null);
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
-        TextView clock1 = (TextView) view.findViewById(R.id.clock_1);
-        TextView clock2 = (TextView) view.findViewById(R.id.clock2);
-        TextView clock3 = (TextView) view.findViewById(R.id.clock_3);
-        TextView clock4 = (TextView) view.findViewById(R.id.clock_4);
+        clock1 = (TextView) view.findViewById(R.id.clock_1);
+        clock2 = (TextView) view.findViewById(R.id.clock2);
+        clock3 = (TextView) view.findViewById(R.id.clock_3);
+        clock4 = (TextView) view.findViewById(R.id.clock_4);
         final Switch switch1 = (Switch) view.findViewById(R.id.clock1);
         Switch switch2 = (Switch) view.findViewById(R.id.clock22);
         Switch switch3 = (Switch) view.findViewById(R.id.clock3);
@@ -257,6 +265,31 @@ public class NotificationSettingActivity extends ToolBarActivity {
 //        popupWindow.setClippingEnabled(true);
         popupWindow.setBackgroundDrawable(new ColorDrawable(0xffD3D3D3));
         popupWindow.showAtLocation(totalView, Gravity.BOTTOM,0,0);
+        //从本地取出闹钟的状态
+//        闹钟1
+        String Alarm_one = deviceSetting.getAlarm_one();
+        MyLog.e(TAG, "闹钟字符串：" + Alarm_one);
+        String[] strAlarm_one = Alarm_one.split("-");
+        String strTime1 = strAlarm_one[0];
+        clock1.setText(strTime1);
+        int sw1 = Integer.parseInt(strAlarm_one[2]);
+        switch1.setChecked(sw1 ==1);
+        //        闹钟2
+        String Alarm_two = deviceSetting.getAlarm_two();
+        MyLog.e(TAG, "闹钟字符串：" + Alarm_two);
+        String[] strAlarm_two = Alarm_two.split("-");
+        String strTime2 = strAlarm_two[0];
+        clock2.setText(strTime2);
+        int sw2 = Integer.parseInt(strAlarm_two[2]);
+        switch2.setChecked(sw2 ==1);
+        //        闹钟3
+        String Alarm_three = deviceSetting.getAlarm_three();
+        MyLog.e(TAG, "闹钟字符串：" + Alarm_three);
+        String[] strAlarm_three = Alarm_three.split("-");
+        String strTime3 = strAlarm_three[0];
+        clock3.setText(strTime3);
+        int sw3 = Integer.parseInt(strAlarm_three[2]);
+        switch3.setChecked(sw3 ==1);
         dismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -327,7 +360,25 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 deviceSetting.setAlarm_one(clock1);
                 deviceSetting.setAlarm_two(clock2);
                 deviceSetting.setAlarm_three(clock3);
-                provider.SetClock(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,userEntity));
+                deviceSetting.setAlarm_four(clock4);
+                if (provider.isConnectedAndDiscovered()){
+                    LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
+                    lpDeviceInfo.alarmTime1_H=Integer.parseInt(clockoneHr);
+                    lpDeviceInfo.alarmTime2_H=Integer.parseInt(clocktwoHr);
+                    lpDeviceInfo.alarmTime3_H=Integer.parseInt(clockthreeHr);
+                    lpDeviceInfo.alarmTime4_H=Integer.parseInt(clockfourHr);
+                    lpDeviceInfo.alarmTime1_M=Integer.parseInt(clockoneMin);
+                    lpDeviceInfo.alarmTime2_M=Integer.parseInt(clocktwoMin);
+                    lpDeviceInfo.alarmTime3_M=Integer.parseInt(clockthreeMin);
+                    lpDeviceInfo.alarmTime4_M=Integer.parseInt(clockfourMin);
+                    lpDeviceInfo.frequency1=127 ;
+                    lpDeviceInfo.frequency2=127 ;
+                    lpDeviceInfo.frequency3=127 ;
+                    lpDeviceInfo.frequency4=127 ;
+                    provider.SetClock(NotificationSettingActivity.this,lpDeviceInfo);
+                }else{
+                    Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -337,7 +388,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
         ImageView startTimeNext = (ImageView) view.findViewById(R.id.startTimeNext);
         final ImageView endTimeNext = (ImageView) view.findViewById(R.id.endTimeNext);
-        Switch switchInterval = (Switch) view.findViewById(R.id.switchinterval);
+        final Switch switchInterval = (Switch) view.findViewById(R.id.switchinterval);
         final PopupWindow popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setTouchable(true);
@@ -374,47 +425,49 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 }
             }
         });
-        /**在结束时把时间保存*/
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                String time = starttimeHr+":"+starttimeMin+"-"+endTimeHr+":"+endTimeMin;
-                deviceSetting.setLongsit_time(time);
-                deviceSetting.setLongsit_vaild(ischecked+"");
-                LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,
-                        deviceSetting);
-                /**判断蓝牙是否连接*/
-                provider.SetLongSit(NotificationSettingActivity.this, DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
-                        userEntity));
-            /*    //判断蓝牙是否连接
-                if (provider.isConnectedAndDiscovered()) {
-                    //同步到设备
-                    provider.SetLongSit(LongSitActivity.this, DeviceInfoHelper.fromUserEntity(LongSitActivity.this, userEntity));
-                    Synchronize_device.setVisibility(View.VISIBLE);
-                    BLE_Button.setText(getString(R.string.saved_to_local));
-                    toast.show();
-                }else{
-                    android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(LongSitActivity.this)
-                            .setTitle(ToolKits.getStringbyId(LongSitActivity.this, R.string.portal_main_unbound))
-                            .setMessage(ToolKits.getStringbyId(LongSitActivity.this, R.string.portal_main_unbound_msg))
-                            .setPositiveButton(ToolKits.getStringbyId(LongSitActivity.this, R.string.general_ok),
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                        }
-                                    }).create();
-                    dialog.show();
-                }*/
+        switchInterval.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            if ((starttimeHr+starttimeMin).equals("00:00")&&(endTimeHr+endTimeMin).equals("00:00")){
+                                //都为0就不发送命令
+                                MyLog.e(TAG,"不发送久坐提醒的指令");
+                            }else {
+                                if (provider.isConnectedAndDiscovered()){
+                                    MyLog.e(TAG,"发送久坐的指令了");
+                                    //                原先的有两个,第二个无限大.
+                                    String time = starttimeHr+":"+starttimeMin+"-"+endTimeHr+":"+endTimeMin+"-" + "23" + ":"
+                                            + "59" + "-" + "23" + ":" + "59";
+                                    MyLog.e(TAG,"久坐提醒的time是"+time);
+                                    deviceSetting.setLongsit_time(time);
+                                    deviceSetting.setLongsit_vaild(ischecked+"");
+                                    LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,
+                                            deviceSetting);
+                                    /**判断蓝牙是否连接*/
+                                    LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
+                                    lpDeviceInfo.longsit_step = 60;
+                                    lpDeviceInfo.startTime1_H = Integer.parseInt(starttimeHr) ;
+                                    lpDeviceInfo.startTime1_M = Integer.parseInt(starttimeMin) ;
+                                    lpDeviceInfo.endTime1_H = Integer.parseInt(endTimeHr) ;
+                                    lpDeviceInfo.endTime1_H = Integer.parseInt(endTimeMin) ;
+                                    provider.SetLongSit(NotificationSettingActivity.this,lpDeviceInfo);
+//                                    provider.SetLongSit(NotificationSettingActivity.this, DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
+//                                            userEntity));
+                                }else {
+                                    Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+                });
             }
-        });
-    }
 
     public PopupWindow showTimePopupWindow(){
         View view = View.inflate(NotificationSettingActivity.this, R.layout.starttimepopupwindow, null);
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
-        WheelView hrWheelView = (WheelView) view.findViewById(R.id.hr);
+        final WheelView hrWheelView = (WheelView) view.findViewById(R.id.hr);
         hrWheelView.setItems(hrStrings);
-        WheelView minWheelView = (WheelView) view.findViewById(R.id.min);
+        final WheelView minWheelView = (WheelView) view.findViewById(R.id.min);
         minWheelView.setItems(minStrings);
         final PopupWindow popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
@@ -439,7 +492,9 @@ public class NotificationSettingActivity extends ToolBarActivity {
                        endTimeHr = item ;
                        break;
                    case CLOCKONE:
+                       MyLog.e(TAG,item+"-----------clockonedehr");
                        clockoneHr = item ;
+                       edit.putString("clockoneHr",clockoneHr);
                        break;
                    case CLOCKTWO:
                        clocktwoHr = item ;
@@ -477,6 +532,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                         endTimeMin = item ;
                         break;
                     case CLOCKONE:
+                        MyLog.e(TAG,clockoneMin+"------------");
                         clockoneMin = item ;
                         break;
                     case CLOCKTWO:
@@ -500,15 +556,59 @@ public class NotificationSettingActivity extends ToolBarActivity {
             public void onDismiss() {
                 switch (timeType){
                     case CLOCKONE:
+                        String  minString = "00";
+                        if(!minWheelView.getSeletedItem().equals("")){
+                            int i = Integer.parseInt(minWheelView.getSeletedItem()) + 1;
+                            minString = i<10?"0"+i:i+"";
+                        }
+                        String hrString = "00";
+                        if(!hrWheelView.getSeletedItem().equals("")){
+                            int i = Integer.parseInt(hrWheelView.getSeletedItem()) + 1;
+                            hrString = i<10?"0"+i:i+"";
+                        }
+                        clock1.setText(hrString+":"+minString);
                         break;
                     case CLOCKTWO:
+                        String  minString2 = "00";
+                        if(!minWheelView.getSeletedItem().equals("")){
+                            int i = Integer.parseInt(minWheelView.getSeletedItem()) + 1;
+                            minString2= i<10?"0"+i:i+"";
+                        }
+                        String hrString2= "00";
+                        if(!hrWheelView.getSeletedItem().equals("")){
+                            int i = Integer.parseInt(hrWheelView.getSeletedItem()) + 1;
+                            hrString2 = i<10?"0"+i:i+"";
+                        }
+                        clock2.setText(hrString2+":"+minString2);
                         break;
                     case CLOCKTHREE:
+                        String  minString3 = "00";
+                        if(!minWheelView.getSeletedItem().equals("")){
+                            int i = Integer.parseInt(minWheelView.getSeletedItem()) + 1;
+                            minString3= i<10?"0"+i:i+"";
+                        }
+                        String hrString3= "00";
+                        if(!hrWheelView.getSeletedItem().equals("")){
+                            int i = Integer.parseInt(hrWheelView.getSeletedItem()) + 1;
+                            hrString3= i<10?"0"+i:i+"";
+                        }
+                        clock3.setText(hrString3+":"+minString3);
                         break;
                     case CLOCKFOUR:
+                        String  minString4= "00";
+                        if(!minWheelView.getSeletedItem().equals("")){
+                            int i = Integer.parseInt(minWheelView.getSeletedItem()) + 1;
+                            minString4 = i<10?"0"+i:i+"";
+                        }
+                        String hrString4 = "00";
+                        if(!hrWheelView.getSeletedItem().equals("")){
+                            int i = Integer.parseInt(hrWheelView.getSeletedItem()) + 1;
+                             hrString4= i<10?"0"+i:i+"";
+                        }
+                        clock4.setText(hrString4+":"+minString4);
                         break;
                     case TIMESETTINGONE:
-                        clock1.setText(timeoneHr+":"+timeoneMin);
+                        timeSetting1.setText(timeoneHr+":"+timeoneMin);
                         break;
 
                 }

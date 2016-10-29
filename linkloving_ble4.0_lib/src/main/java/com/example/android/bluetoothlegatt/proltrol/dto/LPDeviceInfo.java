@@ -183,6 +183,10 @@ public class LPDeviceInfo {
 	public int alarmTime3_H; // 闹铃时间，
 	public int alarmTime3_M;
 	public int frequency3; // 周几和ONCE的位或
+	public int alarmTime4_H; // 闹铃时间，
+	public int alarmTime4_M;
+	public int frequency4; // 周几和ONCE的位或
+
 
 	//	public int alarmTime4; // 闹铃时间，
 	//	public int frequency4; // 周几和ONCE的位或

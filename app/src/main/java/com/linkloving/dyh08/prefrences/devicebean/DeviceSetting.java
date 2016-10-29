@@ -13,6 +13,18 @@ public class DeviceSetting {
     private String alarm_two = "07:30-0-0";
     /**闹钟3*/
     private String alarm_three = "08:30-0-0";
+
+    public String getAlarm_four() {
+        return alarm_four;
+    }
+
+    public void setAlarm_four(String alarm_four) {
+        this.alarm_four = alarm_four;
+    }
+
+    /**闹钟4*/
+    private String alarm_four = "08:30-0-0";
+
     /**久坐提醒的时间*/
     private String longsit_time = "09:00-11:30-14:00-20:00";
     /**久坐提醒的步数*/

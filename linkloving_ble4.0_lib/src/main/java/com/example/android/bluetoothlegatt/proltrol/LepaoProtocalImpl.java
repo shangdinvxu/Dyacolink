@@ -635,7 +635,9 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 	public int setClock(LPDeviceInfo deviceInfo) throws BLException,
 			LPException {
 		// COMMAND_SET_ALARM
+		Log.e(TAG,"setclock方法执行了");
 		WatchRequset req = new WatchRequset();
+		Log.e(TAG,"setclock方法执行了+++++++"+deviceInfo.alarmTime1_H+"======="+deviceInfo.alarmTime1_M+"frequ"+deviceInfo.frequency1);
 		req.appendByte(seq++).appendByte(LepaoCommand.COMMAND_SET_ALARM)
 				.appendByte((byte) deviceInfo.alarmTime1_H)
 				.appendByte((byte) deviceInfo.alarmTime1_M)
@@ -645,9 +647,13 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 				.appendByte((byte) deviceInfo.frequency2)
 				.appendByte((byte) deviceInfo.alarmTime3_H)
 				.appendByte((byte) deviceInfo.alarmTime3_M)
-				.appendByte((byte) deviceInfo.frequency3).makeCheckSum();
+				.appendByte((byte) deviceInfo.frequency3)
+				.appendByte((byte) deviceInfo.alarmTime4_H)
+				.appendByte((byte) deviceInfo.alarmTime4_M)
+				.appendByte((byte) deviceInfo.frequency4).makeCheckSum();
 		WatchResponse resp = this.sendData2BLE(req);
 		LPUtil.printData(req.getData(), "setClock");
+		LPUtil.printData(resp.getData(), "setClockresp");
 		if(resp.getData()[3]==LepaoCommand.COMMAND_SET_ALARM && resp.getData()[4]==1)
 			return BLEProvider.INDEX_SET_DEVICE_CLOCK;
 		return  BLEProvider.INDEX_SET_DEVICE_CLOCK_FAIL;
@@ -657,6 +663,8 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 	public int setLongSitRemind(LPDeviceInfo deviceInfo)
 			throws BLException, LPException {
 		WatchRequset req = new WatchRequset();
+		Log.e(TAG,"setLongSitRemind方法执行了");
+		Log.e(TAG,"setLongSitRemind方法执行了"+deviceInfo.startTime1_M+"--------"+deviceInfo.startTime1_H);
 		req.appendByte(seq++)
 				.appendByte(LepaoCommand.COMMAND_SET_MOTION_REMIND)
 				.appendByte((byte) 60)
