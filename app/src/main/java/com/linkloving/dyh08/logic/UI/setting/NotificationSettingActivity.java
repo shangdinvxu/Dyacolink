@@ -47,7 +47,8 @@ public class NotificationSettingActivity extends ToolBarActivity {
     private View totalView;
     private ArrayList<String> hrStrings;
     private ArrayList<String> minStrings;
-    private int ischecked ;
+    private int ischecked = 0 ;
+    private int isLongsettingChecked = 0 ;
     private DeviceSetting deviceSetting;
     private final static int STARTSEDENTARY = 1 ;
     private final static  int ENDSEDENTARY = 2;
@@ -332,7 +333,9 @@ public class NotificationSettingActivity extends ToolBarActivity {
         switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                MyLog.e(TAG,"isChecked"+isChecked);
                 clock3Switch = isChecked?1:0 ;
+                MyLog.e(TAG,"clock3Switch"+clock3Switch);
             }
         });
         clock4.setOnClickListener(new View.OnClickListener() {
@@ -353,6 +356,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
             @Override
             public void onDismiss() {
 //                1+2+4+8+16+32+64= 127 意思是一周每天都有
+                MyLog.e(TAG,"clock3Switch-------------"+clock3Switch);
                 String clock1 = clockoneHr+":"+clockoneMin+"-"+"127"+"-"+clock1Switch;
                 String clock2 = clocktwoHr+":"+clocktwoMin+"-"+"127"+"-"+clock2Switch;
                 String clock3 = clockthreeHr +":"+clockthreeMin+"-"+"127"+"-"+clock3Switch;
@@ -361,7 +365,8 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 deviceSetting.setAlarm_two(clock2);
                 deviceSetting.setAlarm_three(clock3);
                 deviceSetting.setAlarm_four(clock4);
-                if (provider.isConnectedAndDiscovered()){
+                LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,deviceSetting);
+//                if (provider.isConnectedAndDiscovered()){
                     LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
                     lpDeviceInfo.alarmTime1_H=Integer.parseInt(clockoneHr);
                     lpDeviceInfo.alarmTime2_H=Integer.parseInt(clocktwoHr);
@@ -375,10 +380,12 @@ public class NotificationSettingActivity extends ToolBarActivity {
                     lpDeviceInfo.frequency2=127 ;
                     lpDeviceInfo.frequency3=127 ;
                     lpDeviceInfo.frequency4=127 ;
+                    LPDeviceInfo lpDeviceInfo1 = DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this, userEntity);
+                   MyLog.e(TAG," lpDeviceInfo1.alarmTime3_H "+ lpDeviceInfo1.alarmTime3_H );
                     provider.SetClock(NotificationSettingActivity.this,lpDeviceInfo);
-                }else{
-                    Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
-                }
+//                }else{
+//                    Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
+//                }
             }
         });
     }
@@ -419,9 +426,9 @@ public class NotificationSettingActivity extends ToolBarActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    ischecked = 1;
+                    isLongsettingChecked = 1;
                 }else{
-                    ischecked = 0 ;
+                    isLongsettingChecked = 0 ;
                 }
             }
         });
@@ -440,7 +447,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                                             + "59" + "-" + "23" + ":" + "59";
                                     MyLog.e(TAG,"久坐提醒的time是"+time);
                                     deviceSetting.setLongsit_time(time);
-                                    deviceSetting.setLongsit_vaild(ischecked+"");
+                                    deviceSetting.setLongsit_vaild("1");
                                     LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,
                                             deviceSetting);
                                     /**判断蓝牙是否连接*/
@@ -451,8 +458,8 @@ public class NotificationSettingActivity extends ToolBarActivity {
                                     lpDeviceInfo.endTime1_H = Integer.parseInt(endTimeHr) ;
                                     lpDeviceInfo.endTime1_H = Integer.parseInt(endTimeMin) ;
                                     provider.SetLongSit(NotificationSettingActivity.this,lpDeviceInfo);
-//                                    provider.SetLongSit(NotificationSettingActivity.this, DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
-//                                            userEntity));
+                                    provider.SetLongSit(NotificationSettingActivity.this, DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
+                                            userEntity));
                                 }else {
                                     Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
                                 }
@@ -487,9 +494,11 @@ public class NotificationSettingActivity extends ToolBarActivity {
                switch (timeType){
                    case STARTSEDENTARY:
                        starttimeHr = item ;
+                       starttimeHr=starttimeHr.length()==0?"00":item ;
                        break;
                    case ENDSEDENTARY :
                        endTimeHr = item ;
+                       endTimeHr=endTimeHr.length()==0?"00":item ;
                        break;
                    case CLOCKONE:
                        MyLog.e(TAG,item+"-----------clockonedehr");
@@ -527,13 +536,15 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 switch (timeType){
                     case STARTSEDENTARY:
                         starttimeMin = item ;
+                        starttimeMin=starttimeMin.length()==0?"00":item ;
                         break;
                     case ENDSEDENTARY :
                         endTimeMin = item ;
+                        endTimeMin=endTimeMin.length()==0?"00":item ;
                         break;
                     case CLOCKONE:
                         MyLog.e(TAG,clockoneMin+"------------");
-                        clockoneMin = item ;
+                        clockoneMin=clockoneMin.length()==0?"00":item ;
                         break;
                     case CLOCKTWO:
                         clocktwoMin = item ;
