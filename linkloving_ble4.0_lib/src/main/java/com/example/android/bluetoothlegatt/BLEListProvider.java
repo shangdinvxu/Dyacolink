@@ -136,7 +136,7 @@ public class BLEListProvider
         	/**判断是否是手表设备*/
  		   if(( ((scanRecord[5] == (byte)0xE1) && (scanRecord[6] == (byte)0xFE)) || ((scanRecord[23] == (byte)0xE1) && (scanRecord[24] == (byte)0xFE)) ))//&& device.getAddress().equals(getCurrentDeviceMac())
 		   {
-     			   /**判断是否是手环设备*/
+			   /**判断是否是手环设备*/
 //     			   Log.i(TAG, " device address.......................... " + device.getAddress());
      			   Message msg = mHandler.obtainMessage();
      			   msg.what = MSG_BLE_DATA;

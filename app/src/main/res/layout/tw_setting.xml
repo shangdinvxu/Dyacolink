@@ -60,6 +60,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:maxLength="14"
                         android:background="@null"
                         android:hint="@string/setting_name_hint"
                         android:singleLine="true" />

@@ -308,6 +308,19 @@ public class NotificationSettingActivity extends ToolBarActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 clock1Switch = isChecked?1:0 ;
+                String clock1 = clockoneHr+":"+clockoneMin+"-"+"127"+"-"+clock1Switch;
+                deviceSetting.setAlarm_one(clock1);
+                LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,deviceSetting);
+                if (isChecked){
+                    if (provider.isConnectedAndDiscovered()){
+                            MyLog.e(TAG,"发送闹钟1的指令了");
+                            provider.SetClock(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
+                                    userEntity));
+                        }else {
+                            Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
+                        }
+
+                }
             }
         });
         clock2.setOnClickListener(new View.OnClickListener() {
@@ -321,6 +334,18 @@ public class NotificationSettingActivity extends ToolBarActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 clock2Switch = isChecked?1:0 ;
+                String clock2 = clocktwoHr+":"+clocktwoMin+"-"+"127"+"-"+clock2Switch;
+                deviceSetting.setAlarm_two(clock2);
+                LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,deviceSetting);
+                if (isChecked){
+                    if (provider.isConnectedAndDiscovered()){
+                        MyLog.e(TAG,"发送闹钟1的指令了");
+                        provider.SetClock(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
+                                userEntity));
+                    }else {
+                        Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
         clock3.setOnClickListener(new View.OnClickListener() {
@@ -333,9 +358,20 @@ public class NotificationSettingActivity extends ToolBarActivity {
         switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                MyLog.e(TAG,"isChecked"+isChecked);
                 clock3Switch = isChecked?1:0 ;
+                String clock3 = clockthreeHr +":"+clockthreeMin+"-"+"127"+"-"+clock3Switch;
+                deviceSetting.setAlarm_three(clock3);
                 MyLog.e(TAG,"clock3Switch"+clock3Switch);
+                LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,deviceSetting);
+                if (isChecked){
+                    if (provider.isConnectedAndDiscovered()){
+                        MyLog.e(TAG,"发送闹钟3的指令了");
+                        provider.SetClock(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
+                                userEntity));
+                    }else {
+                        Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
         clock4.setOnClickListener(new View.OnClickListener() {
@@ -349,43 +385,18 @@ public class NotificationSettingActivity extends ToolBarActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 clock4Switch = isChecked?1:0 ;
-            }
-        });
-        /**结束时把几个闹钟保存设置*/
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-//                1+2+4+8+16+32+64= 127 意思是一周每天都有
-                MyLog.e(TAG,"clock3Switch-------------"+clock3Switch);
-                String clock1 = clockoneHr+":"+clockoneMin+"-"+"127"+"-"+clock1Switch;
-                String clock2 = clocktwoHr+":"+clocktwoMin+"-"+"127"+"-"+clock2Switch;
-                String clock3 = clockthreeHr +":"+clockthreeMin+"-"+"127"+"-"+clock3Switch;
                 String clock4 = clockfourHr+":"+clockfourMin+"-"+"127"+"-"+clock4Switch;
-                deviceSetting.setAlarm_one(clock1);
-                deviceSetting.setAlarm_two(clock2);
-                deviceSetting.setAlarm_three(clock3);
                 deviceSetting.setAlarm_four(clock4);
                 LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,deviceSetting);
-//                if (provider.isConnectedAndDiscovered()){
-                    LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
-                    lpDeviceInfo.alarmTime1_H=Integer.parseInt(clockoneHr);
-                    lpDeviceInfo.alarmTime2_H=Integer.parseInt(clocktwoHr);
-                    lpDeviceInfo.alarmTime3_H=Integer.parseInt(clockthreeHr);
-                    lpDeviceInfo.alarmTime4_H=Integer.parseInt(clockfourHr);
-                    lpDeviceInfo.alarmTime1_M=Integer.parseInt(clockoneMin);
-                    lpDeviceInfo.alarmTime2_M=Integer.parseInt(clocktwoMin);
-                    lpDeviceInfo.alarmTime3_M=Integer.parseInt(clockthreeMin);
-                    lpDeviceInfo.alarmTime4_M=Integer.parseInt(clockfourMin);
-                    lpDeviceInfo.frequency1=127 ;
-                    lpDeviceInfo.frequency2=127 ;
-                    lpDeviceInfo.frequency3=127 ;
-                    lpDeviceInfo.frequency4=127 ;
-                    LPDeviceInfo lpDeviceInfo1 = DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this, userEntity);
-                   MyLog.e(TAG," lpDeviceInfo1.alarmTime3_H "+ lpDeviceInfo1.alarmTime3_H );
-                    provider.SetClock(NotificationSettingActivity.this,lpDeviceInfo);
-//                }else{
-//                    Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
-//                }
+                if (isChecked){
+                    if (provider.isConnectedAndDiscovered()){
+                        MyLog.e(TAG,"发送闹钟4的指令了");
+                        provider.SetClock(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
+                                userEntity));
+                    }else {
+                        Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
     }
@@ -422,16 +433,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 showTimePopupWindow();
             }
         });
-        switchInterval.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    isLongsettingChecked = 1;
-                }else{
-                    isLongsettingChecked = 0 ;
-                }
-            }
-        });
+
         switchInterval.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -440,24 +442,16 @@ public class NotificationSettingActivity extends ToolBarActivity {
                                 //都为0就不发送命令
                                 MyLog.e(TAG,"不发送久坐提醒的指令");
                             }else {
+                                String time = starttimeHr+":"+starttimeMin+"-"+endTimeHr+":"+endTimeMin+"-" + "23" + ":"
+                                        + "59" + "-" + "23" + ":" + "59";
+                                MyLog.e(TAG,"久坐提醒的time是"+time);
+                                deviceSetting.setLongsit_time(time);
+                                deviceSetting.setLongsit_vaild("1");
+                                LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,
+                                        deviceSetting);
                                 if (provider.isConnectedAndDiscovered()){
                                     MyLog.e(TAG,"发送久坐的指令了");
                                     //                原先的有两个,第二个无限大.
-                                    String time = starttimeHr+":"+starttimeMin+"-"+endTimeHr+":"+endTimeMin+"-" + "23" + ":"
-                                            + "59" + "-" + "23" + ":" + "59";
-                                    MyLog.e(TAG,"久坐提醒的time是"+time);
-                                    deviceSetting.setLongsit_time(time);
-                                    deviceSetting.setLongsit_vaild("1");
-                                    LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,
-                                            deviceSetting);
-                                    /**判断蓝牙是否连接*/
-                                    LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
-                                    lpDeviceInfo.longsit_step = 60;
-                                    lpDeviceInfo.startTime1_H = Integer.parseInt(starttimeHr) ;
-                                    lpDeviceInfo.startTime1_M = Integer.parseInt(starttimeMin) ;
-                                    lpDeviceInfo.endTime1_H = Integer.parseInt(endTimeHr) ;
-                                    lpDeviceInfo.endTime1_H = Integer.parseInt(endTimeMin) ;
-                                    provider.SetLongSit(NotificationSettingActivity.this,lpDeviceInfo);
                                     provider.SetLongSit(NotificationSettingActivity.this, DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
                                             userEntity));
                                 }else {

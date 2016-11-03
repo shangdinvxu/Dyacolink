@@ -2,6 +2,8 @@ package com.linkloving.dyh08.logic.UI.distance;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.ViewUtils.calendar.MonthDateView;
+import com.linkloving.dyh08.logic.UI.step.*;
 
 import butterknife.ButterKnife;
 
@@ -26,6 +29,7 @@ public class DayViewFragment extends Fragment {
     private IDataChangeListener dataChangeListener;
     private View view ;
     public String date;
+    private int type = 0;
 
     public void setDataChangeListener(IDataChangeListener dataChangeListener){
         this.dataChangeListener = dataChangeListener;
@@ -57,19 +61,34 @@ public class DayViewFragment extends Fragment {
                 }
                 String checkDate =monthDateView.getmSelYear()+"-"+monthDateView.getmSelMonth()+"-"+monthDateView.getmSelDay();
                dataChangeListener.onDataChange(checkDate);
+                if (type == 0) {
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    DaychartviewFragment daychartviewFragment = new DaychartviewFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("checkDate", checkDate);
+                    daychartviewFragment.setArguments(bundle);
+                    transaction.replace(R.id.step_middle, daychartviewFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
             }
         });
         left_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                type = 1;
                 monthDateView.onLeftClick();
+                type = 0;
             }
         });
         right_btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                 monthDateView.onRightClick();
+                type = 1;
+                monthDateView.onRightClick();
+                type = 0;
             }
         });
 

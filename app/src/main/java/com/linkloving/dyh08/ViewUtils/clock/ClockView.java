@@ -3,6 +3,7 @@ package com.linkloving.dyh08.ViewUtils.clock;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -34,9 +35,9 @@ public class ClockView extends View {
     private static final float DEFAULT_BORDER_WIDTH = 6f;
     //指针反向超过圆点的长度
     private static final float DEFAULT_POINT_BACK_LENGTH = 40f;
-    private Context context ;
+    private Context context;
     //长刻度线
-    private static  float DEFAULT_LONG_DEGREE_LENGTH = 40f;
+    private static float DEFAULT_LONG_DEGREE_LENGTH = 40f;
     //短刻度线
     private static final float DEFAULT_SHORT_DEGREE_LENGTH = 30f;
 
@@ -63,19 +64,19 @@ public class ClockView extends View {
 
     public ClockView(Context context) {
         super(context);
-        this.context =context ;
+        this.context = context;
         init();
     }
 
     public ClockView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context =context ;
+        this.context = context;
         init();
     }
 
     public ClockView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context =context ;
+        this.context = context;
         init();
     }
 
@@ -88,7 +89,7 @@ public class ClockView extends View {
      * 计算时针、分针、秒针的长度
      */
     private void reset() {
-        float r = (float) (Math.min(getHeight() *0.55 , getWidth() *0.55) - DEFAULT_BORDER_WIDTH / 2);
+        float r = (float) (Math.min(getHeight() * 0.55, getWidth() * 0.55) - DEFAULT_BORDER_WIDTH / 2);
         secondPointerLength = r * 0.8f;
         minutePointerLength = r * 0.6f;
         hourPointerLength = r * 0.5f;
@@ -167,7 +168,7 @@ public class ClockView extends View {
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(calendar.HOUR);
-        int hour_clock = hour-1;
+        int hour_clock = hour - 1;
 //根据时间判断画点
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         int width = wm.getDefaultDisplay().getWidth();
@@ -175,15 +176,31 @@ public class ClockView extends View {
             float[] temp = calculatePoint((i + 1) * 30, r - DEFAULT_LONG_DEGREE_LENGTH - degressNumberSize / 2 - 15);
           /*  canvas.drawText((i+1)+"", temp[2], temp[3] + degressNumberSize/2-6, paintDegreeNumber);*/
             if (i == hour_clock) {
-                Bitmap bitmap = loadBallView(getContext(), R.mipmap.point_3, (int) (0.074*width), (int) (0.074*width));
-                canvas.drawBitmap(bitmap, temp[2]-30, temp[3]-30, paintDegreeNumber);
+                Bitmap bitmap = loadBallView(getContext(), R.mipmap.point_1, (int) (0.074 * width), (int) (0.074 * width));
+//                BlurMaskFilter blurFilter = new BlurMaskFilter(1,
+//                        BlurMaskFilter.Blur.NORMAL);
+//                Paint shadowPaint = new Paint();
+//                shadowPaint.setAlpha(50);
+//                shadowPaint.setColor(Color.WHITE);
+//                shadowPaint.setMaskFilter(blurFilter);
+//                int[] offsetXY = new int[2];
+//                Bitmap shadowBitmap = bitmap
+//                        .extractAlpha(shadowPaint, offsetXY);
+//                Bitmap shadowImage32 = shadowBitmap.copy(Bitmap.Config.ARGB_8888, true);
+//                paintDegreeNumber.setShadowLayer(6,0,0,0xFFffffff);
+                canvas.drawBitmap(bitmap, temp[2] - 30, temp[3] - 30, paintDegreeNumber);
+//
+//                Paint paint3 = new Paint();
+//                paint3.setColor(Color.WHITE);
+//                paint3.setShadowLayer(30, 5, 2, Color.GREEN);
+//                canvas.drawCircle( temp[2] - 30, temp[3] - 30, (float) (0.037 * width), paint3);
 
-            }else {
+            } else {
 
-                if (i==-1|i == 2 | i == 5 | i == 8 ) {
-                    canvas.drawCircle(temp[2], temp[3] + degressNumberSize / 2 - 6, (int) (0.037*width), paintDegreeNumber);
+                if (i == -1 | i == 2 | i == 5 | i == 8) {
+                    canvas.drawCircle(temp[2], temp[3] + degressNumberSize / 2 - 6, (int) (0.037 * width), paintDegreeNumber);
                 } else {
-                    canvas.drawCircle(temp[2], temp[3] + degressNumberSize / 2 - 6, (int) (0.015*width), paintDegreeNumber);
+                    canvas.drawCircle(temp[2], temp[3] + degressNumberSize / 2 - 6, (int) (0.015 * width), paintDegreeNumber);
                 }
 
             }

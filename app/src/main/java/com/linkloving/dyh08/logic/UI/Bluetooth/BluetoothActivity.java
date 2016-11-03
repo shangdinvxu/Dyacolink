@@ -110,6 +110,7 @@ public class BluetoothActivity extends ToolBarActivity {
                     if (v.mac.equals(bluetoothDevice.getAddress()))
                         return;
                 }
+                MyLog.e(TAG,"接收到蓝牙了");
                 DeviceVO vo = new DeviceVO();
                 vo.mac = bluetoothDevice.getAddress();
                 vo.name = bluetoothDevice.getName();

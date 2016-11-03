@@ -1324,6 +1324,7 @@
     <string name="dianyuan_notify">Battery management</string>
     <string name="distance_count">Distance Count</string>
     <string name="distance_to_goal">Distance to goal</string>
+    <string name="doyouwantto">Do you want to log out?</string>
     <string name="edit_target">Edit target</string>
     <string name="effective_time_is_invalid">Effective time is invalid</string>
     <string name="ent_address">Group Address</string>
@@ -3966,7 +3967,7 @@ function login(form){
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_marginTop">17dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:layout_marginLeft">80dp</item>
     </style>
     <style name="main_UI_text_set">

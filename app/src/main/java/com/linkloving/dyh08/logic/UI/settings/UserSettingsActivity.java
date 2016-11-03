@@ -50,7 +50,9 @@ public class UserSettingsActivity extends ToolBarActivity {
     AppCompatButton btnEnter;
     private UserEntity userEntity;
     private UserBase userBase;
-    private int wearingStyle = 0 ;
+    private int wearingStyle = 0;
+    private int remindtype = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,32 +60,64 @@ public class UserSettingsActivity extends ToolBarActivity {
         ButterKnife.inject(this);
         userEntity = MyApplication.getInstance(UserSettingsActivity.this).getLocalUserInfoProvider();
         userBase = userEntity.getUserBase();
+        editNickname.setText(userBase.getNickname());
+        int user_sex = userBase.getUser_sex();
+        if (user_sex == 1) {
+            radioMan.setChecked(true);
+        } else {
+            radioWoman.setChecked(true);
+        }
+        if (userBase.getUser_wearingStyle() == 1) {
+            radioLeft.setChecked(true);
+        } else {
+            radioRight.setChecked(true);
+        }
+        String birthdate = userBase.getBirthdate();
+        if (birthdate.length() > 0) {
+            String[] split = birthdate.split("-");
+            editYear.setText(split[0]);
+            editMon.setText(split[1]);
+            editDay.setText(split[2]);
+        }
+        if (userBase.getRemind()==1){
+            radioRemOn.setChecked(true);
+        }else {
+            radioRemOff.setChecked(true);
+        }
     }
 
     @OnClick(R.id.radio_left)
-    void setRadioLeft(View view){
-        wearingStyle = 0 ;
+    void setRadioLeft(View view) {
+        wearingStyle = 0;
     }
+
     @OnClick(R.id.radio_right)
-    void  setRadioRight(View view){
-        wearingStyle = 1 ;
+    void setRadioRight(View view) {
+        wearingStyle = 1;
     }
 
     @OnClick(R.id.btn_enter)
-     void enter(View view){
+    void enter(View view) {
         String name = editNickname.getText().toString().trim();
         userBase.setNickname(name);
         String day = editDay.getText().toString().trim();
         String month = editMon.getText().toString().trim();
         String year = editYear.getText().toString().trim();
-        String birthday = day+month+year ;
+        String birthday = year + "-" + month + "-" + day;
         userBase.setBirthdate(birthday);
         userBase.setUser_wearingStyle(wearingStyle);
-
+        userBase.setRemind(remindtype);
         IntentFactory.startPortalActivityIntent(UserSettingsActivity.this);
     }
 
-
+    @OnClick(R.id.radio_rem_off)
+    void setRadioRemOff(View view) {
+        remindtype = 2;
+    }
+    @OnClick(R.id.radio_rem_on)
+    void setRadioRemOn(View view){
+        remindtype = 1 ;
+    }
 
     @Override
     protected void getIntentforActivity() {
@@ -92,6 +126,10 @@ public class UserSettingsActivity extends ToolBarActivity {
 
     @Override
     protected void initView() {
+
+    }
+    @OnClick(R.id.user_head)
+    void setUserHead(View view){
 
     }
 

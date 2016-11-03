@@ -39,7 +39,7 @@ public class SettingActivity extends ToolBarActivity {
         totalView = layoutInflater.inflate(R.layout.tw_setting_activity, null);
        String[] strings = {getString(R.string.Notificationsetting),
                 getString(R.string.General),
-                getString(R.string.Datasync),
+//                getString(R.string.Datasync),
         };
         Myadapter myadapter = new Myadapter(SettingActivity.this, strings);
         listview.setAdapter(myadapter);

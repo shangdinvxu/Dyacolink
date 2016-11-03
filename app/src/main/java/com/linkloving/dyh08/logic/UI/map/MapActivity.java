@@ -182,6 +182,7 @@ public class MapActivity extends ToolBarActivity {
             startDate = startTimeList.get(i).getStartDate();
             MyLog.e(TAG,"startDate"+startDate);
             String starttime = simpleDateFormat.format(startDate);
+            MyLog.e(TAG,"starttime-----------"+starttime);
             if (starttime.equals(stringToday)) {
                 startNoteList.add(i);
             }

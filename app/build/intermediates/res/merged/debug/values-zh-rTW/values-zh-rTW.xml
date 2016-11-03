@@ -943,8 +943,8 @@
     <string name="thisyear">thisyear</string>
     <string name="thurs">thurs</string>
     <string name="thursday">thursday</string>
-    <string name="timersetting">定时器</string>
-    <string name="timesetting">定时器</string>
+    <string name="timersetting">定時器</string>
+    <string name="timesetting">定時器</string>
     <string name="title_activity_about_us">AboutUsActivity</string>
     <string name="title_activity_blelist">BLEListActivity</string>
     <string name="title_activity_body">BodyActivity</string>

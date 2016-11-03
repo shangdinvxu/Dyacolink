@@ -1,11 +1,13 @@
 package com.linkloving.dyh08.logic.UI.main;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -13,6 +15,8 @@ import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -226,6 +231,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tv_activity_portal_main);
+        checkBle();
         AppManager.getAppManager().addActivity(this);
         ButterKnife.inject(this);
         contentLayout = (ViewGroup) findViewById(R.id.main);
@@ -252,6 +258,18 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
         /*-------------------日历----------------*/
 
+    }
+    private void checkBle() {
+        //判断是否有权限
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            //请求权限
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},1);
+            //判断是否需要 向用户解释，为什么要申请该权限
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_CONTACTS)) {
+                Toast.makeText(this, "shouldShowRequestPermissionRationale", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
     /*-----------------------------------------------------------------------*/
     @OnClick(R.id.user_linerLayout)
@@ -343,9 +361,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         user_head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //进入个人信息.详细页面
-//                Intent intent = IntentFactory.create_PersonalInfo_Activity_Intent(PortalActivity.this);
-//                startActivityForResult(intent, REQUSET_FOR_PERSONAL);
+                IntentFactory.start2SettingsActivity(PortalActivity.this);
             }
         });
 

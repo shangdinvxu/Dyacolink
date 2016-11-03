@@ -17,7 +17,7 @@ android {
     defaultConfig {
         applicationId "com.linkloving.dyh08"
         minSdkVersion 18
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 10
         versionName "1.1.0"
         multiDexEnabled true

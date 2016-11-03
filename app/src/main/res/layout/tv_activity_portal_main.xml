@@ -43,17 +43,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/activity_horizontal_margin"
+                android:gravity="center"
                 android:paddingBottom="@dimen/activity_horizontal_margin"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 >
                 <!-- 头像 -->
                 <com.linkloving.dyh08.logic.utils.CircleImageView
                     android:id="@+id/user_head"
                     android:layout_width="180px"
                     android:layout_height="180px"
-                    android:layout_gravity="center_vertical"
+
+                    android:layout_gravity="center"
                     android:src="@mipmap/default_avatar_m"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                     app:border_width="2dp"
                     app:border_color="@color/white"
                     android:contentDescription="@string/imageView" />
@@ -63,8 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="用户昵称"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:layout_gravity="center_vertical"
+                    android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="30sp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
