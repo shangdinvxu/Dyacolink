@@ -2,19 +2,30 @@ package com.linkloving.dyh08.logic.UI.HeartRate;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
+import com.linkloving.dyh08.logic.UI.step.IDataChangeListener;
+import com.linkloving.dyh08.logic.UI.step.StepActivity;
+import com.linkloving.dyh08.logic.dto.UserEntity;
+import com.linkloving.dyh08.utils.ToolKits;
+import com.linkloving.dyh08.utils.logUtils.MyLog;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -24,6 +35,7 @@ import butterknife.InjectView;
  */
 
 public class HeartRateActivity extends ToolBarActivity implements View.OnClickListener{
+    private static final String TAG = HeartRateActivity.class.getSimpleName();
     @InjectView(R.id.groups_time)
     TextView groupsTime;
     @InjectView(R.id.Heartrate_day)
@@ -40,7 +52,6 @@ public class HeartRateActivity extends ToolBarActivity implements View.OnClickLi
     TextView avgerageText;
     @InjectView(R.id.middle_framelayout)
     FrameLayout middleFramelayout;
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +62,13 @@ public class HeartRateActivity extends ToolBarActivity implements View.OnClickLi
         HeartrateMonth.setOnClickListener(this);
         HeartrateWeek.setOnClickListener(this);
         initDay();
+        UserEntity localUserInfoProvider = MyApplication.getInstance(HeartRateActivity.this).getLocalUserInfoProvider();
+        String birthdate = localUserInfoProvider.getUserBase().getBirthdate();
+        String[] split = birthdate.split("-");
+        int i = Integer.parseInt(split[0]);
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int resting = (int) ((220-(year-i))*0.4);
+        restingText.setText(resting+"");
         HeartrateDay.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.d_on_72px, 0, 0);
     }
 
@@ -78,55 +96,82 @@ public class HeartRateActivity extends ToolBarActivity implements View.OnClickLi
     }
 
     private void initMonth() {
-        MonthFragment monthFragment = new MonthFragment();
+        MonthDatefragment monthDatefragment = new MonthDatefragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.middle_framelayout, monthFragment);
+        fragmentTransaction.replace(R.id.middle_framelayout, monthDatefragment);
         fragmentTransaction.commit();
+   /*     MonthFragment monthFragment = new MonthFragment();
         monthFragment.setRestingBpmListener(new RestingBpm() {
             @Override
-            public void restAndAvg(int resting, int average, Date data) {
-                restingText.setText(resting+"");
+            public void setAvg(int average) {
                 avgerageText.setText(average+"");
-                String format = simpleDateFormat.format(data);
-                groupsTime.setText(format);
+            }
+        });*/
+        monthDatefragment.setDataChangeListener(new IDataChangeListener() {
+            @Override
+            public void onDataChange(String data) {
+                groupsTime.setText(data);
             }
         });
 
     }
 
     private void initWeek() {
-        WeekFragment weekFragment = new WeekFragment();
+        WeekDatefragment weekDatefragment = new WeekDatefragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.middle_framelayout, weekFragment);
+        fragmentTransaction.replace(R.id.middle_framelayout, weekDatefragment);
         fragmentTransaction.commit();
-        weekFragment.setRestingBpmListener(new RestingBpm() {
+ /*       WeekFragment weekFragment = new WeekFragment();
+    weekFragment.setRestingBpmListener(new RestingBpm() {
+        @Override
+        public void setAvg(int average) {
+            avgerageText.setText(average+"");
+        }
+    });*/
+        weekDatefragment.setDataChangeListener(new IDataChangeListener() {
             @Override
-            public void restAndAvg(int resting, int average, Date data) {
-                restingText.setText(resting+"");
-                avgerageText.setText(average+"");
-                String format = simpleDateFormat.format(data);
-                groupsTime.setText(format);
+            public void onDataChange(String data) {
+                Log.e(TAG, "dateStr-------" + data);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+                Date mondayOfThisWeek = null;
+                Date sundayofThisWeek = null;
+                try {
+                    mondayOfThisWeek= ToolKits.getFirstSundayOfThisWeek(sdf.parse(data));
+                    sundayofThisWeek = ToolKits.getStaurdayofThisWeek(sdf.parse(data));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                SimpleDateFormat simYearMonth = new SimpleDateFormat("MM/dd");
+             String   startData = sdf.format(mondayOfThisWeek);
+              String  endData = simYearMonth.format(sundayofThisWeek);
+                groupsTime.setText(startData+" - "+endData);
             }
         });
     }
 
     private void initDay() {
-        DayFragment dayFragment = new DayFragment();
+        DayDatefragment dayDatefragment = new DayDatefragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.middle_framelayout, dayFragment);
+        fragmentTransaction.replace(R.id.middle_framelayout, dayDatefragment);
         fragmentTransaction.commit();
-        dayFragment.setRestingBpmListener(new RestingBpm() {
+        dayDatefragment.setDataChangeListener(new IDataChangeListener() {
             @Override
-            public void restAndAvg(int resting, int average, Date data) {
-                restingText.setText(resting+"");
-                avgerageText.setText(average+"");
-                String format = simpleDateFormat.format(data);
-                groupsTime.setText(format);
+            public void onDataChange(String data) {
+                groupsTime.setText(data);
+
             }
         });
+      /*  DayFragment dayFragment = new DayFragment();
+        dayFragment.setRestingBpmListener(new RestingBpm() {
+            @Override
+            public void setAvg(int average) {
+                avgerageText.setText(average+"");
+            }
+        });*/
+
     }
 
 
@@ -149,5 +194,9 @@ public class HeartRateActivity extends ToolBarActivity implements View.OnClickLi
 
     @Override
     protected void initListeners() {
+    }
+
+    public void setAvgText(int avging) {
+        avgerageText.setText(avging+"");
     }
 }

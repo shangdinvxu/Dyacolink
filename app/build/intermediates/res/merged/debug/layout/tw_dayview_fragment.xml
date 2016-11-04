@@ -5,6 +5,7 @@
     android:layout_height="fill_parent"
     android:layout_centerInParent="true"
     android:orientation="vertical"
+
     android:background="@color/white">
     <!-- 日历时间选择栏 -->
     <!-- <RelativeLayout

@@ -55,23 +55,23 @@ public class DayViewFragment extends Fragment {
                 }
                 checkDate = monthDateView.getmSelYear() + "-" + monthDateView.getmSelMonth() + "-" + monthDateView.getmSelDay();
                 dataChangeListener.onDataChange(checkDate);
-                if (type == 0) {
-                    //加载下面的buttom
-                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    SleepDayButtomFragment sleepDayButtomFragment = new SleepDayButtomFragment();
-                    fragmentTransaction.replace(R.id.tw_sleep_buttomfragment, sleepDayButtomFragment).commit();
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction transaction = fragmentManager.beginTransaction();
-                    DaychartviewFragment daychartviewFragment = new DaychartviewFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("date", checkDate);
-                    daychartviewFragment.setArguments(bundle);
-                    transaction.replace(R.id.step_middle, daychartviewFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                    SleepActivity activity = (SleepActivity) getActivity();
-                    activity.videGone();
-                }
+//                if (type == 0) {
+//                    //加载下面的buttom
+//                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                    SleepDayButtomFragment sleepDayButtomFragment = new SleepDayButtomFragment();
+//                    fragmentTransaction.replace(R.id.tw_sleep_buttomfragment, sleepDayButtomFragment).commit();
+//                    FragmentManager fragmentManager = getFragmentManager();
+//                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+//                    DaychartviewFragment daychartviewFragment = new DaychartviewFragment();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("date", checkDate);
+//                    daychartviewFragment.setArguments(bundle);
+//                    transaction.replace(R.id.step_middle, daychartviewFragment);
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
+//                    SleepActivity activity = (SleepActivity) getActivity();
+//                    activity.videGone();
+//                }
             }
         });
         left_btn.setOnClickListener(new View.OnClickListener() {

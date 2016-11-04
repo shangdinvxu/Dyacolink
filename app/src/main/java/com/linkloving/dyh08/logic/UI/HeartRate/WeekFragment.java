@@ -11,9 +11,12 @@ import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.logic.UI.HeartRate.WeekView.BarChartView;
 import com.linkloving.dyh08.logic.UI.HeartRate.WeekView.DetailChartControl;
 import com.linkloving.dyh08.utils.ToolKits;
+import com.linkloving.dyh08.utils.logUtils.MyLog;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +39,9 @@ public class WeekFragment extends Fragment {
     private ArrayList<BarChartView.BarChartItemBean> beanArrayList;
     private RestingBpm restingBpm ;
     private Date firstSundayOfThisWeek;
+    Date mondayOfThisWeek =null;
+    Date sundayofThisWeek=null ;
+    private Date time;
 
     public  void setRestingBpmListener(RestingBpm restingBpm){
         this.restingBpm = restingBpm ;
@@ -46,6 +52,22 @@ public class WeekFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tw_heartrate_week, container, false);
         ButterKnife.inject(this, view);
+        String date = getArguments().getString("date");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+//            SimpleDateFormat sdfWithSlashYear = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+//            SimpleDateFormat sdfWithSlashNoYear = new SimpleDateFormat("MM/dd", Locale.getDefault());
+//            取出来的天数加7天
+        try {
+            Date parse = sdf.parse(date);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(parse);
+            calendar.add(Calendar.DAY_OF_YEAR, 7);
+            time = calendar.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         greendaoUtils = new GreendaoUtils(getActivity());
         beanArrayList = getOneWeekRecord();
         HeartrateDayBarchartview.setItems(beanArrayList);
@@ -55,12 +77,13 @@ public class WeekFragment extends Fragment {
 
     private ArrayList<BarChartView.BarChartItemBean> getOneWeekRecord() {
         beanArrayList = new ArrayList<>();
-        Date date = new Date();
         /**先取出每周的开始时间,for7次*/
-        firstSundayOfThisWeek = ToolKits.getFirstSundayOfThisWeek(date);
+        firstSundayOfThisWeek = ToolKits.getFirstSundayOfThisWeek(time);
         long time = firstSundayOfThisWeek.getTime();
         int restmonth = 0 ;
         int avgmonth = 0 ;
+        int totalAvg = 0 ;
+        int times = 0 ;
         for (int i = 0; i < 7; i++) {
             long Daystarttime =time +ONEDAYMILLIONS*i;
         long timeEnd = Daystarttime + ONEDAYMILLIONS;
@@ -70,6 +93,8 @@ public class WeekFragment extends Fragment {
         for (heartrate record : heartrates) {
             Integer avg = record.getAvg();
             Integer max = record.getMax();
+            totalAvg = record.getAvg()+totalAvg ;
+            times = times++ ;
             onedayAvg = avg + onedayAvg;
             onedayMax = max + onedayMax;
         }
@@ -86,8 +111,13 @@ public class WeekFragment extends Fragment {
             avgmonth = onedayAvg+avgmonth ;
     }
         int  resting = restmonth/7 ;
-        int  avging = avgmonth/7 ;
-        restingBpm.restAndAvg(resting,avging,date);
+        int avging = 0 ;
+        if (times !=0){
+            avging = totalAvg/times ;
+        }
+        HeartRateActivity activity = (HeartRateActivity) getActivity();
+        activity.setAvgText( avging) ;
+//        restingBpm.setAvg(avging);
         return beanArrayList ;
     }
 

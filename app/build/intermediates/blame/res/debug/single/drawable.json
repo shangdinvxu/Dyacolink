@@ -760,12 +760,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\title_add.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_toast_bg.9.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\common_toast_bg.9.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\side_nav_bar.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\side_nav_bar.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_toast_bg.9.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\common_toast_bg.9.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_corners_bg_nor.xml",

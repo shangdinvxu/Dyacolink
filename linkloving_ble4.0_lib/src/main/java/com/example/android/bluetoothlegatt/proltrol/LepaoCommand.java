@@ -49,4 +49,5 @@ public interface LepaoCommand {
 	static final byte COMMAND_FORMAT_DEVICE = 0x5E;         // 初始化设备(解除绑定)
 	
 	static final byte COMMAND_FACTORY_TEST = 0x00;          // 工厂测试命令
+	byte COMMANDSHOWHAND = 0x45  ;//抬手显屏
 }

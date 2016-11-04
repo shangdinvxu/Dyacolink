@@ -44,6 +44,17 @@ public class DeviceSetting {
     /**目标*/
     private String goal;
 
+    public byte getShowhand() {
+        return showhand;
+    }
+
+    public void setShowhand(byte showhand) {
+        this.showhand = showhand;
+    }
+
+    /**抬手显屏*/
+    public byte showhand = 0x01;
+
     /**目标更新*/
     private long goal_update;
 

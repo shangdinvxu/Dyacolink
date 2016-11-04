@@ -74,7 +74,7 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
         int runDistance = (int) (CommonUtils.getScaledDoubleValue(Double.valueOf(daySynopic.getRun_distance()), 0));
         int distance = walkDistance + runDistance;
         int stepGoal = Integer.parseInt(PreferencesToolkits.getGoalInfo(context, PreferencesToolkits.KEY_GOAL_DISTANCE));
-        float stepPercent  = (float)distance/stepGoal ;
+        float stepPercent  = (float)distance/(stepGoal*1000) ;
         //此时去更新UI
         double i = (double)distance / 1000;
         if (i==0){

@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -60,6 +61,18 @@ public class TraceGreendao {
 //        MyLog.e(TAG,"addNote方法执行了");
         Note note = new Note(null, date,  startDate, runDate,3, latitude,longitude);
         getNoteDao().insert(note);
+    }
+
+    /**
+     * 添加workout的数据,type的类型是10
+     * @param starttime
+     * @param endtime
+     */
+    public void addworkoutData(long starttime,long endtime){
+        Date startData = new Date(starttime);
+        Date endData = new Date(endtime);
+        Note note = new Note(null, null, startData, endData, 10, null, null);
+        getNoteDao().insertOrReplace(note);
     }
 
     /**
@@ -123,7 +136,7 @@ public class TraceGreendao {
     public List <Note>searchAllStarttime(){
         Query<Note> query = getNoteDao().queryBuilder()
                 .where(NoteDao.Properties.Type.eq(1))
-                .orderAsc(NoteDao.Properties.Id)
+                .orderAsc(NoteDao.Properties.StartDate)
                 .build();
         List<Note> list = query.list();
         for (int i=0 ; i<list.size();i++){
@@ -134,7 +147,7 @@ public class TraceGreendao {
     public List<Note>searchAllEndTime(){
         Query<Note> query = getNoteDao().queryBuilder()
                 .where(NoteDao.Properties.Type.eq(2))
-                .orderAsc(NoteDao.Properties.Id)
+                .orderAsc(NoteDao.Properties.StartDate)
                 .build();
         List<Note> list = query.list();
         for (int i=0 ; i<list.size();i++){

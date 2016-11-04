@@ -89,7 +89,7 @@ public class MonthSportAsynck extends AsyncTask<Object, Object, List<DaySynopic>
         }
         stepnumber = stepnumber /daynumber ;
         int stepGoal = Integer.parseInt(PreferencesToolkits.getGoalInfo(context, PreferencesToolkits.KEY_GOAL_DISTANCE));
-        float stepPercent  = (float)stepnumber/stepGoal ;
+        float stepPercent  = (float)stepnumber/(stepGoal*1000) ;
         //此时去更新UI
         double i = (double)stepnumber / 1000;
         if (i==0){

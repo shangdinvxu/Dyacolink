@@ -4,12 +4,14 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -87,6 +89,11 @@ TextView caloriesTV ;
         updataGoalView();
         //获取右上角的点击控件
         LinearLayout rightLayout = getRightButton();
+        TextView ree = (TextView) findViewById(R.id.ree);
+        ree.setVisibility(View.VISIBLE);
+        AppCompatImageView gogalImage = (AppCompatImageView) findViewById(R.id.gogalImage);
+        gogalImage.setVisibility(View.GONE);
+
         rightLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,9 +156,9 @@ TextView caloriesTV ;
     private List<String> creatStepGoalList() {
         List<String> list =new ArrayList<String>();
         //要求步数目标为2000~~100000
-        int startGoal = 2000;
-        int overGoal = 100000;
-        for(int i =startGoal;i<overGoal;i+=1000 ){
+        int startGoal = 1000;
+        int overGoal = 9900;
+        for(int i =startGoal;i<=overGoal;i+=100 ){
             list.add(i+"");
         }
         return list;

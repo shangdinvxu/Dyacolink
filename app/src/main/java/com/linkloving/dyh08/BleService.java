@@ -23,6 +23,7 @@ import com.example.android.bluetoothlegatt.BLEHandler;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPSportData;
+import com.example.android.bluetoothlegatt.proltrol.dto.LPWorkoutData;
 import com.example.android.bluetoothlegatt.proltrol.dto.LpHeartrateData;
 import com.linkloving.band.dto.DaySynopic;
 import com.linkloving.band.dto.SportRecord;
@@ -30,6 +31,7 @@ import com.linkloving.dyh08.db.sport.UserDeviceRecord;
 import com.linkloving.dyh08.db.summary.DaySynopicTable;
 import com.linkloving.dyh08.logic.UI.HeartRate.GreendaoUtils;
 import com.linkloving.dyh08.logic.UI.device.incomingtel.IncomingTelActivity;
+import com.linkloving.dyh08.logic.UI.setting.NotificationSettingActivity;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.UI.workout.trackshow.TrackApplication;
 import com.linkloving.dyh08.logic.UI.workout.trackshow.WorkoutActivity;
@@ -133,7 +135,6 @@ public class BleService extends Service {
     public LPDeviceInfo lpDeviceInfo_;
     private LBSTraceClient client;
     private Trace trace;
-    private TraceGreendao traGreendao ;
 
     private SQLiteDatabase db;
     private DaoMaster.DevOpenHelper devOpenHelper;
@@ -220,7 +221,9 @@ public class BleService extends Service {
         heartrateHelper = new DaoMaster.DevOpenHelper(BleService.this, "heartrate", null);
         SQLiteDatabase readableDatabase = heartrateHelper.getReadableDatabase();
         greendaoUtils = new GreendaoUtils(BleService.this, readableDatabase);
-
+        devOpenHelper = new DaoMaster.DevOpenHelper(this, "Note", null);
+        db = devOpenHelper.getReadableDatabase();
+        traceGreendao = new TraceGreendao(this,db);
 
     }
 
@@ -576,6 +579,7 @@ public class BleService extends Service {
 
                 provider.SetDeviceTime(BleService.this);
                 provider.GetHeartrate(BleService.this);
+                provider.getworkOutdata(BleService.this);
             }
 
             //时间设置成功--基本流程完毕
@@ -610,6 +614,7 @@ public class BleService extends Service {
             protected  void notifyforgerHeartList(ArrayList<LpHeartrateData>  obj){
                 MyLog.e(TAG,"notifyforgerHeartListsuccess");
                 super.notifyforgerHeartList(obj);
+
                 for (LpHeartrateData obj1: obj){
                     greendaoUtils.add(obj1.getStartTime(),obj1.getMaxRate(),obj1.getAvgRate());
                     List<heartrate> search = greendaoUtils.search(obj1.getStartTime());
@@ -617,7 +622,16 @@ public class BleService extends Service {
                     MyLog.e(TAG,"-----------------------");
                 }
 
+            }
 
+            @Override
+            protected void notifyforgetworkoutdata(ArrayList<LPWorkoutData> obj) {
+                super.notifyforgetworkoutdata(obj);
+                for (LPWorkoutData obj1: obj){
+                    MyLog.e(TAG,"notifyforgetworkoutdata"+obj1.getStarttime()+"-------"+obj1.getEndtime());
+                    traceGreendao.addworkoutData(obj1.getStarttime(),obj1.getEndtime());
+                }
+                provider.clearWorkOutdata(BleService.this);
             }
 
             @Override

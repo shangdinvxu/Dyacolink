@@ -49,7 +49,7 @@ public class NoteDao extends AbstractDao<Note, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'NOTE' (" + //
                 "'_id' INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "'DATE' TEXT NOT NULL ," + // 1: date
+                "'DATE' TEXT," + // 1: date
                 "'START_DATE' INTEGER," + // 2: startDate
                 "'RUN_DATE' INTEGER," + // 3: runDate
                 "'TYPE' INTEGER," + // 4: type
@@ -72,7 +72,11 @@ public class NoteDao extends AbstractDao<Note, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getDate());
+ 
+        String date = entity.getDate();
+        if (date != null) {
+            stmt.bindString(2, date);
+        }
  
         java.util.Date startDate = entity.getStartDate();
         if (startDate != null) {
@@ -117,7 +121,7 @@ public class NoteDao extends AbstractDao<Note, Long> {
     public Note readEntity(Cursor cursor, int offset) {
         Note entity = new Note( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // date
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // date
             cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)), // startDate
             cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)), // runDate
             cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // type
@@ -131,7 +135,7 @@ public class NoteDao extends AbstractDao<Note, Long> {
     @Override
     public void readEntity(Cursor cursor, Note entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setDate(cursor.getString(offset + 1));
+        entity.setDate(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setStartDate(cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)));
         entity.setRunDate(cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)));
         entity.setType(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));

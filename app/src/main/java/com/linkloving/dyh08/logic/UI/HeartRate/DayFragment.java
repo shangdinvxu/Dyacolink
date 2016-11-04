@@ -1,5 +1,6 @@
 package com.linkloving.dyh08.logic.UI.HeartRate;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +15,8 @@ import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.logic.UI.HeartRate.DayView.BarChartView;
 import com.linkloving.dyh08.logic.UI.HeartRate.DayView.DetailChartControl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -41,18 +44,27 @@ public class DayFragment extends Fragment {
     private AsyncTask<Object, Object, List<BRDetailData>> dayDataAsync = null;
     private DaoMaster.DevOpenHelper heartrateHelper;
     private GreendaoUtils greendaoUtils;
-    private Date date;
 
     private RestingBpm restingBpm ;
+    private String checkDate;
+    private SimpleDateFormat simpleDateFormat;
+    private Date parse;
+
     public  void setRestingBpmListener(RestingBpm restingBpm){
             this.restingBpm = restingBpm ;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tw_heartrate_day, container, false);
         ButterKnife.inject(this, view);
+        checkDate = getArguments().getString("checkDate");
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            parse = simpleDateFormat.parse(checkDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         heartrateHelper = new DaoMaster.DevOpenHelper(getActivity(), "heartrate", null);
         SQLiteDatabase readableDatabase = heartrateHelper.getReadableDatabase();
         greendaoUtils = new GreendaoUtils(getActivity(), readableDatabase);
@@ -60,14 +72,13 @@ public class DayFragment extends Fragment {
         barchartview.setItems(list);
 //   调滑动的线
         detailChartControl = (DetailChartControl)view.findViewById(R.id.activity_detailChartView1);
-        detailChartControl.initDayIndex(date);
+        detailChartControl.initDayIndex(parse);
         return view;
     }
     private List<BarChartView.BarChartItemBean>  getHeartPointoneDay(){
-         date=new Date();//取时间
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_YEAR,-1);
-        calendar.setTime(date);
+        calendar.setTime(parse);
         calendar.set(Calendar.HOUR,0);
         calendar.set(Calendar.MINUTE,0);
         calendar.set(Calendar.SECOND,0);
@@ -91,7 +102,7 @@ public class DayFragment extends Fragment {
             rest = rest+record.getMax();
             avg = avg+record.getAvg();
         }
-        int resting,avging ;
+        int resting,avging = 0;
         if (list.size()==0){
              resting = 0 ;
             avging = 0 ;
@@ -99,8 +110,11 @@ public class DayFragment extends Fragment {
              resting = rest / list.size();
              avging = avg/list.size();
         }
+        HeartRateActivity activity = (HeartRateActivity) getActivity();
+        activity.setAvgText( avging) ;
 
-        restingBpm.restAndAvg(resting,avging,date);
+//        restingBpm.setAvg(avging);
+//        restingBpm.setAvg(resting,avging,date);
         return list ;
     }
 

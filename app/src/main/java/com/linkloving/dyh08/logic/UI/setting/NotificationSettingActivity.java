@@ -311,7 +311,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 String clock1 = clockoneHr+":"+clockoneMin+"-"+"127"+"-"+clock1Switch;
                 deviceSetting.setAlarm_one(clock1);
                 LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,deviceSetting);
-                if (isChecked){
+
                     if (provider.isConnectedAndDiscovered()){
                             MyLog.e(TAG,"发送闹钟1的指令了");
                             provider.SetClock(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
@@ -320,7 +320,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                             Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
                         }
 
-                }
+
             }
         });
         clock2.setOnClickListener(new View.OnClickListener() {
@@ -337,7 +337,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 String clock2 = clocktwoHr+":"+clocktwoMin+"-"+"127"+"-"+clock2Switch;
                 deviceSetting.setAlarm_two(clock2);
                 LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,deviceSetting);
-                if (isChecked){
+
                     if (provider.isConnectedAndDiscovered()){
                         MyLog.e(TAG,"发送闹钟1的指令了");
                         provider.SetClock(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
@@ -345,7 +345,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                     }else {
                         Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
                     }
-                }
+
             }
         });
         clock3.setOnClickListener(new View.OnClickListener() {
@@ -363,7 +363,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 deviceSetting.setAlarm_three(clock3);
                 MyLog.e(TAG,"clock3Switch"+clock3Switch);
                 LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,deviceSetting);
-                if (isChecked){
+
                     if (provider.isConnectedAndDiscovered()){
                         MyLog.e(TAG,"发送闹钟3的指令了");
                         provider.SetClock(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
@@ -371,7 +371,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                     }else {
                         Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
                     }
-                }
+
             }
         });
         clock4.setOnClickListener(new View.OnClickListener() {
@@ -388,7 +388,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 String clock4 = clockfourHr+":"+clockfourMin+"-"+"127"+"-"+clock4Switch;
                 deviceSetting.setAlarm_four(clock4);
                 LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,deviceSetting);
-                if (isChecked){
+
                     if (provider.isConnectedAndDiscovered()){
                         MyLog.e(TAG,"发送闹钟4的指令了");
                         provider.SetClock(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
@@ -396,7 +396,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                     }else {
                         Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
                     }
-                }
+
             }
         });
     }

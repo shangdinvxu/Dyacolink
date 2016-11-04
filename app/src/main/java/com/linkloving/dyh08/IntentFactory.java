@@ -45,16 +45,14 @@ import com.linkloving.dyh08.logic.UI.more.MoreActivity;
 import com.linkloving.dyh08.logic.UI.setting.GeneralActivity;
 import com.linkloving.dyh08.logic.UI.setting.NotificationSettingActivity;
 import com.linkloving.dyh08.logic.UI.setting.SettingActivity;
-import com.linkloving.dyh08.logic.UI.settings.UserSettingsActivity;
+import com.linkloving.dyh08.logic.UI.settings.PersonalInfoActivity;
 import com.linkloving.dyh08.logic.UI.sleep.SleepActivity;
 import com.linkloving.dyh08.logic.UI.step.StepActivity;
 import com.linkloving.dyh08.logic.UI.weight.WeightActivity;
 import com.linkloving.dyh08.logic.UI.Groups.baidu.GroupsActivity;
 import com.linkloving.dyh08.logic.UI.workout.trackshow.WorkoutActivity;
-import com.linkloving.dyh08.logic.UI.workout.trackshow.work_outActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.utils.ToolKits;
-import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.utils.CommonUtils;
 
 //import com.linkloving.dyh08.logic.UI.step.StepActivity;
@@ -324,7 +322,7 @@ public class IntentFactory {
 
     //设置信息
     public static void start2SettingsActivity(Activity activity){
-        Intent intent = new Intent(activity, UserSettingsActivity.class);
+        Intent intent = new Intent(activity, PersonalInfoActivity.class);
         activity.startActivity(intent);
     }
 

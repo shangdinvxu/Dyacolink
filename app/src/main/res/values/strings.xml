@@ -1020,7 +1020,7 @@
     <string name="wearabledevice">Wearable Device</string>
     <string name="Pressthedecive">Press the devices\'s display for two seconds to switch the heart rate measurement automatically</string>
 
-
+    <string name="showhand">抬手显屏</string>
     <string name="Datasync">Data synchronization</string>
     <string name="syncdata">Sync data</string>
     <string name="usecellilar">Use cellilar network</string>

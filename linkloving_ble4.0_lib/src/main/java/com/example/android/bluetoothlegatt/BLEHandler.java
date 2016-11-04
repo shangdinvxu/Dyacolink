@@ -13,6 +13,7 @@ import com.example.android.bluetoothlegatt.proltrol.dto.LLXianJinCard;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPSportData;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPSportRecorder;
+import com.example.android.bluetoothlegatt.proltrol.dto.LPWorkoutData;
 import com.example.android.bluetoothlegatt.proltrol.dto.LpHeartrateData;
 import com.example.android.bluetoothlegatt.utils.OwnLog;
 
@@ -715,6 +716,11 @@ public abstract class BLEHandler extends Handler {
 		}else if (typeIndex==BLEProvider.INDEX_GET_HEART_RATE)	{
 				notifyforgerHeartList((ArrayList<LpHeartrateData>) obj);
 		}
+		else if (typeIndex==BLEProvider.INDEX_GET_WORKOUT_DATA)	{
+			notifyforgetworkoutdata((ArrayList<LPWorkoutData>) obj);
+		}
+
+
 		else if(typeIndex ==BLEProvider.INDEX_STEP_TARGET){
 			if ((boolean)obj){
 				notifyforsendGoalSuccess();
@@ -1272,6 +1278,10 @@ public abstract class BLEHandler extends Handler {
 //		if (bleProviderObserver != null)
 //			bleProviderObserver.updateFor_notifyforgerHeartList( obj);
 //		OwnLog.e("BluetoothActivity","解绑成功+notifyforgerHeartList");
+	}
+
+	protected  void notifyforgetworkoutdata(ArrayList<LPWorkoutData> obj){
+
 	}
 
 	/**

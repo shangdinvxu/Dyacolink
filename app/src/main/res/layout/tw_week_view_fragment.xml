@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@color/white"
+    android:id="@+id/step_linear_day"
     >
     <LinearLayout
         android:paddingTop="10dp"

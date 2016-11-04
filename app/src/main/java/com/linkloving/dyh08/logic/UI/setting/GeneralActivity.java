@@ -8,17 +8,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.android.bluetoothlegatt.BLEProvider;
+import com.linkloving.dyh08.BleService;
+import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
+import com.linkloving.dyh08.logic.dto.UserEntity;
+import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
+import com.linkloving.dyh08.prefrences.devicebean.DeviceSetting;
+import com.linkloving.dyh08.utils.DeviceInfoHelper;
 import com.linkloving.dyh08.utils.ToolKits;
+
+import java.security.Provider;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -32,6 +43,9 @@ public class GeneralActivity extends ToolBarActivity {
     ListView listview;
     private LayoutInflater layoutInflater;
     private View totalView;
+    private BLEProvider provider;
+    private UserEntity userEntity;
+    private DeviceSetting deviceSetting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +58,11 @@ public class GeneralActivity extends ToolBarActivity {
                 getString(R.string.Selectthe),
                 getString(R.string.Communityweb),
                 getString(R.string.AutomaticHR)
+                ,getString(R.string.showhand)
         };
-
+        provider = BleService.getInstance(GeneralActivity.this).getCurrentHandlerProvider();
+        userEntity = MyApplication.getInstance(getApplicationContext()).getLocalUserInfoProvider();
+        deviceSetting = LocalUserSettingsToolkits.getLocalSetting(GeneralActivity.this, userEntity.getUser_id() + "");
         layoutInflater = LayoutInflater.from(GeneralActivity.this);
         totalView = layoutInflater.inflate(R.layout.tw_setting_activity, null);
         Myadapter myadapter = new Myadapter(GeneralActivity.this, strings);
@@ -77,8 +94,33 @@ public class GeneralActivity extends ToolBarActivity {
                     case 6:
                         initAutomaticHR();
                         break;
+                    case 7:
+                        initShowhand();
+                        break;
 
                 }
+            }
+        });
+    }
+
+    private void initShowhand() {
+        View view = layoutInflater.inflate(R.layout.showhandpopupwindow, null);
+        ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
+        final PopupWindow popupWindow = getnewPopupWindow(view);
+        dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        Switch showhandSwitch = (Switch) view.findViewById(R.id.showhand);
+        showhandSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                deviceSetting.setShowhand((byte) (isChecked?0x01:0x00));
+                LocalUserSettingsToolkits.updateLocalSetting(GeneralActivity.this,deviceSetting);
+                    provider.SetHandUp(GeneralActivity.this, DeviceInfoHelper.fromUserEntity(GeneralActivity.this,
+                            userEntity));
             }
         });
     }
@@ -199,7 +241,7 @@ public class GeneralActivity extends ToolBarActivity {
         distanceSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                distancesTextview.setText((progress+2000)+"");
+                distancesTextview.setText((progress)+"");
             }
 
             @Override
@@ -216,7 +258,7 @@ public class GeneralActivity extends ToolBarActivity {
         caloriesSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                caloriesTextview.setText((progress+2000)+"");
+                caloriesTextview.setText((progress+1000)+"");
             }
 
             @Override

@@ -7,6 +7,7 @@ import com.example.android.bluetoothlegatt.proltrol.dto.LLXianJinCard;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPSportData;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPSportRecorder;
+import com.example.android.bluetoothlegatt.proltrol.dto.LPWorkoutData;
 import com.example.android.bluetoothlegatt.proltrol.dto.LpHeartrateData;
 import com.example.android.bluetoothlegatt.utils.OwnLog;
 
@@ -219,6 +220,19 @@ public class WatchResponse {
 			}
 			return  list  ;
 		}
+	public List<LPWorkoutData> toLpWorkoutData (WatchResponse response)throws LPException{
+		byte[] data = response.getData();
+		ArrayList<LPWorkoutData> list = new ArrayList<>();
+		for (int i=0;i<data[5];i++){
+			LPWorkoutData lPWorkoutData = new LPWorkoutData();
+			int startTime = LPUtil.makeInt(data[8* i + 9], data[8* i + 8], data[8 * i + 7], data[8 * i + 6]);
+			lPWorkoutData.setStarttime(startTime);
+			int endTime = LPUtil.makeInt(data[8* i + 13], data[8* i + 12], data[8 * i + 11], data[8 * i + 10]);
+			lPWorkoutData.setEndtime(endTime);
+			list.add(lPWorkoutData);
+		}
+		return  list  ;
+	}
 
 		
 		public  List< LPSportData >  toLPSportDataList(int devicetime) throws LPException {

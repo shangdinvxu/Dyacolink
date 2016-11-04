@@ -23,6 +23,24 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@mipmap/twitter"/>
+            <ImageView
+                android:id="@+id/Wechat"
+                android:layout_marginLeft="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/twitter"/>
+            <ImageView
+                android:id="@+id/QQ"
+                android:layout_marginLeft="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/twitter"/>
+            <ImageView
+                android:id="@+id/instagram"
+                android:layout_marginLeft="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/twitter"/>
 
 
         </LinearLayout>

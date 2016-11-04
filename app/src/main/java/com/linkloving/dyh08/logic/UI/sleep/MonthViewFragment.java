@@ -67,24 +67,14 @@ public class MonthViewFragment extends Fragment {
                 String seletedItem = wva.getSeletedItem();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                MonthCalendarFragment monthchartviewFragment = new MonthCalendarFragment();
-                monthchartviewFragment.setDataChangeListener(new IDataChangeListener() {
-                    @Override
-                    public void onDataChange(String data) {
-                        MyLog.e(TAG, "Stringdate" + data);
-
-                        dataChangeListener.onDataChange(data);
-                    }
-                });
+                Month2CalendarFragment monthchartviewFragment = new Month2CalendarFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("monthDate", seletedItem);
                 monthchartviewFragment.setArguments(bundle);
-                iClickNextlistener.nextFragment();
-//                SleepCalendarButtomFragment sleepCalendarButtomFragment = new SleepCalendarButtomFragment();
-//                transaction.replace(R.id.tw_sleep_buttom,sleepCalendarButtomFragment);
                 transaction.replace(R.id.step_middle, monthchartviewFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
+                iClickNextlistener.nextFragment();
             }
         });
 

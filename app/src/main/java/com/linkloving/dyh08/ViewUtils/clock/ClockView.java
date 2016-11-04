@@ -176,7 +176,7 @@ public class ClockView extends View {
             float[] temp = calculatePoint((i + 1) * 30, r - DEFAULT_LONG_DEGREE_LENGTH - degressNumberSize / 2 - 15);
           /*  canvas.drawText((i+1)+"", temp[2], temp[3] + degressNumberSize/2-6, paintDegreeNumber);*/
             if (i == hour_clock) {
-                Bitmap bitmap = loadBallView(getContext(), R.mipmap.point_1, (int) (0.074 * width), (int) (0.074 * width));
+                Bitmap bitmap = loadBallView(getContext(), R.mipmap.point_3, (int) (0.074 * width), (int) (0.074 * width));
 //                BlurMaskFilter blurFilter = new BlurMaskFilter(1,
 //                        BlurMaskFilter.Blur.NORMAL);
 //                Paint shadowPaint = new Paint();
@@ -188,7 +188,9 @@ public class ClockView extends View {
 //                        .extractAlpha(shadowPaint, offsetXY);
 //                Bitmap shadowImage32 = shadowBitmap.copy(Bitmap.Config.ARGB_8888, true);
 //                paintDegreeNumber.setShadowLayer(6,0,0,0xFFffffff);
-                canvas.drawBitmap(bitmap, temp[2] - 30, temp[3] - 30, paintDegreeNumber);
+                paintDegreeNumber.setShadowLayer(116,0,0,0xFF555555);
+//                canvas.drawBitmap(bitmap, temp[2] - 30, temp[3] - 30, paintDegreeNumber);
+                canvas.drawCircle( temp[2] - 30, temp[3] - 30, (float) (0.037 * width), paintDegreeNumber);
 //
 //                Paint paint3 = new Paint();
 //                paint3.setColor(Color.WHITE);

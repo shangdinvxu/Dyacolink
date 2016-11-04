@@ -720,7 +720,7 @@ ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:409:9-412:58
 		ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:412:13-55
 	android:name
 		ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:410:13-65
-activity#com.linkloving.dyh08.logic.UI.settings.UserSettingsActivity
+activity#com.linkloving.dyh08.logic.UI.settings.PersonalInfoActivity
 ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:414:9-417:58
 	android:screenOrientation
 		ADDED from F:\Daniel\dyh08\app\src\main\AndroidManifest.xml:416:13-49

@@ -8,10 +8,12 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.DataSetObserver;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.nfc.Tag;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,10 +28,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +47,7 @@ import com.baidu.location.LocationClientOption;
 import com.example.android.bluetoothlegatt.BLEHandler;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jaeger.library.StatusBarUtil;
 import com.linkloving.band.dto.DaySynopic;
 import com.linkloving.band.dto.SportRecord;
@@ -70,6 +75,7 @@ import com.linkloving.dyh08.logic.dto.SportRecordUploadDTO;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.LocalInfoVO;
+import com.linkloving.dyh08.utils.AvatarHelper;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.DateSwitcher;
 import com.linkloving.dyh08.utils.ScreenUtils;
@@ -87,6 +93,8 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.yolanda.nohttp.Response;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -96,7 +104,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import no.nordicsemi.android.dfu.DfuProgressListenerAdapter;
-import no.nordicsemi.android.dfu.DfuServiceController;
 import no.nordicsemi.android.dfu.DfuServiceInitiator;
 import no.nordicsemi.android.dfu.DfuServiceListenerHelper;
 
@@ -142,6 +149,8 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     @InjectView(R.id.main_tv_Sleep)
     AppCompatTextView sleepView;
 
+    // 修改头像的临时文件存放路径（头像修改成功后，会自动删除之）
+    private String __tempImageFileLocation = null;
 
     /*--------------------------------------------------------*/
     /**
@@ -231,6 +240,69 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tv_activity_portal_main);
+    /*    PullToRefreshListView pulltorefreshView = (PullToRefreshListView) findViewById(R.id.pullTorefreshView);
+        pulltorefreshView.setAdapter(new ListAdapter() {
+            @Override
+            public boolean areAllItemsEnabled() {
+                return false;
+            }
+
+            @Override
+            public boolean isEnabled(int position) {
+                return false;
+            }
+
+            @Override
+            public void registerDataSetObserver(DataSetObserver observer) {
+
+            }
+
+            @Override
+            public void unregisterDataSetObserver(DataSetObserver observer) {
+
+            }
+
+            @Override
+            public int getCount() {
+                return 1;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public boolean hasStableIds() {
+                return false;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = LayoutInflater.from(PortalActivity.this).inflate(R.layout.tw_activity_main_lunch, null);
+                return view;
+            }
+
+            @Override
+            public int getItemViewType(int position) {
+                return 0;
+            }
+
+            @Override
+            public int getViewTypeCount() {
+                return 1;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+        });*/
         checkBle();
         AppManager.getAppManager().addActivity(this);
         ButterKnife.inject(this);
@@ -259,11 +331,12 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         /*-------------------日历----------------*/
 
     }
+
     private void checkBle() {
         //判断是否有权限
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             //请求权限
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
             //判断是否需要 向用户解释，为什么要申请该权限
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.READ_CONTACTS)) {
@@ -271,9 +344,10 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
             }
         }
     }
+
     /*-----------------------------------------------------------------------*/
     @OnClick(R.id.user_linerLayout)
-    void setUserLinerLayout(View view){
+    void setUserLinerLayout(View view) {
         IntentFactory.start2SettingsActivity(PortalActivity.this);
     }
 
@@ -341,16 +415,59 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         refreshHeadView();
         //更新日历 1s一次
         updateTimeThread();
+        Bitmap bitmap = decodeUriAsBitmap(getTempImageFileUri());
+        user_head.setImageBitmap(bitmap);
+
 
     }
 
+    private Bitmap decodeUriAsBitmap(Uri uri) {
+        Bitmap bitmap = null;
+        try {
+            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return bitmap;
+    }
+
+    private Uri getTempImageFileUri() {
+        String tempImageFileLocation = getTempImageFileLocation();
+        if (tempImageFileLocation != null) {
+            return Uri.parse("file://" + tempImageFileLocation);
+        }
+        return null;
+    }
+
+    private String getTempImageFileLocation() {
+        try {
+            if (__tempImageFileLocation == null) {
+                String avatarTempDirStr = AvatarHelper.getUserAvatarSavedDir(PortalActivity.this);
+                File avatarTempDir = new File(avatarTempDirStr);
+                if (avatarTempDir != null) {
+                    // 目录不存在则新建之
+                    if (!avatarTempDir.exists())
+                        avatarTempDir.mkdirs();
+                    // 临时文件名
+                    __tempImageFileLocation = avatarTempDir.getAbsolutePath() + "/" + "local_avatar_temp.jpg";
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "【ChangeAvatar】读取本地用户的头像临时存储路径时出错了，" + e.getMessage(), e);
+        }
+
+        Log.d(TAG, "【ChangeAvatar】正在获取本地用户的头像临时存储路径：" + __tempImageFileLocation);
+
+        return __tempImageFileLocation;
+    }
 
 /*--------------------------------Daniel-----------------------------------*/
 
     @Override
     protected void onResume() {
         super.onResume();
-            DfuServiceListenerHelper.registerProgressListener(this, mDfuProgressListener);
+        DfuServiceListenerHelper.registerProgressListener(this, mDfuProgressListener);
     }
 
 
@@ -649,8 +766,8 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         }
     }
 
-    public void onUploadClicked(){
-        MyLog.e(TAG,"onUploadClicked执行了");
+    public void onUploadClicked() {
+        MyLog.e(TAG, "onUploadClicked执行了");
         DfuServiceInitiator starter = new DfuServiceInitiator("F6:B2:79:1F:47:E8")
                 .setDeviceName("DYH_01")
                 .setKeepBond(false)
@@ -662,12 +779,11 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     }
 
 
-
     /**
      * 提示绑定的弹出框
      */
     private void showBundDialog() {
-            // 您还未绑定 请您绑定一个设备
+        // 您还未绑定 请您绑定一个设备
         AlertDialog dialog = new AlertDialog.Builder(PortalActivity.this)
                 .setTitle(ToolKits.getStringbyId(PortalActivity.this, R.string.portal_main_unbound))
                 .setMessage(ToolKits.getStringbyId(PortalActivity.this, R.string.portal_main_unbound_msg))
@@ -798,9 +914,9 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                         if (up_List.size() > 0) {
                             SportRecordUploadDTO sportRecordUploadDTO = new SportRecordUploadDTO();
                             final String startTime = up_List.get(0).getStart_time();
-                            MyLog.e(TAG,"starttime"+startTime);
+                            MyLog.e(TAG, "starttime" + startTime);
                             final String endTime = up_List.get(up_List.size() - 1).getStart_time();
-                            MyLog.e(TAG,"starttime"+endTime);
+                            MyLog.e(TAG, "starttime" + endTime);
                             sportRecordUploadDTO.setDevice_id("1");
                             sportRecordUploadDTO.setUtc_time("1");
                             sportRecordUploadDTO.setOffset(TimeZoneHelper.getTimeZoneOffsetMinute() + "");
@@ -966,24 +1082,24 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         }
     }
 
-     private final DfuProgressListenerAdapter mDfuProgressListener =  new DfuProgressListenerAdapter(){
-         @Override
-         public void onProgressChanged(String deviceAddress, int percent, float speed, float avgSpeed, int currentPart, int partsTotal) {
-             MyLog.e(TAG,"mDfuProgressListener"+percent+"----");
-         }
+    private final DfuProgressListenerAdapter mDfuProgressListener = new DfuProgressListenerAdapter() {
+        @Override
+        public void onProgressChanged(String deviceAddress, int percent, float speed, float avgSpeed, int currentPart, int partsTotal) {
+            MyLog.e(TAG, "mDfuProgressListener" + percent + "----");
+        }
 
-         @Override
-         public void onDfuCompleted(String deviceAddress) {
-             super.onDfuCompleted(deviceAddress);
-             MyLog.e(TAG,"mDfuProgressListener"+"---onDfuCompleted-");
-         }
+        @Override
+        public void onDfuCompleted(String deviceAddress) {
+            super.onDfuCompleted(deviceAddress);
+            MyLog.e(TAG, "mDfuProgressListener" + "---onDfuCompleted-");
+        }
 
-         @Override
-         public void onError(String deviceAddress, int error, int errorType, String message) {
-             super.onError(deviceAddress, error, errorType, message);
-             MyLog.e(TAG,"mDfuProgressListener"+"--onError--");
-         }
-     };
+        @Override
+        public void onError(String deviceAddress, int error, int errorType, String message) {
+            super.onError(deviceAddress, error, errorType, message);
+            MyLog.e(TAG, "mDfuProgressListener" + "--onError--");
+        }
+    };
 }
 
 

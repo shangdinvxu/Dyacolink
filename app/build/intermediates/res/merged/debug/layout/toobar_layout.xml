@@ -35,7 +35,18 @@
                     android:layout_width="@dimen/activity_horizontal_margin"
                     android:layout_height="@dimen/activity_horizontal_margin"
                     android:layout_gravity="center"
-                    android:background="@mipmap/goal_image"/>
+                    android:background="@mipmap/goal_image"
+                    android:id="@+id/gogalImage"
+                    />
+                <TextView
+                    android:text="REE"
+                    android:id="@+id/ree"
+                    android:layout_marginTop="8dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
         </LinearLayout>
 

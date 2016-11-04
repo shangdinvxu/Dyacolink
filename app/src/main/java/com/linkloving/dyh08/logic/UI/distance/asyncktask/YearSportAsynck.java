@@ -78,7 +78,7 @@ public class YearSportAsynck extends AsyncTask<Object, Object, Integer> {
         super.onPostExecute(averageStepnumber);
         int step = averageStepnumber;
         int stepGoal = Integer.parseInt(PreferencesToolkits.getGoalInfo(context, PreferencesToolkits.KEY_GOAL_DISTANCE));
-        float stepPercent  = (float)step/stepGoal ;
+        float stepPercent  = (float)step/(stepGoal*1000) ;
         double i = (double)step / 1000;
         if (i==0){
             distanceDB = 0.0 ;

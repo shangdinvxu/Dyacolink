@@ -10,9 +10,12 @@ import android.view.ViewGroup;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.logic.UI.HeartRate.MonthView.BarChartView;
 import com.linkloving.dyh08.logic.UI.HeartRate.MonthView.DetailChartControl;
+import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +40,8 @@ public class MonthFragment extends Fragment {
 
     private RestingBpm restingBpm ;
     private Date getfirstDayOfMonth;
+    private SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
+    private Date parse;
 
     public  void setRestingBpmListener(RestingBpm restingBpm){
         this.restingBpm = restingBpm ;
@@ -46,6 +51,16 @@ public class MonthFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tw_heartrate_month, container, false);
         ButterKnife.inject(this, view);
+        String monthDate = getArguments().getString("monthDate");
+        String[] split = monthDate.split("-");
+        String year = split[0];
+        String month = split[1];
+        String firstDayOfMonth = CommonUtils.getFirstDayOfMonth(Integer.parseInt(year), Integer.parseInt(month));
+        try {
+            parse = sim.parse(firstDayOfMonth);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         greendaoUtils = new GreendaoUtils(getActivity());
         beanArrayList = getOneMonthRecord();
         HeartrateDayBarchartview.setItems(beanArrayList);
@@ -62,13 +77,15 @@ public class MonthFragment extends Fragment {
 
     private ArrayList<BarChartView.BarChartItemBean> getOneMonthRecord() {
         beanArrayList = new ArrayList<>();
-        Date date = new Date();
-        int monthMount = ToolKits.getMonthMount(date);
+
+        int monthMount = ToolKits.getMonthMount(parse);
       /**每月的天数*/
-        getfirstDayOfMonth = ToolKits.getFirstofMonth(date);
+        getfirstDayOfMonth = ToolKits.getFirstofMonth(parse);
         long time = getfirstDayOfMonth.getTime();
         int restmonth = 0 ;
         int avgmonth = 0 ;
+        int totalAvg = 0 ;
+        int times = 0 ;
         for (int i = 0; i < monthMount; i++) {
             long Daystarttime =time +ONEDAYMILLIONS*i;
             long timeEnd = Daystarttime + ONEDAYMILLIONS;
@@ -80,6 +97,8 @@ public class MonthFragment extends Fragment {
                 Integer max = record.getMax();
                 onedayAvg = avg + onedayAvg;
                 onedayMax = max + onedayMax;
+                totalAvg = record.getAvg()+totalAvg ;
+                times = times++ ;
             }
             if (heartrates.size() == 0) {
                 onedayAvg = 0;
@@ -94,8 +113,14 @@ public class MonthFragment extends Fragment {
             beanArrayList.add(barChartItemBean);
         }
            int  resting = restmonth/monthMount ;
-            int  avging = avgmonth/monthMount ;
-        restingBpm.restAndAvg(resting,avging,date);
+        int avging = 0 ;
+        if (times !=0){
+            avging = totalAvg/times ;
+        }
+        HeartRateActivity activity = (HeartRateActivity) getActivity();
+        activity.setAvgText( avging) ;
+
+//        restingBpm.setAvg(avging);
         return beanArrayList ;
     }
     @Override

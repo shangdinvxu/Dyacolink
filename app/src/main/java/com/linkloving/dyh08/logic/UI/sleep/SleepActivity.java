@@ -185,9 +185,9 @@ public void videGone(){
                     public void onDataChange(String data) {
                         MyLog.e(TAG, "日界面点击的日期是:" + data);
                         new DaySportAsynck(sleepHourTv,sleepMinuteTv,sleepDeepSleep,sleepLightSleep, step_tv_date, SleepActivity.this).execute(data);
-                        if (dayButtomTag==1) {
-                            sleepButtom.setVisibility(View.GONE);
-                        }
+//                        if (dayButtomTag==1) {
+//                            sleepButtom.setVisibility(View.GONE);
+//                        }
                         fragmentReplaceTag = 1 ;
                     }
                 });
@@ -238,10 +238,11 @@ public void videGone(){
                     @Override
                     public void nextFragment() {
                         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                        SleepCalendarButtomFragment sleepCalendarButtomFragment = new SleepCalendarButtomFragment();
-                        fragmentTransaction.replace(R.id.tw_sleep_buttomfragment,sleepCalendarButtomFragment).commit();
+                        SleepWeekButtomFragment sleepWeekButtomFragment = new SleepWeekButtomFragment();
+                        fragmentTransaction.replace(R.id.tw_sleep_buttomfragment,sleepWeekButtomFragment);
                         sleepButtom.setVisibility(View.GONE);
                         fragmentReplaceTag = 3 ;
+                        fragmentTransaction.commit();
                     }
                 });
                 break;

@@ -10,6 +10,7 @@ import com.example.android.bluetoothlegatt.proltrol.dto.LLXianJinCard;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPSportData;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPUser;
+import com.example.android.bluetoothlegatt.proltrol.dto.LPWorkoutData;
 import com.example.android.bluetoothlegatt.proltrol.dto.LpHeartrateData;
 import com.example.android.bluetoothlegatt.utils.OwnLog;
 import com.example.android.bluetoothlegatt.utils.TimeZoneHelper;
@@ -358,6 +359,21 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			return   resp.toLPHeartrateDataList(resp);
 		}else{
 			List<LpHeartrateData> list = new ArrayList<LpHeartrateData>();
+			return list;
+		}
+	}
+	//清除或者获取workout数据
+	public List<LPWorkoutData> workoutData(byte Index)throws BLException, LPException{
+		Log.e("workoutData","clearworkoutData"+Index);
+		WatchRequset req = new WatchRequset();
+		req.appendByte(seq++).appendByte(Index).makeCheckSum();
+		LPUtil.printData(req.getData(), " workoutDataclear");
+		WatchResponse resp = this.sendData2BLE(req);
+		LPUtil.printData(resp.getData(), " workoutDataclear");
+		if(resp.getData()[4]==0){
+			return   resp.toLpWorkoutData(resp);
+		}else{
+			List<LPWorkoutData> list = new ArrayList<LPWorkoutData>();
 			return list;
 		}
 	}
@@ -819,6 +835,26 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			return BLEProvider.INDEX_SET_HAND_UP;
 		return BLEProvider.INDEX_SET_HAND_UP_FAIL;
 	}
+
+	/**
+	 * showhand
+	 */
+	/** 抬手显示 */
+	public int setShowhand(LPDeviceInfo deviceInfo) throws BLException,LPException {
+		// COMMAND_SetOledOnTimeZone
+		WatchRequset req = new WatchRequset();
+	byte OFFON = (byte) (deviceInfo.showhand==0x01?0x01:0x00);
+			req.appendByte(seq++)
+					.appendByte(LepaoCommand.COMMANDSHOWHAND)
+					.appendByte(OFFON)
+					.makeCheckSum();
+		WatchResponse resp = this.sendData2BLE(req);
+		LPUtil.printData(req.getData(), "setHandUp");
+		if(resp.getData()[4]==1)
+			return BLEProvider.INDEX_SET_HAND_UP;
+		return BLEProvider.INDEX_SET_HAND_UP_FAIL;
+	}
+
 	
 	/**消息提醒*/
 	@Override

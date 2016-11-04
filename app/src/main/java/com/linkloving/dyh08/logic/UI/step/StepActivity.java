@@ -147,7 +147,7 @@ public class StepActivity extends ToolBarActivity{
         //要求步数目标为2000~~100000
         int startGoal = 2000;
         int overGoal = 100000;
-        for(int i =startGoal;i<overGoal;i+=1000 ){
+        for(int i =startGoal;i<=overGoal;i+=1000 ){
             list.add(i+"");
         }
         return list;

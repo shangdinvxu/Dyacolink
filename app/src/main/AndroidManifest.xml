@@ -412,7 +412,7 @@
             android:theme="@style/AppThemeNoActionBar" />
 
         <activity
-            android:name=".logic.UI.settings.UserSettingsActivity"
+            android:name=".logic.UI.settings.PersonalInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar" />
 

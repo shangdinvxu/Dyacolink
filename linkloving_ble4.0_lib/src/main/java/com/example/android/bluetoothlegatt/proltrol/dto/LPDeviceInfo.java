@@ -43,6 +43,7 @@ public class LPDeviceInfo {
     
     public static final String HUBEI_SHUMA="62585";
     public static final String YUNNAN_FUDIAN="6251";
+
     
 	/** 激活码*/
 	public static final int ACTIVATION = 1;
@@ -102,6 +103,7 @@ public class LPDeviceInfo {
 	}
 
 	public int userId = -1;
+	public byte showhand = 0x01;
 
 	/**
 	 * 设备信息

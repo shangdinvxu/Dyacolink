@@ -61,6 +61,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -71,6 +72,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import cn.sharesdk.facebook.Facebook;
 import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.twitter.Twitter;
@@ -84,7 +86,7 @@ import rx.schedulers.Schedulers;
  * Created by Daniel.Xu on 2016/8/22.
  */
 public class GroupsShareActivity extends ToolBarActivity {
-    private static final String TAG = GroupsDetailsActivity.class.getSimpleName();
+    private static final String TAG = GroupsShareActivity.class.getSimpleName();
     @InjectView(R.id.gourps_topmap)
     MapView gourpsTopmap;
     @InjectView(R.id.groups_time)
@@ -298,6 +300,22 @@ public class GroupsShareActivity extends ToolBarActivity {
                 Platform facebook = ShareSDK.getPlatform(Facebook.NAME);
                 facebook.share(shareParams);
                 boolean b = facebook.hasShareCallback();
+                facebook.setPlatformActionListener(new PlatformActionListener() {
+                    @Override
+                    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+
+                    }
+
+                    @Override
+                    public void onError(Platform platform, int i, Throwable throwable) {
+                        MyLog.e(TAG,throwable.toString()+"-----------Error");
+                    }
+
+                    @Override
+                    public void onCancel(Platform platform, int i) {
+
+                    }
+                });
                 showToast(b);
             }
         });

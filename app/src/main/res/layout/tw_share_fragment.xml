@@ -11,6 +11,7 @@
         android:paddingLeft="40dp"
         android:background="@null"
         android:hint="@string/Leaveamessage"
+        android:text=" "
         android:layout_width="match_parent"
         android:layout_weight="2"
         android:layout_height="0dp" />

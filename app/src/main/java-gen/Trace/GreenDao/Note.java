@@ -13,7 +13,6 @@ import de.greenrobot.dao.DaoException;
 public class Note {
 
     private Long id;
-    /** Not-null value. */
     private String date;
     private java.util.Date startDate;
     private java.util.Date runDate;
@@ -62,12 +61,10 @@ public class Note {
         this.id = id;
     }
 
-    /** Not-null value. */
     public String getDate() {
         return date;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setDate(String date) {
         this.date = date;
     }

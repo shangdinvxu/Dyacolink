@@ -2,9 +2,12 @@ package com.linkloving.dyh08.logic.UI.main.materialmenu;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.provider.Settings;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +17,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.linkloving.dyh08.BleService;
 import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
+import com.linkloving.dyh08.basic.AppManager;
 import com.linkloving.dyh08.logic.dto.UserEntity;
+import com.linkloving.dyh08.notify.NotificationCollectorService;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
+import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.text.MessageFormat;
 import java.util.List;
+
 
 
 /**
@@ -136,7 +144,19 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                                 .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog_, int which) {
-
+                                        /**设置APP状态为退出*/
+                                        BleService.setEXIT_APP(true);
+                                        AppManager.getAppManager().finishAllActivity();
+                                        if(CommonUtils.isStringEmpty(MyApplication.getInstance(mContext).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id())
+                                                || !isEnabled(mContext)
+                                                || MyApplication.getInstance(mContext).getLocalUserInfoProvider().getDeviceEntity().getDevice_type()==MyApplication.DEVICE_BAND
+                                                ){
+                                            //未绑定
+                                            BleService.getInstance(mContext).getCurrentHandlerProvider().clearProess();
+                                            // 以下的注释都开启后 并且 通知的服务也关闭后 就可以完全关闭APP 否则 退出不退出服务
+                                            MyApplication.getInstance(mContext).stopBleService();
+                                            System.exit(0);
+                                        }
                                     }
                                 })
                                 .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
@@ -154,6 +174,25 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                 }
             }
         }
-
     }
+        //判断是否获取了消息通知权限
+        public static boolean isEnabled(Context context)
+        {
+            String pkgName = context.getPackageName();
+            final String flat = Settings.Secure.getString(context.getContentResolver(), NotificationCollectorService.ENABLED_NOTIFICATION_LISTENERS);
+            if (!TextUtils.isEmpty(flat)) {
+                final String[] names = flat.split(":");
+                for (int i = 0; i < names.length; i++) {
+                    final ComponentName cn = ComponentName.unflattenFromString(names[i]);
+                    if (cn != null) {
+                        if (TextUtils.equals(pkgName, cn.getPackageName())) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+
 }

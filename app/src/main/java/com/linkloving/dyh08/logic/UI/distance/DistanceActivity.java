@@ -77,7 +77,7 @@ public class DistanceActivity extends ToolBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tw_distance_activity);
         ButterKnife.inject(this);
-        HideButtonRight(true);
+        HideButtonRight(false);
         weekSwitcher = new DateSwitcher(DateSwitcher.PeriodSwitchType.week);
         /*设置进入到STEP界面默认的fragment*/
         selectionIndex = 0;
@@ -146,9 +146,9 @@ public class DistanceActivity extends ToolBarActivity{
     private List<String> creatStepGoalList() {
         List<String> list =new ArrayList<String>();
         //要求步数目标为2000~~100000
-        int startGoal = 2000;
-        int overGoal = 100000;
-        for(int i =startGoal;i<overGoal;i+=1000 ){
+        int startGoal = 1;
+        int overGoal = 100;
+        for(int i =startGoal;i<=overGoal;i+=1 ){
             list.add(i+"");
         }
         return list;

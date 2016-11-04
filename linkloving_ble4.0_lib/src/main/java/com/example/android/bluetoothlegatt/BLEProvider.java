@@ -236,6 +236,14 @@ public  class BLEProvider
 	public static final int INDEX_GET_HEART_RATE= INDEX_GET_MODEL + 1;
 	/** 指令代码：发送设置定时器的指令 */
 	public static final int INDEX_SET_TIME_SETTING= INDEX_GET_HEART_RATE + 1;
+	/** 指令代码：发送抬手显示的指令 */
+	public static final int INDEX_SHOWHAND= INDEX_SET_TIME_SETTING + 1;
+	/** 指令代码：发送抬手显示的指令 */
+	public static final int INDEX_GET_WORKOUT_DATA= INDEX_SHOWHAND + 1;
+	/** 指令代码：发送抬手显示的指令 */
+	public static final int INDEX_CLEAR_WORKOUT_DATA= INDEX_GET_WORKOUT_DATA + 1;
+
+
 	// Stops scanning after 10 seconds.
 	private static final long SCAN_PERIOD = 10000;
 
@@ -912,6 +920,19 @@ public  class BLEProvider
 	   runIndexProess(context, INDEX_GET_MODEL);
 	   
    }
+	//0x43  获取workout的数据
+	public void getworkOutdata(Context context)
+	{
+		OwnLog.e(TAG, "..................getworkOutdata Thread........................");
+		runIndexProess(context, INDEX_GET_WORKOUT_DATA);
+	}
+	//0x44  清除workout的数据
+	public void clearWorkOutdata(Context context)
+	{
+		OwnLog.e(TAG, "..................clearWorkOutdata Thread........................");
+		runIndexProess(context, INDEX_CLEAR_WORKOUT_DATA);
+	}
+
    //0x02  获取运动数据
    public void getSportDataNew(Context context)
    {
@@ -1135,8 +1156,15 @@ public  class BLEProvider
 	  OwnLog.i(TAG, "..................INDEX_REQUEST_BOUND_RECY Thread........................"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 	   runIndexProess(context, INDEX_REQUEST_BOUND_RECY);
    }
-   
-   //运动目标
+	//运动目标
+	public void setIndexShowhand(Context context,LPDeviceInfo deviceInfo)
+	{
+		OwnLog.i(TAG, "..................setIndexShowhand Thread........................"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+		runIndexProess(context, INDEX_SHOWHAND,deviceInfo);
+	}
+
+
+	//运动目标
    public void setTarget(Context context,LPDeviceInfo deviceInfo)
    {
 	  OwnLog.i(TAG, "..................INDEX_STEP_TARGET Thread........................"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
@@ -1179,6 +1207,9 @@ public  class BLEProvider
 	  OwnLog.i(TAG, "..................INDEX_SEND_PHONE_NOTIFICATION Thread........................"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 	   runIndexProess(context,notificationUID, INDEX_SEND_PHONE_NOTIFICATION,title,text);
    }
+
+
+
    //消息提醒  (移除来电)
    public void setNotification_remove_incall(Context context,byte notificationUID,byte[] title,byte[] text)
    {
@@ -1743,6 +1774,25 @@ public  class BLEProvider
 						msg.obj =  mLepaoProtocalImpl.getHeartrate(0xfF,0x7F,0) ;
 						msg.sendToTarget();
 						break;
+					//					发送获取WorkoutData的指令
+					case INDEX_GET_WORKOUT_DATA:
+						Log.e(TAG, ".................INDEX_GET_HEART_RATE................");
+						msg = mHandler.obtainMessage();
+						msg.what = MSG_BLE_DATA;
+						msg.arg1 = INDEX_GET_WORKOUT_DATA;
+						Log.e(TAG,"发送获取WorkoutData的指令");
+						msg.obj =  mLepaoProtocalImpl.workoutData((byte) 0x43) ;
+						msg.sendToTarget();
+						break;
+					//					发送清除WorkoutData的指令
+					case INDEX_CLEAR_WORKOUT_DATA:
+						Log.d(TAG, ".................INDEX_GET_HEART_RATE................");
+						msg = mHandler.obtainMessage();
+						msg.what = MSG_BLE_DATA;
+						msg.arg1 = INDEX_CLEAR_WORKOUT_DATA;
+						msg.obj =  mLepaoProtocalImpl.workoutData((byte) 0x44) ;
+						msg.sendToTarget();
+						break;
 				    //  发送设置闹钟指令
 				    case INDEX_SET_DEVICE_CLOCK:
 				    	Log.d(TAG, ".................INDEX_SET_DEVICE_CLOCK................");
@@ -1761,7 +1811,16 @@ public  class BLEProvider
 				    	msg.obj = mLepaoProtocalImpl.setLongSitRemind(serverDeviceInfo);
 				    	msg.sendToTarget();
 				    	break;
-				    // 发送运动目标提醒指令  
+//					showhand
+					case INDEX_SHOWHAND:  //
+						Log.d(TAG, ".................INDEX_SET_DEVICE_LONGSIT................");
+						msg = mHandler.obtainMessage();
+						msg.what = MSG_BLE_DATA;
+						msg.arg1 = INDEX_SHOWHAND;
+						msg.obj = mLepaoProtocalImpl.setShowhand(serverDeviceInfo);
+						msg.sendToTarget();
+						break;
+				    // 发送运动目标提醒指令
 				    case INDEX_STEP_TARGET:
 				    	Log.d(TAG, ".................INDEX_STEP_TARGET................");
 				    	msg = mHandler.obtainMessage();

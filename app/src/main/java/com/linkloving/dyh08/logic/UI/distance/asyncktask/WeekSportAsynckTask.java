@@ -97,7 +97,7 @@ import java.util.Locale;
         }
         stepnumber = stepnumber /daynumber ;
         int stepGoal = Integer.parseInt(PreferencesToolkits.getGoalInfo(context, PreferencesToolkits.KEY_GOAL_DISTANCE));
-        float stepPercent  = (float)stepnumber/stepGoal ;
+        float stepPercent  = (float)stepnumber/(stepGoal*1000) ;
         double i = (double)stepnumber / 1000;
         if (i==0){
             distanceDB = 0.0 ;

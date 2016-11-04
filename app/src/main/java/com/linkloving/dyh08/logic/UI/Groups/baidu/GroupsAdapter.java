@@ -173,7 +173,6 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         float distance = 0 ;
         ArrayList<SportRecord> sportRecordArrayList = UserDeviceRecord.
                 findHistoryChartwithHMS(mContext, String.valueOf(user_id), itemStartDate, itemEndDate);
-
         if (sportRecordArrayList.size()==0){
             distance = 0 ;
         }else{
