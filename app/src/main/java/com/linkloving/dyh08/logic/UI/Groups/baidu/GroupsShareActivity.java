@@ -74,13 +74,12 @@ import cn.sharesdk.facebook.Facebook;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.instagram.Instagram;
+import cn.sharesdk.linkedin.LinkedIn;
 import cn.sharesdk.onekeyshare.OnekeyShare;
-import cn.sharesdk.twitter.Twitter;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.moments.WechatMoments;
+import cn.sharesdk.wechat.utils.WechatHelper;
 
 /**
  * Created by Daniel.Xu on 2016/8/22.
@@ -144,7 +143,7 @@ public class GroupsShareActivity extends ToolBarActivity {
     private String filePathCacheTotal = "/sdcard/ranking_v333.png";
     private LocationClient mlocationClient;
     private MyLocationListener mMyLocationListener;
-    private ImageView fb;
+    private ImageView fb,wx,qq,linkin,instagram;
     private ImageView twitter;
     private View view;
 
@@ -254,7 +253,10 @@ public class GroupsShareActivity extends ToolBarActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setContentView(popupView);
         fb = (ImageView) popupView.findViewById(R.id.fb);
-        twitter = (ImageView) popupView.findViewById(R.id.twitter);
+        wx = (ImageView) popupView.findViewById(R.id.wx);
+        qq = (ImageView) popupView.findViewById(R.id.qq);
+        linkin = (ImageView) popupView.findViewById(R.id.Linkin);
+        instagram = (ImageView) popupView.findViewById(R.id.instagram);
         popupWindow.setBackgroundDrawable(new ColorDrawable(0xffffffff));
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -319,7 +321,70 @@ public class GroupsShareActivity extends ToolBarActivity {
                 showToast(b);
             }
         });
-        twitter.setOnClickListener(new View.OnClickListener() {
+        wx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WechatHelper.ShareParams shareParams = new WechatHelper.ShareParams();
+                shareParams.setFilePath(filePathCache);
+                shareParams.setImagePath(filePathCache);
+                Platform platform = ShareSDK.getPlatform(WechatMoments.NAME);
+                platform.share(shareParams);
+                platform.setPlatformActionListener(new PlatformActionListener() {
+                    @Override
+                    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+
+                    }
+
+                    @Override
+                    public void onError(Platform platform, int i, Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onCancel(Platform platform, int i) {
+
+                    }
+                });
+            }
+        });
+
+        qq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                QQ.ShareParams shareParams = new QQ.ShareParams();
+                shareParams.setFilePath(filePathCache);
+                shareParams.setImagePath(filePathCache);
+                Platform platform = ShareSDK.getPlatform(QQ.NAME);
+                platform.share(shareParams);
+                boolean b = platform.hasShareCallback();
+                showToast(b);
+            }
+        });
+        linkin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinkedIn.ShareParams shareParams = new LinkedIn.ShareParams();
+                shareParams.setFilePath(filePathCache);
+                shareParams.setImagePath(filePathCache);
+                Platform platform = ShareSDK.getPlatform(LinkedIn.NAME);
+                platform.share(shareParams);
+                boolean b = platform.hasShareCallback();
+                showToast(b);
+            }
+        });
+        instagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Instagram.ShareParams shareParams = new Instagram.ShareParams();
+                shareParams.setFilePath(filePathCache);
+                shareParams.setImagePath(filePathCache);
+                Platform platform = ShareSDK.getPlatform(Instagram.NAME);
+                platform.share(shareParams);
+                boolean b = platform.hasShareCallback();
+                showToast(b);
+            }
+        });
+    /*    twitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Twitter.ShareParams shareParams = new Twitter.ShareParams();
@@ -330,7 +395,7 @@ public class GroupsShareActivity extends ToolBarActivity {
                 boolean b = platform.hasShareCallback();
                 showToast(b);
             }
-        });
+        });*/
     }
 
     private void showToast(boolean b) {

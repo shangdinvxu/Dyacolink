@@ -17,7 +17,6 @@
         android:layout_weight="2"
         android:orientation="vertical"
         android:background="@mipmap/un484px"
-
         >
 
         <!-- 步数和卡路里-->
@@ -141,7 +140,8 @@
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/main_tv_Sleep"
-                    style="@style/main_UI_text_set"/>
+                    style="@style/main_UI_text_set"
+                    android:text="00:00"/>
 
             </RelativeLayout>
         </LinearLayout>

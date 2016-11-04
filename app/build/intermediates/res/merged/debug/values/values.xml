@@ -1024,6 +1024,10 @@
     <string name="Heart_Rate">Heart Rate</string>
     <string name="Height">Height</string>
     <string name="Incoming_tel_title">Call reminder</string>
+    <string name="KM">千米</string>
+    <string name="KMmonth">千米/每月</string>
+    <string name="KMweek">千米/每周</string>
+    <string name="KMyear">千米/每年</string>
     <string name="Leaveamessage">Leave a message</string>
     <string name="LinkEquip">Link Equipment</string>
     <string name="M">M</string>
@@ -2050,6 +2054,7 @@
     <string name="sport_exercise">Exercise</string>
     <string name="ssdk_alipay">支付宝好友</string>
     <string name="ssdk_alipay_client_inavailable">目前您的支付宝版本过低或未安装，需要安装支付宝才能使用</string>
+    <string name="ssdk_alipaymoments">支付宝生活圈</string>
     <string name="ssdk_bluetooth">蓝牙</string>
     <string name="ssdk_douban">豆瓣</string>
     <string name="ssdk_dropbox">Dropbox</string>

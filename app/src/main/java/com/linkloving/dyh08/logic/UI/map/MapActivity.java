@@ -52,7 +52,6 @@ import butterknife.InjectView;
 import cn.sharesdk.facebook.Facebook;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.twitter.Twitter;
 
 /**
  * Created by Daniel.Xu on 2016/9/21.
@@ -126,7 +125,6 @@ public class MapActivity extends ToolBarActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setContentView(popupView);
         fb = (ImageView) popupView.findViewById(R.id.fb);
-        twitter = (ImageView) popupView.findViewById(R.id.twitter);
         popupWindow.setBackgroundDrawable(new ColorDrawable(0xffffffff));
         sharebutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +150,7 @@ public class MapActivity extends ToolBarActivity {
                 facebook.share(shareParams);
             }
         });
-        twitter.setOnClickListener(new View.OnClickListener() {
+      /*  twitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Twitter.ShareParams shareParams = new Twitter.ShareParams();
@@ -163,7 +161,7 @@ public class MapActivity extends ToolBarActivity {
                 Platform platform = ShareSDK.getPlatform(Twitter.NAME);
                 platform.share(shareParams);
             }
-        });
+        });*/
     }
 
 

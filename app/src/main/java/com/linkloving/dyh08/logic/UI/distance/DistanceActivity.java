@@ -187,7 +187,7 @@ public class DistanceActivity extends ToolBarActivity{
         switch (index){
             case 0:
                 selectionIndex =0 ;
-                distanceTV.setText("KM");
+                distanceTV.setText(getString(R.string.KM));
                 step_button_day_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.d_on_72px, 0, 0);
                 new DaySportAsynck(flushDate,step_number,stepCircleView,step_tv_date,DistanceActivity.this).execute(flushDate);
                     dayViewFragment = new DayViewFragment();
@@ -203,7 +203,7 @@ public class DistanceActivity extends ToolBarActivity{
                 break;
             case 1:
                 selectionIndex =1 ;
-                distanceTV.setText("KM/week");
+                distanceTV.setText(getString(R.string.KMweek));
                 step_button_week_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.w_on_72px, 0, 0);
                 new WeekSportAsynckTask(null,step_number,stepCircleView,step_tv_date,DistanceActivity.this).execute(flushWeek);
                 weekViewFragment = new WeekViewFragment();
@@ -219,7 +219,7 @@ public class DistanceActivity extends ToolBarActivity{
                 break;
             case 2:
                 selectionIndex =2 ;
-                distanceTV.setText("KM/month");
+                distanceTV.setText(R.string.KMmonth);
                 step_button_month_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.m_on_72px, 0, 0);
                 new MonthSportAsynck(null,step_number, stepCircleView, step_tv_date, DistanceActivity.this).execute(flushMonth);
                 monthViewFragment  = new MonthViewFragment();
@@ -235,7 +235,7 @@ public class DistanceActivity extends ToolBarActivity{
                 break;
             case 3:
                 selectionIndex =3 ;
-                distanceTV.setText("KM/year");
+                distanceTV.setText(R.string.KMyear);
                 step_button_year_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.y_on_72px, 0, 0);
                 yearViewFragment = new YearViewFragment();
                 flushYear = CommonUtils.getFlushYear();

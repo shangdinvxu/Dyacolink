@@ -223,11 +223,11 @@
         <!-- android:configChanges="keyboardHidden|orientation|screenSize|locale|layoutDirection" -->
         <!-- android:theme="@android:style/Theme.NoTitleBar" -->
         <!-- android:windowSoftInputMode="stateHidden|adjustResize" /> -->
-        <activity
-            android:name=".wxapi.WXEntryActivity"
+    <!--    <activity
+            android:name="cn.sharesdk.demo.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
         <activity
             android:name=".logic.UI.device.handup.HandUpActivity"
             android:label="@string/title_activity_hand_up"
@@ -285,10 +285,10 @@
             android:name=".logic.UI.launch.Change_Passw_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity
+  <!--      <activity
             android:name=".logic.UI.launch.ThirdLogin.view.ThirdLoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar" />
+            android:theme="@style/AppThemeNoActionBar" />-->
         <activity
             android:name=".logic.UI.launch.register.RegisterActivity"
             android:label="@string/title_activity_register"
@@ -517,6 +517,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             />
+        <activity
+            android:name="cn.sharesdk.demo.wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"

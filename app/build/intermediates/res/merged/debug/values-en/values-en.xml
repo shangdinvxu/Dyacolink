@@ -1214,6 +1214,7 @@
     <string name="sport_exercise">Exercise</string>
     <string name="ssdk_alipay">Alipay</string>
     <string name="ssdk_alipay_client_inavailable">Alipay client not exists or the version is too low</string>
+    <string name="ssdk_alipaymoments">Alipay Moments</string>
     <string name="ssdk_bluetooth">Bluetooth</string>
     <string name="ssdk_douban">Douban</string>
     <string name="ssdk_dropbox">Dropbox</string>

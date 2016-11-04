@@ -176,27 +176,14 @@ public class ClockView extends View {
             float[] temp = calculatePoint((i + 1) * 30, r - DEFAULT_LONG_DEGREE_LENGTH - degressNumberSize / 2 - 15);
           /*  canvas.drawText((i+1)+"", temp[2], temp[3] + degressNumberSize/2-6, paintDegreeNumber);*/
             if (i == hour_clock) {
-                Bitmap bitmap = loadBallView(getContext(), R.mipmap.point_3, (int) (0.074 * width), (int) (0.074 * width));
-//                BlurMaskFilter blurFilter = new BlurMaskFilter(1,
-//                        BlurMaskFilter.Blur.NORMAL);
-//                Paint shadowPaint = new Paint();
-//                shadowPaint.setAlpha(50);
-//                shadowPaint.setColor(Color.WHITE);
-//                shadowPaint.setMaskFilter(blurFilter);
-//                int[] offsetXY = new int[2];
-//                Bitmap shadowBitmap = bitmap
-//                        .extractAlpha(shadowPaint, offsetXY);
-//                Bitmap shadowImage32 = shadowBitmap.copy(Bitmap.Config.ARGB_8888, true);
-//                paintDegreeNumber.setShadowLayer(6,0,0,0xFFffffff);
-                paintDegreeNumber.setShadowLayer(116,0,0,0xFF555555);
-//                canvas.drawBitmap(bitmap, temp[2] - 30, temp[3] - 30, paintDegreeNumber);
-                canvas.drawCircle( temp[2] - 30, temp[3] - 30, (float) (0.037 * width), paintDegreeNumber);
-//
-//                Paint paint3 = new Paint();
-//                paint3.setColor(Color.WHITE);
-//                paint3.setShadowLayer(30, 5, 2, Color.GREEN);
-//                canvas.drawCircle( temp[2] - 30, temp[3] - 30, (float) (0.037 * width), paint3);
-
+                Bitmap bitmap = null;
+                if (i == -1 | i == 2 | i == 5 | i == 8) {
+                    bitmap = loadBallView(getContext(), R.mipmap.point_3, (int) (0.12 * width), (int) (0.12 * width));
+                    canvas.drawBitmap(bitmap, temp[2] - 60, temp[3] - 30, paintDegreeNumber);
+                } else {
+                    bitmap = loadBallView(getContext(), R.mipmap.point_3, (int) (0.074 * width), (int) (0.074 * width));
+                    canvas.drawBitmap(bitmap, temp[2] - 30, temp[3] - 30, paintDegreeNumber);
+                }
             } else {
 
                 if (i == -1 | i == 2 | i == 5 | i == 8) {
