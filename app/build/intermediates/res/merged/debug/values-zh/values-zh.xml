@@ -1349,13 +1349,13 @@
     <string name="user_info_child_switch">Switch account</string>
     <string name="user_info_child_switch_message">Are you sure switch to {0}?</string>
     <string name="user_info_child_title">Sub account list</string>
-    <string name="user_info_choose_photo">相册选取</string>
+    <string name="user_info_choose_photo">Choose Photo</string>
     <string name="user_info_mail">Email</string>
     <string name="user_info_main_account_desc">Headman</string>
     <string name="user_info_nick_name">Nickname</string>
     <string name="user_info_password">Password</string>
     <string name="user_info_profile_photo">Profile Photo</string>
-    <string name="user_info_take_photo">拍摄照片</string>
+    <string name="user_info_take_photo">Take Photo</string>
     <string name="user_info_title">Profile</string>
     <string name="user_info_update_body_title">Profile Info</string>
     <string name="user_info_update_failure">Update failed.</string>

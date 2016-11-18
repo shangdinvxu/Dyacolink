@@ -2,6 +2,7 @@ package com.linkloving.dyh08.logic.UI.calories;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
@@ -100,7 +101,7 @@ TextView caloriesTV ;
 
                 List<String> stepGoalList = creatStepGoalList();
                 LayoutInflater inflater = getLayoutInflater();
-                final View layout = inflater.inflate(R.layout.goalwheel, (LinearLayout) findViewById(R.id.goal_view));
+                final View layout = inflater.inflate(R.layout.caloriesgoalwheel, (LinearLayout) findViewById(R.id.goal_view));
                 final GoalWheelView wheelView = (GoalWheelView)layout.findViewById(R.id.goal_wheelView);
                 final Button okbtn = (Button)layout.findViewById(R.id.okBtn);
                 final Button cancelBtn = (Button)layout.findViewById(R.id.cancelBtn);
@@ -182,6 +183,7 @@ TextView caloriesTV ;
         //从本地抓取目标值 并且设置到view上
         String stepGoal = PreferencesToolkits.getGoalInfo(this,PreferencesToolkits.KEY_GOAL_CAL);
         goalTv.setText(stepGoal);
+        goalTv.setTextColor(Color.rgb(255,196,0));
     }
 
     @Override

@@ -84,12 +84,7 @@ public class TrackUploadFragment extends Fragment {
     private Button btnStartTrace = null;
 
     private Button btnStopTrace = null;
-
-    private Button btnOperator = null;
-
-    protected TextView tvEntityName = null;
-
-    private Geofence geoFence = null;
+    private int  stopType = 1 ;
 
     /**
      * 舒适化数据查找对象
@@ -226,7 +221,7 @@ public class TrackUploadFragment extends Fragment {
                         long runtimeDuration = time-startTimeLong;
                         Date date = new Date(runtimeDuration);
                         String format = simpleDateFormat.format(date);
-                        if (chronometer!=null){
+                        if (chronometer!=null&&stopType==1){
                             chronometer.setText(format);
                         }
                 }
@@ -264,8 +259,6 @@ public class TrackUploadFragment extends Fragment {
                     }
                 }
             }.start();
-        }else{
-
         }
 
 
@@ -329,7 +322,7 @@ public class TrackUploadFragment extends Fragment {
                         isClickStart = true;
                         secondMiddle.setVisibility(View.VISIBLE);
                         getRuntime();
-                        Toast.makeText(getActivity(), "开启轨迹服务", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getActivity(), "开启轨迹服务", Toast.LENGTH_LONG).show();
                         relativeLayout.setBackgroundColor(Color.BLACK);
                         relativeLayout.getBackground().setAlpha(150);
                         startTrace();
@@ -374,7 +367,8 @@ public class TrackUploadFragment extends Fragment {
                 // TODO Auto-generated method stub
                 if (clickType == 1) {
                     isClickStart=false ;
-                    Toast.makeText(getActivity(), "停止轨迹服务", Toast.LENGTH_SHORT).show();
+
+//                    Toast.makeText(getActivity(), "停止轨迹服务", Toast.LENGTH_SHORT).show();
                     stopTrace();
 //                    把开始时间取出来,记录下来
                     SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
@@ -394,7 +388,16 @@ public class TrackUploadFragment extends Fragment {
                     MyLog.e(TAG, "结束的时间是" + dateStopTrace.toString());
                     traGreendao.addEndTime(formatEndTime, dateStopTrace);
 //                    停止后更新ui界面
-                    secondMiddle.setVisibility(View.GONE);
+//                    secondMiddle.setVisibility(View.GONE);
+
+                    secondMiddle.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (stopType==2){
+                                secondMiddle.setVisibility(View.GONE);
+                            }
+                        }
+                    });
                     relativeLayout.setBackgroundColor(Color.BLACK);
                     relativeLayout.getBackground().setAlpha(0);
                     if (isRegister) {
@@ -436,6 +439,7 @@ public class TrackUploadFragment extends Fragment {
      */
     private void startTrace() {
         // 通过轨迹服务客户端client开启轨迹服务
+        stopType = 1;
         WorkoutActivity.client.startTrace(WorkoutActivity.trace, startTraceListener);
 
         if (!MonitorService.isRunning) {
@@ -450,7 +454,7 @@ public class TrackUploadFragment extends Fragment {
      * 停止轨迹服务
      */
     private void stopTrace() {
-
+        stopType = 2;
         // 停止监听service
         MonitorService.isCheck = false;
         MonitorService.isRunning = false;

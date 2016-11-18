@@ -273,9 +273,10 @@ public class MapActivity extends ToolBarActivity {
             }
         }
         long duration = 0 ;
+        MyLog.e(TAG,startTimeList.size()+"-----"+startNoteList.size());
         for (Integer i : startNoteList) {
-            long startTime = startTimeList.get(startNoteList.get(i)).getStartDate().getTime();
-            long endTime = endTimeList.get(startNoteList.get(i)).getStartDate().getTime();
+            long startTime = startTimeList.get(startNoteList.get(i-1)).getStartDate().getTime();
+            long endTime = endTimeList.get(startNoteList.get(i-1)).getStartDate().getTime();
             duration = duration+endTime-startTime;
         }
         String durtionText = getDurtion(duration);
@@ -289,8 +290,8 @@ public class MapActivity extends ToolBarActivity {
         int  caloriesTotal = 0 ;
 
         for (Integer i :startNoteList){
-            Date startDate = startTimeList.get(startNoteList.get(i)).getStartDate();
-            Date endDate = endTimeList.get(startNoteList.get(i)).getStartDate();
+            Date startDate = startTimeList.get(startNoteList.get(i-1)).getStartDate();
+            Date endDate = endTimeList.get(startNoteList.get(i-1)).getStartDate();
             sportRecordArrayList = UserDeviceRecord.findHistoryChartwithHMS
                     (MapActivity.this, String.valueOf(user_id), startDate, endDate);
             if (sportRecordArrayList.size() == 0) {

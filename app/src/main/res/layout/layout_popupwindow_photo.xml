@@ -13,9 +13,8 @@
         android:background="#312E3F"
         android:gravity="center_horizontal"
         android:orientation="vertical" >
-
         <Button
-            android:id="@+id/takePhotoBtn"
+            android:id="@+id/deletePhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
@@ -23,12 +22,29 @@
             android:layout_marginTop="10dp"
             android:background="#373447"
             android:padding="10dp"
-            android:text="@string/user_info_take_photo"
+            android:textAllCaps="false"
+            android:text="@string/user_info_delete_photo"
             android:textColor="#CEC9E7"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/takePhotoBtn"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:background="#373447"
+            android:padding="10dp"
+            android:text="@string/user_info_take_photo"
+            android:textColor="#CEC9E7"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:textAllCaps="false"
             android:id="@+id/pickPhotoBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +68,7 @@
             android:layout_marginTop="20dp"
             android:background="@android:color/white"
             android:padding="10dp"
-            android:text="@string/smssdk_cancel"
+            android:text="@string/back"
             android:textColor="#373447"
             android:textSize="18sp"
             android:textStyle="bold" />

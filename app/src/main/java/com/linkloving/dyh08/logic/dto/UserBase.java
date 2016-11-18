@@ -31,6 +31,16 @@ public class UserBase implements Serializable
 	private int channel;
 	private int user_wearingStyle;
 
+	public int getPhotoType() {
+		return PhotoType;
+	}
+
+	public void setPhotoType(int photoType) {
+		PhotoType = photoType;
+	}
+
+	private int PhotoType ;
+
 	public int getRemind() {
 		return remind;
 	}

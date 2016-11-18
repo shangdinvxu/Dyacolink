@@ -28,10 +28,6 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:23.4.0'
-    compile files('libs/ShareSDK-Core-2.7.6.jar')
-    compile files('libs/ShareSDK-Facebook-2.7.6.jar')
 
-    compile files('libs/MobTools-2016.0816.1507.jar')
-    compile files('libs/MobCommons-2016.0816.1507.jar')
-
+    compile files('libs/MobCommons-2016.1102.1128.jar')
 }

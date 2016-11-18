@@ -2,6 +2,7 @@ package com.linkloving.dyh08.logic.UI.distance;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
@@ -93,7 +94,7 @@ public class DistanceActivity extends ToolBarActivity{
 
                 List<String> stepGoalList = creatStepGoalList();
                 LayoutInflater inflater = getLayoutInflater();
-                final View layout = inflater.inflate(R.layout.goalwheel, (LinearLayout) findViewById(R.id.goal_view));
+                final View layout = inflater.inflate(R.layout.distancegoalwheel, (LinearLayout) findViewById(R.id.goal_view));
                 final GoalWheelView wheelView = (GoalWheelView)layout.findViewById(R.id.goal_wheelView);
                 final Button okbtn = (Button)layout.findViewById(R.id.okBtn);
                 final Button cancelBtn = (Button)layout.findViewById(R.id.cancelBtn);
@@ -171,6 +172,7 @@ public class DistanceActivity extends ToolBarActivity{
     private void updataGoalView() {
         //从本地抓取目标值 并且设置到view上
         String stepGoal = PreferencesToolkits.getGoalInfo(this,PreferencesToolkits.KEY_GOAL_DISTANCE);
+        goalTv.setTextColor(Color.rgb(255,196,0));
         goalTv.setText(stepGoal);
     }
 

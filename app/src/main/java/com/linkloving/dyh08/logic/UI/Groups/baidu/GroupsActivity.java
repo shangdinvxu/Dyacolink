@@ -82,7 +82,7 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
         stickyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(GroupsActivity.this, "Item " + position + " clicked!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(GroupsActivity.this, "Item " + position + " clicked!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(GroupsActivity.this, GroupsDetailsActivity.class);
                 intent.putExtra("postion", String.valueOf(position));
                 startActivity(intent);
@@ -93,7 +93,7 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
         stickyList.setOnHeaderClickListener(new StickyListHeadersListView.OnHeaderClickListener() {
             @Override
             public void onHeaderClick(StickyListHeadersListView l, View header, int itemPosition, long headerId, boolean currentlySticky) {
-                Toast.makeText(GroupsActivity.this, "Header " + headerId + " currentlySticky ? " + currentlySticky, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(GroupsActivity.this, "Header " + headerId + " currentlySticky ? " + currentlySticky, Toast.LENGTH_SHORT).show();
             }
         });
         stickyList.setOnStickyHeaderChangedListener(new StickyListHeadersListView.OnStickyHeaderChangedListener() {

@@ -424,8 +424,10 @@
     <string name="user_info_update_user_psw_old_equal_new">The new password is the same as the old! </string>
     <string name="user_info_update_whats_up_count">personal signature{0}tips</string>
     <string name="user_info_body_info_text">{0}cm, {1}kg, {2}, {3}</string>
-    <string name="user_info_take_photo">Take Photo</string>
-    <string name="user_info_choose_photo">Choose Photo</string>
+    <string name="user_info_take_photo">Take Picture</string>
+    <string name="user_info_delete_photo">Delete Photo</string>
+    <string name="user_info_choose_photo">Select from album</string>
+    <string name="back">Back</string>
     <string name="user_info_avatar_uploading">Avatar uploading...</string>
     <string name="user_info_avatar_upload_faild1">Avatar update faild, please check your sdcard!</string>
     <string name="user_info_avatar_upload_faild2">Sorry, your avatar update failed (image is so large)!</string>
@@ -555,10 +557,10 @@
     <string name="alarm_save">Save</string>
 
     <!-- 单位 -->
-    <string name="KM">千米</string>
-    <string name="KMweek">千米/每周</string>
-    <string name="KMmonth">千米/每月</string>
-    <string name="KMyear">千米/每年</string>
+    <string name="KM">公里</string>
+    <string name="KMweek">公里/周</string>
+    <string name="KMmonth">公里/月</string>
+    <string name="KMyear">公里/年</string>
     <string name="unit_mileage">Mileage</string>
     <string name="unit_step">Step</string>
     <string name="unit_cal">Calorie</string>
@@ -1055,7 +1057,8 @@
 
     <string name="alarmclock">Alarm clock setting</string>
     <string name="timersetting">Timer setting</string>
-
+        <string name="photopre">Photo Preview</string>
+    <string name="personalPhoto">Personal Photo Setting</string>
     <string name="Settings">Settings</string>
     <!-- Workout-->
     <string name="Workout">Workout</string>
@@ -1150,7 +1153,7 @@
     <string name="setting_enter">Enter</string>
     <string name="Attention">Attention!</string>
     <string name="Gps">GPS</string>
-    <string name="must_be">must be turned on</string>
+    <string name="must_be">GPS must be turned on</string>
     <string name="ok">ok</string>
     <string name="start_">start!</string>
     <string name="doyouwantto">Do you want to log out?</string>

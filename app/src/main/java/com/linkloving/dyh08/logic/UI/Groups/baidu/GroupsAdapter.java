@@ -58,6 +58,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     public final List<Note> list;
     private DetailChartCountData count;
     private final UserEntity userEntity;
+    private final List<Note> workDataNotes;
 
     public GroupsAdapter(Context context) {
         this.mContext = context;
@@ -80,6 +81,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         mSectionLetters = getSectionLetters();*/
         startTimeList = traGreendao.searchAllStarttime();
         endTimeList = traGreendao.searchAllEndTime();
+        workDataNotes = traGreendao.searchWorkData();
 
     }
 
@@ -133,7 +135,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
             }
         }
 
-        holder.activityNumbers.setText(amount+" "+mContext.getString(R.string.activities));
+      /*  holder.activityNumbers.setText(amount+" "+mContext.getString(R.string.activities));*/
         final int finalAmount = amount;
 
         return convertView;

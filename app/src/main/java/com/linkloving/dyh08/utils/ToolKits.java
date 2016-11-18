@@ -1203,5 +1203,47 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		}
 		return false;
 	}
+	/**
+	 * 算卡路里
+	 *
+	 * @return
+	 */
+	public int getCalories(Context context) {
+		UserEntity userEntity = MyApplication.getInstance(context).getLocalUserInfoProvider();
+		int user_sex = userEntity.getUserBase().getUser_sex();
+		int user_weight = userEntity.getUserBase().getUser_weight();
+		int user_height = userEntity.getUserBase().getUser_height();
+		String birthdate = userEntity.getUserBase().getBirthdate();
+		MyLog.e(TAG,birthdate+"birthdate");
+		int localUnit = SwitchUnit.getLocalUnit(context);
+		int dayCalories = 0;
+		String[] split = birthdate.split("-");
+		MyLog.e(TAG,split[0]+"split[0]");
+		int year = Integer.parseInt(split[0]);
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
+		String format = simpleDateFormat.format(date);
+		int year1 = Integer.parseInt(format);
+		MyLog.e(TAG,year1+"year1"+"====="+year+"year");
+		int age = year1 - year + 1;
+		switch (user_sex) {
+			case 0:
+				if (localUnit == ToolKits.UNIT_GONG) {
+					dayCalories = (int) (655.1 + 9.563 * user_weight + 1.85 * user_height - 4.676 * age);
+				} else {
+					dayCalories = (int) (655.1 + 4.35 * user_weight + 4.7 * user_height - 4.7 * age);
+				}
+				break;
+			case 1:
+				if (localUnit == ToolKits.UNIT_YING) {
+					dayCalories = (int) (66 + 6.2 * user_weight + 12.7 * user_height - 6.76 * age);
+
+				} else {
+					dayCalories = (int) (66 + 13.75 * user_weight + 5.0003 * user_height - 6.755 * age);
+				}
+		}
+		MyLog.e(TAG,dayCalories+"dayCalories"+"======"+user_weight+"user_weight"+"======"+user_height+"user_height"+"======"+age+"age");
+		return dayCalories;
+	}
 
 }

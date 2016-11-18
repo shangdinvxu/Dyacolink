@@ -7,11 +7,11 @@
     >
   <LinearLayout
       android:id="@+id/first_middle"
-      android:visibility="gone"
+      android:visibility="visible"
       android:layout_centerVertical="true"
       android:layout_width="match_parent"
       android:layout_height="180dp"
-      android:background="@color/blueBackground"
+      android:background="#55000000"
       android:gravity="center_horizontal"
       android:orientation="vertical"
       >
@@ -27,30 +27,28 @@
       android:layout_height="1dp"
       android:src="@mipmap/line"
       />
-    <TextView
+ <!--   <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Gps"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:layout_marginTop="20dp"
-        />
+        />-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/must_be"
         android:textColor="@color/white"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         />
     <Button
         android:layout_marginTop="20dp"
         android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:background="@drawable/button"
-        android:text="@string/ok"
+        android:layout_height="70dp"
+        android:background="@drawable/gpsokbutton"
         android:id="@+id/OK_btn"
         android:textAllCaps="false"
-        android:textSize="20sp"
         />
 
   </LinearLayout>
@@ -59,7 +57,7 @@
       android:layout_centerVertical="true"
       android:layout_width="match_parent"
       android:layout_height="180dp"
-      android:background="@color/blueBackground"
+      android:background="#55000000"
       android:gravity="center_horizontal"
       android:orientation="vertical"
       android:id="@+id/second_middle"
@@ -67,7 +65,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/start_"
+        android:text="@string/Attention"
         android:textColor="@color/yellow"
         android:textSize="26sp"
         android:textStyle="italic"
@@ -91,16 +89,14 @@
   </LinearLayout>
 
 
-    <Button
+<!--    <Button
         android:id="@+id/btn_startTrace"
         android:background="@drawable/button"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
         android:layout_width="70dp"
         android:layout_height="30dp"
-        android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dip"
         android:textAllCaps="false"
         android:text="@string/start_trace"
         android:textSize="25sp"
@@ -118,7 +114,38 @@
         android:text="@string/stop_trace"
         android:textAllCaps="false"
         android:textSize="25sp"
-        android:textColor="#000000" />
+        android:textColor="#000000" />-->
+  <RadioGroup
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:layout_alignParentBottom="true"
+      android:orientation="horizontal"
+      >
+    <RadioButton
+        android:gravity="center"
+        android:textSize="27sp"
+        android:id="@+id/btn_startTrace"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:textAllCaps="false"
+        android:text="@string/start_trace"
+        android:background="@drawable/mapbuttonselector"
+        android:button="@null"
+        android:layout_height="wrap_content" />
+    <RadioButton
+        android:gravity="center"
+        android:textSize="27sp"
+        android:id="@+id/btn_stopTrace"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:textAllCaps="false"
+        android:text="@string/stop_trace"
+        android:button="@null"
+        android:background="@drawable/mapbuttonselector"
+        android:layout_height="wrap_content" />
+
+
+  </RadioGroup>
 
 <!--    <Button
         android:id="@+id/btn_operator"

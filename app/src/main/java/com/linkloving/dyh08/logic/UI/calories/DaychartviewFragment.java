@@ -1,6 +1,7 @@
 package com.linkloving.dyh08.logic.UI.calories;
 
 import android.app.Fragment;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by leo.wang on 2016/8/2.
@@ -42,18 +44,23 @@ public class DaychartviewFragment extends Fragment {
     private List<BarChartView.BarChartItemBean> dayhour = new ArrayList<>();
     private BarChartView barChartView;
     private View view;
+    int calorieseveryday ;
+    private int calorieseveryHour;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tw_calories_chartview_fragment, container, false);
+        ToolKits toolKits = new ToolKits();
+        this.calorieseveryday = toolKits.getCalories(getActivity());
+        MyLog.e("calories",calorieseveryday+"calories");
         barChartView = (BarChartView) view.findViewById(R.id.day_barchartView);
         barChartView.setPopupViewType(BarChartView.CALORIES);
         String checkDate = getArguments().getString("checkDate");
         new DayChartAsynck().execute(checkDate);
         return view;
     }
-
     private class DayChartAsynck extends AsyncTask<Object, Object, List<BarChartView.BarChartItemBean>>{
 
         private Date parse;
@@ -65,10 +72,12 @@ public class DaychartviewFragment extends Fragment {
         String enddata ;
         private DetailChartCountData count;
         UserEntity userEntity= MyApplication.getInstance(getActivity()).getLocalUserInfoProvider();
-
+        private SimpleDateFormat  hh = new SimpleDateFormat("HH", Locale.getDefault());
 
         @Override
         protected List<BarChartView.BarChartItemBean> doInBackground(Object... objects) {
+            calorieseveryHour = calorieseveryday / 24;
+            MyLog.e("calories",calorieseveryHour+"calorieseveryHour");
             stringTimeList = new ArrayList<>();
             String time = objects[0].toString()+" 00:00:00.000";
             MyLog.e("time是",time);
@@ -101,7 +110,7 @@ public class DaychartviewFragment extends Fragment {
                 String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(time1);
                 try {
                     count = DatasProcessHelper.countSportData(srs, startDateLocal);
-                    MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
+//                    MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -109,7 +118,36 @@ public class DaychartviewFragment extends Fragment {
                         (int) count.walking_duration * 60, userEntity.getUserBase().getUser_weight());
 //        userEntity.getUserBase().getUser_weight()
                 int runCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.runing_distance)), (int)count.runing_duation * 60, userEntity.getUserBase().getUser_weight());
-                int calValue = walkCal + runCal;
+
+                /*********************/
+                Date dateToday = new Date();
+                int calValue = 0 ;
+                if (ToolKits.compareDate(dateToday,parse)){
+//            calValue = walkCal + runCal+calorieseveryday;
+                    String dateTodayFormat = sdf.format(dateToday);
+                    String dateFormat = sdf.format(parse);
+                    String[] dateFormatSplit = dateTodayFormat.split(" ");
+                    String[] dateSplit = dateFormat.split(" ");
+                    MyLog.e(TAG,"1---"+dateSplit[0]+"2--"+dateFormatSplit[0]);
+                    if (dateSplit[0].equals(dateFormatSplit[0])){
+                        MyLog.e(TAG,"日期等于今天");
+                        String HH = hh.format(dateToday);
+                        int h = Integer.parseInt(HH);
+                        if (i+1<h){
+                            MyLog.e(TAG,"小时之前");
+                            calValue = walkCal+runCal ;
+                        }else {
+                            calValue = calorieseveryHour+walkCal+runCal ;
+                            MyLog.e(TAG,"小时之后");
+                        }
+                    }else{
+                        MyLog.e(TAG,"日期在今天之前");
+                        calValue = walkCal + runCal+calorieseveryHour;
+                    }
+                }else {
+                    MyLog.e(TAG, "日期在今天之后");
+                }
+                    /*********************/
                 MyLog.e(TAG, "calValue" + calValue);
              BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean(Integer.toString(i+1), calValue);
                 dayhour.add(barChartItemBean);

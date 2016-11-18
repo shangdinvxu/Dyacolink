@@ -7,13 +7,13 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".logic.UI.main.PortalActivity"
     tools:showIn="@layout/tw_app_bar_portal">
-<!--
+
+    <include layout="@layout/tw_activity_main_lunch"></include>
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/pullTorefreshView"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:layout_width="match_parent">
-    </com.handmark.pulltorefresh.library.PullToRefreshListView>-->
-    <include layout="@layout/tw_activity_main_lunch"></include>
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 
 

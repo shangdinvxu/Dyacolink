@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -34,6 +35,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +49,7 @@ import com.baidu.location.LocationClientOption;
 import com.example.android.bluetoothlegatt.BLEHandler;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jaeger.library.StatusBarUtil;
 import com.linkloving.band.dto.DaySynopic;
@@ -99,6 +102,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -186,6 +190,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
      * 当前正在运行中的数据加载异步线程(放全局的目的是尽量控制当前只有一个在运行，防止用户恶意切换导致OOM)
      */
     private AsyncTask<Object, Object, DaySynopic> currentDataAsync = null;
+    private PullToRefreshListView pulltorefreshView;
 
     @Override
     protected void onPause() {
@@ -202,7 +207,6 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
         provider = BleService.getInstance(PortalActivity.this).getCurrentHandlerProvider();
         provider.setBleProviderObserver(bleProviderObserver);
-
         UserEntity userEntity = MyApplication.getInstance(PortalActivity.this).getLocalUserInfoProvider();
 
 //        if (userEntity == null || userEntity.getDeviceEntity() == null || userEntity.getUserBase() == null)
@@ -240,69 +244,10 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tv_activity_portal_main);
-    /*    PullToRefreshListView pulltorefreshView = (PullToRefreshListView) findViewById(R.id.pullTorefreshView);
-        pulltorefreshView.setAdapter(new ListAdapter() {
-            @Override
-            public boolean areAllItemsEnabled() {
-                return false;
-            }
-
-            @Override
-            public boolean isEnabled(int position) {
-                return false;
-            }
-
-            @Override
-            public void registerDataSetObserver(DataSetObserver observer) {
-
-            }
-
-            @Override
-            public void unregisterDataSetObserver(DataSetObserver observer) {
-
-            }
-
-            @Override
-            public int getCount() {
-                return 1;
-            }
-
-            @Override
-            public Object getItem(int position) {
-                return null;
-            }
-
-            @Override
-            public long getItemId(int position) {
-                return 0;
-            }
-
-            @Override
-            public boolean hasStableIds() {
-                return false;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = LayoutInflater.from(PortalActivity.this).inflate(R.layout.tw_activity_main_lunch, null);
-                return view;
-            }
-
-            @Override
-            public int getItemViewType(int position) {
-                return 0;
-            }
-
-            @Override
-            public int getViewTypeCount() {
-                return 1;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-        });*/
+        View heardView = LayoutInflater.from(PortalActivity.this).inflate(R.layout.tw_activity_main_lunch, null);
+        pulltorefreshView = (PullToRefreshListView) findViewById(R.id.pullTorefreshView);
+        ListView refreshableView = pulltorefreshView.getRefreshableView();
+        refreshableView.addHeaderView(heardView);
         checkBle();
         AppManager.getAppManager().addActivity(this);
         ButterKnife.inject(this);
@@ -326,11 +271,49 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         //开始定位
         mLocationClient.start();
         /*--------------------------------*/
+        pulltorefreshView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                String s = MyApplication.getInstance(PortalActivity.this).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id();
+                if (CommonUtils.isStringEmpty(s)) {
+                    //
+//                    showBundDialog();
+                    pulltorefreshView.onRefreshComplete();
+                } else {
+                    // 启动超时处理handler
+                    // 进入扫描和连接处理过程
+                    provider.setCurrentDeviceMac(s);
+                    //开始同步
+                    BleService.getInstance(PortalActivity.this).syncAllDeviceInfoAuto(PortalActivity.this, false, null);
+                    mScrollViewRefreshingHandler.post(mScrollViewRefreshingRunnable);
+                }
 
+            }
+
+        });
 
         /*-------------------日历----------------*/
 
     }
+
+    /**
+     * 下拉同步ui的超时复位延迟执行handler （防止意外情况下，一直处于“同步中”的状态）
+     */
+    private Handler mScrollViewRefreshingHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (pulltorefreshView.isRefreshing())
+                pulltorefreshView.onRefreshComplete();
+            super.handleMessage(msg);
+        }
+    };
+    Runnable mScrollViewRefreshingRunnable = new Runnable() {
+        @Override
+        public void run() {
+            Message ms = new Message();
+            mScrollViewRefreshingHandler.sendMessageDelayed(ms, 15000);
+        }
+    };
 
     private void checkBle() {
         //判断是否有权限
@@ -415,10 +398,9 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         refreshHeadView();
         //更新日历 1s一次
         updateTimeThread();
+
         Bitmap bitmap = decodeUriAsBitmap(getTempImageFileUri());
         user_head.setImageBitmap(bitmap);
-
-
     }
 
     private Bitmap decodeUriAsBitmap(Uri uri) {
@@ -686,7 +668,16 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
                 int walkCal = ToolKits.calculateCalories(Float.parseFloat(mDaySynopic.getWork_distance()), (int) walktime * 60, userEntity.getUserBase().getUser_weight());
                 int runCal = ToolKits.calculateCalories(Float.parseFloat(mDaySynopic.getRun_distance()), (int) runtime * 60, userEntity.getUserBase().getUser_weight());
-                int calValue = walkCal + runCal;
+                ToolKits toolKits = new ToolKits();
+                int calorieseveryday = toolKits.getCalories(PortalActivity.this);
+                Date dateToday = new Date();
+                SimpleDateFormat hh = new SimpleDateFormat("HH", Locale.getDefault());
+                String HH = hh.format(dateToday);
+                SimpleDateFormat mm = new SimpleDateFormat("mm", Locale.getDefault());
+                String MM = mm.format(dateToday);
+                int caloriesNow = calorieseveryday * (Integer.parseInt(HH) * 60 + Integer.parseInt(MM)) / 1440;
+                MyLog.e("caloriesNow",caloriesNow+"caloriesNow");
+                int calValue = caloriesNow+walkCal+runCal ;
                 calView.setText(calValue + "");
 
                 if (progressDialog != null && progressDialog.isShowing())

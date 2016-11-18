@@ -1,8 +1,12 @@
 package com.linkloving.dyh08.logic.UI.settings;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -11,8 +15,15 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.linkloving.dyh08.CommParams;
@@ -22,6 +33,7 @@ import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.http.basic.CallServer;
 import com.linkloving.dyh08.http.basic.NoHttpRuquestFactory;
+import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.dto.UserBase;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.logic.utils.CircleImageView;
@@ -29,8 +41,11 @@ import com.linkloving.dyh08.utils.AvatarHelper;
 import com.linkloving.dyh08.utils.MyToast;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.net.URI;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -45,7 +60,7 @@ public class PersonalInfoActivity extends ToolBarActivity {
     @InjectView(R.id.user_head)
     CircleImageView userHead;
     @InjectView(R.id.edit_nickname)
-    AppCompatEditText editNickname;
+    EditText editNickname;
     @InjectView(R.id.radio_man)
     AppCompatRadioButton radioMan;
     @InjectView(R.id.radio_woman)
@@ -84,11 +99,16 @@ public class PersonalInfoActivity extends ToolBarActivity {
     private static final int AVATAR_SIZE = 640;
     // 修改头像的临时文件存放路径（头像修改成功后，会自动删除之）
     private String __tempImageFileLocation = null;
+    private View totalView;
+    private LayoutInflater layoutInflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tw_setting);
+        layoutInflater = LayoutInflater.from(PersonalInfoActivity.this);
+
+        totalView = layoutInflater.inflate(R.layout.tw_setting, null);
         ButterKnife.inject(this);
         userEntity = MyApplication.getInstance(PersonalInfoActivity.this).getLocalUserInfoProvider();
         userBase = userEntity.getUserBase();
@@ -168,10 +188,53 @@ public class PersonalInfoActivity extends ToolBarActivity {
     }
     private void initpopwindow()
     {
-        menuWindow = new SelectPicPopupWindow(PersonalInfoActivity.this, itemsOnClick);
+        View view = layoutInflater.inflate(R.layout.popphotopopupwindow, null);
+        Button deletePhoto = (Button) view.findViewById(R.id.deletePhoto);
+        Button takePhotoBtn = (Button) view.findViewById(R.id.takePhotoBtn);
+        Button pickPhotoBtn = (Button) view.findViewById(R.id.pickPhotoBtn);
+        Button cancel_Btn = (Button) view.findViewById(R.id.cancelBtn);
+        final PopupWindow popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0xffD3D3D3));
+        popupWindow.showAtLocation(totalView, Gravity.BOTTOM, 0, 0);
+        deletePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deletePhotoPopupWindow();
+            }
+        });
+        takePhotoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //进入拍照
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//action is capture
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, getTempImageFileUri());
+                startActivityForResult(intent, TAKE_BIG_PICTURE);
+            }
+        });
+        pickPhotoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startPhoto();//相册
+            }
+        });
+        cancel_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                int photoType = userBase.getPhotoType();
+                if (photoType==1){
+                    userHead.setImageResource(R.mipmap.default_avatar_m);
+                }
+            }
+        });
 
-        menuWindow.showAtLocation(findViewById(R.id.layout_peosoninfo),
-                Gravity.BOTTOM| Gravity.CENTER_HORIZONTAL, 0, 0);
     }
     //为弹出窗口实现监听类
     private View.OnClickListener itemsOnClick = new View.OnClickListener() {
@@ -180,6 +243,8 @@ public class PersonalInfoActivity extends ToolBarActivity {
             menuWindow.dismiss();
             switch (v.getId()) {
                 // 拍照
+                case R.id.deletePhoto:
+
                 case R.id.takePhotoBtn:
                     //进入拍照
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//action is capture
@@ -195,6 +260,48 @@ public class PersonalInfoActivity extends ToolBarActivity {
             }
         }
     };
+    private void deletePhotoPopupWindow() {
+        final Uri imagePhotoUri = getTempImageFileUri();
+        LayoutInflater layoutInflater = LayoutInflater.from(PersonalInfoActivity.this);
+        View view = layoutInflater.inflate(R.layout.photopopupwindow, null);
+        final CircleImageView photoView = (CircleImageView) view.findViewById(R.id.photo);
+        Button cancel_btn = (Button) view.findViewById(R.id.cancel_Btn);
+        Button confirm_btn = (Button) view.findViewById(R.id.confirm_Btn);
+        final PopupWindow popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0xffD3D3D3));
+        popupWindow.showAtLocation(totalView, Gravity.BOTTOM, 0, 0);
+        cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        confirm_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               photoView.setImageResource(R.mipmap.default_avatar_m);
+                File file = new File(getTempImageFileLocation());
+                Resources r = getResources();
+                Bitmap bitmap = BitmapFactory.decodeResource(r, R.mipmap.default_avatar_m);
+                FileOutputStream fileOutputStream = null ;
+                try {
+                 fileOutputStream = new FileOutputStream(file);
+                    bitmap.compress(Bitmap.CompressFormat.PNG,90,fileOutputStream);
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        Bitmap bitmap = decodeUriAsBitmap(imagePhotoUri);
+        photoView.setImageBitmap(bitmap);
+    }
+
+
     /*进入相册*/
     private void startPhoto (){
         Intent intent = new Intent("android.intent.action.PICK");

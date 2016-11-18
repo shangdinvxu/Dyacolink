@@ -20,12 +20,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_input_bg_focus.9.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\cai_item.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\cai_item.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_input_bg_special_focus.9.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\smssdk_input_bg_special_focus.9.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\cai_item.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\cai_item.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_checkbox_nor.9.png",
@@ -70,6 +70,10 @@
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\header_selector.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\header_selector.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\gpsokbutton.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\gpsokbutton.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\twitter_selector.xml",
@@ -304,6 +308,10 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\seek.9.png"
     },
     {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\mapbuttonselector.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\mapbuttonselector.xml"
+    },
+    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_settings_item_bg_group_full.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\common_settings_item_bg_group_full.xml"
     },
@@ -320,12 +328,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\rank_content_bg.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rank_content_head.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\rank_content_head.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ding_item.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\ding_item.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rank_content_head.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\rank_content_head.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\tab_bg.xml",
@@ -384,12 +392,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\sns_add_friend_form_say_hi_greet_bg.9.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_full_material.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_full_material.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\alarm_list_item_bg_normal.9.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\alarm_list_item_bg_normal.9.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_full_material.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_full_material.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\fb_selector.xml",
@@ -416,6 +424,10 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\alarm_dialog_title.9.png"
     },
     {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\button_start.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\button_start.png"
+    },
+    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\name_content_bg.xml",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\name_content_bg.xml"
     },
@@ -432,12 +444,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\main_report_page_dataselect_left_btn_normal.9.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\chat_put_in.9.png",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\chat_put_in.9.png"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\widget_toast_icon_error.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\widget_toast_icon_error.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\chat_put_in.9.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\chat_put_in.9.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\tw_share_selector.xml",
@@ -520,12 +532,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\dyh08\\PullToRefreshLibrary\\unspecified\\res\\drawable\\indicator_bg_top.xml"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\tab_indicator.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\tab_indicator.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_radio_woman_nor.9.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\common_radio_woman_nor.9.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\tab_indicator.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\tab_indicator.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_style_alert_dialog_cancel_pressed.9.png",
@@ -582,6 +594,10 @@
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_check_material.xml",
         "source": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_check_material.xml"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\button_start_on.png",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\button_start_on.png"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\relationship_tab_on.png",
@@ -760,12 +776,12 @@
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\title_add.png"
     },
     {
-        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\side_nav_bar.xml",
-        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\side_nav_bar.xml"
-    },
-    {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_toast_bg.9.png",
         "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\common_toast_bg.9.png"
+    },
+    {
+        "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\side_nav_bar.xml",
+        "source": "F:\\Daniel\\dyh08\\app\\src\\main\\res\\drawable\\side_nav_bar.xml"
     },
     {
         "merged": "F:\\Daniel\\dyh08\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\smssdk_corners_bg_nor.xml",

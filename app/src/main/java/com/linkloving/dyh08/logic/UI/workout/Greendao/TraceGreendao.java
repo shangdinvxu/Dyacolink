@@ -75,6 +75,8 @@ public class TraceGreendao {
         getNoteDao().insertOrReplace(note);
     }
 
+
+
     /**
      * 添加开始时间
      * @param date  每天的日期
@@ -113,6 +115,12 @@ public class TraceGreendao {
         List<Note> list = query.list();
         return list ;
     }
+    public List<Note> searchWorkData(){
+        Query<Note> build = getNoteDao().queryBuilder().where(NoteDao.Properties.Type.eq(10)).orderDesc(NoteDao.Properties.Id).build();
+        List<Note> list = build.list();
+        return list;
+    }
+
 
 
 
@@ -136,7 +144,7 @@ public class TraceGreendao {
     public List <Note>searchAllStarttime(){
         Query<Note> query = getNoteDao().queryBuilder()
                 .where(NoteDao.Properties.Type.eq(1))
-                .orderAsc(NoteDao.Properties.StartDate)
+                .orderAsc(NoteDao.Properties.Id)
                 .build();
         List<Note> list = query.list();
         for (int i=0 ; i<list.size();i++){
@@ -147,7 +155,7 @@ public class TraceGreendao {
     public List<Note>searchAllEndTime(){
         Query<Note> query = getNoteDao().queryBuilder()
                 .where(NoteDao.Properties.Type.eq(2))
-                .orderAsc(NoteDao.Properties.StartDate)
+                .orderAsc(NoteDao.Properties.Id)
                 .build();
         List<Note> list = query.list();
         for (int i=0 ; i<list.size();i++){

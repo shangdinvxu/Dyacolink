@@ -12,11 +12,4 @@
     <string name="ssdk_oks_pull_to_refresh">Pull down to refresh</string>
 	<string name="ssdk_oks_release_to_refresh">Release to refresh</string>
 	<string name="ssdk_oks_refreshing">Refreshing…</string>
-	
-	<string name="ssdk_sinaweibo">Sina</string>
-	<string name="ssdk_wechat">Wechat</string>
-	<string name="ssdk_qzone">Qzone</string>
-	<string name="ssdk_wechatmoments">Wechatmoments</string>
-	<string name="ssdk_facebook">Facebook</string>
-	<string name="ssdk_twitter">Twitter</string>
 </resources>

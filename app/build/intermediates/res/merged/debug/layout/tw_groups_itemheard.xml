@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:textColor="#8A8A8A"
         android:textSize="20sp"
-        android:text="2 activities"
+        android:text=""
         />
 </LinearLayout>
 

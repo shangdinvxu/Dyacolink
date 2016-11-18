@@ -24,13 +24,16 @@ import java.util.Locale;
  */
 public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
     String datasdf;
-
+    private static  final String TAG =DaySportAsynck.class.getSimpleName() ;
     Object object ;
     DrawArc drawArc ;
     TextView textView ;
     Context context ;
     TextView stepNumber ;
+    int calorieseveryday ;
     private UserEntity userEntity;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    Date date = null;
     /**
      *
      * @param object  用于传Asynck执行的对象
@@ -45,6 +48,9 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
         this.drawArc = drawArc ;
         this.textView = textView ;
         this.context = context ;
+        ToolKits toolKits = new ToolKits();
+         this.calorieseveryday = toolKits.getCalories(context);
+
     }
 
     //耗时操作
@@ -53,8 +59,6 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
         userEntity = MyApplication.getInstance(context).getLocalUserInfoProvider();
         String data = (String) params[0];
         MyLog.e("params", data);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        Date date = null;
         try {
             date = sdf.parse(data);
         } catch (ParseException e) {
@@ -77,7 +81,48 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
 
         int walkCal = ToolKits.calculateCalories(Float.parseFloat(daySynopic.getWork_distance()), (int) walktime * 60, userEntity.getUserBase().getUser_weight());
         int runCal = ToolKits.calculateCalories(Float.parseFloat(daySynopic.getRun_distance()), (int) runtime * 60, userEntity.getUserBase().getUser_weight());
-        int calValue = walkCal + runCal;
+        Date dateToday = new Date();
+        int calValue = 0 ;
+        if (ToolKits.compareDate(dateToday,date)){
+//            calValue = walkCal + runCal+calorieseveryday;
+            String dateTodayFormat = sdf.format(dateToday);
+            String dateFormat = sdf.format(date);
+            String[] dateFormatSplit = dateTodayFormat.split(" ");
+            String[] dateSplit = dateFormat.split(" ");
+            MyLog.e(TAG,"1---"+dateSplit[0]+"2--"+dateFormatSplit[0]);
+            if (dateSplit[0].equals(dateFormatSplit[0])){
+                MyLog.e(TAG,"日期等于今天");
+                SimpleDateFormat hh = new SimpleDateFormat("HH", Locale.getDefault());
+                String HH = hh.format(dateToday);
+                SimpleDateFormat mm = new SimpleDateFormat("mm", Locale.getDefault());
+                String MM = mm.format(dateToday);
+                int i = calorieseveryday * (Integer.parseInt(HH) * 60 + Integer.parseInt(MM)) / 1440;
+                calValue = i+walkCal+runCal ;
+            }else{
+                MyLog.e(TAG,"日期在今天之前");
+                calValue = walkCal + runCal+calorieseveryday;
+            }
+        }else{
+            MyLog.e(TAG,"日期在今天之后");
+         /*   String dateTodayFormat = sdf.format(dateToday);
+            String dateFormat = sdf.format(date);
+            String[] dateFormatSplit = dateTodayFormat.split(" ");
+            String[] dateSplit = dateFormat.split(" ");
+            if (dateSplit[0].equals(dateFormatSplit[0])){
+                MyLog.e(TAG,"日期等于今天");
+                SimpleDateFormat hh = new SimpleDateFormat("HH", Locale.getDefault());
+                String HH = hh.format(dateToday);
+                SimpleDateFormat mm = new SimpleDateFormat("mm", Locale.getDefault());
+                String MM = mm.format(dateToday);
+                int i = calorieseveryday * (Integer.parseInt(HH) * 60 + Integer.parseInt(MM)) / 1440;
+                calValue = i+walkCal+runCal ;
+            }else{
+                MyLog.e(TAG,"日期在今天之后");
+                calValue =walkCal+runCal ;
+            }*/
+            calValue =walkCal+runCal ;
+        }
+
         int stepGoal = Integer.parseInt(PreferencesToolkits.getGoalInfo(context, PreferencesToolkits.KEY_GOAL_CAL));
         float stepPercent  = (float)calValue/stepGoal ;
         //此时去更新UI

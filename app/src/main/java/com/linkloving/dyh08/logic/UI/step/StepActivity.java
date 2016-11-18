@@ -2,6 +2,7 @@ package com.linkloving.dyh08.logic.UI.step;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
@@ -171,6 +172,7 @@ public class StepActivity extends ToolBarActivity{
         //从本地抓取目标值 并且设置到view上
         String stepGoal = PreferencesToolkits.getGoalInfo(this,PreferencesToolkits.KEY_GOAL_STEP);
         goalTv.setText(stepGoal);
+        goalTv.setTextColor(Color.rgb(255,196,0));
     }
 
     @Override
