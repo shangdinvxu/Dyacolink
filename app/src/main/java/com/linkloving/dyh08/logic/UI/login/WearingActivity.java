@@ -73,7 +73,8 @@ public class WearingActivity extends Activity {
                     return;
                 }
                 userEntity.getUserBase().setUser_wearingStyle(wearingStyle);
-                IntentFactory.startLoginFinish(WearingActivity.this);
+//                IntentFactory.startLoginFinish(WearingActivity.this);
+                    IntentFactory.startPortalActivityIntent(WearingActivity.this);
             }
         });
 

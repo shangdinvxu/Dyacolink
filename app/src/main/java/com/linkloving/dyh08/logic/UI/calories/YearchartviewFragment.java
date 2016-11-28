@@ -37,6 +37,7 @@ public class YearchartviewFragment extends Fragment {
     private View view ;
     private ProgressBar progressbarYear;
     private UserEntity userEntity;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,6 +76,10 @@ public class YearchartviewFragment extends Fragment {
 //        MyLog.e(TAG,Integer.toString(month));
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             List<BarChartView.BarChartItemBean> barChartItemBeans = new ArrayList<>();
+            Date date1 = new Date();
+            String todayString = simpleDateFormat.format(date1);
+            ToolKits toolKits = new ToolKits();
+            int toolKitsCalories = toolKits.getCalories(getActivity());
             for( int i=0 ;i<=month ;i++){
 //                value是用来更新进度条的
                 value = i/month ;
@@ -95,7 +100,12 @@ public class YearchartviewFragment extends Fragment {
                     int walkCal = ToolKits.calculateCalories(Float.parseFloat(monthData.getWork_distance()), (int) walktime * 60, userEntity.getUserBase().getUser_weight());
                     int runCal = ToolKits.calculateCalories(Float.parseFloat(monthData.getRun_distance()), (int) runtime * 60, userEntity.getUserBase().getUser_weight());
                     int calValue = walkCal + runCal;
+                    String data_date = monthData.getData_date();
+                    if (!todayString.equals(data_date)){
+                        calValue = calValue + toolKitsCalories;
+                    }
                     stepSum+=calValue ;
+                    MyLog.e(TAG,data_date+"data_date"+"-----"+daySum+"daySum");
                 }
                 monthAverageNumber = stepSum /daySum ;
                 String substring = String.valueOf(year).substring(2);
@@ -103,6 +113,12 @@ public class YearchartviewFragment extends Fragment {
                 if (s1.length()<2){
                     s1= "0"+s1 ;
                 }
+            /*    Date date1 = new Date();
+                String todayString = simpleDateFormat.format(date1);
+                if (!todayString.equals(date)){
+                    ToolKits toolKits = new ToolKits();
+                    calValue = calValue + toolKits.getCalories(getActivity());
+                }*/
                 BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean(substring+"/"+s1, monthAverageNumber);
                 barChartItemBeans.add(barChartItemBean);
             }

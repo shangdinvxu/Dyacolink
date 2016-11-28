@@ -102,7 +102,9 @@ import java.util.Locale;
             stepnumber = stepnumber+calValue  ;
             MyLog.e(TAG,stepnumber+"======"+daynumber);
         }
-        stepnumber = stepnumber /daynumber ;
+        ToolKits toolKits = new ToolKits();
+        int calories = toolKits.getCalories(context);
+        stepnumber = (stepnumber+calories*daynumber) /daynumber ;
         int stepGoal = Integer.parseInt(PreferencesToolkits.getGoalInfo(context, PreferencesToolkits.KEY_GOAL_CAL));
         float stepPercent  = (float)stepnumber/stepGoal ;
         //此时去更新UI

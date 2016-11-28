@@ -94,7 +94,9 @@ public class MonthSportAsynck extends AsyncTask<Object, Object, List<DaySynopic>
         if (daynumber == 0){
             daynumber =1 ;
         }
-        stepnumber = stepnumber /daynumber ;
+        ToolKits toolKits = new ToolKits();
+        int calories = toolKits.getCalories(context);
+        stepnumber = (stepnumber+calories*daynumber) /daynumber ;
         int stepGoal = Integer.parseInt(PreferencesToolkits.getGoalInfo(context, PreferencesToolkits.KEY_GOAL_CAL));
         float stepPercent  = (float)stepnumber/stepGoal ;
         //此时去更新UI

@@ -197,12 +197,12 @@ public class GroupsDetailsActivity extends ToolBarActivity {
 //        AvgSpeed.setText(avgSpeedStr + "km/h");
 
         //从数据库中获取的坐标点画,有问题,需要纠偏.暂不采用.
-/*        for (int i = 0; i < lists.size(); i++) {
+        for (int i = 0; i < lists.size(); i++) {
             Date runDate = lists.get(i).getRunDate();
             SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             String format1 = simpleDateFormat1.format(runDate);
             showRealtimeTrack(lists.get(i).getLatitude(), lists.get(i).getLongitude());
-        }*/
+        }
         initOnTrackListener();
 
         queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");

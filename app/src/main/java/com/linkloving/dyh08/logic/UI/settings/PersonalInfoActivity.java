@@ -152,6 +152,7 @@ public class PersonalInfoActivity extends ToolBarActivity {
 
     @OnClick(R.id.btn_enter)
     void enter(View view) {
+        btnEnter.setBackgroundResource(R.drawable.enteron);
         String name = editNickname.getText().toString().trim();
         userBase.setNickname(name);
         String day = editDay.getText().toString().trim();
@@ -353,6 +354,8 @@ public class PersonalInfoActivity extends ToolBarActivity {
                     if(!avatarTempDir.exists())
                         avatarTempDir.mkdirs();
                     // 临时文件名
+                    int user_id = MyApplication.getInstance(PersonalInfoActivity.this).getLocalUserInfoProvider().getUser_id();
+                    String userIdString = Integer.toString(user_id);
                     __tempImageFileLocation = avatarTempDir.getAbsolutePath()+"/"+"local_avatar_temp.jpg";
                 }
             }

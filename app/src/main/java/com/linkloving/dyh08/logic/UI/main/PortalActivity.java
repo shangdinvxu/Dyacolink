@@ -15,6 +15,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -74,6 +75,7 @@ import com.linkloving.dyh08.logic.UI.main.materialmenu.Left_viewVO1;
 import com.linkloving.dyh08.logic.UI.main.materialmenu.MenuNewAdapter;
 import com.linkloving.dyh08.logic.UI.main.materialmenu.MenuVO;
 import com.linkloving.dyh08.logic.UI.more.MoreActivity;
+import com.linkloving.dyh08.logic.UI.settings.PersonalInfoActivity;
 import com.linkloving.dyh08.logic.dto.SportRecordUploadDTO;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
@@ -275,6 +277,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 String s = MyApplication.getInstance(PortalActivity.this).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id();
+                getCalroiesNow();
                 if (CommonUtils.isStringEmpty(s)) {
                     //
 //                    showBundDialog();
@@ -399,8 +402,25 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         //更新日历 1s一次
         updateTimeThread();
 
-        Bitmap bitmap = decodeUriAsBitmap(getTempImageFileUri());
-        user_head.setImageBitmap(bitmap);
+        if (getTempImageFileUri()!=null){
+            Bitmap bitmap = decodeUriAsBitmap(getTempImageFileUri());
+            user_head.setImageBitmap(bitmap);
+        }
+        getCalroiesNow();
+    }
+
+    private void getCalroiesNow(){
+        ToolKits toolKits = new ToolKits();
+        int calorieseveryday = toolKits.getCalories(PortalActivity.this);
+        Date dateToday = new Date();
+        SimpleDateFormat hh = new SimpleDateFormat("HH", Locale.getDefault());
+        String HH = hh.format(dateToday);
+        SimpleDateFormat mm = new SimpleDateFormat("mm", Locale.getDefault());
+        String MM = mm.format(dateToday);
+        int caloriesNow = calorieseveryday * (Integer.parseInt(HH) * 60 + Integer.parseInt(MM)) / 1440;
+        MyLog.e("caloriesNow",caloriesNow+"caloriesNow");
+        calView.setText(caloriesNow + "");
+
     }
 
     private Bitmap decodeUriAsBitmap(Uri uri) {
@@ -432,7 +452,9 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                     if (!avatarTempDir.exists())
                         avatarTempDir.mkdirs();
                     // 临时文件名
-                    __tempImageFileLocation = avatarTempDir.getAbsolutePath() + "/" + "local_avatar_temp.jpg";
+                    int user_id = MyApplication.getInstance(PortalActivity.this).getLocalUserInfoProvider().getUser_id();
+                    String userIdString = Integer.toString(user_id);
+                    __tempImageFileLocation = avatarTempDir.getAbsolutePath() + "/" +"local_avatar_temp.jpg";
                 }
             }
         } catch (Exception e) {

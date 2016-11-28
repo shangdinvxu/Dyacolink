@@ -138,6 +138,7 @@ public class BluetoothActivity extends ToolBarActivity {
                 provider.setCurrentDeviceMac(macList.get(position).mac);
                 provider.setmBluetoothDevice(macList.get(position).bledevice);
                 provider.connect_mac(macList.get(position).mac);
+                middleChangeIV.setVisibility(View.VISIBLE);
                 dialog = new AlertDialog.Builder(BluetoothActivity.this).setMessage("连接中").setCancelable(false).show();
             }
         });

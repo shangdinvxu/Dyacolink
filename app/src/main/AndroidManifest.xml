@@ -430,7 +430,11 @@
             android:name=".logic.UI.sleep.SleepActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar" />
-
+    <activity android:name=".logic.UI.login.HeightNewActivity"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".logic.UI.login.WeightNewActivity" android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".logic.UI.distance.DistanceActivity"
             android:screenOrientation="portrait"
@@ -466,7 +470,8 @@
         <activity
             android:name=".logic.UI.login.UsernameActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar" />
+            android:theme="@style/AppThemeNoActionBar"
+             />
         <activity
             android:name=".logic.UI.login.WeightActivity"
             android:screenOrientation="portrait"

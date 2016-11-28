@@ -39,6 +39,7 @@ public class WeekchartviewFragment extends Fragment {
     private View view;
     private List<BarChartView.BarChartItemBean> week = new ArrayList<>();
     private UserEntity userEntity;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tw_week_barchartview_fragment, container, false);
@@ -67,15 +68,15 @@ public class WeekchartviewFragment extends Fragment {
         String startDateformat;
         private String endDateMd;
         private String endDateformat;
-        Context context ;
         private Date parseDate;
 
         Date mondayOfThisWeek =null;
         Date sundayofThisWeek=null ;
+
         protected List<DaySynopic> doInBackground(Object... params) {
             MyLog.e("params", params[0].toString());
             String dateStr = params[0].toString();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat sdf =  new SimpleDateFormat("yyyy/MM/dd");
 //            SimpleDateFormat sdfWithSlashYear = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
 //            SimpleDateFormat sdfWithSlashNoYear = new SimpleDateFormat("MM/dd", Locale.getDefault());
 //            取出来的天数加7天
@@ -135,6 +136,12 @@ public class WeekchartviewFragment extends Fragment {
                     e.printStackTrace();
                 }
                 String format = sim.format(parseDate);
+                Date date1 = new Date();
+                String todayString = simpleDateFormat.format(date1);
+                if (!todayString.equals(date)){
+                    ToolKits toolKits = new ToolKits();
+                    calValue = calValue + toolKits.getCalories(getActivity());
+                }
                 BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean(format, calValue);
                 week.add(barChartItemBean);
             }

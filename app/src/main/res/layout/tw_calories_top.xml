@@ -13,15 +13,15 @@
 
     <com.linkloving.dyh08.ViewUtils.drawAngle.DrawArc
         android:id="@+id/step_DrawArc_angle"
-        android:layout_width="265dp"
-        android:layout_height="265dp"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
         android:layout_centerInParent="true"
         >
     </com.linkloving.dyh08.ViewUtils.drawAngle.DrawArc>
 
     <ImageView
-        android:layout_width="280dp"
-        android:layout_height="280dp"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
         android:layout_centerInParent="true"
         android:background="@mipmap/loop"
         />
@@ -32,7 +32,7 @@
         android:layout_height="70dp"
         android:src="@mipmap/tw_calories"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="33dp"
         />
     <TextView
         android:id="@+id/tv_STEP"
@@ -52,7 +52,7 @@
         android:text="0"
         android:layout_below="@+id/tv_STEP"
         android:layout_centerHorizontal="true"
-        android:textSize="70sp"
+        android:textSize="60sp"
         android:textColor="#ffffff"
         />
     <TextView

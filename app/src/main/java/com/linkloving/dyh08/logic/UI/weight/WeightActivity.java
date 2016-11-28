@@ -41,6 +41,7 @@ public class WeightActivity extends AutoLayoutActivity {
         ButterKnife.inject(this);
         userEntity = MyApplication.getInstance(WeightActivity.this).getLocalUserInfoProvider();
         weightRulerView.initViewParam(mHeight,mMaxHeight,mMinHeight);
+
         weightRulerView.setValueChangeListener(new ScaleRulerView.OnValueChangeListener() {
             @Override
             public void onValueChange(float value) {

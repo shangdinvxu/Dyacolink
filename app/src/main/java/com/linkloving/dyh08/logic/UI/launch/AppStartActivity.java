@@ -1,9 +1,12 @@
 package com.linkloving.dyh08.logic.UI.launch;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -132,11 +135,11 @@ public class AppStartActivity extends AppCompatActivity {
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                    if(position==viewList.size()-1){
-                        IntentFactory.startUsername(AppStartActivity.this);
-                        finish();
-                    }
+                if (position == viewList.size() - 1) {
+                    IntentFactory.startUsername(AppStartActivity.this);
+                    finish();
                 }
+            }
 
 
             @Override
@@ -157,6 +160,11 @@ public class AppStartActivity extends AppCompatActivity {
          */
         if (sp.getInt("VERSION", 0) != VERSION) {
             redirectTo();
+//            获取权限
+            if (Build.VERSION.SDK_INT >= 23) {
+                String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_APN_SETTINGS};
+                ActivityCompat.requestPermissions(this, mPermissionList, 123);
+            }
             viewPager.setAdapter(pagerAdapter);
         } else {
             redirectTo();
@@ -192,14 +200,12 @@ public class AppStartActivity extends AppCompatActivity {
         });*/
 
 
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         AppManager.getAppManager().removeActivity(this);
         SharedPreferences.Editor edit = sp.edit();
-        edit.putInt("VERSION",1);
+        edit.putInt("VERSION", 1);
         edit.commit();
     }
 
@@ -207,29 +213,27 @@ public class AppStartActivity extends AppCompatActivity {
     /**
      * 跳转到...
      */
-    private void redirectTo()
-    {
+    private void redirectTo() {
         userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(this);
-            if( userAuthedInfo == null)
-            {
-                userAuthedInfo = new UserEntity();
-                //1,000,000,00
-                int ran = (int)((10000000)*Math.random()+10000);
-                SharedPreferences userid = getSharedPreferences("userid", MODE_PRIVATE);
-                SharedPreferences.Editor edit = userid.edit();
-                edit.putInt("id",ran);
-                edit.commit();
-                userAuthedInfo.setUser_id(ran);
-                userAuthedInfo.setDeviceEntity(new SportDeviceEntity());
-                userAuthedInfo.setUserBase(new UserBase("1980-01-01"));
-                userAuthedInfo.setEntEntity(new EntEntity());
-                userAuthedInfo.getUserBase().setUser_status(1);
-                userAuthedInfo.getUserBase().setNickname("User");
-                userAuthedInfo.getUserBase().setUser_weight(60);
-                userAuthedInfo.getUserBase().setUser_height(175);
+        if (userAuthedInfo == null) {
+            userAuthedInfo = new UserEntity();
+            //1,000,000,00
+            int ran = (int) ((10000000) * Math.random() + 10000);
+            SharedPreferences userid = getSharedPreferences("userid", MODE_PRIVATE);
+            SharedPreferences.Editor edit = userid.edit();
+            edit.putInt("id", ran);
+            edit.commit();
+            userAuthedInfo.setUser_id(ran);
+            userAuthedInfo.setDeviceEntity(new SportDeviceEntity());
+            userAuthedInfo.setUserBase(new UserBase("1980-01-01"));
+            userAuthedInfo.setEntEntity(new EntEntity());
+            userAuthedInfo.getUserBase().setUser_status(1);
+            userAuthedInfo.getUserBase().setNickname("User");
+            userAuthedInfo.getUserBase().setUser_weight(60);
+            userAuthedInfo.getUserBase().setUser_height(175);
 //                userAuthedInfo.getDeviceEntity().setLast_sync_device_id("");
-            }
-            MyApplication.getInstance(this).setLocalUserInfoProvider(userAuthedInfo);
+        }
+        MyApplication.getInstance(this).setLocalUserInfoProvider(userAuthedInfo);
 ////        开始跳转到用户信息设置界面
 //        SharedPreferences logined1 = getSharedPreferences("logined", MODE_PRIVATE);
 //        int login = logined1.getInt("login", 0);

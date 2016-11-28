@@ -135,9 +135,9 @@ public class DaychartviewFragment extends Fragment {
                         int h = Integer.parseInt(HH);
                         if (i+1<h){
                             MyLog.e(TAG,"小时之前");
-                            calValue = walkCal+runCal ;
-                        }else {
                             calValue = calorieseveryHour+walkCal+runCal ;
+                        }else {
+                            calValue = walkCal+runCal ;
                             MyLog.e(TAG,"小时之后");
                         }
                     }else{

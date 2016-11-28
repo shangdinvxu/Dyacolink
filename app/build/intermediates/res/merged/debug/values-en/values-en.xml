@@ -293,6 +293,10 @@
     <string name="Heart_Rate">Heart Rate</string>
     <string name="Height">Height</string>
     <string name="Incoming_tel_title">Call reminder</string>
+    <string name="KM">KM</string>
+    <string name="KMmonth">KM/month</string>
+    <string name="KMweek">KM/week</string>
+    <string name="KMyear">KM/year</string>
     <string name="Leaveamessage">Leave a message</string>
     <string name="LinkEquip">Link Equipment</string>
     <string name="M">M</string>
@@ -1068,6 +1072,7 @@
     <string name="share_content_fail">Share Success</string>
     <string name="share_content_short">Share</string>
     <string name="shop">Shop</string>
+    <string name="showhand">Show hand</string>
     <string name="shujumingxi">data book</string>
     <string name="sign">Personal State Message</string>
     <string name="smssdk_add_contact">Add</string>
@@ -1377,7 +1382,7 @@
     <string name="unit_week">Week</string>
     <string name="unit_year">Year</string>
     <string name="unit_year4date">Year</string>
-    <string name="unitsetting"/>
+    <string name="unitsetting">Unit settings</string>
     <string name="update_firmware">Update Firmware</string>
     <string name="update_message">Discover the new version already exists on the SD card, if not by downloading directly from the local installation?</string>
     <string name="update_title">Notice</string>

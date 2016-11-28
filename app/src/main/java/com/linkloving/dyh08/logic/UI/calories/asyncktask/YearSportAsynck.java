@@ -76,7 +76,10 @@ public class YearSportAsynck extends AsyncTask<Object, Object, Integer> {
                 stepSum+=calValue ;
             }}
         MyLog.e(TAG,stepSum+"step"+daySum);
-        return stepSum/daySum;
+        ToolKits toolKits = new ToolKits();
+        int calories = toolKits.getCalories(context);
+//        stepSum = (stepSum+calories*daySum) /daySum ;
+        return  (stepSum+calories*daySum) /daySum;
     }
     @Override
     protected void onPostExecute( Integer averageStepnumber) {

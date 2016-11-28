@@ -56,6 +56,8 @@ public class MonthchartviewFragment extends Fragment {
         private String[] split = {"","",""};
         private Date parseDate;
         String param ;
+        private SimpleDateFormat simpleDateFormat;
+        private SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
 
         protected List<DaySynopic> doInBackground(Object... params) {
 
@@ -64,7 +66,7 @@ public class MonthchartviewFragment extends Fragment {
             MyLog.e("param1",param);
             if (param == null || param.length() <= 0){
                 Date time = Calendar.getInstance().getTime();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+                simpleDateFormat = new SimpleDateFormat("yyyy-MM");
                 String todayParam = simpleDateFormat.format(time);
                 param = todayParam ;
             }
@@ -101,6 +103,12 @@ public class MonthchartviewFragment extends Fragment {
                     e.printStackTrace();
                 }
                 String format = sim.format(parseDate);
+                Date date1 = new Date();
+                String todayString = simpleDateFormat1.format(date1);
+                if (!todayString.equals(date)){
+                    ToolKits toolKits = new ToolKits();
+                    calValue = calValue + toolKits.getCalories(getActivity());
+                }
                 BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean(format, calValue);
                 MyLog.e(TAG, barChartItemBean.itemType.toString() + "=======" + Integer.toString((int) barChartItemBean.itemValue));
                 month.add(barChartItemBean);

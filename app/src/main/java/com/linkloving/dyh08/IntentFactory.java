@@ -24,6 +24,7 @@ import com.linkloving.dyh08.logic.UI.device.power.PowerActivity;
 import com.linkloving.dyh08.logic.UI.distance.DistanceActivity;
 import com.linkloving.dyh08.logic.UI.goal.SportGoalActivity;
 import com.linkloving.dyh08.logic.UI.height.HeightActivity;
+import com.linkloving.dyh08.logic.UI.launch.AppStartActivity;
 import com.linkloving.dyh08.logic.UI.launch.LoginFromPhoneActivity;
 import com.linkloving.dyh08.logic.UI.launch.dto.UserRegisterDTO;
 import com.linkloving.dyh08.logic.UI.launch.register.BodyActivity;
@@ -94,6 +95,11 @@ public class IntentFactory {
         intent.putExtra("tag",tag); //1是注册
         activity.startActivity(intent);
     }
+    public static void startAPPstartActivity(Activity activity) {
+        Intent intent = new Intent(activity, AppStartActivity.class);
+        activity.startActivity(intent);
+    }
+
 
     public static void startWeightActivityIntent(Activity activity,int tag) {
         Intent intent = new Intent(activity, WeightActivity.class);
@@ -385,8 +391,17 @@ public class IntentFactory {
         Intent intent = new Intent(activity, com.linkloving.dyh08.logic.UI.login.WeightActivity.class);
         activity.startActivity(intent);
     }
+    public static void startNewWeight(Activity activity){
+        Intent intent = new Intent(activity, com.linkloving.dyh08.logic.UI.login.WeightNewActivity.class);
+        activity.startActivity(intent);
+    }
+
     public static void startHeight(Activity activity){
         Intent intent = new Intent(activity, com.linkloving.dyh08.logic.UI.login.HeightActivity.class);
+        activity.startActivity(intent);
+    }
+    public static void startNewHeight(Activity activity){
+        Intent intent = new Intent(activity, com.linkloving.dyh08.logic.UI.login.HeightNewActivity.class);
         activity.startActivity(intent);
     }
     public static void startWearing(Activity activity){

@@ -145,7 +145,7 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                                     @Override
                                     public void onClick(DialogInterface dialog_, int which) {
                                         /**设置APP状态为退出*/
-                                        BleService.setEXIT_APP(true);
+                               /*         BleService.setEXIT_APP(true);
                                         AppManager.getAppManager().finishAllActivity();
                                         if(CommonUtils.isStringEmpty(MyApplication.getInstance(mContext).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id())
                                                 || !isEnabled(mContext)
@@ -155,8 +155,14 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                                             BleService.getInstance(mContext).getCurrentHandlerProvider().clearProess();
                                             // 以下的注释都开启后 并且 通知的服务也关闭后 就可以完全关闭APP 否则 退出不退出服务
                                             MyApplication.getInstance(mContext).stopBleService();
+                                            MyApplication.getInstance(mContext).setLocalUserInfoProvider(null);
                                             System.exit(0);
-                                        }
+                                        }*/
+                                        UserEntity userEntity = new UserEntity();
+                                        int ran = (int) ((10000000) * Math.random() + 10000);
+                                        userEntity.setUser_id(ran);
+                                        MyApplication.getInstance(mContext).setLocalUserInfoProvider(userEntity);
+                                        IntentFactory.startUsername((Activity) mContext);
                                     }
                                 })
                                 .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {

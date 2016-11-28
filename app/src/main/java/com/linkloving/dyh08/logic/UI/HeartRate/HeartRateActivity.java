@@ -70,6 +70,11 @@ public class HeartRateActivity extends ToolBarActivity implements View.OnClickLi
         int resting = (int) ((220-(year-i))*0.4);
         restingText.setText(resting+"");
         HeartrateDay.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.d_on_72px, 0, 0);
+        //中间的时间
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd a HH:mm",Locale.US);
+        String format = simpleDateFormat.format(date);
+        groupsTime.setText(format);
     }
 
 

@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.trace.TraceLocation;
+import com.facebook.stetho.Stetho;
 import com.linkloving.dyh08.logic.UI.launch.LoginInfo;
 import com.linkloving.dyh08.logic.dto.EntEntity;
 import com.linkloving.dyh08.logic.dto.SportDeviceEntity;
@@ -122,6 +123,7 @@ public class MyApplication extends Application{
     public void onCreate() {
         super.onCreate();
         //获取进程名称
+        Stetho.initializeWithDefaults(this);
         String processName = OsUtils.getProcessName(this,android.os.Process.myPid());
         if (processName != null){
             //判断是否是主进程

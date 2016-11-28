@@ -1,7 +1,9 @@
 package com.linkloving.dyh08.logic.UI.setting;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -178,18 +180,30 @@ public class GeneralActivity extends ToolBarActivity {
 
     private void initUnitsetting() {
         View view = layoutInflater.inflate(R.layout.unitsettingpopupwindow, null);
-        Button metric = (Button) view.findViewById(R.id.metric);
+        final Button metric = (Button) view.findViewById(R.id.metric);
+        final Button britsh = (Button) view.findViewById(R.id.britsh);
+        int localSettingUnitInfo = PreferencesToolkits.getLocalSettingUnitInfo(GeneralActivity.this);
+        if (localSettingUnitInfo==ToolKits.UNIT_GONG){
+            metric.setBackgroundColor(0xFFfbc400);
+            britsh.setBackgroundColor(0xffF5F5F5);
+        }else {
+            britsh.setBackgroundColor(0xFFfbc400);
+            metric.setBackgroundColor(0xffF5F5F5);
+        }
         metric.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PreferencesToolkits.setLocalSettingUnitInfo(GeneralActivity.this, ToolKits.UNIT_GONG);
+                metric.setBackgroundColor(0xFFfbc400);
+                britsh.setBackgroundColor(0xffF5F5F5);
             }
         });
-        Button britsh = (Button) view.findViewById(R.id.britsh);
         britsh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PreferencesToolkits.setLocalSettingUnitInfo(GeneralActivity.this,ToolKits.UNIT_YING);
+                britsh.setBackgroundColor(0xFFfbc400);
+                metric.setBackgroundColor(0xffF5F5F5);
             }
         });
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);

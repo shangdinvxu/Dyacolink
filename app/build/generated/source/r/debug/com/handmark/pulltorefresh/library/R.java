@@ -44,9 +44,9 @@ public final class R {
 	public static final class drawable {
 		public static final int default_ptr_flip = 0x7f020084;
 		public static final int default_ptr_rotate = 0x7f020085;
-		public static final int indicator_arrow = 0x7f02009d;
-		public static final int indicator_bg_bottom = 0x7f02009e;
-		public static final int indicator_bg_top = 0x7f02009f;
+		public static final int indicator_arrow = 0x7f02009e;
+		public static final int indicator_bg_bottom = 0x7f02009f;
+		public static final int indicator_bg_top = 0x7f0200a0;
 	}
 	public static final class id {
 		public static final int both = 0x7f0e0051;
@@ -72,9 +72,9 @@ public final class R {
 		public static final int pull_to_refresh_header_vertical = 0x7f0400a8;
 	}
 	public static final class string {
-		public static final int pull_to_refresh_from_bottom_pull_label = 0x7f0704f9;
-		public static final int pull_to_refresh_from_bottom_refreshing_label = 0x7f0704fa;
-		public static final int pull_to_refresh_from_bottom_release_label = 0x7f0704fb;
+		public static final int pull_to_refresh_from_bottom_pull_label = 0x7f0704fe;
+		public static final int pull_to_refresh_from_bottom_refreshing_label = 0x7f0704ff;
+		public static final int pull_to_refresh_from_bottom_release_label = 0x7f070500;
 		public static final int pull_to_refresh_pull_label = 0x7f070032;
 		public static final int pull_to_refresh_refreshing_label = 0x7f070033;
 		public static final int pull_to_refresh_release_label = 0x7f070034;

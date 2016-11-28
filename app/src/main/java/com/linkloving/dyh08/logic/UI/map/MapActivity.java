@@ -1,10 +1,13 @@
 package com.linkloving.dyh08.logic.UI.map;
 
+import android.Manifest;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.nfc.Tag;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -103,7 +106,7 @@ public class MapActivity extends ToolBarActivity {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Date todayDate;
     private String stringToday;
-    private Date startDate;
+    private Date startDate,endDate;
     private UserEntity userEntity;
     private int user_id;
     private ArrayList<SportRecord> sportRecordArrayList;
@@ -112,6 +115,8 @@ public class MapActivity extends ToolBarActivity {
     private  int calValue = 0;
     private DetailChartCountData count;
     private String filePathCacheTotal = "/sdcard/ranking_v333.png";
+    private List<Note> startNoteList;
+    private List<Note> endNoteList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +150,7 @@ public class MapActivity extends ToolBarActivity {
                 ToolKits.getScreenHot(screenhot, filePathCache);
             }
         });
+
         share();
 
     }
@@ -237,20 +243,101 @@ public class MapActivity extends ToolBarActivity {
                 boolean b = platform.hasShareCallback();
             }
         });
-    /*    twitter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Twitter.ShareParams shareParams = new Twitter.ShareParams();
-//                shareParams.setFilePath(filePathCache);
-                shareParams.setImagePath(filePathCache);
-                Platform platform = ShareSDK.getPlatform(Twitter.NAME);
-                platform.share(shareParams);
-                boolean b = platform.hasShareCallback();
-                showToast(b);
-            }
-        });*/
+
     }
 
+    //        得到哪几个记录是今天的
+    private List<Note> getStartListToday(){
+        List<Note> startNoteList = new ArrayList<>();
+
+        for (int i = 0; i < startTimeList.size(); i++) {
+            startDate = startTimeList.get(i).getStartDate();
+            MyLog.e(TAG,"startDate"+startDate);
+            String starttime = simpleDateFormat.format(startDate);
+            MyLog.e(TAG,"starttime-----------"+starttime);
+            if (starttime.equals(stringToday)) {
+                startNoteList.add(startTimeList.get(i));
+            }
+        }
+        return startNoteList ;
+    }
+    private List<Note> getEndListToday(){
+        List<Note> endNoteList = new ArrayList<>();
+        for (int i = 0; i < endTimeList.size(); i++) {
+            endDate = endTimeList.get(i).getStartDate();
+            MyLog.e(TAG,"endDate"+endDate);
+            String endtime = simpleDateFormat.format(endDate);
+            MyLog.e(TAG,"endtime-----------"+endtime);
+            if (endtime.equals(stringToday)) {
+                endNoteList.add(endTimeList.get(i));
+            }
+        }
+        return endNoteList ;
+    }
+
+
+    private void initDuration() {
+        long duration = 0 ;
+        if (startNoteList.size()!=0){
+            for (int i = 0; i< startNoteList.size(); i++) {
+                long startTime = startNoteList.get(i).getStartDate().getTime();
+                long endTime = endNoteList.get(i).getStartDate().getTime();
+                duration = duration+endTime-startTime;
+            }
+        }
+        String durtionText = getDurtion(duration);
+        mainTvDuration.setText(durtionText);
+    }
+
+    private void initDistance(){
+        //求Distance的逻辑
+        float distanceTotal = 0 ;
+        float stepTotal = 0 ;
+        int  caloriesTotal = 0 ;
+        if (startNoteList.size()!=0){
+            for (int i = 0; i< startNoteList.size(); i++) {
+                Date startDate = startNoteList.get(i).getStartDate();
+                Date endDate = endNoteList.get(i).getStartDate();
+                sportRecordArrayList = UserDeviceRecord.findHistoryChartwithHMS
+                        (MapActivity.this, String.valueOf(user_id), startDate, endDate);
+                if (sportRecordArrayList.size() == 0) {
+                    distance = 0;
+                    step = 0 ;
+                    calValue = 0 ;
+                } else {
+                    for (SportRecord sportRecordArray : sportRecordArrayList) {
+                        MyLog.e(TAG, "distance" + sportRecordArray.getDistance());
+                        distance = Integer.parseInt(sportRecordArray.getDistance()) + distance;
+                        step = Integer.parseInt(sportRecordArray.getStep()) + step;
+                        //这一部分是求Calories的逻辑
+                        List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
+                        String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(startDate);
+                        try {
+                            count = DatasProcessHelper.countSportData(srs, startDateLocal);
+                            MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        int walkCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.walking_distance)),
+                                (int) count.walking_duration * 60, userEntity.getUserBase().getUser_weight());
+                        MyLog.e("walkCal", walkCal + "");
+//        userEntity.getUserBase().getUser_weight()
+                        int runCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.runing_distance)), (int) count.runing_duation * 60, userEntity.getUserBase().getUser_weight());
+                        calValue = walkCal + runCal;
+                    }
+                }
+                caloriesTotal = caloriesTotal+calValue ;
+                distanceTotal = distanceTotal+distance ;
+                stepTotal = stepTotal +step ;
+            }}
+//        这一步吧distance转换成如5.3 的用来加km
+        MyLog.e("distance", distance + "");
+        double distanceKM = CommonUtils.getDoubleValue(distanceTotal / 1000, 1);
+        String distanceTotalString = new Formatter().format("%.1f", distanceKM).toString();
+        groupsTvDistance.setText(distanceTotalString);
+        groupsTvStep.setText(stepTotal+"");
+        groupsTvCalories.setText(caloriesTotal+"");
+    }
 
 
     private void init() {
@@ -262,78 +349,12 @@ public class MapActivity extends ToolBarActivity {
         startTimeList = traGreendao.searchAllStarttime();
         endTimeList = traGreendao.searchAllEndTime();
 //        得到哪几个记录是今天的
-        List<Integer> startNoteList = new ArrayList<>();
-        for (int i = 0; i < startTimeList.size(); i++) {
-            startDate = startTimeList.get(i).getStartDate();
-            MyLog.e(TAG,"startDate"+startDate);
-            String starttime = simpleDateFormat.format(startDate);
-            MyLog.e(TAG,"starttime-----------"+starttime);
-            if (starttime.equals(stringToday)) {
-                startNoteList.add(i);
-            }
-        }
-        long duration = 0 ;
-        MyLog.e(TAG,startTimeList.size()+"-----"+startNoteList.size());
-        for (Integer i : startNoteList) {
-            long startTime = startTimeList.get(startNoteList.get(i-1)).getStartDate().getTime();
-            long endTime = endTimeList.get(startNoteList.get(i-1)).getStartDate().getTime();
-            duration = duration+endTime-startTime;
-        }
-        String durtionText = getDurtion(duration);
-        mainTvDuration.setText(durtionText);
-
-
-
-        //求Distance的逻辑
-        float distanceTotal = 0 ;
-        float stepTotal = 0 ;
-        int  caloriesTotal = 0 ;
-
-        for (Integer i :startNoteList){
-            Date startDate = startTimeList.get(startNoteList.get(i-1)).getStartDate();
-            Date endDate = endTimeList.get(startNoteList.get(i-1)).getStartDate();
-            sportRecordArrayList = UserDeviceRecord.findHistoryChartwithHMS
-                    (MapActivity.this, String.valueOf(user_id), startDate, endDate);
-            if (sportRecordArrayList.size() == 0) {
-                distance = 0;
-                step = 0 ;
-                calValue = 0 ;
-            } else {
-                for (SportRecord sportRecordArray : sportRecordArrayList) {
-                    MyLog.e(TAG, "distance" + sportRecordArray.getDistance());
-                    distance = Integer.parseInt(sportRecordArray.getDistance()) + distance;
-                    step = Integer.parseInt(sportRecordArray.getStep()) + step;
-                    //这一部分是求Calories的逻辑
-                    List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
-                    String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(startDate);
-                    try {
-                        count = DatasProcessHelper.countSportData(srs, startDateLocal);
-                        MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    int walkCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.walking_distance)),
-                            (int) count.walking_duration * 60, userEntity.getUserBase().getUser_weight());
-                    MyLog.e("walkCal", walkCal + "");
-//        userEntity.getUserBase().getUser_weight()
-                    int runCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.runing_distance)), (int) count.runing_duation * 60, userEntity.getUserBase().getUser_weight());
-                     calValue = walkCal + runCal;
-                }
-            }
-            caloriesTotal = caloriesTotal+calValue ;
-            distanceTotal = distanceTotal+distance ;
-            stepTotal = stepTotal +step ;
-        }
-//        这一步吧distance转换成如5.3 的用来加km
-        MyLog.e("distance", distance + "");
-        double distanceKM = CommonUtils.getDoubleValue(distanceTotal / 1000, 1);
-        String distanceTotalString = new Formatter().format("%.1f", distanceKM).toString();
-
-        groupsTvDistance.setText(distanceTotalString);
-        groupsTvStep.setText(stepTotal+"");
-        groupsTvCalories.setText(caloriesTotal+"");
-
+        startNoteList = getStartListToday();
+        endNoteList = getEndListToday();
+        initDuration();
+        initDistance();
     }
+
 
     /**
      * long 转String

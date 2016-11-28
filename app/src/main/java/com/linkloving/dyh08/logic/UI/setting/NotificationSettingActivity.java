@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -469,6 +470,8 @@ public class NotificationSettingActivity extends ToolBarActivity {
         final WheelView hrWheelView = (WheelView) view.findViewById(R.id.hr);
         hrWheelView.setItems(hrStrings);
         final WheelView minWheelView = (WheelView) view.findViewById(R.id.min);
+        Button okBtn = (Button) view.findViewById(R.id.okBtn);
+        TextView text = (TextView) view.findViewById(R.id.text);
         minWheelView.setItems(minStrings);
         final PopupWindow popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
@@ -482,6 +485,19 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 popupWindow.dismiss();
             }
         });
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        if (timeType==STARTSEDENTARY||timeType==ENDSEDENTARY){
+            text.setText(R.string.sendentarynotif);
+        }else if (timeType==CLOCKONE||timeType==CLOCKTWO||timeType==CLOCKTHREE||timeType==CLOCKFOUR){
+            text.setText(R.string.alarmclock);
+        }else {
+            text.setText(R.string.timersetting);
+        }
        hrWheelView.setOnWheelViewListener(new WheelView.OnWheelViewListener(){
            @Override
            public void onSelected(int selectedIndex, String item) {

@@ -555,6 +555,10 @@
     <string name="alarm_save">Save</string>
 
     <!-- 单位 -->
+    <string name="KM">KM</string>
+    <string name="KMweek">KM/week</string>
+    <string name="KMmonth">KM/month</string>
+    <string name="KMyear">KM/year</string>
     <string name="unit_mileage">Mileage</string>
     <string name="unit_step">Step</string>
     <string name="unit_cal">Calorie</string>
@@ -1136,7 +1140,8 @@
     <string name="Google">Google</string>
     <string name="baidu">Baidu</string>
     <string name="interval"></string>
-    <string name="unitsetting"></string>
+    <string name="unitsetting">Unit settings</string>
+    <string name="showhand">Show hand</string>
     <string name="messagingapps">Apps</string>
     <string name="wearabledevice">Manual</string>
     <string name="thebritshunit">Imperial</string>

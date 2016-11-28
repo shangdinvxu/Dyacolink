@@ -81,7 +81,7 @@ public class BirthdayActivity extends Activity {
                     Toast.makeText(BirthdayActivity.this, "请填写正确的生日", Toast.LENGTH_SHORT).show();
                 } else {
                     userEntity.getUserBase().setBirthdate(birthday);
-                    IntentFactory.startWeight(BirthdayActivity.this);
+                    IntentFactory.startNewWeight(BirthdayActivity.this);
                 }
 
             }
