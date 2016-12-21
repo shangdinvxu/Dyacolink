@@ -136,7 +136,7 @@ public class WeekchartviewFragment extends Fragment {
             barChartView.setDialogListerer(new BarChartView.DialogListerer() {
                 @Override
                 public void showDialog(int i, int x, int y) {
-                    barChartView.showPopupWindow(view, (int) week.get(i).itemValue, x, y);
+                    barChartView.showPopupWindow(view,week.get(i).itemType, (int) week.get(i).itemValue, x, y);
                 }
                 @Override
                 public void dismissPopupWindow() {

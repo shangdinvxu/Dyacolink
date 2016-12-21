@@ -104,7 +104,7 @@ public class YearchartviewFragment extends Fragment {
             barChartView.setDialogListerer(new BarChartView.DialogListerer() {
                 @Override
                 public void showDialog(int i, int x, int y) {
-                    barChartView.showPopupWindow(view, (int) daySynopics.get(i).itemValue, x, y);
+//                    barChartView.showPopupWindow(view, (int) daySynopics.get(i).itemValue, x, y);
                 }
                 @Override
                 public void dismissPopupWindow() {

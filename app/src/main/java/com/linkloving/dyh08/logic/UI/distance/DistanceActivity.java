@@ -22,8 +22,10 @@ import com.linkloving.dyh08.logic.UI.distance.asyncktask.DaySportAsynck;
 import com.linkloving.dyh08.logic.UI.distance.asyncktask.MonthSportAsynck;
 import com.linkloving.dyh08.logic.UI.distance.asyncktask.WeekSportAsynckTask;
 import com.linkloving.dyh08.logic.UI.distance.asyncktask.YearSportAsynck;
+import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.utils.CommonUtils;
+import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.dyh08.utils.sportUtils.DateSwitcher;
 
@@ -73,6 +75,7 @@ public class DistanceActivity extends ToolBarActivity{
     private String flushYear;
     private int selectionIndex;
 
+    private int localSettingUnitInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +139,14 @@ public class DistanceActivity extends ToolBarActivity{
                 });
             }
         });
+
+        localSettingUnitInfo = PreferencesToolkits.getLocalSettingUnitInfo(DistanceActivity.this);
+        if (localSettingUnitInfo==ToolKits.UNIT_GONG){
+            distanceTV.setText(getString(R.string.KM));
+        }else {
+            distanceTV.setText(R.string.KMunit);
+        }
+
     }
 
 
@@ -189,7 +200,11 @@ public class DistanceActivity extends ToolBarActivity{
         switch (index){
             case 0:
                 selectionIndex =0 ;
-                distanceTV.setText(getString(R.string.KM));
+                if (localSettingUnitInfo==ToolKits.UNIT_GONG){
+                    distanceTV.setText(getString(R.string.KM));
+                }else {
+                    distanceTV.setText(R.string.KMunit);
+                }
                 step_button_day_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.d_on_72px, 0, 0);
                 new DaySportAsynck(flushDate,step_number,stepCircleView,step_tv_date,DistanceActivity.this).execute(flushDate);
                     dayViewFragment = new DayViewFragment();
@@ -205,7 +220,11 @@ public class DistanceActivity extends ToolBarActivity{
                 break;
             case 1:
                 selectionIndex =1 ;
-                distanceTV.setText(getString(R.string.KMweek));
+                if (localSettingUnitInfo==ToolKits.UNIT_GONG){
+                    distanceTV.setText(getString(R.string.KMweek));
+                }else {
+                    distanceTV.setText(R.string.KMunitweek);
+                }
                 step_button_week_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.w_on_72px, 0, 0);
                 new WeekSportAsynckTask(null,step_number,stepCircleView,step_tv_date,DistanceActivity.this).execute(flushWeek);
                 weekViewFragment = new WeekViewFragment();
@@ -221,7 +240,11 @@ public class DistanceActivity extends ToolBarActivity{
                 break;
             case 2:
                 selectionIndex =2 ;
-                distanceTV.setText(R.string.KMmonth);
+                if (localSettingUnitInfo==ToolKits.UNIT_GONG){
+                    distanceTV.setText(R.string.KMmonth);
+                }else {
+                    distanceTV.setText(R.string.KMunitmonth);
+                }
                 step_button_month_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.m_on_72px, 0, 0);
                 new MonthSportAsynck(null,step_number, stepCircleView, step_tv_date, DistanceActivity.this).execute(flushMonth);
                 monthViewFragment  = new MonthViewFragment();
@@ -237,7 +260,11 @@ public class DistanceActivity extends ToolBarActivity{
                 break;
             case 3:
                 selectionIndex =3 ;
-                distanceTV.setText(R.string.KMyear);
+                if (localSettingUnitInfo==ToolKits.UNIT_GONG){
+                    distanceTV.setText(R.string.KMyear);
+                }else {
+                    distanceTV.setText(R.string.KMunityear);
+                }
                 step_button_year_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.y_on_72px, 0, 0);
                 yearViewFragment = new YearViewFragment();
                 flushYear = CommonUtils.getFlushYear();
@@ -254,6 +281,7 @@ public class DistanceActivity extends ToolBarActivity{
         }
         transaction.commit();
     }
+
     /**切换Fragment时候 重置按钮图片*/
     private void restartBotton() {
         step_button_day_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.mipmap.d_off_72px,0,0);

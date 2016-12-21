@@ -75,6 +75,7 @@ import com.linkloving.dyh08.logic.UI.main.materialmenu.Left_viewVO1;
 import com.linkloving.dyh08.logic.UI.main.materialmenu.MenuNewAdapter;
 import com.linkloving.dyh08.logic.UI.main.materialmenu.MenuVO;
 import com.linkloving.dyh08.logic.UI.more.MoreActivity;
+import com.linkloving.dyh08.logic.UI.setting.GeneralActivity;
 import com.linkloving.dyh08.logic.UI.settings.PersonalInfoActivity;
 import com.linkloving.dyh08.logic.dto.SportRecordUploadDTO;
 import com.linkloving.dyh08.logic.dto.UserEntity;
@@ -154,6 +155,8 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     AppCompatTextView distanceView;
     @InjectView(R.id.main_tv_Sleep)
     AppCompatTextView sleepView;
+    @InjectView(R.id.distanceUnit)
+    AppCompatTextView  distanceUnit ;
 
     // 修改头像的临时文件存放路径（头像修改成功后，会自动删除之）
     private String __tempImageFileLocation = null;
@@ -193,6 +196,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
      */
     private AsyncTask<Object, Object, DaySynopic> currentDataAsync = null;
     private PullToRefreshListView pulltorefreshView;
+    private int localSettingUnitInfo;
 
     @Override
     protected void onPause() {
@@ -294,6 +298,8 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
             }
 
         });
+
+
 
         /*-------------------日历----------------*/
 
@@ -659,6 +665,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                 //走路 步数
                 int walkStep = (int) (CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getWork_step()), 0));
                 //跑步 步数
+
                 int runStep = (int) (CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getRun_step()), 0));
                 int step = walkStep + runStep;
                 /****************今天的步数给到 方便OAD完成后回填步数 的变量里面去****************/
@@ -672,7 +679,15 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                 int distance = walkDistance + runDistance;
                 float distanceKm = (float) distance / 1000;
                 String distancekm = DateSwitcher.oneFloat(distanceKm);
-                distanceView.setText(distancekm + "");
+                localSettingUnitInfo = PreferencesToolkits.getLocalSettingUnitInfo(PortalActivity.this);
+                if (localSettingUnitInfo==ToolKits.UNIT_GONG){
+                    distanceView.setText(distancekm + "");
+                    distanceUnit.setText(R.string.KM);
+                }else {
+                    distanceView.setText(Integer.toString((int) (distance*0.6214))+"");
+                    distanceUnit.setText(R.string.KMunit);
+                }
+
 
                 //浅睡 小时
                 double lightSleepHour = CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getSleepMinute()), 1);

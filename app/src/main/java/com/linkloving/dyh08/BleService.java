@@ -193,6 +193,7 @@ public class BleService extends Service {
     }
     private DaoMaster.DevOpenHelper heartrateHelper;
     private TraceGreendao traceGreendao;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
 
 
     /*****》成员变量的get/set方法！end《******/
@@ -580,6 +581,7 @@ public class BleService extends Service {
                 provider.SetDeviceTime(BleService.this);
                 provider.GetHeartrate(BleService.this);
                 provider.getworkOutdata(BleService.this);
+                provider.clearWorkOutdata(BleService.this);
             }
 
             //时间设置成功--基本流程完毕
@@ -627,11 +629,12 @@ public class BleService extends Service {
             @Override
             protected void notifyforgetworkoutdata(ArrayList<LPWorkoutData> obj) {
                 super.notifyforgetworkoutdata(obj);
+                provider.clearWorkOutdata(BleService.this);
                 for (LPWorkoutData obj1: obj){
                     MyLog.e(TAG,"notifyforgetworkoutdata"+obj1.getStarttime()+"-------"+obj1.getEndtime());
-                    traceGreendao.addworkoutData(obj1.getStarttime(),obj1.getEndtime());
+                    traceGreendao.addworkoutData(obj1.getStarttime(),obj1.getStarttime(),obj1.getEndtime());
+                    traceGreendao.addStartMonth(simpleDateFormat.format(new Date(obj1.getStarttime()*1000)),new Date(obj1.getStarttime()*1000));
                 }
-                provider.clearWorkOutdata(BleService.this);
             }
 
             @Override

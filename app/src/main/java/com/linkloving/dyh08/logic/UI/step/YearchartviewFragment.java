@@ -57,6 +57,7 @@ public class YearchartviewFragment extends Fragment {
         private String endDateMd;
         private String endDateformat;
         Context context ;
+        private List<BarChartView.BarChartItemBean> barChartItemBeans;
 
         protected List<BarChartView.BarChartItemBean> doInBackground(Object... params) {
 //            wheelview ,需要加一.指针偏移小1 ;
@@ -70,7 +71,7 @@ public class YearchartviewFragment extends Fragment {
             int month = calendar.get(Calendar.MONTH);
 //        MyLog.e(TAG,Integer.toString(month));
             int day = calendar.get(Calendar.DAY_OF_MONTH);
-            List<BarChartView.BarChartItemBean> barChartItemBeans = new ArrayList<>();
+            barChartItemBeans = new ArrayList<>();
             for( int i=0 ;i<=month ;i++){
                 value = i/month ;
                 calendar.set(year,i,day);
@@ -109,7 +110,11 @@ public class YearchartviewFragment extends Fragment {
             barChartView.setDialogListerer(new BarChartView.DialogListerer() {
                 @Override
                 public void showDialog(int i, int x, int y) {
-                    barChartView.showPopupWindow(view, (int) daySynopics.get(i).itemValue, x, y);
+                    String itemType = barChartItemBeans.get(i).itemType;
+                    String[] split = itemType.split("/");
+                    int i1 = Integer.parseInt(split[1]);
+                    String finalString = split[0]+"/"+(i1+1);
+                    barChartView.showPopupWindow(view, finalString,(int) daySynopics.get(i).itemValue, x, y);
                 }
                 @Override
                 public void dismissPopupWindow() {

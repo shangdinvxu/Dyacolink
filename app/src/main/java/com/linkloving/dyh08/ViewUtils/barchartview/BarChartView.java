@@ -179,7 +179,7 @@ public class BarChartView extends View {
      *
      * @param x
      */
-    public void showPopupWindow(View view, int number, int x, int y) {
+    public void showPopupWindow(View view,String time, int number, int x, int y) {
         switch (Popuptype) {
             case STEP__TYPE:
                 popupView = LayoutInflater.from(getContext()).inflate(R.layout.tw_step_popupwiew, null);
@@ -202,6 +202,8 @@ public class BarChartView extends View {
         }
         TextView step_number_textview = (TextView) popupView.findViewById(R.id.dialog_number);
         step_number_textview.setText(number + "");
+        TextView textShowTime = (TextView) popupView.findViewById(R.id.time);
+        textShowTime.setText(time);
         popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
 

@@ -366,7 +366,8 @@ startRefreshThread(true);
                 Date date = new Date();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String format = simpleDateFormat.format(date);
-                List<Note> searchtimes = traGreendao.searchtimes(format);
+                List<Note> searchtimes = traGreendao.searchtimes
+                        (format);
                 for (int i=0;i<searchtimes.size();i++) {
                     MyLog.e(TAG, searchtimes.get(i).getStartDate().toString());
                 }

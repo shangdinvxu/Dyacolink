@@ -174,7 +174,6 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		{
 			return (int) ((distance * weight * 1.099) / 1000);
 		}
-
 		return (int) ((seconds * weight * p) / (0.453 *60));
 	}
 
@@ -1243,7 +1242,9 @@ private final static String TAG = ToolKits.class.getSimpleName();
 				}
 		}
 		MyLog.e(TAG,dayCalories+"dayCalories"+"======"+user_weight+"user_weight"+"======"+user_height+"user_height"+"======"+age+"age");
-		return dayCalories;
+
+//		return dayCalories;
+		return 0;
 	}
 
 }

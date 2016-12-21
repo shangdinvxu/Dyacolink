@@ -14,7 +14,7 @@
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/gd_arrow_offset"
         android:text="2016/04/25"
-        android:textSize="@dimen/m00_font_size_36pt"
+        android:textSize="20sp"
         android:background="@null"/>
 
 

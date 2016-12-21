@@ -1088,18 +1088,24 @@
     <string name="setting_rem_on">ON</string>
     <string name="setting_rem_off">OFF</string>
     <string name="setting_enter">確認</string>
-    <string name="Attention">Attention!</string>
+    <string name="Attention">注意!</string>
     <string name="Gps">GPS</string>
-    <string name="must_be">must be turned on</string>
+    <string name="must_be">必須打開</string>
     <string name="ok">ok</string>
     <string name="start_">start!</string>
+
+    <string name="Restingbpm">靜息心率</string>
+    <string name="Average">平均心率</string>
+    <string name="founddevice">找到，設備連接...</string>
+    <string name="keepthe">請保持連接設備</string>
+    <string name="showhand">抬手顯屏</string>
 
 
     <!--百度鷹眼-->
 
     <string name="app_title">百度鷹眼</string>
-    <string name="start_trace">Start</string>
-    <string name="stop_trace">Stop</string>
+    <string name="start_trace">開始</string>
+    <string name="stop_trace">結束</string>
     <string name="select_date">日期</string>
     <string name="fence_operator">操作</string>
     <string name="is_processed">糾偏</string>
@@ -1162,4 +1168,9 @@
     <string name="wearabledevice">手環裝置</string>
     <string name="thebritshunit">英制</string>
     <string name="themetric">公制</string>
+    <string name="KMweek">km/週</string>
+    <string name="KMmonth">km/月</string>
+    <string name="KM">km</string>
+    <string name="KMyear">km/年</string>
+    <string name="pleaseturnon">請開啟軌跡服務</string>
 </resources>

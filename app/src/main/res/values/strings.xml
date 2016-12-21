@@ -557,15 +557,20 @@
     <string name="alarm_save">Save</string>
 
     <!-- 单位 -->
-    <string name="KM">公里</string>
-    <string name="KMweek">公里/周</string>
-    <string name="KMmonth">公里/月</string>
-    <string name="KMyear">公里/年</string>
+    <string name="KM">km</string>
+    <string name="KMunit">mile</string>
+    <string name="KMunitweek">mile/週</string>
+    <string name="KMunitmonth">mile/月</string>
+    <string name="KMunityear">mile/年</string>
+    <string name="KMweek">km/周</string>
+    <string name="KMmonth">km/月</string>
+    <string name="KMyear">km/年</string>
     <string name="unit_mileage">Mileage</string>
     <string name="unit_step">Step</string>
     <string name="unit_cal">Calorie</string>
     <string name="unit_cal_big">Kcal.</string>
     <string name="unit_cm">CM</string>
+    <string name="unit_inch">inch</string>
     <string name="unit_m">Meter</string>
     <string name="unit_mile">Mile</string>
     <string name="unit_km">Km</string>
@@ -1091,6 +1096,7 @@
     <string name="choosewearingstyles">请选择佩戴方式</string>
     <string name="pleasebirthday">请填写正确的生日</string>
     <string name="pleaseGender">请选择性别</string>
+    <string name="distanceUnit">distanceUnit</string>
 
 
     <!-- 主界面-->
@@ -1103,7 +1109,7 @@
     <string name="Calories">Calories</string>
     <string name="CALORIES">CALORIES</string>
     <string name="kcal">kcal</string>
-    <string name="avgkcal">avg. kcal</string>
+    <string name="avgkcal">avg.kcal</string>
 
     <string name="Distance">Distance</string>
     <string name="DISTANCE">DISTANCE</string>
@@ -1157,7 +1163,7 @@
     <string name="ok">ok</string>
     <string name="start_">start!</string>
     <string name="doyouwantto">Do you want to log out?</string>
-
+    <string name="keepthe">Keep the device connected</string>
 
 
     <!--百度鹰眼-->
@@ -1191,6 +1197,7 @@
     <string name="circular_fence_caption">请点击地图标记围栏圆心</string>
     <string name="vertexes_fence_caption">请按顺时针或逆时针方向点击地图</string>
     <string name="dfu_service_title">nRF Toolbox DFU Proxy</string>
+    <string name="pleaseturnon">Please turn on Track Services</string>
     
 
 </resources>

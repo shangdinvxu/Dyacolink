@@ -9,6 +9,7 @@ import com.linkloving.dyh08.ViewUtils.drawAngle.DrawArc;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.DbDataUtils;
+import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ public class MonthSportAsynck extends AsyncTask<Object, Object, List<DaySynopic>
     TextView textView;
     Context context;
     TextView stepNumber ;
+    private int localSettingUnitInfo;
 
     private static final String[] PLANETS = new String[]{"January", "February", "March", "April", "May", "June", "July",
             "August", "September", "October", "November", "December"};
@@ -55,6 +57,7 @@ public class MonthSportAsynck extends AsyncTask<Object, Object, List<DaySynopic>
     }
     @Override
     protected List<DaySynopic> doInBackground(Object... params) {
+        localSettingUnitInfo = PreferencesToolkits.getLocalSettingUnitInfo(context);
         param = params[0].toString();
         String[] split = param.split("-");
         String year = split[0];
@@ -95,8 +98,12 @@ public class MonthSportAsynck extends AsyncTask<Object, Object, List<DaySynopic>
         if (i==0){
             distanceDB = 0.0 ;
         }else{
+            if (localSettingUnitInfo!= ToolKits.UNIT_GONG){
+                i = i*0.6214 ;
+            }
             distanceDB = (Math.round(i * 100 + 0.5) / 100.0);
         }
+
         stepNumber.setText(Double.toString(distanceDB));
         drawArc.setPercent(stepPercent);
           textView.setText(param);

@@ -160,7 +160,8 @@ public class DaychartviewFragment extends Fragment {
             barChartView.setDialogListerer(new BarChartView.DialogListerer() {
                 @Override
                 public void showDialog(int i, int x, int y) {
-                    barChartView.showPopupWindow(view, (int) dayhour.get(i).itemValue, x, y);
+                    String textShowTime = i+":00";
+                    barChartView.showPopupWindow(view,textShowTime, (int) dayhour.get(i).itemValue, x, y);
                 }
                 @Override
                 public void dismissPopupWindow() {

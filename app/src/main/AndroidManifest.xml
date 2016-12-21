@@ -218,16 +218,13 @@
                 <!-- 连爱手表APPID:1104705744 测试ID:222222 -->
             </intent-filter>
         </activity>
-        <!-- <activity -->
-        <!-- android:name="com.mob.tools.MobUIShell" -->
-        <!-- android:configChanges="keyboardHidden|orientation|screenSize|locale|layoutDirection" -->
-        <!-- android:theme="@android:style/Theme.NoTitleBar" -->
-        <!-- android:windowSoftInputMode="stateHidden|adjustResize" /> -->
-    <!--    <activity
-            android:name="cn.sharesdk.demo.wxapi.WXEntryActivity"
+        <!--微信分享回调 -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
+            android:screenOrientation="portrait" />
         <activity
             android:name=".logic.UI.device.handup.HandUpActivity"
             android:label="@string/title_activity_hand_up"
@@ -522,12 +519,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             />
-        <activity
-            android:name="cn.sharesdk.demo.wxapi.WXEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:screenOrientation="portrait" />
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"

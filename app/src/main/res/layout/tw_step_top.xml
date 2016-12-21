@@ -28,11 +28,11 @@
 
     <ImageView
         android:id="@+id/step_image"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@mipmap/step"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="40dp"
         />
     <TextView
         android:id="@+id/tv_STEP"
@@ -52,20 +52,19 @@
         android:text="0"
         android:layout_below="@+id/tv_STEP"
         android:layout_centerHorizontal="true"
-        android:textSize="60sp"
+        android:textSize="40sp"
         android:textColor="#ffffff"
         />
+
     <TextView
         android:id="@+id/steps_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/steps"
-        android:layout_below="@+id/step_mount"
-        android:layout_centerHorizontal="true"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textColor="#ffffff"
-        />
-
+        android:layout_below="@+id/step_mount"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

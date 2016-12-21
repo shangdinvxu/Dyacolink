@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
  */
 
 public class MonthDatefragment extends Fragment {
-    private static final String TAG = MonthViewFragment.class.getSimpleName();
+    private static final String TAG = MonthDatefragment.class.getSimpleName();
     private IDataChangeListener dataChangeListener;
     private WheelView wva;
 

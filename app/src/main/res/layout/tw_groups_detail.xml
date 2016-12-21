@@ -148,7 +148,7 @@
                         android:id="@+id/main_tv_Duration"
                         style="@style/main_UI_text_set"
                         android:layout_marginTop="50dp"
-                        android:textSize="24sp" />
+                        android:textSize="18sp" />
 
                 </RelativeLayout>
             </LinearLayout>

@@ -1061,7 +1061,6 @@
     <string name="danger">Warnung</string>
 
 
-
     <string name="Day_View">Tagesansicht</string>
     <string name="D">D</string>
 
@@ -1091,11 +1090,13 @@
     <string name="setting_rem_on">ON</string>
     <string name="setting_rem_off">OFF</string>
     <string name="setting_enter">Enter</string>
-    <string name="Attention">Attention!</string>
+    <string name="Attention">Aufrechtzuerhalten!</string>
     <string name="Gps">GPS</string>
-    <string name="must_be">must be turned on</string>
+    <string name="must_be">Muss geöffnet</string>
     <string name="ok">ok</string>
     <string name="start_">start!</string>
+    <string name="founddevice">Gefunden, Gerät verbinden ...</string>
+    <string name="keepthe">Bitte halten angeschlossenen Geräte</string>
 
 
 
@@ -1103,8 +1104,8 @@
     <!--百度鹰眼-->
 
     <string name="app_title">百度鹰眼</string>
-    <string name="start_trace">Start</string>
-    <string name="stop_trace">Stop</string>
+    <string name="start_trace">beginnen</string>
+    <string name="stop_trace">Ende</string>
     <string name="select_date">日期</string>
     <string name="fence_operator">操作</string>
     <string name="is_processed">纠偏</string>
@@ -1167,4 +1168,8 @@
     <string name="wearabledevice">Tragbares Gerät</string>
     <string name="themetric">Metrisches System</string>
     <string name="thebritshunit">Englisches System</string>
+    <string name="KM">km</string>
+    <string name="KMmonth">km/month</string>
+    <string name="KMweek">km/week</string>
+    <string name="KMyear">km/year</string>
 </resources>

@@ -115,6 +115,7 @@
                     android:textSize="12sp"
                     android:layout_marginLeft="2dp"
                     android:layout_marginBottom="7dp"
+                    android:id="@+id/distanceUnit"
                     android:layout_alignBottom="@id/main_tv_Distance"
                     android:layout_toRightOf="@id/main_tv_Distance"
                     android:text="km"

@@ -29,7 +29,7 @@ public class WeightActivity extends AutoLayoutActivity {
     ImageView back;
     private UserEntity userEntity;
 
-    private float mHeight = 60;
+    private float mHeight = 80;
     private float mMaxHeight = 200;
     private float mMinHeight = 10;
 
@@ -40,8 +40,9 @@ public class WeightActivity extends AutoLayoutActivity {
         AppManager.getAppManager().addActivity(this);
         ButterKnife.inject(this);
         userEntity = MyApplication.getInstance(WeightActivity.this).getLocalUserInfoProvider();
-        weightRulerView.initViewParam(mHeight,mMaxHeight,mMinHeight);
-
+        int user_weight = userEntity.getUserBase().getUser_weight();
+        weightRulerView.initViewParam(user_weight,mMaxHeight,mMinHeight);
+        weight.setText(user_weight+"");
         weightRulerView.setValueChangeListener(new ScaleRulerView.OnValueChangeListener() {
             @Override
             public void onValueChange(float value) {
@@ -50,6 +51,7 @@ public class WeightActivity extends AutoLayoutActivity {
         });
 
     }
+
 
     @OnClick(R.id.back)
     void back(View view){

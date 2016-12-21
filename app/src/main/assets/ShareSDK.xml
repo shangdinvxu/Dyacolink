@@ -54,7 +54,7 @@
     -->
     
     <ShareSDK 
-        AppKey = "b92bd4952736"/> <!-- 修改成你在sharesdk后台注册的应用的appkey"-->
+        AppKey = "1932b3fb326a1"/> <!-- 修改成你在sharesdk后台注册的应用的appkey"-->
     
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
     <SinaWeibo
@@ -96,6 +96,14 @@
 	<Wechat
 		Id="4"
 		SortId="4"
+		AppId="wxf3a623155e2ebc55"
+		AppSecret="b48f8c334918c485251d8581695f32eb"
+		BypassApproval="false"
+		Enable="true" />
+
+	<WechatMoments
+		Id="5"
+		SortId="5"
 		AppId="wxcd89a759f1a9d81f"
 		AppSecret="faf2fa9bb13a6ba84a542876edde03db"
 		BypassApproval="false"
@@ -107,12 +115,7 @@
 		AppSecret="faf2fa9bb13a6ba84a542876edde03db"
 		BypassApproval="false"
 		Enable="true" />
-	<WechatFavorite
-		Id="6"
-		SortId="6"
-		AppId="wxcd89a759f1a9d81f"
-		AppSecret="faf2fa9bb13a6ba84a542876edde03db"
-		Enable="true" />
+    
 	<!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
 	<QQ
         Id="7"
@@ -259,14 +262,15 @@
         SortId="27"
         ApplicationId="3921561"
         Enable="true" />
-
-	<Instagram
-		Id="28"
-		SortId="28"
-		ClientId="ff68e3216b4f4f989121aa1c2962d058"
+        
+    <Instagram 
+    	Id="28"
+        SortId="28"
+        ClientId="ff68e3216b4f4f989121aa1c2962d058"
 		ClientSecret="1b2e82f110264869b3505c3fe34e31a1"
 		RedirectUri="http://sharesdk.cn"
-		Enable="true" />
+        Enable="true" />
+    
     <!-- 
     	Yixin易信和YixinMoments易信朋友圈的appid是一样的；
     

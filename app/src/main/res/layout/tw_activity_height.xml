@@ -32,6 +32,7 @@
             android:layout_marginBottom="10px"
             android:textColor="@color/white"
             android:text="@string/unit_cm"
+            android:id="@+id/unit_cm"
             android:textSize="@dimen/m00_font_size_28pt"/>
 
         <android.support.v7.widget.AppCompatTextView

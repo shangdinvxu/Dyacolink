@@ -378,6 +378,25 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 		}
 	}
 
+	//清除或者获取workout数据
+	public WatchResponse clearworkoutData()throws BLException, LPException{
+		WatchRequset req = new WatchRequset();
+		req.appendByte(seq++).appendByte((byte) 0x44).makeCheckSum();
+		LPUtil.printData(req.getData(), " workoutDataclear");
+		WatchResponse resp = this.sendData2BLE(req);
+		LPUtil.printData(resp.getData(), " workoutDataclear");
+	/*	if(resp.getData()[4]==0){
+			return   resp.toLpWorkoutData(resp);
+		}else{
+			List<LPWorkoutData> list = new ArrayList<LPWorkoutData>();
+			return list;
+		}*/
+		return resp ;
+	}
+
+
+
+
 	// test
 	@Override
 	public boolean formatDevice() throws BLException, LPException {

@@ -162,6 +162,7 @@ public class BarChartView extends View {
                 barTextpaint.setColor(Color.WHITE);
                 barTextpaint.setTextSize(30);
                 canvas.drawText(mItems.get(i).itemType, barRect.left + 10, barRect.top + 40, barTextpaint);
+
             }
         }
     }
@@ -179,7 +180,7 @@ public class BarChartView extends View {
      *
      * @param x
      */
-    public void showPopupWindow(View view, int number, int x, int y) {
+    public void showPopupWindow(View view,String text , int number, int x, int y) {
         switch (Popuptype) {
             case STEP__TYPE:
                 popupView = LayoutInflater.from(getContext()).inflate(R.layout.tw_step_popupwiew, null);
@@ -207,7 +208,8 @@ public class BarChartView extends View {
         step_number_textview.setText(number + "");
         popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
-
+        TextView timeView = (TextView) popupView.findViewById(R.id.time);
+        timeView.setText(text);
         popupWindow.setTouchable(true);
         // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
         popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
@@ -505,66 +507,3 @@ public class BarChartView extends View {
         }
     }
 }
-//            onDraw 里面的方法 类型不需要
-//draw type text
-     /*       String typeText = mItems[i].starttime;
-            float textPathStartX = barRect.left + barItemWidth / 2 -
-                    (float) (Math.sin(Math.PI / 6)) * textPaint.measureText("好") / 2;
-            float textPathStartY = barRect.bottom;
-            textPath.reset();
-            textPath.moveTo(textPathStartX, textPathStartY);
-            textPath.lineTo(textPathStartX + (float) (1000 * Math.tan(Math.PI / 6)), textPathStartY + 1000);
-            canvas.drawTextOnPath(typeText, textPath, smallMargin * 1.5f, smallMargin * 2, textPaint);*/
-
-//draw value text
-         /*   String valueText = String.valueOf(mItems[i].itemValue);
-            canvas.drawText(valueText, barRect.left - (textPaint.measureText(valueText) - barItemWidth) / 2,
-                    barRect.top - smallMargin, textPaint);*/
-
-
-//draw left white space and right white space
-     /*   int c = barPaint.getColor();
-        barPaint.setColor(BG_COLOR);
-        leftWhiteRect.right = (int) y_index_startX;
-
-        canvas.drawRect(leftWhiteRect, barPaint);
-        canvas.drawRect(rightWhiteRect, barPaint);
-        barPaint.setColor(c);*/
-
-//draw x-index line.
-      /*  canvas.drawLine(
-                y_index_startX - lineStrokeWidth / 2,
-                x_index_startY,
-                screenW - leftMargin,
-                x_index_startY,
-                linePaint);
-        //draw y-index line.
-        canvas.drawLine(
-                y_index_startX,
-                x_index_startY + lineStrokeWidth / 2,
-                y_index_startX,
-                topMargin / 2,
-                linePaint);*/
-
-    /*    canvas.drawBitmap(arrowBmp, null, y_index_arrowRect, null);
-        canvas.save();
-       canvas.rotate(90, (x_index_arrowRect.left + x_index_arrowRect.right) / 2, (x_index_arrowRect.top + x_index_arrowRect.bottom) / 2);
-        canvas.drawBitmap(arrowBmp, null, x_index_arrowRect, null);
-        canvas.restore();
-        */
-//draw division value
-      /*  int maxDivisionValueHeight = (int) (maxHeight * 1.0f / maxValue * maxDivisionValue);
-        textPaint.setTextSize(ScreenUtils.dp2px(getContext(), 10));
-        for (int i = 1; i <= 10; i++) {
-            float startY = barRect.bottom - maxDivisionValueHeight * 0.1f * i;
-            if (startY < topMargin / 2) {
-                break;
-            }
-            canvas.drawLine(y_index_startX, startY, y_index_startX + 10, startY, linePaint);
-
-            String text = String.valueOf(maxDivisionValue * 0.1f * i);
-            canvas.drawText(text,
-                    y_index_startX - textPaint.measureText(text) - 5,
-                    startY + textPaint.measureText("0") / 2,
-                    textPaint);
-        }*/

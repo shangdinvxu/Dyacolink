@@ -1790,7 +1790,7 @@ public  class BLEProvider
 						msg = mHandler.obtainMessage();
 						msg.what = MSG_BLE_DATA;
 						msg.arg1 = INDEX_CLEAR_WORKOUT_DATA;
-						msg.obj =  mLepaoProtocalImpl.workoutData((byte) 0x44) ;
+						msg.obj =  mLepaoProtocalImpl.clearworkoutData() ;
 						msg.sendToTarget();
 						break;
 				    //  发送设置闹钟指令

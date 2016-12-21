@@ -115,7 +115,13 @@ public class GeneralActivity extends ToolBarActivity {
                 popupWindow.dismiss();
             }
         });
+        byte showhand = deviceSetting.getShowhand();
         Switch showhandSwitch = (Switch) view.findViewById(R.id.showhand);
+        if (showhand==(byte) 0x01){
+            showhandSwitch.setChecked(true);
+        }else {
+            showhandSwitch.setChecked(false);
+        }
         showhandSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -144,12 +150,26 @@ public class GeneralActivity extends ToolBarActivity {
 
     private void initAutomaticHR() {
         View view = layoutInflater.inflate(R.layout.automatichrpopupwindow, null);
+        final Switch realtime = (Switch) view.findViewById(R.id.realtime);
+        final Switch wearable = (Switch) view.findViewById(R.id.wearable);
+        boolean handRingSet = PreferencesToolkits.getHandRingSet(GeneralActivity.this);
+        boolean heartrateSync = PreferencesToolkits.getHeartrateSync(GeneralActivity.this);
+        realtime.setChecked(heartrateSync);
+        wearable.setChecked(handRingSet);
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
         final PopupWindow popupWindow = getnewPopupWindow(view);
         dismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 popupWindow.dismiss();
+            }
+        });
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                PreferencesToolkits.setHandRingSet(GeneralActivity.this,wearable.isChecked());
+                PreferencesToolkits.setHeartrateSync(GeneralActivity.this,realtime.isChecked());
             }
         });
     }
@@ -235,6 +255,11 @@ public class GeneralActivity extends ToolBarActivity {
         final TextView caloriesTextview = (TextView) view.findViewById(R.id.calories_textView);
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
         final TextView stepsTextview = (TextView) view.findViewById(R.id.steps_textView);
+        String stepGogalnfo = PreferencesToolkits.getGoalInfo(GeneralActivity.this, PreferencesToolkits.KEY_GOAL_STEP);
+        if (!"".equals(stepGogalnfo)){
+            stepsTextview.setText(stepGogalnfo);
+            stepsSeekbar.setProgress(Integer.parseInt(stepGogalnfo)-2000);
+        }
         stepsSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -252,6 +277,11 @@ public class GeneralActivity extends ToolBarActivity {
             }
         });
         SeekBar distanceSeekbar = (SeekBar) view.findViewById(R.id.DistanceBar);
+        String distanceGogalnfo = PreferencesToolkits.getGoalInfo(GeneralActivity.this, PreferencesToolkits.KEY_GOAL_DISTANCE);
+        if (!"".equals(distanceGogalnfo)){
+            distancesTextview.setText(distanceGogalnfo);
+            distanceSeekbar.setProgress(Integer.parseInt(distanceGogalnfo));
+        }
         distanceSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -269,6 +299,11 @@ public class GeneralActivity extends ToolBarActivity {
             }
         });
         SeekBar caloriesSeekbar = (SeekBar) view.findViewById(R.id.caloriesBar);
+        String caloriesGogalnfo = PreferencesToolkits.getGoalInfo(GeneralActivity.this, PreferencesToolkits.KEY_GOAL_CAL);
+        if (!"".equals(caloriesGogalnfo)){
+            caloriesTextview.setText(caloriesGogalnfo);
+            caloriesSeekbar.setProgress(Integer.parseInt(caloriesGogalnfo)-1000);
+        }
         caloriesSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

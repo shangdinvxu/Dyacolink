@@ -10,6 +10,8 @@ import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.AppManager;
 import com.linkloving.dyh08.logic.UI.launch.view.ScaleRulerView;
 import com.linkloving.dyh08.logic.dto.UserEntity;
+import com.linkloving.dyh08.prefrences.PreferencesToolkits;
+import com.linkloving.dyh08.utils.ToolKits;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import butterknife.ButterKnife;
@@ -23,11 +25,13 @@ public class HeightActivity extends AutoLayoutActivity {
     AppCompatTextView height;
     @InjectView(R.id.back)
     ImageView back;
+    @InjectView(R.id.unit_cm)
+    AppCompatTextView unitCm;
+    private int localSettingUnitInfo;
 
 
-    private float mHeight = 158;
     private float mMaxHeight = 220;
-    private float mMinHeight = 100;
+    private float mMinHeight = 60;
     private UserEntity userEntity;
 
     @Override
@@ -42,21 +46,34 @@ public class HeightActivity extends AutoLayoutActivity {
         setContentView(R.layout.tw_activity_height);
         AppManager.getAppManager().addActivity(this);
         ButterKnife.inject(this);
+        localSettingUnitInfo = PreferencesToolkits.getLocalSettingUnitInfo(HeightActivity.this);
         userEntity = MyApplication.getInstance(HeightActivity.this).getLocalUserInfoProvider();
-        heightRulerView.initViewParam(mHeight,mMaxHeight,mMinHeight);
+        int user_height = userEntity.getUserBase().getUser_height();
+        if (localSettingUnitInfo != ToolKits.UNIT_GONG) {
+            user_height = (int) (user_height * 0.3937);
+            unitCm.setText(R.string.unit_inch);
+        }else {
+            unitCm.setText(R.string.unit_cm);
+        }
+        heightRulerView.initViewParam(user_height, mMaxHeight, mMinHeight);
+        height.setText(user_height + "");
         heightRulerView.setValueChangeListener(new ScaleRulerView.OnValueChangeListener() {
             @Override
             public void onValueChange(float value) {
-                height.setText((int)value+"");
+                height.setText((int) value + "");
             }
         });
+
 
     }
 
     @OnClick(R.id.back)
-    void back(View view){
+    void back(View view) {
         String heightString = height.getText().toString().trim();
         int heightInt = Integer.parseInt(heightString);
+        if (localSettingUnitInfo != ToolKits.UNIT_GONG) {
+          heightInt = (int) (heightInt/0.3937);
+        }
         userEntity.getUserBase().setUser_height(heightInt);
         HeightActivity.this.finish();
     }

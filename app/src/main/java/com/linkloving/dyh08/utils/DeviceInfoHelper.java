@@ -105,13 +105,30 @@ public class DeviceInfoHelper {
             //提醒的时间段内,运动步数少于此值,提醒
             deviceInfo.longsit_step =  Integer.parseInt(deviceSetting.getLongsit_step());
             // 早上提醒的开始时间(小时)
-            deviceInfo.startTime1_H = Integer.parseInt(LongsitData[0].split(":")[0]);
+            if (LongsitData[0].split(":")[0]==null){
+                deviceInfo.startTime1_H = 0;
+            }else {
+                deviceInfo.startTime1_H = Integer.parseInt(LongsitData[0].split(":")[0]);
+            }
+
             // 早上提醒的开始时间(分钟)
-            deviceInfo.startTime1_M = Integer.parseInt(LongsitData[0].split(":")[1]);
+            if (LongsitData[1].split(":")[0]==null){
+                deviceInfo.startTime1_M = 0;
+            }else {
+                deviceInfo.startTime1_M = Integer.parseInt(LongsitData[0].split(":")[1]);
+            }
             // 早上结束的开始时间(小时)
-            deviceInfo.endTime1_H = Integer.parseInt(LongsitData[1].split(":")[0]);
+            if (LongsitData[1].split(":")[0]==null){
+                deviceInfo.endTime1_H =0 ;
+            }else {
+                deviceInfo.endTime1_H = Integer.parseInt(LongsitData[1].split(":")[0]);
+            }
             // 早上结束的开始时间(分钟)
-            deviceInfo.endTime1_M = Integer.parseInt(LongsitData[1].split(":")[1]);
+            if (LongsitData[1].split(":")[1]==null){
+                deviceInfo.endTime1_M =0 ;
+            }else {
+                deviceInfo.endTime1_M = Integer.parseInt(LongsitData[1].split(":")[1]);
+            }
             // 下午提醒的开始时间(小时)
             deviceInfo.startTime2_H = Integer.parseInt(LongsitData[2].split(":")[0]);
             // 下午提醒的开始时间(分钟)

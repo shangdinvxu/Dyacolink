@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.List;
@@ -49,6 +51,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     public final List<Note>startTimeList;
     public final List<Note> endTimeList;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+    private SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final int user_id;
     private long itemDuration;
     private Date itemStartDate ;
@@ -70,19 +73,19 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         db = devOpenHelper.getReadableDatabase();
         traGreendao = new TraceGreendao(context,db);
         list = traGreendao.searchAllMonthtimes();
+        startTimeList = traGreendao.searchAllStarttime();
+        endTimeList = traGreendao.searchAllEndTime();
+        workDataNotes = traGreendao.searchWorkData();
         mMonthData = new String[list.size()];
         for (int i = 0 ;i< list.size();i++){
             mMonthData[i]= list.get(i).getDate();
             MyLog.e(TAG,"mMonthData[i].toString():"+mMonthData[i].toString());
         }
-/*        //获取A.B.C的 index
-        mSectionIndices = getSectionIndices();
-//        //获取所有字母头的方法（去重复）
-        mSectionLetters = getSectionLetters();*/
-        startTimeList = traGreendao.searchAllStarttime();
-        endTimeList = traGreendao.searchAllEndTime();
-        workDataNotes = traGreendao.searchWorkData();
-
+        startTimeList.addAll(workDataNotes);
+        endTimeList.addAll(workDataNotes);
+        sort sort = new sort();
+        Collections.sort(startTimeList,sort);
+        Collections.sort(endTimeList,sort);
     }
 
     private int[] getSectionIndices() {
@@ -152,12 +155,14 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
             holder.distance = (AutoCompleteTextView) convertView.findViewById(R.id.distance);
             holder.duration = (AutoCompleteTextView) convertView.findViewById(R.id.duration);
             holder.avgSpeed = (AutoCompleteTextView) convertView.findViewById(R.id.avgSpeed);
-//            convertView.setTag(holder);
-//        } else {
-//            holder = (ViewHolder) convertView.getTag();
-//        }
+            holder.mapState = (ImageView) convertView.findViewById(R.id.mapState);
+        if (startTimeList.get(position).getType()==10){
+            holder.mapState.setBackgroundResource(R.mipmap.mapoff);
+        }else {
+            holder.mapState.setBackgroundResource(R.mipmap.mapon);
+        }
         MyLog.e(TAG,startTimeList.get(position).getDate()+"-------------startTimeList的getDate");
-        holder.dataTime.setText(startTimeList.get(position).getDate());
+        holder.dataTime.setText(simpleDateFormat2.format(startTimeList.get(position).getStartDate()));
 //      每个item的开始时间和结束时间
         itemStartDate = startTimeList.get(position).getStartDate();
         itemEndDate = endTimeList.get(position).getStartDate();
@@ -241,6 +246,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         AutoCompleteTextView distance;
         AutoCompleteTextView duration;
         AutoCompleteTextView avgSpeed;
+        ImageView mapState ;
     }
 
     @Override

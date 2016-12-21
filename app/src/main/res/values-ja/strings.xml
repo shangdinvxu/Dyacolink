@@ -1039,6 +1039,7 @@
     <string name="STEP">歩数</string>
     <string name="steps">歩数</string>
     <string name="avgsteps">平均歩数</string>
+    <string name="avgkcal">平均消費カロリー</string>
 
 
     <string name="Calories">消費カロリー</string>
@@ -1089,11 +1090,15 @@
     <string name="setting_rem_on">ON</string>
     <string name="setting_rem_off">OFF</string>
     <string name="setting_enter">確認</string>
-    <string name="Attention">Attention!</string>
+    <string name="Attention">注意!</string>
     <string name="Gps">GPS</string>
-    <string name="must_be">must be turned on</string>
+    <string name="must_be">オープンする必要があります</string>
+
     <string name="ok">ok</string>
     <string name="start_">start!</string>
+    <string name="founddevice">見つかった、デバイス接続中...</string>
+    <string name="keepthe">接続されたデバイスに保管してください</string>
+
 
 
 
@@ -1101,8 +1106,8 @@
     <!--百度鹰眼-->
 
     <string name="app_title">百度鹰眼</string>
-    <string name="start_trace">Start</string>
-    <string name="stop_trace">Stop</string>
+    <string name="start_trace">始めます</string>
+    <string name="stop_trace">終了</string>
     <string name="select_date">日期</string>
     <string name="fence_operator">操作</string>
     <string name="is_processed">纠偏</string>
@@ -1164,4 +1169,11 @@
     <string name="wearabledevice">ウェアラブルデバイス</string>
     <string name="themetric">キロメートル</string>
     <string name="thebritshunit">マイル</string>
+    <string name="KMweek">km/周</string>
+    <string name="KM">km</string>
+    <string name="KMmonth">km/月</string>
+    <string name="KMyear">km/年</string>
+    <string name="Restingbpm">安静時の心拍数</string>
+    <string name="Average">平均心拍数</string>
+
 </resources>

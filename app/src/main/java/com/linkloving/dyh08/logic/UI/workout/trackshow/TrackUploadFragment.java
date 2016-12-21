@@ -410,7 +410,7 @@ public class TrackUploadFragment extends Fragment {
                     }
                     clickType = 0;
                 } else {
-                    Toast.makeText(getActivity(), "请开启轨迹服务", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.pleaseturnon), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -441,7 +441,6 @@ public class TrackUploadFragment extends Fragment {
         // 通过轨迹服务客户端client开启轨迹服务
         stopType = 1;
         WorkoutActivity.client.startTrace(WorkoutActivity.trace, startTraceListener);
-
         if (!MonitorService.isRunning) {
             // 开启监听service
             MonitorService.isCheck = true;
@@ -524,8 +523,8 @@ public class TrackUploadFragment extends Fragment {
             // 开启轨迹服务回调接口（arg0 : 消息编码，arg1 : 消息内容，详情查看类参考）
             public void onTraceCallback(int arg0, String arg1) {
                 // TODO Auto-generated method stub
-//                showMessage(" " + arg1, Integer.valueOf(arg0));
-//                showMessage("开启轨迹服务回调接口消息 [消息编码 : " + arg0 + "，消息内容 : " + arg1 + "]", Integer.valueOf(arg0));
+                showMessage(" " + arg1, Integer.valueOf(arg0));
+                showMessage("开启轨迹服务回调接口消息 [消息编码 : " + arg0 + "，消息内容 : " + arg1 + "]", Integer.valueOf(arg0));
                 if (0 == arg0 || 10006 == arg0 || 10008 == arg0 || 10009 == arg0) {
                     isTraceStart = true;
                     // TODO: 2016/8/25
@@ -570,7 +569,7 @@ public class TrackUploadFragment extends Fragment {
             // 轨迹服务停止成功
             public void onStopTraceSuccess() {
                 // TODO Auto-generated method stub
-//                showMessage("停止轨迹服务成功", Integer.valueOf(1));
+                showMessage("停止轨迹服务成功", Integer.valueOf(1));
 
 
                 isTraceStart = false;

@@ -95,6 +95,10 @@ public class ScaleRulerView extends View {
         notifyValueChange();
     }
 
+    public void  setdefaultValue(float mDefaultMinValue){
+        mValue = mDefaultMinValue ;
+    }
+
     /**
      * 设置用于接收结果的监听器
      *

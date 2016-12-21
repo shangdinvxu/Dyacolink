@@ -26,8 +26,10 @@ import com.linkloving.dyh08.ViewUtils.Wheelview.WheelView;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
+import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.DeviceSetting;
 import com.linkloving.dyh08.utils.DeviceInfoHelper;
+import com.linkloving.dyh08.utils.KeyUtils;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.mob.tools.utils.SharePrefrenceHelper;
 
@@ -173,15 +175,11 @@ public class NotificationSettingActivity extends ToolBarActivity {
         View view = layoutInflater.inflate(R.layout.timesettingpopupwindow, null);
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
         timeSetting1 = (TextView) view.findViewById(R.id.clock_1);
-//        TextView clock2 = (TextView) view.findViewById(R.id.clock2);
-//        TextView clock3 = (TextView) view.findViewById(R.id.clock_3);
-//        TextView clock4 = (TextView) view.findViewById(R.id.clock_4);
-        Switch switch1  = (Switch) view.findViewById(R.id.timesetting1);
-//        Switch switch2  = (Switch) view.findViewById(R.id.timesetting2);
-//        Switch switch3  = (Switch) view.findViewById(R.id.timesetting3);
-//        Switch switch4  = (Switch) view.findViewById(R.id.timesetting4);
+        final Switch switch1  = (Switch) view.findViewById(R.id.timesetting1);
         final PopupWindow popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        timeSetting1.setText(PreferencesToolkits.getTimeSettingString(NotificationSettingActivity.this));
+//        switch1.setChecked(PreferencesToolkits.getTimeSettingBoolean(NotificationSettingActivity.this));
         popupWindow.setTouchable(true);
 //        popupWindow.setClippingEnabled(true);
         popupWindow.setBackgroundDrawable(new ColorDrawable(0xffD3D3D3));
@@ -190,6 +188,15 @@ public class NotificationSettingActivity extends ToolBarActivity {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+            }
+        });
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                String timeSetting = timeSetting1.getText().toString();
+                boolean checked = switch1.isChecked();
+                PreferencesToolkits.setTimeSettingBoolean(NotificationSettingActivity.this,checked);
+                PreferencesToolkits.setTimeSettingString(NotificationSettingActivity.this,timeSetting);
             }
         });
         timeSetting1.setOnClickListener(new View.OnClickListener() {
@@ -214,8 +221,8 @@ public class NotificationSettingActivity extends ToolBarActivity {
                             lpDeviceInfo1.millions = Integer.parseInt(timeoneHr)*3600+Integer.parseInt(timeoneMin)*60;
                             provider.SetTimeSetting(NotificationSettingActivity.this,lpDeviceInfo1);
                         }else {
-                            Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
-                        }
+                            Toast.makeText(NotificationSettingActivity.this,getString(R.string.keepthe),Toast.LENGTH_SHORT).show();
+                    }
                     }
                 }
             }
@@ -241,12 +248,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
 //                showTimePopupWindow();
 //            }
 //        });
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
 
-            }
-        });
 
     }
 
@@ -312,16 +314,13 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 String clock1 = clockoneHr+":"+clockoneMin+"-"+"127"+"-"+clock1Switch;
                 deviceSetting.setAlarm_one(clock1);
                 LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,deviceSetting);
-
                     if (provider.isConnectedAndDiscovered()){
                             MyLog.e(TAG,"发送闹钟1的指令了");
                             provider.SetClock(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
                                     userEntity));
                         }else {
-                            Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NotificationSettingActivity.this,getString(R.string.keepthe),Toast.LENGTH_SHORT).show();
                         }
-
-
             }
         });
         clock2.setOnClickListener(new View.OnClickListener() {
@@ -344,7 +343,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                         provider.SetClock(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
                                 userEntity));
                     }else {
-                        Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NotificationSettingActivity.this,getString(R.string.keepthe),Toast.LENGTH_SHORT).show();
                     }
 
             }
@@ -370,7 +369,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                         provider.SetClock(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
                                 userEntity));
                     }else {
-                        Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NotificationSettingActivity.this,getString(R.string.keepthe),Toast.LENGTH_SHORT).show();
                     }
 
             }
@@ -395,7 +394,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                         provider.SetClock(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
                                 userEntity));
                     }else {
-                        Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NotificationSettingActivity.this,getString(R.string.keepthe),Toast.LENGTH_SHORT).show();
                     }
 
             }
@@ -408,6 +407,12 @@ public class NotificationSettingActivity extends ToolBarActivity {
         ImageView startTimeNext = (ImageView) view.findViewById(R.id.startTimeNext);
         final ImageView endTimeNext = (ImageView) view.findViewById(R.id.endTimeNext);
         final Switch switchInterval = (Switch) view.findViewById(R.id.switchinterval);
+        String longsit_vaild = deviceSetting.getLongsit_vaild();
+        if ("".equals(longsit_vaild)||"0".equals(longsit_vaild)){
+            switchInterval.setChecked(false);
+        } else {
+            switchInterval.setChecked(true);
+        }
         final PopupWindow popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setTouchable(true);
@@ -443,6 +448,18 @@ public class NotificationSettingActivity extends ToolBarActivity {
                                 //都为0就不发送命令
                                 MyLog.e(TAG,"不发送久坐提醒的指令");
                             }else {
+                                if (starttimeHr==null){
+                                    starttimeHr="00";
+                                }
+                                if (starttimeMin==null){
+                                    starttimeMin="00";
+                                }
+                                if (endTimeHr==null){
+                                    endTimeHr="00";
+                                }
+                                if (endTimeMin==null){
+                                    endTimeMin="00";
+                                }
                                 String time = starttimeHr+":"+starttimeMin+"-"+endTimeHr+":"+endTimeMin+"-" + "23" + ":"
                                         + "59" + "-" + "23" + ":" + "59";
                                 MyLog.e(TAG,"久坐提醒的time是"+time);
@@ -453,12 +470,14 @@ public class NotificationSettingActivity extends ToolBarActivity {
                                 if (provider.isConnectedAndDiscovered()){
                                     MyLog.e(TAG,"发送久坐的指令了");
                                     //                原先的有两个,第二个无限大.
-                                    provider.SetLongSit(NotificationSettingActivity.this, DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
-                                            userEntity));
                                 }else {
-                                    Toast.makeText(NotificationSettingActivity.this,"请保持连接设备",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(NotificationSettingActivity.this,getString(R.string.keepthe),Toast.LENGTH_SHORT).show();
                                 }
                             }
+                        }else {
+                            deviceSetting.setLongsit_vaild("0");
+                            LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,
+                                    deviceSetting);
                         }
                     }
                 });
@@ -653,8 +672,14 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 popupWindow.dismiss();
             }
         });
+        final SharedPreferences messagenotification = getSharedPreferences("Messagenotification", MODE_PRIVATE);
+        boolean switchPhonecallBoolean = messagenotification.getBoolean("switchPhonecall", false);
+        boolean switchTextmessageBoolean = messagenotification.getBoolean("switchTextmessage", false);
+        boolean switchEmailBoolean = messagenotification.getBoolean("switchEmail", false);
+        boolean switchMessagingBoolean = messagenotification.getBoolean("switchMessagingapps", false);
 
         Switch switchPhonecall = (Switch) view.findViewById(R.id.switchPhoneCall);
+        switchPhonecall.setChecked(switchPhonecallBoolean);
         switchPhonecall.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -666,6 +691,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
             }
         });
         Switch switchTextmessage = (Switch) view.findViewById(R.id.switchTextmessage);
+        switchTextmessage.setChecked(switchTextmessageBoolean);
         switchTextmessage.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -677,6 +703,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
             }
         });
         Switch switchEmail = (Switch) view.findViewById(R.id.switchEmail);
+        switchEmail.setChecked(switchEmailBoolean);
         switchEmail.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -688,6 +715,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
             }
         });
         Switch switchapps = (Switch) view.findViewById(R.id.switchMessagingapps);
+        switchapps.setChecked(switchMessagingBoolean);
         switchapps.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -701,6 +729,12 @@ public class NotificationSettingActivity extends ToolBarActivity {
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
+                SharedPreferences.Editor edit = messagenotification.edit();
+                edit.putBoolean("switchPhonecall",phonecall==1);
+                edit.putBoolean("switchTextmessage",SMScall==1);
+                edit.putBoolean("switchEmail",Emailcall==1);
+                edit.putBoolean("switchMessagingapps",appscall==1);
+                edit.commit();
                 String notif_ = ""+phonecall+SMScall+Emailcall+appscall ;
                 int notif_data = Integer.parseInt(notif_, 2);
                 byte[] send_data = intto2byte(notif_data);

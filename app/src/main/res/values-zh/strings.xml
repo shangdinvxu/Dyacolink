@@ -1056,7 +1056,9 @@
     <string name="safe">安全</string>
     <string name="atention">注意</string>
     <string name="danger">警告</string>
-
+    <string name="Restingbpm">静息心率</string>
+    <string name="Average">平均心率</string>
+    <string name="founddevice">找到，设备连接...</string>
 
 
     <string name="Day_View">日</string>
@@ -1088,18 +1090,18 @@
     <string name="setting_rem_on">ON</string>
     <string name="setting_rem_off">OFF</string>
     <string name="setting_enter">确认</string>
-    <string name="Attention">Attention!</string>
+    <string name="Attention">注意!</string>
     <string name="Gps">GPS</string>
-    <string name="must_be">must be turned on</string>
+    <string name="must_be">必须打开</string>
     <string name="ok">ok</string>
     <string name="start_">start!</string>
-
+    <string name="keepthe">请保持连接设备</string>
 
     <!--百度鹰眼-->
 
     <string name="app_title">百度鹰眼</string>
-    <string name="start_trace">Start</string>
-    <string name="stop_trace">Stop</string>
+    <string name="start_trace">开始</string>
+    <string name="stop_trace">结束</string>
     <string name="select_date">日期</string>
     <string name="fence_operator">操作</string>
     <string name="is_processed">纠偏</string>
@@ -1162,4 +1164,9 @@
     <string name="wearabledevice">手环设置</string>
     <string name="thebritshunit">英制</string>
     <string name="themetric">公制</string>
+    <string name="KM">km</string>
+    <string name="KMmonth">km/月</string>
+    <string name="KMweek">km/周</string>
+    <string name="KMyear">km/年</string>
+    <string name="pleaseturnon">请开启轨迹服务</string>
 </resources>

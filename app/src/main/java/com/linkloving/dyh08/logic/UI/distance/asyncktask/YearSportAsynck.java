@@ -5,10 +5,13 @@ import android.os.AsyncTask;
 import android.widget.TextView;
 
 import com.linkloving.band.dto.DaySynopic;
+import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.ViewUtils.drawAngle.DrawArc;
+import com.linkloving.dyh08.logic.UI.distance.DistanceActivity;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.DbDataUtils;
+import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.text.SimpleDateFormat;
@@ -29,6 +32,7 @@ public class YearSportAsynck extends AsyncTask<Object, Object, Integer> {
     private int year;
     TextView stepNumber ;
     private Double distanceDB;
+    private int localSettingUnitInfo;
 
     /**
      * @param object   用于传Asynck执行的对象
@@ -46,7 +50,7 @@ public class YearSportAsynck extends AsyncTask<Object, Object, Integer> {
 
     @Override
     protected Integer doInBackground(Object... params) {
-
+        localSettingUnitInfo = PreferencesToolkits.getLocalSettingUnitInfo(context);
         String s = params[0].toString().trim();
         year = Integer.parseInt(s);
         Calendar calendar = Calendar.getInstance();
@@ -83,6 +87,9 @@ public class YearSportAsynck extends AsyncTask<Object, Object, Integer> {
         if (i==0){
             distanceDB = 0.0 ;
         }else{
+            if (localSettingUnitInfo!= ToolKits.UNIT_GONG){
+                i = i*0.6214 ;
+            }
             distanceDB = (Math.round(i * 100 + 0.5) / 100.0);
         }
         stepNumber.setText(Double.toString(distanceDB));

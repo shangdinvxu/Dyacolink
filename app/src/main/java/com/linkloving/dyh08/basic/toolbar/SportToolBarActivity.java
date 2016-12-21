@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jaeger.library.StatusBarUtil;
@@ -26,7 +27,7 @@ public abstract class SportToolBarActivity extends AppCompatActivity {
     private ToolBarHelper mToolBarHelper ;
     public Toolbar toolbar ;
 
-    Button btn;
+    LinearLayout btn;
     TextView title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,7 @@ public abstract class SportToolBarActivity extends AppCompatActivity {
         getLayoutInflater().inflate(R.layout.toobar_layout, toolbar) ;
         title = (TextView) toolbar.findViewById(R.id.title);
         //暂时用不到 gone掉
-        btn = (Button) toolbar.findViewById(R.id.id_txt_btn);
+        btn = (LinearLayout) toolbar.findViewById(R.id.id_txt_btn);
         final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
@@ -92,7 +93,7 @@ public abstract class SportToolBarActivity extends AppCompatActivity {
     /**
      * 隐藏右侧按钮
      */
-    public Button getRightButton() {
+    public LinearLayout getRightButton() {
         if (null != btn)
             return btn;
         return null;

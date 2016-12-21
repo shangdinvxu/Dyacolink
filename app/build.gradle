@@ -13,6 +13,19 @@ android {
     }
     aaptOptions.cruncherEnabled = false //解决.9图片的问题
     aaptOptions.useNewCruncher = false //解决.9图片的问题
+    productFlavors {
+        // Define separate dev and prod product flavors.
+        dev {
+            // dev utilizes minSDKVersion = 21 to allow the Android gradle plugin
+            // to pre-dex each module and produce an APK that can be tested on
+            // Android Lollipop without time consuming dex merging processes.
+            minSdkVersion 21
+        }
+        prod {
+            // The actual minSdkVersion for the application.
+            minSdkVersion 18
+        }
+    }
 
     defaultConfig {
         applicationId "com.linkloving.dyh08"
@@ -128,5 +141,6 @@ dependencies {
     compile project(':onkeyshare')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile 'no.nordicsemi.android:dfu:1.0.4'
+    compile files('libs/MobCommons-2016.1107.1809.jar')
 }
 

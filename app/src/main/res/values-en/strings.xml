@@ -555,10 +555,10 @@
     <string name="alarm_save">Save</string>
 
     <!-- 单位 -->
-    <string name="KM">KM</string>
-    <string name="KMweek">KM/week</string>
-    <string name="KMmonth">KM/month</string>
-    <string name="KMyear">KM/year</string>
+    <string name="KM">km</string>
+    <string name="KMweek">km/week</string>
+    <string name="KMmonth">km/month</string>
+    <string name="KMyear">km/year</string>
     <string name="unit_mileage">Mileage</string>
     <string name="unit_step">Step</string>
     <string name="unit_cal">Calorie</string>
@@ -1102,7 +1102,7 @@
     <string name="must_be">must be turned on</string>
     <string name="ok">ok</string>
     <string name="start_">start!</string>
-
+    <string name="keepthe">Keep the device connected</string>
 
 
 
@@ -1141,9 +1141,11 @@
     <string name="baidu">Baidu</string>
     <string name="interval"></string>
     <string name="unitsetting">Unit settings</string>
-    <string name="showhand">Show hand</string>
+    <string name="showhand">Quick View</string>
     <string name="messagingapps">Apps</string>
     <string name="wearabledevice">Manual</string>
     <string name="thebritshunit">Imperial</string>
     <string name="themetric">Metric</string>
+    <string name="founddevice">Found,device connecting...</string>
+    <string name="pleaseturnon">Please turn on Track Services</string>
 </resources>

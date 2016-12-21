@@ -60,7 +60,7 @@ public class TraceGreendao {
 //        public Note(Long id, java.util.Date date, java.util.Date startDate, java.util.Date runDate, String TraceLocation)
 //        MyLog.e(TAG,"addNote方法执行了");
         Note note = new Note(null, date,  startDate, runDate,3, latitude,longitude);
-        getNoteDao().insert(note);
+        getNoteDao().insertOrReplace(note);
     }
 
     /**
@@ -68,11 +68,13 @@ public class TraceGreendao {
      * @param starttime
      * @param endtime
      */
-    public void addworkoutData(long starttime,long endtime){
-        Date startData = new Date(starttime);
-        Date endData = new Date(endtime);
+    public void addworkoutData(long id ,long starttime,long endtime){
+        Date startData = new Date();
+        startData.setTime(starttime*1000);
+        Date endData = new Date();
+        endData.setTime(endtime*1000);
         Note note = new Note(null, null, startData, endData, 10, null, null);
-        getNoteDao().insertOrReplace(note);
+        getNoteDao().insertOrReplaceInTx(note);
     }
 
 
@@ -85,12 +87,12 @@ public class TraceGreendao {
     public void addStartTime(String date,Date startDate){
         MyLog.e(TAG,"addStartTime方法执行了");
         Note note = new Note(null, date,  startDate, null,1, null,null);
-        getNoteDao().insert(note);
+        getNoteDao().insertOrReplace(note);
     }
     public void addStartMonth(String date,Date startDate){
         MyLog.e(TAG,"addStartMoth方法执行了");
         Note note = new Note(null, date,  startDate, null,0, null,null);
-        getNoteDao().insert(note);
+        getNoteDao().insertOrReplace(note);
     }
     /**
      * 添加结束时间
@@ -100,7 +102,7 @@ public class TraceGreendao {
     public void addEndTime(String date,Date endDate){
         MyLog.e(TAG,"addEndTime方法执行了");
         Note note = new Note(null, date,  endDate, null,2, null,null);
-        getNoteDao().insert(note);
+        getNoteDao().insertOrReplace(note);
     }
 
     /**

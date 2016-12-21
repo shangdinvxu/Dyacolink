@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import cn.sharesdk.framework.ShareSDK;
+
 /**
  * Created by zkx on 2016/3/2.
  */

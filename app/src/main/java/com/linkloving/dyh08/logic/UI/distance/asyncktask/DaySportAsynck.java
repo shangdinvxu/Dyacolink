@@ -9,6 +9,7 @@ import com.linkloving.dyh08.ViewUtils.drawAngle.DrawArc;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.DbDataUtils;
+import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.text.ParseException;
@@ -28,6 +29,7 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
     Context context ;
     TextView stepNumber ;
     private Double distanceDB;
+    private int localSettingUnitInfo;
 
     /**
      *
@@ -48,6 +50,7 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
     //耗时操作
     @Override
     protected DaySynopic doInBackground(Object... params) {
+        localSettingUnitInfo = PreferencesToolkits.getLocalSettingUnitInfo(context);
         String data = (String) params[0];
         MyLog.e("params", data);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -80,8 +83,12 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
         if (i==0){
             distanceDB = 0.0 ;
         }else{
+            if (localSettingUnitInfo!= ToolKits.UNIT_GONG){
+                i = i*0.6214 ;
+            }
             distanceDB = (Math.round(i * 100 + 0.5) / 100.0);
         }
+
         stepNumber.setText(Double.toString(distanceDB));
         drawArc.setPercent(stepPercent);
         textView.setText(datasdf);

@@ -11,6 +11,14 @@
         android:background="@mipmap/dataamount">
         <!--style="@style/small_dialog_number"-->
         <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/time"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:text="00:00"
+            />
+        <TextView
             android:id="@+id/dialog_number"
         style="@style/small_dialog_number"
             android:text="2500" />

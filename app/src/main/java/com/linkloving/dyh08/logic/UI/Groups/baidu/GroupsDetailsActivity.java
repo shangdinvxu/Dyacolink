@@ -61,6 +61,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.List;
@@ -146,6 +147,7 @@ public class GroupsDetailsActivity extends ToolBarActivity {
     public static PolylineOptions polyline = null;
 
     private static MarkerOptions markerOptions = null;
+    private  List<Note> workDataNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,9 +167,15 @@ public class GroupsDetailsActivity extends ToolBarActivity {
         traGreendao = new TraceGreendao(GroupsDetailsActivity.this, db);
         startTimeList = traGreendao.searchAllStarttime();
         endTimeList = traGreendao.searchAllEndTime();
+        workDataNotes = traGreendao.searchWorkData();
+        startTimeList.addAll( workDataNotes);
+        endTimeList.addAll(workDataNotes);
+        sort sort = new sort();
+        Collections.sort(startTimeList,sort);
+        Collections.sort(endTimeList,sort);
         startDate = startTimeList.get(position).getStartDate();
         endDate = endTimeList.get(position).getStartDate();
-        List<Note> lists = traGreendao.searchLocation(startDate, endDate);
+//        List<Note> lists = traGreendao.searchLocation(startDate, endDate);
         String durtion = getDurtion(position);
         groupsTvDuration.setText(durtion);
         groupsTvDistance.setText(getDistanceKM() + "");
@@ -197,14 +205,13 @@ public class GroupsDetailsActivity extends ToolBarActivity {
 //        AvgSpeed.setText(avgSpeedStr + "km/h");
 
         //从数据库中获取的坐标点画,有问题,需要纠偏.暂不采用.
-        for (int i = 0; i < lists.size(); i++) {
-            Date runDate = lists.get(i).getRunDate();
-            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-            String format1 = simpleDateFormat1.format(runDate);
-            showRealtimeTrack(lists.get(i).getLatitude(), lists.get(i).getLongitude());
-        }
+//        for (int i = 0; i < lists.size(); i++) {
+//            Date runDate = lists.get(i).getRunDate();
+//            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+//            String format1 = simpleDateFormat1.format(runDate);
+//            showRealtimeTrack(lists.get(i).getLatitude(), lists.get(i).getLongitude());
+//        }
         initOnTrackListener();
-
         queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
 
         String avgPace = getAvgPace();

@@ -36,6 +36,7 @@ import java.util.Locale;
     Context context ;
     TextView stepNumber ;
     private Double distanceDB;
+    private int localSettingUnitInfo;
 
     /**
      *
@@ -56,7 +57,7 @@ import java.util.Locale;
     //耗时操作
     @Override
     protected List<DaySynopic> doInBackground(Object... params) {
-
+        localSettingUnitInfo = PreferencesToolkits.getLocalSettingUnitInfo(context);
         String dateStr = params[0].toString();
         Log.e(TAG, "dateStr-------" + dateStr);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
@@ -102,8 +103,12 @@ import java.util.Locale;
         if (i==0){
             distanceDB = 0.0 ;
         }else{
+            if (localSettingUnitInfo!= ToolKits.UNIT_GONG){
+                i = i*0.6214 ;
+            }
             distanceDB = (Math.round(i * 100 + 0.5) / 100.0);
         }
+
         stepNumber.setText(Double.toString(distanceDB));
         //此时去更新UI
         drawArc.setPercent(stepPercent);

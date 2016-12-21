@@ -1,5 +1,6 @@
 package com.linkloving.dyh08.logic.UI.Groups.baidu;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -77,6 +78,7 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.instagram.Instagram;
 import cn.sharesdk.linkedin.LinkedIn;
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.OnekeyShareTheme;
 import cn.sharesdk.tencent.qq.QQ;
 import cn.sharesdk.wechat.moments.WechatMoments;
 import cn.sharesdk.wechat.utils.WechatHelper;
@@ -168,17 +170,17 @@ public class GroupsShareActivity extends ToolBarActivity {
         endTimeList = traGreendao.searchAllEndTime();
         startDate = startTimeList.get(position).getStartDate();
         endDate = endTimeList.get(position).getStartDate();
-        List<Note> lists = traGreendao.searchLocation(startDate, endDate);
+//        List<Note> lists = traGreendao.searchLocation(startDate, endDate);
         String durtion = getDurtion(position);
         groupsTvDuration.setText(durtion);
         groupsTvDistance.setText(getDistanceKM() + "");
 
-        for (int i = 0; i < lists.size(); i++) {
-            Date runDate = lists.get(i).getRunDate();
-            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-            String format1 = simpleDateFormat1.format(runDate);
-            showRealtimeTrack(lists.get(i).getLatitude(), lists.get(i).getLongitude());
-        }
+//        for (int i = 0; i < lists.size(); i++) {
+//            Date runDate = lists.get(i).getRunDate();
+//            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+//            String format1 = simpleDateFormat1.format(runDate);
+//            showRealtimeTrack(lists.get(i).getLatitude(), lists.get(i).getLongitude());
+//        }
         groupsTvStep.setText(getStep() + "");
         groupsTime.setText(getMiddleTime());
         initPopupWindow();
@@ -296,68 +298,21 @@ public class GroupsShareActivity extends ToolBarActivity {
         fb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Facebook.ShareParams shareParams = new Facebook.ShareParams();
-//                shareParams.setFilePath(filePathCache);
-                shareParams.setImagePath(filePathCacheTotal);
-                Platform facebook = ShareSDK.getPlatform(Facebook.NAME);
-                facebook.share(shareParams);
-                boolean b = facebook.hasShareCallback();
-                facebook.setPlatformActionListener(new PlatformActionListener() {
-                    @Override
-                    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+              showShare(GroupsShareActivity.this,"Facebook",false);
 
-                    }
-
-                    @Override
-                    public void onError(Platform platform, int i, Throwable throwable) {
-                        MyLog.e(TAG,throwable.toString()+"-----------Error");
-                    }
-
-                    @Override
-                    public void onCancel(Platform platform, int i) {
-
-                    }
-                });
-                showToast(b);
             }
         });
         wx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WechatHelper.ShareParams shareParams = new WechatHelper.ShareParams();
-                shareParams.setFilePath(filePathCache);
-                shareParams.setImagePath(filePathCache);
-                Platform platform = ShareSDK.getPlatform(WechatMoments.NAME);
-                platform.share(shareParams);
-                platform.setPlatformActionListener(new PlatformActionListener() {
-                    @Override
-                    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-
-                    }
-
-                    @Override
-                    public void onError(Platform platform, int i, Throwable throwable) {
-
-                    }
-
-                    @Override
-                    public void onCancel(Platform platform, int i) {
-
-                    }
-                });
+                showShare(GroupsShareActivity.this,"Wechat",false);
             }
         });
 
         qq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                QQ.ShareParams shareParams = new QQ.ShareParams();
-                shareParams.setFilePath(filePathCache);
-                shareParams.setImagePath(filePathCache);
-                Platform platform = ShareSDK.getPlatform(QQ.NAME);
-                platform.share(shareParams);
-                boolean b = platform.hasShareCallback();
-                showToast(b);
+                showShare(GroupsShareActivity.this,"QQ",false);
             }
         });
         linkin.setOnClickListener(new View.OnClickListener() {
@@ -375,27 +330,9 @@ public class GroupsShareActivity extends ToolBarActivity {
         instagram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Instagram.ShareParams shareParams = new Instagram.ShareParams();
-                shareParams.setFilePath(filePathCache);
-                shareParams.setImagePath(filePathCache);
-                Platform platform = ShareSDK.getPlatform(Instagram.NAME);
-                platform.share(shareParams);
-                boolean b = platform.hasShareCallback();
-                showToast(b);
+                showShare(GroupsShareActivity.this,"Instagram",false);
             }
         });
-    /*    twitter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Twitter.ShareParams shareParams = new Twitter.ShareParams();
-//                shareParams.setFilePath(filePathCache);
-                shareParams.setImagePath(filePathCache);
-                Platform platform = ShareSDK.getPlatform(Twitter.NAME);
-                platform.share(shareParams);
-                boolean b = platform.hasShareCallback();
-                showToast(b);
-            }
-        });*/
     }
 
     private void showToast(boolean b) {
@@ -408,101 +345,72 @@ public class GroupsShareActivity extends ToolBarActivity {
     }
 
 
-/*
-// 四个分享按钮的点击事件
-   @OnClick(R.id.fb_share)
-   void fbShare(View view){
-       ToolKits.getScreenHot(GroupsShareActivity.this.getWindow().getDecorView(), filePathCache);
-       Facebook.ShareParams shareParams = new Facebook.ShareParams();
-       String  shareWord = shareText.getText().toString();
-       shareParams.setText(shareWord);
-       shareParams.setFilePath(filePathCache);
-       shareParams.setImagePath(filePathCache);
-       Platform facebook = ShareSDK.getPlatform(Facebook.NAME);
-        facebook.share(shareParams);
-   }
-
-    @OnClick(R.id.twitter_share)
-    void setTwitterShare(View view)
-    {
-        ToolKits.getScreenHot(GroupsShareActivity.this.getWindow().getDecorView(), filePathCache);
-        Twitter.ShareParams shareParams = new Twitter.ShareParams();
-        String  shareWord = shareText.getText().toString();
-        shareParams.setText(shareWord);
-        shareParams.setFilePath(filePathCache);
-        shareParams.setImagePath(filePathCache);
-        Platform platform = ShareSDK.getPlatform(Twitter.NAME);
-        platform.share(shareParams);
-    }
-
-    @OnClick(R.id.instagram_share)
-    void setInstagramShare(View view)
-    {
-        ToolKits.getScreenHot(GroupsShareActivity.this.getWindow().getDecorView(), filePathCache);
-        Instagram.ShareParams shareParams = new Instagram.ShareParams();
-        final String  shareWord = shareText.getText().toString();
-        shareParams.setText(shareWord);
-        shareParams.setFilePath(filePathCache);
-        shareParams.setImagePath(filePathCache);
-        Platform instagram = ShareSDK.getPlatform(Instagram.NAME);
-        instagram.share(shareParams);
-
-        instagram.setPlatformActionListener(new PlatformActionListener() {
-            @Override
-            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-            }
-
-            @Override
-            public void onError(Platform platform, int i, Throwable throwable) {
-                if (throwable.toString().contains("ClientNotExistException")) {
-                    MyLog.e("throwable", "执行了");
-                    Looper.prepare();
-                    Toast.makeText(GroupsShareActivity.this, "请安装Instagram客户端或更新到最新版本", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
-
-                }
-                throwable.printStackTrace();
-            }
-
-            @Override
-            public void onCancel(Platform platform, int i) {
-
-            }
-        });
-
-    }
-    @OnClick(R.id.google_share)
-    void setGoogleShare(View view)
-    {
-        ToolKits.getScreenHot(GroupsShareActivity.this.getWindow().getDecorView(), filePathCache);
-        GooglePlus.ShareParams shareParams = new GooglePlus.ShareParams();
-        String  shareWord = shareText.getText().toString();
-        if ("".equals(shareWord)){
-            shareWord=".";
+    /**
+     * 演示调用ShareSDK执行分享
+     *
+     * @param context
+     * @param platformToShare  指定直接分享平台名称（一旦设置了平台名称，则九宫格将不会显示）
+     * @param showContentEdit  是否显示编辑页
+     */
+    public  void showShare(Context context, String platformToShare, boolean showContentEdit) {
+        OnekeyShare oks = new OnekeyShare();
+        oks.setSilent(!showContentEdit);
+        if (platformToShare != null) {
+            oks.setPlatform(platformToShare);
         }
-        shareParams.setText(shareWord);
-        shareParams.setFilePath(filePathCache);
-        shareParams.setImagePath(filePathCache);
-        Platform google = ShareSDK.getPlatform(GooglePlus.NAME);
-        google.share(shareParams);
-        google.setPlatformActionListener(new PlatformActionListener() {
-            @Override
-            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+        //ShareSDK快捷分享提供两个界面第一个是九宫格 CLASSIC  第二个是SKYBLUE
+        oks.setTheme(OnekeyShareTheme.CLASSIC);
+        // 令编辑页面显示为Dialog模式
+        oks.setDialogMode();
+        // 在自动授权时可以禁用SSO方式
+        oks.disableSSOWhenAuthorize();
+        //oks.setAddress("12345678901"); //分享短信的号码和邮件的地址
+//        oks.setTitle("ShareSDK--Title");
+//        oks.setTitleUrl("http://mob.com");
+//        oks.setText("ShareSDK--文本");
+        //oks.setImagePath("/sdcard/test-pic.jpg");  //分享sdcard目录下的图片
+//        oks.setImageUrl("http://99touxiang.com/public/upload/nvsheng/125/27-011820_433.jpg");
+        oks.setFilePath(filePathCache);
+        oks.setImagePath(filePathCache);
+        oks.setUrl("http://www.mob.com"); //微信不绕过审核分享链接
+        //oks.setFilePath("/sdcard/test-pic.jpg");  //filePath是待分享应用程序的本地路劲，仅在微信（易信）好友和Dropbox中使用，否则可以不提供
+//        oks.setComment("分享"); //我对这条分享的评论，仅在人人网和QQ空间使用，否则可以不提供
+//        oks.setSite("ShareSDK");  //QZone分享完之后返回应用时提示框上显示的名称
+//        oks.setSiteUrl("http://mob.com");//QZone分享参数
+//        oks.setVenueName("ShareSDK");
+//        oks.setVenueDescription("This is a beautiful place!");
+        // 将快捷分享的操作结果将通过OneKeyShareCallback回调
+        //oks.setCallback(new OneKeyShareCallback());
+        // 去自定义不同平台的字段内容
+        //oks.setShareContentCustomizeCallback(new ShareContentCustomizeDemo());
+        // 在九宫格设置自定义的图标
+        Bitmap logo = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
+        String label = "ShareSDK";
+        View.OnClickListener listener = new View.OnClickListener() {
+            public void onClick(View v) {
 
             }
+        };
+        oks.setCustomerLogo(logo, label, listener);
 
-            @Override
-            public void onError(Platform platform, int i, Throwable throwable) {
-                    throwable.printStackTrace();
-            }
+        // 为EditPage设置一个背景的View
+        //oks.setEditPageBackground(getPage());
+        // 隐藏九宫格中的新浪微博
+        // oks.addHiddenPlatform(SinaWeibo.NAME);
 
-            @Override
-            public void onCancel(Platform platform, int i) {
+        // String[] AVATARS = {
+        // 		"http://99touxiang.com/public/upload/nvsheng/125/27-011820_433.jpg",
+        // 		"http://img1.2345.com/duoteimg/qqTxImg/2012/04/09/13339485237265.jpg",
+        // 		"http://diy.qqjay.com/u/files/2012/0523/f466c38e1c6c99ee2d6cd7746207a97a.jpg",
+        // 		"http://diy.qqjay.com/u2/2013/0422/fadc08459b1ef5fc1ea6b5b8d22e44b4.jpg",
+        // 		"http://img1.2345.com/duoteimg/qqTxImg/2012/04/09/13339510584349.jpg",
+        // 		"http://diy.qqjay.com/u2/2013/0401/4355c29b30d295b26da6f242a65bcaad.jpg" };
+        // oks.setImageArray(AVATARS);              //腾讯微博和twitter用此方法分享多张图片，其他平台不可以
 
-            }
-        });
+        // 启动分享
+        oks.show(context);
     }
-*/
+
 
 
     private String getMiddleTime() {

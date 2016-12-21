@@ -184,7 +184,7 @@ public class WheelView extends ScrollView {
 
         for (String item : items) {
             try {
-                MyLog.e(TAG,"item"+item);
+//                MyLog.e(TAG,"item"+item);
                 views.addView(createView(item,type));
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -207,7 +207,7 @@ public class WheelView extends ScrollView {
          String[] PLANETS = new String[]{"January", "February", "March", "April", "May", "June", "July",
                 "August", "September", "October", "November", "December"};
         if(type==TYPE_WEEK){
-            MyLog.e(TAG, item);
+//            MyLog.e(TAG, item);
             if (item == null || item.length() <= 0){
                 tv.setText("");
             }else {
@@ -219,7 +219,7 @@ public class WheelView extends ScrollView {
                 tv.setText(monDay + " - " + sunDay);
             }
         }else if(type==TYPE_MONTH){
-           MyLog.e(TAG, "TYPE_MONTH" + item);
+//           MyLog.e(TAG, "TYPE_MONTH" + item);
             if (item == null || item.length() <= 0){
                 tv.setText("");
             }else {
@@ -227,7 +227,7 @@ public class WheelView extends ScrollView {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(month);
                 int monthIndex = calendar.get(Calendar.MONTH);
-                MyLog.e(TAG,monthIndex+"");
+//                MyLog.e(TAG,monthIndex+"");
                 tv.setText(PLANETS[monthIndex]);
             }
         }else{
