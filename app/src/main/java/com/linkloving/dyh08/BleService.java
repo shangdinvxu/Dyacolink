@@ -21,6 +21,11 @@ import com.baidu.trace.OnEntityListener;
 import com.baidu.trace.TraceLocation;
 import com.example.android.bluetoothlegatt.BLEHandler;
 import com.example.android.bluetoothlegatt.BLEProvider;
+import com.example.android.bluetoothlegatt.proltrol.LPException;
+import com.example.android.bluetoothlegatt.proltrol.LPUtil;
+import com.example.android.bluetoothlegatt.proltrol.LepaoProtocalImpl;
+import com.example.android.bluetoothlegatt.proltrol.WatchRequset;
+import com.example.android.bluetoothlegatt.proltrol.WatchResponse;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPSportData;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPWorkoutData;
@@ -225,7 +230,6 @@ public class BleService extends Service {
         devOpenHelper = new DaoMaster.DevOpenHelper(this, "Note", null);
         db = devOpenHelper.getReadableDatabase();
         traceGreendao = new TraceGreendao(this,db);
-
     }
 
 
@@ -577,11 +581,11 @@ public class BleService extends Service {
                 super.handleDataEnd();
                 MyLog.e(TAG, "【NEW离线数据同步】handleDataEnd" );
                 //设置时间指令
-
                 provider.SetDeviceTime(BleService.this);
                 provider.GetHeartrate(BleService.this);
                 provider.getworkOutdata(BleService.this);
                 provider.clearWorkOutdata(BleService.this);
+
             }
 
             //时间设置成功--基本流程完毕
@@ -616,7 +620,6 @@ public class BleService extends Service {
             protected  void notifyforgerHeartList(ArrayList<LpHeartrateData>  obj){
                 MyLog.e(TAG,"notifyforgerHeartListsuccess");
                 super.notifyforgerHeartList(obj);
-
                 for (LpHeartrateData obj1: obj){
                     greendaoUtils.add(obj1.getStartTime(),obj1.getMaxRate(),obj1.getAvgRate());
                     List<heartrate> search = greendaoUtils.search(obj1.getStartTime());
@@ -630,6 +633,17 @@ public class BleService extends Service {
             protected void notifyforgetworkoutdata(ArrayList<LPWorkoutData> obj) {
                 super.notifyforgetworkoutdata(obj);
                 provider.clearWorkOutdata(BleService.this);
+
+//                WatchRequset watchRequset = new WatchRequset();
+//                try {
+//                    watchRequset.appendByte((byte) 0x02).appendByte((byte) 0x44).makeCheckSum();
+//                    LepaoProtocalImpl lepaoProtocal = new LepaoProtocalImpl();
+//                    WatchResponse resp = lepaoProtocal.sendData2BLE(watchRequset);
+//                    LPUtil.printData(resp.getData(), " workoutDataclear++++++notifyforgetworkoutdata+++++resp");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+
                 for (LPWorkoutData obj1: obj){
                     MyLog.e(TAG,"notifyforgetworkoutdata"+obj1.getStarttime()+"-------"+obj1.getEndtime());
                     traceGreendao.addworkoutData(obj1.getStarttime(),obj1.getStarttime(),obj1.getEndtime());

@@ -175,7 +175,6 @@ public class GroupsDetailsActivity extends ToolBarActivity {
         Collections.sort(endTimeList,sort);
         startDate = startTimeList.get(position).getStartDate();
         endDate = endTimeList.get(position).getStartDate();
-//        List<Note> lists = traGreendao.searchLocation(startDate, endDate);
         String durtion = getDurtion(position);
         groupsTvDuration.setText(durtion);
         groupsTvDistance.setText(getDistanceKM() + "");
@@ -191,6 +190,7 @@ public class GroupsDetailsActivity extends ToolBarActivity {
         }
 //        float x = count.runing_duation + count.walking_duration;
 //        float v = count.runing_distance + count.walking_distance;
+
         int walkCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.walking_distance)),
                 (int) count.walking_duration * 60, userEntity.getUserBase().getUser_weight());
         MyLog.e("walkCal", walkCal + "");
@@ -204,15 +204,8 @@ public class GroupsDetailsActivity extends ToolBarActivity {
         String avgSpeedStr = new Formatter().format("%.1f", avgSpeed).toString();
 //        AvgSpeed.setText(avgSpeedStr + "km/h");
 
-        //从数据库中获取的坐标点画,有问题,需要纠偏.暂不采用.
-//        for (int i = 0; i < lists.size(); i++) {
-//            Date runDate = lists.get(i).getRunDate();
-//            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-//            String format1 = simpleDateFormat1.format(runDate);
-//            showRealtimeTrack(lists.get(i).getLatitude(), lists.get(i).getLongitude());
-//        }
-        initOnTrackListener();
-        queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
+//        initOnTrackListener();
+//        queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
 
         String avgPace = getAvgPace();
 //        AvgPace.setText(avgPace + "/km");
@@ -226,6 +219,27 @@ public class GroupsDetailsActivity extends ToolBarActivity {
                 startActivity(intent);
             }
         });
+
+        initTrace();
+
+    }
+
+    private void initTrace() {
+        MyLog.e(TAG,"initrace执行了");
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //从数据库中获取的坐标点画,有问题,需要纠偏.暂不采用.
+                List<Note> lists = traGreendao.searchLocation(startDate, endDate);
+                for (int i = 0; i < lists.size(); i++) {
+//            Date runDate = lists.get(i).getRunDate();
+//            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+//            String format1 = simpleDateFormat1.format(runDate);
+                    showRealtimeTrack(lists.get(i).getLatitude(), lists.get(i).getLongitude());
+                }
+            }
+        }).start();
     }
 
     private String getMiddleTime() {
@@ -328,8 +342,12 @@ public class GroupsDetailsActivity extends ToolBarActivity {
         int simpleReturn = 0;
         // 是否返回纠偏后轨迹（0 : 否，1 : 是）
         int isProcessed = processed;
-        int startTime = startDate.getDate();
-        int endTime = endDate.getDate();
+//        int startTime = startDate.getDate();
+//        int endTime = endDate.getDate();
+//        long startTime = startDate.;
+
+        int startTime = (int) (startDate.getTime()/1000);
+        int endTime = (int) (endDate.getTime()/1000);
         // 开始时间
         if (startTime == 0) {
             startTime = (int) (System.currentTimeMillis() / 1000 - 12 * 60 * 60);
@@ -343,9 +361,7 @@ public class GroupsDetailsActivity extends ToolBarActivity {
         int pageIndex = 1;
         LBSTraceClient client = new LBSTraceClient(GroupsDetailsActivity.this);
         client.setLocationMode(LocationMode.High_Accuracy);
-         client.queryHistoryTrack(123056, "myTrace", simpleReturn,
-                isProcessed, processOption,
-                startTime, endTime,
+         client.queryHistoryTrack(123056, "myTrace", simpleReturn, isProcessed, processOption, startTime, endTime,
                 pageSize,
                 pageIndex,
                 trackListener);
@@ -398,7 +414,6 @@ public class GroupsDetailsActivity extends ToolBarActivity {
             public Map<String, String> onTrackAttrCallback() {
                 // TODO Auto-generated method stub
                 MyLog.e(TAG,"onTrackAttrCallback");
-                System.out.println("onTrackAttrCallback");
                 return null;
             }
 

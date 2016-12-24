@@ -2,6 +2,7 @@ package com.linkloving.dyh08.logic.UI.Groups.baidu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,11 +10,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,7 +43,11 @@ import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.model.LatLngBounds;
 import com.baidu.mapapi.utils.CoordinateConverter;
+import com.baidu.trace.LBSTraceClient;
+import com.baidu.trace.LocationMode;
+import com.baidu.trace.OnTrackListener;
 import com.example.android.bluetoothlegatt.utils.ToastUtil;
 import com.linkloving.band.dto.SportRecord;
 import com.linkloving.dyh08.MyApplication;
@@ -47,24 +55,34 @@ import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.db.sport.UserDeviceRecord;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
+import com.linkloving.dyh08.logic.UI.workout.trackshow.TrackApplication;
+import com.linkloving.dyh08.logic.UI.workout.trackshow.WorkoutActivity;
+import com.linkloving.dyh08.logic.UI.workout.trackutils.GsonService;
+import com.linkloving.dyh08.logic.UI.workout.trackutils.HistoryTrackData;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.utils.TimeZoneHelper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import Trace.GreenDao.DaoMaster;
 import Trace.GreenDao.Note;
@@ -82,13 +100,21 @@ import cn.sharesdk.onekeyshare.OnekeyShareTheme;
 import cn.sharesdk.tencent.qq.QQ;
 import cn.sharesdk.wechat.moments.WechatMoments;
 import cn.sharesdk.wechat.utils.WechatHelper;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.schedulers.Schedulers;
+
+import static com.linkloving.dyh08.R.id.gourps_topmap;
 
 /**
  * Created by Daniel.Xu on 2016/8/22.
  */
 public class GroupsShareActivity extends ToolBarActivity {
     private static final String TAG = GroupsShareActivity.class.getSimpleName();
-    @InjectView(R.id.gourps_topmap)
+    @InjectView(gourps_topmap)
     MapView gourpsTopmap;
     @InjectView(R.id.groups_time)
     TextView groupsTime;
@@ -136,7 +162,6 @@ public class GroupsShareActivity extends ToolBarActivity {
     private long itemDuration;
     private String duration;
     protected static MapStatusUpdate msUpdate = null;
-    private static PolylineOptions polyline = null;
     protected static OverlayOptions overlayOptions;
     private static BitmapDescriptor realtimeBitmap;
     private static List<LatLng> pointList = new ArrayList<LatLng>();
@@ -148,17 +173,36 @@ public class GroupsShareActivity extends ToolBarActivity {
     private ImageView fb,wx,qq,linkin,instagram;
     private ImageView twitter;
     private View view;
+    private  List<Note> workDataNotes;
+    // 起点图标
+    private static BitmapDescriptor bmStart;
+    // 终点图标
+    private static BitmapDescriptor bmEnd;
+
+    // 起点图标覆盖物
+    private static MarkerOptions startMarker = null;
+    // 终点图标覆盖物
+    private static MarkerOptions endMarker = null;
+    // 路线覆盖物
+    public static PolylineOptions polyline = null;
+
+    private static MarkerOptions markerOptions = null;
+
+    /**
+     * Track监听器
+     */
+    protected static OnTrackListener trackListener = null;
+    private int user_weight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tw_groups_share);
         view = LayoutInflater.from(GroupsShareActivity.this).inflate(R.layout.tw_share_day, null);
-
         ButterKnife.inject(this);
-
         ShareSDK.initSDK(GroupsShareActivity.this);
         user_id = MyApplication.getInstance(GroupsShareActivity.this).getLocalUserInfoProvider().getUser_id();
+        user_weight = MyApplication.getInstance(GroupsShareActivity.this).getLocalUserInfoProvider().getUserBase().getUser_weight();
         map = gourpsTopmap.getMap();
         Intent intent = getIntent();
         String postionStr = intent.getStringExtra("postion");
@@ -168,13 +212,18 @@ public class GroupsShareActivity extends ToolBarActivity {
         traGreendao = new TraceGreendao(GroupsShareActivity.this, db);
         startTimeList = traGreendao.searchAllStarttime();
         endTimeList = traGreendao.searchAllEndTime();
+        workDataNotes = traGreendao.searchWorkData();
+        startTimeList.addAll( workDataNotes);
+        endTimeList.addAll(workDataNotes);
+        sort sort = new sort();
+        Collections.sort(startTimeList,sort);
+        Collections.sort(endTimeList,sort);
         startDate = startTimeList.get(position).getStartDate();
         endDate = endTimeList.get(position).getStartDate();
 //        List<Note> lists = traGreendao.searchLocation(startDate, endDate);
         String durtion = getDurtion(position);
         groupsTvDuration.setText(durtion);
         groupsTvDistance.setText(getDistanceKM() + "");
-
 //        for (int i = 0; i < lists.size(); i++) {
 //            Date runDate = lists.get(i).getRunDate();
 //            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -183,9 +232,219 @@ public class GroupsShareActivity extends ToolBarActivity {
 //        }
         groupsTvStep.setText(getStep() + "");
         groupsTime.setText(getMiddleTime());
+        groupsTvCalories.setText(getCalories()+"");
+        initOnTrackListener();
         initPopupWindow();
+        initTrace();
+        queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
+    }
+
+    /**
+     * 查询历史轨迹
+     */
+    private void queryHistoryTrack(int processed, String processOption) {
+
+        // entity标识
+        String entityName = WorkoutActivity.entityName;
+        // 是否返回精简的结果（0 : 否，1 : 是）
+        int simpleReturn = 0;
+        // 是否返回纠偏后轨迹（0 : 否，1 : 是）
+        int isProcessed = processed;
+//        int startTime = startDate.getDate();
+//        int endTime = endDate.getDate();
+//        long startTime = startDate.;
+
+        int startTime = (int) (startDate.getTime()/1000);
+        int endTime = (int) (endDate.getTime()/1000);
+        // 开始时间
+        if (startTime == 0) {
+            startTime = (int) (System.currentTimeMillis() / 1000 - 12 * 60 * 60);
+        }
+        if (endTime == 0) {
+            endTime = (int) (System.currentTimeMillis() / 1000);
+        }
+        // 分页大小
+        int pageSize = 1000;
+        // 分页索引
+        int pageIndex = 1;
+        LBSTraceClient client = new LBSTraceClient(GroupsShareActivity.this);
+        client.setLocationMode(LocationMode.High_Accuracy);
+        client.queryHistoryTrack(123056, "myTrace", simpleReturn, isProcessed, processOption, startTime, endTime,
+                pageSize,
+                pageIndex,
+                trackListener);
+    }
+
+    /**
+     * 初始化OnTrackListener
+     */
+    private void initOnTrackListener() {
+
+        trackListener = new OnTrackListener() {
+
+            // 请求失败回调接口
+            @Override
+            public void onRequestFailedCallback(String arg0) {
+                // TODO Auto-generated method stub
+                TrackApplication.showMessage("track请求失败回调接口消息 : " + arg0);
+                MyLog.e(TAG,"onRequestFailedCallback"+arg0);
+            }
+
+            // 查询历史轨迹回调接口
+            @Override
+            public void onQueryHistoryTrackCallback(String arg0) {
+                // TODO Auto-generated method stub
+                super.onQueryHistoryTrackCallback(arg0);
+                showHistoryTrack(arg0);
+                MyLog.e (TAG,"onQueryHistoryTrackCallback"+arg0);
+            }
+
+            @Override
+            public void onQueryDistanceCallback(String arg0) {
+                MyLog.e(TAG,"onQueryDistanceCallback"+arg0);
+                // TODO Auto-generated method stub
+                try {
+                    JSONObject dataJson = new JSONObject(arg0);
+                    if (null != dataJson && dataJson.has("status") && dataJson.getInt("status") == 0) {
+                        double distance = dataJson.getDouble("distance");
+                        DecimalFormat df = new DecimalFormat("#.0");
+                        TrackApplication.showMessage("里程 : " + df.format(distance) + "米");
+                    }
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    TrackApplication.showMessage("queryDistance回调消息 : " + arg0);
+                }
+
+            }
+
+            @Override
+            public Map<String, String> onTrackAttrCallback() {
+                // TODO Auto-generated method stub
+                MyLog.e(TAG,"onTrackAttrCallback");
+                return null;
+            }
+
+        };
+    }
+
+    /**
+     * 显示历史轨迹
+     *
+     * @param historyTrack
+     */
+    private void showHistoryTrack(String historyTrack) {
+
+        HistoryTrackData historyTrackData = GsonService.parseJson(historyTrack,
+                HistoryTrackData.class);
+
+        List<LatLng> latLngList = new ArrayList<LatLng>();
+        if (historyTrackData != null && historyTrackData.getStatus() == 0) {
+            if (historyTrackData.getListPoints() != null) {
+                latLngList.addAll(historyTrackData.getListPoints());
+
+            }
+            // 绘制历史轨迹
+            drawHistoryTrack(latLngList, historyTrackData.distance);
+
+        }
+
+    }
+    /**
+     * 绘制历史轨迹
+     *
+     * @param points
+     */
+    private void drawHistoryTrack(final List<LatLng> points, final double distance) {
+
+        // 绘制新覆盖物前，清空之前的覆盖物
+        map.clear();
+
+        if (points.size() == 1) {
+            points.add(points.get(0));
+        }
+
+        if (points == null || points.size() == 0) {
+//            TrackApplication.showMessage("当前查询无轨迹点");
+            resetMarker();
+        } else if (points.size() > 1) {
+
+            LatLng llC = points.get(0);
+            LatLng llD = points.get(points.size() - 1);
+            LatLngBounds bounds = new LatLngBounds.Builder()
+                    .include(llC).include(llD).build();
+
+            msUpdate = MapStatusUpdateFactory.newLatLngBounds(bounds);
 
 
+            bmStart = BitmapDescriptorFactory.fromResource(R.mipmap.icon_start);
+            bmEnd = BitmapDescriptorFactory.fromResource(R.mipmap.icon_end);
+
+            // 添加起点图标
+            startMarker = new MarkerOptions()
+                    .position(points.get(points.size() - 1)).icon(bmStart)
+                    .zIndex(9).draggable(true);
+
+            // 添加终点图标
+            endMarker = new MarkerOptions().position(points.get(0))
+                    .icon(bmEnd).zIndex(9).draggable(true);
+
+            // 添加路线（轨迹）
+            polyline = new PolylineOptions().width(10).color(Color.RED).points(points);
+
+            markerOptions = new MarkerOptions();
+            markerOptions.flat(true);
+            markerOptions.anchor(0.5f, 0.5f);
+            markerOptions.icon(BitmapDescriptorFactory
+                    .fromResource(R.mipmap.icon_gcoding));
+            markerOptions.position(points.get(points.size() - 1));
+
+            addMarker();
+            /**设置精度*/
+            map.animateMapStatus(MapStatusUpdateFactory.zoomTo(16));
+
+
+            MyLog.e("当前轨迹里程为 : " + (int) distance + "米");
+//            TrackApplication.showMessage("当前轨迹里程为 : " + (int) distance + "米");
+
+        }
+
+    }
+
+
+    /**
+     * 重置覆盖物
+     */
+    private void resetMarker() {
+        startMarker = null;
+        endMarker = null;
+        polyline = null;
+    }
+
+
+    private void initTrace() {
+        MyLog.e(TAG,"initrace执行了");
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //从数据库中获取的坐标点画,有问题,需要纠偏.暂不采用.
+                List<Note> lists = traGreendao.searchLocation(startDate, endDate);
+                if (lists.size()==0){
+                    SharedPreferences location = getSharedPreferences("Location", MODE_PRIVATE);
+                    float latitude = location.getFloat("Latitude", 11);
+                    float longitude = location.getFloat("Longitude", 11);
+                    showRealtimeTrack(latitude,longitude);
+                }else {
+//                    for (int i = 0; i < lists.size(); i++) {
+//            Date runDate = lists.get(i).getRunDate();
+//            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+//            String format1 = simpleDateFormat1.format(runDate);
+                    showHistoryTrack(lists.get(0).getDate());
+//                    }
+                }
+
+            }
+        }).start();
     }
 
     @OnClick(R.id.earthImageview)
@@ -213,6 +472,9 @@ public class GroupsShareActivity extends ToolBarActivity {
      */
     public void getScreenHot(BaiduMap mBaiduMap) {
         // 截图，在SnapshotReadyCallback中保存图片到 sd 卡
+
+
+
         mBaiduMap.snapshot(new BaiduMap.SnapshotReadyCallback() {
             public void onSnapshotReady(Bitmap snapshot) {
                 File file = new File(filePathCache);
@@ -220,13 +482,13 @@ public class GroupsShareActivity extends ToolBarActivity {
                 try {
                     out = new FileOutputStream(file);
                     if (snapshot.compress(
-                            Bitmap.CompressFormat.PNG, 100, out)) {
+                            Bitmap.CompressFormat.PNG, 20, out)) {
                         out.flush();
                         out.close();
                     }
-                    Toast.makeText(GroupsShareActivity.this,
-                            "屏幕截图成功，图片存在: " + file.toString(),
-                            Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(GroupsShareActivity.this,
+//                            "屏幕截图成功，图片存在: " + file.toString(),
+//                            Toast.LENGTH_SHORT).show();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -234,8 +496,8 @@ public class GroupsShareActivity extends ToolBarActivity {
                 }
             }
         });
-        Toast.makeText(GroupsShareActivity.this, "正在截取屏幕图片...",
-                Toast.LENGTH_SHORT).show();
+//        Toast.makeText(GroupsShareActivity.this, "正在截取屏幕图片...",
+//                Toast.LENGTH_SHORT).show();
     }
 
 
@@ -264,19 +526,20 @@ public class GroupsShareActivity extends ToolBarActivity {
             @Override
             public void onClick(View v) {
                 popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
-//                ToolKits.getScreenHot(MapActivity.this.getWindow().getDecorView(), filePathCache);
+//                ToolKits.getScreenHot(GroupsShareActivity.this.getWindow().getDecorView(), filePathCache);
 //               截图分两步
                 /**把下面的部分截图*/
-                ToolKits.saveFile(ToolKits.getViewBitmap(screenhot), filePathCacheUnder);
-                /**百度截图*/
-                ToolKits.getScreenHot(map,filePathCache);
-                final Bitmap bitmap = ToolKits.mergeBitmap_TB(BitmapFactory.decodeFile(filePathCache),
-                        BitmapFactory.decodeFile(filePathCacheUnder), true);
-                ToolKits.saveBitmap2file(bitmap, filePathCacheTotal);
 
+
+                        ToolKits.saveFile(ToolKits.getViewBitmap(screenhot), filePathCacheUnder);
+                        getScreenHot(map);
+                        final Bitmap bitmap = ToolKits.mergeBitmap_TB(BitmapFactory.decodeFile(filePathCache),
+                                BitmapFactory.decodeFile(filePathCacheUnder), true);
+                        ToolKits.saveBitmap2file(bitmap, filePathCacheTotal);
             }
         });
         share();
+
     }
 
 
@@ -370,8 +633,8 @@ public class GroupsShareActivity extends ToolBarActivity {
 //        oks.setText("ShareSDK--文本");
         //oks.setImagePath("/sdcard/test-pic.jpg");  //分享sdcard目录下的图片
 //        oks.setImageUrl("http://99touxiang.com/public/upload/nvsheng/125/27-011820_433.jpg");
-        oks.setFilePath(filePathCache);
-        oks.setImagePath(filePathCache);
+        oks.setFilePath(filePathCacheTotal);
+        oks.setImagePath(filePathCacheTotal);
         oks.setUrl("http://www.mob.com"); //微信不绕过审核分享链接
         //oks.setFilePath("/sdcard/test-pic.jpg");  //filePath是待分享应用程序的本地路劲，仅在微信（易信）好友和Dropbox中使用，否则可以不提供
 //        oks.setComment("分享"); //我对这条分享的评论，仅在人人网和QQ空间使用，否则可以不提供
@@ -436,11 +699,13 @@ public class GroupsShareActivity extends ToolBarActivity {
             calories = 0;
         } else {
             for (SportRecord sportRecordArray : sportRecordArrayList) {
-                MyLog.e(TAG, "calories" + sportRecordArray.getDistance());
-
+                if (sportRecordArray.getState().equals("1")||sportRecordArray.getState().equals("2")||sportRecordArray.getState().equals("3")){
+                    calories =ToolKits.calculateCalories(Float.parseFloat(sportRecordArray.getDistance()),
+                            Integer.parseInt(sportRecordArray.getDuration()),user_weight)+calories;
+                }
             }
         }
-        return step;
+        return calories;
     }
 
     public String getDurtion(int position) {
@@ -457,6 +722,9 @@ public class GroupsShareActivity extends ToolBarActivity {
         duration = simpleDateFormat.format(time);
         return duration;
     }
+
+
+
 
 
     private String getDistanceKM() {

@@ -94,7 +94,6 @@ public class DistanceActivity extends ToolBarActivity{
         rightLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 List<String> stepGoalList = creatStepGoalList();
                 LayoutInflater inflater = getLayoutInflater();
                 final View layout = inflater.inflate(R.layout.distancegoalwheel, (LinearLayout) findViewById(R.id.goal_view));

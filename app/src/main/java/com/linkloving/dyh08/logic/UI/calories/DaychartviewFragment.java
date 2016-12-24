@@ -64,12 +64,12 @@ public class DaychartviewFragment extends Fragment {
     private class DayChartAsynck extends AsyncTask<Object, Object, List<BarChartView.BarChartItemBean>>{
 
         private Date parse;
-        private ArrayList<String> stringTimeList;
+        private ArrayList<Date> stringTimeList;
         ArrayList<SportRecord> sportRecordArrayList = new ArrayList<SportRecord>();
         UserDeviceRecord chatMessageTable = UserDeviceRecord.getInstance(getActivity());
         String user_id = MyApplication.getInstance(getActivity()).getLocalUserInfoProvider().getUser_id() + "";
-        String startdata ;
-        String enddata ;
+        Date startdata ;
+        Date enddata ;
         private DetailChartCountData count;
         UserEntity userEntity= MyApplication.getInstance(getActivity()).getLocalUserInfoProvider();
         private SimpleDateFormat  hh = new SimpleDateFormat("HH", Locale.getDefault());
@@ -91,62 +91,75 @@ public class DaychartviewFragment extends Fragment {
             instance.setTime(parse);
             instance.add(Calendar.MINUTE, -TimeZoneHelper.getTimeZoneOffsetMinute());// before 8 hour
             Date time1 = instance.getTime();
-            String format = simpleDateFormat.format(time1);
-            stringTimeList.add(format);
+//            String format = simpleDateFormat.format(time1);
+            stringTimeList.add(time1);
             for (int i = 0; i<24;i++)
             {
                 instance.add(Calendar.HOUR_OF_DAY,1);
                 Date time2 = instance.getTime();
-                String format1 = simpleDateFormat.format(time2);
-                stringTimeList.add(format1);
+//                String format1 = simpleDateFormat.format(time2);
+                stringTimeList.add(time2);
             }
             for (int i=0;i<24;i++){
+                int calValue = 0 ;
                 startdata = stringTimeList.get(i);
                 enddata = stringTimeList.get(i+1);
-            String where = COLUMN_START_TIME+">='"+startdata+"' and "+COLUMN_START_TIME+"<'"+enddata+"'";
-            // 查找此期间内的运动原始数据
-                sportRecordArrayList = chatMessageTable.findHistory(user_id, where);
-                List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
-                String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(time1);
-                try {
-                    count = DatasProcessHelper.countSportData(srs, startDateLocal);
-//                    MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                //                String where = COLUMN_START_TIME+">='"+startdata+"' and "+COLUMN_START_TIME+"<'"+enddata+"'";
+//                // 查找此期间内的运动原始数据
+//                sportRecordArrayList = chatMessageTable.findHistory(user_id, where);
+                sportRecordArrayList = UserDeviceRecord.findHistoryChartwithHMS
+                        (getActivity(), String.valueOf(user_id), startdata, enddata);
+                if (sportRecordArrayList.size() == 0) {
+                    calValue = 0;
+                } else {
+                    for (SportRecord sportRecordArray : sportRecordArrayList) {
+                        if (sportRecordArray.getState().equals("1")||sportRecordArray.getState().equals("2")||sportRecordArray.getState().equals("3"))
+                            calValue = ToolKits.calculateCalories(Integer.parseInt(sportRecordArray.getDistance()),
+                                    Integer.parseInt(sportRecordArray.getDuration()),
+                                    userEntity.getUserBase().getUser_weight())+calValue ;
+                    }
                 }
-                int walkCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.walking_distance)),
-                        (int) count.walking_duration * 60, userEntity.getUserBase().getUser_weight());
-//        userEntity.getUserBase().getUser_weight()
-                int runCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.runing_distance)), (int)count.runing_duation * 60, userEntity.getUserBase().getUser_weight());
+//                List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
+//                String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(time1);
+//                try {
+//                    count = DatasProcessHelper.countSportData(srs, startDateLocal);
+////                    MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                int walkCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.walking_distance)),
+//                        (int) count.walking_duration * 60, userEntity.getUserBase().getUser_weight());
+////        userEntity.getUserBase().getUser_weight()
+//                int runCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.runing_distance)), (int)count.runing_duation * 60, userEntity.getUserBase().getUser_weight());
 
                 /*********************/
-                Date dateToday = new Date();
-                int calValue = 0 ;
-                if (ToolKits.compareDate(dateToday,parse)){
-//            calValue = walkCal + runCal+calorieseveryday;
-                    String dateTodayFormat = sdf.format(dateToday);
-                    String dateFormat = sdf.format(parse);
-                    String[] dateFormatSplit = dateTodayFormat.split(" ");
-                    String[] dateSplit = dateFormat.split(" ");
-                    MyLog.e(TAG,"1---"+dateSplit[0]+"2--"+dateFormatSplit[0]);
-                    if (dateSplit[0].equals(dateFormatSplit[0])){
-                        MyLog.e(TAG,"日期等于今天");
-                        String HH = hh.format(dateToday);
-                        int h = Integer.parseInt(HH);
-                        if (i+1<h){
-                            MyLog.e(TAG,"小时之前");
-                            calValue = calorieseveryHour+walkCal+runCal ;
-                        }else {
-                            calValue = walkCal+runCal ;
-                            MyLog.e(TAG,"小时之后");
-                        }
-                    }else{
-                        MyLog.e(TAG,"日期在今天之前");
-                        calValue = walkCal + runCal+calorieseveryHour;
-                    }
-                }else {
-                    MyLog.e(TAG, "日期在今天之后");
-                }
+//                Date dateToday = new Date();
+//
+//                if (ToolKits.compareDate(dateToday,parse)){
+////            calValue = walkCal + runCal+calorieseveryday;
+//                    String dateTodayFormat = sdf.format(dateToday);
+//                    String dateFormat = sdf.format(parse);
+//                    String[] dateFormatSplit = dateTodayFormat.split(" ");
+//                    String[] dateSplit = dateFormat.split(" ");
+//                    MyLog.e(TAG,"1---"+dateSplit[0]+"2--"+dateFormatSplit[0]);
+//                    if (dateSplit[0].equals(dateFormatSplit[0])){
+//                        MyLog.e(TAG,"日期等于今天");
+//                        String HH = hh.format(dateToday);
+//                        int h = Integer.parseInt(HH);
+//                        if (i+1<h){
+//                            MyLog.e(TAG,"小时之前");
+//                            calValue = calorieseveryHour+walkCal+runCal ;
+//                        }else {
+//                            calValue = walkCal+runCal ;
+//                            MyLog.e(TAG,"小时之后");
+//                        }
+//                    }else{
+//                        MyLog.e(TAG,"日期在今天之前");
+//                        calValue = walkCal + runCal+calorieseveryHour;
+//                    }
+//                }else {
+//                    MyLog.e(TAG, "日期在今天之后");
+//                }
                     /*********************/
                 MyLog.e(TAG, "calValue" + calValue);
              BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean(Integer.toString(i+1), calValue);

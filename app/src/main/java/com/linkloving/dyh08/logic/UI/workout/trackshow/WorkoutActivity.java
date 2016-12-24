@@ -3,6 +3,7 @@ package com.linkloving.dyh08.logic.UI.workout.trackshow;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,20 +17,40 @@ import android.view.Window;
 import android.widget.Button;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.PolylineOptions;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.model.LatLngBounds;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.LocationMode;
 import com.baidu.trace.OnEntityListener;
+import com.baidu.trace.OnTrackListener;
 import com.baidu.trace.Trace;
 import com.baidu.trace.TraceLocation;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
+import com.linkloving.dyh08.logic.UI.Groups.baidu.GroupsDetailsActivity;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.UI.main.PortalActivity;
+import com.linkloving.dyh08.logic.UI.workout.trackutils.GsonService;
+import com.linkloving.dyh08.logic.UI.workout.trackutils.HistoryTrackData;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import Trace.GreenDao.DaoMaster;
 
@@ -63,6 +84,11 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
     public static LBSTraceClient client = null;
 
     /**
+     * Track监听器
+     */
+    protected static OnTrackListener trackListener = null;
+
+    /**
      * Entity监听器
      */
     protected static OnEntityListener entityListener = null;
@@ -73,6 +99,13 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
     protected static MapView bmapView = null;
 
     protected static BaiduMap mBaiduMap = null;
+
+
+    protected static MapStatusUpdate msUpdate = null;
+    protected static OverlayOptions overlayOptions;
+    private static BitmapDescriptor realtimeBitmap;
+
+    private SimpleDateFormat  simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     /**
      * 用于对Fragment进行管理
      */
@@ -88,6 +121,22 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
 
     private SQLiteDatabase db;
     private DaoMaster.DevOpenHelper devOpenHelper;
+
+    // 起点图标
+    private static BitmapDescriptor bmStart;
+    // 终点图标
+    private static BitmapDescriptor bmEnd;
+
+    // 起点图标覆盖物
+    private static MarkerOptions startMarker = null;
+    // 终点图标覆盖物
+    private static MarkerOptions endMarker = null;
+    // 路线覆盖物
+    public static PolylineOptions polyline = null;
+
+    private static MarkerOptions markerOptions = null;
+    private int noteStartTime ,noteEndTime ;
+    private SharedPreferences locationsp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +171,8 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
         devOpenHelper = new DaoMaster.DevOpenHelper(this, "Note", null);
         db = devOpenHelper.getReadableDatabase();
         traGreendao = new TraceGreendao(WorkoutActivity.this,db);
+        initOnTrackListener();
+        locationsp = getSharedPreferences("Location", MODE_PRIVATE);
 
     }
 /*    @Override
@@ -174,6 +225,198 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
         handlerButtonClick(v.getId());
     }
 
+    public void  queryHistoryTrack(int startTime,int endTime){
+        // 是否返回精简的结果（0 : 否，1 : 是）
+        int simpleReturn = 0;
+        // 是否返回纠偏后轨迹（0 : 否，1 : 是）
+        int isProcessed = 1;
+        // 分页大小
+        int pageSize = 1000;
+        // 分页索引
+        int pageIndex = 1;
+        noteStartTime=startTime ;
+        noteEndTime = endTime ;
+        LBSTraceClient client = new LBSTraceClient(WorkoutActivity.this);
+        client.setLocationMode(LocationMode.High_Accuracy);
+        client.queryHistoryTrack(123056, "myTrace", simpleReturn, isProcessed, "need_denoise=1,need_vacuate=1,need_mapmatch=1", startTime, endTime,
+                pageSize,
+                pageIndex,
+                trackListener);
+    }
+
+
+    /**
+     * 初始化OnTrackListener
+     */
+    private void initOnTrackListener() {
+
+        trackListener = new OnTrackListener() {
+
+            // 请求失败回调接口
+            @Override
+            public void onRequestFailedCallback(String arg0) {
+                // TODO Auto-generated method stub
+                TrackApplication.showMessage("track请求失败回调接口消息 : " + arg0);
+                MyLog.e(TAG,"onRequestFailedCallback"+arg0);
+            }
+
+            // 查询历史轨迹回调接口
+            @Override
+            public void onQueryHistoryTrackCallback(String arg0) {
+                // TODO Auto-generated method stub
+                super.onQueryHistoryTrackCallback(arg0);
+                showHistoryTrack(arg0);
+                MyLog.e (TAG,"onQueryHistoryTrackCallback"+arg0);
+            }
+
+            @Override
+            public void onQueryDistanceCallback(String arg0) {
+                MyLog.e(TAG,"onQueryDistanceCallback"+arg0);
+                // TODO Auto-generated method stub
+                try {
+                    JSONObject dataJson = new JSONObject(arg0);
+                    if (null != dataJson && dataJson.has("status") && dataJson.getInt("status") == 0) {
+                        double distance = dataJson.getDouble("distance");
+                        DecimalFormat df = new DecimalFormat("#.0");
+                        TrackApplication.showMessage("里程 : " + df.format(distance) + "米");
+                    }
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    TrackApplication.showMessage("queryDistance回调消息 : " + arg0);
+                }
+
+            }
+
+            @Override
+            public Map<String, String> onTrackAttrCallback() {
+                // TODO Auto-generated method stub
+//                MyLog.e(TAG,"onTrackAttrCallback");
+                return null;
+            }
+
+        };
+    }
+
+
+    /**
+     * 显示历史轨迹
+     *
+     * @param historyTrack
+     */
+    private void showHistoryTrack(final String historyTrack) {
+
+        final HistoryTrackData historyTrackData = GsonService.parseJson(historyTrack,
+                HistoryTrackData.class);
+
+        List<LatLng> latLngList = new ArrayList<LatLng>();
+
+       final Date date = new Date((long)noteStartTime * 1000 + 2000);
+
+
+        if (historyTrackData != null && historyTrackData.getStatus() == 0) {
+            if (historyTrackData.getListPoints() != null) {
+                latLngList.addAll(historyTrackData.getListPoints());
+               new Thread(new Runnable() {
+                   @Override
+                   public void run() {
+                       traGreendao.addNote(historyTrack,date,date,0,0);
+                   }
+               }).start();
+            }
+            // 绘制历史轨迹
+            drawHistoryTrack(latLngList, historyTrackData.distance);
+        }
+    }
+
+
+    /**
+     * 绘制历史轨迹
+     *
+     * @param points
+     */
+    private void drawHistoryTrack(final List<LatLng> points, final double distance) {
+
+        // 绘制新覆盖物前，清空之前的覆盖物
+        mBaiduMap.clear();
+
+        if (points.size() == 1) {
+            points.add(points.get(0));
+        }
+
+        if (points == null || points.size() == 0) {
+            TrackApplication.showMessage("当前查询无轨迹点");
+            resetMarker();
+        } else if (points.size() > 1) {
+
+            LatLng llC = points.get(0);
+            LatLng llD = points.get(points.size() - 1);
+            LatLngBounds bounds = new LatLngBounds.Builder()
+                    .include(llC).include(llD).build();
+
+            msUpdate = MapStatusUpdateFactory.newLatLngBounds(bounds);
+
+            bmStart = BitmapDescriptorFactory.fromResource(R.mipmap.icon_start);
+            bmEnd = BitmapDescriptorFactory.fromResource(R.mipmap.icon_end);
+
+            // 添加起点图标
+            startMarker = new MarkerOptions()
+                    .position(points.get(points.size() - 1)).icon(bmStart)
+                    .zIndex(9).draggable(true);
+
+            // 添加终点图标
+            endMarker = new MarkerOptions().position(points.get(0))
+                    .icon(bmEnd).zIndex(9).draggable(true);
+
+            // 添加路线（轨迹）
+            polyline = new PolylineOptions().width(10).color(Color.RED).points(points);
+
+            markerOptions = new MarkerOptions();
+            markerOptions.flat(true);
+            markerOptions.anchor(0.5f, 0.5f);
+            markerOptions.icon(BitmapDescriptorFactory
+                    .fromResource(R.mipmap.icon_gcoding));
+            markerOptions.position(points.get(points.size() - 1));
+            addMarker();
+            MyLog.e("当前轨迹里程为 : " + (int) distance + "米");
+            TrackApplication.showMessage("当前轨迹里程为 : " + (int) distance + "米");
+        }
+
+    }
+
+    /**
+     * 添加覆盖物
+     */
+    protected void addMarker() {
+
+        if (null != msUpdate) {
+            mBaiduMap.animateMapStatus(msUpdate, 2000);
+        }
+
+        if (null != startMarker) {
+            mBaiduMap.addOverlay(startMarker);
+        }
+
+        if (null != endMarker) {
+            mBaiduMap.addOverlay(endMarker);
+        }
+
+        if (null != polyline) {
+            mBaiduMap.addOverlay(polyline);
+        }
+
+    }
+
+    /**
+     * 重置覆盖物
+     */
+    private void resetMarker() {
+        startMarker = null;
+        endMarker = null;
+        polyline = null;
+    }
+
+
+
     /**
      * 初始化OnEntityListener
      */
@@ -205,14 +448,18 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
             public void onReceiveLocation(TraceLocation location) {
                 // TODO Auto-generated method stub
                 if (mTrackUploadFragment != null) {
+//                    MyLog.e(TAG,"在接受到坐标"+location.toString());
                     mTrackUploadFragment.showRealtimeTrack(location);
-                    Date date = new Date();
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    String format = simpleDateFormat.format(date);
-                    traGreendao.addNote(format, date, date, location.getLatitude(), location.getLongitude());
+                    SharedPreferences.Editor edit = locationsp.edit();
+                    edit.putFloat("Latitude", (float) location.getLatitude());
+                    edit.putFloat("Longitude", (float) location.getLongitude());
+                    edit.commit();
+//                    Date date = new Date();
+//
+//                    String format = simpleDateFormat.format(date);
+//                    traGreendao.addNote(format, date, date, location.getLatitude(), location.getLongitude());
                 }
             }
-
         };
     }
 
@@ -274,6 +521,8 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
 
     }
 
+
+
     /**
      * 重置button状态
      */
@@ -320,6 +569,7 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
     protected void initListeners() {
 
     }
+
 
 
     @Override

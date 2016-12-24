@@ -150,12 +150,12 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         MyLog.e(TAG,"getView的position是---------"+position);
 //        if (convertView == null) {
             holder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.sticklist_item_layout, parent, false);
-            holder.dataTime = (AutoCompleteTextView) convertView.findViewById(R.id.dataTime);
-            holder.distance = (AutoCompleteTextView) convertView.findViewById(R.id.distance);
-            holder.duration = (AutoCompleteTextView) convertView.findViewById(R.id.duration);
-            holder.avgSpeed = (AutoCompleteTextView) convertView.findViewById(R.id.avgSpeed);
-            holder.mapState = (ImageView) convertView.findViewById(R.id.mapState);
+          View  convertView1 = mInflater.inflate(R.layout.sticklist_item_layout, parent, false);
+            holder.dataTime = (AutoCompleteTextView) convertView1.findViewById(R.id.dataTime);
+            holder.distance = (AutoCompleteTextView) convertView1.findViewById(R.id.distance);
+            holder.duration = (AutoCompleteTextView) convertView1.findViewById(R.id.duration);
+            holder.avgSpeed = (AutoCompleteTextView) convertView1.findViewById(R.id.avgSpeed);
+            holder.mapState = (ImageView) convertView1.findViewById(R.id.mapState);
         if (startTimeList.get(position).getType()==10){
             holder.mapState.setBackgroundResource(R.mipmap.mapoff);
         }else {
@@ -198,7 +198,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         holder.duration.setText(duration);
         String avgSpeedStr = new Formatter().format("%.1f", avgSpeed).toString();
         holder.avgSpeed.setText(avgSpeedStr+" km/h");
-        return convertView;
+        return convertView1;
 
     }
 

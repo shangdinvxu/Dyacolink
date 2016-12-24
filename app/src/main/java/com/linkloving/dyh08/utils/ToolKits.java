@@ -515,7 +515,7 @@ private final static String TAG = ToolKits.class.getSimpleName();
 
 			if (fileOutputStream != null) {
 
-				bitmap.compress(Bitmap.CompressFormat.PNG, 90, fileOutputStream);
+				bitmap.compress(Bitmap.CompressFormat.PNG, 20, fileOutputStream);
 
 				fileOutputStream.flush();
 
@@ -558,7 +558,7 @@ private final static String TAG = ToolKits.class.getSimpleName();
 			{
 			
 					FileOutputStream out = new FileOutputStream(filePath);
-					bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+					bitmap.compress(Bitmap.CompressFormat.PNG, 20, out);
 				out.close();
 			}
 			else
@@ -766,7 +766,7 @@ private final static String TAG = ToolKits.class.getSimpleName();
 				try {
 					out = new FileOutputStream(file);
 					if (snapshot.compress(
-							Bitmap.CompressFormat.PNG, 100, out)) {
+							Bitmap.CompressFormat.PNG, 20, out)) {
 						out.flush();
 						out.close();
 					}

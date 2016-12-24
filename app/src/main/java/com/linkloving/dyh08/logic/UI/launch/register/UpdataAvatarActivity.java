@@ -414,7 +414,11 @@ public class UpdataAvatarActivity extends ToolBarActivity {
     private Bitmap decodeUriAsBitmap(Uri uri){
         Bitmap bitmap = null;
         try {
-            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+            BitmapFactory.Options opt = new BitmapFactory.Options();
+            opt.inPreferredConfig = Bitmap.Config.RGB_565;
+            opt.inPurgeable = true;
+            opt.inInputShareable = true;
+            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri),null,opt);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;

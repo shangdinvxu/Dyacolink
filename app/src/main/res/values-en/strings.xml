@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DYACO LINK</string>
+    <string name="Thedevicewill">The device will measure heart rate automatically when switch to ON, if switch to OFF auto HR measurement,  press display two second to start HR measurement. </string>
+
     <!--注册-->
     <string name="login_activity_wechat">请安装微信客户端</string>
     <string name="login_activity_wechat_success">Authorization successful</string>
@@ -1139,7 +1141,7 @@
     <string name="AutomaticHR">Automatic HR measurement</string>
     <string name="Google">Google</string>
     <string name="baidu">Baidu</string>
-    <string name="interval"></string>
+    <string name="interval">Reminder switch</string>
     <string name="unitsetting">Unit settings</string>
     <string name="showhand">Quick View</string>
     <string name="messagingapps">Apps</string>
@@ -1148,4 +1150,6 @@
     <string name="themetric">Metric</string>
     <string name="founddevice">Found,device connecting...</string>
     <string name="pleaseturnon">Please turn on Track Services</string>
+    <string name="goalkcal">Combustion</string>
+    <string name="Intervals">Intervals</string>
 </resources>

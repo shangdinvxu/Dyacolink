@@ -1140,14 +1140,14 @@
     <string name="Searchingwearable">寻找手环</string>
     <string name="Selectthe">路线设定</string>
     <string name="Starttime">开始时间</string>
-    <string name="Thedevicewill">自动开启心率测量</string>
+    <string name="Thedevicewill">开启则自动心率测量,关闭则需长按屏幕开启心率测量.</string>
     <string name="alarmclock">闹钟设定</string>
     <string name="baidu">百度</string>
     <string name="hr">时</string>
-    <string name="interval">间隔时间</string>
+    <string name="interval">提醒开关</string>
     <string name="messagenoti">消息提醒</string>
     <string name="min">分</string>
-    <string name="realtime">自动同步</string>
+    <string name="realtime">自动量测</string>
     <string name="recent3">最近3个月数据</string>
     <string name="recent6">最近6个月数据</string>
     <string name="regularyear">最近1年数据</string>
@@ -1169,4 +1169,6 @@
     <string name="KMweek">km/周</string>
     <string name="KMyear">km/年</string>
     <string name="pleaseturnon">请开启轨迹服务</string>
+    <string name="goalkcal">燃烧</string>
+    <string name="Intervals">间隔时间</string>
 </resources>

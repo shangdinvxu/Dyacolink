@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
@@ -27,13 +29,19 @@ public class HeightActivity extends AutoLayoutActivity {
     ImageView back;
     @InjectView(R.id.unit_cm)
     AppCompatTextView unitCm;
+    @InjectView(R.id.textft)
+    TextView textft;
+    @InjectView(R.id.textUnitft)
+    TextView textUnitft;
+    @InjectView(R.id.linerlayout)
+    LinearLayout linerlayout;
     private int localSettingUnitInfo;
 
 
     private float mMaxHeight = 220;
-    private float mMinHeight = 60;
+    private float mMinHeight = 0;
     private UserEntity userEntity;
-
+    int unitGong = 0 ;
     @Override
     public void finish() {
         super.finish();
@@ -49,18 +57,35 @@ public class HeightActivity extends AutoLayoutActivity {
         localSettingUnitInfo = PreferencesToolkits.getLocalSettingUnitInfo(HeightActivity.this);
         userEntity = MyApplication.getInstance(HeightActivity.this).getLocalUserInfoProvider();
         int user_height = userEntity.getUserBase().getUser_height();
+
         if (localSettingUnitInfo != ToolKits.UNIT_GONG) {
-            user_height = (int) (user_height * 0.3937);
+            textft.setVisibility(View.VISIBLE);
+            textUnitft.setVisibility(View.VISIBLE);
+           unitGong  = (int) (user_height * 0.3937)+1;
+            int unit_in = unitGong%12 ;
+            int unit_ft = (unitGong-unit_in)/12 ;
             unitCm.setText(R.string.unit_inch);
-        }else {
+            textft.setText(unit_ft+"");
+            height.setText(unit_in+"");
+            heightRulerView.initViewParam(unitGong, mMaxHeight, mMinHeight);
+        } else {
+            textft.setVisibility(View.GONE);
+            textUnitft.setVisibility(View.GONE);
             unitCm.setText(R.string.unit_cm);
+            heightRulerView.initViewParam(user_height, mMaxHeight, mMinHeight);
+            height.setText(user_height + "");
         }
-        heightRulerView.initViewParam(user_height, mMaxHeight, mMinHeight);
-        height.setText(user_height + "");
         heightRulerView.setValueChangeListener(new ScaleRulerView.OnValueChangeListener() {
             @Override
             public void onValueChange(float value) {
-                height.setText((int) value + "");
+                if (localSettingUnitInfo != ToolKits.UNIT_GONG) {
+                    int unit_in = (int) (value % 12);
+                    int unit_ft = (int) ((value - unit_in) / 12);
+                    textft.setText(unit_ft + "");
+                    height.setText(unit_in + "");
+                } else {
+                    height.setText((int) value + "");
+                }
             }
         });
 
@@ -72,7 +97,7 @@ public class HeightActivity extends AutoLayoutActivity {
         String heightString = height.getText().toString().trim();
         int heightInt = Integer.parseInt(heightString);
         if (localSettingUnitInfo != ToolKits.UNIT_GONG) {
-          heightInt = (int) (heightInt/0.3937);
+            heightInt = (int) (unitGong / 0.3937);
         }
         userEntity.getUserBase().setUser_height(heightInt);
         HeightActivity.this.finish();

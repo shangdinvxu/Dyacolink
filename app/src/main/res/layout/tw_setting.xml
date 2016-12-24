@@ -40,6 +40,7 @@
                 android:orientation="vertical">
                 <!--昵称栏-->
                 <LinearLayout
+                   android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginTop="50px"
@@ -116,7 +117,7 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="30px"
@@ -126,7 +127,20 @@
                         android:textColor="@color/yellow_title"
                         android:textSize="@dimen/m00_font_size_24pt" />
 
+                    <TextView
+                        android:id="@+id/birthday"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="00:00:00"
+                        android:textColor="@color/yellow_title"
+                        android:textSize="@dimen/m00_font_size_24pt"
+                        />
+
+
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -140,6 +154,7 @@
                             android:background="@null"
                             android:inputType="number"
                             android:hint="@string/setting_yyyy"
+                            android:maxLength="4"
                             android:singleLine="true" />
 
                         <android.support.v7.widget.AppCompatTextView
@@ -159,6 +174,7 @@
                             android:layout_marginEnd="5px"
                             android:background="@null"
                             android:hint="@string/setting_mm"
+                            android:maxLength="2"
                             android:singleLine="true" />
 
                         <android.support.v7.widget.AppCompatTextView
@@ -177,6 +193,7 @@
                             android:layout_height="match_parent"
                             android:background="@null"
                             android:hint="@string/setting_day"
+                            android:maxLength="2"
                             android:singleLine="true" />
                     </LinearLayout>
 

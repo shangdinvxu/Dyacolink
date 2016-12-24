@@ -1148,7 +1148,7 @@
     <string name="alarmclock">Einstellungen Wecker</string>
     <string name="baidu">Baidu</string>
     <string name="hr">Stunde(n)</string>
-    <string name="interval">Intervall</string>
+    <string name="interval">Reminder switch</string>
     <string name="kcal">Kalorien</string>
     <string name="messagenoti">Benachrichtigungsmeldung</string>
     <string name="messagingapps">Instant-Messaging-Programme</string>
@@ -1172,4 +1172,7 @@
     <string name="KMmonth">km/month</string>
     <string name="KMweek">km/week</string>
     <string name="KMyear">km/year</string>
+    <string name="goalkcal">Combustion</string>
+    <string name="Intervals">Intervals</string>
+
 </resources>

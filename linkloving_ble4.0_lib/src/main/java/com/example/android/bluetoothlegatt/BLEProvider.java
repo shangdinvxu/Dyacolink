@@ -1709,7 +1709,7 @@ public  class BLEProvider
 						Log.i(TAG, "................INDEX_SET_TIME_SETTING.................");
 						msg = mHandler.obtainMessage();
 						msg.what = MSG_BLE_DATA;
-						msg.arg1 = INDEX_GAT_ALL_INFO_NEW;
+						msg.arg1 = INDEX_SET_TIME_SETTING;
 						msg.obj = mLepaoProtocalImpl.settimesetting(serverDeviceInfo.millions);
 						msg.sendToTarget();
 						break;
@@ -1786,12 +1786,13 @@ public  class BLEProvider
 						break;
 					//					发送清除WorkoutData的指令
 					case INDEX_CLEAR_WORKOUT_DATA:
-						Log.d(TAG, ".................INDEX_GET_HEART_RATE................");
-						msg = mHandler.obtainMessage();
-						msg.what = MSG_BLE_DATA;
-						msg.arg1 = INDEX_CLEAR_WORKOUT_DATA;
-						msg.obj =  mLepaoProtocalImpl.clearworkoutData() ;
-						msg.sendToTarget();
+//						Log.d(TAG, ".................INDEX_GET_HEART_RATE................");
+//						msg = mHandler.obtainMessage();
+//						msg.what = MSG_BLE_DATA;
+//						msg.arg1 = INDEX_CLEAR_WORKOUT_DATA;
+//						msg.obj =  mLepaoProtocalImpl.clearworkoutData() ;
+//						msg.sendToTarget();
+						mLepaoProtocalImpl.clearworkoutData();
 						break;
 				    //  发送设置闹钟指令
 				    case INDEX_SET_DEVICE_CLOCK:

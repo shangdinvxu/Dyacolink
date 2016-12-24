@@ -63,6 +63,9 @@ public class NotificationSettingActivity extends ToolBarActivity {
     private final static  int TIMESETTINGTWO = 8;
     private final static  int TIMESETTINGTHREE = 9;
     private final static  int TIMESETTINGFOUR = 10;
+    private final static  int INTERVALSTIME = 11;
+
+    private int Intervalstime = 60 ;
     /**闹钟*/
     private String clockoneHr ="00" ;
     private String clockoneMin ="00" ;
@@ -203,7 +206,10 @@ public class NotificationSettingActivity extends ToolBarActivity {
             @Override
             public void onClick(View v) {
                 timeType=TIMESETTINGONE ;
-                showTimePopupWindow();
+                String s = timeSetting1.getText().toString();
+                String[] split = s.split(":");
+
+                showTimePopupWindow(Integer.parseInt(split[0]),Integer.parseInt(split[1]));
 
             }
         });
@@ -304,7 +310,9 @@ public class NotificationSettingActivity extends ToolBarActivity {
             @Override
             public void onClick(View v) {
                 timeType=CLOCKONE ;
-                showTimePopupWindow();
+                String s = clock1.getText().toString();
+                String[] split = s.split(":");
+                showTimePopupWindow(Integer.parseInt(split[0]),Integer.parseInt(split[1]));
             }
         });
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -327,7 +335,9 @@ public class NotificationSettingActivity extends ToolBarActivity {
             @Override
             public void onClick(View v) {
                 timeType=CLOCKTWO ;
-                showTimePopupWindow();
+                String s = clock2.getText().toString();
+                String[] split = s.split(":");
+                showTimePopupWindow(Integer.parseInt(split[0]),Integer.parseInt(split[1]));
             }
         });
         switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -352,7 +362,9 @@ public class NotificationSettingActivity extends ToolBarActivity {
             @Override
             public void onClick(View v) {
                 timeType=CLOCKTHREE ;
-                showTimePopupWindow();
+                String s = clock3.getText().toString();
+                String[] split = s.split(":");
+                showTimePopupWindow(Integer.parseInt(split[0]),Integer.parseInt(split[1]));
             }
         });
         switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -378,7 +390,9 @@ public class NotificationSettingActivity extends ToolBarActivity {
             @Override
             public void onClick(View v) {
                 timeType =CLOCKFOUR ;
-                showTimePopupWindow();
+                String s = clock4.getText().toString();
+                String[] split = s.split(":");
+                showTimePopupWindow(Integer.parseInt(split[0]),Integer.parseInt(split[1]));
             }
         });
         switch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -407,6 +421,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
         ImageView startTimeNext = (ImageView) view.findViewById(R.id.startTimeNext);
         final ImageView endTimeNext = (ImageView) view.findViewById(R.id.endTimeNext);
         final Switch switchInterval = (Switch) view.findViewById(R.id.switchinterval);
+        final ImageView Intervalsnext = (ImageView) view.findViewById(R.id.Intervalsnext);
         String longsit_vaild = deviceSetting.getLongsit_vaild();
         if ("".equals(longsit_vaild)||"0".equals(longsit_vaild)){
             switchInterval.setChecked(false);
@@ -429,14 +444,53 @@ public class NotificationSettingActivity extends ToolBarActivity {
             @Override
             public void onClick(View v) {
                 timeType = STARTSEDENTARY ;
-                showTimePopupWindow();
+                String longsit_time = deviceSetting.getLongsit_time();
+                String[] split = longsit_time.split("-");
+                String[] splits = split[0].split(":");
+                showTimePopupWindow(Integer.parseInt(splits[0]),Integer.parseInt(splits[1]));
             }
         });
         endTimeNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 timeType = ENDSEDENTARY ;
-                showTimePopupWindow();
+                String longsit_time = deviceSetting.getLongsit_time();
+                String[] split = longsit_time.split("-");
+                String[] splits = split[1].split(":");
+                showTimePopupWindow(Integer.parseInt(splits[0]),Integer.parseInt(splits[1]));
+            }
+        });
+
+        Intervalsnext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View longsit_popupwindow = layoutInflater.inflate(R.layout.longsitpopupwindow, null);
+                final PopupWindow longsitTimePopupwindow = new PopupWindow(longsit_popupwindow, LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT, true);
+                longsitTimePopupwindow.setTouchable(true);
+                longsitTimePopupwindow.setBackgroundDrawable(new ColorDrawable(0xffD3D3D3));
+                longsitTimePopupwindow.showAtLocation(totalView, Gravity.BOTTOM,0,0);
+                final WheelView longsitWheelview = (WheelView) longsit_popupwindow.findViewById(R.id.longsitWheelview);
+                ImageView dismiss = (ImageView) longsit_popupwindow.findViewById(R.id.dismiss);
+                dismiss.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        longsitTimePopupwindow.dismiss();
+                    }
+                });
+                ArrayList<String> strings = new ArrayList<>();
+                strings.add("15 min");
+                strings.add("30 min");
+                strings.add("45 min");
+                strings.add("60 min");
+                longsitWheelview.setItems(strings);
+                longsitTimePopupwindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        int seletedIndex = longsitWheelview.getSeletedIndex();
+                        Intervalstime=(seletedIndex+1)*15 ;
+                    }
+                });
             }
         });
 
@@ -462,6 +516,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                                 }
                                 String time = starttimeHr+":"+starttimeMin+"-"+endTimeHr+":"+endTimeMin+"-" + "23" + ":"
                                         + "59" + "-" + "23" + ":" + "59";
+                                deviceSetting.setLongsit_intervals(Intervalstime);
                                 MyLog.e(TAG,"久坐提醒的time是"+time);
                                 deviceSetting.setLongsit_time(time);
                                 deviceSetting.setLongsit_vaild("1");
@@ -469,6 +524,8 @@ public class NotificationSettingActivity extends ToolBarActivity {
                                         deviceSetting);
                                 if (provider.isConnectedAndDiscovered()){
                                     MyLog.e(TAG,"发送久坐的指令了");
+                                    provider.SetLongSit(NotificationSettingActivity.this,DeviceInfoHelper.fromUserEntity(NotificationSettingActivity.this,
+                                            userEntity));
                                     //                原先的有两个,第二个无限大.
                                 }else {
                                     Toast.makeText(NotificationSettingActivity.this,getString(R.string.keepthe),Toast.LENGTH_SHORT).show();
@@ -483,15 +540,17 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 });
             }
 
-    public PopupWindow showTimePopupWindow(){
+    public PopupWindow showTimePopupWindow(int showhr,int showmin){
         View view = View.inflate(NotificationSettingActivity.this, R.layout.starttimepopupwindow, null);
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
         final WheelView hrWheelView = (WheelView) view.findViewById(R.id.hr);
         hrWheelView.setItems(hrStrings);
+        hrWheelView.setSeletion(showhr);
         final WheelView minWheelView = (WheelView) view.findViewById(R.id.min);
         Button okBtn = (Button) view.findViewById(R.id.okBtn);
         TextView text = (TextView) view.findViewById(R.id.text);
         minWheelView.setItems(minStrings);
+        minWheelView.setSeletion(showmin);
         final PopupWindow popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setTouchable(true);
@@ -556,6 +615,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                        timefourHr = item ;
                        break;
 
+
                }
            }
        });
@@ -587,6 +647,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                     case TIMESETTINGONE:
                         timeoneMin = item ;
                         break;
+
                 }
 
             }

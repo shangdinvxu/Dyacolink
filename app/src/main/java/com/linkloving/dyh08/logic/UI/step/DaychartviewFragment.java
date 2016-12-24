@@ -103,11 +103,12 @@ public class DaychartviewFragment extends Fragment {
                     stepnumber = 0;
                 } else {
                     for (SportRecord sportRecordArray : sportRecordArrayList) {
+                        if (sportRecordArray.getState().equals("1")||sportRecordArray.getState().equals("2")||sportRecordArray.getState().equals("3"))
                         stepnumber = Integer.parseInt(sportRecordArray.getStep()) + stepnumber;
                     }
                 }
-/*                List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
-                String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(time1);
+//              List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
+ /*                 String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(time1);
                 try {
                     count = DatasProcessHelper.countSportData(srs, startDateLocal);
                     MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());

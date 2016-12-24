@@ -53,12 +53,12 @@ public class DaychartviewFragment extends Fragment {
     private class DayChartAsynck extends AsyncTask<Object, Object, List<BarChartView.BarChartItemBean>> {
 
         private Date parse;
-        private ArrayList<String> stringTimeList;
+        private ArrayList<Date> stringTimeList;
         ArrayList<SportRecord> sportRecordArrayList = new ArrayList<SportRecord>();
         UserDeviceRecord chatMessageTable = UserDeviceRecord.getInstance(getActivity());
         String user_id = MyApplication.getInstance(getActivity()).getLocalUserInfoProvider().getUser_id() + "";
-        String startdata ;
-        String enddata ;
+        Date startdata ;
+        Date enddata ;
         private DetailChartCountData count;
         UserEntity userEntity= MyApplication.getInstance(getActivity()).getLocalUserInfoProvider();
 
@@ -75,33 +75,44 @@ public class DaychartviewFragment extends Fragment {
             }
             Calendar instance = Calendar.getInstance();
             instance.setTime(parse);
-            instance.add(Calendar.MINUTE, -TimeZoneHelper.getTimeZoneOffsetMinute());// before 8 hour
+//            instance.add(Calendar.MINUTE, -TimeZoneHelper.getTimeZoneOffsetMinute());// before 8 hour
             Date time1 = instance.getTime();
-            String format = simpleDateFormat.format(time1);
-            stringTimeList.add(format);
+//            String format = simpleDateFormat.format(time1);
+            stringTimeList.add(time1);
             for (int i = 0; i<24;i++)
             {
                 instance.add(Calendar.HOUR_OF_DAY,1);
                 Date time2 = instance.getTime();
-                String format1 = simpleDateFormat.format(time2);
-                stringTimeList.add(format1);
+//                String format1 = simpleDateFormat.format(time2);
+                stringTimeList.add(time2);
             }
             for (int i=0;i<24;i++){
+                int stepnumber = 0 ;
                 startdata = stringTimeList.get(i);
                 enddata = stringTimeList.get(i+1);
-                String where = COLUMN_START_TIME+">='"+startdata+"' and "+COLUMN_START_TIME+"<'"+enddata+"'";
-                // 查找此期间内的运动原始数据
-                sportRecordArrayList = chatMessageTable.findHistory(user_id, where);
-                List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
-                String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(time1);
-                try {
-                    count = DatasProcessHelper.countSportData(srs, startDateLocal);
-                    MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
+//                String where = COLUMN_START_TIME+">='"+startdata+"' and "+COLUMN_START_TIME+"<'"+enddata+"'";
+//                // 查找此期间内的运动原始数据
+//                sportRecordArrayList = chatMessageTable.findHistory(user_id, where);
+                sportRecordArrayList = UserDeviceRecord.findHistoryChartwithHMS
+                        (getActivity(), String.valueOf(user_id), startdata, enddata);
+                if (sportRecordArrayList.size() == 0) {
+                    stepnumber = 0;
+                } else {
+                    for (SportRecord sportRecordArray : sportRecordArrayList) {
+                        if (sportRecordArray.getState().equals("1")||sportRecordArray.getState().equals("2")||sportRecordArray.getState().equals("3"))
+                             stepnumber = Integer.parseInt(sportRecordArray.getDistance()) + stepnumber;
+                    }
                 }
-                float walkstep = count.walking_distance ;
-                float runing_steps = count.runing_distance;
+//                List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
+//                String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(time1);
+//                try {
+//                    count = DatasProcessHelper.countSportData(srs, startDateLocal);
+//                    MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                float walkstep = count.walking_distance ;
+//                float runing_steps = count.runing_distance;
 
            /*     int walkCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.walking_distance)),
                         (int) count.walking_duration * 60, userEntity.getUserBase().getUser_weight());
@@ -109,7 +120,7 @@ public class DaychartviewFragment extends Fragment {
                 int runCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.runing_distance)), (int)count.runing_duation * 60, userEntity.getUserBase().getUser_weight());
                 int calValue = walkCal + runCal;
                 MyLog.e(TAG, "calValue" + calValue);*/
-                BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean(Integer.toString(i+1), walkstep+runing_steps);
+                BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean(Integer.toString(i+1),stepnumber);
                 dayhour.add(barChartItemBean);
             }
             return dayhour;

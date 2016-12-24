@@ -63,7 +63,7 @@
                <android.support.v7.widget.AppCompatTextView
                    android:text="@string/Calories"
                    style="@style/main_UI_Text"/>
-               <android.support.v7.widget.AppCompatTextView
+               <TextView
                    android:id="@+id/main_tv_Calories"
                    style="@style/main_UI_text_set"/>
                <android.support.v7.widget.AppCompatTextView
@@ -141,9 +141,21 @@
                     style="@style/main_UI_Text"/>
 
                 <android.support.v7.widget.AppCompatTextView
+
                     android:id="@+id/main_tv_Sleep"
                     style="@style/main_UI_text_set"
-                    android:text="00:00"/>
+                    android:text="0"/>
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginBottom="7dp"
+                    android:id="@+id/sleepUnit"
+                    android:layout_alignBottom="@id/main_tv_Sleep"
+                    android:layout_toRightOf="@id/main_tv_Sleep"
+                    android:text="hr"
+                    />
 
             </RelativeLayout>
         </LinearLayout>

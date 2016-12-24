@@ -44,6 +44,16 @@ public class DeviceSetting {
     /**目标*/
     private String goal;
 
+    public int getLongsit_intervals() {
+        return longsit_intervals;
+    }
+
+    public void setLongsit_intervals(int longsit_intervals) {
+        this.longsit_intervals = longsit_intervals;
+    }
+
+    private int longsit_intervals ;
+
     public byte getShowhand() {
         return showhand;
     }

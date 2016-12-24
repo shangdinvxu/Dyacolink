@@ -2,6 +2,7 @@ package com.linkloving.dyh08.logic.UI.Groups.baidu;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.opengl.Visibility;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,15 +47,17 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
     private List<Note> endTimeList;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
 
-        @InjectView(R.id.stickyList)
-        StickyListHeadersListView stickyList;
-        private boolean fadeHeader = true; //隐藏头
+    @InjectView(R.id.stickyList)
+    StickyListHeadersListView stickyList;
+    private boolean fadeHeader = true; //隐藏头
     private GroupsAdapter groupsAdapter;
     private Long deleteStartTime;
     private Long deleteEndTime;
-    private View itemView ;
+    private View itemView;
     private List<Note> listMonth;
     private Long deleteMonthTime;
+    private int lasttimePostion = -1;
+    private boolean isonCreate = false;
 
 
     @Override
@@ -68,12 +71,20 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
 //        endTimeList = traGreendao.searchAllEndTime();
         groupsAdapter = new GroupsAdapter(GroupsActivity.this);
         stickyList.setAdapter(groupsAdapter);
-        startTimeList = groupsAdapter.startTimeList ;
-        endTimeList = groupsAdapter.endTimeList ;
-        listMonth=   groupsAdapter.list;
+        startTimeList = groupsAdapter.startTimeList;
+        endTimeList = groupsAdapter.endTimeList;
+        listMonth = groupsAdapter.list;
         initView();
 
+
     }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        isonCreate = true;
+    }
+
     protected void getIntentforActivity() {
     }
 
@@ -83,7 +94,7 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Toast.makeText(GroupsActivity.this, "Item " + position + " clicked!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(GroupsActivity.this, GroupsDetailsActivity.class);
+                Intent intent = new Intent(GroupsActivity.this, GroupsShareActivity.class);
                 intent.putExtra("postion", String.valueOf(position));
                 startActivity(intent);
             }
@@ -121,43 +132,83 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
         stickyList.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                MyLog.e(TAG,"position"+position);
-                itemView = view ;
+//                if (isonCreate){
+                lasttimePostion = position;
+                MyLog.e(TAG, "position" + position);
+                itemView = view;
                 ImageView nextIV = (ImageView) view.findViewById(R.id.next);
                 ImageView mapState = (ImageView) view.findViewById(R.id.mapState);
                 ImageView delete = (ImageView) view.findViewById(R.id.delete);
-                nextIV.setVisibility(GONE);
-                mapState.setVisibility(GONE);
-                delete.setVisibility(VISIBLE);
                 deleteStartTime = startTimeList.get(position).getId();
                 deleteEndTime = endTimeList.get(position).getId();
                 deleteMonthTime = listMonth.get(position).getId();
-                MyLog.e(TAG, deleteStartTime +"");
-                MyLog.e(TAG, deleteEndTime +"");
-                delete.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        MyLog.e(TAG,"onClick执行了");
+                MyLog.e(TAG, deleteStartTime + "");
+                MyLog.e(TAG, deleteEndTime + "");
+                if (nextIV != null) {
+                    nextIV.setVisibility(GONE);
+                    mapState.setVisibility(GONE);
+                    delete.setVisibility(VISIBLE);
+                    delete.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            MyLog.e(TAG, "onClick执行了");
 //                        数据库删除数据
-                        traGreendao.deleteByKey(deleteEndTime);
-                        traGreendao.deleteByKey(deleteStartTime);
-                        traGreendao.deleteByKey(deleteMonthTime);
+                            traGreendao.deleteByKey(deleteEndTime);
+                            traGreendao.deleteByKey(deleteStartTime);
+                            traGreendao.deleteByKey(deleteMonthTime);
 //                         刷新数据源刷新View
-                        startTimeList.remove(position);
-                        endTimeList.remove(position);
-                        listMonth.remove(position);
-
-                        groupsAdapter.notifyDataSetChanged();
+                            startTimeList.remove(position);
+                            endTimeList.remove(position);
+                            listMonth.remove(position);
+                            groupsAdapter.notifyDataSetChanged();
 //                                groupsAdapter = new GroupsAdapter(GroupsActivity.this);
 //                                stickyList.setAdapter(groupsAdapter);
-                    }
-                });
-
+                        }
+                    });
+                }
+//                    isonCreate = false ;
+//                }else {
+//                    if (lasttimePostion == position){
+//                        return  true ;
+//                    }else {
+//                        lasttimePostion = position ;
+//                        itemView = view ;
+//                        ImageView nextIV = (ImageView) view.findViewById(R.id.next);
+//                        ImageView mapState = (ImageView) view.findViewById(R.id.mapState);
+//                        ImageView delete = (ImageView) view.findViewById(R.id.delete);
+//                        nextIV.setVisibility(GONE);
+//                        mapState.setVisibility(GONE);
+//                        delete.setVisibility(VISIBLE);
+//                        deleteStartTime = startTimeList.get(position).getId();
+//                        deleteEndTime = endTimeList.get(position).getId();
+//                        deleteMonthTime = listMonth.get(position).getId();
+//                        MyLog.e(TAG, deleteStartTime +"");
+//                        MyLog.e(TAG, deleteEndTime +"");
+//                        delete.setOnClickListener(new OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                MyLog.e(TAG,"onClick执行了");
+////                        数据库删除数据
+//                                traGreendao.deleteByKey(deleteEndTime);
+//                                traGreendao.deleteByKey(deleteStartTime);
+//                                traGreendao.deleteByKey(deleteMonthTime);
+////                         刷新数据源刷新View
+//                                startTimeList.remove(position);
+//                                endTimeList.remove(position);
+//                                listMonth.remove(position);
+//
+//                                groupsAdapter.notifyDataSetChanged();
+////                                groupsAdapter = new GroupsAdapter(GroupsActivity.this);
+////                                stickyList.setAdapter(groupsAdapter);
+//                            }
+//                        });
+//                        isonCreate = false ;
+//                    }
+//                }
                 return true;
             }
         });
     }
-
 
 
     @Override
@@ -170,7 +221,7 @@ public class GroupsActivity extends ToolBarActivity implements Serializable {
 
 
     }
-    }
+}
 
 
 

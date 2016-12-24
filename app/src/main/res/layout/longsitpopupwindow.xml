@@ -42,31 +42,17 @@
             android:orientation="horizontal">
 
             <com.linkloving.dyh08.ViewUtils.Wheelview.WheelView
-                android:id="@+id/hr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></com.linkloving.dyh08.ViewUtils.Wheelview.WheelView>
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text=":"
-                android:textColor="@color/blue"
-                android:textSize="25sp" />
+                android:id="@+id/longsitWheelview"
+                >
 
-            <com.linkloving.dyh08.ViewUtils.Wheelview.WheelView
-                android:id="@+id/min"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></com.linkloving.dyh08.ViewUtils.Wheelview.WheelView>
+            </com.linkloving.dyh08.ViewUtils.Wheelview.WheelView>
+
 
         </LinearLayout>
-        <Button
-            android:id="@+id/okBtn"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ok"
-            />
+
+
 
     </LinearLayout>
 

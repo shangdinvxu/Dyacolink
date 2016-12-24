@@ -139,7 +139,7 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 	/**
 	 * 现用的发送方法
 	 * */
-	private synchronized WatchResponse sendData2BLE(WatchRequset req) throws BLException, LPException {
+	public synchronized WatchResponse sendData2BLE(WatchRequset req) throws BLException, LPException {
 		try {
 			WatchResponse resp = sendData2BLEImpl(req);
 			retryTimes = 0;
@@ -367,9 +367,9 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 		Log.e("workoutData","clearworkoutData"+Index);
 		WatchRequset req = new WatchRequset();
 		req.appendByte(seq++).appendByte(Index).makeCheckSum();
-		LPUtil.printData(req.getData(), " workoutDataclear");
+		LPUtil.printData(req.getData(), " getworkoutData++++req");
 		WatchResponse resp = this.sendData2BLE(req);
-		LPUtil.printData(resp.getData(), " workoutDataclear");
+		LPUtil.printData(resp.getData(), "getworkoutData++++resp");
 		if(resp.getData()[4]==0){
 			return   resp.toLpWorkoutData(resp);
 		}else{
@@ -378,19 +378,13 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 		}
 	}
 
-	//清除或者获取workout数据
+	//清除workout数据
 	public WatchResponse clearworkoutData()throws BLException, LPException{
 		WatchRequset req = new WatchRequset();
 		req.appendByte(seq++).appendByte((byte) 0x44).makeCheckSum();
-		LPUtil.printData(req.getData(), " workoutDataclear");
+		LPUtil.printData(req.getData(), "workoutDataclearreq");
 		WatchResponse resp = this.sendData2BLE(req);
-		LPUtil.printData(resp.getData(), " workoutDataclear");
-	/*	if(resp.getData()[4]==0){
-			return   resp.toLpWorkoutData(resp);
-		}else{
-			List<LPWorkoutData> list = new ArrayList<LPWorkoutData>();
-			return list;
-		}*/
+		LPUtil.printData(resp.getData(), "workoutDataclearresp");
 		return resp ;
 	}
 
@@ -700,9 +694,13 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 		WatchRequset req = new WatchRequset();
 		Log.e(TAG,"setLongSitRemind方法执行了");
 		Log.e(TAG,"setLongSitRemind方法执行了"+deviceInfo.startTime1_M+"--------"+deviceInfo.startTime1_H);
+		if (deviceInfo.timeWindow==0){
+			deviceInfo.timeWindow=60 ;
+		}
 		req.appendByte(seq++)
 				.appendByte(LepaoCommand.COMMAND_SET_MOTION_REMIND)
-				.appendByte((byte) 60)
+//				间隔时间
+				.appendByte((byte) deviceInfo.timeWindow)
 				.appendByte((byte) deviceInfo.longsit_step)
 				.appendByte((byte) deviceInfo.startTime1_H)
 				.appendByte((byte) deviceInfo.startTime1_M)

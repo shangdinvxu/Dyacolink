@@ -18,6 +18,7 @@ import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.linkloving.dyh08.BleService;
@@ -237,6 +238,11 @@ public class GeneralActivity extends ToolBarActivity {
     }
 
     private void initSearchingWearablePopupWindow() {
+        if (provider.isConnectedAndDiscovered()){
+            provider.SetBandRing(GeneralActivity.this);
+        }else {
+            Toast.makeText(GeneralActivity.this,getString(R.string.keepthe),Toast.LENGTH_SHORT).show();
+        }
         View view = layoutInflater.inflate(R.layout.searchingwearablepopupwindow, null);
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
         final PopupWindow popupWindow = getnewPopupWindow(view);
@@ -260,10 +266,13 @@ public class GeneralActivity extends ToolBarActivity {
             stepsTextview.setText(stepGogalnfo);
             stepsSeekbar.setProgress(Integer.parseInt(stepGogalnfo)-2000);
         }
+
         stepsSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                stepsTextview.setText((progress+2000)+"");
+                int i = (progress+10000)/1000 ;
+                i = i*1000 ;
+                stepsTextview.setText(i+"");
             }
 
             @Override
@@ -285,7 +294,8 @@ public class GeneralActivity extends ToolBarActivity {
         distanceSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                distancesTextview.setText((progress)+"");
+
+                distancesTextview.setText((progress+1)+"");
             }
 
             @Override
@@ -307,7 +317,11 @@ public class GeneralActivity extends ToolBarActivity {
         caloriesSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                caloriesTextview.setText((progress+1000)+"");
+                int i = (progress+1000)/100 ;
+                i = i*100 ;
+                if (i==10000)
+                    i=9900;
+                caloriesTextview.setText(i+"");
             }
 
             @Override

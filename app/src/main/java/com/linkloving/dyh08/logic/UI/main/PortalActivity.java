@@ -150,7 +150,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     @InjectView(R.id.main_tv_Step)
     AppCompatTextView stepView;
     @InjectView(R.id.main_tv_Calories)
-    AppCompatTextView calView;
+    TextView calView;
     @InjectView(R.id.main_tv_Distance)
     AppCompatTextView distanceView;
     @InjectView(R.id.main_tv_Sleep)
@@ -190,6 +190,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     private Handler timeHandler = new Handler();
 
     private FragmentTransaction transaction;
+    private int caloriesSave  = 0;
 
     /**
      * 当前正在运行中的数据加载异步线程(放全局的目的是尽量控制当前只有一个在运行，防止用户恶意切换导致OOM)
@@ -293,16 +294,27 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                     //开始同步
                     BleService.getInstance(PortalActivity.this).syncAllDeviceInfoAuto(PortalActivity.this, false, null);
                     mScrollViewRefreshingHandler.post(mScrollViewRefreshingRunnable);
+                    calView.setText(caloriesSave+"");
                 }
-
             }
 
         });
 
-
-
         /*-------------------日历----------------*/
+        initCheckUnit();
+    }
 
+
+
+
+
+    private void initCheckUnit() {
+        localSettingUnitInfo = PreferencesToolkits.getLocalSettingUnitInfo(PortalActivity.this);
+        if (localSettingUnitInfo==ToolKits.UNIT_GONG){
+            distanceUnit.setText(R.string.KM);
+        }else {
+            distanceUnit.setText(R.string.KMunit);
+        }
     }
 
     /**
@@ -412,7 +424,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
             Bitmap bitmap = decodeUriAsBitmap(getTempImageFileUri());
             user_head.setImageBitmap(bitmap);
         }
-        getCalroiesNow();
+//        getCalroiesNow();
     }
 
     private void getCalroiesNow(){
@@ -429,10 +441,20 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
     }
 
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        refreshHeadView();
+    }
+
     private Bitmap decodeUriAsBitmap(Uri uri) {
         Bitmap bitmap = null;
         try {
-            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+            BitmapFactory.Options opt = new BitmapFactory.Options();
+            opt.inPreferredConfig = Bitmap.Config.RGB_565;
+            opt.inPurgeable = true;
+            opt.inInputShareable = true;
+            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri),null,opt);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
@@ -478,6 +500,11 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     protected void onResume() {
         super.onResume();
         DfuServiceListenerHelper.registerProgressListener(this, mDfuProgressListener);
+        initCheckUnit();
+        if (getTempImageFileUri()!=null){
+            Bitmap bitmap = decodeUriAsBitmap(getTempImageFileUri());
+            user_head.setImageBitmap(bitmap);
+        }
     }
 
 
@@ -684,17 +711,15 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                     distanceView.setText(distancekm + "");
                     distanceUnit.setText(R.string.KM);
                 }else {
-                    distanceView.setText(Integer.toString((int) (distance*0.6214))+"");
+                    distanceView.setText(Double.toString((Math.round(distanceKm*0.6214 * 100 + 0.5) / 100.0)));
                     distanceUnit.setText(R.string.KMunit);
                 }
-
 
                 //浅睡 小时
                 double lightSleepHour = CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getSleepMinute()), 1);
                 //深睡 小时
                 double deepSleepHour = CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getDeepSleepMiute()), 1);
                 double sleepTime = CommonUtils.getScaledDoubleValue(lightSleepHour + deepSleepHour, 1);
-                sleepView.setText(sleepTime + "");
 
                 //走路 分钟
                 double walktime = CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getWork_duration()), 1);
@@ -705,17 +730,18 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
                 int walkCal = ToolKits.calculateCalories(Float.parseFloat(mDaySynopic.getWork_distance()), (int) walktime * 60, userEntity.getUserBase().getUser_weight());
                 int runCal = ToolKits.calculateCalories(Float.parseFloat(mDaySynopic.getRun_distance()), (int) runtime * 60, userEntity.getUserBase().getUser_weight());
-                ToolKits toolKits = new ToolKits();
-                int calorieseveryday = toolKits.getCalories(PortalActivity.this);
-                Date dateToday = new Date();
-                SimpleDateFormat hh = new SimpleDateFormat("HH", Locale.getDefault());
-                String HH = hh.format(dateToday);
-                SimpleDateFormat mm = new SimpleDateFormat("mm", Locale.getDefault());
-                String MM = mm.format(dateToday);
-                int caloriesNow = calorieseveryday * (Integer.parseInt(HH) * 60 + Integer.parseInt(MM)) / 1440;
-                MyLog.e("caloriesNow",caloriesNow+"caloriesNow");
-                int calValue = caloriesNow+walkCal+runCal ;
-                calView.setText(calValue + "");
+//                ToolKits toolKits = new ToolKits();
+//                int calorieseveryday = toolKits.getCalories(PortalActivity.this);
+//                Date dateToday = new Date();
+//                SimpleDateFormat hh = new SimpleDateFormat("HH", Locale.getDefault());
+//                String HH = hh.format(dateToday);
+//                SimpleDateFormat mm = new SimpleDateFormat("mm", Locale.getDefault());
+//                String MM = mm.format(dateToday);
+//                int caloriesNow = calorieseveryday * (Integer.parseInt(HH) * 60 + Integer.parseInt(MM)) / 1440;
+//                MyLog.e("caloriesNow",caloriesNow+"caloriesNow");
+//                int calValue = caloriesNow+walkCal+runCal ;
+                calView.setText((walkCal+runCal) + "");
+                caloriesSave  =walkCal+runCal ;
 
                 if (progressDialog != null && progressDialog.isShowing())
                     progressDialog.dismiss();

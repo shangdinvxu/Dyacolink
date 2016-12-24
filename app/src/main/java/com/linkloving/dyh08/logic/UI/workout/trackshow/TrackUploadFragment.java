@@ -17,6 +17,7 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,14 +39,21 @@ import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.model.LatLngBounds;
 import com.baidu.mapapi.utils.CoordinateConverter;
 import com.baidu.mapapi.utils.CoordinateConverter.CoordType;
+import com.baidu.trace.LBSTraceClient;
+import com.baidu.trace.LocationMode;
 import com.baidu.trace.OnStartTraceListener;
 import com.baidu.trace.OnStopTraceListener;
+import com.baidu.trace.OnTrackListener;
 import com.baidu.trace.TraceLocation;
 import com.linkloving.dyh08.R;
+import com.linkloving.dyh08.logic.UI.Groups.baidu.GroupsDetailsActivity;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.UI.workout.trackutils.DateUtils;
+import com.linkloving.dyh08.logic.UI.workout.trackutils.GsonService;
+import com.linkloving.dyh08.logic.UI.workout.trackutils.HistoryTrackData;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.GpsUtils;
 import com.linkloving.dyh08.utils.TimeUtils;
@@ -55,11 +63,13 @@ import com.linkloving.utils.TimeZoneHelper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 import Trace.GreenDao.DaoMaster;
@@ -127,6 +137,10 @@ public class TrackUploadFragment extends Fragment {
     protected boolean isTraceStart = false;
 
     private Intent serviceIntent = null;
+    /**
+     * Track监听器
+     */
+    protected static OnTrackListener trackListener = null;
 
     /**
      * 刷新地图线程(获取实时点)
@@ -170,6 +184,7 @@ public class TrackUploadFragment extends Fragment {
     private Handler handler;
     private Runnable update_thread;
     private long startTimeLong;
+    private WorkoutActivity workoutActivity;
 
 
     @Override
@@ -198,8 +213,8 @@ public class TrackUploadFragment extends Fragment {
         startTimeLong = sharedPreferencesbegin.getLong("startTimeLong", 0);
         if (isClickStart){
             secondMiddle.setVisibility(View.VISIBLE);
-            relativeLayout.setBackgroundColor(Color.BLACK);
-            relativeLayout.getBackground().setAlpha(150);
+//            relativeLayout.setBackgroundColor(Color.BLACK);
+//            relativeLayout.getBackground().setAlpha(150);
 
         }
         return view;
@@ -227,6 +242,8 @@ public class TrackUploadFragment extends Fragment {
                 }
             }
         };
+        workoutActivity = (WorkoutActivity) getActivity();
+
     }
 
 
@@ -271,7 +288,6 @@ public class TrackUploadFragment extends Fragment {
         edit.putInt("clickType", clickType);
         edit.putBoolean("isClickStart",isClickStart);
         edit.commit();
-
         super.onDestroy();
     }
 
@@ -323,9 +339,9 @@ public class TrackUploadFragment extends Fragment {
                         secondMiddle.setVisibility(View.VISIBLE);
                         getRuntime();
 //                        Toast.makeText(getActivity(), "开启轨迹服务", Toast.LENGTH_LONG).show();
-                        relativeLayout.setBackgroundColor(Color.BLACK);
-                        relativeLayout.getBackground().setAlpha(150);
-                        startTrace();
+//                        relativeLayout.setBackgroundColor(Color.BLACK);
+//                        relativeLayout.getBackground().setAlpha(150);
+
 //                    把开始时间等数据记录下来,等按结束时一起记录.
                         //  成功开启轨迹服务,说明开始跑了,记录开始时间.
                         dateStartTrace = new Date();
@@ -339,6 +355,7 @@ public class TrackUploadFragment extends Fragment {
                         edit.putLong("startTimeLong", startTimeLong);
                         edit.commit();
                         clickType = 1;
+                        startTrace();
                         if (!isRegister) {
                             if (null == pm) {
                                 pm = (PowerManager) WorkoutActivity.mContext.getSystemService(Context.POWER_SERVICE);
@@ -362,19 +379,19 @@ public class TrackUploadFragment extends Fragment {
 
         btnStopTrace.setOnClickListener(new View.OnClickListener() {
 
+            private long startTimeLong;
+
             public void onClick(View v) {
                 MyLog.e(TAG,"clicktype====="+clickType);
                 // TODO Auto-generated method stub
                 if (clickType == 1) {
                     isClickStart=false ;
-
 //                    Toast.makeText(getActivity(), "停止轨迹服务", Toast.LENGTH_SHORT).show();
-                    stopTrace();
 //                    把开始时间取出来,记录下来
                     SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
                     String formatStartTime = sharedPreferences.getString("formatStartTime", "");
                     String formatMonth = sharedPreferences.getString("formatMonth", "");
-                    long startTimeLong = sharedPreferences.getLong("startTimeLong", 0);
+                    startTimeLong = sharedPreferences.getLong("startTimeLong", 0);
                     Calendar c = Calendar.getInstance();
                     c.setTimeInMillis(startTimeLong);
                     Date dateStartTrace = c.getTime();
@@ -389,7 +406,6 @@ public class TrackUploadFragment extends Fragment {
                     traGreendao.addEndTime(formatEndTime, dateStopTrace);
 //                    停止后更新ui界面
 //                    secondMiddle.setVisibility(View.GONE);
-
                     secondMiddle.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -400,20 +416,58 @@ public class TrackUploadFragment extends Fragment {
                     });
                     relativeLayout.setBackgroundColor(Color.BLACK);
                     relativeLayout.getBackground().setAlpha(0);
-                    if (isRegister) {
-                        try {
-                            WorkoutActivity.mContext.unregisterReceiver(powerReceiver);
-                            isRegister = false;
-                        } catch (Exception e) {
-                            // TODO: handle
-                        }
-                    }
                     clickType = 0;
+                            stopTrace();
+                            if (isRegister) {
+                                try {
+                                    WorkoutActivity.mContext.unregisterReceiver(powerReceiver);
+                                    isRegister = false;
+                                } catch (Exception e) {
+                                    // TODO: handle
+                                }
+                                queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
+                            }
+
                 } else {
                     Toast.makeText(getActivity(), getString(R.string.pleaseturnon), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+
+    /**
+     * 查询历史轨迹
+     */
+    private void queryHistoryTrack(int processed, String processOption) {
+
+//        // entity标识
+//        String entityName = WorkoutActivity.entityName;
+//        // 是否返回精简的结果（0 : 否，1 : 是）
+//        int simpleReturn = 0;
+//        // 是否返回纠偏后轨迹（0 : 否，1 : 是）
+        int isProcessed = processed;
+        int startTime = (int) (startTimeLong/1000);
+        int endTime = (int) (dateStopTrace.getTime()/1000);
+        // 开始时间
+        if (startTime == 0) {
+            startTime = (int) (System.currentTimeMillis() / 1000 - 12 * 60 * 60);
+        }
+        if (endTime == 0) {
+            endTime = (int) (System.currentTimeMillis() / 1000);
+        }
+        workoutActivity.queryHistoryTrack(startTime,endTime);
+        // 分页大小
+//        int pageSize = 1000;
+//        // 分页索引
+//        int pageIndex = 1;
+//        LBSTraceClient client = new LBSTraceClient(getActivity());
+//        client.setLocationMode(LocationMode.High_Accuracy);
+//
+//        client.queryHistoryTrack(123056, "myTrace", simpleReturn, isProcessed, processOption, startTime, endTime,
+//                pageSize,
+//                pageIndex,
+//                trackListener);
     }
 
 
@@ -523,8 +577,8 @@ public class TrackUploadFragment extends Fragment {
             // 开启轨迹服务回调接口（arg0 : 消息编码，arg1 : 消息内容，详情查看类参考）
             public void onTraceCallback(int arg0, String arg1) {
                 // TODO Auto-generated method stub
-                showMessage(" " + arg1, Integer.valueOf(arg0));
-                showMessage("开启轨迹服务回调接口消息 [消息编码 : " + arg0 + "，消息内容 : " + arg1 + "]", Integer.valueOf(arg0));
+//                showMessage(" " + arg1, Integer.valueOf(arg0));
+//                showMessage("开启轨迹服务回调接口消息 [消息编码 : " + arg0 + "，消息内容 : " + arg1 + "]", Integer.valueOf(arg0));
                 if (0 == arg0 || 10006 == arg0 || 10008 == arg0 || 10009 == arg0) {
                     isTraceStart = true;
                     // TODO: 2016/8/25
@@ -569,9 +623,7 @@ public class TrackUploadFragment extends Fragment {
             // 轨迹服务停止成功
             public void onStopTraceSuccess() {
                 // TODO Auto-generated method stub
-                showMessage("停止轨迹服务成功", Integer.valueOf(1));
-
-
+//                showMessage("停止轨迹服务成功", Integer.valueOf(1));
                 isTraceStart = false;
                 startRefreshThread(false);
                 WorkoutActivity.client.onDestroy();
@@ -633,7 +685,6 @@ public class TrackUploadFragment extends Fragment {
 
         if (Math.abs(latitude - 0.0) < 0.000001 && Math.abs(longitude - 0.0) < 0.000001) {
             showMessage("当前查询无轨迹点", null);
-
         } else {
 
             LatLng latLng = new LatLng(latitude, longitude);
@@ -673,20 +724,19 @@ public class TrackUploadFragment extends Fragment {
 
         msUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
 
-        if (null == realtimeBitmap) {
-            realtimeBitmap = BitmapDescriptorFactory
-                    .fromResource(R.mipmap.icon_geo);
-        }
-
-        overlayOptions = new MarkerOptions().position(point)
-                .icon(realtimeBitmap).zIndex(9).draggable(true);
-
-        if (pointList.size() >= 2 && pointList.size() <= 10000) {
-            // 添加路线（轨迹）
-            polyline = new PolylineOptions().width(10)
-                    .color(Color.RED).points(pointList);
-        }
-
+//        if (null == realtimeBitmap) {
+//            realtimeBitmap = BitmapDescriptorFactory
+//                    .fromResource(R.mipmap.icon_geo);
+//        }
+//
+//        overlayOptions = new MarkerOptions().position(point)
+//                .icon(realtimeBitmap).zIndex(9).draggable(true);
+//
+//        if (pointList.size() >= 2 && pointList.size() <= 10000) {
+//            // 添加路线（轨迹）
+//            polyline = new PolylineOptions().width(10)
+//                    .color(Color.RED).points(pointList);
+//        }
 
         addMarker();
 

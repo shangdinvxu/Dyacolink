@@ -1,9 +1,11 @@
 package com.linkloving.dyh08.logic.UI.settings;
 
-import android.content.ContentResolver;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -13,39 +15,34 @@ import android.provider.MediaStore;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatRadioButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.linkloving.dyh08.CommParams;
 import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
-import com.linkloving.dyh08.http.basic.CallServer;
-import com.linkloving.dyh08.http.basic.NoHttpRuquestFactory;
-import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.dto.UserBase;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.logic.utils.CircleImageView;
 import com.linkloving.dyh08.utils.AvatarHelper;
-import com.linkloving.dyh08.utils.MyToast;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.net.URI;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -81,26 +78,39 @@ public class PersonalInfoActivity extends ToolBarActivity {
     AppCompatRadioButton radioRemOff;
     @InjectView(R.id.btn_enter)
     AppCompatButton btnEnter;
+    @InjectView(R.id.birthday)
+    TextView birthday;
+    @InjectView(R.id.layout_peosoninfo)
+    LinearLayout layoutPeosoninfo;
     private UserEntity userEntity;
     private UserBase userBase;
     private int wearingStyle = 0;
     private int remindtype = 0;
     //自定义的弹出框类
     private PopupWindow menuWindow = null;
-    /** 回调常量之：拍照 */
+    /**
+     * 回调常量之：拍照
+     */
     private static final int TAKE_BIG_PICTURE = 991;
-    /** 回调常量之：拍照后裁剪 */
+    /**
+     * 回调常量之：拍照后裁剪
+     */
     private static final int CROP_BIG_PICTURE = 993;
 //	/** 回调常量之：从相册中选取 */
 //	private static final int CHOOSE_BIG_PICTURE = 995;
-    /** 回调常量之：从相册中选取2 */
+    /**
+     * 回调常量之：从相册中选取2
+     */
     private static final int CHOOSE_BIG_PICTURE2 = 996;
-    /** 图像保存大小（微信的也是这个大小） */
+    /**
+     * 图像保存大小（微信的也是这个大小）
+     */
     private static final int AVATAR_SIZE = 640;
     // 修改头像的临时文件存放路径（头像修改成功后，会自动删除之）
     private String __tempImageFileLocation = null;
     private View totalView;
     private LayoutInflater layoutInflater;
+     private    String day,month,year1 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,15 +135,16 @@ public class PersonalInfoActivity extends ToolBarActivity {
             radioRight.setChecked(true);
         }
         String birthdate = userBase.getBirthdate();
+        birthday.setText(birthdate);
         if (birthdate.length() > 0) {
             String[] split = birthdate.split("-");
             editYear.setText(split[0]);
             editMon.setText(split[1]);
             editDay.setText(split[2]);
         }
-        if (userBase.getRemind()==1){
+        if (userBase.getRemind() == 1) {
             radioRemOn.setChecked(true);
-        }else {
+        } else {
             radioRemOff.setChecked(true);
         }
         Bitmap bitmap = decodeUriAsBitmap(getTempImageFileUri());
@@ -155,13 +166,21 @@ public class PersonalInfoActivity extends ToolBarActivity {
         btnEnter.setBackgroundResource(R.drawable.enteron);
         String name = editNickname.getText().toString().trim();
         userBase.setNickname(name);
-        String day = editDay.getText().toString().trim();
-        String month = editMon.getText().toString().trim();
-        String year = editYear.getText().toString().trim();
-        String birthday = year + "-" + month + "-" + day;
-        userBase.setBirthdate(birthday);
+//         day = editDay.getText().toString().trim();
+//        month = editMon.getText().toString().trim();
+//        year1 = editYear.getText().toString().trim();
+//        String birthday = year1 + "-" + month + "-" + day;
+
+        userBase.setBirthdate( birthday.getText().toString());
         userBase.setUser_wearingStyle(wearingStyle);
         userBase.setRemind(remindtype);
+
+        if (month.equals("") || Integer.parseInt(month) == 0 || Integer.parseInt(month) > 12
+                || day.equals("") || Integer.parseInt(day) == 0 || Integer.parseInt(day) > 31
+                ) {
+            Toast.makeText(PersonalInfoActivity.this, getString(R.string.pleasebirthday), Toast.LENGTH_SHORT).show();
+            return;
+        }
         IntentFactory.startPortalActivityIntent(PersonalInfoActivity.this);
     }
 
@@ -169,9 +188,10 @@ public class PersonalInfoActivity extends ToolBarActivity {
     void setRadioRemOff(View view) {
         remindtype = 2;
     }
+
     @OnClick(R.id.radio_rem_on)
-    void setRadioRemOn(View view){
-        remindtype = 1 ;
+    void setRadioRemOn(View view) {
+        remindtype = 1;
     }
 
     @Override
@@ -183,17 +203,39 @@ public class PersonalInfoActivity extends ToolBarActivity {
     protected void initView() {
 
     }
-    @OnClick(R.id.user_head)
-    void setUserHead(View view){
-       initpopwindow();
+
+    @OnClick(R.id.birthday)
+    void setBirthday(View view){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(PersonalInfoActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                day = dayOfMonth + "";
+                year1 = year + "";
+                month = monthOfYear+1 + "";
+            }
+        }, 2000, 12, 2);
+        datePickerDialog.show();
+        datePickerDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                birthday.setText(year1+"-"+month+"-"+day);
+            }
+        });
+
     }
-    private void initpopwindow()
-    {
+
+    @OnClick(R.id.user_head)
+    void setUserHead(View view) {
+        initpopwindow();
+    }
+
+    private void initpopwindow() {
         View view = layoutInflater.inflate(R.layout.popphotopopupwindow, null);
         Button deletePhoto = (Button) view.findViewById(R.id.deletePhoto);
         Button takePhotoBtn = (Button) view.findViewById(R.id.takePhotoBtn);
         Button pickPhotoBtn = (Button) view.findViewById(R.id.pickPhotoBtn);
         Button cancel_Btn = (Button) view.findViewById(R.id.cancelBtn);
+        ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
         final PopupWindow popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setTouchable(true);
@@ -230,13 +272,24 @@ public class PersonalInfoActivity extends ToolBarActivity {
             @Override
             public void onDismiss() {
                 int photoType = userBase.getPhotoType();
-                if (photoType==1){
+                if (photoType == 1) {
                     userHead.setImageResource(R.mipmap.default_avatar_m);
                 }
+                if (getTempImageFileUri() != null) {
+                    Bitmap bitmap = decodeUriAsBitmap(getTempImageFileUri());
+                    userHead.setImageBitmap(bitmap);
+                }
+            }
+        });
+        dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
             }
         });
 
     }
+
     //为弹出窗口实现监听类
     private View.OnClickListener itemsOnClick = new View.OnClickListener() {
         @Override
@@ -261,6 +314,7 @@ public class PersonalInfoActivity extends ToolBarActivity {
             }
         }
     };
+
     private void deletePhotoPopupWindow() {
         final Uri imagePhotoUri = getTempImageFileUri();
         LayoutInflater layoutInflater = LayoutInflater.from(PersonalInfoActivity.this);
@@ -282,14 +336,14 @@ public class PersonalInfoActivity extends ToolBarActivity {
         confirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               photoView.setImageResource(R.mipmap.default_avatar_m);
+                photoView.setImageResource(R.mipmap.default_avatar_m);
                 File file = new File(getTempImageFileLocation());
                 Resources r = getResources();
                 Bitmap bitmap = BitmapFactory.decodeResource(r, R.mipmap.default_avatar_m);
-                FileOutputStream fileOutputStream = null ;
+                FileOutputStream fileOutputStream = null;
                 try {
-                 fileOutputStream = new FileOutputStream(file);
-                    bitmap.compress(Bitmap.CompressFormat.PNG,90,fileOutputStream);
+                    fileOutputStream = new FileOutputStream(file);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 20, fileOutputStream);
                     fileOutputStream.flush();
                     fileOutputStream.close();
                 } catch (Exception e) {
@@ -304,7 +358,7 @@ public class PersonalInfoActivity extends ToolBarActivity {
 
 
     /*进入相册*/
-    private void startPhoto (){
+    private void startPhoto() {
         Intent intent = new Intent("android.intent.action.PICK");
         intent.setDataAndType(MediaStore.Images.Media.INTERNAL_CONTENT_URI, "image/*");
         intent.putExtra("crop", "true");
@@ -325,11 +379,9 @@ public class PersonalInfoActivity extends ToolBarActivity {
      *
      * @return 正常获得uri则返回，否则返回null
      */
-    private Uri getTempImageFileUri()
-    {
+    private Uri getTempImageFileUri() {
         String tempImageFileLocation = getTempImageFileLocation();
-        if(tempImageFileLocation != null)
-        {
+        if (tempImageFileLocation != null) {
             return Uri.parse("file://" + tempImageFileLocation);
         }
         return null;
@@ -340,28 +392,22 @@ public class PersonalInfoActivity extends ToolBarActivity {
      *
      * @return 正常获得则返回，否则返回null
      */
-    private String getTempImageFileLocation()
-    {
-        try
-        {
-            if(__tempImageFileLocation == null)
-            {
+    private String getTempImageFileLocation() {
+        try {
+            if (__tempImageFileLocation == null) {
                 String avatarTempDirStr = AvatarHelper.getUserAvatarSavedDir(PersonalInfoActivity.this);
                 File avatarTempDir = new File(avatarTempDirStr);
-                if(avatarTempDir != null)
-                {
+                if (avatarTempDir != null) {
                     // 目录不存在则新建之
-                    if(!avatarTempDir.exists())
+                    if (!avatarTempDir.exists())
                         avatarTempDir.mkdirs();
                     // 临时文件名
                     int user_id = MyApplication.getInstance(PersonalInfoActivity.this).getLocalUserInfoProvider().getUser_id();
                     String userIdString = Integer.toString(user_id);
-                    __tempImageFileLocation = avatarTempDir.getAbsolutePath()+"/"+"local_avatar_temp.jpg";
+                    __tempImageFileLocation = avatarTempDir.getAbsolutePath() + "/" + "local_avatar_temp.jpg";
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Log.e(TAG, "【ChangeAvatar】读取本地用户的头像临时存储路径时出错了，" + e.getMessage(), e);
         }
 
@@ -369,13 +415,14 @@ public class PersonalInfoActivity extends ToolBarActivity {
 
         return __tempImageFileLocation;
     }
+
     @Override
     protected void initListeners() {
 
     }
+
     /**
      * 拍照后裁剪图片方法实现
-     *
      */
     public void startPhotoZoom(Uri uri, int outputX, int outputY, int requestCode) {
         Intent intent = new Intent("com.android.camera.action.CROP");
@@ -392,6 +439,7 @@ public class PersonalInfoActivity extends ToolBarActivity {
         intent.putExtra("noFaceDetection", true);
         startActivityForResult(intent, requestCode);
     }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         final Uri imagePhotoUri = getTempImageFileUri();
         switch (requestCode) {
@@ -441,14 +489,21 @@ public class PersonalInfoActivity extends ToolBarActivity {
 
         }
     }
-    private Bitmap decodeUriAsBitmap(Uri uri){
+
+    private Bitmap decodeUriAsBitmap(Uri uri) {
         Bitmap bitmap = null;
         try {
-            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+            BitmapFactory.Options opt = new BitmapFactory.Options();
+            opt.inPreferredConfig = Bitmap.Config.RGB_565;
+            opt.inPurgeable = true;
+            opt.inInputShareable = true;
+            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, opt);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
         }
         return bitmap;
     }
+
+
 }

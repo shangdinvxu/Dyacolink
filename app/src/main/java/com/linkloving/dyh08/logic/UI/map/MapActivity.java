@@ -324,24 +324,26 @@ public class MapActivity extends ToolBarActivity {
                     calValue = 0 ;
                 } else {
                     for (SportRecord sportRecordArray : sportRecordArrayList) {
-                        MyLog.e(TAG, "distance" + sportRecordArray.getDistance());
-                        distance = Integer.parseInt(sportRecordArray.getDistance()) + distance;
-                        step = Integer.parseInt(sportRecordArray.getStep()) + step;
-                        //这一部分是求Calories的逻辑
-                        List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
-                        String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(startDate);
-                        try {
-                            count = DatasProcessHelper.countSportData(srs, startDateLocal);
-                            MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        int walkCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.walking_distance)),
-                                (int) count.walking_duration * 60, userEntity.getUserBase().getUser_weight());
-                        MyLog.e("walkCal", walkCal + "");
+                        if (sportRecordArray.getState().equals("1")||sportRecordArray.getState().equals("2")||sportRecordArray.getState().equals("3")) {
+                            MyLog.e(TAG, "distance" + sportRecordArray.getDistance());
+                            distance = Integer.parseInt(sportRecordArray.getDistance()) + distance;
+                            step = Integer.parseInt(sportRecordArray.getStep()) + step;
+                            //这一部分是求Calories的逻辑
+                            List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
+                            String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(startDate);
+                            try {
+                                count = DatasProcessHelper.countSportData(srs, startDateLocal);
+                                MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            int walkCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.walking_distance)),
+                                    (int) count.walking_duration * 60, userEntity.getUserBase().getUser_weight());
+                            MyLog.e("walkCal", walkCal + "");
 //        userEntity.getUserBase().getUser_weight()
-                        int runCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.runing_distance)), (int) count.runing_duation * 60, userEntity.getUserBase().getUser_weight());
-                        calValue = walkCal + runCal;
+                            int runCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.runing_distance)), (int) count.runing_duation * 60, userEntity.getUserBase().getUser_weight());
+                            calValue = walkCal + runCal;
+                        }
                     }
                 }
                 caloriesTotal = caloriesTotal+calValue ;
@@ -353,7 +355,7 @@ public class MapActivity extends ToolBarActivity {
         double distanceKM = CommonUtils.getDoubleValue(distanceTotal / 1000, 1);
         String distanceTotalString = new Formatter().format("%.1f", distanceKM).toString();
         groupsTvDistance.setText(distanceTotalString);
-        groupsTvStep.setText(stepTotal+"");
+        groupsTvStep.setText((int)stepTotal+"");
         groupsTvCalories.setText(caloriesTotal+"");
     }
 

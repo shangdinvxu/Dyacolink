@@ -21,6 +21,8 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="birthdaypicker" parent="Theme.Design.Light.NoActionBar"></style>
+
 
     <!--开始的进入页面 AppStart 专用-->
     <style name="AppStarThemeNoActionBar" parent="Theme.AppCompat.Light">

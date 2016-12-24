@@ -1,115 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
+
     <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/dismiss"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/triangle"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/blue"
-        android:text="@string/sendentarynotif"
-        />
-    <ImageView
-        android:layout_marginTop="10dp"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/selectline_yellow"
-        />
-    <RelativeLayout
-        android:layout_width="250dp"
-        android:gravity="center"
-        android:layout_height="50dp">
-        <TextView
-            android:gravity="center_horizontal"
-            android:text="@string/Starttime"
-            android:textSize="20sp"
-            android:padding="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <ImageView
-            android:src="@mipmap/selectnext"
+            android:id="@+id/dismiss"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            android:id="@+id/startTimeNext" />
-    </RelativeLayout>
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/selectline"
-        />
-    <RelativeLayout
-        android:layout_width="250dp"
-        android:gravity="center"
-        android:layout_height="50dp">
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/triangle" />
+
         <TextView
-            android:gravity="center_horizontal"
-            android:text="@string/Endtime"
-            android:textSize="20sp"
-            android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:layout_marginTop="20dp"
+            android:text="@string/sendentarynotif"
+            android:textColor="@color/blue"
+            android:textSize="25sp" />
 
         <ImageView
-            android:src="@mipmap/selectnext"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            android:id="@+id/endTimeNext" />
-    </RelativeLayout>
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/selectline"
-        />
-    <RelativeLayout
-        android:layout_width="250dp"
-        android:gravity="center"
-        android:layout_height="50dp">
-        <TextView
-            android:gravity="center_horizontal"
-            android:text="@string/interval"
-            android:textSize="20sp"
-            android:padding="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/selectline_yellow" />
 
-        <Switch
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="@string/Starttime"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/startTimeNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:src="@mipmap/selectnext" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            android:id="@+id/switchinterval" />
-    </RelativeLayout>
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/selectline"
-        />
+            android:src="@mipmap/selectline" />
+
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="@string/Endtime"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/endTimeNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:src="@mipmap/selectnext" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/selectline" />
+
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="@string/Intervals"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/Intervalsnext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:src="@mipmap/selectnext" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/selectline" />
+
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="@string/interval"
+                android:textSize="20sp" />
+
+            <Switch
+                android:id="@+id/switchinterval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/selectline" />
 
     </LinearLayout>
 

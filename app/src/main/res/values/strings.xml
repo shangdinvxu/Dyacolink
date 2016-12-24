@@ -574,6 +574,7 @@
     <string name="unit_m">Meter</string>
     <string name="unit_mile">Mile</string>
     <string name="unit_km">Km</string>
+    <string name="unit_lb">lbs</string>
     <string name="unit_km_metric">Km</string>
     <string name="unit_km_en">Km</string>
     <string name="unit_km_per_hour">Km/hr</string>
@@ -1027,7 +1028,7 @@
     <string name="baidu">Baidu</string>
     <string name="AutomaticHR">Automatic HR measurement</string>
     <string name="realtime">Realtime</string>
-    <string name="Thedevicewill">The device will measure heart rate automatically until it\'s closed</string>
+    <string name="Thedevicewill"> 將選擇開啟時心率為自動偵測, 選擇關閉時須按著手環螢幕兩秒開啟心率量測</string>
     <string name="wearabledevice">Wearable Device</string>
     <string name="Pressthedecive">Press the devices\'s display for two seconds to switch the heart rate measurement automatically</string>
 
@@ -1057,7 +1058,7 @@
     <string name="hr">hr</string>
     <string name="min">min</string>
     <string name="Endtime">End time</string>
-    <string name="interval">Interval</string>
+    <string name="interval">提醒開關</string>
 
 
     <string name="alarmclock">Alarm clock setting</string>
@@ -1198,6 +1199,9 @@
     <string name="vertexes_fence_caption">请按顺时针或逆时针方向点击地图</string>
     <string name="dfu_service_title">nRF Toolbox DFU Proxy</string>
     <string name="pleaseturnon">Please turn on Track Services</string>
-    
+    <string name="goalkcal">燃烧</string>
+    <string name="goal_kcal">Kcal</string>
+    <string name="Intervals">间隔时间</string>
+
 
 </resources>
