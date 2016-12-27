@@ -93,6 +93,26 @@ public class MyApplication extends Application{
 
     /**OAD完成后回填步数step */
     private int old_step = 0;
+
+    public int getOld_distance() {
+        return old_distance;
+    }
+
+    public void setOld_distance(int old_distance) {
+        this.old_distance = old_distance;
+    }
+
+    public int getOld_calories() {
+        return old_calories;
+    }
+
+    public void setOld_calories(int old_calories) {
+        this.old_calories = old_calories;
+    }
+
+    private int old_distance = 0 ;
+    private int old_calories = 0 ;
+
     /**OAD完成后回填步数step */
     public int getOld_step()
     {

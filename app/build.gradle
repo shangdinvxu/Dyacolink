@@ -140,6 +140,7 @@ dependencies {
     compile project(':linkloving_ble4.0_lib')
     compile project(':onkeyshare')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile 'com.google.android.gms:play-services:9.8.0'
     compile 'no.nordicsemi.android:dfu:1.0.4'
     compile files('libs/MobCommons-2016.1107.1809.jar')
 }

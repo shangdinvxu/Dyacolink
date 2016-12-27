@@ -157,7 +157,6 @@ public class GroupsDetailsActivity extends ToolBarActivity {
 
         userEntity = MyApplication.getInstance(GroupsDetailsActivity.this).getLocalUserInfoProvider();
         user_id = userEntity.getUser_id();
-
         map = gourpsTopmap.getMap();
         Intent intent = getIntent();
         String postionStr = intent.getStringExtra("postion");
@@ -167,12 +166,12 @@ public class GroupsDetailsActivity extends ToolBarActivity {
         traGreendao = new TraceGreendao(GroupsDetailsActivity.this, db);
         startTimeList = traGreendao.searchAllStarttime();
         endTimeList = traGreendao.searchAllEndTime();
-        workDataNotes = traGreendao.searchWorkData();
-        startTimeList.addAll( workDataNotes);
-        endTimeList.addAll(workDataNotes);
-        sort sort = new sort();
-        Collections.sort(startTimeList,sort);
-        Collections.sort(endTimeList,sort);
+//        workDataNotes = traGreendao.searchWorkData();
+//        startTimeList.addAll( workDataNotes);
+//        endTimeList.addAll(workDataNotes);
+//        sort sort = new sort();
+//        Collections.sort(startTimeList,sort);
+//        Collections.sort(endTimeList,sort);
         startDate = startTimeList.get(position).getStartDate();
         endDate = endTimeList.get(position).getStartDate();
         String durtion = getDurtion(position);

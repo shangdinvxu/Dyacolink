@@ -317,11 +317,13 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 	}
 
 	@Override
-	public int resetSportDataNew(int step) throws BLException, LPException {
+	public int resetSportDataNew(int step,int distance ,int calories) throws BLException, LPException {
 		WatchRequset req = new WatchRequset();
 		req.appendByte(seq++)
 				.appendByte(LepaoCommand.COMMAND_SET_STEP)
 				.appendInt(step)
+				.appendInt(distance)
+				.appendInt(calories)
 				.makeCheckSum();
 		LPUtil.printData(req.getData(), "重置步数");
 		WatchResponse resp = this.sendData2BLE(req);
@@ -857,16 +859,17 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 	 * showhand
 	 */
 	/** 抬手显示 */
-	public int setShowhand(LPDeviceInfo deviceInfo) throws BLException,LPException {
+	public int setShowhand(byte showhand) throws BLException,LPException {
 		// COMMAND_SetOledOnTimeZone
 		WatchRequset req = new WatchRequset();
-	byte OFFON = (byte) (deviceInfo.showhand==0x01?0x01:0x00);
+//	byte OFFON = (byte) (deviceInfo.showhand==0x01?0x01:0x00);
 			req.appendByte(seq++)
 					.appendByte(LepaoCommand.COMMANDSHOWHAND)
-					.appendByte(OFFON)
+					.appendByte(showhand)
 					.makeCheckSum();
+		LPUtil.printData(req.getData(),"setHandUp抬手显示++++req");
 		WatchResponse resp = this.sendData2BLE(req);
-		LPUtil.printData(req.getData(), "setHandUp");
+		LPUtil.printData(resp.getData(), "setHandUp抬手显示");
 		if(resp.getData()[4]==1)
 			return BLEProvider.INDEX_SET_HAND_UP;
 		return BLEProvider.INDEX_SET_HAND_UP_FAIL;
@@ -1688,4 +1691,14 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			LPUtil.printData(req.getData(), " 未接来电提醒");
 			WatchResponse resp = this.sendData2BLE(req);
 		}
+
+	public void heartSync(byte b) throws LPException, BLException {
+		WatchRequset req = new WatchRequset();
+		req.appendByte(seq++)
+				.appendByte(LepaoCommand.COMMAND_HEARTRATE_SYNC)
+				.appendByte(b).makeCheckSum();
+		LPUtil.printData(req.getData(),"heartSync++++++");
+		WatchResponse watchResponse = this.sendData2BLE(req);
+		LPUtil.printData(watchResponse.getData(),"heartSync++++++");
+	}
 }

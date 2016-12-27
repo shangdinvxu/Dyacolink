@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import com.linkloving.band.dto.DaySynopic;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.ViewUtils.barchartview.BarChartView;
+import com.linkloving.dyh08.ViewUtils.barchartview.YearBarChartView;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.DbDataUtils;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
@@ -29,8 +30,8 @@ import java.util.Locale;
  */
 public class YearchartviewFragment extends Fragment {
     private static final String TAG = YearchartviewFragment.class.getSimpleName();
-    private BarChartView barChartView;
-    private BarChartView.BarChartItemBean[] items;
+    private YearBarChartView barChartView;
+    private YearBarChartView.BarChartItemBean[] items;
     private View view ;
     private ProgressBar progressbarYear;
 
@@ -38,7 +39,7 @@ public class YearchartviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tw_year_barchartview_fragment, container, false);
-        barChartView = (BarChartView) view.findViewById(R.id.year_barchartView);
+        barChartView = (YearBarChartView) view.findViewById(R.id.year_barchartView);
         barChartView.setPopupViewType(BarChartView.DISTANCE_AVG_TYPE);
         progressbarYear = (ProgressBar) view.findViewById(R.id.year_progressbar);
         String date = getArguments().getString("yearDate");
@@ -48,7 +49,7 @@ public class YearchartviewFragment extends Fragment {
         return view ;
     }
 
-    public  class YearChartAsynckTask extends AsyncTask<Object, Object, List<BarChartView.BarChartItemBean>> {
+    public  class YearChartAsynckTask extends AsyncTask<Object, Object, List<YearBarChartView.BarChartItemBean>> {
         String startData; //周开始时间
         String endData;   //周结束时间
         Date endDatesdf;
@@ -57,9 +58,10 @@ public class YearchartviewFragment extends Fragment {
         private String endDateMd;
         private String endDateformat;
         Context context ;
-        private List<BarChartView.BarChartItemBean> barChartItemBeans;
+        private List<YearBarChartView.BarChartItemBean> barChartItemBeans;
+        private String substring;
 
-        protected List<BarChartView.BarChartItemBean> doInBackground(Object... params) {
+        protected List<YearBarChartView.BarChartItemBean> doInBackground(Object... params) {
 //            wheelview ,需要加一.指针偏移小1 ;
             int value = 0 ;
             int year;
@@ -91,23 +93,27 @@ public class YearchartviewFragment extends Fragment {
                     stepSum+=distance ;
                 }
                 monthAverageNumber = stepSum /daySum ;
-                String substring = String.valueOf(year).substring(2);
-                String s1 = Integer.toString(i);
+                substring = String.valueOf(year).substring(2);
+                String s1 = Integer.toString(i+1);
                 if (s1.length()<2){
                     s1= "0"+s1 ;
                 }
-                BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean(substring+"/"+s1, monthAverageNumber);
+                YearBarChartView.BarChartItemBean barChartItemBean = new YearBarChartView.BarChartItemBean(substring +"/"+s1, monthAverageNumber);
                 barChartItemBeans.add(barChartItemBean);
+            }
+            int yearLeft = 12-barChartItemBeans.size() ;
+            for (int i = 0 ;i<yearLeft;i++){
+                barChartItemBeans.add(new YearBarChartView.BarChartItemBean(substring +"/"+barChartItemBeans.size()+i+2,0));
             }
             publishProgress(value);
             return barChartItemBeans;
         }
         @Override
-        protected void onPostExecute(final List<BarChartView.BarChartItemBean> daySynopics) {
+        protected void onPostExecute(final List<YearBarChartView.BarChartItemBean> daySynopics) {
             super.onPostExecute(daySynopics);
             progressbarYear.setVisibility(View.GONE);
             barChartView.setItems(daySynopics);
-            barChartView.setDialogListerer(new BarChartView.DialogListerer() {
+            barChartView.setDialogListerer(new YearBarChartView.DialogListerer() {
                 @Override
                 public void showDialog(int i, int x, int y) {
                     String itemType = barChartItemBeans.get(i).itemType;

@@ -94,7 +94,7 @@ public class TrackUploadFragment extends Fragment {
     private Button btnStartTrace = null;
 
     private Button btnStopTrace = null;
-    private int  stopType = 1 ;
+    private int stopType = 1;
 
     /**
      * 舒适化数据查找对象
@@ -211,7 +211,7 @@ public class TrackUploadFragment extends Fragment {
         SharedPreferences sharedPreferencesbegin = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
         isClickStart = sharedPreferencesbegin.getBoolean("isClickStart", false);
         startTimeLong = sharedPreferencesbegin.getLong("startTimeLong", 0);
-        if (isClickStart){
+        if (isClickStart) {
             secondMiddle.setVisibility(View.VISIBLE);
 //            relativeLayout.setBackgroundColor(Color.BLACK);
 //            relativeLayout.getBackground().setAlpha(150);
@@ -226,17 +226,17 @@ public class TrackUploadFragment extends Fragment {
         View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.tw_trace_fragment_trackupload, null);
         chronometer = (TextView) inflate.findViewById(R.id.chronometer);
         final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-        handler = new Handler(){
+        handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                switch (msg.what){
+                switch (msg.what) {
                     case 1:
-                        long  time = (long) msg.obj;
-                        long runtimeDuration = time-startTimeLong;
+                        long time = (long) msg.obj;
+                        long runtimeDuration = time - startTimeLong;
                         Date date = new Date(runtimeDuration);
                         String format = simpleDateFormat.format(date);
-                        if (chronometer!=null&&stopType==1){
+                        if (chronometer != null && stopType == 1) {
                             chronometer.setText(format);
                         }
                 }
@@ -249,8 +249,8 @@ public class TrackUploadFragment extends Fragment {
 
     public void getRuntime() {
         //延时1s后又将线程加入到线程队列中
-         MyLog.e(TAG,"postDelayed执行了");
-        if (isClickStart){
+        MyLog.e(TAG, "postDelayed执行了");
+        if (isClickStart) {
             new Thread() {
                 @Override
                 public void run() {
@@ -260,11 +260,11 @@ public class TrackUploadFragment extends Fragment {
                                 @Override
                                 public void run() {
                                     Calendar instance = Calendar.getInstance();
-                                    instance.add(Calendar.MINUTE,-TimeZoneHelper.getTimeZoneOffsetMinute());
+                                    instance.add(Calendar.MINUTE, -TimeZoneHelper.getTimeZoneOffsetMinute());
                                     long timeInMillis = instance.getTimeInMillis();
                                     Message message = new Message();
-                                    message.what=1 ;
-                                    message.obj=timeInMillis ;
+                                    message.what = 1;
+                                    message.obj = timeInMillis;
                                     handler.sendMessage(message);
                                     handler.postDelayed(update_thread, 1000);
                                 }
@@ -286,7 +286,7 @@ public class TrackUploadFragment extends Fragment {
         SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putInt("clickType", clickType);
-        edit.putBoolean("isClickStart",isClickStart);
+        edit.putBoolean("isClickStart", isClickStart);
         edit.commit();
         super.onDestroy();
     }
@@ -311,7 +311,7 @@ public class TrackUploadFragment extends Fragment {
             startTimer = true;
             getRuntime();
         }
-        if (GpsUtils.isOPen(getContext())){
+        if (GpsUtils.isOPen(getContext())) {
             firstMiddle.setVisibility(View.GONE);
         }
 
@@ -329,12 +329,12 @@ public class TrackUploadFragment extends Fragment {
         btnStartTrace.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                MyLog.e(TAG,"clicktype====="+clickType);
+                MyLog.e(TAG, "clicktype=====" + clickType);
                 if (clickType == 0) {
                     //先判断Gps有没有开,要是GPs没有开则在用户点确定后开启
                     if (!GpsUtils.isOPen(getContext())) {
                         firstMiddle.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         isClickStart = true;
                         secondMiddle.setVisibility(View.VISIBLE);
                         getRuntime();
@@ -382,10 +382,10 @@ public class TrackUploadFragment extends Fragment {
             private long startTimeLong;
 
             public void onClick(View v) {
-                MyLog.e(TAG,"clicktype====="+clickType);
+                MyLog.e(TAG, "clicktype=====" + clickType);
                 // TODO Auto-generated method stub
                 if (clickType == 1) {
-                    isClickStart=false ;
+                    isClickStart = false;
 //                    Toast.makeText(getActivity(), "停止轨迹服务", Toast.LENGTH_SHORT).show();
 //                    把开始时间取出来,记录下来
                     SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
@@ -395,7 +395,7 @@ public class TrackUploadFragment extends Fragment {
                     Calendar c = Calendar.getInstance();
                     c.setTimeInMillis(startTimeLong);
                     Date dateStartTrace = c.getTime();
-                    traGreendao.addStartTime(formatStartTime, dateStartTrace);
+                    traGreendao.addStartTime(formatStartTime, dateStartTrace, 0);
                     //                记录月份格式的日期type为0,方便索引排序;
                     traGreendao.addStartMonth(formatMonth, dateStartTrace);
                     //  成功停止轨迹服务,说明停止跑了,记录开始时间,数据类型设置为type
@@ -409,7 +409,7 @@ public class TrackUploadFragment extends Fragment {
                     secondMiddle.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (stopType==2){
+                            if (stopType == 2) {
                                 secondMiddle.setVisibility(View.GONE);
                             }
                         }
@@ -417,17 +417,16 @@ public class TrackUploadFragment extends Fragment {
                     relativeLayout.setBackgroundColor(Color.BLACK);
                     relativeLayout.getBackground().setAlpha(0);
                     clickType = 0;
-                            stopTrace();
-                            if (isRegister) {
-                                try {
-                                    WorkoutActivity.mContext.unregisterReceiver(powerReceiver);
-                                    isRegister = false;
-                                } catch (Exception e) {
-                                    // TODO: handle
-                                }
-                                queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
-                            }
-
+                    stopTrace();
+                    if (isRegister) {
+                        try {
+                            WorkoutActivity.mContext.unregisterReceiver(powerReceiver);
+                            isRegister = false;
+                        } catch (Exception e) {
+                            // TODO: handle
+                        }
+                        queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
+                    }
                 } else {
                     Toast.makeText(getActivity(), getString(R.string.pleaseturnon), Toast.LENGTH_SHORT).show();
                 }
@@ -447,8 +446,8 @@ public class TrackUploadFragment extends Fragment {
 //        int simpleReturn = 0;
 //        // 是否返回纠偏后轨迹（0 : 否，1 : 是）
         int isProcessed = processed;
-        int startTime = (int) (startTimeLong/1000);
-        int endTime = (int) (dateStopTrace.getTime()/1000);
+        int startTime = (int) (startTimeLong / 1000);
+        int endTime = (int) (dateStopTrace.getTime() / 1000);
         // 开始时间
         if (startTime == 0) {
             startTime = (int) (System.currentTimeMillis() / 1000 - 12 * 60 * 60);
@@ -456,7 +455,7 @@ public class TrackUploadFragment extends Fragment {
         if (endTime == 0) {
             endTime = (int) (System.currentTimeMillis() / 1000);
         }
-        workoutActivity.queryHistoryTrack(startTime,endTime);
+        workoutActivity.queryHistoryTrack(startTime, endTime);
         // 分页大小
 //        int pageSize = 1000;
 //        // 分页索引

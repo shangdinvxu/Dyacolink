@@ -170,10 +170,10 @@ public class GroupsShareActivity extends ToolBarActivity {
     private String filePathCacheTotal = "/sdcard/ranking_v333.png";
     private LocationClient mlocationClient;
     private MyLocationListener mMyLocationListener;
-    private ImageView fb,wx,qq,linkin,instagram;
+    private ImageView fb, wx, qq, linkin, instagram;
     private ImageView twitter;
     private View view;
-    private  List<Note> workDataNotes;
+    private List<Note> workDataNotes;
     // 起点图标
     private static BitmapDescriptor bmStart;
     // 终点图标
@@ -212,12 +212,12 @@ public class GroupsShareActivity extends ToolBarActivity {
         traGreendao = new TraceGreendao(GroupsShareActivity.this, db);
         startTimeList = traGreendao.searchAllStarttime();
         endTimeList = traGreendao.searchAllEndTime();
-        workDataNotes = traGreendao.searchWorkData();
-        startTimeList.addAll( workDataNotes);
-        endTimeList.addAll(workDataNotes);
+//        workDataNotes = traGreendao.searchWorkData();
+//        startTimeList.addAll( workDataNotes);
+//        endTimeList.addAll(workDataNotes);
         sort sort = new sort();
-        Collections.sort(startTimeList,sort);
-        Collections.sort(endTimeList,sort);
+        Collections.sort(startTimeList, sort);
+        Collections.sort(endTimeList, sort);
         startDate = startTimeList.get(position).getStartDate();
         endDate = endTimeList.get(position).getStartDate();
 //        List<Note> lists = traGreendao.searchLocation(startDate, endDate);
@@ -232,11 +232,11 @@ public class GroupsShareActivity extends ToolBarActivity {
 //        }
         groupsTvStep.setText(getStep() + "");
         groupsTime.setText(getMiddleTime());
-        groupsTvCalories.setText(getCalories()+"");
+        groupsTvCalories.setText(getCalories() + "");
         initOnTrackListener();
         initPopupWindow();
         initTrace();
-        queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
+//        queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
     }
 
     /**
@@ -254,8 +254,8 @@ public class GroupsShareActivity extends ToolBarActivity {
 //        int endTime = endDate.getDate();
 //        long startTime = startDate.;
 
-        int startTime = (int) (startDate.getTime()/1000);
-        int endTime = (int) (endDate.getTime()/1000);
+        int startTime = (int) (startDate.getTime() / 1000);
+        int endTime = (int) (endDate.getTime() / 1000);
         // 开始时间
         if (startTime == 0) {
             startTime = (int) (System.currentTimeMillis() / 1000 - 12 * 60 * 60);
@@ -287,7 +287,7 @@ public class GroupsShareActivity extends ToolBarActivity {
             public void onRequestFailedCallback(String arg0) {
                 // TODO Auto-generated method stub
                 TrackApplication.showMessage("track请求失败回调接口消息 : " + arg0);
-                MyLog.e(TAG,"onRequestFailedCallback"+arg0);
+                MyLog.e(TAG, "onRequestFailedCallback" + arg0);
             }
 
             // 查询历史轨迹回调接口
@@ -296,12 +296,12 @@ public class GroupsShareActivity extends ToolBarActivity {
                 // TODO Auto-generated method stub
                 super.onQueryHistoryTrackCallback(arg0);
                 showHistoryTrack(arg0);
-                MyLog.e (TAG,"onQueryHistoryTrackCallback"+arg0);
+                MyLog.e(TAG, "onQueryHistoryTrackCallback" + arg0);
             }
 
             @Override
             public void onQueryDistanceCallback(String arg0) {
-                MyLog.e(TAG,"onQueryDistanceCallback"+arg0);
+                MyLog.e(TAG, "onQueryDistanceCallback" + arg0);
                 // TODO Auto-generated method stub
                 try {
                     JSONObject dataJson = new JSONObject(arg0);
@@ -320,7 +320,7 @@ public class GroupsShareActivity extends ToolBarActivity {
             @Override
             public Map<String, String> onTrackAttrCallback() {
                 // TODO Auto-generated method stub
-                MyLog.e(TAG,"onTrackAttrCallback");
+                MyLog.e(TAG, "onTrackAttrCallback");
                 return null;
             }
 
@@ -349,6 +349,7 @@ public class GroupsShareActivity extends ToolBarActivity {
         }
 
     }
+
     /**
      * 绘制历史轨迹
      *
@@ -422,19 +423,19 @@ public class GroupsShareActivity extends ToolBarActivity {
 
 
     private void initTrace() {
-        MyLog.e(TAG,"initrace执行了");
+        MyLog.e(TAG, "initrace执行了");
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 //从数据库中获取的坐标点画,有问题,需要纠偏.暂不采用.
                 List<Note> lists = traGreendao.searchLocation(startDate, endDate);
-                if (lists.size()==0){
+                if (lists.size() == 0) {
                     SharedPreferences location = getSharedPreferences("Location", MODE_PRIVATE);
                     float latitude = location.getFloat("Latitude", 11);
                     float longitude = location.getFloat("Longitude", 11);
-                    showRealtimeTrack(latitude,longitude);
-                }else {
+                    showRealtimeTrack(latitude, longitude);
+                } else {
 //                    for (int i = 0; i < lists.size(); i++) {
 //            Date runDate = lists.get(i).getRunDate();
 //            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -472,7 +473,6 @@ public class GroupsShareActivity extends ToolBarActivity {
      */
     public void getScreenHot(BaiduMap mBaiduMap) {
         // 截图，在SnapshotReadyCallback中保存图片到 sd 卡
-
 
 
         mBaiduMap.snapshot(new BaiduMap.SnapshotReadyCallback() {
@@ -529,13 +529,13 @@ public class GroupsShareActivity extends ToolBarActivity {
 //                ToolKits.getScreenHot(GroupsShareActivity.this.getWindow().getDecorView(), filePathCache);
 //               截图分两步
                 /**把下面的部分截图*/
-
-
-                        ToolKits.saveFile(ToolKits.getViewBitmap(screenhot), filePathCacheUnder);
-                        getScreenHot(map);
-                        final Bitmap bitmap = ToolKits.mergeBitmap_TB(BitmapFactory.decodeFile(filePathCache),
-                                BitmapFactory.decodeFile(filePathCacheUnder), true);
-                        ToolKits.saveBitmap2file(bitmap, filePathCacheTotal);
+                ToolKits.saveFile(ToolKits.getViewBitmap(screenhot), filePathCacheUnder);
+                getScreenHot(map);
+                if (BitmapFactory.decodeFile(filePathCache) != null) {
+                    final Bitmap bitmap = ToolKits.mergeBitmap_TB(BitmapFactory.decodeFile(filePathCache),
+                            BitmapFactory.decodeFile(filePathCacheUnder), true);
+                    ToolKits.saveBitmap2file(bitmap, filePathCacheTotal);
+                }
             }
         });
         share();
@@ -561,21 +561,21 @@ public class GroupsShareActivity extends ToolBarActivity {
         fb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              showShare(GroupsShareActivity.this,"Facebook",false);
+                showShare(GroupsShareActivity.this, "Facebook", false);
 
             }
         });
         wx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showShare(GroupsShareActivity.this,"Wechat",false);
+                showShare(GroupsShareActivity.this, "Wechat", false);
             }
         });
 
         qq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showShare(GroupsShareActivity.this,"QQ",false);
+                showShare(GroupsShareActivity.this, "QQ", false);
             }
         });
         linkin.setOnClickListener(new View.OnClickListener() {
@@ -593,7 +593,7 @@ public class GroupsShareActivity extends ToolBarActivity {
         instagram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showShare(GroupsShareActivity.this,"Instagram",false);
+                showShare(GroupsShareActivity.this, "Instagram", false);
             }
         });
     }
@@ -612,10 +612,10 @@ public class GroupsShareActivity extends ToolBarActivity {
      * 演示调用ShareSDK执行分享
      *
      * @param context
-     * @param platformToShare  指定直接分享平台名称（一旦设置了平台名称，则九宫格将不会显示）
-     * @param showContentEdit  是否显示编辑页
+     * @param platformToShare 指定直接分享平台名称（一旦设置了平台名称，则九宫格将不会显示）
+     * @param showContentEdit 是否显示编辑页
      */
-    public  void showShare(Context context, String platformToShare, boolean showContentEdit) {
+    public void showShare(Context context, String platformToShare, boolean showContentEdit) {
         OnekeyShare oks = new OnekeyShare();
         oks.setSilent(!showContentEdit);
         if (platformToShare != null) {
@@ -633,8 +633,14 @@ public class GroupsShareActivity extends ToolBarActivity {
 //        oks.setText("ShareSDK--文本");
         //oks.setImagePath("/sdcard/test-pic.jpg");  //分享sdcard目录下的图片
 //        oks.setImageUrl("http://99touxiang.com/public/upload/nvsheng/125/27-011820_433.jpg");
-        oks.setFilePath(filePathCacheTotal);
-        oks.setImagePath(filePathCacheTotal);
+        if (BitmapFactory.decodeFile(filePathCache) == null) {
+            oks.setFilePath(filePathCacheUnder);
+            oks.setImagePath(filePathCacheUnder);
+        } else {
+            oks.setFilePath(filePathCacheTotal);
+            oks.setImagePath(filePathCacheTotal);
+        }
+
         oks.setUrl("http://www.mob.com"); //微信不绕过审核分享链接
         //oks.setFilePath("/sdcard/test-pic.jpg");  //filePath是待分享应用程序的本地路劲，仅在微信（易信）好友和Dropbox中使用，否则可以不提供
 //        oks.setComment("分享"); //我对这条分享的评论，仅在人人网和QQ空间使用，否则可以不提供
@@ -675,7 +681,6 @@ public class GroupsShareActivity extends ToolBarActivity {
     }
 
 
-
     private String getMiddleTime() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd a.HH:MM", Locale.US);
         String middleTime = simpleDateFormat.format(startDate);
@@ -688,6 +693,7 @@ public class GroupsShareActivity extends ToolBarActivity {
         } else {
             for (SportRecord sportRecordArray : sportRecordArrayList) {
                 MyLog.e(TAG, "step" + sportRecordArray.getStep());
+                if (sportRecordArray.getState().equals("1")||sportRecordArray.getState().equals("2")||sportRecordArray.getState().equals("3"))
                 step = Integer.parseInt(sportRecordArray.getStep()) + step;
             }
         }
@@ -699,9 +705,9 @@ public class GroupsShareActivity extends ToolBarActivity {
             calories = 0;
         } else {
             for (SportRecord sportRecordArray : sportRecordArrayList) {
-                if (sportRecordArray.getState().equals("1")||sportRecordArray.getState().equals("2")||sportRecordArray.getState().equals("3")){
-                    calories =ToolKits.calculateCalories(Float.parseFloat(sportRecordArray.getDistance()),
-                            Integer.parseInt(sportRecordArray.getDuration()),user_weight)+calories;
+                if (sportRecordArray.getState().equals("1") || sportRecordArray.getState().equals("2") || sportRecordArray.getState().equals("3")) {
+                    calories = ToolKits.calculateCalories(Float.parseFloat(sportRecordArray.getDistance()),
+                            Integer.parseInt(sportRecordArray.getDuration()), user_weight) + calories;
                 }
             }
         }
@@ -724,9 +730,6 @@ public class GroupsShareActivity extends ToolBarActivity {
     }
 
 
-
-
-
     private String getDistanceKM() {
 
         sportRecordArrayList = UserDeviceRecord.findHistoryChartwithHMS
@@ -737,6 +740,7 @@ public class GroupsShareActivity extends ToolBarActivity {
         } else {
             for (SportRecord sportRecordArray : sportRecordArrayList) {
                 MyLog.e(TAG, "distance" + sportRecordArray.getDistance());
+                if (sportRecordArray.getState().equals("1")||sportRecordArray.getState().equals("2")||sportRecordArray.getState().equals("3"))
                 distance = Integer.parseInt(sportRecordArray.getDistance()) + distance;
             }
         }
@@ -782,11 +786,11 @@ public class GroupsShareActivity extends ToolBarActivity {
         }
         overlayOptions = new MarkerOptions().position(point)
                 .icon(realtimeBitmap).zIndex(9).draggable(true);
-        if (pointList.size() >= 2 && pointList.size() <= 10000) {
-            // 添加路线（轨迹）
-            polyline = new PolylineOptions().width(10)
-                    .color(Color.RED).points(pointList);
-        }
+//        if (pointList.size() >= 2 && pointList.size() <= 10000) {
+//            // 添加路线（轨迹）
+//            polyline = new PolylineOptions().width(10)
+//                    .color(Color.RED).points(pointList);
+//        }
         addMarker();
     }
 

@@ -33,6 +33,9 @@ import com.baidu.trace.OnEntityListener;
 import com.baidu.trace.OnTrackListener;
 import com.baidu.trace.Trace;
 import com.baidu.trace.TraceLocation;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.logic.UI.Groups.baidu.GroupsDetailsActivity;
@@ -54,7 +57,7 @@ import java.util.Map;
 
 import Trace.GreenDao.DaoMaster;
 
-
+//,OnMapReadyCallback
 @SuppressLint("NewApi")
 public class WorkoutActivity extends ToolBarActivity implements OnClickListener {
 
@@ -174,6 +177,9 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
         initOnTrackListener();
         locationsp = getSharedPreferences("Location", MODE_PRIVATE);
 
+//        MapFragment mapFragment = (MapFragment) getFragmentManager()
+//                .findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
     }
 /*    @Override
     public void onBackPressed() {
@@ -290,7 +296,7 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
             @Override
             public Map<String, String> onTrackAttrCallback() {
                 // TODO Auto-generated method stub
-//                MyLog.e(TAG,"onTrackAttrCallback");
+                MyLog.e(TAG,"onTrackAttrCallback");
                 return null;
             }
 
@@ -598,4 +604,12 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
         return mImei;
     }
 
+/*    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        MyLog.e(TAG,"googleMap++好了");
+        googleMap.addMarker(new com.google.android.gms.maps.model.MarkerOptions()
+        .position(new com.google.android.gms.maps.model.LatLng(0,0))
+                .title("Google dyho8 map")
+        );
+    }*/
 }

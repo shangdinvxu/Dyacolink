@@ -13,14 +13,14 @@
         >
 
 
-        <com.linkloving.dyh08.ViewUtils.barchartview.BarChartView
+        <com.linkloving.dyh08.ViewUtils.barchartview.WeekBarChartView
             android:layout_marginTop="-10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/week_barchartView"
             >
 
-        </com.linkloving.dyh08.ViewUtils.barchartview.BarChartView>
+        </com.linkloving.dyh08.ViewUtils.barchartview.WeekBarChartView>
     </LinearLayout>
 
 

@@ -704,10 +704,17 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                 //跑步 里程
                 int runDistance = (int) (CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getRun_distance()), 0));
                 int distance = walkDistance + runDistance;
+                MyApplication.getInstance(PortalActivity.this).setOld_distance(distance);
                 float distanceKm = (float) distance / 1000;
-                String distancekm = DateSwitcher.oneFloat(distanceKm);
+                String distancekm = "" ;
+                if (distance<1000){
+                    distancekm = DateSwitcher.twoFloat(distanceKm);
+                }else {
+                     distancekm = DateSwitcher.oneFloat(distanceKm);
+                }
                 localSettingUnitInfo = PreferencesToolkits.getLocalSettingUnitInfo(PortalActivity.this);
                 if (localSettingUnitInfo==ToolKits.UNIT_GONG){
+
                     distanceView.setText(distancekm + "");
                     distanceUnit.setText(R.string.KM);
                 }else {
@@ -740,6 +747,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 //                int caloriesNow = calorieseveryday * (Integer.parseInt(HH) * 60 + Integer.parseInt(MM)) / 1440;
 //                MyLog.e("caloriesNow",caloriesNow+"caloriesNow");
 //                int calValue = caloriesNow+walkCal+runCal ;
+                MyApplication.getInstance(PortalActivity.this).setOld_calories(walkCal+runCal);
                 calView.setText((walkCal+runCal) + "");
                 caloriesSave  =walkCal+runCal ;
 

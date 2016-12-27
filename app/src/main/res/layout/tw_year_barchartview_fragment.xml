@@ -25,7 +25,7 @@
         android:background="@color/white"
         >
 
-        <com.linkloving.dyh08.ViewUtils.barchartview.BarChartView
+        <com.linkloving.dyh08.ViewUtils.barchartview.YearBarChartView
             android:layout_marginTop="-10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,7 +33,7 @@
             >
 
 
-        </com.linkloving.dyh08.ViewUtils.barchartview.BarChartView>
+        </com.linkloving.dyh08.ViewUtils.barchartview.YearBarChartView>
     </LinearLayout>
 
 

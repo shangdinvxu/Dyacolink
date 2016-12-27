@@ -120,6 +120,7 @@ public class LPDeviceInfo {
 	//老版本信息
 	public int stepDayTotals; // 已经完成的任务量
 	public int distenceDayTotals;
+	public int CaloriesTotals ;
 	
 	/**
 	 * 走路信息

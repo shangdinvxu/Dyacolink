@@ -11,14 +11,14 @@
         >
 
 
-        <com.linkloving.dyh08.logic.UI.calories.barchartview.BarChartView
+        <com.linkloving.dyh08.ViewUtils.barchartview.DayBarChartView
             android:layout_marginTop="-10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/day_barchartView"
             >
 
-        </com.linkloving.dyh08.logic.UI.calories.barchartview.BarChartView>
+        </com.linkloving.dyh08.ViewUtils.barchartview.DayBarChartView>
     </LinearLayout>
 
 </LinearLayout>

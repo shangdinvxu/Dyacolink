@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.GregorianCalendar;
+import java.util.IllegalFormatCodePointException;
 
 /**
  * 日期切换实现类.
@@ -39,6 +40,10 @@ public class DateSwitcher
 		return  new Formatter().format("%.1f", object).toString();
 	}
 
+	public static String twoFloat(Object object){
+
+		return  new Formatter().format("%.2f", object).toString();
+	}
 
 
 	protected void init()
@@ -73,10 +78,82 @@ public class DateSwitcher
 			break;
 			
 		}
-		
-		
-		
+
 	}
+
+
+	public static  String intWeekDateToString(int i){
+		String weekString  = null;
+		switch (i){
+			case 1:
+			weekString = "Sun";
+			break;
+			case 2:
+				weekString = "Mon";
+				break;
+			case 3:
+				weekString = "Tue";
+				break;
+			case 4:
+				weekString = "Wed";
+				break;
+			case 5:
+				weekString = "Thu";
+				break;
+			case 6:
+				weekString = "Fir";
+				break;
+			case 7:
+				weekString = "Sat";
+				break;
+
+		}
+		return weekString  ;
+	}
+
+	public static  String intMonthDateToString(int i){
+		String weekString  = null;
+		switch (i){
+			case 1:
+				weekString = "Jan";
+				break;
+			case 2:
+				weekString = "Feb";
+				break;
+			case 3:
+				weekString = "Mar";
+				break;
+			case 4:
+				weekString = "Apr";
+				break;
+			case 5:
+				weekString = "May";
+				break;
+			case 6:
+				weekString = "Jun";
+				break;
+			case 7:
+				weekString = "Jul";
+				break;
+			case 8:
+				weekString = "Aug";
+				break;
+			case 9:
+				weekString = "Sep";
+				break;
+			case 10:
+				weekString = "Oct";
+				break;
+			case 11:
+				weekString = "Nov";
+				break;
+			case 12:
+				weekString = "Dec";
+				break;
+		}
+		return weekString  ;
+	}
+
 
 	/**
 	 * 起始日期.

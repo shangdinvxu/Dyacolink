@@ -84,10 +84,10 @@ public class TraceGreendao {
      * @param date  每天的日期
      * @param startDate 每次开始记录轨迹的开始时间
      */
-    public void addStartTime(String date,Date startDate){
+    public void addStartTime(String date,Date startDate,double  dou){
         MyLog.e(TAG,"addStartTime方法执行了");
-        Note note = new Note(null, date,  startDate, null,1, null,null);
-        getNoteDao().insertOrReplace(note);
+        Note note = new Note(null, date,  startDate, null,1, dou,null);
+        getNoteDao().insert(note);
     }
     public void addStartMonth(String date,Date startDate){
         MyLog.e(TAG,"addStartMoth方法执行了");

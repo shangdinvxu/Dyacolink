@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import com.linkloving.band.dto.DaySynopic;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.ViewUtils.barchartview.BarChartView;
+import com.linkloving.dyh08.ViewUtils.barchartview.MonthBarChartView;
+import com.linkloving.dyh08.ViewUtils.barchartview.WeekBarChartView;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.DbDataUtils;
+import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.text.ParseException;
@@ -27,14 +30,14 @@ import java.util.List;
 public class MonthchartviewFragment extends Fragment {
     private static final String TAG = MonthchartviewFragment.class.getSimpleName();
 
-    BarChartView barChartView ;
+    MonthBarChartView barChartView ;
     private View view;
-    private BarChartView.BarChartItemBean[] items;
-    private List<BarChartView.BarChartItemBean> month;
+    private MonthBarChartView.BarChartItemBean[] items;
+    private List<MonthBarChartView.BarChartItemBean> month;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tw_month_barchartview_fragment, container, false);
-         barChartView = (BarChartView) view.findViewById(R.id.month_barchartView);
+         barChartView = (MonthBarChartView) view.findViewById(R.id.month_barchartView);
         barChartView.setPopupViewType(BarChartView.STEP__TYPE);
         String date = getArguments().getString("monthDate");
         new MonthChartAsynckTask().execute(date);
@@ -92,13 +95,25 @@ public class MonthchartviewFragment extends Fragment {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
                 String format = sim.format(parseDate);
-                BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean(format, step);
+                MonthBarChartView.BarChartItemBean barChartItemBean = new MonthBarChartView.BarChartItemBean(format, step);
                 MyLog.e(TAG, barChartItemBean.itemType.toString() + "=======" + Integer.toString((int) barChartItemBean.itemValue));
                 month.add(barChartItemBean);
             }
+
+            int monthMount = ToolKits.getMonthMount(parseDate);
+            int leftSize = monthMount - month.size();
+            for (int i = 0 ;i<leftSize;i++){
+                Calendar instance = Calendar.getInstance();
+                instance.setTime(parseDate);
+                instance.add(Calendar.DAY_OF_YEAR,1+i);
+                Date time = instance.getTime();
+                String format = sim.format(time);
+                month.add(new MonthBarChartView.BarChartItemBean(format,0));
+            }
             barChartView.setItems(month);
-            barChartView.setDialogListerer(new BarChartView.DialogListerer() {
+            barChartView.setDialogListerer(new MonthBarChartView.DialogListerer() {
                 @Override
                 public void showDialog(int i, int x, int y) {
                     barChartView.showPopupWindow(view, month.get(i).itemType, (int) month.get(i).itemValue, x, y);

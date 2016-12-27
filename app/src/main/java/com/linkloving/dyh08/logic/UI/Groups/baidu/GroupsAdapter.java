@@ -16,6 +16,7 @@ import com.linkloving.band.ui.DetailChartCountData;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.db.sport.UserDeviceRecord;
+import com.linkloving.dyh08.logic.UI.login.LoginFinishActivity;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.utils.CommonUtils;
@@ -61,7 +62,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     public final List<Note> list;
     private DetailChartCountData count;
     private final UserEntity userEntity;
-    private final List<Note> workDataNotes;
+//    private final List<Note> workDataNotes;
 
     public GroupsAdapter(Context context) {
         this.mContext = context;
@@ -75,14 +76,14 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         list = traGreendao.searchAllMonthtimes();
         startTimeList = traGreendao.searchAllStarttime();
         endTimeList = traGreendao.searchAllEndTime();
-        workDataNotes = traGreendao.searchWorkData();
+//        workDataNotes = traGreendao.searchWorkData();
         mMonthData = new String[list.size()];
         for (int i = 0 ;i< list.size();i++){
             mMonthData[i]= list.get(i).getDate();
             MyLog.e(TAG,"mMonthData[i].toString():"+mMonthData[i].toString());
         }
-        startTimeList.addAll(workDataNotes);
-        endTimeList.addAll(workDataNotes);
+//        startTimeList.addAll(workDataNotes);
+//        endTimeList.addAll(workDataNotes);
         sort sort = new sort();
         Collections.sort(startTimeList,sort);
         Collections.sort(endTimeList,sort);
@@ -156,9 +157,9 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
             holder.duration = (AutoCompleteTextView) convertView1.findViewById(R.id.duration);
             holder.avgSpeed = (AutoCompleteTextView) convertView1.findViewById(R.id.avgSpeed);
             holder.mapState = (ImageView) convertView1.findViewById(R.id.mapState);
-        if (startTimeList.get(position).getType()==10){
+        if (startTimeList.get(position).getLatitude()!=null&&startTimeList.get(position).getLatitude()==1){
             holder.mapState.setBackgroundResource(R.mipmap.mapoff);
-        }else {
+        }else if (startTimeList.get(position).getLatitude()!=null&&startTimeList.get(position).getLatitude()==0){
             holder.mapState.setBackgroundResource(R.mipmap.mapon);
         }
         MyLog.e(TAG,startTimeList.get(position).getDate()+"-------------startTimeList的getDate");
@@ -185,6 +186,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         }else{
             for (SportRecord sportRecordArray:sportRecordArrayList) {
                 MyLog.e(TAG,"distance"+sportRecordArray.getDistance());
+                if (sportRecordArray.getState().equals("1")||sportRecordArray.getState().equals("2")||sportRecordArray.getState().equals("3"))
                 distance =Integer.parseInt(sportRecordArray.getDistance())+distance ;
             }
         }
@@ -194,12 +196,10 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         float avgSpeed = (distance/1000) /hourtime;
         String distanceStr = new Formatter().format("%.1f", distanceKM).toString();
         holder.distance.setText(distanceStr + " km");
-
         holder.duration.setText(duration);
         String avgSpeedStr = new Formatter().format("%.1f", avgSpeed).toString();
         holder.avgSpeed.setText(avgSpeedStr+" km/h");
         return convertView1;
-
     }
 
     @Override

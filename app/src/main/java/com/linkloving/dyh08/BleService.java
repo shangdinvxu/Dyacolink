@@ -201,6 +201,8 @@ public class BleService extends Service {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
 
 
+
+
     /*****》成员变量的get/set方法！end《******/
 
     /*************************》复写服务生命周期方法《*************************/
@@ -584,8 +586,12 @@ public class BleService extends Service {
                 provider.SetDeviceTime(BleService.this);
                 provider.GetHeartrate(BleService.this);
                 provider.getworkOutdata(BleService.this);
-                provider.clearWorkOutdata(BleService.this);
-
+                try {
+                    Thread.sleep(1000);
+                    provider.clearWorkOutdata(BleService.this);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
             //时间设置成功--基本流程完毕
@@ -602,6 +608,8 @@ public class BleService extends Service {
                         if (lpDeviceInfo_.timeStamp < 365 * 24 * 3600)  //手表时间为1970年的1年内
                         {
                             lpDeviceInfo_.stepDayTotals = MyApplication.getInstance(BleService.this).getOld_step();
+                            lpDeviceInfo_.distenceDayTotals =MyApplication.getInstance(BleService.this).getOld_distance() ;
+                            lpDeviceInfo_.CaloriesTotals =MyApplication.getInstance(BleService.this).getOld_calories() ;
                             provider.resetStep(BleService.this, lpDeviceInfo_);
                         }
                         /******拿到卡号同时后按情况去设置步数OVER*****/
@@ -643,12 +651,16 @@ public class BleService extends Service {
 //                } catch (Exception e) {
 //                    e.printStackTrace();
 //                }
-
-                for (LPWorkoutData obj1: obj){
-                    MyLog.e(TAG,"notifyforgetworkoutdata"+obj1.getStarttime()+"-------"+obj1.getEndtime());
-                    traceGreendao.addworkoutData(obj1.getStarttime(),obj1.getStarttime(),obj1.getEndtime());
-                    traceGreendao.addStartMonth(simpleDateFormat.format(new Date(obj1.getStarttime()*1000)),new Date(obj1.getStarttime()*1000));
+                if (obj.size()>0){
+                    for (LPWorkoutData obj1: obj){
+                        MyLog.e(TAG,"notifyforgetworkoutdata"+obj1.getStarttime()+"-------"+obj1.getEndtime());
+                        traceGreendao.addworkoutData(obj1.getStarttime(),obj1.getStarttime(),obj1.getEndtime());
+                        traceGreendao.addStartTime(simpleDateFormat.format(new Date(obj1.getStarttime()*1000)),new Date(obj1.getStarttime()*1000),1);
+                        traceGreendao.addEndTime(simpleDateFormat.format(new Date(obj1.getStarttime()*1000)),new Date(obj1.getEndtime()*1000));
+                        traceGreendao.addStartMonth(simpleDateFormat.format(new Date(obj1.getStarttime()*1000)),new Date(obj1.getStarttime()*1000));
+                    }
                 }
+
             }
 
             @Override

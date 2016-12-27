@@ -242,6 +242,10 @@ public  class BLEProvider
 	public static final int INDEX_GET_WORKOUT_DATA= INDEX_SHOWHAND + 1;
 	/** 指令代码：发送抬手显示的指令 */
 	public static final int INDEX_CLEAR_WORKOUT_DATA= INDEX_GET_WORKOUT_DATA + 1;
+	/** 指令代码：发送抬手显示的指令 */
+	public static final int INDEX_CLOSESHOWHAND= INDEX_CLEAR_WORKOUT_DATA + 1;
+	public static final int OPEN_HEARTRATESYNC= INDEX_CLOSESHOWHAND + 1;
+	public static final int CLOSE_HEARTRATESYNC= OPEN_HEARTRATESYNC + 1;
 
 
 	// Stops scanning after 10 seconds.
@@ -1001,6 +1005,15 @@ public  class BLEProvider
 	  OwnLog.i(TAG, "..................keepstate Thread........................");
 	   runIndexProess(context, INDEX_SEND_0X5F);
    }
+
+	public void setHeartrateSync(Context context ){
+		runIndexProess(context,OPEN_HEARTRATESYNC);
+	}
+
+	public void setCloseHeartrateSync(Context context ){
+		runIndexProess(context,CLOSE_HEARTRATESYNC);
+	}
+
    
    /* 获取卡号*/
    public void get_cardnum(Context context)
@@ -1156,11 +1169,17 @@ public  class BLEProvider
 	  OwnLog.i(TAG, "..................INDEX_REQUEST_BOUND_RECY Thread........................"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 	   runIndexProess(context, INDEX_REQUEST_BOUND_RECY);
    }
-	//运动目标
-	public void setIndexShowhand(Context context,LPDeviceInfo deviceInfo)
+	//抬手显屏
+	public void setIndexShowhand(Context context)
 	{
 		OwnLog.i(TAG, "..................setIndexShowhand Thread........................"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-		runIndexProess(context, INDEX_SHOWHAND,deviceInfo);
+		runIndexProess(context, INDEX_SHOWHAND);
+	}
+	//抬手显屏
+	public void setIndexcloseShowhand(Context context)
+	{
+		OwnLog.i(TAG, "..................setIndexShowhand Thread........................"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+		runIndexProess(context, INDEX_CLOSESHOWHAND);
 	}
 
 
@@ -1705,6 +1724,12 @@ public  class BLEProvider
 						msg.obj = mLepaoProtocalImpl.getAllDeviceInfoNew(serverDeviceInfo.userId);
 			    		msg.sendToTarget();
 						break;
+					case OPEN_HEARTRATESYNC :
+						mLepaoProtocalImpl.heartSync((byte)0x01);
+						break;
+					case CLOSE_HEARTRATESYNC :
+						mLepaoProtocalImpl.heartSync((byte)0x00);
+							break;
 					case INDEX_SET_TIME_SETTING:
 						Log.i(TAG, "................INDEX_SET_TIME_SETTING.................");
 						msg = mHandler.obtainMessage();
@@ -1814,11 +1839,19 @@ public  class BLEProvider
 				    	break;
 //					showhand
 					case INDEX_SHOWHAND:  //
+					Log.d(TAG, ".................INDEX_SET_DEVICE_LONGSIT................");
+					msg = mHandler.obtainMessage();
+					msg.what = MSG_BLE_DATA;
+					msg.arg1 = INDEX_SHOWHAND;
+					msg.obj = mLepaoProtocalImpl.setShowhand((byte) 0x01);
+					msg.sendToTarget();
+					break;
+					case INDEX_CLOSESHOWHAND:  //
 						Log.d(TAG, ".................INDEX_SET_DEVICE_LONGSIT................");
 						msg = mHandler.obtainMessage();
 						msg.what = MSG_BLE_DATA;
-						msg.arg1 = INDEX_SHOWHAND;
-						msg.obj = mLepaoProtocalImpl.setShowhand(serverDeviceInfo);
+						msg.arg1 = INDEX_CLOSESHOWHAND;
+						msg.obj = mLepaoProtocalImpl.setShowhand((byte) 0x00);
 						msg.sendToTarget();
 						break;
 				    // 发送运动目标提醒指令
@@ -2099,7 +2132,7 @@ public  class BLEProvider
 				        msg = mHandler.obtainMessage();
 			    	    msg.what = MSG_BLE_DATA;
 			    	    msg.arg1 = INDEX_SEND_STEP;
-			    	    msg.obj = mLepaoProtocalImpl.resetSportDataNew(serverDeviceInfo.stepDayTotals);;
+			    	    msg.obj = mLepaoProtocalImpl.resetSportDataNew(serverDeviceInfo.stepDayTotals,serverDeviceInfo.distenceDayTotals,serverDeviceInfo.CaloriesTotals);;
 			    	    msg.sendToTarget();
 				        break;
 				    case INDEX_SEND_0X5F:

@@ -1,28 +1,20 @@
 package com.linkloving.dyh08.logic.UI.calories;
 
 import android.app.Fragment;
-import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.linkloving.band.dto.DaySynopic;
 import com.linkloving.band.dto.SportRecord;
-import com.linkloving.band.sleep.DLPSportData;
-import com.linkloving.band.sleep.SleepDataHelper;
-import com.linkloving.band.ui.DatasProcessHelper;
 import com.linkloving.band.ui.DetailChartCountData;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.db.sport.UserDeviceRecord;
-import com.linkloving.dyh08.logic.UI.calories.asyncktask.DaySportAsynck;
-import com.linkloving.dyh08.logic.UI.calories.barchartview.BarChartView;
+import com.linkloving.dyh08.ViewUtils.barchartview.DayBarChartView;
 import com.linkloving.dyh08.logic.dto.UserEntity;
-import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.utils.TimeZoneHelper;
@@ -41,8 +33,8 @@ import java.util.Locale;
 public class DaychartviewFragment extends Fragment {
     public static final String COLUMN_START_TIME="start_time";
     private static final String TAG = DaychartviewFragment.class.getSimpleName();
-    private List<BarChartView.BarChartItemBean> dayhour = new ArrayList<>();
-    private BarChartView barChartView;
+    private List<DayBarChartView.BarChartItemBean> dayhour = new ArrayList<>();
+    private DayBarChartView dayBarChartView;
     private View view;
     int calorieseveryday ;
     private int calorieseveryHour;
@@ -55,13 +47,13 @@ public class DaychartviewFragment extends Fragment {
         ToolKits toolKits = new ToolKits();
         this.calorieseveryday = toolKits.getCalories(getActivity());
         MyLog.e("calories",calorieseveryday+"calories");
-        barChartView = (BarChartView) view.findViewById(R.id.day_barchartView);
-        barChartView.setPopupViewType(BarChartView.CALORIES);
+        dayBarChartView = (DayBarChartView) view.findViewById(R.id.day_barchartView);
+        dayBarChartView.setPopupViewType(DayBarChartView.CALORIES);
         String checkDate = getArguments().getString("checkDate");
         new DayChartAsynck().execute(checkDate);
         return view;
     }
-    private class DayChartAsynck extends AsyncTask<Object, Object, List<BarChartView.BarChartItemBean>>{
+    private class DayChartAsynck extends AsyncTask<Object, Object, List<DayBarChartView.BarChartItemBean>>{
 
         private Date parse;
         private ArrayList<Date> stringTimeList;
@@ -75,7 +67,7 @@ public class DaychartviewFragment extends Fragment {
         private SimpleDateFormat  hh = new SimpleDateFormat("HH", Locale.getDefault());
 
         @Override
-        protected List<BarChartView.BarChartItemBean> doInBackground(Object... objects) {
+        protected List<DayBarChartView.BarChartItemBean> doInBackground(Object... objects) {
             calorieseveryHour = calorieseveryday / 24;
             MyLog.e("calories",calorieseveryHour+"calorieseveryHour");
             stringTimeList = new ArrayList<>();
@@ -162,23 +154,23 @@ public class DaychartviewFragment extends Fragment {
 //                }
                     /*********************/
                 MyLog.e(TAG, "calValue" + calValue);
-             BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean(Integer.toString(i+1), calValue);
+             DayBarChartView.BarChartItemBean barChartItemBean = new DayBarChartView.BarChartItemBean(Integer.toString(i+1), calValue);
                 dayhour.add(barChartItemBean);
         }
             return dayhour;
         }
-        protected void onPostExecute(final List<BarChartView.BarChartItemBean> dayhour) {
+        protected void onPostExecute(final List<DayBarChartView.BarChartItemBean> dayhour) {
             super.onPostExecute(dayhour);
-            barChartView.setItems(dayhour);
-            barChartView.setDialogListerer(new BarChartView.DialogListerer() {
+            dayBarChartView.setItems(dayhour);
+            dayBarChartView.setDialogListerer(new DayBarChartView.DialogListerer() {
                 @Override
                 public void showDialog(int i, int x, int y) {
                     String textShowTime = i+":00";
-                    barChartView.showPopupWindow(view,textShowTime, (int) dayhour.get(i).itemValue, x, y);
+                    dayBarChartView.showPopupWindow(view,textShowTime, (int) dayhour.get(i).itemValue, x, y);
                 }
                 @Override
                 public void dismissPopupWindow() {
-                    barChartView.popupWindow.dismiss();
+                    dayBarChartView.popupWindow.dismiss();
                 }
             });
         }

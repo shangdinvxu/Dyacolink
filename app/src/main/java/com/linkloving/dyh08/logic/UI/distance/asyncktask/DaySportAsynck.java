@@ -8,6 +8,7 @@ import com.linkloving.band.dto.DaySynopic;
 import com.linkloving.dyh08.ViewUtils.drawAngle.DrawArc;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.utils.CommonUtils;
+import com.linkloving.dyh08.utils.DateSwitcher;
 import com.linkloving.dyh08.utils.DbDataUtils;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
@@ -77,6 +78,7 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
         int runDistance = (int) (CommonUtils.getScaledDoubleValue(Double.valueOf(daySynopic.getRun_distance()), 0));
         int distance = walkDistance + runDistance;
         int stepGoal = Integer.parseInt(PreferencesToolkits.getGoalInfo(context, PreferencesToolkits.KEY_GOAL_DISTANCE));
+
         float stepPercent  = (float)distance/(stepGoal*1000) ;
         //此时去更新UI
         double i = (double)distance / 1000;
@@ -89,7 +91,7 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
             distanceDB = (Math.round(i * 100 + 0.5) / 100.0);
         }
 
-        stepNumber.setText(Double.toString(distanceDB));
+        stepNumber.setText(DateSwitcher.twoFloat(distanceDB));
         drawArc.setPercent(stepPercent);
         textView.setText(datasdf);
 //            int walkDistance = (int) (CommonUtils.getScaledDoubleValue(Double.valueOf(daySynopic.getWork_distance()), 0));//走路 里程

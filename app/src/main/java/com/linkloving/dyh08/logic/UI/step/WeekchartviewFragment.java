@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.linkloving.band.dto.DaySynopic;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.ViewUtils.barchartview.BarChartView;
+import com.linkloving.dyh08.ViewUtils.barchartview.WeekBarChartView;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.DbDataUtils;
 import com.linkloving.dyh08.utils.ToolKits;
@@ -32,15 +33,15 @@ import butterknife.ButterKnife;
 public class WeekchartviewFragment extends Fragment {
     private static final String TAG = WeekchartviewFragment.class.getSimpleName();
 
-    private BarChartView barChartView;
+    private WeekBarChartView barChartView;
     private BarChartView.BarChartItemBean[] items;
     private View view;
-    private List<BarChartView.BarChartItemBean> week = new ArrayList<>();
+    private List<WeekBarChartView.BarChartItemBean> week = new ArrayList<>();
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tw_week_barchartview_fragment, container, false);
-        barChartView = (BarChartView) view.findViewById(R.id.week_barchartView);
+        barChartView = (WeekBarChartView) view.findViewById(R.id.week_barchartView);
         barChartView.setPopupViewType(BarChartView.STEP__TYPE);
         String date = getArguments().getString("date");
         MyLog.e(TAG,date);
@@ -86,8 +87,6 @@ public class WeekchartviewFragment extends Fragment {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
-
             try {
                 mondayOfThisWeek = ToolKits.getFirstSundayOfThisWeek(sdf.parse(dateStr));
                 sundayofThisWeek = ToolKits.getStaurdayofThisWeek(sdf.parse(dateStr));
@@ -129,11 +128,20 @@ public class WeekchartviewFragment extends Fragment {
                     e.printStackTrace();
                 }
                 String format = sim.format(parseDate);
-                BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean(format, step);
+                WeekBarChartView.BarChartItemBean barChartItemBean = new WeekBarChartView.BarChartItemBean(format, step);
                 week.add(barChartItemBean);
             }
+            int leftSize = 7 - week.size();
+            for (int i = 0 ;i<leftSize;i++){
+                Calendar instance = Calendar.getInstance();
+                instance.setTime(parseDate);
+                instance.add(Calendar.DAY_OF_YEAR,1+i);
+                Date time = instance.getTime();
+                String format = sim.format(time);
+                week.add(new WeekBarChartView.BarChartItemBean(format,0));
+            }
             barChartView.setItems(week);
-            barChartView.setDialogListerer(new BarChartView.DialogListerer() {
+            barChartView.setDialogListerer(new WeekBarChartView.DialogListerer() {
                 @Override
                 public void showDialog(int i, int x, int y) {
                     barChartView.showPopupWindow(view,week.get(i).itemType, (int) week.get(i).itemValue, x, y);

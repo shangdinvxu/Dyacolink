@@ -914,6 +914,9 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		return arrayList;
 	}
 
+
+
+
 	/**
 	 * 获取这个日期有多少天.
 	 * @param date
@@ -926,7 +929,6 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		int days=c.getActualMaximum(Calendar.DAY_OF_MONTH);//这个月有多少天
-
 		return days;
 	}
 

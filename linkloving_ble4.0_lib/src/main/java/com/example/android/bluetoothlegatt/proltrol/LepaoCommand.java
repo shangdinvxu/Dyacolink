@@ -31,7 +31,7 @@ public interface LepaoCommand {
 	static final byte COMMAND_ANCS_PUSH = 0x20;             //消息提醒
 	
 	static final byte COMMAND_SET_ALARM = 0x0C;             // 设置闹钟
-	static final byte COMMAND_GET_ALARM = 0x0D;             // 获取可用闹钟个数(参数 0xFF) 或者 闹钟信息(参数 闹钟索引)
+//	static final byte COMMAND_GET_ALARM = 0x0D;             // 获取可用闹钟个数(参数 0xFF) 或者 闹钟信息(参数 闹钟索引)
 //	static final byte COMMAND_GET_VERSION = 0x0E;           // 获取设备版本号，是一个String
 	byte TIMMERSETTING =0x0E ; //								定时器设置
 	static final byte COMMAND_SET_MOTION_REMIND = 0x0F;     // 运动提醒（久坐提醒）
@@ -42,6 +42,7 @@ public interface LepaoCommand {
 	static final byte COMMAND_SET_NAME = 0x5C;              // 设置设备名称
 	static final byte COMMAND_GET_DEVICE_ID = 0x5F;         // 设备ID，8byte
 	static final byte COMMAND_GET_HEARTRATE = 0x42;         // 设备ID，8byte
+	static final byte COMMAND_HEARTRATE_SYNC = 0x41;         // 设备ID，8byte
 	//*********************卡片********************//
 	static final byte COMMAND_CONTROL_CARD = (byte) 0x90;   // 开卡(上电)  关卡(断电)
 	static final byte COMMAND_AID_CARD = (byte) 0x91;       //AID
@@ -49,5 +50,5 @@ public interface LepaoCommand {
 	static final byte COMMAND_FORMAT_DEVICE = 0x5E;         // 初始化设备(解除绑定)
 	
 	static final byte COMMAND_FACTORY_TEST = 0x00;          // 工厂测试命令
-	byte COMMANDSHOWHAND = 0x45  ;//抬手显屏
+	byte COMMANDSHOWHAND = 0x0D  ;//抬手显屏
 }

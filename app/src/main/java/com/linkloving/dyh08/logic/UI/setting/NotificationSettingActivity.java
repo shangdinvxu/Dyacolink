@@ -224,7 +224,9 @@ public class NotificationSettingActivity extends ToolBarActivity {
                         if (provider.isConnectedAndDiscovered()){
                             MyLog.e(TAG,"发送定时器的指令了");
                             LPDeviceInfo lpDeviceInfo1 = new LPDeviceInfo();
-                            lpDeviceInfo1.millions = Integer.parseInt(timeoneHr)*3600+Integer.parseInt(timeoneMin)*60;
+                            String s = timeSetting1.getText().toString();
+                            String[] split = s.split(":");
+                            lpDeviceInfo1.millions = Integer.parseInt(split[0])*3600+Integer.parseInt(split[1])*60;
                             provider.SetTimeSetting(NotificationSettingActivity.this,lpDeviceInfo1);
                         }else {
                             Toast.makeText(NotificationSettingActivity.this,getString(R.string.keepthe),Toast.LENGTH_SHORT).show();
@@ -254,8 +256,6 @@ public class NotificationSettingActivity extends ToolBarActivity {
 //                showTimePopupWindow();
 //            }
 //        });
-
-
     }
 
     private void initClockPopupWindow() {
@@ -520,6 +520,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                                 MyLog.e(TAG,"久坐提醒的time是"+time);
                                 deviceSetting.setLongsit_time(time);
                                 deviceSetting.setLongsit_vaild("1");
+                                deviceSetting.setLongsit_step(Intervalstime+"");
                                 LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,
                                         deviceSetting);
                                 if (provider.isConnectedAndDiscovered()){
