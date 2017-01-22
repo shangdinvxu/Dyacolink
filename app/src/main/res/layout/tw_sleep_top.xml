@@ -58,7 +58,7 @@
      <RelativeLayout
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_marginLeft="40dp">
+         android:layout_marginLeft="20dp">
          <TextView
              android:id="@+id/sleep_lightSleep"
              android:layout_width="wrap_content"
@@ -70,12 +70,13 @@
              />
          <TextView
              android:id="@+id/Lightsleep"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
+             android:layout_width="100dp"
+             android:layout_height="20dp"
+             android:lines="1"
              android:text="@string/lightsleep"
              android:textColor="@color/white"
              android:layout_marginLeft="3dp"
-             android:textSize="15sp"
+             android:textSize="11sp"
              android:layout_toRightOf="@+id/sleep_lightSleep"
              />
          <TextView
@@ -94,7 +95,7 @@
       <RelativeLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginLeft="30dp">
+          >
           <TextView
               android:id="@+id/sleep_DeepSleep"
               android:layout_width="wrap_content"
@@ -106,12 +107,13 @@
               />
           <TextView
               android:id="@+id/Deep_sleep"
-              android:layout_width="wrap_content"
+              android:layout_width="100dp"
               android:layout_height="wrap_content"
               android:text="@string/deepsleep"
               android:textColor="@color/white"
+              android:lines="1"
               android:layout_marginLeft="3dp"
-              android:textSize="15sp"
+              android:textSize="11sp"
               android:layout_toRightOf="@+id/sleep_DeepSleep"
               />
           <TextView

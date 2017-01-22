@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.linkloving.dyh08.BleService;
 import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
@@ -124,7 +125,12 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                         IntentFactory.start2MapActivity((Activity) mContext);
                         break;
                     case Left_viewVO1.map:
-                        IntentFactory.start2WorkoutActivity((Activity) mContext);
+                        boolean mapSelect = PreferencesToolkits.getMapSelect(mContext);
+                        if (mapSelect){
+                        IntentFactory.startGoogleActivity((Activity)mContext);
+                        }else {
+                            IntentFactory.start2WorkoutActivity((Activity) mContext);
+                        }
                         break;
                     case Left_viewVO1.Heart_Rate:
                         IntentFactory.startHeartrateActivity((Activity) mContext);

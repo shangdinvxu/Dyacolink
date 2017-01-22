@@ -144,7 +144,7 @@ public class WeekBarChartView extends View {
         textPaint.setTextSize(ScreenUtils.dp2px(getContext(), 12));
         int weekIndex = 7 ;
         for (int i = 0; i < mItems.size(); i++) {
-            barRect.bottom = (int) (screenH * 0.59);
+            barRect.bottom = (int) (screenH * 0.53);
             barRect.left =((int) y_index_startX + barItemWidth * i + barSpace * (i + 1));
 
 //            对值做个判断,如果为0的话设置一个高度,不然会很高 ;
@@ -253,6 +253,10 @@ public class WeekBarChartView extends View {
                 lastPointX = event.getRawX();
                 int x = (int) event.getX();
                 int y = (int) event.getY();
+                if(popupWindow!=null||popupWindow.isShowing()){
+                    mdialogListerer.dismissPopupWindow();
+                }
+
                 for (int i = 0; i < mItems.size(); i++) {
                     barRect.left = barItemWidth * i + barSpace * (i + 1) ;
                     int left = barRect.left;
@@ -281,7 +285,6 @@ public class WeekBarChartView extends View {
                     }
                 }
                 break;
-
             case MotionEvent.ACTION_MOVE:
                 if (popupWindow.isShowing()){
                 touchDown = false ;
@@ -291,7 +294,6 @@ public class WeekBarChartView extends View {
                 leftMoving += movingLeftThisTime;
                 lastPointX = x_move;
 //              自动清屏,屏幕刷新
-
                 for (int i = 0; i < mItems.size(); i++){
                     if (((int) y_index_startX + barItemWidth * i + barSpace * (i + 1) - (int) leftMoving)<lastPointX
                             &&lastPointX< ((int) y_index_startX + barItemWidth * (i+1) + barSpace * (i + 2) - (int) leftMoving)){
@@ -300,19 +302,22 @@ public class WeekBarChartView extends View {
                                 barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))+screenH,-1,-1);
                         timeView.setText(mItems.get(i).itemType);
                         step_number_textview.setText((int)mItems.get(i).itemValue+"");
+                        iCheck = i ;
+                        invalidate();
                     }
                 }
-                invalidate();
                 }
                 break;
-
             case MotionEvent.ACTION_UP:
-                //smooth scroll
-
-                new Thread(new SmoothScrollThread(movingLeftThisTime)).start();
                 if (popupWindow.isShowing()) {
                     mdialogListerer.dismissPopupWindow();
                 }
+                iCheck=-1;
+                //smooth scroll
+                new Thread(new SmoothScrollThread(movingLeftThisTime)).start();
+         /*       if (popupWindow.isShowing()) {
+                    mdialogListerer.dismissPopupWindow();
+                }*/
                 break;
 
             default:

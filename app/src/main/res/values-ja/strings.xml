@@ -1040,6 +1040,7 @@
     <string name="steps">歩数</string>
     <string name="avgsteps">平均歩数</string>
     <string name="avgkcal">平均消費カロリー</string>
+    <string name="goal_kcal">カロリー</string>
 
 
     <string name="Calories">消費カロリー</string>
@@ -1051,7 +1052,7 @@
     <string name="Sleep">睡眠</string>
     <string name="SLEEP">睡眠</string>
     <string name="avgtime">平均時間</string>
-    <string name="lightsleep">平均時間</string>
+    <string name="lightsleep">レム睡眠</string>
     <string name="deepsleep">ノンレム睡眠</string>
     <string name="wakeup">起床</string>
     <string name="totalsleep">総睡眠時間</string>
@@ -1133,7 +1134,7 @@
     <string name="confirm">确定</string>
     <string name="circular_fence_caption">请点击地图标记围栏圆心</string>
     <string name="vertexes_fence_caption">请按顺时针或逆时针方向点击地图</string>
-    <string name="AutomaticHR">Automatische Herzfrequenzmessung</string>
+    <string name="AutomaticHR">自動心拍数測定</string>
     <string name="Datasync">データ同期</string>
     <string name="Email">メール</string>
     <string name="Endtime">エンド</string>
@@ -1177,5 +1178,6 @@
     <string name="Average">平均心拍数</string>
     <string name="goalkcal">燃焼</string>
     <string name="Intervals">インターバル</string>
+    <string name="timersetting">タイマー</string>
 
 </resources>

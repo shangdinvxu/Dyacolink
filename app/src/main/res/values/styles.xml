@@ -329,8 +329,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:text">total</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:layout_marginLeft">64dp</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:layout_marginLeft">67dp</item>
+        <item name="android:textSize">11sp</item>
         <item name="android:layout_marginTop">12dp</item>
     </style>
 
@@ -349,10 +349,10 @@
       <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">7dp</item>
-      <item name="android:layout_marginLeft">3dp</item>
+      <item name="android:layout_marginLeft">17dp</item>
         <item name="android:padding">7dp</item>
       <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">23sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
    <style name="sleep_textview_hour">

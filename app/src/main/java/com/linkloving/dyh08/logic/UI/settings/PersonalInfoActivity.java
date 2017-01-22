@@ -171,16 +171,21 @@ public class PersonalInfoActivity extends ToolBarActivity {
 //        year1 = editYear.getText().toString().trim();
 //        String birthday = year1 + "-" + month + "-" + day;
 
+
+        String s = birthday.getText().toString();
+        if (s==null||s.length()==0){
+            Toast.makeText(PersonalInfoActivity.this, getString(R.string.pleasebirthday), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String[] split = s.split("-");
+        if (split[0].equals("null")){
+            Toast.makeText(PersonalInfoActivity.this, getString(R.string.pleasebirthday), Toast.LENGTH_SHORT).show();
+            return;
+        }
         userBase.setBirthdate( birthday.getText().toString());
         userBase.setUser_wearingStyle(wearingStyle);
         userBase.setRemind(remindtype);
 
-        if (month.equals("") || Integer.parseInt(month) == 0 || Integer.parseInt(month) > 12
-                || day.equals("") || Integer.parseInt(day) == 0 || Integer.parseInt(day) > 31
-                ) {
-            Toast.makeText(PersonalInfoActivity.this, getString(R.string.pleasebirthday), Toast.LENGTH_SHORT).show();
-            return;
-        }
         IntentFactory.startPortalActivityIntent(PersonalInfoActivity.this);
     }
 

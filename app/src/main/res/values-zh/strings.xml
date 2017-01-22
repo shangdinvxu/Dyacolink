@@ -1042,6 +1042,7 @@
     <string name="Calories">消耗卡路里</string>
     <string name="CALORIES">消耗卡路里</string>
     <string name="kcal">消耗卡路里</string>
+    <string name="goal_kcal">卡路里</string>
     <string name="avgkcal">平均消耗卡路里</string>
     <string name="Distance">距离</string>
     <string name="DISTANCE">距离</string>

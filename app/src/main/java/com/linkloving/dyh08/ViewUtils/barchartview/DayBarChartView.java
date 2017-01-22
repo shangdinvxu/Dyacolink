@@ -100,6 +100,7 @@ public class DayBarChartView extends View {
         screenHight = com.linkloving.dyh08.logic.UI.calories.barchartview.ScreenUtils.getScreenH(context);
         screenH = (int) (com.linkloving.dyh08.logic.UI.calories.barchartview.ScreenUtils.getScreenH(context) * 0.5);
         leftMargin = com.linkloving.dyh08.logic.UI.calories.barchartview.ScreenUtils.dp2px(context, 16);
+//        leftMargin = com.linkloving.dyh08.logic.UI.calories.barchartview.ScreenUtils.dp2px(context, 40);
         topMargin = com.linkloving.dyh08.logic.UI.calories.barchartview.ScreenUtils.dp2px(context, 40);
         smallMargin = com.linkloving.dyh08.logic.UI.calories.barchartview.ScreenUtils.dp2px(context, 6);
 
@@ -143,7 +144,7 @@ public class DayBarChartView extends View {
 
         for (int i = 0; i < mItems.size(); i++) {
 
-            barRect.bottom = (int) (screenH * 0.59);
+            barRect.bottom = (int) (screenH * 0.53);
             barRect.left =((int) y_index_startX + barItemWidth * i + barSpace * (i + 1));
 
 //            对值做个判断,如果为0的话设置一个高度,不然会很高 ;
@@ -254,8 +255,11 @@ public class DayBarChartView extends View {
                 lastPointX = event.getRawX();
                 int x = (int) event.getX();
                 int y = (int) event.getY();
+                if(popupWindow!=null&&popupWindow.isShowing()){
+                    mdialogListerer.dismissPopupWindow();
+                }
                 for (int i = 0; i < mItems.size(); i++) {
-                    barRect.left = barItemWidth * i + barSpace * (i + 1) ;
+                    barRect.left = (int) ( y_index_startX + barItemWidth * i + barSpace * (i)+screenW*0.05);
                     int left = barRect.left;
 //                    -60方便点击
                     if (mItems.get(i).itemValue == 0) {
@@ -274,10 +278,10 @@ public class DayBarChartView extends View {
                         MyLog.e("点击", "点击的是" + mItems.get(i).itemType);
 //                        (int) mItems[i].itemValue
 //                        y = screenHight-y +1000 ;
-                        x = (int) (barRect.left - screenW * 0.1);
+                        x = (int) (barRect.left - screenW*1.1);
                         y = (int) (-screenH + barRect.top + 0.078 * screenHight);
                         MyLog.e("点击", screenHight + "screenHight....." + screenH + "screenH...." + y + "y......." + screenW + "screenW-----" + x + "");
-                        mdialogListerer.showDialog(i, (int) (x-screenW*0.13), y);
+                        mdialogListerer.showDialog(i, x, y);
                         break;
                     }
                 }
@@ -292,34 +296,35 @@ public class DayBarChartView extends View {
                     leftMoving += movingLeftThisTime;
                     lastPointX = x_move;
 //              自动清屏,屏幕刷新
-
                     for (int i = 0; i < mItems.size(); i++) {
                         if (((int) y_index_startX + barItemWidth * i + barSpace * (i + 1) - (int) leftMoving) < lastPointX
                                 && lastPointX < ((int) y_index_startX + barItemWidth * (i + 1) + barSpace * (i + 2) - (int) leftMoving)) {
 //                        mdialogListerer.showDialog(i,(int)lastPointX,(int)event.getRawY());
-                            popupWindow.update((int) (lastPointX - screenW * 0.13),
+                            popupWindow.update((int) (lastPointX - screenW * 0.17),
                                     barRect.bottom - (int) (maxHeight * (mItems.get(i).itemValue / maxValue)) + screenH, -1, -1);
                             timeView.setText(i + ":00");
                             step_number_textview.setText((int) mItems.get(i).itemValue + "");
+                            iCheck=i;
+                            invalidate();
                         }
                     }
-                    invalidate();
                 }
                 break;
 
             case MotionEvent.ACTION_UP:
-                //smooth scroll
-
-                new Thread(new SmoothScrollThread(movingLeftThisTime)).start();
                 if (popupWindow.isShowing()) {
                     mdialogListerer.dismissPopupWindow();
                 }
+                iCheck=-1;
+                //smooth scroll
+                new Thread(new SmoothScrollThread(movingLeftThisTime)).start();
+//                if (popupWindow.isShowing()) {
+//                    mdialogListerer.dismissPopupWindow();
+//                }
                 break;
-
             default:
                 return super.onTouchEvent(event);
         }
-
         return true;
     }
 
@@ -391,7 +396,8 @@ public class DayBarChartView extends View {
 //            barItemWidth = minBarWidth;
             barSpace = minBarSpacing;
         }
-        barItemWidth = (screenW -itemCount*barSpace)/itemCount ;
+//        barItemWidth = (screenW -itemCount*barSpace)/itemCount ;
+        barItemWidth= (int) (screenW*0.025);
 
         maxRight = (int) y_index_startX + lineStrokeWidth + (barSpace + barItemWidth) * mItems.size();
         minRight = screenW - leftMargin - barSpace;
@@ -430,7 +436,7 @@ public class DayBarChartView extends View {
 
         maxDivisionValue = (float) (getRangeTop(unscaledValue) * Math.pow(10, scale));
 //        y_index_startX = (getDivisionTextMaxWidth(maxDivisionValue) + 10);
-        y_index_startX = 0;
+        y_index_startX = (float) (screenW*0.1);
         y_index_arrowRect = new Rect((int) (y_index_startX - 5), topMargin / 2 - 20,
                 (int) (y_index_startX + 5), topMargin / 2);
 

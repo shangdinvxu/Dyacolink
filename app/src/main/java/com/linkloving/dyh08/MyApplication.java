@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
@@ -33,7 +34,7 @@ import cn.sharesdk.framework.ShareSDK;
 /**
  * Created by zkx on 2016/3/2.
  */
-public class MyApplication extends Application{
+public class MyApplication extends MultiDexApplication {
     private final static String TAG = MyApplication.class.getSimpleName();
 
     public final static String SERVICE_WATCH = "com.linkloving.dyh08";

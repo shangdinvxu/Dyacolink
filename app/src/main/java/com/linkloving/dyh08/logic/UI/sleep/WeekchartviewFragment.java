@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.linkloving.band.dto.DaySynopic;
 import com.linkloving.dyh08.R;
+import com.linkloving.dyh08.ViewUtils.barchartview.WeekBarChartView;
 import com.linkloving.dyh08.logic.UI.sleep.sleepBarchartView.BarChartView;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.DbDataUtils;
@@ -85,8 +86,6 @@ public class WeekchartviewFragment extends Fragment {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
-
             try {
                 mondayOfThisWeek = ToolKits.getFirstSundayOfThisWeek(sdf.parse(dateStr));
                 sundayofThisWeek = ToolKits.getStaurdayofThisWeek(sdf.parse(dateStr));
@@ -113,6 +112,7 @@ public class WeekchartviewFragment extends Fragment {
             super.onPostExecute(daySynopics);
             double totalSleepTime = 0;
             SimpleDateFormat sim = new SimpleDateFormat("MM/dd");
+
             for(DaySynopic daySynopic:daySynopics){
 
                 Log.e(TAG, "----daySynopic---" + daySynopic.toString());
@@ -129,11 +129,30 @@ public class WeekchartviewFragment extends Fragment {
                 }
                 String format = sim.format(parseDate);
                 MyLog.e(TAG,"lightSleepHour"+lightSleepHour+"======"+"deepSleepHour"+deepSleepHour);
+
                 BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean(format, deepSleepHour,lightSleepHour);
                 week.add(barChartItemBean);
             }
+            int leftSize = 7 - week.size();
+            for (int i = 0 ;i<leftSize;i++){
+                Calendar instance = Calendar.getInstance();
+                instance.setTime(parseDate);
+                instance.add(Calendar.DAY_OF_YEAR,1+i);
+                Date time = instance.getTime();
+                String format = sim.format(time);
+                week.add(new BarChartView.BarChartItemBean(format,0,0));
+            }
             barChartView.setItems(week);
-
+            barChartView.setDialogListerer(new BarChartView.DialogListerer() {
+                @Override
+                public void showDialog(int i, int x, int y) {
+                    barChartView.showPopupWindow(view,3, 3, x, y);
+                }
+                @Override
+                public void dismissPopupWindow() {
+                    barChartView.popupWindow.dismiss();
+                }
+            });
         }
     }
 }

@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +18,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
+import android.widget.ZoomButton;
+
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -33,12 +39,24 @@ import com.baidu.trace.OnEntityListener;
 import com.baidu.trace.OnTrackListener;
 import com.baidu.trace.Trace;
 import com.baidu.trace.TraceLocation;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.logic.UI.Groups.baidu.GroupsDetailsActivity;
+import com.linkloving.dyh08.logic.UI.workout.GooglemapActivity;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.UI.workout.trackutils.GsonService;
@@ -59,7 +77,7 @@ import Trace.GreenDao.DaoMaster;
 
 //,OnMapReadyCallback
 @SuppressLint("NewApi")
-public class WorkoutActivity extends ToolBarActivity implements OnClickListener {
+public class WorkoutActivity extends ToolBarActivity implements OnClickListener{
 
     private static final String TAG = WorkoutActivity.class.getSimpleName();
     /**
@@ -108,7 +126,7 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
     protected static OverlayOptions overlayOptions;
     private static BitmapDescriptor realtimeBitmap;
 
-    private SimpleDateFormat  simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     /**
      * 用于对Fragment进行管理
      */
@@ -120,7 +138,7 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
 
     protected static Context mContext = null;
 
-    private TraceGreendao traGreendao ;
+    private TraceGreendao traGreendao;
 
     private SQLiteDatabase db;
     private DaoMaster.DevOpenHelper devOpenHelper;
@@ -138,8 +156,14 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
     public static PolylineOptions polyline = null;
 
     private static MarkerOptions markerOptions = null;
-    private int noteStartTime ,noteEndTime ;
+    private int noteStartTime, noteEndTime;
     private SharedPreferences locationsp;
+    /**
+     * google 地图
+     */
+    private GoogleMap mgoogleMap;
+    private GoogleApiClient googleApiClient;
+    private LocationRequest mLocationRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,20 +197,16 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
         Geofence.addEntity();
         devOpenHelper = new DaoMaster.DevOpenHelper(this, "Note", null);
         db = devOpenHelper.getReadableDatabase();
-        traGreendao = new TraceGreendao(WorkoutActivity.this,db);
+        traGreendao = new TraceGreendao(WorkoutActivity.this, db);
         initOnTrackListener();
         locationsp = getSharedPreferences("Location", MODE_PRIVATE);
 
-//        MapFragment mapFragment = (MapFragment) getFragmentManager()
-//                .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
+      /*  SupportMapFragment mapFragment =
+                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);*/
     }
-/*    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(WorkoutActivity.this,PortalActivity.class);
-        startActivity(intent);
 
-    }*/
+
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
@@ -194,6 +214,7 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
         // 设置默认的Fragment
         setDefaultFragment();
     }
+
     /**
      * 初始化组件
      */
@@ -231,7 +252,7 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
         handlerButtonClick(v.getId());
     }
 
-    public void  queryHistoryTrack(int startTime,int endTime){
+    public void queryHistoryTrack(int startTime, int endTime) {
         // 是否返回精简的结果（0 : 否，1 : 是）
         int simpleReturn = 0;
         // 是否返回纠偏后轨迹（0 : 否，1 : 是）
@@ -240,8 +261,8 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
         int pageSize = 1000;
         // 分页索引
         int pageIndex = 1;
-        noteStartTime=startTime ;
-        noteEndTime = endTime ;
+        noteStartTime = startTime;
+        noteEndTime = endTime;
         LBSTraceClient client = new LBSTraceClient(WorkoutActivity.this);
         client.setLocationMode(LocationMode.High_Accuracy);
         client.queryHistoryTrack(123056, "myTrace", simpleReturn, isProcessed, "need_denoise=1,need_vacuate=1,need_mapmatch=1", startTime, endTime,
@@ -263,7 +284,7 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
             public void onRequestFailedCallback(String arg0) {
                 // TODO Auto-generated method stub
                 TrackApplication.showMessage("track请求失败回调接口消息 : " + arg0);
-                MyLog.e(TAG,"onRequestFailedCallback"+arg0);
+                MyLog.e(TAG, "onRequestFailedCallback" + arg0);
             }
 
             // 查询历史轨迹回调接口
@@ -272,12 +293,12 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
                 // TODO Auto-generated method stub
                 super.onQueryHistoryTrackCallback(arg0);
                 showHistoryTrack(arg0);
-                MyLog.e (TAG,"onQueryHistoryTrackCallback"+arg0);
+                MyLog.e(TAG, "onQueryHistoryTrackCallback" + arg0);
             }
 
             @Override
             public void onQueryDistanceCallback(String arg0) {
-                MyLog.e(TAG,"onQueryDistanceCallback"+arg0);
+                MyLog.e(TAG, "onQueryDistanceCallback" + arg0);
                 // TODO Auto-generated method stub
                 try {
                     JSONObject dataJson = new JSONObject(arg0);
@@ -296,7 +317,7 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
             @Override
             public Map<String, String> onTrackAttrCallback() {
                 // TODO Auto-generated method stub
-                MyLog.e(TAG,"onTrackAttrCallback");
+                MyLog.e(TAG, "onTrackAttrCallback");
                 return null;
             }
 
@@ -316,18 +337,18 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
 
         List<LatLng> latLngList = new ArrayList<LatLng>();
 
-       final Date date = new Date((long)noteStartTime * 1000 + 2000);
+        final Date date = new Date((long) noteStartTime * 1000 + 2000);
 
 
         if (historyTrackData != null && historyTrackData.getStatus() == 0) {
             if (historyTrackData.getListPoints() != null) {
                 latLngList.addAll(historyTrackData.getListPoints());
-               new Thread(new Runnable() {
-                   @Override
-                   public void run() {
-                       traGreendao.addNote(historyTrack,date,date,0,0);
-                   }
-               }).start();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        traGreendao.addNote(historyTrack, date, date, 0, 0);
+                    }
+                }).start();
             }
             // 绘制历史轨迹
             drawHistoryTrack(latLngList, historyTrackData.distance);
@@ -420,7 +441,6 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
         endMarker = null;
         polyline = null;
     }
-
 
 
     /**
@@ -528,7 +548,6 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
     }
 
 
-
     /**
      * 重置button状态
      */
@@ -577,7 +596,6 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
     }
 
 
-
     @Override
     protected void onDestroy() {
         // TODO Auto-generated method stub
@@ -604,12 +622,79 @@ public class WorkoutActivity extends ToolBarActivity implements OnClickListener 
         return mImei;
     }
 
-/*    @Override
+
+ /*   public void initGoogleServer() {
+        createLocationRequest();
+        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,mLocationRequest,this);
+
+    }
+
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(5000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+
+
+
+    @Override
     public void onMapReady(GoogleMap googleMap) {
-        MyLog.e(TAG,"googleMap++好了");
+        MyLog.e(TAG, "googleMap++好了");
+        mgoogleMap = googleMap;
+
+        googleMap.setMyLocationEnabled(true);
+        Location myLocation = googleMap.getMyLocation();
+
+        com.google.android.gms.maps.model.LatLng mapCenter = new com.google.android.gms.maps.model.LatLng(31.298886, 120.58531600000003);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapCenter, 13));
+
+
         googleMap.addMarker(new com.google.android.gms.maps.model.MarkerOptions()
-        .position(new com.google.android.gms.maps.model.LatLng(0,0))
-                .title("Google dyho8 map")
-        );
+                .icon(com.google.android.gms.maps.model.BitmapDescriptorFactory.fromResource(R.mipmap.icon_geo))
+                .position(mapCenter)
+                .flat(true)
+                .rotation(245));
+
+        CameraPosition cameraPosition = CameraPosition.builder()
+                .target(mapCenter)
+                .zoom(13)
+                .bearing(90)
+                .build();
+
+        // Animate the change in camera view over 2 seconds
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition),
+                3000, null);
+
+
+        googleApiClient = new GoogleApiClient.Builder(WorkoutActivity.this)
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                    @Override
+                    public void onConnected(@Nullable Bundle bundle) {
+
+                    }
+
+                    @Override
+                    public void onConnectionSuspended(int i) {
+
+                    }
+                })
+                .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+                    }
+                }).build();
+        googleApiClient.connect();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Toast.makeText(WorkoutActivity.this, location.getLatitude() + "___________" + location.getLongitude(), Toast.LENGTH_SHORT).show();
+        MyLog.e("googleLocation", location.getLatitude() + "___________" + location.getLongitude());
+        mgoogleMap.addMarker(new com.google.android.gms.maps.model.MarkerOptions().position(new com.google.android.gms.maps.model.LatLng(location.getLongitude(), location.getLatitude())).title("Marker"));
+        mgoogleMap.addPolyline(new com.google.android.gms.maps.model.PolylineOptions().add(new com.google.android.gms.maps.model.LatLng(location.getLatitude(), location.getLongitude())));
     }*/
 }

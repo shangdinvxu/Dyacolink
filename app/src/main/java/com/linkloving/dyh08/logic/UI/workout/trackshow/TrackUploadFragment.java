@@ -175,7 +175,6 @@ public class TrackUploadFragment extends Fragment {
     private String formatStartTime;
     private Date dateStopTrace;
     private String formatEndTime;
-    private boolean startTimer = false;
 
     @InjectView(R.id.chronometer)
     TextView chronometer;
@@ -215,7 +214,6 @@ public class TrackUploadFragment extends Fragment {
             secondMiddle.setVisibility(View.VISIBLE);
 //            relativeLayout.setBackgroundColor(Color.BLACK);
 //            relativeLayout.getBackground().setAlpha(150);
-
         }
         return view;
     }
@@ -278,7 +276,6 @@ public class TrackUploadFragment extends Fragment {
             }.start();
         }
 
-
     }
 
     @Override
@@ -308,7 +305,6 @@ public class TrackUploadFragment extends Fragment {
         if (isClickStart && GpsUtils.isOPen(getContext())) {
             firstMiddle.setVisibility(View.GONE);
             secondMiddle.setVisibility(View.VISIBLE);
-            startTimer = true;
             getRuntime();
         }
         if (GpsUtils.isOPen(getContext())) {

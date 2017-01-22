@@ -83,6 +83,8 @@ public class TraceGreendao {
      * 添加开始时间
      * @param date  每天的日期
      * @param startDate 每次开始记录轨迹的开始时间
+     * @param dou 0百度   2 google     1设备传上来的
+     *
      */
     public void addStartTime(String date,Date startDate,double  dou){
         MyLog.e(TAG,"addStartTime方法执行了");

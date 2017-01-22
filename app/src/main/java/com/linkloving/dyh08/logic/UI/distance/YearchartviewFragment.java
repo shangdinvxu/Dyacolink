@@ -75,7 +75,11 @@ public class YearchartviewFragment extends Fragment {
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             barChartItemBeans = new ArrayList<>();
             for( int i=0 ;i<=month ;i++){
-                value = i/month ;
+                if (month==0){
+                    value=1;
+                }else {
+                    value = i/month ;
+                }
                 calendar.set(year,i,day);
                 Date time = calendar.getTime();
                 String dateFormat = sdfStandard.format(time);
@@ -101,9 +105,10 @@ public class YearchartviewFragment extends Fragment {
                 YearBarChartView.BarChartItemBean barChartItemBean = new YearBarChartView.BarChartItemBean(substring +"/"+s1, monthAverageNumber);
                 barChartItemBeans.add(barChartItemBean);
             }
+            int size = barChartItemBeans.size();
             int yearLeft = 12-barChartItemBeans.size() ;
             for (int i = 0 ;i<yearLeft;i++){
-                barChartItemBeans.add(new YearBarChartView.BarChartItemBean(substring +"/"+barChartItemBeans.size()+i+2,0));
+                barChartItemBeans.add(new YearBarChartView.BarChartItemBean(substring +"/"+(size+i+1),0));
             }
             publishProgress(value);
             return barChartItemBeans;

@@ -5,10 +5,18 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
+import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.ViewUtils.barchartview.ScreenUtils;
+import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +36,29 @@ public class BarChartViewforMonth extends View {
     private Rect deepSleepRect;
     private Paint deepSleepPaint;
 
+    public DialogListerer mdialogListerer;
+    public PopupWindow popupWindow = new PopupWindow();
+    private TextView deepSleepHr;
+    private TextView lightSleepHr;
+    private TextView dateTextView;
+    private Context context ;
     public BarChartViewforMonth(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
+        this.context = context ;
     }
+
+    public void setDialogListerer(DialogListerer DialogListerer) {
+        this.mdialogListerer = DialogListerer;
+    }
+
+    public interface DialogListerer {
+        void showDialog(int number, int x, int y);
+
+        void dismissPopupWindow();
+    }
+
+
 
     private void init(Context context) {
         screenW = ScreenUtils.getScreenW(context);
@@ -101,16 +128,98 @@ public class BarChartViewforMonth extends View {
             float texttypeStarty = (float) (oneHourHight * (12 - 2.5 * i));
             canvas.drawText(typeText, texttypeStartx, texttypeStarty, textPaint);
         }
-        String[] week = {"1", "4", "7", "10","13", "16", "19", "22","25", "28", "31"};
-        for (int i = 0; i < 11; i++) {
-            String typeText = week[i];
-            float texttypeStartx = (float) (screenW * (0.1 + i * 0.072));
-            float texttypeStarty = (float) (oneHourHight * 16.5);
-            canvas.drawText(typeText, texttypeStartx, texttypeStarty, textPaint);
-        }
+//        String[] week = {"1", "4", "7", "10","13", "16", "19", "22","25", "28", "31"};
+//        for (int i = 0; i < 11; i++) {
+//            String typeText = week[i];
+//
+//
+//        }
 
-   
+        for (int i = 0; i<mItems.size();i++){
+            if ((i+1)%3==1){
+                float texttypeStartx = (float) (screenW * (0.1 + i * 0.024));
+                float texttypeStarty = (float) (oneHourHight * 16.5);
+                canvas.drawText(i+1+"", texttypeStartx, texttypeStarty, textPaint);
+            }
+        }
     }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                int x = (int) event.getX();
+                int y = (int) event.getY();
+                for (int i = 0; i < mItems.size(); i++) {
+                    barRect.left = (int) (screenW * 0.1 + barItemWidth * i + barSpace * (i + 1));
+                    barRect.top = (int) (oneHourHight * 14 - mItems.get(i).itemDeepValue * oneHourHight * 1.25);
+                    barRect.right = (int) (barRect.left + barItemWidth);
+                    barRect.bottom = (int) (oneHourHight * 14);
+                    int left = barRect.left;
+//                    -60方便点击
+                    int top = (int) (barRect.top - screenH-80);
+                    int right = barRect.right;
+                    if (x > left && x < right && y > top) {
+                        MyLog.e("点击", "点击的是" + mItems.get(i).itemType);
+//                        (int) mItems[i].itemValue
+//                        y = screenHight-y +1000 ;
+                        x = (int) (barRect.left - screenW * 0.1);
+                        MyLog.e("点击", "screenHight....." + screenH + "screenH...." + y + "y......." + screenW + "screenW-----" + x + "");
+//                        mdialogListerer.showDialog(i, (int) (x-screenW*0.13), y);
+                        mdialogListerer.showDialog(i, (int) (x-screenW*0.13), y);
+                        break;
+                    }
+                }
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (popupWindow.isShowing()){
+                    float x_move = event.getRawX();
+//              自动清屏,屏幕刷新
+                    for (int i = 0; i < mItems.size(); i++){
+                        if (((screenW * 0.1 + barItemWidth * i + barSpace * (i + 1)))<x_move
+                                &&x_move<(screenW * 0.1 + barItemWidth * i + barSpace * (i + 1)+barItemWidth)){
+//                        mdialogListerer.showDialog(i,(int)lastPointX,(int)event.getRawY());
+                            popupWindow.update((int) (screenW * 0.1 -barItemWidth*0.5+ barItemWidth * i + barSpace * (i + 1)+barItemWidth*0.5-screenW*0.13),
+                                    (int) (oneHourHight*8+ (mItems.get(i).itemDeepValue+mItems.get(i).itemLightValue) * oneHourHight * 1.25),-1,-1);
+                            deepSleepHr.setText(context.getString(R.string.deep)+"  "+mItems.get(i).itemLightValue+"hr");
+                            lightSleepHr.setText(context.getString(R.string.light)+"  "+mItems.get(i).itemDeepValue+"hr");
+                            dateTextView.setText(mItems.get(i).itemType);
+                            MyLog.e("move的是",mItems.get(i).itemType);
+                        }
+                    }
+                    invalidate();
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                if (popupWindow.isShowing()) {
+                    mdialogListerer.dismissPopupWindow();
+                }
+
+                break;
+            default:
+                return super.onTouchEvent(event);
+        }
+        return true;
+    }
+
+    public void showPopupWindow(View view,int  deep , int light, int x, int y) {
+        View popupView = LayoutInflater.from(getContext()).inflate(R.layout.tw_sleep_popupwiew, null);
+        deepSleepHr = (TextView) popupView.findViewById(R.id.deepSleepHr);
+        dateTextView = (TextView) popupView.findViewById(R.id.date);
+        popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        lightSleepHr = (TextView) popupView.findViewById(R.id.lightSleepHr);
+        popupWindow.setTouchable(true);
+        // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
+        popupWindow.setClippingEnabled(false);
+        popupWindow.showAsDropDown(view, x, y);
+//        }
+        MyLog.e("点击", "调用了popupwindow");
+    }
+
+
 
 
     public List<BarChartItemBean> getItems() {

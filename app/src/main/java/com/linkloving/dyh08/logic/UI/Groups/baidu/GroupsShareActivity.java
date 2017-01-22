@@ -1,5 +1,6 @@
 package com.linkloving.dyh08.logic.UI.Groups.baidu;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
@@ -49,19 +51,27 @@ import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.LocationMode;
 import com.baidu.trace.OnTrackListener;
 import com.example.android.bluetoothlegatt.utils.ToastUtil;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.linkloving.band.dto.SportRecord;
+import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.db.sport.UserDeviceRecord;
+import com.linkloving.dyh08.logic.UI.workout.GooglemapActivity;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.UI.workout.trackshow.TrackApplication;
 import com.linkloving.dyh08.logic.UI.workout.trackshow.WorkoutActivity;
 import com.linkloving.dyh08.logic.UI.workout.trackutils.GsonService;
 import com.linkloving.dyh08.logic.UI.workout.trackutils.HistoryTrackData;
+import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
+import com.linkloving.dyh08.utils.sportUtils.LocationUtils;
 import com.linkloving.utils.TimeZoneHelper;
 
 import org.json.JSONException;
@@ -83,6 +93,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import Trace.GreenDao.DaoMaster;
 import Trace.GreenDao.Note;
@@ -112,7 +124,7 @@ import static com.linkloving.dyh08.R.id.gourps_topmap;
 /**
  * Created by Daniel.Xu on 2016/8/22.
  */
-public class GroupsShareActivity extends ToolBarActivity {
+public class GroupsShareActivity extends ToolBarActivity implements OnMapReadyCallback {
     private static final String TAG = GroupsShareActivity.class.getSimpleName();
     @InjectView(gourps_topmap)
     MapView gourpsTopmap;
@@ -194,11 +206,22 @@ public class GroupsShareActivity extends ToolBarActivity {
     protected static OnTrackListener trackListener = null;
     private int user_weight;
 
+    private GoogleMap mGoogleMap ;
+    private SupportMapFragment mapFragment;
+    private SharedPreferences locationsp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tw_groups_share);
         view = LayoutInflater.from(GroupsShareActivity.this).inflate(R.layout.tw_share_day, null);
+
+        /**加载google 地图*/
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+        locationsp = getSharedPreferences("Location", MODE_PRIVATE);
+
         ButterKnife.inject(this);
         ShareSDK.initSDK(GroupsShareActivity.this);
         user_id = MyApplication.getInstance(GroupsShareActivity.this).getLocalUserInfoProvider().getUser_id();
@@ -235,9 +258,103 @@ public class GroupsShareActivity extends ToolBarActivity {
         groupsTvCalories.setText(getCalories() + "");
         initOnTrackListener();
         initPopupWindow();
-        initTrace();
+//        isGoogle();
 //        queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
     }
+
+    //判断百度还是google 2,运动数据1.
+    public void isGoogle(){
+        if ( startTimeList.get(position).getLatitude()!=null&&startTimeList.get(position).getLatitude()==2){
+            addGoogleMap();
+        }else if (startTimeList.get(position).getLatitude()!=null&&startTimeList.get(position).getLatitude()==1){
+            boolean mapSelect = PreferencesToolkits.getMapSelect(GroupsShareActivity.this);
+            if (mapSelect){
+                addGoogleMap();
+            }else {
+                hideGoogleMap();
+            }
+        } else {
+            hideGoogleMap();
+            initTrace();
+        }
+
+    }
+
+    private void hideGoogleMap() {
+        gourpsTopmap.setVisibility(View.VISIBLE);
+    }
+
+
+    public void addGoogleMap(){
+        gourpsTopmap.setVisibility(View.GONE);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //从数据库中获取的坐标点画,有问题,需要纠偏.暂不采用.
+                List<Note> lists = traGreendao.searchLocation(startDate, endDate);
+                if (lists.size() == 0) {
+                    SharedPreferences location = getSharedPreferences("Location", MODE_PRIVATE);
+                    float latitude = location.getFloat("Latitude", 11);
+                    float longitude = location.getFloat("Longitude", 11);
+                    lists.add(new Note(null,null,null,null,null,(double) latitude,(double)longitude));
+                }
+                showGoogleLine(lists);
+            }
+        }).start();
+    }
+
+    private void showGoogleLine(List<Note> lists) {
+        final com.google.android.gms.maps.model.PolylineOptions polylineOptions = new com.google.android.gms.maps.model.PolylineOptions();
+        for (Note list : lists){
+            com.google.android.gms.maps.model.LatLng latLng = new com.google.android.gms.maps.model.LatLng(list.getLatitude(), list.getLongitude());
+            polylineOptions.add(latLng);
+        }
+        final com.google.android.gms.maps.model.LatLng latLng = new com.google.android.gms.maps.model.LatLng(lists.get(lists.size() - 1).getLatitude(), lists.get(lists.size() - 1).getLongitude());
+
+        polylineOptions.color(Color.RED);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Observable.just("Hello","world")
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Action1<String>() {
+                            @Override
+                            public void call(String s) {
+                                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
+                                mGoogleMap.addMarker(new com.google.android.gms.maps.model.MarkerOptions().title("dyh08").position(latLng));
+                                mGoogleMap.addPolyline(polylineOptions);
+                            }
+                        });
+            }
+        },2000);
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mGoogleMap = googleMap ;
+        Location location = LocationUtils.getLocation(GroupsShareActivity.this);
+        locationUpdates(location);
+        isGoogle();
+    }
+
+    public void locationUpdates(Location location) {
+
+//        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, mLocationRequest, this);
+        Location myLocation = location;
+        com.google.android.gms.maps.model.LatLng mapCenter = null;
+        if (myLocation == null) {
+            float latitude = locationsp.getFloat("Latitude", 0);
+            float longitude = locationsp.getFloat("Longitude", 0);
+            mapCenter = new com.google.android.gms.maps.model.LatLng(latitude, longitude);
+        } else {
+            mapCenter = new com.google.android.gms.maps.model.LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+        }
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapCenter, 13));
+    }
+
+
 
     /**
      * 查询历史轨迹
@@ -501,6 +618,7 @@ public class GroupsShareActivity extends ToolBarActivity {
     }
 
 
+
     private class MyLocationListener implements BDLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {
@@ -531,6 +649,7 @@ public class GroupsShareActivity extends ToolBarActivity {
                 /**把下面的部分截图*/
                 ToolKits.saveFile(ToolKits.getViewBitmap(screenhot), filePathCacheUnder);
                 getScreenHot(map);
+                getScreenGoogle(mGoogleMap);
                 if (BitmapFactory.decodeFile(filePathCache) != null) {
                     final Bitmap bitmap = ToolKits.mergeBitmap_TB(BitmapFactory.decodeFile(filePathCache),
                             BitmapFactory.decodeFile(filePathCacheUnder), true);
@@ -539,6 +658,32 @@ public class GroupsShareActivity extends ToolBarActivity {
             }
         });
         share();
+
+    }
+
+    private void getScreenGoogle(GoogleMap mGoogleMap) {
+        mGoogleMap.snapshot(new GoogleMap.SnapshotReadyCallback() {
+            @Override
+            public void onSnapshotReady(Bitmap bitmap) {
+                File file = new File(filePathCache);
+                FileOutputStream out;
+                try {
+                    out = new FileOutputStream(file);
+                    if (bitmap.compress(
+                            Bitmap.CompressFormat.PNG, 20, out)) {
+                        out.flush();
+                        out.close();
+                    }
+//                    Toast.makeText(GroupsShareActivity.this,
+//                            "屏幕截图成功，图片存在: " + file.toString(),
+//                            Toast.LENGTH_SHORT).show();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 

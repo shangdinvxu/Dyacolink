@@ -300,6 +300,14 @@ public class NotificationSettingActivity extends ToolBarActivity {
         clock3.setText(strTime3);
         int sw3 = Integer.parseInt(strAlarm_three[2]);
         switch3.setChecked(sw3 ==1);
+        //        闹钟4
+        String Alarm_four = deviceSetting.getAlarm_four();
+        MyLog.e(TAG, "闹钟字符串：" + Alarm_four);
+        String[] strAlarm_four = Alarm_four.split("-");
+        String strTime4 = strAlarm_four[0];
+        clock4.setText(strTime4);
+        int sw4 = Integer.parseInt(strAlarm_four[2]);
+        switch4.setChecked(sw4 ==1);
         dismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -410,9 +418,25 @@ public class NotificationSettingActivity extends ToolBarActivity {
                     }else {
                         Toast.makeText(NotificationSettingActivity.this,getString(R.string.keepthe),Toast.LENGTH_SHORT).show();
                     }
-
             }
         });
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                String clock11 = clock1.getText().toString()+"-"+"127"+"-"+(switch1.isChecked()?1:0);
+                deviceSetting.setAlarm_one(clock11);
+                String clock22 = clock2.getText().toString()+"-"+"127"+"-"+clock2Switch;
+                deviceSetting.setAlarm_two(clock22);
+                String clock33 = clock3.getText().toString()+"-"+"127"+"-"+clock3Switch;
+                deviceSetting.setAlarm_three(clock33);
+                String clock44 = clock4.getText().toString()+"-"+"127"+"-"+clock4Switch;
+                deviceSetting.setAlarm_four(clock44);
+                LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,deviceSetting);
+            }
+        });
+
+
+
     }
 
     private void initSedentaryPopupWindow() {

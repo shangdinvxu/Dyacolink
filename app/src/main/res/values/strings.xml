@@ -1091,6 +1091,8 @@
     <string name="Weight">Weight</string>
     <!-- Sign Out-->
     <string name="Sign_Out">Sign Out</string>
+    <string name="light">Light:</string>
+    <string name="deep">Deep:</string>
 
     <!--登录界面-->
     <string name="usernamecannot">Username不能为空</string>

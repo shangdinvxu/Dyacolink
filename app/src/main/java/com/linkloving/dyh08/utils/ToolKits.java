@@ -19,12 +19,14 @@ import android.graphics.drawable.Drawable;
 import android.net.ParseException;
 import android.net.Uri;
 import android.os.Build;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -1247,6 +1249,25 @@ private final static String TAG = ToolKits.class.getSimpleName();
 
 //		return dayCalories;
 		return 0;
+	}
+
+	/***
+	 * 模拟点击事件
+	 * @param view  点击的View
+	 * @param x		点击的位置
+     * @param y		点击的位置
+     */
+	private static void setSimulateClick(View view, float x, float y) {
+		long downTime = SystemClock.uptimeMillis();
+		final MotionEvent downEvent = MotionEvent.obtain(downTime, downTime,
+				MotionEvent.ACTION_DOWN, x, y, 0);
+		downTime += 1000;
+		final MotionEvent upEvent = MotionEvent.obtain(downTime, downTime,
+				MotionEvent.ACTION_UP, x, y, 0);
+		view.onTouchEvent(downEvent);
+		view.onTouchEvent(upEvent);
+		downEvent.recycle();
+		upEvent.recycle();
 	}
 
 }

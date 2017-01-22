@@ -236,6 +236,9 @@ public class BarChartView extends View {
                 lastPointX = event.getRawX();
                 int x = (int) event.getX();
                 int y = (int) event.getY();
+                if(popupWindow!=null||popupWindow.isShowing()){
+                    mdialogListerer.dismissPopupWindow();
+                }
                 for (int i = 0; i < mItems.size(); i++) {
                     barRect.left = (int) ((int) y_index_startX + barItemWidth * i + barSpace * (i + 1) - (int) leftMoving);
                     int left = barRect.left;
@@ -278,9 +281,9 @@ public class BarChartView extends View {
             case MotionEvent.ACTION_UP:
                 //smooth scroll
                 new Thread(new SmoothScrollThread(movingLeftThisTime)).start();
-                if (popupWindow.isShowing()) {
+              /*  if (popupWindow.isShowing()) {
                     mdialogListerer.dismissPopupWindow();
-                }
+                }*/
                 break;
 
             default:

@@ -41,7 +41,7 @@ public interface LepaoCommand {
 	static final byte COMMAND_GET_CARD_NUMBER = (byte) 0x85;// 获取设置设备卡号
 	static final byte COMMAND_SET_NAME = 0x5C;              // 设置设备名称
 	static final byte COMMAND_GET_DEVICE_ID = 0x5F;         // 设备ID，8byte
-	static final byte COMMAND_GET_HEARTRATE = 0x42;         // 设备ID，8byte
+		static final byte COMMAND_GET_HEARTRATE = 0x42;         // 设备ID，8byte
 	static final byte COMMAND_HEARTRATE_SYNC = 0x41;         // 设备ID，8byte
 	//*********************卡片********************//
 	static final byte COMMAND_CONTROL_CARD = (byte) 0x90;   // 开卡(上电)  关卡(断电)

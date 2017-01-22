@@ -555,6 +555,14 @@
     <string name="alarm_save">Save</string>
 
     <!-- 单位 -->
+    <string name="KM">km</string>
+    <string name="KMunit">mile</string>
+    <string name="KMunitweek">mile/Woche</string>
+    <string name="KMunitmonth">mile/Monat</string>
+    <string name="KMunityear">mile/Jahr</string>
+    <string name="KMweek">km/Woche</string>
+    <string name="KMmonth">km/Monat</string>
+    <string name="KMyear">km/Jahr</string>
     <string name="unit_mileage">Mileage</string>
     <string name="unit_step">Step</string>
     <string name="unit_cal">Calorie</string>
@@ -714,6 +722,7 @@
 
 
     <!-- 日明细数据 -->
+    <string name="showhand">Aufrechtzuerhalten</string>
     <string name="detail_sport_data_title">Detail data</string>
     <string name="detail_sport_data_image_loading">Picture preparing...</string>
     <string name="detail_sport_data_refresh_range">Refresh: Date Range:</string>
@@ -1150,6 +1159,7 @@
     <string name="hr">Stunde(n)</string>
     <string name="interval">Reminder switch</string>
     <string name="kcal">Kalorien</string>
+    <string name="goal_kcal">Kalorien</string>
     <string name="messagenoti">Benachrichtigungsmeldung</string>
     <string name="messagingapps">Instant-Messaging-Programme</string>
     <string name="min">Minute(n)</string>
@@ -1164,14 +1174,10 @@
     <string name="unitsetting">Maßeinheit einstellung</string>
     <string name="usecellilar">Internet</string>
     <string name="Communityweb">Social Network Einstellung</string>
-    <string name="timersetting"></string>
+    <string name="timersetting">Timer</string>
     <string name="wearabledevice">Tragbares Gerät</string>
     <string name="themetric">Metrisches System</string>
     <string name="thebritshunit">Englisches System</string>
-    <string name="KM">km</string>
-    <string name="KMmonth">km/month</string>
-    <string name="KMweek">km/week</string>
-    <string name="KMyear">km/year</string>
     <string name="goalkcal">Combustion</string>
     <string name="Intervals">Intervals</string>
 

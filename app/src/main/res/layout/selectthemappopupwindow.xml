@@ -32,19 +32,31 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:src="@mipmap/selectline_yellow" />
-    <TextView
-        android:visibility="gone"
-        android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:text="@string/Google"/>
-        <TextView
+        <RadioGroup
+            android:layout_width="120dp"
+            android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/google"
             android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
             android:textSize="25sp"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/Google"/>
+        <RadioButton
+            android:id="@+id/baidu"
+            android:layout_marginTop="30dp"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:textSize="25sp"
+            android:button="@null"
+            android:gravity="center"
             android:text="@string/baidu"/>
+
+    </RadioGroup>
+
 
     </LinearLayout>
 

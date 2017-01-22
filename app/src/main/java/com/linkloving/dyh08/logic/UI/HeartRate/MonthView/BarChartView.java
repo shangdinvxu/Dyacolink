@@ -103,7 +103,7 @@ public class BarChartView extends View {
         for (int i = 0; i < 11; i++) {
             String typeText = week[i];
             float texttypeStartx = (float) (screenW * (0.18 + i * 0.072));
-            float texttypeStarty = (float) (oneHourHight * 31);
+            float texttypeStarty = (float) (oneHourHight * 29.5);
             MyLog.e(TAG,texttypeStartx+"------"+texttypeStarty);
             canvas.drawText(typeText, texttypeStartx, texttypeStarty, textPaint);
         }

@@ -92,6 +92,7 @@ public class PreferencesToolkits {
      * */
     public final static String TIME_SETTING_BOOLEAN = "TIME_SETTING_BOOLEAN";
 
+    public final static String MAP_SETTING = "MAP_SETTING";
 
     /**
      * 存储“是否在主界面上显示可下拉刷新的提示”的key标识常量（对应的Shared Preferences标识常量
@@ -663,6 +664,38 @@ public class PreferencesToolkits {
             Log.e(TAG, e.getMessage());
         }
 
+    }
+
+    /**
+     *
+     * @param context
+     * @param isGoogle 是Google地图就是true
+     */
+    public static void setMapSelect(Context context, boolean isGoogle) {
+        SharedPreferences sharedPreferences;
+        try {
+            sharedPreferences = getAppDefaultSharedPreferences(context, true);
+            SharedPreferences.Editor edit = sharedPreferences.edit();
+            edit.putBoolean(MAP_SETTING, isGoogle);
+            edit.commit();
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
+
+    }
+
+
+    /*获取定时器信息*/
+    public static boolean getMapSelect(Context context) {
+        SharedPreferences sharedPreferences;
+        boolean jString = false ;
+        try {
+            sharedPreferences = getAppDefaultSharedPreferences(context, true);
+            jString = sharedPreferences.getBoolean(MAP_SETTING, true);//获得设备信息
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
+        return jString;
     }
 
     /*获取定时器信息*/

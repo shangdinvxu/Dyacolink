@@ -85,7 +85,11 @@ public class YearchartviewFragment extends Fragment {
             int toolKitsCalories = toolKits.getCalories(getActivity());
             for( int i=0 ;i<=month ;i++){
 //                value是用来更新进度条的
-                value = i/month ;
+                if (month==0){
+                    value=1;
+                }else {
+                    value = i/month ;
+                }
                 calendar.set(year,i,day);
                 Date time = calendar.getTime();
                 String dateFormat = sdfStandard.format(time);
@@ -99,7 +103,6 @@ public class YearchartviewFragment extends Fragment {
                     double walktime = CommonUtils.getScaledDoubleValue(Double.valueOf(monthData.getWork_duration()), 1);
                     //跑步 分钟
                     double runtime = CommonUtils.getScaledDoubleValue(Double.valueOf(monthData.getRun_duration()), 1);
-
                     int walkCal = ToolKits.calculateCalories(Float.parseFloat(monthData.getWork_distance()), (int) walktime * 60, userEntity.getUserBase().getUser_weight());
                     int runCal = ToolKits.calculateCalories(Float.parseFloat(monthData.getRun_distance()), (int) runtime * 60, userEntity.getUserBase().getUser_weight());
                     int calValue = walkCal + runCal;
@@ -125,9 +128,10 @@ public class YearchartviewFragment extends Fragment {
                 YearBarChartView.BarChartItemBean barChartItemBean = new YearBarChartView.BarChartItemBean(substring +"/"+s1, monthAverageNumber);
                 barChartItemBeans.add(barChartItemBean);
             }
+            int size = barChartItemBeans.size();
             int yearLeft = 12-barChartItemBeans.size() ;
             for (int i = 0 ;i<yearLeft;i++){
-                barChartItemBeans.add(new YearBarChartView.BarChartItemBean(substring +"/"+barChartItemBeans.size()+i+2,0));
+                barChartItemBeans.add(new YearBarChartView.BarChartItemBean(substring +"/"+(size+i+1),0));
             }
             publishProgress(value);
             return barChartItemBeans;

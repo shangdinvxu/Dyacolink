@@ -51,6 +51,7 @@ import com.linkloving.dyh08.logic.UI.sleep.SleepActivity;
 import com.linkloving.dyh08.logic.UI.step.StepActivity;
 import com.linkloving.dyh08.logic.UI.weight.WeightActivity;
 import com.linkloving.dyh08.logic.UI.Groups.baidu.GroupsActivity;
+import com.linkloving.dyh08.logic.UI.workout.GooglemapActivity;
 import com.linkloving.dyh08.logic.UI.workout.trackshow.WorkoutActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.utils.ToolKits;
@@ -104,6 +105,11 @@ public class IntentFactory {
     public static void startWeightActivityIntent(Activity activity,int tag) {
         Intent intent = new Intent(activity, WeightActivity.class);
         intent.putExtra("tag",tag); //1是注册
+        activity.startActivity(intent);
+    }
+
+    public static void startGoogleActivity(Activity activity) {
+        Intent intent = new Intent(activity, GooglemapActivity.class);
         activity.startActivity(intent);
     }
 

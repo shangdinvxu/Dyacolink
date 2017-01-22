@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="70dp"
-                android:text="@string/goalkcal"
+                android:text="@string/goal_kcal"
                 android:textColor="@color/blue"
                 android:textSize="18sp" />
 

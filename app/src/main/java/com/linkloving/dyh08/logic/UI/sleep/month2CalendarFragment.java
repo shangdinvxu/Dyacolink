@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 
 import com.linkloving.band.dto.DaySynopic;
 import com.linkloving.dyh08.R;
+import com.linkloving.dyh08.ViewUtils.barchartview.MonthBarChartView;
+import com.linkloving.dyh08.logic.UI.sleep.sleepBarchartView.BarChartView;
 import com.linkloving.dyh08.logic.UI.sleep.sleepBarchartView.BarChartViewforMonth;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.DbDataUtils;
+import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.text.ParseException;
@@ -114,27 +117,29 @@ public class Month2CalendarFragment extends Fragment {
                 MyLog.e(TAG, barChartItemBean.itemType.toString() + "=======");
                 month.add(barChartItemBean);
             }
-          /*  BarChartViewforMonth.BarChartItemBean barChartItemBean1 = new BarChartViewforMonth.BarChartItemBean("2", 1,1);
-            BarChartViewforMonth.BarChartItemBean barChartItemBean23 = new BarChartViewforMonth.BarChartItemBean("2", 2,2);
-            BarChartViewforMonth.BarChartItemBean barChartItemBean4 = new BarChartViewforMonth.BarChartItemBean("2", 3,3);
-            BarChartViewforMonth.BarChartItemBean barChartItemBean5 = new BarChartViewforMonth.BarChartItemBean("2", 4,4);
-            BarChartViewforMonth.BarChartItemBean barChartItemBean6 = new BarChartViewforMonth.BarChartItemBean("1", 5,5);
-            BarChartViewforMonth.BarChartItemBean barChartItemBean11 = new BarChartViewforMonth.BarChartItemBean("2", 1,1);
-            BarChartViewforMonth.BarChartItemBean barChartItemBean231 = new BarChartViewforMonth.BarChartItemBean("2", 2,2);
-            BarChartViewforMonth.BarChartItemBean barChartItemBean41 = new BarChartViewforMonth.BarChartItemBean("2", 3,3);
-            BarChartViewforMonth.BarChartItemBean barChartItemBean51 = new BarChartViewforMonth.BarChartItemBean("2", 4,4);
-            BarChartViewforMonth.BarChartItemBean barChartItemBean61= new BarChartViewforMonth.BarChartItemBean("1", 5,5);
-            month.add(barChartItemBean1);
-            month.add(barChartItemBean23);
-            month.add(barChartItemBean4);
-            month.add(barChartItemBean5);
-            month.add(barChartItemBean6);
-            month.add(barChartItemBean11);
-            month.add(barChartItemBean231);
-            month.add(barChartItemBean41);
-            month.add(barChartItemBean51);
-            month.add(barChartItemBean61);*/
+            int monthMount = ToolKits.getMonthMount(parseDate);
+            int leftSize = monthMount - month.size();
+            for (int i = 0 ;i<leftSize;i++){
+                Calendar instance = Calendar.getInstance();
+                instance.setTime(parseDate);
+                instance.add(Calendar.DAY_OF_YEAR,1+i);
+                Date time = instance.getTime();
+                String format = sim.format(time);
+                month.add(new BarChartViewforMonth.BarChartItemBean(format,0,0));
+            }
             barChartView.setItems(month);
+            barChartView.setDialogListerer(new BarChartViewforMonth.DialogListerer() {
+                @Override
+                public void showDialog(int i, int x, int y) {
+                    barChartView.showPopupWindow(view,3, 3, x, y);
+                }
+                @Override
+                public void dismissPopupWindow() {
+                    barChartView.popupWindow.dismiss();
+                }
+            });
+
+
         }
     }
 }

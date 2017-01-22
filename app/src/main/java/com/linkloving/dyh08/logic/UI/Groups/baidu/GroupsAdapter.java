@@ -39,6 +39,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 /**
  * Created by Administrator on 2016/8/11.
  */
+
 public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapter, SectionIndexer {
     private static final String TAG = GroupsAdapter.class.getSimpleName();
     private Context mContext;
@@ -159,7 +160,8 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
             holder.mapState = (ImageView) convertView1.findViewById(R.id.mapState);
         if (startTimeList.get(position).getLatitude()!=null&&startTimeList.get(position).getLatitude()==1){
             holder.mapState.setBackgroundResource(R.mipmap.mapoff);
-        }else if (startTimeList.get(position).getLatitude()!=null&&startTimeList.get(position).getLatitude()==0){
+        }else if (startTimeList.get(position).getLatitude()!=null&&startTimeList.get(position).getLatitude()==0
+                &&startTimeList.get(position).getLatitude()==2){
             holder.mapState.setBackgroundResource(R.mipmap.mapon);
         }
         MyLog.e(TAG,startTimeList.get(position).getDate()+"-------------startTimeList的getDate");

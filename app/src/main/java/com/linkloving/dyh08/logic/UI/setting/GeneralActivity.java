@@ -15,12 +15,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.bluetoothlegatt.BLEProvider;
+import com.google.android.gms.maps.GoogleMap;
 import com.linkloving.dyh08.BleService;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
@@ -222,6 +224,31 @@ public class GeneralActivity extends ToolBarActivity {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+            }
+        });
+        final RadioButton google = (RadioButton) view.findViewById(R.id.google);
+        final RadioButton baidu = (RadioButton) view.findViewById(R.id.baidu);
+        if (PreferencesToolkits.getMapSelect(GeneralActivity.this)) {
+            google.setBackgroundColor(0xFFfbc400);
+            baidu.setBackgroundColor(0xffF5F5F5);
+        } else {
+            baidu.setBackgroundColor(0xFFfbc400);
+            google.setBackgroundColor(0xffF5F5F5);
+        }
+        google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PreferencesToolkits.setMapSelect(GeneralActivity.this,true);
+                google.setBackgroundColor(0xFFfbc400);
+                baidu.setBackgroundColor(0xffF5F5F5);
+            }
+        });
+        baidu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PreferencesToolkits.setMapSelect(GeneralActivity.this,false);
+                baidu.setBackgroundColor(0xFFfbc400);
+                google.setBackgroundColor(0xffF5F5F5);
             }
         });
     }

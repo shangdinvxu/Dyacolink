@@ -5,11 +5,26 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.baidu.mapapi.map.MapView
-        android:id="@+id/gourps_topmap"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:clickable="true" />
+        android:layout_height="210dp">
+
+        <fragment
+            android:id="@+id/map"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            />
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/gourps_topmap"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:clickable="true" />
+    </FrameLayout>
+
+
+
+
 
 
     <LinearLayout
