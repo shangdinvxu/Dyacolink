@@ -17,6 +17,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.linkloving.dyh08.R;
+import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 public class CircleImageView extends ImageView {
 
@@ -86,6 +87,11 @@ public class CircleImageView extends ImageView {
         if (scaleType != SCALE_TYPE) {
             throw new IllegalArgumentException(String.format("ScaleType %s not supported.", scaleType));
         }
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override
