@@ -1,15 +1,19 @@
 package com.example.android.bluetoothlegatt;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Message;
+import android.os.ParcelUuid;
 import android.util.Log;
 
 import com.example.android.bluetoothlegatt.exception.BLENotBounded;
 import com.example.android.bluetoothlegatt.exception.BLENotEnabledException;
 import com.example.android.bluetoothlegatt.exception.BLENotSupportException;
 import com.example.android.bluetoothlegatt.exception.BLException;
+import com.example.android.bluetoothlegatt.proltrol.LPUtil;
+import com.example.android.bluetoothlegatt.proltrol.ParsedAd;
 import com.example.android.bluetoothlegatt.wapper.BLEWapper;
 
 public class BLEListProvider
@@ -133,16 +137,31 @@ public class BLEListProvider
         @Override
         public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) 
         {
-        	/**判断是否是手表设备*/
- 		   if(( ((scanRecord[5] == (byte)0xE1) && (scanRecord[6] == (byte)0xFE)) || ((scanRecord[23] == (byte)0xE1) && (scanRecord[24] == (byte)0xFE)) ))//&& device.getAddress().equals(getCurrentDeviceMac())
+
+//			Log.e("BluetoothActivityScan","device.getName()"+device.getName()+"-------------device.getAddress()"+device.getAddress());
+			LPUtil.printData(scanRecord,"BluetoothActivityScan"+"device.getName()"+device.getName()+"-------------device.getAddress()"+device.getAddress()
+			);
+			ParsedAd parsedAd = LPUtil.parseData(scanRecord);
+
+			/**判断是否是手表设备*/
+ 	/*	   if(( ((scanRecord[5] == (byte)0xE1) && (scanRecord[6] == (byte)0xFE)) || ((scanRecord[23] == (byte)0xE1) && (scanRecord[24] == (byte)0xFE)) ))//&& device.getAddress().equals(getCurrentDeviceMac())
 		   {
-			   /**判断是否是手环设备*/
+			   *//**判断是否是手环设备*//*
 //     			   Log.i(TAG, " device address.......................... " + device.getAddress());
      			   Message msg = mHandler.obtainMessage();
      			   msg.what = MSG_BLE_DATA;
      			   msg.obj = device;
      			   msg.sendToTarget();
-		   }
+		   }*/
+			if (parsedAd.uuidStrings.contains("fee1")){
+				//**判断是否是手环设备*//
+  			   Log.i(TAG, " device address.......................... " + device.getAddress());
+				Message msg = mHandler.obtainMessage();
+				msg.what = MSG_BLE_DATA;
+				msg.obj = device;
+				msg.sendToTarget();
+			}
+
 		}
     };
 

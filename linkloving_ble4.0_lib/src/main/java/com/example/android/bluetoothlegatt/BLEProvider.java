@@ -19,7 +19,9 @@ import com.example.android.bluetoothlegatt.exception.BLENotSupportException;
 import com.example.android.bluetoothlegatt.exception.BLException;
 import com.example.android.bluetoothlegatt.proltrol.ANCSCommand;
 import com.example.android.bluetoothlegatt.proltrol.LPException;
+import com.example.android.bluetoothlegatt.proltrol.LPUtil;
 import com.example.android.bluetoothlegatt.proltrol.LepaoProtocalImpl;
+import com.example.android.bluetoothlegatt.proltrol.ParsedAd;
 import com.example.android.bluetoothlegatt.proltrol.dto.LLTradeRecord;
 import com.example.android.bluetoothlegatt.proltrol.dto.LLXianJinCard;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
@@ -456,7 +458,7 @@ public  class BLEProvider
 				{
 					if(bd != null)
 					{
-						OwnLog.i(TAG, "【BLE_DEBUG】当前已连接的设备：mac="+bd.getAddress()+",type="+bd.getType()+",bondState="+bd.getBondState()+",uuids="+Arrays.toString(bd.getUuids()));
+						OwnLog.i(TAG, "【BLE_DEBUG】当前已连接的设备：mac="+bd.getAddress()+",type="+bd.getType()+",bondState="+bd.getBondState()+",uuidStrings="+Arrays.toString(bd.getUuids()));
 						String connectedMac = bd.getAddress();
 						if(connectedMac != null && this.getCurrentDeviceMac().toUpperCase().substring(6).equals(connectedMac.toUpperCase().substring(6)))
 						{
@@ -576,7 +578,7 @@ public  class BLEProvider
 				{
 					if(bd != null)
 					{
-						OwnLog.i(TAG, "【BLE_DEBUG】当前已连接的设备：mac="+bd.getAddress()+",type="+bd.getType()+",bondState="+bd.getBondState()+",uuids="+Arrays.toString(bd.getUuids()));
+						OwnLog.i(TAG, "【BLE_DEBUG】当前已连接的设备：mac="+bd.getAddress()+",type="+bd.getType()+",bondState="+bd.getBondState()+",uuidStrings="+Arrays.toString(bd.getUuids()));
 						String connectedMac = bd.getAddress();
 						if(connectedMac != null && mac.equals(connectedMac.toUpperCase()))
 						{
@@ -793,8 +795,11 @@ public  class BLEProvider
      	   {
      		   String scanMac = device.getAddress().substring(device.getAddress().length()-11,device.getAddress().length()).toUpperCase();
      		   String myMac = getCurrentDeviceMac().substring(getCurrentDeviceMac().length()-11,getCurrentDeviceMac().length()).toUpperCase();
-     		   /**判断是否是手环设备 23 24*/ 
-     		  if(( ((scanRecord[5] == (byte)0xE1) && (scanRecord[6] == (byte)0xFE)) || ((scanRecord[23] == (byte)0xE1) && (scanRecord[24] == (byte)0xFE)) ) && scanMac.equals(myMac))  //"78:A5:04:84:48:B4"))
+     		   /**判断是否是手环设备 23 24*/
+			   ParsedAd parsedAd = LPUtil.parseData(scanRecord);
+
+//     		  if(( ((scanRecord[5] == (byte)0xE1) && (scanRecord[6] == (byte)0xFE)) || ((scanRecord[23] == (byte)0xE1) && (scanRecord[24] == (byte)0xFE)) ) && scanMac.equals(myMac))  //"78:A5:04:84:48:B4"))
+			   if(parsedAd.uuidStrings.contains("fee1") && scanMac.equals(myMac))  //"78:A5:04:84:48:B4"))
      		   {
      			   OwnLog.e(TAG, "【来自扫描】4.3 device address.........................." + device.getAddress());
 //     			   try
@@ -1718,9 +1723,6 @@ public  class BLEProvider
 						msg.what = MSG_BLE_DATA;
 						msg.arg1 = INDEX_GAT_ALL_INFO_NEW;
 						// // TODO: 2016/10/10 userId
-//						SharedPreferences sp = mContext.getSharedPreferences("userid", Context.MODE_PRIVATE);
-//						int id = sp.getInt("id", 0);
-//						Log.e(TAG,"id++++++++++"+id);
 						msg.obj = mLepaoProtocalImpl.getAllDeviceInfoNew(serverDeviceInfo.userId);
 			    		msg.sendToTarget();
 						break;

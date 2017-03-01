@@ -2,6 +2,7 @@ package com.linkloving.dyh08.notify;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +12,9 @@ import android.service.notification.StatusBarNotification;
 
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.linkloving.dyh08.BleService;
+import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
+import com.linkloving.dyh08.logic.UI.setting.NotificationSettingActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
@@ -105,10 +108,13 @@ public class NotificationCollectorService extends NotificationListenerService {
             Bundle extras = mNotification.extras;
             if (extras == null) return;
             if (CommonUtils.isStringEmpty(extras.getString(Notification.EXTRA_TEXT))) return;
-            ModelInfo modelInfo = PreferencesToolkits.getInfoBymodelName(NotificationCollectorService.this, userEntity.getDeviceEntity().getModel_name());
-            if (modelInfo == null) return;
+            UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(NotificationCollectorService.this);
+            String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
+            if (last_sync_device_id==null||last_sync_device_id.length()==0) return;
+//            ModelInfo modelInfo = PreferencesToolkits.getInfoBymodelName(NotificationCollectorService.this, userEntity.getDeviceEntity().getModel_name());
+//            if (modelInfo == null) return;
             //OAD的时候取消一切其他蓝牙命令
-            if (!CommonUtils.isStringEmpty(userEntity.getDeviceEntity().getLast_sync_device_id()) && !BleService.isCANCLE_ANCS() && modelInfo.getAncs() > 0) {
+            if (!CommonUtils.isStringEmpty(userEntity.getDeviceEntity().getLast_sync_device_id()) && !BleService.isCANCLE_ANCS()) {
                 if (!provider.isConnectedAndDiscovered()) return; //蓝牙未连接
                 MyLog.e(TAG, "===qq/wechat的内容：" + extras.getString(Notification.EXTRA_TEXT));
                 DeviceSetting deviceSetting = LocalUserSettingsToolkits.getLocalSetting(NotificationCollectorService.this, userEntity.getUser_id() + ""); //获取用户设置 判断是否要发送指令
@@ -116,7 +122,7 @@ public class NotificationCollectorService extends NotificationListenerService {
                 charr = Ansc_str.toCharArray(); // 将字符串转换为字符数组
                 System.arraycopy(charr, 0, array, 5 - charr.length, charr.length);
 
-                if ("com.tencent.mobileqq".equals(sbn.getPackageName()) && array[0] == '1') {
+                if ("com.tencent.mobileqq".equals(sbn.getPackageName()) && array[4] == '1') {
 
                     connectble0x02(NotificationCollectorService.this); //检查蓝牙连接
 

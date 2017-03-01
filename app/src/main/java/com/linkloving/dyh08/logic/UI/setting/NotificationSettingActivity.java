@@ -815,6 +815,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
+                SharedPreferences messagenotification = getSharedPreferences("Messagenotification", MODE_PRIVATE);
                 SharedPreferences.Editor edit = messagenotification.edit();
                 edit.putBoolean("switchPhonecall",phonecall==1);
                 edit.putBoolean("switchTextmessage",SMScall==1);

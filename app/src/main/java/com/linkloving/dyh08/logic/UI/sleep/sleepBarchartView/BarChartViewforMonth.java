@@ -152,13 +152,16 @@ public class BarChartViewforMonth extends View {
                 int x = (int) event.getX();
                 int y = (int) event.getY();
                 for (int i = 0; i < mItems.size(); i++) {
+
                     barRect.left = (int) (screenW * 0.1 + barItemWidth * i + barSpace * (i + 1));
                     barRect.top = (int) (oneHourHight * 14 - mItems.get(i).itemDeepValue * oneHourHight * 1.25);
                     barRect.right = (int) (barRect.left + barItemWidth);
                     barRect.bottom = (int) (oneHourHight * 14);
                     int left = barRect.left;
 //                    -60方便点击
-                    int top = (int) (barRect.top - screenH-80);
+                    int top = (int) barRect.top;
+                    MyLog.e("barchartview","barRect.top-----"+(screenH-top));
+                    MyLog.e("barchartview","barRect.buttom-----"+barRect.bottom);
                     int right = barRect.right;
                     if (x > left && x < right && y > top) {
                         MyLog.e("点击", "点击的是" + mItems.get(i).itemType);
@@ -167,7 +170,8 @@ public class BarChartViewforMonth extends View {
                         x = (int) (barRect.left - screenW * 0.1);
                         MyLog.e("点击", "screenHight....." + screenH + "screenH...." + y + "y......." + screenW + "screenW-----" + x + "");
 //                        mdialogListerer.showDialog(i, (int) (x-screenW*0.13), y);
-                        mdialogListerer.showDialog(i, (int) (x-screenW*0.13), y);
+                        mdialogListerer.showDialog(i, (int) (x-screenW*0.13),
+                                (int) (oneHourHight*8+ (mItems.get(i).itemDeepValue+mItems.get(i).itemLightValue) * oneHourHight * 1.25));
                         break;
                     }
                 }

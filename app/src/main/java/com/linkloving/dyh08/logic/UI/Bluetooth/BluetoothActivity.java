@@ -114,6 +114,7 @@ public class BluetoothActivity extends ToolBarActivity {
                 DeviceVO vo = new DeviceVO();
                 vo.mac = bluetoothDevice.getAddress();
                 vo.name = bluetoothDevice.getName();
+                MyLog.e(TAG+"blue","Mac+"+vo.mac+"------------"+"Name"+vo.name);
                 vo.bledevice = bluetoothDevice;
                 macList.add(vo);
                 macListAdapterNew.notifyDataSetChanged();

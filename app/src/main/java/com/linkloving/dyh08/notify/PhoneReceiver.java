@@ -13,6 +13,7 @@ import android.util.Log;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.linkloving.dyh08.BleService;
 import com.linkloving.dyh08.MyApplication;
+import com.linkloving.dyh08.logic.UI.setting.Myadapter;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
@@ -49,12 +50,14 @@ public class PhoneReceiver extends BroadcastReceiver {
 			return;
 		if(userEntity.getUserBase()==null)
 			return;
-		ModelInfo modelInfo = PreferencesToolkits.getInfoBymodelName(context,userEntity.getDeviceEntity().getModel_name());
-		if(modelInfo==null) return;
-
-		if(modelInfo.getAncs()<=0){
+		UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(context);
+		String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
+		if (last_sync_device_id==null||last_sync_device_id.length()==0) return;
+//		ModelInfo modelInfo = PreferencesToolkits.getInfoBymodelName(context,userEntity.getDeviceEntity().getModel_name());
+//		if(modelInfo==null) return;
+	/*	if(modelInfo.getAncs()<=0){
 			return;
-		}
+		}*/
 		provider = BleService.getInstance(context).getCurrentHandlerProvider();
 		MyLog.e(TAG,"========PhoneReceiver========");
 		DeviceSetting deviceSetting = LocalUserSettingsToolkits.getLocalSetting(context, MyApplication.getInstance(context).getLocalUserInfoProvider().getUser_id()+"");
@@ -62,7 +65,10 @@ public class PhoneReceiver extends BroadcastReceiver {
 		 MyLog.i(TAG, "Ansc_str："+Ansc_str);
 		 char[] charr = Ansc_str.toCharArray(); // 将字符串转换为字符数组
 		 System.arraycopy(charr, 0, array_phone, 5 - charr.length, charr.length);
-		 MyLog.i(TAG, "array_phone："+array_phone[3]);
+		 MyLog.i(TAG, "array_phone："+array_phone[1]);
+		if (array_phone[1]==0){
+			return;
+		}
 		 if(intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)){  //拨打号码
 			String phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
 			MyLog.i(TAG, "我呼出去的电话号码:" + phoneNumber);

@@ -156,8 +156,8 @@ public class BarChartView extends View {
 //                        y = screenHight-y +1000 ;
                         x = (int) (barRect.left - screenW * 0.1);
                         MyLog.e("点击", "screenHight....." + screenH + "screenH...." + y + "y......." + screenW + "screenW-----" + x + "");
-//                        mdialogListerer.showDialog(i, (int) (x-screenW*0.13), y);
-                        mdialogListerer.showDialog(i, (int) (x-screenW*0.13), y);
+                        mdialogListerer.showDialog(i, (int) (x-screenW*0.13),
+                                (int) (oneHourHight*8+ (mItems.get(i).itemDeepValue+mItems.get(i).itemLightValue) * oneHourHight * 1.25));
                         break;
                     }
                 }

@@ -58,21 +58,21 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
 			return;
 		if(userEntity.getUserBase()==null)
 			return;
-		ModelInfo modelInfo = PreferencesToolkits.getInfoBymodelName(context,userEntity.getDeviceEntity().getModel_name());
-		if(modelInfo==null) return;
-
-		if(modelInfo.getAncs()<=0){
-			return;
-		}
+		UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(context);
+		String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
+		if (last_sync_device_id==null||last_sync_device_id.length()==0) return;
 		 provider = BleService.getInstance(context).getCurrentHandlerProvider();
 		MyLog.e(TAG,"========SMSBroadcastReceiver========");
 		 DeviceSetting deviceSetting = LocalUserSettingsToolkits.getLocalSetting(context, MyApplication.getInstance(context).getLocalUserInfoProvider().getUser_id()+"");
 		 String Ansc_str = Integer.toBinaryString(deviceSetting.getANCS_value());
 		 char[] charr = Ansc_str.toCharArray(); // 将字符串转换为字符数组
 		 System.arraycopy(charr, 0, array_phone, 5 - charr.length, charr.length);
+		if (array_phone[2]==0){
+			return;
+		}
 		 if(SMS_RECEIVED_ACTION.equals(intent.getAction()) || !CommonUtils.isStringEmpty(MyApplication.getInstance(context).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id()) ){
 			 connectble0x02(context);
-			if(provider.isConnectedAndDiscovered() && array_phone[2] == SMS && !BleService.getInstance(context).isCANCLE_ANCS()){
+			if(provider.isConnectedAndDiscovered() && !BleService.getInstance(context).isCANCLE_ANCS()){
 				 SmsMessage msg = null;
 		           Bundle bundle = intent.getExtras();
 		           if (bundle != null) {

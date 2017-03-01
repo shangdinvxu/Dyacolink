@@ -422,6 +422,9 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
         if (getTempImageFileUri()!=null){
             Bitmap bitmap = decodeUriAsBitmap(getTempImageFileUri());
+            if (bitmap==null){
+                bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.default_avatar_m);
+            }
             user_head.setImageBitmap(bitmap);
         }
 //        getCalroiesNow();
@@ -503,6 +506,9 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         initCheckUnit();
         if (getTempImageFileUri()!=null){
             Bitmap bitmap = decodeUriAsBitmap(getTempImageFileUri());
+            if (bitmap==null){
+                bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.default_avatar_m);
+            }
             user_head.setImageBitmap(bitmap);
         }
     }
@@ -586,8 +592,8 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    ImageView mhead = (ImageView) view;
-                    mhead.setImageBitmap(loadedImage);
+//                    ImageView mhead = (ImageView) view;
+//                    mhead.setImageBitmap(loadedImage);
                 }
 
                 @Override
@@ -878,6 +884,8 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         public void updateFor_handleNotEnableMsg() {
             //用户未打开蓝牙
             Log.i(TAG, "updateFor_handleNotEnableMsg");
+            if (pulltorefreshView!=null&&pulltorefreshView.isRefreshing())
+                pulltorefreshView.onRefreshComplete();
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             getActivity().startActivityForResult(enableBtIntent, BleService.REQUEST_ENABLE_BT);
         }
@@ -911,6 +919,8 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         public void updateFor_handleConnectFailedMsg() {
             //连接失败
             MyLog.e(TAG, "updateFor_handleConnectFailedMsg");
+            if (pulltorefreshView!=null&&pulltorefreshView.isRefreshing())
+                pulltorefreshView.onRefreshComplete();
         }
 
         /**********
@@ -1122,6 +1132,8 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
          *********/
         @Override
         public void updateFor_handleSetTime() {
+            if (pulltorefreshView!=null&&pulltorefreshView.isRefreshing())
+                pulltorefreshView.onRefreshComplete();
             MyLog.e(TAG, "updateFor_handleSetTime");
         }
 
