@@ -1,45 +1,45 @@
 package com.linkloving.dyh08;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.IBinder;
-import android.os.Looper;
 import android.os.SystemClock;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.trace.LBSTraceClient;
-import com.baidu.trace.LocationMode;
 import com.baidu.trace.OnEntityListener;
-import com.baidu.trace.TraceLocation;
 import com.example.android.bluetoothlegatt.BLEHandler;
 import com.example.android.bluetoothlegatt.BLEProvider;
-import com.example.android.bluetoothlegatt.proltrol.LPException;
-import com.example.android.bluetoothlegatt.proltrol.LPUtil;
-import com.example.android.bluetoothlegatt.proltrol.LepaoProtocalImpl;
-import com.example.android.bluetoothlegatt.proltrol.WatchRequset;
-import com.example.android.bluetoothlegatt.proltrol.WatchResponse;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPSportData;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPWorkoutData;
 import com.example.android.bluetoothlegatt.proltrol.dto.LpHeartrateData;
+import com.example.android.bluetoothlegatt.wapper.BLEWapper;
 import com.linkloving.band.dto.DaySynopic;
 import com.linkloving.band.dto.SportRecord;
 import com.linkloving.dyh08.db.sport.UserDeviceRecord;
 import com.linkloving.dyh08.db.summary.DaySynopicTable;
 import com.linkloving.dyh08.logic.UI.HeartRate.GreendaoUtils;
 import com.linkloving.dyh08.logic.UI.device.incomingtel.IncomingTelActivity;
-import com.linkloving.dyh08.logic.UI.setting.NotificationSettingActivity;
+import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
-import com.linkloving.dyh08.logic.UI.workout.trackshow.TrackApplication;
-import com.linkloving.dyh08.logic.UI.workout.trackshow.WorkoutActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
@@ -52,11 +52,13 @@ import com.linkloving.dyh08.utils.sportUtils.SportDataHelper;
 import com.linkloving.dyh08.utils.sportUtils.TimeUtils;
 import com.baidu.trace.Trace;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Observer;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -199,6 +201,7 @@ public class BleService extends Service {
     private DaoMaster.DevOpenHelper heartrateHelper;
     private TraceGreendao traceGreendao;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+    private MediaPlayer   mMediaPlayer ;
 
 
 
@@ -232,7 +235,44 @@ public class BleService extends Service {
         devOpenHelper = new DaoMaster.DevOpenHelper(this, "Note", null);
         db = devOpenHelper.getReadableDatabase();
         traceGreendao = new TraceGreendao(this,db);
+        initFindPhone();
     }
+
+    /**找手机功能的实现*/
+    private void initFindPhone() {
+        final BLEWapper bleWapper = BLEWapper.getInstence();
+        bleWapper.setOnSearchForPhoneListener(new BLEWapper.SearchPhoneListener() {
+            @Override
+            public void findPhone() {
+                MyLog.e(TAG+"findPhone","bleService里面的findPhone执行了");
+                Vibrator  vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+                long [] pattern = {100,400,100,400}; // 停止 开启 停止 开启
+                vibrator.vibrate(pattern,-1); //重复两次上面的pattern 如果只想震动一次，index设为-1
+                startAlarm();
+            }
+        });
+    }
+
+    private void startAlarm() {
+    mMediaPlayer = MediaPlayer.create(this, getSystemDefultRingtoneUri());
+        mMediaPlayer.setLooping(false);
+        try {
+            mMediaPlayer.prepare();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mMediaPlayer.start();
+    }
+
+    //获取系统默认铃声的Uri
+    private Uri getSystemDefultRingtoneUri() {
+        return RingtoneManager.getActualDefaultRingtoneUri(this,
+                RingtoneManager.TYPE_RINGTONE);
+    }
+
+
 
 
     /**
@@ -541,7 +581,7 @@ public class BleService extends Service {
                 /***********************设置消息提醒**********************/
                 MyLog.e(TAG, "===设置消息提醒===");
                 DeviceSetting deviceSetting = LocalUserSettingsToolkits.getLocalSetting(BleService.this, userEntity.getUser_id() + "");
-                int ancs = deviceSetting.getANCS_value();
+                int ancs = deviceSetting.getAncs_value();
                 byte[] send_data = IncomingTelActivity.intto2byte(ancs);
                 provider.setNotification(BleService.this, send_data);
                 /***********************设置消息提醒**********************/
@@ -629,6 +669,7 @@ public class BleService extends Service {
                 MyLog.e(TAG,"notifyforgerHeartListsuccess");
                 super.notifyforgerHeartList(obj);
                 for (LpHeartrateData obj1: obj){
+                    if (obj1.getAvgRate()<=0||obj1.getMaxRate()<=0) return;
                     greendaoUtils.add(obj1.getStartTime(),obj1.getMaxRate(),obj1.getAvgRate());
                     List<heartrate> search = greendaoUtils.search(obj1.getStartTime());
                     MyLog.e(TAG,search.get(0).getMax()+"");
@@ -764,7 +805,7 @@ public class BleService extends Service {
                                 && MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity().getDevice_type()==MyApplication.DEVICE_WATCH)//蓝牙关闭 和 OAD升级过程中 取消定时器
                         {    //获得本地用户信息提供者，并且成功获取
                             MyLog.e(TAG, "正在Timer扫描...");
-                            if (!provider.isConnectedAndDiscovered()) {
+                             if (!provider.isConnectedAndDiscovered()) {
                                 //如果未发现连接或未连接。。。
                                 retrycount = 0;                          // 重置连接次数
                                 syncAllDeviceInfoAuto(BleService.this, false, null);

@@ -6,7 +6,6 @@ import android.content.Context;
 import com.example.android.bluetoothlegatt.BLEHandler.BLEProviderObserverAdapter;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
-import com.example.android.bluetoothlegatt.proltrol.dto.LpHeartrateData;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.logic.UI.device.incomingtel.IncomingTelActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
@@ -14,8 +13,6 @@ import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.DeviceSetting;
 import com.linkloving.dyh08.utils.DeviceInfoHelper;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
-
-import java.util.ArrayList;
 
 /**
  * Created by zkx on 2016/3/21.
@@ -121,7 +118,7 @@ public class BleSynchronImpl implements BleSynchron {
             MyLog.d(TAG, "updateFor_notifyForSetBodySucess");
             /***********************设置消息提醒**********************/
             DeviceSetting deviceSetting = LocalUserSettingsToolkits.getLocalSetting(context, userEntity.getUserBase().getUser_id()+"");
-            int ancs = deviceSetting.getANCS_value();
+            int ancs = deviceSetting.getAncs_value();
             byte[] send_data = IncomingTelActivity.intto2byte(ancs);
             provider.setNotification(context, send_data);
             /***********************设置消息提醒**********************/
@@ -134,7 +131,7 @@ public class BleSynchronImpl implements BleSynchron {
             super.notifyForSetNOTIFYFail();
             /***********************设置消息提醒**********************/
             DeviceSetting deviceSetting = LocalUserSettingsToolkits.getLocalSetting(context, userEntity.getUserBase().getUser_id()+"");
-            int ancs = deviceSetting.getANCS_value();
+            int ancs = deviceSetting.getAncs_value();
             byte[] send_data = IncomingTelActivity.intto2byte(ancs);
             if(provider.isConnectedAndDiscovered())
                 provider.setNotification(context, send_data);

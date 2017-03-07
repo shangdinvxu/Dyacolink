@@ -17,6 +17,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
@@ -44,6 +45,8 @@ import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.UI.main.materialmenu.CommonAdapter;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
+import com.linkloving.dyh08.utils.CommonUtils;
+import com.linkloving.dyh08.utils.CutString;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.yolanda.nohttp.Response;
@@ -91,6 +94,7 @@ public class BluetoothActivity extends ToolBarActivity {
 
     public static final int REFRESH_BUTTON = 0x123;
     private AlertDialog dialog;
+    private android.support.v7.app.AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,11 +114,9 @@ public class BluetoothActivity extends ToolBarActivity {
                     if (v.mac.equals(bluetoothDevice.getAddress()))
                         return;
                 }
-                MyLog.e(TAG,"接收到蓝牙了");
                 DeviceVO vo = new DeviceVO();
                 vo.mac = bluetoothDevice.getAddress();
                 vo.name = bluetoothDevice.getName();
-                MyLog.e(TAG+"blue","Mac+"+vo.mac+"------------"+"Name"+vo.name);
                 vo.bledevice = bluetoothDevice;
                 macList.add(vo);
                 macListAdapterNew.notifyDataSetChanged();
@@ -135,7 +137,6 @@ public class BluetoothActivity extends ToolBarActivity {
                 stateIV.setVisibility(View.VISIBLE);
                 rotateAnimation.start();
                 selectionPostion = position;
-                MyLog.e(TAG, "点击的是mac地址是+++" + macList.get(position).mac);
                 provider.setCurrentDeviceMac(macList.get(position).mac);
                 provider.setmBluetoothDevice(macList.get(position).bledevice);
                 provider.connect_mac(macList.get(position).mac);
@@ -155,6 +156,7 @@ public class BluetoothActivity extends ToolBarActivity {
                 .setMessage(R.string.portal_main_isbounding)
                 .create();
         dialog_bound.dismiss();
+        builder = new android.support.v7.app.AlertDialog.Builder(BluetoothActivity.this);
     }
 
     public RotateAnimation getRotateAnimation() {
@@ -208,53 +210,13 @@ public class BluetoothActivity extends ToolBarActivity {
             equipment_adressTV = (TextView) view.findViewById(R.id.equipment_adress);
             item_stateIV = (ImageView) view.findViewById(R.id.list_item_imageview);
             String name = macList.get(position).name;
-            MyLog.e("name是", name);
             equipment_nameTV.setText(name);
             String mac = macList.get(position).mac;
-            equipment_adressTV.setText(mac);
+            String macEndTwo = CutString.macSplitEndTwo(mac);
+            equipment_adressTV.setText(macEndTwo);
             return view;
         }
     }
-
-    /*  class macListAdapter extends CommonAdapter<DeviceVO>{
-          public class ViewHolder{
-              public TextView equipment_name ;
-              public TextView equipment_adress ;
-              public ImageView item_state ;
-
-          }
-          ViewHolder holder ;
-
-          public macListAdapter(Context context, List<DeviceVO> list) {
-              super(context, list);
-          }
-          @Override
-          protected View noConvertView(int position, View convertView, ViewGroup parent) {
-              convertView = inflater.inflate(R.layout.bluetooth_listviewitem, parent, false);
-  //            holder = new ViewHolder();
-  //            holder.equipment_name = (TextView) convertView.findViewById(R.id.equipment_name);
-  //            holder.equipment_adress = (TextView) convertView.findViewById(R.id.equipment_adress);
-  //            holder.item_state = (ImageView) convertView.findViewById(R.id.list_item_imageview);
-              convertView.setTag(holder);
-              return convertView;
-          }
-          @Override
-          protected View hasConvertView(int position, View convertView, ViewGroup parent) {
-              holder = (ViewHolder) convertView.getTag();
-              return convertView;
-          }
-          @Override
-          protected View initConvertView(int position, View convertView, ViewGroup parent) {
-              String name = list.get(position).name;
-              MyLog.e("name是",name);
-  //            equipment_nameTV.setText(name);
-  ////            String mac = list.get(position).mac.substring(list.get(position).mac.length() - 5, list.get(position).mac.length());
-  ////            holder.equipment_adress.setText("ID:   " + removeCharAt(mac, 2));
-  //            String mac = list.get(position).mac;
-  //            equipment_adressTV.setText(mac);
-              return convertView;
-          }
-      }*/
 
 
     @Override
@@ -425,32 +387,6 @@ public class BluetoothActivity extends ToolBarActivity {
                 provider.resetDefaultState();
                 provider.clearProess();
                 finish();
-             /*   new AlertDialog.Builder(BluetoothActivity.this)
-                        .setTitle(R.string.portal_main_gobound)
-                        .setMessage(R.string.portal_main_mustbund)
-                        //
-                        .setPositiveButton(R.string.general_ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                provider.unBoundDevice(BluetoothActivity.this);
-                                dialog.dismiss();
-                            }
-                        })
-                        .setNegativeButton(R.string.general_cancel, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                if (dialog_bound != null && dialog_bound.isShowing()) {
-                                    dialog_bound.dismiss();
-                                }
-                                provider.release();
-                                provider.setCurrentDeviceMac(null);
-                                provider.setmBluetoothDevice(null);
-                                provider.resetDefaultState();
-                                setResult(RESULT_FAIL);
-                                finish();
-                            }
-                        }).create().show();*/
             }else if(latestDeviceInfo != null && latestDeviceInfo.recoderStatus == 6){
                 Log.e("BluetoothActivity", "设备未授权");
                 Toast.makeText(BluetoothActivity.this, "设备未授权", Toast.LENGTH_SHORT).show();
@@ -460,8 +396,21 @@ public class BluetoothActivity extends ToolBarActivity {
                 provider.resetDefaultState();
                 provider.clearProess();
                 finish();
-            }
-            else {
+            }   if (latestDeviceInfo!=null&&latestDeviceInfo.recoderStatus==66){
+                   if (builder!=null&&!builder.create().isShowing()) {
+                       builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               provider.unBoundDevice(BluetoothActivity.this);
+                           }
+                       }).setMessage(getString(R.string.Need_format))
+                               .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(DialogInterface dialog, int which) {
+                                   }
+                               }).show();
+                   }
+            } else {
                 provider.requestbound_fit(BluetoothActivity.this);
             }
 
@@ -636,6 +585,7 @@ public class BluetoothActivity extends ToolBarActivity {
                 dialog_bound.dismiss();
             }
             provider.clearProess();
+            Toast.makeText(BluetoothActivity.this,"绑定失败",Toast.LENGTH_SHORT).show();
 //            provider.unBoundDevice(BluetoothActivity.this);
             setResult(RESULT_FAIL);
             finish();

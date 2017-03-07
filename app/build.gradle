@@ -37,7 +37,8 @@ android {
         multiDexEnabled true
     }
     dexOptions {
-        jumboMode true
+        //是否支持大工程模式
+        jumboMode = true
     }
     packagingOptions {  // 因为多个 jar 包里包含了同样的文件（NOTICE.txt），导致打包时因为担心相互覆盖问题而提示出错。
         // 尝试下在 app 下的 build.gradle 中的 android 部分增加一段配置

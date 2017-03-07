@@ -36,6 +36,7 @@ public class DaychartviewFragment extends Fragment {
     private List<DayBarChartView.BarChartItemBean> dayhour = new ArrayList<>();
     private DayBarChartView dayBarChartView;
     private View view;
+    private View anchorButton;
     int calorieseveryday ;
     private int calorieseveryHour;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -49,6 +50,7 @@ public class DaychartviewFragment extends Fragment {
         MyLog.e("calories",calorieseveryday+"calories");
         dayBarChartView = (DayBarChartView) view.findViewById(R.id.day_barchartView);
         dayBarChartView.setPopupViewType(DayBarChartView.CALORIES);
+        anchorButton = view.findViewById(R.id.anchor_button);
         String checkDate = getArguments().getString("checkDate");
         new DayChartAsynck().execute(checkDate);
         return view;
@@ -166,7 +168,7 @@ public class DaychartviewFragment extends Fragment {
                 @Override
                 public void showDialog(int i, int x, int y) {
                     String textShowTime = i+":00";
-                    dayBarChartView.showPopupWindow(view,textShowTime, (int) dayhour.get(i).itemValue, x, y);
+                    dayBarChartView.showPopupWindow(anchorButton,textShowTime, (int) dayhour.get(i).itemValue, x, y);
                 }
                 @Override
                 public void dismissPopupWindow() {

@@ -71,5 +71,12 @@ public class CutString {
    // 得到剪贴板管理器  
 	   ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);  
 	   cmb.setText(content.trim());  
-   }  
+   }
+
+    public static String macSplitEndTwo(String mac){
+        String[] split = mac.split(":");
+        return split[1]+":"+split[0];
+    }
+
+
 }

@@ -1180,4 +1180,8 @@
     <string name="Intervals">インターバル</string>
     <string name="timersetting">タイマー</string>
 
+    <string name="Need_format">リセットするかどうかの手のリングブレスレット終了アンバンドリング、</string>
+    <string name="format_success">成功リセット、バインドを続けます</string>
+    <string name="Need_before">再バインドする前にデバイスを必要とします</string>
+
 </resources>

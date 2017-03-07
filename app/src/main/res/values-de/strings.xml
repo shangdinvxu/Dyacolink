@@ -1180,5 +1180,8 @@
     <string name="thebritshunit">Englisches System</string>
     <string name="goalkcal">Combustion</string>
     <string name="Intervals">Intervals</string>
+    <string name="Need_format">Die Hand Ring Armband Ende der Entflechtung, ob zurücksetzen</string>
+    <string name="format_success">Reset erfolgreich weiter zu binden</string>
+    <string name="Need_before">Sie benötigen ein Gerät vor rebinding</string>
 
 </resources>

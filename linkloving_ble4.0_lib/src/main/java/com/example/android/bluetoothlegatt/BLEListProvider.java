@@ -138,21 +138,7 @@ public class BLEListProvider
         public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) 
         {
 
-//			Log.e("BluetoothActivityScan","device.getName()"+device.getName()+"-------------device.getAddress()"+device.getAddress());
-			LPUtil.printData(scanRecord,"BluetoothActivityScan"+"device.getName()"+device.getName()+"-------------device.getAddress()"+device.getAddress()
-			);
 			ParsedAd parsedAd = LPUtil.parseData(scanRecord);
-
-			/**判断是否是手表设备*/
- 	/*	   if(( ((scanRecord[5] == (byte)0xE1) && (scanRecord[6] == (byte)0xFE)) || ((scanRecord[23] == (byte)0xE1) && (scanRecord[24] == (byte)0xFE)) ))//&& device.getAddress().equals(getCurrentDeviceMac())
-		   {
-			   *//**判断是否是手环设备*//*
-//     			   Log.i(TAG, " device address.......................... " + device.getAddress());
-     			   Message msg = mHandler.obtainMessage();
-     			   msg.what = MSG_BLE_DATA;
-     			   msg.obj = device;
-     			   msg.sendToTarget();
-		   }*/
 			if (parsedAd.uuidStrings.contains("fee1")){
 				//**判断是否是手环设备*//
   			   Log.i(TAG, " device address.......................... " + device.getAddress());

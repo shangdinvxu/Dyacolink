@@ -48,7 +48,7 @@ public class StepActivity extends ToolBarActivity{
     @InjectView(R.id.step_button_year)
     RadioButton step_button_year_im;
     @InjectView(R.id.step_tv_date)
-    TextView step_tv_date ;
+     TextView step_tv_date ;
     @InjectView(R.id.step_DrawArc_angle)
     DrawArc stepCircleView ;
     @InjectView(R.id.step_mount)

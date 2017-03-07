@@ -9,8 +9,10 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -77,6 +79,7 @@ public class WeekBarChartView extends View {
     private int popupViewWidth;
     private TextView timeView;
     private TextView step_number_textview;
+    private  View anchorView ;
 
     public void setDialogListerer(DialogListerer DialogListerer) {
         this.mdialogListerer = DialogListerer;
@@ -98,6 +101,7 @@ public class WeekBarChartView extends View {
 
 
         screenW = ScreenUtils.getScreenW(context);
+        y_index_startX = (float) (screenW*0.1);
 //        因为获取的是设备屏幕的高度,所以我乘以了0.5
         screenHight = ScreenUtils.getScreenH(context);
         screenH = (int) (ScreenUtils.getScreenH(context) * 0.5);
@@ -142,17 +146,13 @@ public class WeekBarChartView extends View {
         checkLeftMoving();
 
         textPaint.setTextSize(ScreenUtils.dp2px(getContext(), 12));
-        int weekIndex = 7 ;
         for (int i = 0; i < mItems.size(); i++) {
             barRect.bottom = (int) (screenH * 0.53);
             barRect.left =((int) y_index_startX + barItemWidth * i + barSpace * (i + 1));
-
 //            对值做个判断,如果为0的话设置一个高度,不然会很高 ;
             if (mItems.get(i).itemValue == 0) {
-//                MyLog.e(TAG, barRect.top+"========================="+barRect.top);
                 barRect.top =  barRect.bottom-3 ;
             } else {
-//                barRect.top = topMargin * 2 + (int) (maxHeight * (1.0f - mItems.get(i).itemValue / maxValue));
                 barRect.top =  barRect.bottom-(int) (maxHeight * ( mItems.get(i).itemValue / maxValue));
             }
             barRect.right = barRect.left + barItemWidth;
@@ -160,14 +160,10 @@ public class WeekBarChartView extends View {
             canvas.drawRect(barRect, barPaint);
             canvas.drawText(DateSwitcher.intWeekDateToString(i + 1),barRect.left,barRect.bottom+30 ,textPaint);
             if (i == iCheck) {
-//             barRect.left = (int) y_index_startX + barItemWidth * i + barSpace * (i + 1) - (int) leftMoving;
-//             barRect.top = topMargin * 2 + (int) (maxHeight * (1.0f - mItems[i].itemValue / maxValue));
-//             barRect.right = barRect.left + barItemWidth;
                 barPaint.setColor(Color.rgb(251, 195, 0));
                 canvas.drawRect(barRect, barPaint);
                 barTextpaint.setColor(Color.WHITE);
                 barTextpaint.setTextSize(30);
-//                canvas.drawText(mItems.get(i).itemType, barRect.left + 10, barRect.top + 40, barTextpaint);
             }
 
         }
@@ -222,14 +218,8 @@ public class WeekBarChartView extends View {
         // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
         popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
         popupWindow.setClippingEnabled(false);
-/*//        有参数的话，就是一view的左下角进行偏移，xoff正的向左，负的向右.
-//        View stepAcitvityLayout = findViewById(R.id.step_activity_layout);*/
-//        if (!touchDown){
-//            popupWindow.update(x,y,-1,1);
-//            MyLog.e(TAG,"update"+x+"_________________"+y);
-//        }else {
-            popupWindow.showAsDropDown(view, x, y);
-//        }
+        anchorView  = view ;
+        popupWindow.showAsDropDown(view, x, y, Gravity.BOTTOM);
         MyLog.e(TAG,"touchDown++++++++++"+touchDown);
         showView = view ;
         MyLog.e("点击", "调用了popupwindow");
@@ -262,25 +252,26 @@ public class WeekBarChartView extends View {
                     int left = barRect.left;
 //                    -60方便点击
                     if (mItems.get(i).itemValue == 0) {
-//                MyLog.e(TAG, barRect.top+"========================="+barRect.top);
                         barRect.top =  barRect.bottom-3 ;
                     } else {
-//                barRect.top = topMargin * 2 + (int) (maxHeight * (1.0f - mItems.get(i).itemValue / maxValue));
                         barRect.top =  barRect.bottom-(int) (maxHeight * (1.0f - mItems.get(i).itemValue / maxValue));
                     }
                     int top = (int) (barRect.top-screenH);
                     barRect.right = barRect.left + barItemWidth;
                     int right = barRect.right;
                     touchDown = true ;
-                    if (x > left && x < right && y > top) {
+                    if (x > left && x < right && y<barRect.bottom&&y>barRect.top-160) {
                         iCheck = i;
-                        MyLog.e("点击", "点击的是" + mItems.get(i).itemType);
-//                        (int) mItems[i].itemValue
-//                        y = screenHight-y +1000 ;
                         x = (int) (barRect.left - screenW * 0.1);
                         y = (int) (-screenH + barRect.top + 0.078 * screenHight);
-                        MyLog.e("点击", screenHight + "screenHight....." + screenH + "screenH...." + y + "y......." + screenW + "screenW-----" + x + "");
                         mdialogListerer.showDialog(i, (int) (x-screenW*0.13), y);
+                        popupWindow.update(anchorView,(int) (lastPointX - screenW * 0.13),
+                                (int) (-screenHight*0.13+barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))), -1, -1);
+
+                        MyLog.e(TAG,(int) (lastPointX - screenW * 0.13)+" ----------" +
+                                "----"+ (int) (-screenHight*0.13+barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))));
+                        timeView.setText(mItems.get(i).itemType);
+                        step_number_textview.setText((int)mItems.get(i).itemValue+"");
                         break;
                     }
                 }
@@ -297,9 +288,10 @@ public class WeekBarChartView extends View {
                 for (int i = 0; i < mItems.size(); i++){
                     if (((int) y_index_startX + barItemWidth * i + barSpace * (i + 1) - (int) leftMoving)<lastPointX
                             &&lastPointX< ((int) y_index_startX + barItemWidth * (i+1) + barSpace * (i + 2) - (int) leftMoving)){
-//                        mdialogListerer.showDialog(i,(int)lastPointX,(int)event.getRawY());
-                        popupWindow.update((int)(lastPointX-screenW*0.13),
-                                barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))+screenH,-1,-1);
+                        popupWindow.update(anchorView,(int) (lastPointX - screenW * 0.13),
+                                (int) (-screenHight*0.13+barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))), -1, -1);
+                        MyLog.e(TAG,(int) (lastPointX - screenW * 0.13)+" ----------" +
+                                "----              "+ (int) (-screenHight*0.13+barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))));
                         timeView.setText(mItems.get(i).itemType);
                         step_number_textview.setText((int)mItems.get(i).itemValue+"");
                         iCheck = i ;
@@ -315,9 +307,6 @@ public class WeekBarChartView extends View {
                 iCheck=-1;
                 //smooth scroll
                 new Thread(new SmoothScrollThread(movingLeftThisTime)).start();
-         /*       if (popupWindow.isShowing()) {
-                    mdialogListerer.dismissPopupWindow();
-                }*/
                 break;
 
             default:
@@ -347,14 +336,8 @@ public class WeekBarChartView extends View {
 
 
     public void setItems(List<WeekBarChartView.BarChartItemBean> items) {
-     /*   if (items == null) {
-            throw new RuntimeException("BarChartView.setItems(): the param items cannot be null.");
-        }
-        if (items.length == 0) {
-            return;
-        }*/
+
         this.mItems = items;
-        //Calculate the max value.
         maxValue = items.get(0).itemValue;
         for (BarChartItemBean bean : items) {
             if (bean.itemValue > maxValue) {
@@ -388,14 +371,15 @@ public class WeekBarChartView extends View {
 //        barItemWidth = screenW / itemCount;
 //        barItemWidth = 20;
 
+
 //        修改条目的间隔
-        barSpace = (screenW - leftMargin * 2 - barItemWidth * itemCount) / (itemCount + 6);
+        barSpace = (int) ((screenW -y_index_startX*2- leftMargin * 2 - barItemWidth * itemCount) / (itemCount + 6));
         barSpace = 3;
         if (barSpace < minBarSpacing) {
 //            barItemWidth = minBarWidth;
             barSpace = minBarSpacing;
         }
-        barItemWidth = (screenW -itemCount*barSpace)/itemCount ;
+        barItemWidth = (int) ((screenW -y_index_startX*2-itemCount*barSpace)/itemCount);
 
         maxRight = (int) y_index_startX + lineStrokeWidth + (barSpace + barItemWidth) * mItems.size();
         minRight = screenW - leftMargin - barSpace;
@@ -423,18 +407,14 @@ public class WeekBarChartView extends View {
                 screenW - leftMargin + 10, (int) (x_index_startY + 10));
     }
 
-    //The max and min division value.
     private float maxDivisionValue, minDivisionValue;
 
-    //Get the max and min division value by the max and min value in mItems.
     private void getRange(float maxValue, float minValue) {
         //max
         int scale = Utility.getScale(maxValue);
         float unscaledValue = (float) (maxValue / Math.pow(10, scale));
 
         maxDivisionValue = (float) (getRangeTop(unscaledValue) * Math.pow(10, scale));
-//        y_index_startX = (getDivisionTextMaxWidth(maxDivisionValue) + 10);
-        y_index_startX = 0;
         y_index_arrowRect = new Rect((int) (y_index_startX - 5), topMargin / 2 - 20,
                 (int) (y_index_startX + 5), topMargin / 2);
 

@@ -29,9 +29,7 @@ import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.DeviceSetting;
 import com.linkloving.dyh08.utils.DeviceInfoHelper;
-import com.linkloving.dyh08.utils.KeyUtils;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
-import com.mob.tools.utils.SharePrefrenceHelper;
 
 import java.util.ArrayList;
 
@@ -766,6 +764,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
 
         Switch switchPhonecall = (Switch) view.findViewById(R.id.switchPhoneCall);
         switchPhonecall.setChecked(switchPhonecallBoolean);
+        phonecall=switchPhonecallBoolean?1:0 ;
         switchPhonecall.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -778,6 +777,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
         });
         Switch switchTextmessage = (Switch) view.findViewById(R.id.switchTextmessage);
         switchTextmessage.setChecked(switchTextmessageBoolean);
+        SMScall = switchTextmessageBoolean?1:0 ;
         switchTextmessage.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -790,6 +790,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
         });
         Switch switchEmail = (Switch) view.findViewById(R.id.switchEmail);
         switchEmail.setChecked(switchEmailBoolean);
+        Emailcall = switchEmailBoolean?1:0 ;
         switchEmail.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -802,6 +803,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
         });
         Switch switchapps = (Switch) view.findViewById(R.id.switchMessagingapps);
         switchapps.setChecked(switchMessagingBoolean);
+        appscall = switchMessagingBoolean?1:0 ;
         switchapps.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -825,7 +827,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                 String notif_ = ""+phonecall+SMScall+Emailcall+appscall ;
                 int notif_data = Integer.parseInt(notif_, 2);
                 byte[] send_data = intto2byte(notif_data);
-                deviceSetting.setANCS_value(notif_data);
+                deviceSetting.setAncs_value(notif_data);
                 LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this
                 ,deviceSetting);
                 if (provider.isConnectedAndDiscovered()){

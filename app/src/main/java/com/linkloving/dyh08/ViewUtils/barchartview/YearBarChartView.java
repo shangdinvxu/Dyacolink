@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,7 +23,6 @@ import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.logic.UI.calories.barchartview.ScreenUtils;
 import com.linkloving.dyh08.logic.UI.calories.barchartview.Utility;
 import com.linkloving.dyh08.utils.DateSwitcher;
-import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class YearBarChartView extends View {
     private int barSpace;
     //the width of the line.
     private int lineStrokeWidth;
-    private  View showView ;
+    private  View anchorButton;
 
     /**
      * The x-position of y-index and the y-position of the x-index..
@@ -99,6 +99,7 @@ public class YearBarChartView extends View {
 
 
         screenW = ScreenUtils.getScreenW(context);
+        y_index_startX= (float) (screenW*0.1);
 //        因为获取的是设备屏幕的高度,所以我乘以了0.5
         screenHight = ScreenUtils.getScreenH(context);
         screenH = (int) (ScreenUtils.getScreenH(context) * 0.5);
@@ -226,10 +227,10 @@ public class YearBarChartView extends View {
 //            popupWindow.update(x,y,-1,1);
 //            MyLog.e(TAG,"update"+x+"_________________"+y);
 //        }else {
-            popupWindow.showAsDropDown(view, x, y);
+            popupWindow.showAsDropDown(view, x, y, Gravity.BOTTOM);
 //        }
         MyLog.e(TAG,"touchDown++++++++++"+touchDown);
-        showView = view ;
+        anchorButton = view ;
         MyLog.e("点击", "调用了popupwindow");
 
     }
@@ -269,15 +270,13 @@ public class YearBarChartView extends View {
                     barRect.right = barRect.left + barItemWidth;
                     int right = barRect.right;
                     touchDown = true ;
-                    if (x > left && x < right && y > top) {
+                    if (x > left && x < right &&  y<barRect.bottom&&y>barRect.top-160) {
                         iCheck = i;
-                        MyLog.e("点击", "点击的是" + mItems.get(i).itemType);
-//                        (int) mItems[i].itemValue
-//                        y = screenHight-y +1000 ;
                         x = (int) (barRect.left - screenW * 0.1);
                         y = (int) (-screenH + barRect.top + 0.078 * screenHight);
-                        MyLog.e("点击", screenHight + "screenHight....." + screenH + "screenH...." + y + "y......." + screenW + "screenW-----" + x + "");
                         mdialogListerer.showDialog(i, (int) (x-screenW*0.13), y);
+                        popupWindow.update(anchorButton,(int)(lastPointX-screenW*0.17),
+                                (int) (-screenHight*0.13+barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))),-1,-1);
                         break;
                     }
                 }
@@ -295,11 +294,11 @@ public class YearBarChartView extends View {
                 for (int i = 0; i < mItems.size(); i++){
                     if (((int) y_index_startX + barItemWidth * i + barSpace * (i + 1) - (int) leftMoving+5)<lastPointX
                             &&lastPointX< ((int) y_index_startX + barItemWidth * (i+1) + barSpace * (i + 2) - (int) leftMoving)+5){
-//                        mdialogListerer.showDialog(i,(int)lastPointX,(int)event.getRawY());
-                        popupWindow.update((int)(lastPointX-screenW*0.13),
-                                barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))+screenH,-1,-1);
+                        popupWindow.update(anchorButton,(int)(lastPointX-screenW*0.17),
+                                (int) (-screenHight*0.13+barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))),-1,-1);
                         timeView.setText(mItems.get(i).itemType);
                         step_number_textview.setText((int)(int)mItems.get(i).itemValue+"");
+
                         iCheck = i ;
                         invalidate();
                     }
@@ -388,13 +387,13 @@ public class YearBarChartView extends View {
 //        barItemWidth = 20;
 
 //        修改条目的间隔
-        barSpace = (screenW - leftMargin * 2 - barItemWidth * itemCount) / (itemCount + 6);
+        barSpace = (int) ((screenW - 2*y_index_startX-leftMargin * 2 - barItemWidth * itemCount) / (itemCount + 6));
         barSpace = 3;
         if (barSpace < minBarSpacing) {
 //            barItemWidth = minBarWidth;
             barSpace = minBarSpacing;
         }
-        barItemWidth = (screenW -itemCount*barSpace)/itemCount ;
+        barItemWidth = (int) ((screenW- 2*y_index_startX -itemCount*barSpace)/itemCount);
 
         maxRight = (int) y_index_startX + lineStrokeWidth + (barSpace + barItemWidth) * mItems.size();
         minRight = screenW - leftMargin - barSpace;
@@ -432,8 +431,6 @@ public class YearBarChartView extends View {
         float unscaledValue = (float) (maxValue / Math.pow(10, scale));
 
         maxDivisionValue = (float) (getRangeTop(unscaledValue) * Math.pow(10, scale));
-//        y_index_startX = (getDivisionTextMaxWidth(maxDivisionValue) + 10);
-        y_index_startX = 0;
         y_index_arrowRect = new Rect((int) (y_index_startX - 5), topMargin / 2 - 20,
                 (int) (y_index_startX + 5), topMargin / 2);
 

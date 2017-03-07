@@ -2,7 +2,6 @@ package com.linkloving.dyh08.notify;
 
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
@@ -12,14 +11,11 @@ import android.service.notification.StatusBarNotification;
 
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.linkloving.dyh08.BleService;
-import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
-import com.linkloving.dyh08.logic.UI.setting.NotificationSettingActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.DeviceSetting;
-import com.linkloving.dyh08.prefrences.devicebean.ModelInfo;
 import com.linkloving.dyh08.utils.CutString;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.utils.CommonUtils;
@@ -74,7 +70,7 @@ public class NotificationCollectorService extends NotificationListenerService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        MyLog.i(TAG, "NotificationCollectorService--onStartCommand了");
+        MyLog.e(TAG, "NotificationCollectorService--onStartCommand了");
         connectble0x02(this);
         return START_STICKY;
     }
@@ -82,6 +78,7 @@ public class NotificationCollectorService extends NotificationListenerService {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        MyLog.e(TAG, "消息通知服务onDestroy了");
     }
 
     private void connectble0x02(Context context) {
@@ -97,6 +94,7 @@ public class NotificationCollectorService extends NotificationListenerService {
     @SuppressLint("NewApi")
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
+        MyLog.e(TAG,"onNotificationPosted");
         if (MyApplication.getInstance(NotificationCollectorService.this) == null) {
             //APP还未启动的时候  获取userEntity会null
             return;
@@ -118,7 +116,7 @@ public class NotificationCollectorService extends NotificationListenerService {
                 if (!provider.isConnectedAndDiscovered()) return; //蓝牙未连接
                 MyLog.e(TAG, "===qq/wechat的内容：" + extras.getString(Notification.EXTRA_TEXT));
                 DeviceSetting deviceSetting = LocalUserSettingsToolkits.getLocalSetting(NotificationCollectorService.this, userEntity.getUser_id() + ""); //获取用户设置 判断是否要发送指令
-                String Ansc_str = Integer.toBinaryString(deviceSetting.getANCS_value());
+                String Ansc_str = Integer.toBinaryString(deviceSetting.getAncs_value());
                 charr = Ansc_str.toCharArray(); // 将字符串转换为字符数组
                 System.arraycopy(charr, 0, array, 5 - charr.length, charr.length);
 

@@ -36,6 +36,7 @@ import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
+import com.linkloving.dyh08.utils.CutString;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.util.ArrayList;
@@ -192,7 +193,8 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
             MyLog.e("name是", name);
             equipment_nameTV.setText(name);
             String mac = macList.get(position).mac;
-            equipment_adressTV.setText(mac);
+            String macEndTwo = CutString.macSplitEndTwo(mac);
+            equipment_adressTV.setText(macEndTwo);
             return view;
         }
     }

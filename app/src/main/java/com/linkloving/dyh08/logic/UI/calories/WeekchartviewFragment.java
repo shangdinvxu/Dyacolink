@@ -41,12 +41,14 @@ public class WeekchartviewFragment extends Fragment {
     private List<WeekBarChartView.BarChartItemBean> week = new ArrayList<>();
     private UserEntity userEntity;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private View anchorButton;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tw_week_barchartview_fragment, container, false);
         userEntity = MyApplication.getInstance(getActivity()).getLocalUserInfoProvider();
         barChartView = (WeekBarChartView) view.findViewById(R.id.week_barchartView);
         barChartView.setPopupViewType(BarChartView.CALORIES_TYPE);
+        anchorButton = view.findViewById(R.id.anchor_button);
         String date = getArguments().getString("date");
         MyLog.e(TAG,date);
         new WeekChartAsynckTask().execute(date);
@@ -159,7 +161,7 @@ public class WeekchartviewFragment extends Fragment {
             barChartView.setDialogListerer(new WeekBarChartView.DialogListerer() {
                 @Override
                 public void showDialog(int i, int x, int y) {
-                    barChartView.showPopupWindow(view,week.get(i).itemType, (int) week.get(i).itemValue, x, y);
+                    barChartView.showPopupWindow(anchorButton,week.get(i).itemType, (int) week.get(i).itemValue, x, y);
                 }
                 @Override
                 public void dismissPopupWindow() {

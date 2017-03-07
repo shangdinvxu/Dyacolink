@@ -25,6 +25,7 @@ import com.example.android.bluetoothlegatt.exception.BLESendTimeOutException;
 import com.example.android.bluetoothlegatt.exception.BLErrCode;
 import com.example.android.bluetoothlegatt.exception.BLException;
 import com.example.android.bluetoothlegatt.proltrol.LPUtil;
+import com.example.android.bluetoothlegatt.proltrol.LepaoCommand;
 import com.example.android.bluetoothlegatt.utils.OwnLog;
 import com.example.android.bluetoothlegatt.wapper.CmdFinder.OnCmdFindedListener;
 
@@ -240,6 +241,12 @@ public class BLEWapper  implements BLEInterface {
 			else
 			{
 		    	    final byte[] data = characteristic.getValue();
+					if (data!=null&&data.length>0&&data[0]== LepaoCommand.COMMAND_IS_STATUS&&data[3]==LepaoCommand.COMMAND_ANCS_PUSH){
+						if (searchPhoneListener!=null) {
+							LPUtil.printData(data,"回来的data是__");
+							searchPhoneListener.findPhone();
+						}
+					}
 					if (data != null && data.length > 0) {
 						// 将获得  命令过滤
 						CmdFinder.getInstence(new OnCmdFindedListener() {
@@ -255,12 +262,21 @@ public class BLEWapper  implements BLEInterface {
 					} else {
 						reciveDataLen = -1;
 					}
-		    	    
 				}
 		      }
 	};
+
+	public SearchPhoneListener searchPhoneListener;
+
+	public void  setOnSearchForPhoneListener(SearchPhoneListener searchPhoneListener){
+		this.searchPhoneListener = searchPhoneListener;
+
+	}
+	public interface SearchPhoneListener {
+		void findPhone();
+	};
 	
-	private BLEWapper() {
+	public BLEWapper() {
 
 	}
 

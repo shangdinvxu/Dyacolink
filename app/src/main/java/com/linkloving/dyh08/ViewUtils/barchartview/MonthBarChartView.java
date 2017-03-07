@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -227,7 +228,7 @@ public class MonthBarChartView extends View {
 //            popupWindow.update(x,y,-1,1);
 //            MyLog.e(TAG,"update"+x+"_________________"+y);
 //        }else {
-            popupWindow.showAsDropDown(view, x, y);
+        popupWindow.showAsDropDown(view, x, y, Gravity.BOTTOM);
 //        }
         MyLog.e(TAG,"touchDown++++++++++"+touchDown);
         showView = view ;
@@ -258,27 +259,24 @@ public class MonthBarChartView extends View {
                 for (int i = 0; i < mItems.size(); i++) {
                     barRect.left = ((int) y_index_startX + barItemWidth * i + barSpace * (i + 1) - (int) leftMoving+5);
                     int left = barRect.left;
-//                    -60方便点击
                     if (mItems.get(i).itemValue == 0) {
-//                MyLog.e(TAG, barRect.top+"========================="+barRect.top);
                         barRect.top =  barRect.bottom-3 ;
                     } else {
-//                barRect.top = topMargin * 2 + (int) (maxHeight * (1.0f - mItems.get(i).itemValue / maxValue));
                         barRect.top =  barRect.bottom-(int) (maxHeight * (1.0f - mItems.get(i).itemValue / maxValue));
                     }
                     int top = (int) (barRect.top-screenH);
                     barRect.right = barRect.left + barItemWidth;
                     int right = barRect.right;
                     touchDown = true ;
-                    if (x > left && x < right && y > top) {
+                    if (x > left && x < right &&  y<barRect.bottom&&y>barRect.top-160) {
                         iCheck = i;
-                        MyLog.e("点击", "点击的是" + mItems.get(i).itemType);
-//                        (int) mItems[i].itemValue
-//                        y = screenHight-y +1000 ;
                         x = (int) (barRect.left - screenW * 1.15);
                         y = (int) (-screenH + barRect.top + 0.078 * screenHight);
-                        MyLog.e("点击", screenHight + "screenHight....." + screenH + "screenH...." + y + "y......." + screenW + "screenW-----" + x + "");
                         mdialogListerer.showDialog(i, x, y);
+                        popupWindow.update(showView,(int)(lastPointX-screenW*0.18),
+                                (int) (-screenHight*0.13+barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))),-1,-1);
+                        timeView.setText(mItems.get(i).itemType);
+                        step_number_textview.setText((int)(int)mItems.get(i).itemValue+"");
                         break;
                     }
                 }
@@ -296,9 +294,10 @@ public class MonthBarChartView extends View {
                 for (int i = 0; i < mItems.size(); i++){
                     if (((int) y_index_startX + barItemWidth * i + barSpace * (i + 1) - (int) leftMoving+5)<lastPointX
                             &&lastPointX< ((int) y_index_startX + barItemWidth * (i+1) + barSpace * (i + 2) - (int) leftMoving)+5){
-//                        mdialogListerer.showDialog(i,(int)lastPointX,(int)event.getRawY());
-                        popupWindow.update((int)(lastPointX-screenW*0.18),
-                                barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))+screenH,-1,-1);
+
+                        popupWindow.update(showView,(int)(lastPointX-screenW*0.18),
+                                (int) (-screenHight*0.13+barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))),-1,-1);
+                        MyLog.e(TAG,(int)(lastPointX-screenW*0.18)+"           "+ (int) (-screenHight*0.13+barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))));
                         timeView.setText(mItems.get(i).itemType);
                         step_number_textview.setText((int)(int)mItems.get(i).itemValue+"");
                         iCheck = i ;

@@ -13,6 +13,7 @@ import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.logic.dto.SportDeviceEntity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
+import com.linkloving.dyh08.utils.CutString;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -47,7 +48,9 @@ public class BluetoothBindActivity extends ToolBarActivity {
         String last_sync_device_id = deviceEntity.getLast_sync_device_id();
 
         equipmentName.setText(model_name);
-        equipmentAdress.setText(last_sync_device_id);
+        String macEndTwo = CutString.macSplitEndTwo(last_sync_device_id);
+        equipmentAdress.setText(macEndTwo);
+//        equipmentAdress.setText(last_sync_device_id);
         init();
     }
 

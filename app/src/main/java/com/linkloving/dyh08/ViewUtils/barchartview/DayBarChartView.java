@@ -9,8 +9,10 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -40,9 +42,10 @@ public class DayBarChartView extends View {
     private int maxHeight;
     /* private int[] mBarColors = new int[]{Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.MAGENTA, Color.CYAN};*/
     private int[] mBarColors = new int[]{Color.rgb(220, 220, 221)};
+
     public static final int STEP__TYPE = 1;
     public static final int STEP_AVG_TYPE = 2;
-    public static final int CALORIES_TYPE = 3;
+    public static final int CALORIES_TYPE  = 3;
     public static final int CALORIES_AVG_TYPE = 4;
     public static final int DISTANCE__TYPE = 5;
     public static final int DISTANCE_AVG_TYPE = 6;
@@ -58,7 +61,6 @@ public class DayBarChartView extends View {
     private int barSpace;
     //the width of the line.
     private int lineStrokeWidth;
-    private  View showView ;
 
     /**
      * The x-position of y-index and the y-position of the x-index..
@@ -75,6 +77,8 @@ public class DayBarChartView extends View {
     private int popupViewWidth;
     private TextView timeView;
     private TextView step_number_textview;
+    private  View anchorView ;
+    private int popupViewHeight;
 
     public void setDialogListerer(DialogListerer DialogListerer) {
         this.mdialogListerer = DialogListerer;
@@ -149,10 +153,8 @@ public class DayBarChartView extends View {
 
 //            对值做个判断,如果为0的话设置一个高度,不然会很高 ;
             if (mItems.get(i).itemValue == 0) {
-//                MyLog.e(TAG, barRect.top+"========================="+barRect.top);
                 barRect.top =  barRect.bottom-3 ;
             } else {
-//                barRect.top = topMargin * 2 + (int) (maxHeight * (1.0f - mItems.get(i).itemValue / maxValue));
                 barRect.top =  barRect.bottom-(int) (maxHeight * ( mItems.get(i).itemValue / maxValue));
             }
             barRect.right = barRect.left + barItemWidth;
@@ -162,14 +164,10 @@ public class DayBarChartView extends View {
                 canvas.drawText(i+"",barRect.left,barRect.bottom+30 ,textPaint);
             }
             if (i == iCheck) {
-//             barRect.left = (int) y_index_startX + barItemWidth * i + barSpace * (i + 1) - (int) leftMoving;
-//             barRect.top = topMargin * 2 + (int) (maxHeight * (1.0f - mItems[i].itemValue / maxValue));
-//             barRect.right = barRect.left + barItemWidth;
                 barPaint.setColor(Color.rgb(251, 195, 0));
                 canvas.drawRect(barRect, barPaint);
                 barTextpaint.setColor(Color.WHITE);
                 barTextpaint.setTextSize(30);
-//                canvas.drawText(mItems.get(i).itemType, barRect.left + 10, barRect.top + 40, barTextpaint);
             }
 
         }
@@ -213,29 +211,21 @@ public class DayBarChartView extends View {
                 popupView = LayoutInflater.from(getContext()).inflate(R.layout.tw_distance_avg_popupwiew, null);
                 break;
         }
+
         step_number_textview = (TextView) popupView.findViewById(R.id.dialog_number);
         step_number_textview.setText(number + "");
-        popupViewWidth = popupView.getWidth();
         popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
+
         timeView = (TextView) popupView.findViewById(R.id.time);
         timeView.setText(text);
         popupWindow.setTouchable(true);
         // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
         popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
         popupWindow.setClippingEnabled(false);
-/*//        有参数的话，就是一view的左下角进行偏移，xoff正的向左，负的向右.
-//        View stepAcitvityLayout = findViewById(R.id.step_activity_layout);*/
-//        if (!touchDown){
-//            popupWindow.update(x,y,-1,1);
-//            MyLog.e(TAG,"update"+x+"_________________"+y);
-//        }else {
-            popupWindow.showAsDropDown(view, x, y);
-//        }
-        MyLog.e(TAG,"touchDown++++++++++"+touchDown);
-        showView = view ;
-        MyLog.e("点击", "调用了popupwindow");
-
+        MyLog.e("daybarchart", "x  y  的地址是"+x+"          "+y);
+        anchorView  = view ;
+        popupWindow.showAsDropDown(view, x, y,Gravity.BOTTOM);
     }
 
     /**
@@ -263,25 +253,28 @@ public class DayBarChartView extends View {
                     int left = barRect.left;
 //                    -60方便点击
                     if (mItems.get(i).itemValue == 0) {
-//                MyLog.e(TAG, barRect.top+"========================="+barRect.top);
                         barRect.top =  barRect.bottom-3 ;
                     } else {
-//                barRect.top = topMargin * 2 + (int) (maxHeight * (1.0f - mItems.get(i).itemValue / maxValue));
                         barRect.top =  barRect.bottom-(int) (maxHeight * (1.0f - mItems.get(i).itemValue / maxValue));
                     }
-                    int top = (int) (barRect.top-screenH);
                     barRect.right = barRect.left + barItemWidth;
                     int right = barRect.right;
                     touchDown = true ;
-                    if (x > left && x < right && y > top) {
+                    if (x > left && x < right && y<barRect.bottom&&y>barRect.top-160) {
                         iCheck = i;
                         MyLog.e("点击", "点击的是" + mItems.get(i).itemType);
-//                        (int) mItems[i].itemValue
-//                        y = screenHight-y +1000 ;
-                        x = (int) (barRect.left - screenW*1.1);
-                        y = (int) (-screenH + barRect.top + 0.078 * screenHight);
-                        MyLog.e("点击", screenHight + "screenHight....." + screenH + "screenH...." + y + "y......." + screenW + "screenW-----" + x + "");
+                        x = (int) (lastPointX - screenW * 0.17);
+                        y =  barRect.bottom - (int) (maxHeight * (mItems.get(i).itemValue / maxValue));
+
                         mdialogListerer.showDialog(i, x, y);
+
+                        popupWindow.update(anchorView,(int) (lastPointX - screenW * 0.17),
+                                barRect.bottom - (int) (maxHeight * (mItems.get(i).itemValue / maxValue)) , -1, -1);
+
+
+                        timeView.setText(i + ":00");
+                        step_number_textview.setText((int) mItems.get(i).itemValue + "");
+                        //popwindow的位置看移动时update的位置.
                         break;
                     }
                 }
@@ -292,16 +285,14 @@ public class DayBarChartView extends View {
                     touchDown = false;
                     float x_move = event.getRawX();
                     movingLeftThisTime = lastPointX - x_move;
-
                     leftMoving += movingLeftThisTime;
                     lastPointX = x_move;
 //              自动清屏,屏幕刷新
                     for (int i = 0; i < mItems.size(); i++) {
                         if (((int) y_index_startX + barItemWidth * i + barSpace * (i + 1) - (int) leftMoving) < lastPointX
                                 && lastPointX < ((int) y_index_startX + barItemWidth * (i + 1) + barSpace * (i + 2) - (int) leftMoving)) {
-//                        mdialogListerer.showDialog(i,(int)lastPointX,(int)event.getRawY());
-                            popupWindow.update((int) (lastPointX - screenW * 0.17),
-                                    barRect.bottom - (int) (maxHeight * (mItems.get(i).itemValue / maxValue)) + screenH, -1, -1);
+                            popupWindow.update(anchorView,(int) (lastPointX - screenW * 0.17),
+                                    (int) (-screenHight*0.13+barRect.bottom - (int) (maxHeight * (mItems.get(i).itemValue / maxValue))), -1, -1);
                             timeView.setText(i + ":00");
                             step_number_textview.setText((int) mItems.get(i).itemValue + "");
                             iCheck=i;
@@ -316,11 +307,7 @@ public class DayBarChartView extends View {
                     mdialogListerer.dismissPopupWindow();
                 }
                 iCheck=-1;
-                //smooth scroll
                 new Thread(new SmoothScrollThread(movingLeftThisTime)).start();
-//                if (popupWindow.isShowing()) {
-//                    mdialogListerer.dismissPopupWindow();
-//                }
                 break;
             default:
                 return super.onTouchEvent(event);

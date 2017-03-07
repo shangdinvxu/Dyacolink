@@ -36,7 +36,7 @@ public class DeviceSetting {
     /**勿扰的开关*/
     private String disturb_vaild = "1";
     /**消息提醒*/
-    private int ANCS_value=31;
+    private int ancs_value =31;
     /**省电管理*/
     private int electricity_value=0;
     /**用户邮箱*/
@@ -132,12 +132,12 @@ public class DeviceSetting {
         this.disturb_vaild = disturb_vaild;
     }
 
-    public int getANCS_value() {
-        return ANCS_value;
+    public int getAncs_value() {
+        return ancs_value;
     }
 
-    public void setANCS_value(int ANCS_value) {
-        this.ANCS_value = ANCS_value;
+    public void setAncs_value(int ancs_value) {
+        this.ancs_value = ancs_value;
     }
 
     public String getDisturb_time() {

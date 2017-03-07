@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -33,6 +35,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -50,6 +53,7 @@ import com.baidu.location.LocationClientOption;
 import com.example.android.bluetoothlegatt.BLEHandler;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
+import com.example.android.bluetoothlegatt.wapper.BLEWapper;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jaeger.library.StatusBarUtil;
@@ -67,6 +71,7 @@ import com.linkloving.dyh08.http.basic.CallServer;
 import com.linkloving.dyh08.http.basic.HttpCallback;
 import com.linkloving.dyh08.http.basic.NoHttpRuquestFactory;
 import com.linkloving.dyh08.http.data.DataFromServer;
+import com.linkloving.dyh08.logic.UI.Bluetooth.BluetoothActivity;
 import com.linkloving.dyh08.logic.UI.OAD.DfuService;
 import com.linkloving.dyh08.logic.UI.device.DeviceActivity;
 import com.linkloving.dyh08.logic.UI.device.FirmwareDTO;
@@ -79,6 +84,7 @@ import com.linkloving.dyh08.logic.UI.setting.GeneralActivity;
 import com.linkloving.dyh08.logic.UI.settings.PersonalInfoActivity;
 import com.linkloving.dyh08.logic.dto.SportRecordUploadDTO;
 import com.linkloving.dyh08.logic.dto.UserEntity;
+import com.linkloving.dyh08.notify.NotificationCollectorService;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.LocalInfoVO;
 import com.linkloving.dyh08.utils.AvatarHelper;
@@ -198,54 +204,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     private AsyncTask<Object, Object, DaySynopic> currentDataAsync = null;
     private PullToRefreshListView pulltorefreshView;
     private int localSettingUnitInfo;
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (provider.getBleProviderObserver() != null) {
-            provider.setBleProviderObserver(null);
-        }
-    }
-
-    @Override
-    protected void onPostResume() {
-        MyLog.e(TAG, "onPostResume()了");
-        super.onPostResume();
-
-        provider = BleService.getInstance(PortalActivity.this).getCurrentHandlerProvider();
-        provider.setBleProviderObserver(bleProviderObserver);
-        UserEntity userEntity = MyApplication.getInstance(PortalActivity.this).getLocalUserInfoProvider();
-
-//        if (userEntity == null || userEntity.getDeviceEntity() == null || userEntity.getUserBase() == null)
-//            return;
-        MyLog.e(TAG, "u.getDeviceEntity().getDevice_type():" + userEntity.getDeviceEntity().getDevice_type());
-        //去数据库查询所要显示的数据
-        getInfoFromDB();
-        //绑定了蓝牙就去同步蓝牙数据
-        if (!CommonUtils.isStringEmpty(userEntity.getDeviceEntity().getLast_sync_device_id())) {
-//            if (provider.isConnectedAndDiscovered())
-            BleService.getInstance(PortalActivity.this).syncAllDeviceInfoAuto(PortalActivity.this, false, null);
-        }
-
-        if (userEntity.getUserBase().getUser_avatar_file_name() == null) {
-            MyLog.e(TAG, "u.getUserBase().getUser_avatar_file_name()是空的........");
-            return;
-        }
-
-        if (!userEntity.getUserBase().getUser_avatar_file_name().equals(User_avatar_file_name) || !userEntity.getUserBase().getNickname().equals(userEntity.getUserBase().getNickname())) {
-            refreshHeadView();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        provider.setBleProviderObserver(null);
-        AppManager.getAppManager().removeActivity(this);
-        // 如果有未执行完成的AsyncTask则强制退出之，否则线程执行时会空指针异常哦！！！
-        AsyncTaskManger.getAsyncTaskManger().finishAllAsyncTask();
-    }
-
+    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -277,6 +236,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         initListener();
         //开始定位
         mLocationClient.start();
+        builder = new AlertDialog.Builder(PortalActivity.this);
         /*--------------------------------*/
         pulltorefreshView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
@@ -302,10 +262,74 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
         /*-------------------日历----------------*/
         initCheckUnit();
+        initStartNocationService();
     }
 
+    private void initStartNocationService() {
+        Intent intent = new Intent(PortalActivity.this, NotificationCollectorService.class);
+        startService(intent);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DfuServiceListenerHelper.registerProgressListener(this, mDfuProgressListener);
+        initCheckUnit();
+        if (getTempImageFileUri()!=null){
+            Bitmap bitmap = decodeUriAsBitmap(getTempImageFileUri());
+            if (bitmap==null){
+                bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.default_avatar_m);
+            }
+            user_head.setImageBitmap(bitmap);
+        }
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (provider.getBleProviderObserver() != null) {
+            provider.setBleProviderObserver(null);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        provider.setBleProviderObserver(null);
+        AppManager.getAppManager().removeActivity(this);
+        // 如果有未执行完成的AsyncTask则强制退出之，否则线程执行时会空指针异常哦！！！
+        AsyncTaskManger.getAsyncTaskManger().finishAllAsyncTask();
+    }
+
+    @Override
+    protected void onPostResume() {
+        MyLog.e(TAG, "onPostResume()了");
+        super.onPostResume();
+
+        provider = BleService.getInstance(PortalActivity.this).getCurrentHandlerProvider();
+        provider.setBleProviderObserver(bleProviderObserver);
+        UserEntity userEntity = MyApplication.getInstance(PortalActivity.this).getLocalUserInfoProvider();
+
+//        if (userEntity == null || userEntity.getDeviceEntity() == null || userEntity.getUserBase() == null)
+//            return;
+        MyLog.e(TAG, "u.getDeviceEntity().getDevice_type():" + userEntity.getDeviceEntity().getDevice_type());
+        //去数据库查询所要显示的数据
+        getInfoFromDB();
+        //绑定了蓝牙就去同步蓝牙数据
+        if (!CommonUtils.isStringEmpty(userEntity.getDeviceEntity().getLast_sync_device_id())) {
+//            if (provider.isConnectedAndDiscovered())
+            BleService.getInstance(PortalActivity.this).syncAllDeviceInfoAuto(PortalActivity.this, false, null);
+        }
+
+        if (userEntity.getUserBase().getUser_avatar_file_name() == null) {
+            MyLog.e(TAG, "u.getUserBase().getUser_avatar_file_name()是空的........");
+            return;
+        }
+
+        if (!userEntity.getUserBase().getUser_avatar_file_name().equals(User_avatar_file_name) || !userEntity.getUserBase().getNickname().equals(userEntity.getUserBase().getNickname())) {
+            refreshHeadView();
+        }
+    }
 
 
     private void initCheckUnit() {
@@ -498,20 +522,6 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     }
 
 /*--------------------------------Daniel-----------------------------------*/
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        DfuServiceListenerHelper.registerProgressListener(this, mDfuProgressListener);
-        initCheckUnit();
-        if (getTempImageFileUri()!=null){
-            Bitmap bitmap = decodeUriAsBitmap(getTempImageFileUri());
-            if (bitmap==null){
-                bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.default_avatar_m);
-            }
-            user_head.setImageBitmap(bitmap);
-        }
-    }
 
 
     /*--------------------------------------*/
@@ -946,7 +956,28 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
          *********/
         @Override
         public void updateFor_notifyFor0x13ExecSucess_D(LPDeviceInfo latestDeviceInfo) {
-//            MyLog.e(TAG, "updateFor_notifyFor0x13ExecSucess_D");
+            if (latestDeviceInfo!=null&&latestDeviceInfo.recoderStatus==66){
+                if (!CommonUtils.isStringEmpty(MyApplication.getInstance(PortalActivity.this)
+                        .getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id())){
+                    if (builder!=null&&!builder.create().isShowing()) {
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                provider.unBoundDevice(PortalActivity.this);
+                                IntentFactory.start_Bluetooth(PortalActivity.this);
+                            }
+                        }).setMessage(getString(R.string.Need_before))
+                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                }).show();
+                    }
+                }else {
+                    provider.unBoundDevice(PortalActivity.this);
+                }
+            }
         }
 
         @Override

@@ -1,7 +1,7 @@
 package com.example.android.bluetoothlegatt.proltrol;
 
 public interface LepaoCommand {
-//	static final byte COMMAND_IS_STATUS = (byte) 0xA0;      // 返回的是一个状态
+	static final byte COMMAND_IS_STATUS = (byte) 0xA0;      // 返回的是一个状态
 //	static final byte COMMAND_IS_DATA = (byte) 0xA1;        // 返回的是一段数据
 	
 	static final byte COMMAND_HEAD = (byte) 0xAF;

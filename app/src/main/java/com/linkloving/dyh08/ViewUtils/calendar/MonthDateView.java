@@ -42,16 +42,25 @@ public class MonthDateView extends View {
     private DateClick dateClick;
     private int mCircleColor = Color.parseColor("#ff0000");
     private List<Integer> daysHasThingList;
+    private final Paint yellowPaint;
+    private final Paint whitePaint;
+    private Canvas canvas ;
+    private boolean drawRing = false ;
 
     public MonthDateView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mDisplayMetrics = getResources().getDisplayMetrics();
         Calendar calendar = Calendar.getInstance();
         mPaint = new Paint();
+        yellowPaint = new Paint();
+        yellowPaint.setColor(getResources().getColor(R.color.chat_view_orange));
+        whitePaint = new Paint();
+        whitePaint.setColor(getResources().getColor(R.color.white));
         mCurrYear = calendar.get(Calendar.YEAR);
         mCurrMonth = calendar.get(Calendar.MONTH);
         mCurrDay = calendar.get(Calendar.DATE);
         setSelectYearMonth(mCurrYear,mCurrMonth,mCurrDay);
+
     }
 
     @Override
@@ -90,8 +99,10 @@ public class MonthDateView extends View {
                 canvas.drawRect(0, 0, 0, 0, mPaint);
                 float circleX = (float) (mColumnSize * column +	mColumnSize*0.8);
                 float circley = (float) (mRowSize * row + mRowSize*0.2);
-                Bitmap bitmap3 = BitmapFactory.decodeResource(getResources(), R.mipmap.tw_calendar_point);
-                canvas.drawBitmap(bitmap3,circleX-(float)0.65*mColumnSize,  circley - (float)0.19*mRowSize ,mPaint);
+                canvas.drawCircle(circleX-(float)0.3*mColumnSize,  circley + (float)0.3*mRowSize ,mColumnSize/3,yellowPaint);
+                if (!drawRing)
+                canvas.drawCircle(circleX-(float)0.3*mColumnSize,  circley + (float)0.3*mRowSize ,mColumnSize/3-2,whitePaint);
+
 
                 //记录第几行，即第几周
                 weekRow = row + 1;
@@ -116,6 +127,8 @@ public class MonthDateView extends View {
             }
         }
     }
+
+
 
     private void drawCircle(int row,int column,int day,Canvas canvas){
         if(daysHasThingList != null && daysHasThingList.size() >0){
@@ -177,6 +190,7 @@ public class MonthDateView extends View {
      * @param y
      */
     private void doClickAction(int x,int y){
+        drawRing = true;
         int row = y / mRowSize;
         int column = x / mColumnSize;
         setSelectYearMonth(mSelYear,mSelMonth,daysString[row][column]);
@@ -195,7 +209,7 @@ public class MonthDateView extends View {
     public void onLeftClick(){
         int year = mSelYear;
         int month = mSelMonth;
-        int day = mSelDay;
+        int day = 1;
         if(month == 0){//若果是1月份，则变成12月份
             year = mSelYear-1;
             month = 11;
@@ -220,7 +234,7 @@ public class MonthDateView extends View {
     public void onRightClick(){
         int year = mSelYear;
         int month = mSelMonth;
-        int day = mSelDay;
+        int day = 1;
         if(month == 11){//若果是12月份，则变成1月份
             year = mSelYear+1;
             month = 0;

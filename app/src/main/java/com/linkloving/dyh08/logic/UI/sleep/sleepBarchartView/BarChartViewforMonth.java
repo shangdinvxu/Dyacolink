@@ -74,7 +74,7 @@ public class BarChartViewforMonth extends View {
         textPaint.setAntiAlias(true);
         barRect = new Rect(0, 0, 0, 0);
         deepSleepRect = new Rect(0, 0, 0, 0);
-        barItemWidth = screenW * 0.018;
+        barItemWidth = screenW * 0.017;
         barSpace = screenW * 0.007;
 //        设置一个一小时的高度
         oneHourHight = screenH * 0.017;
@@ -158,20 +158,19 @@ public class BarChartViewforMonth extends View {
                     barRect.right = (int) (barRect.left + barItemWidth);
                     barRect.bottom = (int) (oneHourHight * 14);
                     int left = barRect.left;
-//                    -60方便点击
-                    int top = (int) barRect.top;
-                    MyLog.e("barchartview","barRect.top-----"+(screenH-top));
-                    MyLog.e("barchartview","barRect.buttom-----"+barRect.bottom);
                     int right = barRect.right;
-                    if (x > left && x < right && y > top) {
+//                    -160方便点击
+                    if (x > left && x < right &&  y > (barRect.top-160)&& y<barRect.bottom) {
                         MyLog.e("点击", "点击的是" + mItems.get(i).itemType);
-//                        (int) mItems[i].itemValue
-//                        y = screenHight-y +1000 ;
                         x = (int) (barRect.left - screenW * 0.1);
-                        MyLog.e("点击", "screenHight....." + screenH + "screenH...." + y + "y......." + screenW + "screenW-----" + x + "");
-//                        mdialogListerer.showDialog(i, (int) (x-screenW*0.13), y);
                         mdialogListerer.showDialog(i, (int) (x-screenW*0.13),
                                 (int) (oneHourHight*8+ (mItems.get(i).itemDeepValue+mItems.get(i).itemLightValue) * oneHourHight * 1.25));
+                        popupWindow.update((int) (screenW * 0.1 + barItemWidth * i + barSpace * (i + 1)+barItemWidth*0.5-screenW*0.13),
+                                (int) (oneHourHight*8+ (mItems.get(i).itemDeepValue+mItems.get(i).itemLightValue) * oneHourHight * 1.25),-1,-1);
+                        deepSleepHr.setText(context.getString(R.string.deep)+"  "+mItems.get(i).itemLightValue+"hr");
+                        lightSleepHr.setText(context.getString(R.string.light)+"  "+mItems.get(i).itemDeepValue+"hr");
+                        dateTextView.setText(mItems.get(i).itemType);
+                        MyLog.e("move的是",mItems.get(i).itemType);
                         break;
                     }
                 }
@@ -183,8 +182,7 @@ public class BarChartViewforMonth extends View {
                     for (int i = 0; i < mItems.size(); i++){
                         if (((screenW * 0.1 + barItemWidth * i + barSpace * (i + 1)))<x_move
                                 &&x_move<(screenW * 0.1 + barItemWidth * i + barSpace * (i + 1)+barItemWidth)){
-//                        mdialogListerer.showDialog(i,(int)lastPointX,(int)event.getRawY());
-                            popupWindow.update((int) (screenW * 0.1 -barItemWidth*0.5+ barItemWidth * i + barSpace * (i + 1)+barItemWidth*0.5-screenW*0.13),
+                            popupWindow.update((int) (screenW * 0.1 + barItemWidth * i + barSpace * (i + 1)+barItemWidth*0.5-screenW*0.13),
                                     (int) (oneHourHight*8+ (mItems.get(i).itemDeepValue+mItems.get(i).itemLightValue) * oneHourHight * 1.25),-1,-1);
                             deepSleepHr.setText(context.getString(R.string.deep)+"  "+mItems.get(i).itemLightValue+"hr");
                             lightSleepHr.setText(context.getString(R.string.light)+"  "+mItems.get(i).itemDeepValue+"hr");

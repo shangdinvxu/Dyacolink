@@ -144,7 +144,7 @@ public class IncomingTelActivity extends ToolBarActivity{
     private void initData() {
         //通过userid去获取对应的DeviceSetting
         deviceSetting = LocalUserSettingsToolkits.getLocalSetting(IncomingTelActivity.this,userEntity.getUser_id()+"");
-        int ANCS_value = deviceSetting.getANCS_value();
+        int ANCS_value = deviceSetting.getAncs_value();
         MyLog.e("IncomingTelActivity","ANCS_value:"+ANCS_value);
         /*********数据转成应用层变量START*********/
         String Ancs_str = Integer.toBinaryString(ANCS_value);
@@ -190,7 +190,7 @@ public class IncomingTelActivity extends ToolBarActivity{
         send_data = intto2byte(notif_data); //发送到蓝牙的
         /**保存并且发送到蓝牙**/
         //报存本地
-        deviceSetting.setANCS_value(notif_data);
+        deviceSetting.setAncs_value(notif_data);
         MyLog.e("IncomingTelActivity","notif_data:"+notif_data);
         LocalUserSettingsToolkits.updateLocalSetting(IncomingTelActivity.this,deviceSetting);
         //发送到蓝牙

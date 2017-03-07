@@ -13,12 +13,10 @@ import android.util.Log;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.linkloving.dyh08.BleService;
 import com.linkloving.dyh08.MyApplication;
-import com.linkloving.dyh08.logic.UI.setting.Myadapter;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.DeviceSetting;
-import com.linkloving.dyh08.prefrences.devicebean.ModelInfo;
 import com.linkloving.dyh08.utils.CutString;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.utils.CommonUtils;
@@ -61,7 +59,7 @@ public class PhoneReceiver extends BroadcastReceiver {
 		provider = BleService.getInstance(context).getCurrentHandlerProvider();
 		MyLog.e(TAG,"========PhoneReceiver========");
 		DeviceSetting deviceSetting = LocalUserSettingsToolkits.getLocalSetting(context, MyApplication.getInstance(context).getLocalUserInfoProvider().getUser_id()+"");
-		String Ansc_str = Integer.toBinaryString(deviceSetting.getANCS_value());
+		String Ansc_str = Integer.toBinaryString(deviceSetting.getAncs_value());
 		 MyLog.i(TAG, "Ansc_str："+Ansc_str);
 		 char[] charr = Ansc_str.toCharArray(); // 将字符串转换为字符数组
 		 System.arraycopy(charr, 0, array_phone, 5 - charr.length, charr.length);

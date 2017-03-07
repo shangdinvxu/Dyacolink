@@ -33,6 +33,7 @@ public class DaychartviewFragment extends Fragment {
     private List<DayBarChartView.BarChartItemBean> dayhour = new ArrayList<>();
     private DayBarChartView dayBarChartView;
     private View view;
+    private View anchorButton;
 
     @Nullable
     @Override
@@ -40,6 +41,7 @@ public class DaychartviewFragment extends Fragment {
         view = inflater.inflate(R.layout.tw_calories_chartview_fragment, container, false);
         dayBarChartView = (DayBarChartView) view.findViewById(R.id.day_barchartView);
         dayBarChartView.setPopupViewType(DayBarChartView.DISTANCE__TYPE);
+        anchorButton = view.findViewById(R.id.anchor_button);
         String checkDate = getArguments().getString("checkDate");
         new DaychartviewFragment.DayChartAsynck().execute(checkDate);
         return view;
@@ -127,7 +129,7 @@ public class DaychartviewFragment extends Fragment {
                 @Override
                 public void showDialog(int i, int x, int y) {
                     String textShowTime = i+":00";
-                    dayBarChartView.showPopupWindow(view,textShowTime, (int) dayhour.get(i).itemValue, x, y);
+                    dayBarChartView.showPopupWindow(anchorButton,textShowTime, (int) dayhour.get(i).itemValue, x, y);
                 }
                 @Override
                 public void dismissPopupWindow() {

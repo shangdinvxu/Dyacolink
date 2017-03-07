@@ -138,7 +138,7 @@ public class MyApplication extends MultiDexApplication {
         public void uncaughtException(Thread thread, Throwable ex) {
             if(ex != null)
                 MyLog.e("_unCaughtExceptionHandler", ex.getMessage());
-            defaultUEH.uncaughtException(thread, ex);
+//            defaultUEH.uncaughtException(thread, ex);
         }
     };
 
@@ -162,9 +162,9 @@ public class MyApplication extends MultiDexApplication {
                 //开始服务
                 startBleService();
                 /** 崩溃处理handler */
-                defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
-                // setup handler for uncaught exception
-                Thread.setDefaultUncaughtExceptionHandler(_unCaughtExceptionHandler);
+//                defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
+//                // setup handler for uncaught exception
+//                Thread.setDefaultUncaughtExceptionHandler(_unCaughtExceptionHandler);
                 /**不必为每一次HTTP请求都创建一个RequestQueue对象，推荐在application中初始化*/
 				NoHttp.init(MyApplication.this);
                 ImageLoader.getInstance().init(CommParams.getImgConfig(self, pic_const));

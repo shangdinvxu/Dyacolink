@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
@@ -204,8 +205,19 @@ public class WheelView extends ScrollView {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
         SimpleDateFormat monthAndDate = new SimpleDateFormat("MM/dd");
         SimpleDateFormat simYearMonth = new SimpleDateFormat("yyyy-MM");
-         String[] PLANETS = new String[]{"January", "February", "March", "April", "May", "June", "July",
-                "August", "September", "October", "November", "December"};
+         String[] PLANETS = new String[]{context.getString(R.string.January),
+                 context.getString(R.string.February),
+                 context.getString(R.string.March),
+                 context.getString(R.string.April),
+                 context.getString(R.string.May),
+                 context.getString(R.string.June),
+                 context.getString(R.string.July),
+                 context.getString(R.string.August),
+                 context.getString(R.string.September),
+                 context.getString(R.string.October),
+                 context.getString(R.string.November),
+                 context.getString(R.string.December),
+            };
         if(type==TYPE_WEEK){
 //            MyLog.e(TAG, item);
             if (item == null || item.length() <= 0){

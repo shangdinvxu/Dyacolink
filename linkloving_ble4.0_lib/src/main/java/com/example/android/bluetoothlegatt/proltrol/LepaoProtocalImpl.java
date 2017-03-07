@@ -215,6 +215,11 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
 			lpDeviceInfo.recoderStatus = 5;
 			return lpDeviceInfo;
+		}else if(resp.getData()[4]==0x01 && resp.getData()[5]==0x06){
+			OwnLog.e(TAG, "0x13 ...已经在手环端解绑了");
+			LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
+			lpDeviceInfo.recoderStatus = 66;
+			return lpDeviceInfo;
 		}else if (resp.getData()[4]==0x01 && resp.getData()[5]==0x0F){
 			OwnLog.w(TAG, "0x13 用户已经被绑定了...");
 			LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();

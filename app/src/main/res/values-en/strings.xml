@@ -1153,4 +1153,7 @@
     <string name="pleaseturnon">Please turn on Track Services</string>
     <string name="goalkcal">Combustion</string>
     <string name="Intervals">Intervals</string>
+    <string name="Need_format">The wrist in the wrist end unbundled, whether to reset</string>
+    <string name="format_success">Reset successful and continue binding</string>
+    <string name="Need_before">Whether you need to re-bind the previous device</string>
 </resources>

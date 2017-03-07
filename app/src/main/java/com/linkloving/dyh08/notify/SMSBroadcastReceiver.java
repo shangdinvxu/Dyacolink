@@ -14,7 +14,6 @@ import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.DeviceSetting;
-import com.linkloving.dyh08.prefrences.devicebean.ModelInfo;
 import com.linkloving.dyh08.utils.CutString;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.utils.CommonUtils;
@@ -64,7 +63,7 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
 		 provider = BleService.getInstance(context).getCurrentHandlerProvider();
 		MyLog.e(TAG,"========SMSBroadcastReceiver========");
 		 DeviceSetting deviceSetting = LocalUserSettingsToolkits.getLocalSetting(context, MyApplication.getInstance(context).getLocalUserInfoProvider().getUser_id()+"");
-		 String Ansc_str = Integer.toBinaryString(deviceSetting.getANCS_value());
+		 String Ansc_str = Integer.toBinaryString(deviceSetting.getAncs_value());
 		 char[] charr = Ansc_str.toCharArray(); // 将字符串转换为字符数组
 		 System.arraycopy(charr, 0, array_phone, 5 - charr.length, charr.length);
 		if (array_phone[2]==0){

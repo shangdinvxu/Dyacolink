@@ -34,11 +34,13 @@ public class MonthchartviewFragment extends Fragment {
     private View view;
     private MonthBarChartView.BarChartItemBean[] items;
     private List<MonthBarChartView.BarChartItemBean> month;
+    private View anchorButton;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tw_month_barchartview_fragment, container, false);
          barChartView = (MonthBarChartView) view.findViewById(R.id.month_barchartView);
         barChartView.setPopupViewType(BarChartView.STEP__TYPE);
+        anchorButton = view.findViewById(R.id.anchor_button);
         String date = getArguments().getString("monthDate");
         new MonthChartAsynckTask().execute(date);
         return view ;
@@ -116,7 +118,7 @@ public class MonthchartviewFragment extends Fragment {
             barChartView.setDialogListerer(new MonthBarChartView.DialogListerer() {
                 @Override
                 public void showDialog(int i, int x, int y) {
-                    barChartView.showPopupWindow(view, month.get(i).itemType, (int) month.get(i).itemValue, x, y);
+                    barChartView.showPopupWindow(anchorButton, month.get(i).itemType, (int) month.get(i).itemValue, x, y);
                 }
                 @Override
                 public void dismissPopupWindow() {

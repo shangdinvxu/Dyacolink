@@ -34,6 +34,7 @@ public class YearchartviewFragment extends Fragment {
     private YearBarChartView.BarChartItemBean[] items;
     private View view ;
     private ProgressBar progressbarYear;
+    private View anchorButton;
 
     @Nullable
     @Override
@@ -41,6 +42,7 @@ public class YearchartviewFragment extends Fragment {
         view = inflater.inflate(R.layout.tw_year_barchartview_fragment, container, false);
         barChartView = (YearBarChartView) view.findViewById(R.id.year_barchartView);
         barChartView.setPopupViewType(YearBarChartView.STEP_AVG_TYPE);
+        anchorButton = view.findViewById(R.id.anchorButton);
         progressbarYear = (ProgressBar) view.findViewById(R.id.year_progressbar);
         String date = getArguments().getString("yearDate");
         progressbarYear.setVisibility(View.VISIBLE);
@@ -125,7 +127,7 @@ public class YearchartviewFragment extends Fragment {
                     String[] split = itemType.split("/");
                     int i1 = Integer.parseInt(split[1]);
                     String finalString = split[0]+"/"+(i1+1);
-                    barChartView.showPopupWindow(view, finalString,(int) daySynopics.get(i).itemValue, x, y);
+                    barChartView.showPopupWindow(anchorButton, finalString,(int) daySynopics.get(i).itemValue, x, y);
                 }
                 @Override
                 public void dismissPopupWindow() {

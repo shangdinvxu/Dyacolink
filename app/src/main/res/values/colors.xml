@@ -14,7 +14,7 @@
     <color name="highgrey">#B8B8B8</color>
     <!-- 西红柿色 -->
     <color name="orangered">#FF4500</color>
-    <color name="chat_view_orange">#ffa737</color>
+    <color name="chat_view_orange">#FBC400</color>
     <color name="text_light_green">#22dd22</color>
     <color name="progress_color">#8000ff22</color>
     <color name="progress_color_battery">#fffc8004</color>

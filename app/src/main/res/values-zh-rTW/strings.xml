@@ -1176,4 +1176,8 @@
     <string name="pleaseturnon">請開啟軌跡服務</string>
     <string name="goalkcal">燃燒</string>
     <string name="Intervals">間隔時間</string>
+
+    <string name="Need_format">該手環在手環端解綁，是否重置</string>
+    <string name="format_success">重置成功,繼續綁定</string>
+    <string name="Need_before">是否需要重新綁定前一個裝置</string>
 </resources>
