@@ -132,6 +132,8 @@ TextView caloriesTV ;
                                 new YearSportAsynck(null,step_number,stepCircleView,step_tv_date,CaloriesActivity.this).execute(flushYear);
                                 break;
                         }
+
+
                         alertDialog.dismiss();
                     }
                 });

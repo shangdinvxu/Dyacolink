@@ -253,6 +253,7 @@ public class BleService extends Service {
         });
     }
 
+
     private void startAlarm() {
     mMediaPlayer = MediaPlayer.create(this, getSystemDefultRingtoneUri());
         mMediaPlayer.setLooping(false);
