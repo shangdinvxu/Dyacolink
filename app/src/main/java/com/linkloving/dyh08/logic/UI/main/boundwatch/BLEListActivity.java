@@ -46,7 +46,7 @@ import com.linkloving.dyh08.http.basic.NoHttpRuquestFactory;
 import com.linkloving.dyh08.http.data.DataFromServer;
 import com.linkloving.dyh08.logic.UI.main.materialmenu.CommonAdapter;
 import com.linkloving.dyh08.logic.dto.UserEntity;
-import com.linkloving.dyh08.notify.NotificationCollectorService;
+import com.linkloving.dyh08.notify.NotificationService;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.ModelInfo;
 import com.linkloving.dyh08.utils.LanguageHelper;
@@ -692,7 +692,7 @@ private void submitBoundMACToServer(String user_id,String Mac){
     private boolean isEnabled()
     {
         String pkgName = getPackageName();
-        final String flat = Settings.Secure.getString(getContentResolver(),NotificationCollectorService.ENABLED_NOTIFICATION_LISTENERS);
+        final String flat = Settings.Secure.getString(getContentResolver(), NotificationService.ENABLED_NOTIFICATION_LISTENERS);
         if (!TextUtils.isEmpty(flat)) {
             final String[] names = flat.split(":");
             for (int i = 0; i < names.length; i++) {

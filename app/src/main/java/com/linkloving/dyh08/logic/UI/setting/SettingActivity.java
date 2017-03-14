@@ -17,7 +17,7 @@ import android.widget.PopupWindow;
 import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
-import com.linkloving.dyh08.notify.NotificationCollectorService;
+import com.linkloving.dyh08.notify.NotificationService;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
@@ -62,15 +62,8 @@ public class SettingActivity extends ToolBarActivity {
                 }
             }
         });
-        initStartNotification();
-
     }
 
-    private void initStartNotification() {
-        if(!ToolKits.isEnabled(SettingActivity.this)){
-            startActivity(new Intent(NotificationCollectorService.ACTION_NOTIFICATION_LISTENER_SETTINGS));
-        }
-    }
 
     private void initDatasynchroizationPopupwindow() {
         View view = layoutInflater.inflate(R.layout.datasynchronizationpopupwindow, null);

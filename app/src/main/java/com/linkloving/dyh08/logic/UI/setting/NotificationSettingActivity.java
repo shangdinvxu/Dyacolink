@@ -1,5 +1,6 @@
 package com.linkloving.dyh08.logic.UI.setting;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -25,10 +26,12 @@ import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.ViewUtils.Wheelview.WheelView;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
+import com.linkloving.dyh08.notify.NotificationService;
 import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.DeviceSetting;
 import com.linkloving.dyh08.utils.DeviceInfoHelper;
+import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.util.ArrayList;
@@ -155,6 +158,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
             /**因为有头所以从1开始*/
                 switch (position){
                     case 1:
+                        initStartNotification();
                         initMessagePopupWindow();
                         break;
                     case 2:
@@ -171,6 +175,12 @@ public class NotificationSettingActivity extends ToolBarActivity {
             }
         });
     }
+    private void initStartNotification() {
+        if(!ToolKits.isEnabled(NotificationSettingActivity.this)){
+            startActivity(new Intent(NotificationService.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+        }
+    }
+
 
     private void initTimeSettingPopupWindow() {
         View view = layoutInflater.inflate(R.layout.timesettingpopupwindow, null);

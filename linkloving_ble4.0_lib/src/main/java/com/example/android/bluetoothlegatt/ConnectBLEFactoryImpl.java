@@ -13,6 +13,7 @@ import com.lnt.connectfactorylibrary.ConnectReturnImpl;
 import java.util.Observable;
 import java.util.Observer;
 
+@SuppressWarnings("ALL")
 public class ConnectBLEFactoryImpl implements ConnectFactoryImpl{
 	private Context context;
 	private BLEProvider provider;
@@ -98,10 +99,7 @@ public class ConnectBLEFactoryImpl implements ConnectFactoryImpl{
 
 	@Override
 	public Object getConnectState() {
-		if(provider!=null)
-			return provider.isConnectedAndDiscovered();
-		else
-			return false;
+		return provider != null && provider.isConnectedAndDiscovered();
 	}
 
 	@Override

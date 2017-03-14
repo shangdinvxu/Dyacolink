@@ -80,7 +80,7 @@ public class BleService extends Service {
     public static final String BLE_STATE_SUCCESS = "com.ble.state";
     public static final String BLE_SYN_SUCCESS = "com.ble.connectsuc";
 
-    public static final String ALARM_KEYER_ACTION = "com.linkloving.alarm_keyer_action";
+    public static final String ALARM_KEYER_ACTION = "com.linkloving.alparm_keyer_action";
 
     private long timer;
     /**
@@ -248,7 +248,7 @@ public class BleService extends Service {
                 Vibrator  vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
                 long [] pattern = {100,400,100,400}; // 停止 开启 停止 开启
                 vibrator.vibrate(pattern,-1); //重复两次上面的pattern 如果只想震动一次，index设为-1
-                startAlarm();
+//                startAlarm();
             }
         });
     }
@@ -536,6 +536,9 @@ public class BleService extends Service {
                         //BLE--->设置身体信息
                         startSetBody();
 
+                        //BLE--->设置运动目标
+                        startSetSportGoal();
+
                         //BLE--->设置消息提醒
                         startSetANCS();
 
@@ -555,9 +558,23 @@ public class BleService extends Service {
             /**
              * 设置身体信息
              */
+            private void startSetSportGoal() {
+                String goalStep = PreferencesToolkits.getGoalInfo(BleService.this, PreferencesToolkits.KEY_GOAL_STEP);
+                String goalDistance = PreferencesToolkits.getGoalInfo(BleService.this, PreferencesToolkits.KEY_GOAL_DISTANCE);
+                String goalCalories = PreferencesToolkits.getGoalInfo(BleService.this, PreferencesToolkits.KEY_GOAL_CAL);
+                LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
+                lpDeviceInfo.stepDayTotals = Integer.parseInt(goalStep);
+                lpDeviceInfo.distenceDayTotals = Integer.parseInt(goalDistance);
+                lpDeviceInfo.CaloriesTotals = Integer.parseInt(goalCalories);
+                provider.setTarget(BleService.this,lpDeviceInfo);
+            }
+
+            /**
+             * 设置身体信息
+             */
             private void startSetBody() {
 //                if (needRegiesterBody())  //判断是否要注册身体信息
-                    provider.regiesterNew(BleService.this, DeviceInfoHelper.fromUserEntity(BleService.this, userEntity));
+                provider.regiesterNew(BleService.this, DeviceInfoHelper.fromUserEntity(BleService.this, userEntity));
             }
 
             /**

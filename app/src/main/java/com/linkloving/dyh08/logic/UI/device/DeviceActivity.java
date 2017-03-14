@@ -36,7 +36,7 @@ import com.linkloving.dyh08.http.basic.NoHttpRuquestFactory;
 import com.linkloving.dyh08.http.data.DataFromServer;
 import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
-import com.linkloving.dyh08.notify.NotificationCollectorService;
+import com.linkloving.dyh08.notify.NotificationService;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.LocalInfoVO;
 import com.linkloving.dyh08.prefrences.devicebean.ModelInfo;
@@ -512,7 +512,7 @@ public class DeviceActivity extends ToolBarActivity implements View.OnClickListe
                             provider.unBoundDevice(DeviceActivity.this);
                         }
                         if(modelInfo.getAncs()!=0){ //有消息提醒
-                            startActivity(new Intent(NotificationCollectorService.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+                            startActivity(new Intent(NotificationService.ACTION_NOTIFICATION_LISTENER_SETTINGS));
                             ToolKits.showCommonTosat(DeviceActivity.this, true, ToolKits.getStringbyId(DeviceActivity.this, R.string.unbound_success_msg), Toast.LENGTH_LONG);
                         }else{
                             ToolKits.showCommonTosat(DeviceActivity.this, true, ToolKits.getStringbyId(DeviceActivity.this, R.string.unbound_success), Toast.LENGTH_LONG);

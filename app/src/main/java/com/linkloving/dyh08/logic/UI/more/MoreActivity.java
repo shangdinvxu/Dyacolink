@@ -44,7 +44,7 @@ import com.linkloving.dyh08.http.basic.NoHttpRuquestFactory;
 import com.linkloving.dyh08.http.data.DataFromClientNew;
 import com.linkloving.dyh08.http.data.DataFromServer;
 import com.linkloving.dyh08.logic.dto.UserEntity;
-import com.linkloving.dyh08.notify.NotificationCollectorService;
+import com.linkloving.dyh08.notify.NotificationService;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.LocalInfoVO;
 import com.linkloving.dyh08.utils.CommonUtils;
@@ -499,7 +499,7 @@ public class MoreActivity extends ToolBarActivity implements View.OnClickListene
     public static boolean isEnabled(Context context)
     {
         String pkgName = context.getPackageName();
-        final String flat = Settings.Secure.getString(context.getContentResolver(), NotificationCollectorService.ENABLED_NOTIFICATION_LISTENERS);
+        final String flat = Settings.Secure.getString(context.getContentResolver(), NotificationService.ENABLED_NOTIFICATION_LISTENERS);
         if (!TextUtils.isEmpty(flat)) {
             final String[] names = flat.split(":");
             for (int i = 0; i < names.length; i++) {

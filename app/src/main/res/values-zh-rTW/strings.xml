@@ -1026,7 +1026,7 @@
     <string name="Sign_Out">登出</string>
 
     <!--登錄介面-->
-    <string name="usernamecannot">Username不能為空</string>
+    <string name="usernamecannot">資料請填寫完整</string>
     <string name="choosewearingstyles">請選擇佩戴方式</string>
     <string name="pleasebirthday">請填寫正確的生日</string>
     <string name="pleaseGender">請選擇性別</string>

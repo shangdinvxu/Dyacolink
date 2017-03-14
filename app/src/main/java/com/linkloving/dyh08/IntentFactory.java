@@ -41,7 +41,7 @@ import com.linkloving.dyh08.logic.UI.login.UsernameActivity;
 import com.linkloving.dyh08.logic.UI.main.BundTypeActivity;
 import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.UI.main.bundband.bundbandstep1;
-import com.linkloving.dyh08.logic.UI.map.MapActivity;
+import com.linkloving.dyh08.logic.UI.Social.SocialActivity;
 import com.linkloving.dyh08.logic.UI.more.MoreActivity;
 import com.linkloving.dyh08.logic.UI.setting.GeneralActivity;
 import com.linkloving.dyh08.logic.UI.setting.NotificationSettingActivity;
@@ -362,7 +362,7 @@ public class IntentFactory {
      */
     // 开启map
     public static  void start2MapActivity(Activity activity){
-        Intent intent = new Intent(activity, MapActivity.class);
+        Intent intent = new Intent(activity, SocialActivity.class);
         activity.startActivity(intent);
     }
 

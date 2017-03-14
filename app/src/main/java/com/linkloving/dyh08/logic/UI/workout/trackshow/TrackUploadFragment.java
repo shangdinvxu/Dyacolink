@@ -187,6 +187,32 @@ public class TrackUploadFragment extends Fragment {
 
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.tw_trace_fragment_trackupload, null);
+        chronometer = (TextView) inflate.findViewById(R.id.chronometer);
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what) {
+                    case 1:
+                        long time = (long) msg.obj;
+                        long runtimeDuration = time - startTimeLong;
+                        Date date = new Date(runtimeDuration);
+                        String format = simpleDateFormat.format(date);
+                        if (chronometer != null && stopType == 1) {
+                            chronometer.setText(format);
+                        }
+                }
+            }
+        };
+        workoutActivity = (WorkoutActivity) getActivity();
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tw_trace_fragment_trackupload, container, false);
@@ -219,29 +245,33 @@ public class TrackUploadFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.tw_trace_fragment_trackupload, null);
-        chronometer = (TextView) inflate.findViewById(R.id.chronometer);
-        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-        handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                switch (msg.what) {
-                    case 1:
-                        long time = (long) msg.obj;
-                        long runtimeDuration = time - startTimeLong;
-                        Date date = new Date(runtimeDuration);
-                        String format = simpleDateFormat.format(date);
-                        if (chronometer != null && stopType == 1) {
-                            chronometer.setText(format);
-                        }
-                }
-            }
-        };
-        workoutActivity = (WorkoutActivity) getActivity();
+    public void onResume() {
+        super.onResume();
+        if (isClickStart && GpsUtils.isOPen(getContext())) {
+            firstMiddle.setVisibility(View.GONE);
+            secondMiddle.setVisibility(View.VISIBLE);
+            getRuntime();
+        }
+        if (GpsUtils.isOPen(getContext())) {
+            firstMiddle.setVisibility(View.GONE);
+        }
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putInt("clickType", clickType);
+        edit.putBoolean("isClickStart", isClickStart);
+        edit.commit();
+        super.onDestroy();
     }
 
 
@@ -278,16 +308,6 @@ public class TrackUploadFragment extends Fragment {
 
     }
 
-    @Override
-    public void onDestroy() {
-        SharedPreferences sharedPreferences = WorkoutActivity.mContext.getSharedPreferences("clickType", Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = sharedPreferences.edit();
-        edit.putInt("clickType", clickType);
-        edit.putBoolean("isClickStart", isClickStart);
-        edit.commit();
-        super.onDestroy();
-    }
-
     /**
      * 按下ok后帮用户开启gps
      */
@@ -297,20 +317,6 @@ public class TrackUploadFragment extends Fragment {
         Intent intent = new Intent(
                 Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         startActivityForResult(intent, 0);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (isClickStart && GpsUtils.isOPen(getContext())) {
-            firstMiddle.setVisibility(View.GONE);
-            secondMiddle.setVisibility(View.VISIBLE);
-            getRuntime();
-        }
-        if (GpsUtils.isOPen(getContext())) {
-            firstMiddle.setVisibility(View.GONE);
-        }
-
     }
 
 
@@ -631,12 +637,6 @@ public class TrackUploadFragment extends Fragment {
                 startRefreshThread(false);
             }
         };
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.reset(this);
     }
 
     //    设置多少秒去获取数据

@@ -75,6 +75,7 @@ public class DayFragment extends Fragment {
         detailChartControl.initDayIndex(parse);
         return view;
     }
+
     private List<BarChartView.BarChartItemBean>  getHeartPointoneDay(){
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_YEAR,-1);

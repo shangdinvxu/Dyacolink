@@ -25,7 +25,7 @@ public class Left_viewVO1 {
             R.mipmap.imageheartsicon,
             R.mipmap.imageheighticon,
             R.mipmap.imageweighticon,
-            R.mipmap.imagesignouticon
+//            R.mipmap.imagesignouticon
     };
     public static int[] menuText = {
            R.string.Bluetooth,
@@ -36,6 +36,6 @@ public class Left_viewVO1 {
                     R.string.Heart_Rate,
                     R.string.Height,
                     R.string.Weight,
-                    R.string.Sign_Out
+//                    R.string.Sign_Out
     };
 }

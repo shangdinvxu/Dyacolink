@@ -1,16 +1,11 @@
-package com.linkloving.dyh08.logic.UI.map;
+package com.linkloving.dyh08.logic.UI.Social;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
-import android.nfc.Tag;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,14 +28,15 @@ import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.db.sport.UserDeviceRecord;
-import com.linkloving.dyh08.logic.UI.Groups.baidu.GroupsDetailsActivity;
-import com.linkloving.dyh08.logic.UI.Groups.baidu.GroupsShareActivity;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.utils.CommonUtils;
+import com.linkloving.dyh08.utils.GetDBInfo;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.utils.TimeZoneHelper;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -48,7 +44,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -56,24 +51,17 @@ import Trace.GreenDao.DaoMaster;
 import Trace.GreenDao.Note;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import cn.sharesdk.facebook.Facebook;
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
+import butterknife.OnClick;
 import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.instagram.Instagram;
-import cn.sharesdk.linkedin.LinkedIn;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.onekeyshare.OnekeyShareTheme;
-import cn.sharesdk.tencent.qq.QQ;
-import cn.sharesdk.wechat.moments.WechatMoments;
-import cn.sharesdk.wechat.utils.WechatHelper;
 
 /**
  * Created by Daniel.Xu on 2016/9/21.
  */
 
-public class MapActivity extends ToolBarActivity {
-    private static final String TAG = MapActivity.class.getSimpleName();
+public class SocialActivity extends ToolBarActivity {
+    private static final String TAG = SocialActivity.class.getSimpleName();
     @InjectView(R.id.groups_time)
     TextView groupsTime;
     @InjectView(R.id.groups_tv_Step)
@@ -127,18 +115,19 @@ public class MapActivity extends ToolBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tw_share_day);
-        view = LayoutInflater.from(MapActivity.this).inflate(R.layout.tw_share_day, null);
+        view = LayoutInflater.from(SocialActivity.this).inflate(R.layout.tw_share_day, null);
         ButterKnife.inject(this);
-        ShareSDK.initSDK(MapActivity.this);
-        userEntity = MyApplication.getInstance(MapActivity.this).getLocalUserInfoProvider();
+        ShareSDK.initSDK(SocialActivity.this);
+        userEntity = MyApplication.getInstance(SocialActivity.this).getLocalUserInfoProvider();
         user_id = userEntity.getUser_id();
         initPopupWindow();
 //        加载每日数据
         init();
+
     }
 
     private void initPopupWindow() {
-        final View popupView = LayoutInflater.from(MapActivity.this).inflate(R.layout.tw_share_popuwindow, null);
+        final View popupView = LayoutInflater.from(SocialActivity.this).inflate(R.layout.tw_share_popuwindow, null);
         final PopupWindow popupWindow = new PopupWindow(popupView,
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setContentView(popupView);
@@ -160,37 +149,42 @@ public class MapActivity extends ToolBarActivity {
 
     }
 
+    @OnClick(R.id.Rl_step)
+    void sendDB(View view){
+        GetDBInfo.getDBInfoToFile(SocialActivity.this,"HeartRate.txt");
+    }
+
     private void share() {
         fb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showShare(MapActivity.this,"Facebook",false);
+                showShare(SocialActivity.this,"Facebook",false);
 
             }
         });
         wx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showShare(MapActivity.this,"Wechat",false);
+                showShare(SocialActivity.this,"Wechat",false);
             }
         });
 
         qq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showShare(MapActivity.this,"QQ",false);
+                showShare(SocialActivity.this,"QQ",false);
             }
         });
         linkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showShare(MapActivity.this,"LinkedIn",false);
+                showShare(SocialActivity.this,"LinkedIn",false);
             }
         });
         instagram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showShare(MapActivity.this,"Instagram",false);
+                showShare(SocialActivity.this,"Instagram",false);
             }
         });
 
@@ -317,7 +311,7 @@ public class MapActivity extends ToolBarActivity {
                 Date startDate = startNoteList.get(i).getStartDate();
                 Date endDate = endNoteList.get(i).getStartDate();
                 sportRecordArrayList = UserDeviceRecord.findHistoryChartwithHMS
-                        (MapActivity.this, String.valueOf(user_id), startDate, endDate);
+                        (SocialActivity.this, String.valueOf(user_id), startDate, endDate);
                 if (sportRecordArrayList.size() == 0) {
                     distance = 0;
                     step = 0 ;
@@ -361,9 +355,9 @@ public class MapActivity extends ToolBarActivity {
 
 
     private void init() {
-        devOpenHelper = new DaoMaster.DevOpenHelper(MapActivity.this, "Note", null);
+        devOpenHelper = new DaoMaster.DevOpenHelper(SocialActivity.this, "Note", null);
         db = devOpenHelper.getReadableDatabase();
-        traGreendao = new TraceGreendao(MapActivity.this, db);
+        traGreendao = new TraceGreendao(SocialActivity.this, db);
         String middleTime = getMiddleTime();
         groupsTime.setText(middleTime);
         startTimeList = traGreendao.searchAllStarttime();

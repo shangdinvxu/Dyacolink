@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -84,12 +85,12 @@ import com.linkloving.dyh08.logic.UI.setting.GeneralActivity;
 import com.linkloving.dyh08.logic.UI.settings.PersonalInfoActivity;
 import com.linkloving.dyh08.logic.dto.SportRecordUploadDTO;
 import com.linkloving.dyh08.logic.dto.UserEntity;
-import com.linkloving.dyh08.notify.NotificationCollectorService;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.LocalInfoVO;
 import com.linkloving.dyh08.utils.AvatarHelper;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.DateSwitcher;
+import com.linkloving.dyh08.utils.MyToast;
 import com.linkloving.dyh08.utils.ScreenUtils;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.TypefaceUtils;
@@ -104,6 +105,12 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.yolanda.nohttp.Response;
 import com.zhy.autolayout.AutoLayoutActivity;
+
+import net.hockeyapp.android.CrashManager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -262,12 +269,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
         /*-------------------日历----------------*/
         initCheckUnit();
-        initStartNocationService();
-    }
 
-    private void initStartNocationService() {
-        Intent intent = new Intent(PortalActivity.this, NotificationCollectorService.class);
-        startService(intent);
     }
 
     @Override
@@ -282,6 +284,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
             }
             user_head.setImageBitmap(bitmap);
         }
+        checkForCrashes();
     }
 
     @Override
@@ -300,6 +303,13 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         // 如果有未执行完成的AsyncTask则强制退出之，否则线程执行时会空指针异常哦！！！
         AsyncTaskManger.getAsyncTaskManger().finishAllAsyncTask();
     }
+
+
+
+    private void checkForCrashes() {
+        CrashManager.register(this);
+    }
+
 
     @Override
     protected void onPostResume() {
@@ -964,6 +974,12 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 provider.unBoundDevice(PortalActivity.this);
+                                try {
+                                    Thread.sleep(1000);
+                                    BleService.getInstance(PortalActivity.this).releaseBLE();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                                 IntentFactory.start_Bluetooth(PortalActivity.this);
                             }
                         }).setMessage(getString(R.string.Need_before))

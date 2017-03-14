@@ -993,13 +993,13 @@
     <string name="Welcometo">Welcome to the ranks of the movement</string>
     <string name="OpenThe">BluetoothをONにする。</string>
     <string name="LinkEquip">ペアリングされたデバイス</string>
-    <string name="yourUsername">氏名</string>
+    <string name="yourUsername">ニックネーム</string>
     <!--侧滑栏-->
     <!--蓝牙-->
     <string name="Bluetooth">Bluetooth</string>
     <string name="Thisaction">This action will reset all data,still want to disconnect?</string>
     <string name="Cancel">Cancel</string>
-    <string name="Confirm">Confirm</string>
+    <string name="Confirm">キャンセル</string>
     <string name="Reconnect">Reconnect</string>
     <string name="Disconnect">Disconnect</string>
 
@@ -1026,9 +1026,10 @@
     <string name="Weight">体重</string>
     <!-- Sign Out-->
     <string name="Sign_Out">ログアウト</string>
+    <string name="doyouwantto">アプリケーションを終了しますか？</string>
 
     <!--登录界面-->
-    <string name="usernamecannot">Username不能为空</string>
+    <string name="usernamecannot">未入力の項目があります。</string>
     <string name="choosewearingstyles">请选择佩戴方式</string>
     <string name="pleasebirthday">请填写正确的生日</string>
     <string name="pleaseGender">请选择性别</string>
@@ -1107,7 +1108,7 @@
     <!--百度鹰眼-->
 
     <string name="app_title">百度鹰眼</string>
-    <string name="start_trace">始めます</string>
+    <string name="start_trace">開始</string>
     <string name="stop_trace">終了</string>
     <string name="select_date">日期</string>
     <string name="fence_operator">操作</string>

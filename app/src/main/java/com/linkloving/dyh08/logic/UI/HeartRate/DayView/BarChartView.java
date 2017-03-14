@@ -14,6 +14,7 @@ import com.linkloving.dyh08.utils.logUtils.MyLog;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * 自定义组件：条形统计图
@@ -31,7 +32,7 @@ public class BarChartView extends View {
     private Rect deepSleepRect;
     private Paint deepSleepPaint;
     private SimpleDateFormat simpleDateFormat;
-    private final static long ONEDAYMILLISECOND = 86400 ;
+    private final static long ONE_DAY_MILLISECOND = 86400 ;
 
     public BarChartView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -41,7 +42,7 @@ public class BarChartView extends View {
     private void init(Context context) {
         screenW = ScreenUtils.getScreenW(context);
         screenH = ScreenUtils.getScreenH(context);
-        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         barPaint = new Paint();
         deepSleepPaint = new Paint();
         barPaint.setColor(mBarColors[0]);
@@ -80,10 +81,9 @@ public class BarChartView extends View {
         transformToPoint();
         for (int i = 0; i < mItems.size(); i++) {
             if (i<mItems.size()-1){
-                    canvas.drawLine( (float)(((((double)(mItems.get(i).starttime+28800)/ONEDAYMILLISECOND)*(screenW * 0.72))+0.2*screenW)),
+                    canvas.drawLine( (float)(((((double)(mItems.get(i).starttime+28800)/ ONE_DAY_MILLISECOND)*(screenW * 0.72))+0.2*screenW)),
                             (float)(oneHourHight*28- (mItems.get(i).itemDeepValue*1000/200*oneHourHight * 24)/1000),
-                            (float)(((((double)(mItems.get(i+1).starttime+28800)/ONEDAYMILLISECOND)*(screenW * 0.72))+0.2*screenW)),
-//                            (float) ((mItems.get(i+1).starttime *1000/288)*(screenW * 0.72)/1000+0.2*screenW),
+                            (float)(((((double)(mItems.get(i+1).starttime+28800)/ ONE_DAY_MILLISECOND)*(screenW * 0.72))+0.2*screenW)),
                             (float)(oneHourHight*28-(mItems.get(i+1).itemDeepValue*1000/200 *oneHourHight * 24)/1000),
                             linePaint);
             }
@@ -115,8 +115,8 @@ public class BarChartView extends View {
     public  void  transformToPoint(){
         MyLog.e(TAG,"transform执行了");
         for (BarChartItemBean record :mItems) {
-            long l = record.starttime % ONEDAYMILLISECOND;
-             float per= (float)(l+28800) / ONEDAYMILLISECOND;
+            long l = record.starttime % ONE_DAY_MILLISECOND;
+             float per= (float)(l+28800) / ONE_DAY_MILLISECOND;
             MyLog.e(TAG,"per是.........."+per);
             record.starttime=l ;
         }
@@ -136,9 +136,9 @@ public class BarChartView extends View {
      * A model class to keep the bar item info.
      */
     public static class BarChartItemBean {
-        public long starttime;
-        public float itemDeepValue;
-        public float itemLightValue;
+         long starttime;
+         float itemDeepValue;
+         float itemLightValue;
 
 
         public BarChartItemBean(long time, float maxHeartrate, float minHeartrate) {

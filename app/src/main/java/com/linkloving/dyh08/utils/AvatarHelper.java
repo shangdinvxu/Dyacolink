@@ -12,6 +12,7 @@ import com.linkloving.dyh08.MyApplication;
 import java.io.File;
 import java.util.Observer;
 
+@SuppressWarnings("JavaDoc")
 public class AvatarHelper
 {
 	private final static String TAG = AvatarHelper.class.getSimpleName();
@@ -22,6 +23,7 @@ public class AvatarHelper
 	 * @param activity
 	 * @param uid
 	 */
+	@SuppressWarnings("JavaDoc")
 	public static void showAvatarImage(Activity activity, String uid, Observer observerIfNoAvatar)
 	{
 		File cachedAvatarFile = AvatarHelper.getUserCachedAvatar(

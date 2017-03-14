@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -330,7 +331,7 @@ public class GoalWheelView extends ScrollView {
 
         background = new Drawable() {
             @Override
-            public void draw(Canvas canvas) {
+            public void draw(@NonNull Canvas canvas) {
                 canvas.drawLine(viewWidth * 1 / 10, obtainSelectedAreaBorder()[0], viewWidth * 9/ 10, obtainSelectedAreaBorder()[0], paint);
                 canvas.drawLine(viewWidth * 1 / 10, obtainSelectedAreaBorder()[1], viewWidth * 9 / 10, obtainSelectedAreaBorder()[1], paint);
             }

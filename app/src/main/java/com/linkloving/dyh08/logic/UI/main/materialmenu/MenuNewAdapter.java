@@ -24,7 +24,7 @@ import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.AppManager;
 import com.linkloving.dyh08.logic.dto.UserEntity;
-import com.linkloving.dyh08.notify.NotificationCollectorService;
+import com.linkloving.dyh08.notify.NotificationService;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.ToolKits;
@@ -191,7 +191,7 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
         public static boolean isEnabled(Context context)
         {
             String pkgName = context.getPackageName();
-            final String flat = Settings.Secure.getString(context.getContentResolver(), NotificationCollectorService.ENABLED_NOTIFICATION_LISTENERS);
+            final String flat = Settings.Secure.getString(context.getContentResolver(), NotificationService.ENABLED_NOTIFICATION_LISTENERS);
             if (!TextUtils.isEmpty(flat)) {
                 final String[] names = flat.split(":");
                 for (int i = 0; i < names.length; i++) {

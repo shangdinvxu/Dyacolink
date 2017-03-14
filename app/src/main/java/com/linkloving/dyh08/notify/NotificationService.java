@@ -1,6 +1,5 @@
 package com.linkloving.dyh08.notify;
 
-
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.content.Context;
@@ -22,8 +21,13 @@ import com.linkloving.utils.CommonUtils;
 
 import java.io.UnsupportedEncodingException;
 
-public class NotificationCollectorService extends NotificationListenerService {
-    public static final String TAG = NotificationCollectorService.class.getSimpleName();
+/**
+ * Created by Daniel.Xu on 2017/3/10.
+ */
+
+public class NotificationService extends NotificationListenerService {
+
+    public static final String TAG = NotificationService.class.getSimpleName();
 
     public static final String ACTION_NOTIFICATION_LISTENER_SETTINGS = "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS";
     public static final String ENABLED_NOTIFICATION_LISTENERS = "enabled_notification_listeners";
@@ -70,7 +74,7 @@ public class NotificationCollectorService extends NotificationListenerService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        MyLog.e(TAG, "NotificationCollectorService--onStartCommand了");
+        MyLog.e(TAG, "NotificationService--onStartCommand了");
         connectble0x02(this);
         return START_STICKY;
     }
@@ -95,51 +99,49 @@ public class NotificationCollectorService extends NotificationListenerService {
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         MyLog.e(TAG,"onNotificationPosted");
-        if (MyApplication.getInstance(NotificationCollectorService.this) == null) {
+        if (MyApplication.getInstance(NotificationService.this) == null) {
             //APP还未启动的时候  获取userEntity会null
             return;
         }
-        userEntity = MyApplication.getInstance(NotificationCollectorService.this).getLocalUserInfoProvider();
-        provider = BleService.getInstance(NotificationCollectorService.this).getCurrentHandlerProvider();  //获取蓝牙实例
+        userEntity = MyApplication.getInstance(NotificationService.this).getLocalUserInfoProvider();
+        provider = BleService.getInstance(NotificationService.this).getCurrentHandlerProvider();  //获取蓝牙实例
         Notification mNotification = sbn.getNotification();
         if (mNotification != null && provider != null) {
             Bundle extras = mNotification.extras;
             if (extras == null) return;
             if (CommonUtils.isStringEmpty(extras.getString(Notification.EXTRA_TEXT))) return;
-            UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(NotificationCollectorService.this);
+            UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(NotificationService.this);
             String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
             if (last_sync_device_id==null||last_sync_device_id.length()==0) return;
-//            ModelInfo modelInfo = PreferencesToolkits.getInfoBymodelName(NotificationCollectorService.this, userEntity.getDeviceEntity().getModel_name());
+//            ModelInfo modelInfo = PreferencesToolkits.getInfoBymodelName(NotificationService.this, userEntity.getDeviceEntity().getModel_name());
 //            if (modelInfo == null) return;
             //OAD的时候取消一切其他蓝牙命令
             if (!CommonUtils.isStringEmpty(userEntity.getDeviceEntity().getLast_sync_device_id()) && !BleService.isCANCLE_ANCS()) {
-                if (!provider.isConnectedAndDiscovered()) return; //蓝牙未连接
+//                if (!provider.isConnectedAndDiscovered()) return; //蓝牙未连接
                 MyLog.e(TAG, "===qq/wechat的内容：" + extras.getString(Notification.EXTRA_TEXT));
-                DeviceSetting deviceSetting = LocalUserSettingsToolkits.getLocalSetting(NotificationCollectorService.this, userEntity.getUser_id() + ""); //获取用户设置 判断是否要发送指令
+                DeviceSetting deviceSetting = LocalUserSettingsToolkits.getLocalSetting(NotificationService.this, userEntity.getUser_id() + ""); //获取用户设置 判断是否要发送指令
                 String Ansc_str = Integer.toBinaryString(deviceSetting.getAncs_value());
                 charr = Ansc_str.toCharArray(); // 将字符串转换为字符数组
                 System.arraycopy(charr, 0, array, 5 - charr.length, charr.length);
 
                 if ("com.tencent.mobileqq".equals(sbn.getPackageName()) && array[4] == '1') {
-
-                    connectble0x02(NotificationCollectorService.this); //检查蓝牙连接
-
+                    connectble0x02(NotificationService.this); //检查蓝牙连接
                     try {
                         String text = "";
                         if (extras.getString(Notification.EXTRA_TEXT) != null)
                             text = extras.getString(Notification.EXTRA_TEXT);
 
                         MyLog.e(TAG, "接收到的消息：" + text);
-
                         int note_result1 = text.indexOf("触摸即可了解详情或停止应用");    //需要过滤的字段
                         int note_result2 = text.indexOf("点击了解详情或停止应用");          //需要过滤的字段
-
                         if (note_result1 < 0 && note_result2 < 0) {
                             int result = text.indexOf(":");
                             if (result >= 0) {
-                                provider.setNotification_qq(NotificationCollectorService.this, seq++, CutString.stringtobyte(text, 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TEXT), 84));
+                                MyLog.e(TAG, "接收到的消息：result》=0" );
+                                provider.setNotification_qq(NotificationService.this, seq++, CutString.stringtobyte(text, 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TEXT), 84));
                             } else {
-                                provider.setNotification_qq(NotificationCollectorService.this, seq++, CutString.stringtobyte(text, 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TITLE) + ":" + extras.getString(Notification.EXTRA_TEXT), 84));
+                                MyLog.e(TAG, "接收到的消息：result《0" );
+                                provider.setNotification_qq(NotificationService.this, seq++, CutString.stringtobyte(text, 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TITLE) + ":" + extras.getString(Notification.EXTRA_TEXT), 84));
                             }
                         }
                     } catch (UnsupportedEncodingException e) {
@@ -147,7 +149,7 @@ public class NotificationCollectorService extends NotificationListenerService {
                     }
                 } else if ("com.tencent.qqlite".equals(sbn.getPackageName()) && array[0] == '1') {
 
-                    connectble0x02(NotificationCollectorService.this); //检查蓝牙连接
+                    connectble0x02(NotificationService.this); //检查蓝牙连接
 
                     try {
                         String text = "";
@@ -160,9 +162,11 @@ public class NotificationCollectorService extends NotificationListenerService {
                         if (note_result1 < 0 && note_result2 < 0) {
                             int result = text.indexOf(":");
                             if (result >= 0) {
-                                provider.setNotification_qq(NotificationCollectorService.this, seq++, CutString.stringtobyte(text, 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TEXT), 84));
+                                MyLog.e(TAG, "接收到的消息：result》=0" );
+                                provider.setNotification_qq(NotificationService.this, seq++, CutString.stringtobyte(text, 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TEXT), 84));
                             } else {
-                                provider.setNotification_qq(NotificationCollectorService.this, seq++, CutString.stringtobyte(text, 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TITLE) + ":" + extras.getString(Notification.EXTRA_TEXT), 84));
+                                MyLog.e(TAG, "接收到的消息：result《0" );
+                                provider.setNotification_qq(NotificationService.this, seq++, CutString.stringtobyte(text, 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TITLE) + ":" + extras.getString(Notification.EXTRA_TEXT), 84));
                             }
                         }
                     } catch (UnsupportedEncodingException e) {
@@ -170,7 +174,7 @@ public class NotificationCollectorService extends NotificationListenerService {
                     }
                 } else if ("com.tencent.mm".equals(sbn.getPackageName()) && array[1] == '1') {   // 微信
 
-                    connectble0x02(NotificationCollectorService.this); //检查蓝牙连接
+                    connectble0x02(NotificationService.this); //检查蓝牙连接
 
                     try {
                         String text = "";
@@ -182,9 +186,9 @@ public class NotificationCollectorService extends NotificationListenerService {
                         if (note_result1 < 0 && note_result2 < 0 && note_result3 < 0) {
                             int result = text.indexOf(":");
                             if (result >= 0) {
-                                provider.setNotification_WX(NotificationCollectorService.this, seq++, CutString.stringtobyte(text, 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TEXT), 84));
+                                provider.setNotification_WX(NotificationService.this, seq++, CutString.stringtobyte(text, 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TEXT), 84));
                             } else {
-                                provider.setNotification_WX(NotificationCollectorService.this, seq++, CutString.stringtobyte(text, 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TITLE) + ":" + extras.getString(Notification.EXTRA_TEXT), 84));
+                                provider.setNotification_WX(NotificationService.this, seq++, CutString.stringtobyte(text, 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TITLE) + ":" + extras.getString(Notification.EXTRA_TEXT), 84));
                             }
                         }
                     } catch (UnsupportedEncodingException e1) {
@@ -192,7 +196,7 @@ public class NotificationCollectorService extends NotificationListenerService {
                     }
                 } else if ("com.linkloving.rtring_c_watch".equals(sbn.getPackageName()) && array[4] == '1') { // 连爱
                     try {
-                        provider.setNotification_LINK(NotificationCollectorService.this, seq++, CutString.stringtobyte(extras.getString(Notification.EXTRA_TITLE), 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TEXT), 84));
+                        provider.setNotification_LINK(NotificationService.this, seq++, CutString.stringtobyte(extras.getString(Notification.EXTRA_TITLE), 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TEXT), 84));
                     } catch (UnsupportedEncodingException e1) {
                         e1.printStackTrace();
                     }
@@ -210,5 +214,4 @@ public class NotificationCollectorService extends NotificationListenerService {
 
         }
     }
-
 }

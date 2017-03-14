@@ -111,27 +111,11 @@ public class AppStartActivity extends AppCompatActivity {
         /**设置APP状态为打开*/
         BleService.getInstance(this).setEXIT_APP(false);
 
+
         UserEntity user = PreferencesToolkits.getLocalUserInfo(this);
 
         AppManager.getAppManager().addActivity(this);
 
-      /*  if(user != null && !CommonUtils.isStringEmpty(user.getEsplash_screen_file_name()))
-        {
-            //MyApplication.getInstance(this)._const.DIR_ENT_IMAGE_RELATIVE_DIR + "/" + user.getEsplash_screen_file_name()
-            File file = new File(EntHelper.getEntFileSavedDir(this)+"/"+ user.getEsplash_screen_file_name());
-            if(file.exists())
-            {
-                try
-                {
-                    // Drawable com.eva.android
-                    startLL.setBackground(BitmapHelper.loadDrawble(file.getAbsolutePath()));
-                }
-                catch (Exception e)
-                {
-                    Log.w(TAG, e.getMessage(), e);
-                }
-            }
-        }*/
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

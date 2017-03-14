@@ -11,6 +11,7 @@ import java.util.Stack;
 /**
  * Created by zkx on 2016/2/24.
  */
+@SuppressWarnings("JavaDoc")
 public class AppManager {
     private static final String TAG = AppManager.class.getSimpleName();
 
@@ -25,6 +26,7 @@ public class AppManager {
         return instance;
     }
     /** @SuppressWarning */
+    @SuppressWarnings("JavaDoc")
     public void addActivity(Activity activity)
     {
         if (activityStack == null) {

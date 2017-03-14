@@ -166,7 +166,6 @@ public class HeartRateActivity extends ToolBarActivity implements View.OnClickLi
             @Override
             public void onDataChange(String data) {
                 groupsTime.setText(data);
-
             }
         });
       /*  DayFragment dayFragment = new DayFragment();

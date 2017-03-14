@@ -100,13 +100,13 @@ public class PhoneReceiver extends BroadcastReceiver {
 				 case TelephonyManager.CALL_STATE_IDLE:
 					   
 					    //移除来电
-					    if(provider.isConnectedAndDiscovered() && array_phone[3] == '1' && NotificationCollectorService.phoneinidle_count==0 && NotificationCollectorService.phoneinhook_count!=1){
+					    if(provider.isConnectedAndDiscovered() && array_phone[3] == '1' && NotificationService.phoneinidle_count==0 && NotificationService.phoneinhook_count!=1){
 					    	 Log.i(TAG, "挂断");  
-					    	 NotificationCollectorService.phoneinhook_count=0;
-					    	 NotificationCollectorService.phoneincall_count=0;
-					    	 NotificationCollectorService.phoneinidle_count++;
+					    	 NotificationService.phoneinhook_count=0;
+					    	 NotificationService.phoneincall_count=0;
+					    	 NotificationService.phoneinidle_count++;
 
-					    	provider.setNotification_remove_incall(context,NotificationCollectorService.incallphone,NotificationCollectorService.incallphone_title,NotificationCollectorService.incallphone_title);
+					    	provider.setNotification_remove_incall(context,NotificationService.incallphone,NotificationService.incallphone_title,NotificationService.incallphone_title);
 					    	 
 					    	 /**为确保万一*/
 					    	 try {
@@ -114,8 +114,8 @@ public class PhoneReceiver extends BroadcastReceiver {
 							} catch (InterruptedException e) {
 								e.printStackTrace();
 							}
-					    	 Log.i(TAG, "incallphone_title:"+NotificationCollectorService.incallphone_title); 
-						    provider.setNotification_misscall(context, (byte)seq,NotificationCollectorService.incallphone_title,NotificationCollectorService.incallphone_title);
+					    	 Log.i(TAG, "incallphone_title:"+NotificationService.incallphone_title); 
+						    provider.setNotification_misscall(context, (byte)seq,NotificationService.incallphone_title,NotificationService.incallphone_title);
 						    seq=0;
 					    }
 						
@@ -124,11 +124,11 @@ public class PhoneReceiver extends BroadcastReceiver {
 					   case TelephonyManager.CALL_STATE_OFFHOOK:
 						   
 						//移除来电
-						if(provider.isConnectedAndDiscovered() && array_phone[3] == '1' && NotificationCollectorService.phoneinhook_count==0 ){
+						if(provider.isConnectedAndDiscovered() && array_phone[3] == '1' && NotificationService.phoneinhook_count==0 ){
 						Log.i(TAG, "接听");
-						NotificationCollectorService.phoneincall_count=0;
-						NotificationCollectorService.phoneinhook_count++;
-						provider.setNotification_remove_incall(context,NotificationCollectorService.incallphone,NotificationCollectorService.incallphone_title,NotificationCollectorService.incallphone_title);
+						NotificationService.phoneincall_count=0;
+						NotificationService.phoneinhook_count++;
+						provider.setNotification_remove_incall(context,NotificationService.incallphone,NotificationService.incallphone_title,NotificationService.incallphone_title);
 						seq=0;
 						}
 					    break;
@@ -137,22 +137,22 @@ public class PhoneReceiver extends BroadcastReceiver {
 					   case TelephonyManager.CALL_STATE_RINGING:
 						 Log.i(TAG, "provider.isConnectedAndDiscovered():"+provider.isConnectedAndDiscovered());
 						 Log.i(TAG, "array_phone[3] == 1"+(array_phone[3] == '1'));
-						 Log.i(TAG, "phoneincall_count==0:"+(NotificationCollectorService.phoneincall_count==0));
+						 Log.i(TAG, "phoneincall_count==0:"+(NotificationService.phoneincall_count==0));
 						 
 					    //输出来电号码
-					    if(provider.isConnectedAndDiscovered() && array_phone[3] == '1' && NotificationCollectorService.phoneincall_count==0){
+					    if(provider.isConnectedAndDiscovered() && array_phone[3] == '1' && NotificationService.phoneincall_count==0){
 					    	Log.i(TAG, "响铃:来电号码"+incomingNumber);
 					    	
 					    	String name = getContactNameByPhoneNumber(context,incomingNumber);
 					    	Log.i(TAG, "响铃:来电人"+name);
-					    	NotificationCollectorService.phoneincall_count++;
-					    	NotificationCollectorService.phoneinidle_count=0;
-					    	NotificationCollectorService.phoneinhook_count=0;		
+					    	NotificationService.phoneincall_count++;
+					    	NotificationService.phoneinidle_count=0;
+					    	NotificationService.phoneinhook_count=0;		
 					    	try {
-					    		NotificationCollectorService.incallphone_title=CutString.stringtobyte(name, 24);
-					    		NotificationCollectorService.incallphone_text =CutString.stringtobyte(name, 84);
-					            provider.setNotification_PHONE(context, (byte)seq, NotificationCollectorService.incallphone_title, NotificationCollectorService.incallphone_text);
-					            NotificationCollectorService.incallphone=(byte)seq;
+					    		NotificationService.incallphone_title=CutString.stringtobyte(name, 24);
+					    		NotificationService.incallphone_text =CutString.stringtobyte(name, 84);
+					            provider.setNotification_PHONE(context, (byte)seq, NotificationService.incallphone_title, NotificationService.incallphone_text);
+					            NotificationService.incallphone=(byte)seq;
 					            seq++;
 					           
 							} catch (UnsupportedEncodingException e1) {

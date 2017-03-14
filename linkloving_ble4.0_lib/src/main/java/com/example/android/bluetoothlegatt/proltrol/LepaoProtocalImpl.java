@@ -730,7 +730,10 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			throws BLException, LPException {
 		WatchRequset req = new WatchRequset();
 		req.appendByte(seq++).appendByte(LepaoCommand.COMMAND_SET_TASK)
-				.appendInt(deviceInfo.step).makeCheckSum();
+				.appendInt(deviceInfo.stepDayTotals)
+				.appendInt(deviceInfo.distenceDayTotals)
+				.appendInt(deviceInfo.CaloriesTotals)
+				.makeCheckSum();
 		WatchResponse resp = this.sendData2BLE(req);
 		LPUtil.printData(req.getData(), "setSportTarget");
 		if (resp.getData()[4]==1&&resp.getData()[3]==LepaoCommand.COMMAND_SET_TASK){
@@ -967,7 +970,7 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 	 public int requestbound_fit() throws BLException, LPException {
 			WatchRequset req = new WatchRequset();
 			byte[] resp;
-			byte peidui=2;  //手表
+			byte peidui=2;  //手环
 			req.appendByte(seq++).appendByte(LepaoCommand.COMMAND_REQUEST_BOUND).appendByte(peidui).makeCheckSum();
 			LPUtil.printData(req.getData(), "REQUEST_BOUND");
 		 	WatchResponse res = this.sendData2BLE(req);
@@ -1573,29 +1576,31 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 	@Override
 	public void ANCS_Other(byte type,byte sta,byte notificationUID,byte[] title, byte[] text) 
 			throws BLException,LPException {
-		WatchRequset req = new WatchRequset();  //测试QQ
-		//title 24byte message 84byte 
-		req.appendByte(seq++)
-		.appendByte(LepaoCommand.COMMAND_ANCS_PUSH)
-		//从这开始是  categoryID AppID EventID notificationUID 组装部分
-		.appendByte(ANCSCommand.CategoryIDOther)             //除了电话以外
-		.appendByte(type)                                     //APPID
-		.appendByte(sta)                                      //状态：添加 0
-		.appendByte(notificationUID);                         //初始是1   类似seq 
-//		.appendByte(ANCSCommand.NotificationAttributeIDTitle)                                  //
-//		.appendByte((byte) title.length);
-//		for(int i=0;i<title.length;i++){
-//			req.appendByte(title[i]);
-//		}
-		req.appendByte(ANCSCommand.NotificationAttributeIDMessage)//
-		.appendByte((byte) text.length);
-		for(int i=0;i<text.length;i++){
-			req.appendByte(text[i]);
+		try {
+			if (text==null)return;
+			if (title==null)return;
+			WatchRequset req = new WatchRequset();  //测试QQ
+			//title 24byte message 84byte
+			req.appendByte(seq++)
+					.appendByte(LepaoCommand.COMMAND_ANCS_PUSH)
+					//从这开始是  categoryID AppID EventID notificationUID 组装部分
+					.appendByte(ANCSCommand.CategoryIDOther)             //除了电话以外
+					.appendByte(type)                                     //APPID
+					.appendByte(sta)                                      //状态：添加 0
+					.appendByte(notificationUID);                         //初始是1   类似seq
+			req.appendByte(ANCSCommand.NotificationAttributeIDMessage)
+					.appendByte((byte) text.length);
+			for(int i=0;i<text.length;i++){
+				req.appendByte(text[i]);
+			}
+			req.appendByte((byte) 0xff);
+			req.makeCheckSum();
+			LPUtil.printData(req.getData(), " 消息提醒");
+			WatchResponse resp = this.sendData2BLE(req);
+		}catch (Exception e){
+			Log.e(TAG,e.toString());
 		}
-		req.appendByte((byte) 0xff);
-		req.makeCheckSum();
-		LPUtil.printData(req.getData(), " 消息提醒");
-		WatchResponse resp = this.sendData2BLE(req);
+
 	}
 
 

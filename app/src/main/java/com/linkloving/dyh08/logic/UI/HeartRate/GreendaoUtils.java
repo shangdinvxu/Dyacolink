@@ -62,8 +62,8 @@ private final static long HALFFIVEMILLIONS=600 ;
      * @param max
      * @param avg
      */
-    public void add(int starttime , int  max ,int avg){
-        heartrate heartrate = new heartrate(null, starttime, max, avg);
+    public void add(int starttime , int  avg ,int max){
+        heartrate heartrate = new heartrate(null, starttime,max, avg );
         getHeartrateDao().insertOrReplace(heartrate);
 
     }
@@ -96,6 +96,13 @@ private final static long HALFFIVEMILLIONS=600 ;
         List<heartrate> list = build.list();
         return list ;
     }
+
+
+    public List<heartrate> searchAll(){
+        List<heartrate> heartrates = getHeartrateDao().loadAll();
+        return heartrates;
+    }
+
 
     /**
      * 根据一天的开始时间和结束时间来找一天的数据

@@ -396,12 +396,18 @@ public class BluetoothActivity extends ToolBarActivity {
                 provider.resetDefaultState();
                 provider.clearProess();
                 finish();
-            }   if (latestDeviceInfo!=null&&latestDeviceInfo.recoderStatus==66){
+            }else if (latestDeviceInfo!=null&&latestDeviceInfo.recoderStatus==66){
                    if (builder!=null&&!builder.create().isShowing()) {
                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
                                provider.unBoundDevice(BluetoothActivity.this);
+                               try {
+                                   Thread.sleep(1000);
+                                   BleService.getInstance(BluetoothActivity.this).releaseBLE();
+                               } catch (InterruptedException e) {
+                                   e.printStackTrace();
+                               }
                            }
                        }).setMessage(getString(R.string.Need_format))
                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {

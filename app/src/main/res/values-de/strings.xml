@@ -1037,7 +1037,7 @@
     <string name="Sign_Out">Abmelden</string>
 
     <!--登录界面-->
-    <string name="usernamecannot">Username不能为空</string>
+    <string name="usernamecannot">Bitte füllen Sie Informationen</string>
     <string name="choosewearingstyles">请选择佩戴方式</string>
     <string name="pleasebirthday">请填写正确的生日</string>
     <string name="pleaseGender">请选择性别</string>

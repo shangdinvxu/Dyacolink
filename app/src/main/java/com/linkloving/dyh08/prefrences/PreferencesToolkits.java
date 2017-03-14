@@ -732,7 +732,7 @@ public class PreferencesToolkits {
         }
     }
 
-    /*获取单位设置信息*/
+    /*获取目标设置的信息*/
     public static String getGoalInfo(Context context, String type) {
         SharedPreferences sharedPreferences;
         try {

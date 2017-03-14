@@ -24,7 +24,7 @@ import com.linkloving.dyh08.http.basic.HttpCallback;
 import com.linkloving.dyh08.http.basic.NoHttpRuquestFactory;
 import com.linkloving.dyh08.http.data.DataFromServer;
 import com.linkloving.dyh08.logic.dto.UserEntity;
-import com.linkloving.dyh08.notify.NotificationCollectorService;
+import com.linkloving.dyh08.notify.NotificationService;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.ModelInfo;
 import com.linkloving.dyh08.utils.CommonUtils;
@@ -122,7 +122,7 @@ public class BluetoothDisconnectActivity extends ToolBarActivity {
                         //曾经出现过modelInfo为null的情况(服务器没有存这些信息)
                         if(modelInfo!=null){
                             if(modelInfo.getAncs()!=0){ //有消息提醒
-                                startActivity(new Intent(NotificationCollectorService.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+                                startActivity(new Intent(NotificationService.ACTION_NOTIFICATION_LISTENER_SETTINGS));
                                 ToolKits.showCommonTosat(BluetoothDisconnectActivity.this, true, ToolKits.getStringbyId(BluetoothDisconnectActivity.this, R.string.unbound_success_msg), Toast.LENGTH_LONG);
                             }else{
                                 ToolKits.showCommonTosat(BluetoothDisconnectActivity.this, true, ToolKits.getStringbyId(BluetoothDisconnectActivity.this, R.string.unbound_success), Toast.LENGTH_LONG);

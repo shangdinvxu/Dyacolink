@@ -260,7 +260,7 @@ public class DayBarChartView extends View {
                     barRect.right = barRect.left + barItemWidth;
                     int right = barRect.right;
                     touchDown = true ;
-                    if (x > left && x < right && y<barRect.bottom&&y>barRect.top-160) {
+                    if (x > left && x < right && y<barRect.bottom&&y>barRect.top-screenH) {
                         iCheck = i;
                         MyLog.e("点击", "点击的是" + mItems.get(i).itemType);
                         x = (int) (lastPointX - screenW * 0.17);

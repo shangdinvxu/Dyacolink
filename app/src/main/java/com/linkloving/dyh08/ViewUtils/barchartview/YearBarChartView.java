@@ -270,7 +270,7 @@ public class YearBarChartView extends View {
                     barRect.right = barRect.left + barItemWidth;
                     int right = barRect.right;
                     touchDown = true ;
-                    if (x > left && x < right &&  y<barRect.bottom&&y>barRect.top-160) {
+                    if (x > left && x < right &&  y<barRect.bottom&&y>barRect.top-screenH) {
                         iCheck = i;
                         x = (int) (barRect.left - screenW * 0.1);
                         y = (int) (-screenH + barRect.top + 0.078 * screenHight);

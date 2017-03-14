@@ -38,7 +38,7 @@ import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.db.summary.DaySynopicTable;
 import com.linkloving.dyh08.logic.dto.UserEntity;
-import com.linkloving.dyh08.notify.NotificationCollectorService;
+import com.linkloving.dyh08.notify.NotificationService;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.dyh08.utils.sportUtils.SportDataHelper;
 import com.linkloving.utils.TimeZoneHelper;
@@ -1192,7 +1192,7 @@ private final static String TAG = ToolKits.class.getSimpleName();
 	//判断是否获取了消息通知权限
 	public static boolean isEnabled(Context context) {
 		String pkgName = context.getPackageName();
-		final String flat = Settings.Secure.getString(context.getContentResolver(), NotificationCollectorService.ENABLED_NOTIFICATION_LISTENERS);
+		final String flat = Settings.Secure.getString(context.getContentResolver(), NotificationService.ENABLED_NOTIFICATION_LISTENERS);
 		if (!TextUtils.isEmpty(flat)) {
 			final String[] names = flat.split(":");
 			for (int i = 0; i < names.length; i++) {
