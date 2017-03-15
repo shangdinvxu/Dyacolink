@@ -32,7 +32,10 @@ public class BarChartView extends View {
     private Rect deepSleepRect;
     private Paint deepSleepPaint;
     private SimpleDateFormat simpleDateFormat;
+//    每天有多少分钟
     private final static long ONE_DAY_MILLISECOND = 86400 ;
+    private final static long EIGHT_HOUR_SECONDS  =28800 ;
+    private final static long THIRTY_MINUTES_SECONDS = 2400 ;
 
     public BarChartView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -77,15 +80,19 @@ public class BarChartView extends View {
             }
         }
         textPaint.setTextSize(ScreenUtils.dp2px(getContext(), 16));
-        /** 先调用一下下面这方法将开始时间装换成相应的百分比*/
+//        将时间变成的几点几分。
         transformToPoint();
         for (int i = 0; i < mItems.size(); i++) {
             if (i<mItems.size()-1){
-                    canvas.drawLine( (float)(((((double)(mItems.get(i).starttime+28800)/ ONE_DAY_MILLISECOND)*(screenW * 0.72))+0.2*screenW)),
-                            (float)(oneHourHight*28- (mItems.get(i).itemDeepValue*1000/200*oneHourHight * 24)/1000),
-                            (float)(((((double)(mItems.get(i+1).starttime+28800)/ ONE_DAY_MILLISECOND)*(screenW * 0.72))+0.2*screenW)),
-                            (float)(oneHourHight*28-(mItems.get(i+1).itemDeepValue*1000/200 *oneHourHight * 24)/1000),
+                    //大于30分钟就不画线
+                if ((mItems.get(i+1).starttime-mItems.get(i).starttime)<THIRTY_MINUTES_SECONDS) {
+                    /**将开始时间装换成相应的百分比*/
+                    canvas.drawLine((float) (((((double) (mItems.get(i).starttime + EIGHT_HOUR_SECONDS) / ONE_DAY_MILLISECOND) * (screenW * 0.72)) + 0.2 * screenW)),
+                            (float) (oneHourHight * 28 - (mItems.get(i).itemDeepValue * 1000 / 200 * oneHourHight * 24) / 1000),
+                            (float) (((((double) (mItems.get(i + 1).starttime + EIGHT_HOUR_SECONDS) / ONE_DAY_MILLISECOND) * (screenW * 0.72)) + 0.2 * screenW)),
+                            (float) (oneHourHight * 28 - (mItems.get(i + 1).itemDeepValue * 1000 / 200 * oneHourHight * 24) / 1000),
                             linePaint);
+                }
             }
         }
 
@@ -115,10 +122,9 @@ public class BarChartView extends View {
     public  void  transformToPoint(){
         MyLog.e(TAG,"transform执行了");
         for (BarChartItemBean record :mItems) {
-            long l = record.starttime % ONE_DAY_MILLISECOND;
-             float per= (float)(l+28800) / ONE_DAY_MILLISECOND;
-            MyLog.e(TAG,"per是.........."+per);
-            record.starttime=l ;
+//            取出一天的时间是多少。
+            long oneDayTime = record.starttime % ONE_DAY_MILLISECOND;
+            record.starttime=oneDayTime ;
         }
     }
 

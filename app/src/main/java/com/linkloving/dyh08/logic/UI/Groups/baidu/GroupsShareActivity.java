@@ -15,6 +15,7 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.PersistableBundle;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.Gravity;
@@ -661,29 +662,32 @@ public class GroupsShareActivity extends ToolBarActivity implements OnMapReadyCa
 
     }
 
+
     private void getScreenGoogle(GoogleMap mGoogleMap) {
-        mGoogleMap.snapshot(new GoogleMap.SnapshotReadyCallback() {
-            @Override
-            public void onSnapshotReady(Bitmap bitmap) {
-                File file = new File(filePathCache);
-                FileOutputStream out;
-                try {
-                    out = new FileOutputStream(file);
-                    if (bitmap.compress(
-                            Bitmap.CompressFormat.PNG, 20, out)) {
-                        out.flush();
-                        out.close();
-                    }
+        if (mGoogleMap!=null) {
+            mGoogleMap.snapshot(new GoogleMap.SnapshotReadyCallback() {
+                @Override
+                public void onSnapshotReady(Bitmap bitmap) {
+                    File file = new File(filePathCache);
+                    FileOutputStream out;
+                    try {
+                        out = new FileOutputStream(file);
+                        if (bitmap.compress(
+                                Bitmap.CompressFormat.PNG, 20, out)) {
+                            out.flush();
+                            out.close();
+                        }
 //                    Toast.makeText(GroupsShareActivity.this,
 //                            "屏幕截图成功，图片存在: " + file.toString(),
 //                            Toast.LENGTH_SHORT).show();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
+            });
+        }
 
     }
 

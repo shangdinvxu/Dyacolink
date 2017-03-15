@@ -82,16 +82,18 @@ public class BluetoothDisconnectActivity extends ToolBarActivity {
         String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
         if (last_sync_device_id==null||last_sync_device_id.length()==0){
         }else{
-            if (provider.isConnectedAndDiscovered()) {
-                //连接才去下这个指令
-                provider.unBoundDevice(BluetoothDisconnectActivity.this);
-            }
+            provider.unBoundDevice(BluetoothDisconnectActivity.this);
             UserEntity userEntity = MyApplication.getInstance(BluetoothDisconnectActivity.this).getLocalUserInfoProvider();
             //设备号置空
             userEntity.getDeviceEntity().setLast_sync_device_id(null);
             //设备类型置空
             userEntity.getDeviceEntity().setDevice_type(0);
             //*******模拟断开   不管有没有连接 先执行这个再说
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             BleService.getInstance(BluetoothDisconnectActivity.this).releaseBLE();
             ToolKits.showCommonTosat(BluetoothDisconnectActivity.this, false, ToolKits.getStringbyId(BluetoothDisconnectActivity.this, R.string.unbound_success), Toast.LENGTH_SHORT);
         }

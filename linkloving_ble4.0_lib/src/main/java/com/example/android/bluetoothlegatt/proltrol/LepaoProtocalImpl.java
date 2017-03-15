@@ -85,7 +85,6 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			}
 			return resp;
 		} else {
-			
 			try {
 				resp = sendOnce(data, status);
 				retryTimes = 0;
@@ -413,6 +412,7 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 		}else{
 			return false;
 		}
+
 	}
 
 	// test

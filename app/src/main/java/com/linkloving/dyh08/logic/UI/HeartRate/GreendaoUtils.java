@@ -23,7 +23,7 @@ public class GreendaoUtils {
     private DaoMaster daoMaster;
     private DaoSession daoSession;
 //    private final static long HALFFIVEMILLIONS=150 ;
-private final static long HALFFIVEMILLIONS=600 ;
+    private final static long HALFFIVEMILLIONS=40 ;
     public GreendaoUtils(Context context,SQLiteDatabase db){
         this.db = db ;
         this.context = context ;

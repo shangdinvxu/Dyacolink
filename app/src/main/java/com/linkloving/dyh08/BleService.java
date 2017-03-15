@@ -248,7 +248,7 @@ public class BleService extends Service {
                 Vibrator  vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
                 long [] pattern = {100,400,100,400}; // 停止 开启 停止 开启
                 vibrator.vibrate(pattern,-1); //重复两次上面的pattern 如果只想震动一次，index设为-1
-//                startAlarm();
+                startAlarm();
             }
         });
     }
@@ -662,15 +662,12 @@ public class BleService extends Service {
                 if (!CommonUtils.isStringEmpty(MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id())) {
 
                     if (lpDeviceInfo_ != null) {  //解决异步线程bug
-                        /******拿卡号同时按情况去设置步数START*****/
-                        if (lpDeviceInfo_.timeStamp < 365 * 24 * 3600)  //手表时间为1970年的1年内
-                        {
+                        /**把app的数据同步到手环*/
                             lpDeviceInfo_.stepDayTotals = MyApplication.getInstance(BleService.this).getOld_step();
                             lpDeviceInfo_.distenceDayTotals =MyApplication.getInstance(BleService.this).getOld_distance() ;
                             lpDeviceInfo_.CaloriesTotals =MyApplication.getInstance(BleService.this).getOld_calories() ;
                             provider.resetStep(BleService.this, lpDeviceInfo_);
-                        }
-                        /******拿到卡号同时后按情况去设置步数OVER*****/
+
 
                         /**********省电模式START*********/
                         provider.SetPower(BleService.this, DeviceInfoHelper.fromUserEntity(BleService.this, userEntity));

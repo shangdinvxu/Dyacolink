@@ -685,13 +685,13 @@ public class PreferencesToolkits {
     }
 
 
-    /*获取定时器信息*/
+    /*获取地图信息*/
     public static boolean getMapSelect(Context context) {
         SharedPreferences sharedPreferences;
         boolean jString = false ;
         try {
             sharedPreferences = getAppDefaultSharedPreferences(context, true);
-            jString = sharedPreferences.getBoolean(MAP_SETTING, true);//获得设备信息
+            jString = sharedPreferences.getBoolean(MAP_SETTING, false);//获得设备信息
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }

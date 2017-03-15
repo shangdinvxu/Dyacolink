@@ -83,7 +83,7 @@ public class DaychartviewFragment extends Fragment {
             }
             Calendar instance = Calendar.getInstance();
             instance.setTime(parse);
-            instance.add(Calendar.MINUTE, -TimeZoneHelper.getTimeZoneOffsetMinute());// before 8 hour
+//            instance.add(Calendar.MINUTE, -TimeZoneHelper.getTimeZoneOffsetMinute());// before 8 hour
             Date time1 = instance.getTime();
 //            String format = simpleDateFormat.format(time1);
             stringTimeList.add(time1);

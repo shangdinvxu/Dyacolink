@@ -218,9 +218,7 @@ public class GroupsDetailsActivity extends ToolBarActivity {
                 startActivity(intent);
             }
         });
-
         initTrace();
-
     }
 
     private void initTrace() {
@@ -377,7 +375,6 @@ public class GroupsDetailsActivity extends ToolBarActivity {
             // 请求失败回调接口
             @Override
             public void onRequestFailedCallback(String arg0) {
-                // TODO Auto-generated method stub
                 TrackApplication.showMessage("track请求失败回调接口消息 : " + arg0);
                 MyLog.e(TAG,"onRequestFailedCallback"+arg0);
             }
@@ -385,7 +382,6 @@ public class GroupsDetailsActivity extends ToolBarActivity {
             // 查询历史轨迹回调接口
             @Override
             public void onQueryHistoryTrackCallback(String arg0) {
-                // TODO Auto-generated method stub
                 super.onQueryHistoryTrackCallback(arg0);
                 showHistoryTrack(arg0);
                 MyLog.e (TAG,"onQueryHistoryTrackCallback"+arg0);
@@ -394,7 +390,6 @@ public class GroupsDetailsActivity extends ToolBarActivity {
             @Override
             public void onQueryDistanceCallback(String arg0) {
                 MyLog.e(TAG,"onQueryDistanceCallback"+arg0);
-                // TODO Auto-generated method stub
                 try {
                     JSONObject dataJson = new JSONObject(arg0);
                     if (null != dataJson && dataJson.has("status") && dataJson.getInt("status") == 0) {
@@ -403,7 +398,6 @@ public class GroupsDetailsActivity extends ToolBarActivity {
                         TrackApplication.showMessage("里程 : " + df.format(distance) + "米");
                     }
                 } catch (JSONException e) {
-                    // TODO Auto-generated catch block
                     TrackApplication.showMessage("queryDistance回调消息 : " + arg0);
                 }
 

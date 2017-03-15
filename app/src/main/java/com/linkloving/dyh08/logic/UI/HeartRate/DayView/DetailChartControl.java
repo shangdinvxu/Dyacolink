@@ -170,8 +170,8 @@ public class DetailChartControl extends RelativeLayout {
                     avgView.setText("0");
                 }else {
                     MyLog.e(TAG,"heartrates.size()不为0");
-                    maxView.setText(heartrates.get(0).getMax()+"");
-                    avgView.setText(heartrates.get(0).getAvg()+"");
+                    maxView.setText(heartrates.get(heartrates.size()-1).getMax()+"");
+                    avgView.setText(heartrates.get(heartrates.size()-1).getAvg()+"");
                 }
                 nowtimeString = TimeUtils.formatTimeHHMM(nowtime);
                 MyLog.e(TAG,"nowtimeString"+nowtimeString);

@@ -27,6 +27,8 @@ import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.notify.NotificationService;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.utils.CommonUtils;
+import com.linkloving.dyh08.utils.GoogleApiUtils;
+import com.linkloving.dyh08.utils.MyToast;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
@@ -127,7 +129,12 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                     case Left_viewVO1.map:
                         boolean mapSelect = PreferencesToolkits.getMapSelect(mContext);
                         if (mapSelect){
-                        IntentFactory.startGoogleActivity((Activity)mContext);
+                            boolean googlePlaySupport = GoogleApiUtils.isGoogleMapsInstalled((Activity) mContext);
+                            if (googlePlaySupport){
+                                IntentFactory.startGoogleActivity((Activity)mContext);
+                            }else {
+                                MyToast.showShort(mContext,"此设备不支持谷歌服务，无法使用google map");
+                            }
                         }else {
                             IntentFactory.start2WorkoutActivity((Activity) mContext);
                         }

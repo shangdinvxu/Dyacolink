@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.List;
+import java.util.Locale;
 
 import Trace.GreenDao.DaoMaster;
 import Trace.GreenDao.Note;
@@ -81,7 +82,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         mMonthData = new String[list.size()];
         for (int i = 0 ;i< list.size();i++){
             mMonthData[i]= list.get(i).getDate();
-            MyLog.e(TAG,"mMonthData[i].toString():"+mMonthData[i].toString());
+            MyLog.e(TAG,"mMonthData[i].toString():"+mMonthData[i]);
         }
 //        startTimeList.addAll(workDataNotes);
 //        endTimeList.addAll(workDataNotes);
@@ -95,6 +96,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         sectionIndices = new ArrayList<Integer>();
         String lastChar = mMonthData[0];
         sectionIndices.add(0);
+
         for(int i = 1;i< mMonthData.length;i++){
             if(mMonthData[i] != lastChar){
                 sectionIndices.add(i);
@@ -130,19 +132,15 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         }else{
             holder = (HeaderViewHolder) convertView.getTag();
         }
-        String yearMonth = mMonthData[i].toString();
+        String yearMonth = mMonthData[i];
         MyLog.e(TAG, yearMonth);
-        holder.heardYearMonth.setText(mMonthData[i].toString());
+        holder.heardYearMonth.setText(mMonthData[i]);
         int amount = 0 ;
         for (Note listitem:list) {
             if (listitem.getDate().equals(yearMonth)){
                 amount = amount +1 ;
             }
         }
-
-      /*  holder.activityNumbers.setText(amount+" "+mContext.getString(R.string.activities));*/
-        final int finalAmount = amount;
-
         return convertView;
     }
 
@@ -207,9 +205,9 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     @Override
     public long getHeaderId(int position){
         MyLog.e(TAG, "heardID是:  " + mMonthData[position].charAt(0));
-        String s = mMonthData[position].toString();
+        String s = mMonthData[position];
 //        return mMonthData[position].charAt(0);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM", Locale.getDefault());
         Date parse= null ;
         try {
              parse = simpleDateFormat.parse(s);

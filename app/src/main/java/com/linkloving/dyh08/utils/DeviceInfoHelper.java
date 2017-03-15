@@ -193,7 +193,6 @@ public class DeviceInfoHelper {
                 deviceInfo.alarmTime1_H = Integer.parseInt(strTime_1[0]);
                 deviceInfo.alarmTime1_M =Integer.parseInt(strTime_1[1]);
                 deviceInfo.frequency1 = Repeat_1;
-
                 MyLog.i(TAG,"deviceInfo.alarmTime1_H："+deviceInfo.alarmTime1_H);
                 MyLog.i(TAG,"deviceInfo.alarmTime1_M："+deviceInfo.alarmTime1_M);
                 MyLog.i(TAG,"deviceInfo.frequency1："+deviceInfo.frequency1);
