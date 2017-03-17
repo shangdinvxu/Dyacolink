@@ -144,6 +144,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         return convertView;
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;

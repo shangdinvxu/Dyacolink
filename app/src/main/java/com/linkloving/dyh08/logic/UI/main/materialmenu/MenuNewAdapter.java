@@ -129,12 +129,12 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                     case Left_viewVO1.map:
                         boolean mapSelect = PreferencesToolkits.getMapSelect(mContext);
                         if (mapSelect){
-                            boolean googlePlaySupport = GoogleApiUtils.isGoogleMapsInstalled((Activity) mContext);
-                            if (googlePlaySupport){
+//                            boolean googlePlaySupport = GoogleApiUtils.isGoogleMapsInstalled((Activity) mContext);
+//                            if (googlePlaySupport){
                                 IntentFactory.startGoogleActivity((Activity)mContext);
-                            }else {
-                                MyToast.showShort(mContext,"此设备不支持谷歌服务，无法使用google map");
-                            }
+//                            }else {
+//                                MyToast.showShort(mContext,"此设备不支持谷歌服务，无法使用google map");
+//                            }
                         }else {
                             IntentFactory.start2WorkoutActivity((Activity) mContext);
                         }

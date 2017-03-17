@@ -123,8 +123,7 @@ public class BarChartView extends View {
         MyLog.e(TAG,"transform执行了");
         for (BarChartItemBean record :mItems) {
 //            取出一天的时间是多少。
-            long oneDayTime = record.starttime % ONE_DAY_MILLISECOND;
-            record.starttime=oneDayTime ;
+            record.starttime= record.starttime % ONE_DAY_MILLISECOND;
         }
     }
 

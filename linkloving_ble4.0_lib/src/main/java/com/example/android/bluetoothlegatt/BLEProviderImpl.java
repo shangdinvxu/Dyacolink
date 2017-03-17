@@ -117,8 +117,6 @@ public class BLEProviderImpl implements shenzhenInterface{
 		provider.closeSmartCard(context);
 		
 	}
-	
-	
 
 }
 

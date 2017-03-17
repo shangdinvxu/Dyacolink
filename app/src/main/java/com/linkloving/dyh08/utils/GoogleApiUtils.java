@@ -24,7 +24,7 @@ public class GoogleApiUtils {
     public  static boolean isGoogleMapsInstalled(Activity activity) {
         try {
             ApplicationInfo info = activity.getPackageManager().getApplicationInfo(
-                    "com.google.android.gms.maps.SupportMapFragment", 0);
+                    "com.google.android.gms.maps", 0);
             return true;
         } catch (PackageManager.NameNotFoundException e) {
             return false;

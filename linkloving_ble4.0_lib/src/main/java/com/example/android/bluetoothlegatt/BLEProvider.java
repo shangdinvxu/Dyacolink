@@ -1798,7 +1798,7 @@ public  class BLEProvider
 						msg = mHandler.obtainMessage();
 						msg.what = MSG_BLE_DATA;
 						msg.arg1 = INDEX_GET_HEART_RATE;
-						msg.obj =  mLepaoProtocalImpl.getHeartrate(0xfF,0x7F,0) ;
+						msg.obj =  mLepaoProtocalImpl.getHeartrate() ;
 						msg.sendToTarget();
 						break;
 					//					发送获取WorkoutData的指令

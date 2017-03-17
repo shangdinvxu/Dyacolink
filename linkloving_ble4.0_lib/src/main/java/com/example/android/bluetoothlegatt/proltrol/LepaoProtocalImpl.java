@@ -353,21 +353,37 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			return list;
 		}
 	}
-	public List<LpHeartrateData> getHeartrate(int offset, int length, int detial)throws BLException, LPException{
-		Log.e("getHeartrate","getHeartrate执行了");
+
+
+
+
+	public List<LpHeartrateData> getHeartrate()throws BLException, LPException {
+		List<LpHeartrateData> list = new ArrayList<>();
+		WatchResponse resp = getHeartrate(0xff, 0x7f);
+		int itemLeft;
+		if (resp.getData()[4]==0){
+			itemLeft = (int)resp.getData()[5];
+			list.addAll(resp.toLPHeartrateDataList(resp));
+			while (itemLeft>10) {
+				WatchResponse heartrate = getHeartrate(itemLeft - 10, 0);
+				itemLeft =heartrate.getData()[5];
+				list.addAll(heartrate.toLPHeartrateDataList(heartrate));
+			}
+		}
+		return list;
+	}
+
+
+	public WatchResponse getHeartrate(int offset, int length)throws BLException, LPException{
 		WatchRequset req = new WatchRequset();
 		req.appendByte(seq++).appendByte(LepaoCommand.COMMAND_GET_HEARTRATE).appendByte((byte) offset)
 				.appendByte((byte) length).makeCheckSum();
 		LPUtil.printData(req.getData(), " getHeartrate");
 		WatchResponse resp = this.sendData2BLE(req);
-		LPUtil.printData(resp.getData(), " getHeartrateresp");
-		if(resp.getData()[4]==0){
-			return   resp.toLPHeartrateDataList(resp);
-		}else{
-			List<LpHeartrateData> list = new ArrayList<LpHeartrateData>();
-			return list;
-		}
+		LPUtil.printData(resp.getData(), " 接收到的Heartrate");
+		return resp;
 	}
+
 	//清除或者获取workout数据
 	public List<LPWorkoutData> workoutData(byte Index)throws BLException, LPException{
 		Log.e("workoutData","clearworkoutData"+Index);
