@@ -18,6 +18,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baidu.mapapi.common.SysOSUtil;
 import com.linkloving.band.dto.SportRecord;
 import com.linkloving.band.ui.BRDetailData;
 import com.linkloving.dyh08.R;
@@ -164,19 +165,20 @@ public class DetailChartControl extends RelativeLayout {
                 MyLog.e(TAG,"当前的时间是："+( (long)(event.getX()*xlineScale) * 60+ timeLong ) );
                 nowtime = (long)(event.getX() * xlineScale) * 60+ timeLong;
                 List<heartrate> heartrates = searRecord(nowtime);
+                nowtimeString = TimeUtils.formatTimeHHMM(nowtime);
+                MyLog.e(TAG,"nowtimeString"+nowtimeString);
+                timeView.setText(nowtimeString);
                 if (heartrates.size()==0){
                     MyLog.e(TAG,"heartrates.size()为0");
                     maxView.setText("0");
                     avgView.setText("0");
+                    moveLineViewWithFinger(lineView,event.getX(),false);
                 }else {
                     MyLog.e(TAG,"heartrates.size()不为0");
-                    maxView.setText(heartrates.get(heartrates.size()-1).getMax()+"");
-                    avgView.setText(heartrates.get(heartrates.size()-1).getAvg()+"");
+                    maxView.setText(heartrates.get(heartrates.size()/2).getMax()+"");
+                    avgView.setText(heartrates.get(heartrates.size()/2).getAvg()+"");
+                    moveLineViewWithFinger(lineView,event.getX(),true);
                 }
-                nowtimeString = TimeUtils.formatTimeHHMM(nowtime);
-                MyLog.e(TAG,"nowtimeString"+nowtimeString);
-                timeView.setText(nowtimeString);
-                moveLineViewWithFinger(lineView,event.getX());
             }
             if (event.getAction()==MotionEvent.ACTION_UP){
                 i=0;
@@ -234,7 +236,7 @@ public class DetailChartControl extends RelativeLayout {
      * @param view
      * @param rawX
      */
-    private void moveLineViewWithFinger(View view, float rawX) {
+    private void moveLineViewWithFinger(View view, float rawX,boolean show) {
         AutoRelativeLayout.LayoutParams layoutParams = (AutoRelativeLayout.LayoutParams) view.getLayoutParams();
         layoutParams.leftMargin = (int) rawX - view.getWidth() / 2;
 //        layoutParams.leftMargin = (int) (rawX- screenW*0.15);
@@ -243,7 +245,14 @@ public class DetailChartControl extends RelativeLayout {
             showFirstPopupWindow();
             i++;
         }else{
-            popupWindow.update((int) rawX+(int)(screenW*0.027), (int) (screenH*0.37),-1,-1,false);
+            if (show){
+                popupWindow.dismiss();
+                popupWindow.showAsDropDown(framelayout, 20, 20);
+                popupWindow.update((int) rawX+(int)(screenW*0.027), (int) (screenH*0.37),-1,-1,false);
+            }else {
+                popupWindow.dismiss();
+            }
+
         }
     }
 

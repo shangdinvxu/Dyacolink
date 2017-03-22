@@ -25,7 +25,9 @@
 
         <TextView style="@style/small_dialog_total" />
 
-        <TextView style="@style/small_dialog_km" />
+        <TextView style="@style/small_dialog_km"
+            android:layout_marginLeft="69dp"
+            />
 
 
     </RelativeLayout>

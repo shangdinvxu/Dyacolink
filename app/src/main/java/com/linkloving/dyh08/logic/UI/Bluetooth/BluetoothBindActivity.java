@@ -74,11 +74,13 @@ public class BluetoothBindActivity extends ToolBarActivity {
 
     @OnClick(R.id.Disconnect)
     void clickDisconnect(View view){
+        finish();
         IntentFactory.startBindActivity2(BluetoothBindActivity.this);
     }
     @OnClick (R.id.Reconnect)
     void clickReconnect(View view)
     {
+        finish();
         IntentFactory.startBindActivity3(BluetoothBindActivity.this);
     }
 }

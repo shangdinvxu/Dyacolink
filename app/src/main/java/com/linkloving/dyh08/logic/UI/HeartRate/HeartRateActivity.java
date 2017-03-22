@@ -2,6 +2,7 @@ package com.linkloving.dyh08.logic.UI.HeartRate;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.database.sqlite.SQLiteDatabase;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -18,6 +19,7 @@ import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.logic.UI.step.IDataChangeListener;
 import com.linkloving.dyh08.logic.UI.step.StepActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
+import com.linkloving.dyh08.utils.DeviceInfoHelper;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 
@@ -27,6 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import Trace.GreenDao.DaoMaster;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -75,6 +78,22 @@ public class HeartRateActivity extends ToolBarActivity implements View.OnClickLi
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd a HH:mm",Locale.US);
         String format = simpleDateFormat.format(date);
         groupsTime.setText(format);
+//        initTestData();
+
+    }
+
+    /**
+     * 插入测试数据供测试使用
+     */
+    private void initTestData() {
+     DaoMaster.DevOpenHelper heartrateHelper = new DaoMaster.DevOpenHelper(HeartRateActivity.this, "heartrate", null);
+        SQLiteDatabase readableDatabase = heartrateHelper.getReadableDatabase();
+        GreendaoUtils greendaoUtils = new GreendaoUtils(HeartRateActivity.this, readableDatabase);
+        greendaoUtils.add(1489939109,20,80);
+        greendaoUtils.add(1489939199,30,80);
+        greendaoUtils.add(1489939859,90,120);
+        greendaoUtils.add(1489939919,110,160);
+        greendaoUtils.add(1489939989,130,80);
     }
 
 

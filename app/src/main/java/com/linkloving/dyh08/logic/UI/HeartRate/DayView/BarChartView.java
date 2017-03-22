@@ -3,8 +3,10 @@ package com.linkloving.dyh08.logic.UI.HeartRate.DayView;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -36,6 +38,8 @@ public class BarChartView extends View {
     private final static long ONE_DAY_MILLISECOND = 86400 ;
     private final static long EIGHT_HOUR_SECONDS  =28800 ;
     private final static long THIRTY_MINUTES_SECONDS = 2400 ;
+    private Paint lineGradientPaint;
+
 
     public BarChartView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -60,6 +64,7 @@ public class BarChartView extends View {
         barSpace = screenW * 0.035;
 //        设置一个一小时的高度
         oneHourHight = screenH * 0.017;
+        lineGradientPaint = new Paint();
 
     }
 
@@ -84,14 +89,30 @@ public class BarChartView extends View {
         transformToPoint();
         for (int i = 0; i < mItems.size(); i++) {
             if (i<mItems.size()-1){
-                    //大于30分钟就不画线
+                //大于30分钟就不画线
                 if ((mItems.get(i+1).starttime-mItems.get(i).starttime)<THIRTY_MINUTES_SECONDS) {
+                    double  startX = (float) (((((double) (mItems.get(i).starttime ) / ONE_DAY_MILLISECOND) * (screenW * 0.72)) + 0.2 * screenW)) ;
+                    double startY = (float) (oneHourHight * 28 - (mItems.get(i).itemDeepValue * 1000 / 200 * oneHourHight * 24) / 1000) ;
+                    double endX =   (float) (((((double) (mItems.get(i + 1).starttime ) / ONE_DAY_MILLISECOND) * (screenW * 0.72)) + 0.2 * screenW)) ;
+                    double endY = (float) (oneHourHight * 28 - (mItems.get(i + 1).itemDeepValue * 1000 / 200 * oneHourHight * 24) / 1000) ;
+
+                    int startColor = switchIntToColor((int) mItems.get(i).itemDeepValue);
+                    int endColor = switchIntToColor((int) mItems.get(i + 1).itemDeepValue);
+                    Shader mShader = new LinearGradient((int)startX, (int)startY,(int) endX,(int) endY,
+
+                            new int[] { startColor,endColor},
+
+                            null, Shader.TileMode.CLAMP);
+
+                    lineGradientPaint.setShader(mShader);
+                    lineGradientPaint.setStrokeWidth(3);
                     /**将开始时间装换成相应的百分比*/
-                    canvas.drawLine((float) (((((double) (mItems.get(i).starttime + EIGHT_HOUR_SECONDS) / ONE_DAY_MILLISECOND) * (screenW * 0.72)) + 0.2 * screenW)),
+                    canvas.drawLine((float) (((((double) (mItems.get(i).starttime ) / ONE_DAY_MILLISECOND) * (screenW * 0.72)) + 0.2 * screenW)),
                             (float) (oneHourHight * 28 - (mItems.get(i).itemDeepValue * 1000 / 200 * oneHourHight * 24) / 1000),
-                            (float) (((((double) (mItems.get(i + 1).starttime + EIGHT_HOUR_SECONDS) / ONE_DAY_MILLISECOND) * (screenW * 0.72)) + 0.2 * screenW)),
+                            (float) (((((double) (mItems.get(i + 1).starttime ) / ONE_DAY_MILLISECOND) * (screenW * 0.72)) + 0.2 * screenW)),
                             (float) (oneHourHight * 28 - (mItems.get(i + 1).itemDeepValue * 1000 / 200 * oneHourHight * 24) / 1000),
-                            linePaint);
+                            lineGradientPaint );
+                    mShader = null ;
                 }
             }
         }
@@ -116,6 +137,60 @@ public class BarChartView extends View {
         }
     }
 
+    private int switchIntToColor(int value){
+        int color = 0 ;
+        if (value>130){
+            color = Color.rgb(255,0,0);
+        }else if (value>100){
+            color = Color.rgb(250,238,0);
+        }else if (value>80){
+            color = Color.rgb(55,216,150);
+        }else {
+            color = Color.rgb(0,255,255);
+        }
+        return color;
+    }
+
+
+    private Paint setPaintGradientColor(){
+        Paint paint = new Paint();
+        Shader mShader = new LinearGradient(0, 0, 999, 999,
+
+                new int[] { Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW },
+
+                null, Shader.TileMode.REPEAT);
+        paint.setShader(mShader);
+        return paint;
+
+     /*   ////////////////////////////////////////////////////第三列
+
+            *//*
+             * LinearGradient shader = new LinearGradient(0, 0, endX, endY, new
+             * int[]{startColor, midleColor, endColor},new float[]{0 , 0.5f,
+             * 1.0f}, TileMode.MIRROR);
+             * 参数一为渐变起初点坐标x位置，参数二为y轴位置，参数三和四分辨对应渐变终点
+             * 其中参数new int[]{startColor, midleColor,endColor}是参与渐变效果的颜色集合，
+             * 其中参数new float[]{0 , 0.5f, 1.0f}是定义每个颜色处于的渐变相对位置， 这个参数可以为null，如果为null表示所有的颜色按顺序均匀的分布
+             *//*
+        Shader mShader = new LinearGradient(0, 0, 100, 100,
+
+                new int[] { Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW },
+
+                null, Shader.TileMode.REPEAT);
+
+        // Shader.TileMode三种模式
+
+        // REPEAT:沿着渐变方向循环重复
+
+        // CLAMP:如果在预先定义的范围外画的话，就重复边界的颜色
+
+        // MIRROR:与REPEAT一样都是循环重复，但这个会对称重复
+
+        paint.setShader(mShader);// 用Shader中定义定义的颜色来话
+*/
+
+    }
+
     /**
      * 将时间转化成点
      */
@@ -123,7 +198,7 @@ public class BarChartView extends View {
         MyLog.e(TAG,"transform执行了");
         for (BarChartItemBean record :mItems) {
 //            取出一天的时间是多少。
-            record.starttime= record.starttime % ONE_DAY_MILLISECOND;
+            record.starttime= (record.starttime-2*EIGHT_HOUR_SECONDS) % ONE_DAY_MILLISECOND;
         }
     }
 
@@ -148,8 +223,8 @@ public class BarChartView extends View {
 
         public BarChartItemBean(long time, float maxHeartrate, float minHeartrate) {
             this.starttime = time;
-            this.itemDeepValue = maxHeartrate;
-            this.itemLightValue = minHeartrate;
+            this.itemDeepValue = minHeartrate;
+            this.itemLightValue = maxHeartrate;
         }
     }
 }

@@ -1457,7 +1457,6 @@ public  class BLEProvider
 //					  msg.sendToTarget();
 					  // 同步方式的保存数据
 					  saveSportSync2DB(tmpSportDataList);
-					  
 					  msg =  mHandler.obtainMessage();
 					  msg.what = MSG_BLE_DATA;
 					  msg.arg1 = MSG_BLE_SPORT_DATA_PROESS;

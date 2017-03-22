@@ -668,7 +668,6 @@ public class BleService extends Service {
                             lpDeviceInfo_.CaloriesTotals =MyApplication.getInstance(BleService.this).getOld_calories() ;
                             provider.resetStep(BleService.this, lpDeviceInfo_);
 
-
                         /**********省电模式START*********/
                         provider.SetPower(BleService.this, DeviceInfoHelper.fromUserEntity(BleService.this, userEntity));
                         /**********省电模式OVER*********/
