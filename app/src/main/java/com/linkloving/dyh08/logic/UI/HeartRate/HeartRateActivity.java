@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -28,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 import Trace.GreenDao.DaoMaster;
 import butterknife.ButterKnife;
@@ -86,14 +88,19 @@ public class HeartRateActivity extends ToolBarActivity implements View.OnClickLi
      * 插入测试数据供测试使用
      */
     private void initTestData() {
-     DaoMaster.DevOpenHelper heartrateHelper = new DaoMaster.DevOpenHelper(HeartRateActivity.this, "heartrate", null);
-        SQLiteDatabase readableDatabase = heartrateHelper.getReadableDatabase();
-        GreendaoUtils greendaoUtils = new GreendaoUtils(HeartRateActivity.this, readableDatabase);
-        greendaoUtils.add(1489939109,20,80);
-        greendaoUtils.add(1489939199,30,80);
-        greendaoUtils.add(1489939859,90,120);
-        greendaoUtils.add(1489939919,110,160);
-        greendaoUtils.add(1489939989,130,80);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DaoMaster.DevOpenHelper heartrateHelper = new DaoMaster.DevOpenHelper(HeartRateActivity.this, "heartrate", null);
+                SQLiteDatabase readableDatabase = heartrateHelper.getReadableDatabase();
+                GreendaoUtils greendaoUtils = new GreendaoUtils(HeartRateActivity.this, readableDatabase);
+//                greendaoUtils.delete();
+//                for (int i = 0; i < 1000; i++) {
+//                    greendaoUtils.add(1491192122 + i * 200, (int) (Math.random()*200),  (int) (Math.random()*200));
+//                }
+            }
+        }).start();
+
     }
 
 
@@ -168,8 +175,8 @@ public class HeartRateActivity extends ToolBarActivity implements View.OnClickLi
                     e.printStackTrace();
                 }
                 SimpleDateFormat simYearMonth = new SimpleDateFormat("MM/dd");
-             String   startData = sdf.format(mondayOfThisWeek);
-              String  endData = simYearMonth.format(sundayofThisWeek);
+                String startData = sdf.format(mondayOfThisWeek);
+                String endData = simYearMonth.format(sundayofThisWeek);
                 groupsTime.setText(startData+" - "+endData);
             }
         });

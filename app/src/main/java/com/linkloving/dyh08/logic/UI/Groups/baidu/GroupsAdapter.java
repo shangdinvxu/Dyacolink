@@ -78,20 +78,19 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         list = traGreendao.searchAllMonthtimes();
         startTimeList = traGreendao.searchAllStarttime();
         endTimeList = traGreendao.searchAllEndTime();
-//        workDataNotes = traGreendao.searchWorkData();
+
         mMonthData = new String[list.size()];
         for (int i = 0 ;i< list.size();i++){
             mMonthData[i]= list.get(i).getDate();
             MyLog.e(TAG,"mMonthData[i].toString():"+mMonthData[i]);
         }
-//        startTimeList.addAll(workDataNotes);
-//        endTimeList.addAll(workDataNotes);
+
         sort sort = new sort();
         Collections.sort(startTimeList,sort);
         Collections.sort(endTimeList,sort);
     }
 
-    private int[] getSectionIndices() {
+ /*   private int[] getSectionIndices() {
         //需要知道每个头在源数据里面的索引位置
         sectionIndices = new ArrayList<Integer>();
         String lastChar = mMonthData[0];
@@ -109,17 +108,18 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         return sections;
     }
 
-    /**
+    *//**
      * 通过下标的索引 获取Head上的数据集
      * @return
-     */
+     *//*
     public String [] getSectionLetters() {
         String[] letters = new String[mSectionIndices.length];
         for(int i = 0;i<mSectionIndices.length;i++){
             letters[i] = mMonthData[mSectionIndices[i]];
         }
         return letters;
-    }
+    }*/
+
 
     public View getHeaderView(int i, View convertView, ViewGroup parent) {
         final HeaderViewHolder holder;
@@ -191,6 +191,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
                 distance =Integer.parseInt(sportRecordArray.getDistance())+distance ;
             }
         }
+
 //        这一步吧distance转换成如5.3 的用来加km
         double distanceKM = CommonUtils.getDoubleValue(distance / 1000, 1);
         float hourtime = (float)itemDuration/3600000 ;
@@ -259,6 +260,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     public int getPositionForSection(int sectionIndex) {
         return 0;
     }
+
     @Override
     public int getSectionForPosition(int position) {
         return 0;

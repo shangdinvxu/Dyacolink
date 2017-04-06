@@ -96,23 +96,26 @@ public class BarChartView extends View {
                     double endX =   (float) (((((double) (mItems.get(i + 1).starttime ) / ONE_DAY_MILLISECOND) * (screenW * 0.72)) + 0.2 * screenW)) ;
                     double endY = (float) (oneHourHight * 28 - (mItems.get(i + 1).itemDeepValue * 1000 / 200 * oneHourHight * 24) / 1000) ;
 
-                    int startColor = switchIntToColor((int) mItems.get(i).itemDeepValue);
-                    int endColor = switchIntToColor((int) mItems.get(i + 1).itemDeepValue);
-                    Shader mShader = new LinearGradient((int)startX, (int)startY,(int) endX,(int) endY,
+//                    int startColor = switchIntToColor((int) mItems.get(i).itemDeepValue);
+//                    int endColor = switchIntToColor((int) mItems.get(i + 1).itemDeepValue);
+//                    Shader mShader = new LinearGradient((int)startX, (int)startY,(int) endX,(int) endY,
+//
+//                            new int[] { startColor,endColor},
+//
+//                            null, Shader.TileMode.CLAMP);
+//
+//                    lineGradientPaint.setShader(mShader);
+//                    lineGradientPaint.setStrokeWidth(3);
 
-                            new int[] { startColor,endColor},
+                    if (mItems.get(i).itemLightValue>200) continue;
 
-                            null, Shader.TileMode.CLAMP);
-
-                    lineGradientPaint.setShader(mShader);
-                    lineGradientPaint.setStrokeWidth(3);
                     /**将开始时间装换成相应的百分比*/
                     canvas.drawLine((float) (((((double) (mItems.get(i).starttime ) / ONE_DAY_MILLISECOND) * (screenW * 0.72)) + 0.2 * screenW)),
                             (float) (oneHourHight * 28 - (mItems.get(i).itemDeepValue * 1000 / 200 * oneHourHight * 24) / 1000),
                             (float) (((((double) (mItems.get(i + 1).starttime ) / ONE_DAY_MILLISECOND) * (screenW * 0.72)) + 0.2 * screenW)),
                             (float) (oneHourHight * 28 - (mItems.get(i + 1).itemDeepValue * 1000 / 200 * oneHourHight * 24) / 1000),
-                            lineGradientPaint );
-                    mShader = null ;
+                            linePaint );
+//                    mShader = null ;
                 }
             }
         }

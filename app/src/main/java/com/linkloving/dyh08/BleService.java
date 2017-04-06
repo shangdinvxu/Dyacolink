@@ -559,7 +559,7 @@ public class BleService extends Service {
             /**
              * 设置身体信息
              */
-            private void startSetSportGoal() {
+                private void startSetSportGoal() {
                 String goalStep = PreferencesToolkits.getGoalInfo(BleService.this, PreferencesToolkits.KEY_GOAL_STEP);
                 String goalDistance = PreferencesToolkits.getGoalInfo(BleService.this, PreferencesToolkits.KEY_GOAL_DISTANCE);
                 String goalCalories = PreferencesToolkits.getGoalInfo(BleService.this, PreferencesToolkits.KEY_GOAL_CAL);
@@ -683,7 +683,7 @@ public class BleService extends Service {
                 MyLog.e(TAG,"notifyforgerHeartListsuccess");
                 super.notifyforgerHeartList(obj);
                 for (LpHeartrateData obj1: obj){
-                    if (obj1.getAvgRate()<=0||obj1.getMaxRate()<=0) return;
+                    if (obj1.getAvgRate()<=0||obj1.getMaxRate()<=0) continue;
                     greendaoUtils.add(obj1.getStartTime(),obj1.getMaxRate(),obj1.getAvgRate());
                     List<heartrate> search = greendaoUtils.search(obj1.getStartTime());
                     MyLog.e(TAG,search.get(0).getMax()+"");

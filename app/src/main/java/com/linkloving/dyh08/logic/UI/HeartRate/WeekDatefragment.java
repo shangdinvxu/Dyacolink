@@ -30,7 +30,7 @@ import java.util.List;
  * Created by Daniel.Xu on 2016/11/3.
  */
 
-public class WeekDatefragment extends Fragment{
+public class    WeekDatefragment extends Fragment{
     public static final String TAG = WeekDatefragment.class.getSimpleName();
     private IDataChangeListener dataChangeListener;
     private String weekitem;

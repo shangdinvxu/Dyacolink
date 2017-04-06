@@ -997,11 +997,11 @@
     <!--侧滑栏-->
     <!--蓝牙-->
     <string name="Bluetooth">蓝牙连接</string>
-    <string name="Thisaction">This action will reset all data,still want to disconnect?</string>
-    <string name="Cancel">Cancel</string>
-    <string name="Confirm">Confirm</string>
-    <string name="Reconnect">Reconnect</string>
-    <string name="Disconnect">Disconnect</string>
+    <string name="Thisaction">这个动作会重置所有的数据，还是想断开链接？</string>
+    <string name="Cancel">取消</string>
+    <string name="Confirm">确认</string>
+    <string name="Reconnect">重新连接</string>
+    <string name="Disconnect">断开链接</string>
 
 
     <!-- Settings-->

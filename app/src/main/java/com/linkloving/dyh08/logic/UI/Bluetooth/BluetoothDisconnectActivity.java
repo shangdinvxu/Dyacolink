@@ -72,6 +72,7 @@ public class BluetoothDisconnectActivity extends ToolBarActivity {
 
     @OnClick(R.id.cancel)
     void onCancel(View view) {
+        finish();
         IntentFactory.startPortalActivityIntent(BluetoothDisconnectActivity.this);
     }
 
@@ -97,7 +98,9 @@ public class BluetoothDisconnectActivity extends ToolBarActivity {
             BleService.getInstance(BluetoothDisconnectActivity.this).releaseBLE();
             ToolKits.showCommonTosat(BluetoothDisconnectActivity.this, false, ToolKits.getStringbyId(BluetoothDisconnectActivity.this, R.string.unbound_success), Toast.LENGTH_SHORT);
         }
-            IntentFactory.startBindActivity3(BluetoothDisconnectActivity.this);
+            finish();
+//            IntentFactory.startBindActivity3(BluetoothDisconnectActivity.this);
+        IntentFactory.startPortalActivityIntent(BluetoothDisconnectActivity.this);
     }
     private HttpCallback<String> httpCallback = new HttpCallback<String>() {
         @Override
