@@ -424,8 +424,8 @@
     <string name="user_info_update_user_psw_old_equal_new">The new password is the same as the old! </string>
     <string name="user_info_update_whats_up_count">personal signature{0}tips</string>
     <string name="user_info_body_info_text">{0}cm, {1}kg, {2}, {3}</string>
-    <string name="user_info_take_photo">Take Photo</string>
-    <string name="user_info_choose_photo">Choose Photo</string>
+    <string name="user_info_take_photo">Foto machen</string>
+    <string name="user_info_choose_photo">Wählen Sie Foto</string>
     <string name="user_info_avatar_uploading">Avatar uploading...</string>
     <string name="user_info_avatar_upload_faild1">Avatar update faild, please check your sdcard!</string>
     <string name="user_info_avatar_upload_faild2">Sorry, your avatar update failed (image is so large)!</string>
@@ -1183,5 +1183,8 @@
     <string name="Need_format">Die Hand Ring Armband Ende der Entflechtung, ob zurücksetzen</string>
     <string name="format_success">Reset erfolgreich weiter zu binden</string>
     <string name="Need_before">Sie benötigen ein Gerät vor rebinding</string>
+    <string name="personalPhoto">Stellen Sie persönliche Fotos</string>
+    <string name="user_info_delete_photo">Foto löschen</string>
+    <string name="back">annulliert</string>
 
 </resources>

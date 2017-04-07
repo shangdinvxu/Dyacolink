@@ -15,6 +15,7 @@ import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -199,9 +200,20 @@ public class BarChartView extends View {
      */
     public  void  transformToPoint(){
         MyLog.e(TAG,"transform执行了");
+        if (mItems!=null&&mItems.size()>1){
+            //如果获取的时间取到第二天的开始时间了，就把最后一条数据去掉
+            if ((mItems.get(mItems.size()-1).starttime-mItems.get(0).starttime)>80000){
+                mItems.remove(mItems.size()-1);
+            }
+        }
         for (BarChartItemBean record :mItems) {
 //            取出一天的时间是多少。
-            record.starttime= (record.starttime-2*EIGHT_HOUR_SECONDS) % ONE_DAY_MILLISECOND;
+            Date date = new Date();
+            date.setTime(record.starttime*1000);
+            record.starttime=date.getHours()*3600+date.getMinutes()*60+ date.getSeconds();
+            date = null ;
+
+//            record.starttime= (record.starttime-2*EIGHT_HOUR_SECONDS) % ONE_DAY_MILLISECOND;
         }
     }
 

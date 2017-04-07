@@ -102,8 +102,6 @@ public class MonthDateView extends View {
                 canvas.drawCircle(circleX-(float)0.3*mColumnSize,  circley + (float)0.3*mRowSize ,mColumnSize/3,yellowPaint);
                 if (!drawRing)
                 canvas.drawCircle(circleX-(float)0.3*mColumnSize,  circley + (float)0.3*mRowSize ,mColumnSize/3-2,whitePaint);
-
-
                 //记录第几行，即第几周
                 weekRow = row + 1;
             }

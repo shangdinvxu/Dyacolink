@@ -175,8 +175,8 @@ public class DetailChartControl extends RelativeLayout {
                     moveLineViewWithFinger(lineView,event.getX(),false);
                 }else {
                     MyLog.e(TAG,"heartrates.size()不为0");
-                    maxView.setText(heartrates.get(heartrates.size()/2).getMax()+"");
-                    avgView.setText(heartrates.get(heartrates.size()/2).getAvg()+"");
+                    maxView.setText(heartrates.get(0).getMax()+"");
+                    avgView.setText(heartrates.get(0).getAvg()+"");
                     moveLineViewWithFinger(lineView,event.getX(),true);
                 }
             }

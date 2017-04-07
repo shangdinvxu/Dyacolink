@@ -87,7 +87,7 @@ public class GreendaoUtils {
      * 根据时间来查5分钟的数据
      */
     public List<heartrate> searchDurationFiveMinute(long starttime){
-        Query<heartrate> list = getHeartrateDao().queryBuilder().where(heartrateDao.Properties.StartTime.between(starttime - HALFFIVEMILLIONS, starttime + HALFFIVEMILLIONS))
+        Query<heartrate> list = getHeartrateDao().queryBuilder().where(heartrateDao.Properties.StartTime.between(starttime, starttime + HALFFIVEMILLIONS))
                 .orderAsc(heartrateDao.Properties.Id).build();
         List<heartrate> heartrateList = list.list();
             return heartrateList ;

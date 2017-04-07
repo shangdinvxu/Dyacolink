@@ -285,6 +285,8 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
             user_head.setImageBitmap(bitmap);
         }
         checkForCrashes();
+        pulltorefreshView.setRefreshing();
+
     }
 
     @Override
@@ -753,6 +755,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                 //深睡 小时
                 double deepSleepHour = CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getDeepSleepMiute()), 1);
                 double sleepTime = CommonUtils.getScaledDoubleValue(lightSleepHour + deepSleepHour, 1);
+                sleepView.setText(sleepTime + "");
 
                 //走路 分钟
                 double walktime = CommonUtils.getScaledDoubleValue(Double.valueOf(mDaySynopic.getWork_duration()), 1);

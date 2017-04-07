@@ -1156,4 +1156,7 @@
     <string name="Need_format">The wrist in the wrist end unbundled, whether to reset</string>
     <string name="format_success">Reset successful and continue binding</string>
     <string name="Need_before">Whether you need to re-bind the previous device</string>
+    <string name="personalPhoto">Personal photo settings</string>
+    <string name="user_info_delete_photo">Delete Photo</string>
+    <string name="back">Back</string>
 </resources>

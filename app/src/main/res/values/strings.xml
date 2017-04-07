@@ -1064,7 +1064,10 @@
     <string name="alarmclock">Alarm clock setting</string>
     <string name="timersetting">Timer setting</string>
         <string name="photopre">Photo Preview</string>
+
+
     <string name="personalPhoto">Personal Photo Setting</string>
+
     <string name="Settings">Settings</string>
     <!-- Workout-->
     <string name="Workout">Workout</string>

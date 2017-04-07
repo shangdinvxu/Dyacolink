@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
+import com.linkloving.dyh08.logic.UI.HeartRate.DayView.BarChartView;
 import com.linkloving.dyh08.logic.UI.step.IDataChangeListener;
 import com.linkloving.dyh08.logic.UI.step.StepActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
@@ -26,12 +27,15 @@ import com.linkloving.dyh08.utils.logUtils.MyLog;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
 import Trace.GreenDao.DaoMaster;
+import Trace.GreenDao.heartrate;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -81,7 +85,49 @@ public class HeartRateActivity extends ToolBarActivity implements View.OnClickLi
         String format = simpleDateFormat.format(date);
         groupsTime.setText(format);
 //        initTestData();
+        //显示今天的平均心率。
+        initAvgHeartrate();
 
+    }
+
+    private void initAvgHeartrate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR,0);
+        calendar.set(Calendar.MINUTE,0);
+        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.MILLISECOND,0);
+        long dayStart = calendar.getTime().getTime();
+        System.out.println("开始时间："+calendar.getTime());
+        calendar.set(Calendar.HOUR,23);
+        calendar.set(Calendar.MINUTE,59);
+        calendar.set(Calendar.SECOND,59);
+        calendar.set(Calendar.MILLISECOND,999);
+        long dayEnd = calendar.getTime().getTime();
+        System.out.println("结束时间："+calendar.getTime());
+        DaoMaster.DevOpenHelper heartrateHelper = new DaoMaster.DevOpenHelper(HeartRateActivity.this, "heartrate", null);
+        SQLiteDatabase readableDatabase = heartrateHelper.getReadableDatabase();
+        GreendaoUtils greendaoUtils = new GreendaoUtils(HeartRateActivity.this, readableDatabase);
+        List<heartrate> heartrates = greendaoUtils.searchOneDay(dayStart, dayEnd);
+        ArrayList<BarChartView.BarChartItemBean> list = new ArrayList<>();
+        int rest = 0 ;
+        int avg = 0 ;
+        for (heartrate record : heartrates){
+            BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean
+                    (record.getStartTime(), record.getMax(), record.getAvg());
+            if (record.getMax()>200)continue;
+            list.add(barChartItemBean);
+            rest = rest+record.getMax();
+            avg = avg+record.getAvg();
+        }
+        int resting,avging = 0;
+        if (list.size()==0){
+            resting = 0 ;
+            avging = 0 ;
+        }else{
+            resting = rest / list.size();
+            avging = avg/list.size();
+        }
+        setAvgText( avging) ;
     }
 
     /**

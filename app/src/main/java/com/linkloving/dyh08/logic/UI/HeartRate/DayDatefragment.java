@@ -70,8 +70,6 @@ public class DayDatefragment extends Fragment {
                     transaction.addToBackStack(null);
                     transaction.commit();
                 }
-
-
             }
         });
         left_btn.setOnClickListener(new View.OnClickListener() {

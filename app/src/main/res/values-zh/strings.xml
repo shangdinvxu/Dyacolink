@@ -424,8 +424,8 @@
     <string name="user_info_update_user_psw_old_equal_new">The new password is the same as the old! </string>
     <string name="user_info_update_whats_up_count">personal signature{0}tips</string>
     <string name="user_info_body_info_text">{0}cm, {1}kg, {2}, {3}</string>
-    <string name="user_info_take_photo">Take Photo</string>
-    <string name="user_info_choose_photo">Choose Photo</string>
+    <string name="user_info_take_photo">拍照</string>
+    <string name="user_info_choose_photo">选择照片</string>
     <string name="user_info_avatar_uploading">Avatar uploading...</string>
     <string name="user_info_avatar_upload_faild1">Avatar update faild, please check your sdcard!</string>
     <string name="user_info_avatar_upload_faild2">Sorry, your avatar update failed (image is so large)!</string>
@@ -1185,4 +1185,7 @@
     <string name="October">十月</string>
     <string name="November">十一月</string>
     <string name="December">十二月</string>
+    <string name="personalPhoto">个人照片设置</string>
+    <string name="user_info_delete_photo">删除照片</string>
+    <string name="back">取消</string>
 </resources>

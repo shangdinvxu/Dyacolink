@@ -17,7 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.MapsInitializer;
 import com.linkloving.dyh08.BleService;
 import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
@@ -128,6 +130,9 @@ public class MenuNewAdapter extends RecyclerView.Adapter {
                         break;
                     case Left_viewVO1.map:
                         boolean mapSelect = PreferencesToolkits.getMapSelect(mContext);
+//                        int flg = MapsInitializer.initialize(mContext);
+//                        GooglePlayServicesUtil.getErrorDialog(flg,
+//                                (Activity) mContext, 0).show();
                         if (mapSelect){
 //                            boolean googlePlaySupport = GoogleApiUtils.isGoogleMapsInstalled((Activity) mContext);
 //                            if (googlePlaySupport){

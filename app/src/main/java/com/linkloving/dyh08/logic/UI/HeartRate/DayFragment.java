@@ -104,6 +104,7 @@ public class DayFragment extends Fragment {
         for (heartrate record : heartrates){
             BarChartView.BarChartItemBean barChartItemBean = new BarChartView.BarChartItemBean
                     (record.getStartTime(), record.getMax(), record.getAvg());
+            if (record.getMax()>200)continue;
             list.add(barChartItemBean);
             rest = rest+record.getMax();
             avg = avg+record.getAvg();

@@ -64,11 +64,13 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     public final List<Note> list;
     private DetailChartCountData count;
     private final UserEntity userEntity;
+
 //    private final List<Note> workDataNotes;
 
     public GroupsAdapter(Context context) {
         this.mContext = context;
         userEntity = MyApplication.getInstance(mContext).getLocalUserInfoProvider();
+
         user_id   = userEntity.getUser_id();
         mInflater = LayoutInflater.from(mContext);
         //源数据
