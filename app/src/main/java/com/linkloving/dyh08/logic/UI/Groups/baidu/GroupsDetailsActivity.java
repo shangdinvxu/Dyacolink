@@ -154,10 +154,23 @@ public class GroupsDetailsActivity extends ToolBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tw_groups_detail);
         ButterKnife.inject(this);
-
         userEntity = MyApplication.getInstance(GroupsDetailsActivity.this).getLocalUserInfoProvider();
         user_id = userEntity.getUser_id();
         map = gourpsTopmap.getMap();
+        initData();
+        shareIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GroupsDetailsActivity.this, GroupsShareActivity.class);
+                intent.putExtra("postion", String.valueOf(position));
+                startActivity(intent);
+            }
+        });
+        initTrace();
+
+    }
+
+    private void initData() {
         Intent intent = getIntent();
         String postionStr = intent.getStringExtra("postion");
         position = Integer.valueOf(postionStr);
@@ -210,17 +223,6 @@ public class GroupsDetailsActivity extends ToolBarActivity {
 //        AvgPace.setText(avgPace + "/km");
         groupsTvStep.setText(getStep() + "");
         groupsTime.setText(getMiddleTime());
-        shareIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(GroupsDetailsActivity.this, GroupsShareActivity.class);
-                intent.putExtra("postion", String.valueOf(position));
-                startActivity(intent);
-            }
-        });
-
-        initTrace();
-
     }
 
     private void initTrace() {

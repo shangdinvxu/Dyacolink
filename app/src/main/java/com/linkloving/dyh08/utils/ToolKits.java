@@ -1247,8 +1247,8 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		}
 		MyLog.e(TAG,dayCalories+"dayCalories"+"======"+user_weight+"user_weight"+"======"+user_height+"user_height"+"======"+age+"age");
 
-//		return dayCalories;
-		return 0;
+		return dayCalories;
+//		return 0;
 	}
 
 	/***

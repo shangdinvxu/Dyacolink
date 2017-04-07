@@ -766,19 +766,24 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
                 int walkCal = ToolKits.calculateCalories(Float.parseFloat(mDaySynopic.getWork_distance()), (int) walktime * 60, userEntity.getUserBase().getUser_weight());
                 int runCal = ToolKits.calculateCalories(Float.parseFloat(mDaySynopic.getRun_distance()), (int) runtime * 60, userEntity.getUserBase().getUser_weight());
-//                ToolKits toolKits = new ToolKits();
-//                int calorieseveryday = toolKits.getCalories(PortalActivity.this);
-//                Date dateToday = new Date();
-//                SimpleDateFormat hh = new SimpleDateFormat("HH", Locale.getDefault());
-//                String HH = hh.format(dateToday);
-//                SimpleDateFormat mm = new SimpleDateFormat("mm", Locale.getDefault());
-//                String MM = mm.format(dateToday);
-//                int caloriesNow = calorieseveryday * (Integer.parseInt(HH) * 60 + Integer.parseInt(MM)) / 1440;
-//                MyLog.e("caloriesNow",caloriesNow+"caloriesNow");
-//                int calValue = caloriesNow+walkCal+runCal ;
-                MyApplication.getInstance(PortalActivity.this).setOld_calories(walkCal+runCal);
-                calView.setText((walkCal+runCal) + "");
-                caloriesSave  =walkCal+runCal ;
+                //基础卡路里
+                ToolKits toolKits = new ToolKits();
+                int calorieseveryday = toolKits.getCalories(PortalActivity.this);
+                Date dateToday = new Date();
+                SimpleDateFormat hh = new SimpleDateFormat("HH", Locale.getDefault());
+                String HH = hh.format(dateToday);
+                SimpleDateFormat mm = new SimpleDateFormat("mm", Locale.getDefault());
+                String MM = mm.format(dateToday);
+                int caloriesNow = calorieseveryday * (Integer.parseInt(HH) * 60 + Integer.parseInt(MM)) / 1440;
+                MyLog.e("caloriesNow",caloriesNow+"caloriesNow");
+                int calValue = caloriesNow+walkCal+runCal ;
+
+                MyApplication.getInstance(PortalActivity.this).setOld_calories(calValue);
+                calView.setText(calValue+ "");
+                caloriesSave  =calValue ;
+//                MyApplication.getInstance(PortalActivity.this).setOld_calories(walkCal+runCal);
+//                calView.setText((walkCal+runCal) + "");
+//                caloriesSave  =walkCal+runCal ;
 
                 if (progressDialog != null && progressDialog.isShowing())
                     progressDialog.dismiss();

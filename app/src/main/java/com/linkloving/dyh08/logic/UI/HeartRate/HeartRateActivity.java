@@ -273,6 +273,10 @@ public class HeartRateActivity extends ToolBarActivity implements View.OnClickLi
     }
 
     public void setAvgText(int avging) {
-        avgerageText.setText(avging+"");
+        if (avging==0){
+            avgerageText.setText("--");
+        }else {
+            avgerageText.setText(avging + "");
+        }
     }
 }

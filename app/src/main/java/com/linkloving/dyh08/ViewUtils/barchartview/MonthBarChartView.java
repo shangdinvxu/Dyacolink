@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.components.YAxis;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.logic.UI.calories.barchartview.ScreenUtils;
 import com.linkloving.dyh08.logic.UI.calories.barchartview.Utility;
@@ -273,8 +274,9 @@ public class MonthBarChartView extends View {
                         x = (int) (barRect.left - screenW * 1.15);
                         y = (int) (-screenH + barRect.top + 0.078 * screenHight);
                         mdialogListerer.showDialog(i, x, y);
-                        popupWindow.update(showView,(int)(lastPointX-screenW*0.18),
+                        popupWindow.update(showView,(int)(lastPointX-screenW*0.17),
                                 (int) (-screenHight*0.13+barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))),-1,-1);
+                        MyLog.e(TAG,"点击的横坐标是多少"+lastPointX);
                         timeView.setText(mItems.get(i).itemType);
                         step_number_textview.setText((int)(int)mItems.get(i).itemValue+"");
                         break;
@@ -295,7 +297,7 @@ public class MonthBarChartView extends View {
                     if (((int) y_index_startX + barItemWidth * i + barSpace * (i + 1) - (int) leftMoving+5)<lastPointX
                             &&lastPointX< ((int) y_index_startX + barItemWidth * (i+1) + barSpace * (i + 2) - (int) leftMoving)+5){
 
-                        popupWindow.update(showView,(int)(lastPointX-screenW*0.18),
+                        popupWindow.update(showView,(int)(lastPointX-screenW*0.2),
                                 (int) (-screenHight*0.13+barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))),-1,-1);
                         MyLog.e(TAG,(int)(lastPointX-screenW*0.18)+"           "+ (int) (-screenHight*0.13+barRect.bottom-(int) (maxHeight * (mItems.get(i).itemValue / maxValue))));
                         timeView.setText(mItems.get(i).itemType);

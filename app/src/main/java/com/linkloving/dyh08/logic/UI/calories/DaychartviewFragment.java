@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.linkloving.band.dto.SportRecord;
+import com.linkloving.band.sleep.DLPSportData;
+import com.linkloving.band.sleep.SleepDataHelper;
+import com.linkloving.band.ui.DatasProcessHelper;
 import com.linkloving.band.ui.DetailChartCountData;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
@@ -113,47 +116,47 @@ public class DaychartviewFragment extends Fragment {
                                     userEntity.getUserBase().getUser_weight())+calValue ;
                     }
                 }
-//                List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
-//                String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(time1);
-//                try {
-//                    count = DatasProcessHelper.countSportData(srs, startDateLocal);
-////                    MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                int walkCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.walking_distance)),
-//                        (int) count.walking_duration * 60, userEntity.getUserBase().getUser_weight());
-////        userEntity.getUserBase().getUser_weight()
-//                int runCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.runing_distance)), (int)count.runing_duation * 60, userEntity.getUserBase().getUser_weight());
+                List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
+                String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(time1);
+                try {
+                    count = DatasProcessHelper.countSportData(srs, startDateLocal);
+//                    MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                int walkCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.walking_distance)),
+                        (int) count.walking_duration * 60, userEntity.getUserBase().getUser_weight());
+//        userEntity.getUserBase().getUser_weight()
+                int runCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.runing_distance)), (int)count.runing_duation * 60, userEntity.getUserBase().getUser_weight());
 
                 /*********************/
-//                Date dateToday = new Date();
-//
-//                if (ToolKits.compareDate(dateToday,parse)){
-////            calValue = walkCal + runCal+calorieseveryday;
-//                    String dateTodayFormat = sdf.format(dateToday);
-//                    String dateFormat = sdf.format(parse);
-//                    String[] dateFormatSplit = dateTodayFormat.split(" ");
-//                    String[] dateSplit = dateFormat.split(" ");
-//                    MyLog.e(TAG,"1---"+dateSplit[0]+"2--"+dateFormatSplit[0]);
-//                    if (dateSplit[0].equals(dateFormatSplit[0])){
-//                        MyLog.e(TAG,"日期等于今天");
-//                        String HH = hh.format(dateToday);
-//                        int h = Integer.parseInt(HH);
-//                        if (i+1<h){
-//                            MyLog.e(TAG,"小时之前");
-//                            calValue = calorieseveryHour+walkCal+runCal ;
-//                        }else {
-//                            calValue = walkCal+runCal ;
-//                            MyLog.e(TAG,"小时之后");
-//                        }
-//                    }else{
-//                        MyLog.e(TAG,"日期在今天之前");
-//                        calValue = walkCal + runCal+calorieseveryHour;
-//                    }
-//                }else {
-//                    MyLog.e(TAG, "日期在今天之后");
-//                }
+                Date dateToday = new Date();
+
+                if (ToolKits.compareDate(dateToday,parse)){
+//            calValue = walkCal + runCal+calorieseveryday;
+                    String dateTodayFormat = sdf.format(dateToday);
+                    String dateFormat = sdf.format(parse);
+                    String[] dateFormatSplit = dateTodayFormat.split(" ");
+                    String[] dateSplit = dateFormat.split(" ");
+                    MyLog.e(TAG,"1---"+dateSplit[0]+"2--"+dateFormatSplit[0]);
+                    if (dateSplit[0].equals(dateFormatSplit[0])){
+                        MyLog.e(TAG,"日期等于今天");
+                        String HH = hh.format(dateToday);
+                        int h = Integer.parseInt(HH);
+                        if (i+1<h){
+                            MyLog.e(TAG,"小时之前");
+                            calValue = calorieseveryHour+walkCal+runCal ;
+                        }else {
+                            calValue = walkCal+runCal ;
+                            MyLog.e(TAG,"小时之后");
+                        }
+                    }else{
+                        MyLog.e(TAG,"日期在今天之前");
+                        calValue = walkCal + runCal+calorieseveryHour;
+                    }
+                }else {
+                    MyLog.e(TAG, "日期在今天之后");
+                }
                     /*********************/
                 MyLog.e(TAG, "calValue" + calValue);
              DayBarChartView.BarChartItemBean barChartItemBean = new DayBarChartView.BarChartItemBean(Integer.toString(i+1), calValue);
