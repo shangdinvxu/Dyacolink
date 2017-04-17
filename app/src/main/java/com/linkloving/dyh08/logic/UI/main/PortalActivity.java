@@ -90,6 +90,7 @@ import com.linkloving.dyh08.prefrences.devicebean.LocalInfoVO;
 import com.linkloving.dyh08.utils.AvatarHelper;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.DateSwitcher;
+import com.linkloving.dyh08.utils.IsBackgroundUtils;
 import com.linkloving.dyh08.utils.MyToast;
 import com.linkloving.dyh08.utils.ScreenUtils;
 import com.linkloving.dyh08.utils.ToolKits;
@@ -213,6 +214,9 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     private int localSettingUnitInfo;
     private AlertDialog.Builder builder;
 
+    //判断是否从后台进入到前台的flag
+    private boolean flag = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -285,7 +289,10 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
             user_head.setImageBitmap(bitmap);
         }
         checkForCrashes();
-        pulltorefreshView.setRefreshing();
+        if (flag) {
+            flag = false;
+            pulltorefreshView.setRefreshing();
+        }
 
     }
 
@@ -298,6 +305,18 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        boolean background = IsBackgroundUtils.isBackground(PortalActivity.this);
+        Log.e("BaseActivity", "===onStop");
+        Log.e("BaseActivity", "background:" + background);
+        if (background) {
+            flag = true;
+        }
+
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         provider.setBleProviderObserver(null);
@@ -305,7 +324,6 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         // 如果有未执行完成的AsyncTask则强制退出之，否则线程执行时会空指针异常哦！！！
         AsyncTaskManger.getAsyncTaskManger().finishAllAsyncTask();
     }
-
 
 
     private void checkForCrashes() {
@@ -383,6 +401,12 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                 Toast.makeText(this, "shouldShowRequestPermissionRationale", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+
+    @OnClick(R.id.title_right_button)
+    void setTitleRightButton(View view){
+        pulltorefreshView.setRefreshing();
     }
 
     /*-----------------------------------------------------------------------*/
@@ -938,6 +962,8 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         @Override
         public void updateFor_handleScanTimeOutMsg() {
             MyLog.e(TAG, "updateFor_handleScanTimeOutMsg");
+            if (pulltorefreshView!=null&&pulltorefreshView.isRefreshing())
+                pulltorefreshView.onRefreshComplete();
         }
 
         /**********

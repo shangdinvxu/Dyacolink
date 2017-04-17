@@ -369,6 +369,7 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 				itemLeft =heartrate.getData()[5];
 				list.addAll(heartrate.toLPHeartrateDataList(heartrate));
 			}
+			getHeartrate(0,0);
 		}
 		return list;
 	}

@@ -23,10 +23,18 @@
         style="@style/small_dialog_number"
             android:text="2500" />
 
-        <TextView style="@style/small_dialog_total" />
+        <TextView style="@style/small_dialog_total"
+            android:id="@+id/ave"/>
 
-        <TextView style="@style/small_dialog_km"
-            android:layout_marginLeft="69dp"
+        <TextView
+            android:text="M"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_marginTop="25dp"
+            android:layout_alignLeft="@id/ave"
+
             />
 
 

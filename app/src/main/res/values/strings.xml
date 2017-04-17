@@ -1028,7 +1028,7 @@
     <string name="baidu">Baidu</string>
     <string name="AutomaticHR">Automatic HR measurement</string>
     <string name="realtime">Realtime</string>
-    <string name="Thedevicewill"> 將選擇開啟時心率為自動偵測, 選擇關閉時須按著手環螢幕兩秒開啟心率量測</string>
+    <string name="Thedevicewill">开启心率量测有可能会增加手环电量消耗。</string>
     <string name="wearabledevice">Wearable Device</string>
     <string name="Pressthedecive">Press the devices\'s display for two seconds to switch the heart rate measurement automatically</string>
 
@@ -1210,6 +1210,7 @@
     <string name="Need_format">该手环在手环端解绑,是否重置</string>
     <string name="format_success">重置成功,继续绑定</string>
     <string name="Need_before">是否需要重新绑定前一个装置</string>
+    <string name="connect">连接中</string>
 
     <string name="January">January</string>
     <string name="February">February</string>
@@ -1223,13 +1224,12 @@
     <string name="October">October</string>
     <string name="November">November</string>
     <string name="December">December</string>
-
-
-
-
-
-
-
+    <string name="heartrateSwitch">心率量测开/关</string>
+    <string name="batteryShow">手环电量显示</string>
+    <string name="firmwareupdate">韌體更新</string>
+    <string name="firmwareupdate_detail">请与手环蓝芽连结后进行更新，让我们协助提升您的手环配备。依不同的网路连线状况，系统更新可能需数十秒至数分钟，
+系统更新并不会影响您的手环设定及APP中保留的历史资料，请耐心等待，系统会提示您更新完成。</string>
+    <string name="firmwareupdate_finish">更新完成</string>
 
 
 </resources>

@@ -125,6 +125,7 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
                 provider.setCurrentDeviceMac(macList.get(position).mac);
                 provider.setmBluetoothDevice(macList.get(position).bledevice);
                 provider.connect_mac(macList.get(position).mac);
+                modelName = macList.get(position).name ;
                 new AlertDialog.Builder(BluetoothBindActivity3.this).setMessage("连接中").setCancelable(false).show();
             }
         });
@@ -685,7 +686,7 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
                 UserEntity userEntity = MyApplication.getInstance(BluetoothBindActivity3.this).getLocalUserInfoProvider();
                 userEntity.getDeviceEntity().setLast_sync_device_id(provider.getCurrentDeviceMac());
                 userEntity.getDeviceEntity().setDevice_type(MyApplication.DEVICE_BAND);
-                userEntity.getDeviceEntity().setModel_name(modelName);
+                userEntity.getDeviceEntity().setLast_sync_device_id2(modelName);
                 MyApplication.getInstance(BluetoothBindActivity3.this).setLocalUserInfoProvider(userEntity);
                 if (observerAdapter != null)
                     observerAdapter.updateFor_boundInfoSyncToServerFinish("1");

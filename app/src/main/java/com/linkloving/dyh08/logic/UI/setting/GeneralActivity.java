@@ -27,10 +27,12 @@ import com.linkloving.dyh08.BleService;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
+import com.linkloving.dyh08.logic.UI.device.DeviceActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.DeviceSetting;
+import com.linkloving.dyh08.prefrences.devicebean.LocalInfoVO;
 import com.linkloving.dyh08.utils.DeviceInfoHelper;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
@@ -52,6 +54,7 @@ public class GeneralActivity extends ToolBarActivity {
     private BLEProvider provider;
     private UserEntity userEntity;
     private DeviceSetting deviceSetting;
+    private LocalInfoVO localDeviceInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +64,17 @@ public class GeneralActivity extends ToolBarActivity {
         String[] strings = {getString(R.string.Goalsetting),
                 getString(R.string.Searchingwearable),
                 getString(R.string.unitsetting),
-                getString(R.string.Selectthe),
+                getString(R.string.Selectthe)
 //                getString(R.string.Communityweb),
-                getString(R.string.AutomaticHR)
+//                getString(R.string.AutomaticHR)
                 , getString(R.string.showhand)
+                ,getString(R.string.batteryShow)
+                ,getString(R.string.firmwareupdate)
         };
         provider = BleService.getInstance(GeneralActivity.this).getCurrentHandlerProvider();
         userEntity = MyApplication.getInstance(getApplicationContext()).getLocalUserInfoProvider();
         deviceSetting = LocalUserSettingsToolkits.getLocalSetting(GeneralActivity.this, userEntity.getUser_id() + "");
+        localDeviceInfo = PreferencesToolkits.getLocalDeviceInfo(GeneralActivity.this);
         layoutInflater = LayoutInflater.from(GeneralActivity.this);
         totalView = layoutInflater.inflate(R.layout.tw_setting_activity, null);
         Myadapter myadapter = new Myadapter(GeneralActivity.this, strings);
@@ -95,20 +101,73 @@ public class GeneralActivity extends ToolBarActivity {
                         initSelecttheMap();
                         break;
                     case 5:
-                        initAutomaticHR();
+//                        initAutomaticHR();
+                        initShowhand();
 //                        initCommunitywebsite();
                         break;
                     case 6:
-                        initShowhand();
-//                        initAutomaticHR();
+                        initBatteryShowPopupwindow();
                         break;
-//                    case 7:
-//                        initShowhand();
-//                        break;
+                    case 7:
+                        initUpdatePopupWindow();
+                        break;
 
                 }
             }
+
+
         });
+    }
+
+    private void initUpdatePopupWindow() {
+
+        View view = layoutInflater.inflate(R.layout.firmupdate_popupwindow, null);
+        final PopupWindow popupWindow = getnewPopupWindow(view);
+        ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
+        dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+    }
+
+    private void initBatteryShowPopupwindow() {
+        View view = layoutInflater.inflate(R.layout.battery_show_popupwindow, null);
+        ImageView battery = (ImageView) view.findViewById(R.id.battery_imageview);
+        int  batteryNumber = localDeviceInfo.battery;
+        if (batteryNumber>=100){
+            battery.setBackgroundResource(R.mipmap.battary100);
+        }else if (batteryNumber>=90){
+            battery.setBackgroundResource(R.mipmap.battary90);
+        }else if (batteryNumber>=80){
+            battery.setBackgroundResource(R.mipmap.battary80);
+        }else if (batteryNumber>=70){
+            battery.setBackgroundResource(R.mipmap.battary70);
+        }else if (batteryNumber>=60){
+            battery.setBackgroundResource(R.mipmap.battary60);
+        }else if (batteryNumber>=50){
+            battery.setBackgroundResource(R.mipmap.battary50);
+        }else if (batteryNumber>=40){
+            battery.setBackgroundResource(R.mipmap.battary40);
+        }else if (batteryNumber>=30){
+            battery.setBackgroundResource(R.mipmap.battary30);
+        }else if (batteryNumber>=20){
+            battery.setBackgroundResource(R.mipmap.battary20);
+        }else if (batteryNumber>=10){
+            battery.setBackgroundResource(R.mipmap.battary10);
+        }else {
+            battery.setBackgroundResource(R.mipmap.battary0);
+        }
+        final PopupWindow popupWindow = getnewPopupWindow(view);
+        ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
+        dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+
     }
 
     private void initShowhand() {

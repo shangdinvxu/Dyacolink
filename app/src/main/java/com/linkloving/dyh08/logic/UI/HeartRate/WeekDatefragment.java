@@ -69,6 +69,7 @@ public class    WeekDatefragment extends Fragment{
                 MyLog.e(TAG, seletedItem+ "seletedItem");
                 weekFragment.setArguments(bundle);
                 transaction.replace(R.id.middle_framelayout, weekFragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });

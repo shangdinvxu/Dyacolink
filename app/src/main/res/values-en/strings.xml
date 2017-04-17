@@ -1008,6 +1008,7 @@
     <string name="Confirm">Confirm</string>
     <string name="Reconnect">Reconnect</string>
     <string name="Disconnect">Disconnect</string>
+    <string name="connect">Connecting</string>
 
 
     <!-- Settings-->

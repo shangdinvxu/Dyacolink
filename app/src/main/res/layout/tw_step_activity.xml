@@ -14,13 +14,13 @@
     </RelativeLayout>
 
     <TextView
-        android:layout_gravity="center_vertical"
         android:id="@+id/step_tv_date"
         android:layout_width="match_parent"
         android:layout_height="25dp"
+        android:layout_gravity="center_vertical"
         android:background="@color/lightgrey"
-        android:text=""
         android:gravity="center"
+        android:text=""
         android:textColor="@color/highgrey"
         android:textSize="17sp" />
 

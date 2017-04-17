@@ -424,7 +424,6 @@
     <string name="user_info_update_user_psw_old_equal_new">The new password is the same as the old! </string>
     <string name="user_info_update_whats_up_count">personal signature{0}tips</string>
     <string name="user_info_body_info_text">{0}cm, {1}kg, {2}, {3}</string>
-    <string name="user_info_take_photo">Take Photo</string>
     <string name="user_info_choose_photo">選擇照片</string>
     <string name="user_info_avatar_uploading">Avatar uploading...</string>
     <string name="user_info_avatar_upload_faild1">Avatar update faild, please check your sdcard!</string>
@@ -1002,6 +1001,7 @@
     <string name="Confirm">確認</string>
     <string name="Reconnect">重新連接</string>
     <string name="Disconnect">斷開鏈接</string>
+    <string name="connect">連接中</string>
 
 
     <!-- Settings-->
@@ -1145,7 +1145,7 @@
     <string name="Searchingwearable">尋找手環</string>
     <string name="Selectthe">軌跡地圖設定</string>
     <string name="Starttime">開始時間</string>
-    <string name="Thedevicewill"> 將選擇開啟時心率為自動偵測, 選擇關閉時須按著手環螢幕兩秒開啟心率量測</string>
+    <string name="Thedevicewill">開啟心率量測有可能會增加手環電量消耗。</string>
     <string name="alarmclock">鬧鐘設定</string>
     <string name="baidu">百度</string>
     <string name="hr">時</string>
@@ -1182,4 +1182,8 @@
     <string name="Need_before">是否需要重新綁定前一個裝置</string>
     <string name="personalPhoto">個人照片設置</string>
     <string name="back">取消</string>
+    <string name="user_info_take_photo">拍攝照片</string>
+    <string name="heartrateSwitch">心率量測開/關</string>
+    <string name="batteryShow">手環電量顯示</string>
+    <string name="firmwareupdate">韌體更新</string>
 </resources>

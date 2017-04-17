@@ -141,9 +141,9 @@ public class HeartRateActivity extends ToolBarActivity implements View.OnClickLi
                 SQLiteDatabase readableDatabase = heartrateHelper.getReadableDatabase();
                 GreendaoUtils greendaoUtils = new GreendaoUtils(HeartRateActivity.this, readableDatabase);
 //                greendaoUtils.delete();
-//                for (int i = 0; i < 1000; i++) {
-//                    greendaoUtils.add(1491192122 + i * 200, (int) (Math.random()*200),  (int) (Math.random()*200));
-//                }
+                for (int i = 0; i < 10; i++) {
+                    greendaoUtils.add(1492235115 - i * 2000, (int) (Math.random()*200),  (int) (Math.random()*200));
+                }
             }
         }).start();
 

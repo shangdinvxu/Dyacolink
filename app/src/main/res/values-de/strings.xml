@@ -1186,5 +1186,6 @@
     <string name="personalPhoto">Stellen Sie persönliche Fotos</string>
     <string name="user_info_delete_photo">Foto löschen</string>
     <string name="back">annulliert</string>
+    <string name="heartrateSwitch">心率量測開/關</string>
 
 </resources>

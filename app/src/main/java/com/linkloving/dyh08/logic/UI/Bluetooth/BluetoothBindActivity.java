@@ -43,10 +43,9 @@ public class BluetoothBindActivity extends ToolBarActivity {
         ButterKnife.inject(this);
         UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(BluetoothBindActivity.this);
         SportDeviceEntity deviceEntity = userAuthedInfo.getDeviceEntity();
-        String model_name = deviceEntity.getModel_name();
+        String model_name = deviceEntity.getLast_sync_device_id2();
         deviceEntity.getCard_number();
         String last_sync_device_id = deviceEntity.getLast_sync_device_id();
-
         equipmentName.setText(model_name);
         String macEndTwo = CutString.macSplitEndTwo(last_sync_device_id);
         equipmentAdress.setText(macEndTwo);

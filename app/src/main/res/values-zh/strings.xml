@@ -1141,7 +1141,7 @@
     <string name="Searchingwearable">寻找手环</string>
     <string name="Selectthe">路线设定</string>
     <string name="Starttime">开始时间</string>
-    <string name="Thedevicewill">开启则自动心率测量,关闭则需长按屏幕开启心率测量.</string>
+    <string name="Thedevicewill">开启心率量测有可能会增加手环电量消耗。</string>
     <string name="alarmclock">闹钟设定</string>
     <string name="baidu">百度</string>
     <string name="hr">时</string>
@@ -1188,4 +1188,7 @@
     <string name="personalPhoto">个人照片设置</string>
     <string name="user_info_delete_photo">删除照片</string>
     <string name="back">取消</string>
+    <string name="heartrateSwitch">心率量测开/关</string>
+    <string name="batteryShow">手环电量显示</string>
+    <string name="firmwareupdate">固件更新</string>
 </resources>

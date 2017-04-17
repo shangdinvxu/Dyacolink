@@ -24,14 +24,17 @@
             android:text="0" />
 
         <TextView style="@style/small_dialog_total"
-            android:text="avg"/>
+            android:text="avg"
+            android:id="@+id/ave"/>
 
         <TextView
-            android:layout_marginLeft="65dp"
             android:text="M"
-            style="@style/small_dialog_km" />
-
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_marginTop="25dp"
+            android:layout_alignLeft="@id/ave" />
 
     </RelativeLayout>
 

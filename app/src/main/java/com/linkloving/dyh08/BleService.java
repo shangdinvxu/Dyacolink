@@ -702,6 +702,7 @@ public class BleService extends Service {
 //                    watchRequset.appendByte((byte) 0x02).appendByte((byte) 0x44).makeCheckSum();
 //                    LepaoProtocalImpl lepaoProtocal = new LepaoProtocalImpl();
 //                    WatchResponse resp = lepaoProtocal.sendData2BLE(watchRequset);
+
 //                    LPUtil.printData(resp.getData(), " workoutDataclear++++++notifyforgetworkoutdata+++++resp");
 //                } catch (Exception e) {
 //                    e.printStackTrace();

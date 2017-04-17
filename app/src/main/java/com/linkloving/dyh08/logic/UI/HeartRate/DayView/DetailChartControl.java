@@ -68,6 +68,7 @@ public class DetailChartControl extends RelativeLayout {
     private List<SportRecord> sportRecords=new ArrayList<>();
     private int screenW,screenH ;
     public PopupWindow popupWindow = new PopupWindow();
+    public PopupWindow pointPopupWindow = new PopupWindow();
     private String nowtimeString;
 
     int dayindexNow;
@@ -78,8 +79,11 @@ public class DetailChartControl extends RelativeLayout {
     private TextView timeView;
     private TextView avgView;
     private TextView maxView;
-    private View popupView;
+    private View popupView,pointPopupView;
     private GreendaoUtils greendaoUtils;
+    private double oneHourHight ;
+
+
 
     public DetailChartControl(Context context) {
         super(context);
@@ -117,10 +121,13 @@ public class DetailChartControl extends RelativeLayout {
         InitView();
         getViewHigh();
         popupView = LayoutInflater.from(getContext()).inflate(R.layout.tw_heartrate_popupwindow, null);
+        pointPopupView = LayoutInflater.from(getContext()).inflate(R.layout.tw_heartrate_point_popupwindow, null);
         timeView = (TextView) popupView.findViewById(R.id.popuptime);
         avgView = (TextView) popupView.findViewById(R.id.avg);
         maxView = (TextView) popupView.findViewById(R.id.max);
         greendaoUtils = new GreendaoUtils(context);
+        oneHourHight = screenH * 0.017;
+
     }
     private void InitView()
     {
@@ -172,12 +179,13 @@ public class DetailChartControl extends RelativeLayout {
                     MyLog.e(TAG,"heartrates.size()为0");
                     maxView.setText("0");
                     avgView.setText("0");
-                    moveLineViewWithFinger(lineView,event.getX(),false);
+                    moveLineViewWithFinger(lineView,event.getX(),event.getRawX(),0,false);
                 }else {
                     MyLog.e(TAG,"heartrates.size()不为0");
                     maxView.setText(heartrates.get(0).getMax()+"");
                     avgView.setText(heartrates.get(0).getAvg()+"");
-                    moveLineViewWithFinger(lineView,event.getX(),true);
+                    int y = (int) (oneHourHight * 28 - (heartrates.get(0).getAvg() * 1000 / 200 * oneHourHight * 24) / 1000);
+                    moveLineViewWithFinger(lineView,event.getX(),event.getRawX(), (int) (y+screenH*0.37),true);
                 }
             }
             if (event.getAction()==MotionEvent.ACTION_UP){
@@ -230,27 +238,50 @@ public class DetailChartControl extends RelativeLayout {
         MyLog.e("点击", "调用了popupwindow");
     }
 
+
+    public void showPointFirstPopupWindow() {
+//        View popupView = LayoutInflater.from(getContext()).inflate(R.layout.tw_heartrate_popupwindow, null);
+//        TextView time_popupwindow = (TextView) popupView.findViewById(R.id.popuptime);
+        pointPopupWindow = new PopupWindow(pointPopupView, LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        pointPopupWindow.setTouchable(true);
+        // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
+        pointPopupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
+        pointPopupWindow.setClippingEnabled(false);
+/*//        有参数的话，就是一view的左下角进行偏移，xoff正的向左，负的向右.
+//        View stepAcitvityLayout = findViewById(R.id.step_activity_layout);*/
+        pointPopupWindow.showAsDropDown(framelayout, 20, 20);
+        MyLog.e("点击", "调用了popupwindow");
+    }
+
     /**
      * 设置View的布局属性，使得view随着手指移动 注意：view所在的布局必须使用RelativeLayout 而且不得设置居中等样式
      *
      * @param view
      * @param rawX
      */
-    private void moveLineViewWithFinger(View view, float rawX,boolean show) {
+    private void moveLineViewWithFinger(View view, float rawX,float rawleftX,int y ,boolean show) {
         AutoRelativeLayout.LayoutParams layoutParams = (AutoRelativeLayout.LayoutParams) view.getLayoutParams();
         layoutParams.leftMargin = (int) rawX - view.getWidth() / 2;
 //        layoutParams.leftMargin = (int) (rawX- screenW*0.15);
         view.setLayoutParams(layoutParams);
         if (i ==0 ){
             showFirstPopupWindow();
+            showPointFirstPopupWindow();
             i++;
         }else{
             if (show){
                 popupWindow.dismiss();
                 popupWindow.showAsDropDown(framelayout, 20, 20);
                 popupWindow.update((int) rawX+(int)(screenW*0.027), (int) (screenH*0.37),-1,-1,false);
+                //圆点
+                pointPopupWindow.dismiss();
+                pointPopupWindow.showAsDropDown(framelayout, 20, 20);
+                pointPopupWindow.update((int) rawleftX-10,y,-1,-1,false);
+
             }else {
                 popupWindow.dismiss();
+                pointPopupWindow.dismiss();
             }
 
         }

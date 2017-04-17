@@ -140,8 +140,9 @@ public class BluetoothActivity extends ToolBarActivity {
                 provider.setCurrentDeviceMac(macList.get(position).mac);
                 provider.setmBluetoothDevice(macList.get(position).bledevice);
                 provider.connect_mac(macList.get(position).mac);
+                modelName = macList.get(position).name;
                 middleChangeIV.setVisibility(View.VISIBLE);
-                dialog = new AlertDialog.Builder(BluetoothActivity.this).setMessage("连接中").setCancelable(false).show();
+                dialog = new AlertDialog.Builder(BluetoothActivity.this).setMessage(R.string.connect).setCancelable(false).show();
             }
         });
 
@@ -398,7 +399,7 @@ public class BluetoothActivity extends ToolBarActivity {
                 finish();
             }else if (latestDeviceInfo!=null&&latestDeviceInfo.recoderStatus==66){
                    if (builder!=null&&!builder.create().isShowing()) {
-                       builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                       builder.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
                                provider.unBoundDevice(BluetoothActivity.this);
@@ -410,7 +411,7 @@ public class BluetoothActivity extends ToolBarActivity {
                                }
                            }
                        }).setMessage(getString(R.string.Need_format))
-                               .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                               .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
                                    @Override
                                    public void onClick(DialogInterface dialog, int which) {
                                    }
@@ -432,7 +433,7 @@ public class BluetoothActivity extends ToolBarActivity {
                     .setTitle(R.string.portal_main_gobound)
                     .setMessage(R.string.portal_main_mustbund)
                     //
-                    .setPositiveButton(R.string.general_ok, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             provider.unBoundDevice(BluetoothActivity.this);
@@ -614,7 +615,7 @@ public class BluetoothActivity extends ToolBarActivity {
                 UserEntity userEntity = MyApplication.getInstance(BluetoothActivity.this).getLocalUserInfoProvider();
                 userEntity.getDeviceEntity().setLast_sync_device_id(provider.getCurrentDeviceMac());
                 userEntity.getDeviceEntity().setDevice_type(MyApplication.DEVICE_BAND);
-                userEntity.getDeviceEntity().setModel_name(modelName);
+                userEntity.getDeviceEntity().setLast_sync_device_id2(modelName);
                 MyApplication.getInstance(BluetoothActivity.this).setLocalUserInfoProvider(userEntity);
                 if (observerAdapter != null)
                     observerAdapter.updateFor_boundInfoSyncToServerFinish("1");
