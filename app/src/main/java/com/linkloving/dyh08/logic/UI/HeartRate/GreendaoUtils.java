@@ -100,6 +100,9 @@ public class GreendaoUtils {
         return list ;
     }
 
+    public void  deleteAll(){
+        getHeartrateDao().deleteAll();
+    }
 
     public List<heartrate> searchAll(){
         List<heartrate> heartrates = getHeartrateDao().loadAll();

@@ -78,6 +78,7 @@ public class BluetoothBindActivity3 extends ToolBarActivity {
     private int sendcount = 0;
     public static final int sendcount_time = 2000;
     public  String modelName = null;
+
     private Timer timer;
     private AlertDialog dialog_bound;
 

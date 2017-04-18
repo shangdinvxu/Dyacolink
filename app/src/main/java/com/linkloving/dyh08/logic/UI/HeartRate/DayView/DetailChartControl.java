@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -276,9 +277,9 @@ public class DetailChartControl extends RelativeLayout {
                 popupWindow.update((int) rawX+(int)(screenW*0.027), (int) (screenH*0.37),-1,-1,false);
                 //圆点
                 pointPopupWindow.dismiss();
-                pointPopupWindow.showAsDropDown(framelayout, 20, 20);
-                pointPopupWindow.update((int) rawleftX-10,y,-1,-1,false);
-
+//                pointPopupWindow.showAsDropDown(framelayout, 20, 20);
+//                pointPopupWindow.update((int) rawleftX-10,y,-1,-1,false);
+                pointPopupWindow.showAtLocation(framelayout, Gravity.BOTTOM,200,-200);
             }else {
                 popupWindow.dismiss();
                 pointPopupWindow.dismiss();
@@ -303,7 +304,7 @@ public class DetailChartControl extends RelativeLayout {
         xlineScale = (60*24f) / (float) imageWidth;// 每个像素xxx分钟
         yScale = imageHeight / 80;
     }
-        private void  getViewHigh(){
+    private void  getViewHigh(){
         final ViewTreeObserver vto = linearLayout.getViewTreeObserver();
         vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             public boolean onPreDraw() {
@@ -342,8 +343,6 @@ public class DetailChartControl extends RelativeLayout {
     {
         dataView.setImageBitmap(null);
         chartDate=date;
-
-
     }
 
 

@@ -81,7 +81,6 @@ public class BluetoothActivity extends ToolBarActivity {
     private BLEListProvider listProvider;
     private List<DeviceVO> macList =
             new ArrayList<DeviceVO>();
-    private AlertDialog dialog_bound;
     private int selectionPostion;
     private BluetoothActivity.macListAdapterNew macListAdapterNew;
     private ImageView stateIV;
@@ -95,6 +94,7 @@ public class BluetoothActivity extends ToolBarActivity {
     public static final int REFRESH_BUTTON = 0x123;
     private AlertDialog dialog;
     private android.support.v7.app.AlertDialog.Builder builder;
+    public String deviceName = null ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +140,7 @@ public class BluetoothActivity extends ToolBarActivity {
                 provider.setCurrentDeviceMac(macList.get(position).mac);
                 provider.setmBluetoothDevice(macList.get(position).bledevice);
                 provider.connect_mac(macList.get(position).mac);
-                modelName = macList.get(position).name;
+                deviceName = macList.get(position).name;
                 middleChangeIV.setVisibility(View.VISIBLE);
                 dialog = new AlertDialog.Builder(BluetoothActivity.this).setMessage(R.string.connect).setCancelable(false).show();
             }
@@ -153,10 +153,6 @@ public class BluetoothActivity extends ToolBarActivity {
                 startActivity(intent);
             }
         });
-        dialog_bound = new AlertDialog.Builder(BluetoothActivity.this)
-                .setMessage(R.string.portal_main_isbounding)
-                .create();
-        dialog_bound.dismiss();
         builder = new android.support.v7.app.AlertDialog.Builder(BluetoothActivity.this);
     }
 
@@ -323,18 +319,12 @@ public class BluetoothActivity extends ToolBarActivity {
         public void updateFor_handleSendDataError() {
             MyLog.e(TAG, "updateFor_handleSendDataError");
             super.updateFor_handleSendDataError();
-            if (dialog_bound != null && dialog_bound.isShowing()) {
-                dialog_bound.dismiss();
-            }
         }
 
         @Override
         public void updateFor_handleConnectLostMsg() {
             Log.e("BluetoothActivity", "updateFor_handleConnectLostMsg");
             listProvider.stopScan();
-            if (dialog_bound != null && dialog_bound.isShowing()) {
-                dialog_bound.dismiss();
-            }
 //            provider.connect_mac(provider.getCurrentDeviceMac());
 //
             provider.clearProess();
@@ -350,9 +340,6 @@ public class BluetoothActivity extends ToolBarActivity {
         public void updateFor_handleConnectFailedMsg() {
             super.updateFor_handleConnectFailedMsg();
             MyLog.e(TAG, "updateFor_handleConnectFailedMsg");
-            if (dialog_bound != null && dialog_bound.isShowing()) {
-                dialog_bound.dismiss();
-            }
             provider.release();
             provider.setCurrentDeviceMac(null);
             provider.setmBluetoothDevice(null);
@@ -437,22 +424,20 @@ public class BluetoothActivity extends ToolBarActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             provider.unBoundDevice(BluetoothActivity.this);
-                            dialog.dismiss();
+                            provider.connect();
                         }
                     })
                     .setNegativeButton(R.string.general_cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
-                            if (dialog_bound != null && dialog_bound.isShowing()) {
-                                dialog_bound.dismiss();
-                            }
-                            provider.release();
-                            provider.setCurrentDeviceMac(null);
-                            provider.setmBluetoothDevice(null);
-                            provider.resetDefaultState();
-                            setResult(RESULT_FAIL);
-                            finish();
+                            provider.disConnect();
+//                            provider.release();
+//                            provider.setCurrentDeviceMac(null);
+//                            provider.setmBluetoothDevice(null);
+//                            provider.resetDefaultState();
+//                            setResult(RESULT_FAIL);
+//                            finish();
                         }
                     }).create().show();
         }
@@ -474,9 +459,6 @@ public class BluetoothActivity extends ToolBarActivity {
         public void updateFor_BoundNoCharge() {
             super.updateFor_BoundNoCharge();
             Log.e("BluetoothActivity", "updateFor_BoundNoCharge");
-            if (dialog_bound != null && dialog_bound.isShowing()) {
-                dialog_bound.dismiss();
-            }
             setResult(RESULT_NOCHARGE);
             finish();
         }
@@ -485,10 +467,7 @@ public class BluetoothActivity extends ToolBarActivity {
         public void updateFor_BoundContinue() {
             super.updateFor_BoundContinue();
             Log.e("BluetoothActivity", "updateFor_BoundContinue");
-            if (dialog_bound != null && !dialog_bound.isShowing())
-                dialog_bound.show();
-            if (dialog_bound != null && dialog_bound.isShowing()) {
-                if (timer == null) {
+            if (timer == null) {
                     timer = new Timer(); // 每1s更新一下
                     timer.schedule(new TimerTask() {
                         @Override
@@ -498,27 +477,16 @@ public class BluetoothActivity extends ToolBarActivity {
                         }
                     }, 0, 1000);
                 }
-            }
             if (sendcount < sendcount_MAX) {
                 boundhandler.postDelayed(boundRunnable, sendcount_time);
                 sendcount++;
             }
-// else {
-//                Log.e("BluetoothActivity", "已经发送超出15次");
-//                provider.clearProess();
-//                BleService.getInstance(BluetoothActivity.this).releaseBLE();
-//                setResult(RESULT_FAIL);
-//                finish();
-//            }
         }
 
         @Override
         public void updateFor_BoundSucess() {
             Log.e("BluetoothActivity", "updateFor_BoundSucess");
             provider.SetDeviceTime(BluetoothActivity.this);
-            if (dialog_bound != null && dialog_bound.isShowing()) {
-                dialog_bound.dismiss();
-            }
             //获取成功
             startBound();
         }
@@ -536,9 +504,6 @@ public class BluetoothActivity extends ToolBarActivity {
                 provider.getModelName(BluetoothActivity.this);
             } else {
                 modelName = latestDeviceInfo.modelName;
-                if (dialog_bound != null && dialog_bound.isShowing()) {
-                    dialog_bound.dismiss();
-                }
                 //获取成功
                 startBound();
             }
@@ -552,8 +517,7 @@ public class BluetoothActivity extends ToolBarActivity {
             Log.e("BluetoothActivity", "updateFor_boundInfoSyncToServerFinish");
             if (resultFromServer != null) {
                 if (((String) resultFromServer).equals("1")) {
-                    Log.e(TAG, "绑定成功！");
-                    Toast.makeText(BluetoothActivity.this, "绑定成功", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(BluetoothActivity.this, "绑定成功", Toast.LENGTH_SHORT).show();
                     provider.getModelName(BluetoothActivity.this);
                     MyLog.e(TAG,provider.getCurrentDeviceMac()+"provider.getCurrentDeviceMac()");
                     MyApplication.getInstance(BluetoothActivity.this).getLocalUserInfoProvider().getDeviceEntity().setLast_sync_device_id(provider.getCurrentDeviceMac());
@@ -588,9 +552,6 @@ public class BluetoothActivity extends ToolBarActivity {
         public void updateFor_BoundFail() {
             Log.e(TAG, "updateFor_BoundFail 绑定失败");
             // BluetoothActivity.this.notifyAll();
-            if (dialog_bound != null && dialog_bound.isShowing()) {
-                dialog_bound.dismiss();
-            }
             provider.clearProess();
             Toast.makeText(BluetoothActivity.this,"绑定失败",Toast.LENGTH_SHORT).show();
 //            provider.unBoundDevice(BluetoothActivity.this);
@@ -615,7 +576,8 @@ public class BluetoothActivity extends ToolBarActivity {
                 UserEntity userEntity = MyApplication.getInstance(BluetoothActivity.this).getLocalUserInfoProvider();
                 userEntity.getDeviceEntity().setLast_sync_device_id(provider.getCurrentDeviceMac());
                 userEntity.getDeviceEntity().setDevice_type(MyApplication.DEVICE_BAND);
-                userEntity.getDeviceEntity().setLast_sync_device_id2(modelName);
+                userEntity.getDeviceEntity().setModel_name(modelName);
+                userEntity.getDeviceEntity().setLast_sync_device_id2(deviceName);
                 MyApplication.getInstance(BluetoothActivity.this).setLocalUserInfoProvider(userEntity);
                 if (observerAdapter != null)
                     observerAdapter.updateFor_boundInfoSyncToServerFinish("1");

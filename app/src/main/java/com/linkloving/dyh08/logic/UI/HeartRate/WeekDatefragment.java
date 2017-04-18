@@ -69,6 +69,7 @@ public class    WeekDatefragment extends Fragment{
                 MyLog.e(TAG, seletedItem+ "seletedItem");
                 weekFragment.setArguments(bundle);
                 transaction.replace(R.id.middle_framelayout, weekFragment);
+                fragmentManager.popBackStack(null,1);
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
@@ -91,14 +92,8 @@ public class    WeekDatefragment extends Fragment{
         Calendar rightNow = Calendar.getInstance();
         SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd");
         wva.setType(WheelView.TYPE_WEEK);
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD);
-//        rightNow.add(Calendar.DATE,-49);
         for (int i=0;i<45;i++){
             String date = sim.format(rightNow.getTime());
-////        获取每周的第一天日期
-            Date mondayOfThisWeek = ToolKits.getFirstSundayOfThisWeek(rightNow.getTime());
-////        获取每周的周末日期
-//            Date sundayofThisWeek = ToolKits.getStaurdayofThisWeek(rightNow.getTime());
             week.add(date);
             rightNow.add(Calendar.DATE,-7);
         }

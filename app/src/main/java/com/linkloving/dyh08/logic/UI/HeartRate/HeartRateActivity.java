@@ -140,13 +140,12 @@ public class HeartRateActivity extends ToolBarActivity implements View.OnClickLi
                 DaoMaster.DevOpenHelper heartrateHelper = new DaoMaster.DevOpenHelper(HeartRateActivity.this, "heartrate", null);
                 SQLiteDatabase readableDatabase = heartrateHelper.getReadableDatabase();
                 GreendaoUtils greendaoUtils = new GreendaoUtils(HeartRateActivity.this, readableDatabase);
-//                greendaoUtils.delete();
-                for (int i = 0; i < 10; i++) {
-                    greendaoUtils.add(1492235115 - i * 2000, (int) (Math.random()*200),  (int) (Math.random()*200));
+                greendaoUtils.deleteAll();
+                for (int i = 0; i < 500; i++) {
+                    greendaoUtils.add(1492235115 + i * 2000, (int) (Math.random()*100),  (int) (Math.random()*200));
                 }
             }
         }).start();
-
     }
 
 
