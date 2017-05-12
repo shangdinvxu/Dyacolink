@@ -416,8 +416,6 @@
     <string name="user_info_update_user_psw_repeat_new_psw">Confirm Password</string>
     <string name="user_info_update_psw_title">Change Password</string>
     <string name="user_info_update_body_title">Profile Info</string>
-    <string name="user_info_update_success">Update successfully</string>
-    <string name="user_info_update_failure">Update failed.</string>
     <string name="user_info_update_user_psw_old_psw_false">Error Password!</string>
     <string name="user_info_update_user_psw_new_psw_not_equal">Error Confirmation!</string>
     <string name="user_info_update_user_psw_length">less than 6 characters!</string>
@@ -479,7 +477,7 @@
     <string name="firmware_update_title">Firmware update</string>
     <string name="move_device_title"> Delete device</string>
     <string name="longsit_dialog_title">Time setting</string>
-    <string name="getting_version_information">Getting version information</string>
+    <string name="getting_version_information">正在搜取版本情報</string>
     <string name="update_firmware">Update Firmware</string>
     <string name="being_written">Being written</string>
     <string name="start_upgrading">Download completed, start upgrading</string>
@@ -633,7 +631,6 @@
     <string name="bracelet_owner">Linkloving Devixe</string>
     <string name="brace_version">Firmware Vision</string>
     <string name="bracelet_oad_Portal">New firmware is available for your device, do you like to upgrade now?</string>
-    <string name="bracelet_oad_version_top">Your device\'s firmware is the latest version!</string>
     <string name="bracelet_oad_reason">Firmware upgrade failed because of the bluetooth connection was closed during the process!</string>
     <string name="bracelet_oad_keycodeback">Please do not operate during the upgrade!</string>
     <string name="bracelet_oad_failed_battery">The device is required to have at least 30% power for firmware upgrade, please charge your device first!</string>
@@ -678,7 +675,7 @@
     <string name="portal_main_gobound">Bund Device</string>
     <string name="portal_main_isbounding">Bunding..</string>
     <string name="portal_main_bounding">Bunding!Please pay attention to  the screen of Watch!</string>
-    <string name="portal_main_unbound_msg">You have not bunded the device, please bund one first. </string>
+    <string name="portal_main_unbound_msg">あなたはまず、デバイスを結合結合されていません。</string>
     <string name="portal_main_battery_low"> Low Power </string>
     <string name="portal_main_battery_low_msg">Your wristband current consumption is less than 10%, please charge as soon as possible!</string>
     <string name="portal_main_battery_ble_timeout">Bluetooth scan timeout, please try again later.</string>
@@ -1131,7 +1128,6 @@
     <string name="fence_radius">围栏半径(单位：米)</string>
     <string name="vertex_number">顶点数量</string>
     <string name="fence_precision">去噪精度</string>
-    <string name="confirm">确定</string>
     <string name="circular_fence_caption">请点击地图标记围栏圆心</string>
     <string name="vertexes_fence_caption">请按顺时针或逆时针方向点击地图</string>
     <string name="AutomaticHR">自動心拍数測定</string>
@@ -1147,7 +1143,7 @@
     <string name="Searchingwearable">バンドを探す</string>
     <string name="Selectthe">地図を選択</string>
     <string name="Starttime">スタート</string>
-    <string name="Thedevicewill">自動心拍数の測定を回し、あなたが開いた心拍数測定を閉じるには、デバイスの画面を押す必要があります</string>
+    <string name="Thedevicewill">オンにするとバッテリーの持続時間に影響します</string>
     <string name="alarmclock">アラーム</string>
     <string name="baidu">百度</string>
     <string name="hr">時</string>
@@ -1155,7 +1151,7 @@
     <string name="kcal">kcal消費</string>
     <string name="messagenoti">メッセージ</string>
     <string name="min">分</string>
-    <string name="realtime">リアルタイム</string>
+    <string name="realtime">自動測定</string>
     <string name="recent6">最近6ヶ月のデータ</string>
     <string name="recent3">最近3ヶ月のデータ</string>
     <string name="regularyear">最近1年のデータ</string>
@@ -1187,5 +1183,16 @@
     <string name="user_info_delete_photo">写真を削除する</string>
     <string name="user_info_take_photo">写真を撮る</string>
     <string name="back">キャンセル</string>
+    <string name="syncing">Syncing...</string>
+    <string name="bracelet_oad_version_top">アップデートが完了しました</string>
+    <string name="updating">更新</string>
+    <string name="user_info_update_success">アップデート完了</string>
+    <string name="user_info_update_failure">更新に失敗しました</string>
+    <string name="firmwareupdate">アップデート</string>
+    <string name="firmwareupdate_detail">本製品をBluetoothでスマートフォンに接続し、アップデートを行ってください。アップデートは約10秒で完了しますが、ネットワーク環境によっては数分を要することもあります。なお、アップデート後も、元の設定やデータは保持されます。アップデート完了の通知が表示されるまで、スマートフォンのBluetoothをオフにしないでください。</string>
+    <string name="batteryShow">バッテリー残量</string>
+    <string name="heartrateSwitch">心拍数</string>
+    <string name="connect_network">ネットワークに接続してください</string>
+    <string name="confirm">確認</string>
 
 </resources>

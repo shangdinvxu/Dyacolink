@@ -21,6 +21,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.trace.LBSTraceClient;
@@ -46,6 +47,7 @@ import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.DeviceSetting;
 import com.linkloving.dyh08.utils.CommonUtils;
 import com.linkloving.dyh08.utils.DeviceInfoHelper;
+import com.linkloving.dyh08.utils.GetDBInfo;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.dyh08.utils.sportUtils.SportDataHelper;
@@ -519,6 +521,15 @@ public class BleService extends Service {
                 if(CommonUtils.isStringEmpty(MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id())){
                     return;
                 }
+                if (latestDeviceInfo != null && latestDeviceInfo.recoderStatus == 5) {
+                    Log.e("BluetoothActivity", "用户非法");
+                    Toast.makeText(BleService.this, "设备已经被其他用户绑定", Toast.LENGTH_SHORT).show();
+                    provider.release();
+                    provider.setCurrentDeviceMac(null);
+                    provider.setmBluetoothDevice(null);
+                    provider.resetDefaultState();
+                    provider.clearProess();
+                }
                 if (!IS_SYNING) { // 判断app是否存在状态
                     if (latestDeviceInfo != null) {
                         IS_SYNING = true;  //正在同步 不然用户再次刷新 会发两次指令
@@ -667,7 +678,6 @@ public class BleService extends Service {
                             lpDeviceInfo_.distenceDayTotals =MyApplication.getInstance(BleService.this).getOld_distance() ;
                             lpDeviceInfo_.CaloriesTotals =MyApplication.getInstance(BleService.this).getOld_calories() ;
                             provider.resetStep(BleService.this, lpDeviceInfo_);
-
                         /**********省电模式START*********/
                         provider.SetPower(BleService.this, DeviceInfoHelper.fromUserEntity(BleService.this, userEntity));
                         /**********省电模式OVER*********/
@@ -684,12 +694,17 @@ public class BleService extends Service {
                 super.notifyforgerHeartList(obj);
                 for (LpHeartrateData obj1: obj){
                     if (obj1.getAvgRate()<=0||obj1.getMaxRate()<=0) continue;
-                    greendaoUtils.add(obj1.getStartTime(),obj1.getMaxRate(),obj1.getAvgRate());
-                    List<heartrate> search = greendaoUtils.search(obj1.getStartTime());
-                    MyLog.e(TAG,search.get(0).getMax()+"");
-                    MyLog.e(TAG,"-----------------------");
+                    greendaoUtils.addwhole(obj1.getStartTime(),obj1.getAvgRate(),obj1.getMaxRate(),
+                            obj1.getFakeAvgRate(),obj1.getFakeMaxRate());
                 }
+                provider.get_exceptionInfo(BleService.this);
+            }
 
+            /**获取到异常信息*/
+            @Override
+            protected void handleExceptionInfo(byte[] bytes) {
+                super.handleExceptionInfo(bytes);
+                GetDBInfo.writeException(bytes,BleService.this);
             }
 
             @Override

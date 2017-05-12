@@ -1,10 +1,17 @@
 package com.linkloving.dyh08.logic.UI.setting;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.app.Service;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +28,22 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.android.bluetoothlegatt.BLEProvider;
+import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
 import com.google.android.gms.maps.GoogleMap;
 import com.linkloving.dyh08.BleService;
+import com.linkloving.dyh08.CommParams;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
+import com.linkloving.dyh08.RetrofitUtils.Bean.CheckFirmwareVersionReponse;
+import com.linkloving.dyh08.RetrofitUtils.FirmwareRetrofitClient;
+import com.linkloving.dyh08.RetrofitUtils.RetrofitApi.OADApi;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
+import com.linkloving.dyh08.http.basic.CallServer;
+import com.linkloving.dyh08.http.basic.HttpCallback;
+import com.linkloving.dyh08.http.basic.NoHttpRuquestFactory;
+import com.linkloving.dyh08.logic.UI.OAD.DfuService;
 import com.linkloving.dyh08.logic.UI.device.DeviceActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
@@ -34,19 +51,37 @@ import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 import com.linkloving.dyh08.prefrences.devicebean.DeviceSetting;
 import com.linkloving.dyh08.prefrences.devicebean.LocalInfoVO;
 import com.linkloving.dyh08.utils.DeviceInfoHelper;
+import com.linkloving.dyh08.utils.MyToast;
 import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
+import com.yolanda.nohttp.Response;
 
+import net.hockeyapp.android.metrics.MetricsManager;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 import java.security.Provider;
+import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import no.nordicsemi.android.dfu.DfuProgressListenerAdapter;
+import no.nordicsemi.android.dfu.DfuServiceInitiator;
+import no.nordicsemi.android.dfu.DfuServiceListenerHelper;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 /**
  * Created by Daniel.Xu on 2016/10/24.
  */
 
 public class GeneralActivity extends ToolBarActivity {
+    private static String TAG = GeneralActivity.class.getSimpleName();
     @InjectView(R.id.listview)
     ListView listview;
     private LayoutInflater layoutInflater;
@@ -55,6 +90,12 @@ public class GeneralActivity extends ToolBarActivity {
     private UserEntity userEntity;
     private DeviceSetting deviceSetting;
     private LocalInfoVO localDeviceInfo;
+    private ProgressDialog dialog;
+    private ProgressDialog dialog_connect;//下载进度
+    private File file;
+    private ProgressDialog progressDialog;
+    private ImageView uploadImageview;
+    private TextView updateTextview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,9 +160,66 @@ public class GeneralActivity extends ToolBarActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DfuServiceListenerHelper.registerProgressListener(this, mDfuProgressListener);
+    }
+
+
+    //固件更新
+    private final DfuProgressListenerAdapter mDfuProgressListener = new DfuProgressListenerAdapter() {
+        @Override
+        public void onProgressChanged(String deviceAddress, int percent, float speed, float avgSpeed, int currentPart, int partsTotal) {
+            MyLog.e(TAG, "mDfuProgressListener" + percent + "----");
+        }
+
+        @Override
+        public void onDfuCompleted(String deviceAddress) {
+            super.onDfuCompleted(deviceAddress);
+            MyLog.e(TAG, "mDfuProgressListener" + "---onDfuCompleted-");
+            Toast.makeText(GeneralActivity.this,getString(R.string.user_info_update_success),Toast.LENGTH_SHORT).show();
+            updateTextview.setText(getString(R.string.firmwareupdate_finish));
+            uploadImageview.setImageResource(R.mipmap.update_finish);
+            progressDialog.dismiss();
+        }
+
+        @Override
+        public void onError(String deviceAddress, int error, int errorType, String message) {
+            super.onError(deviceAddress, error, errorType, message);
+            Toast.makeText(GeneralActivity.this,getString(R.string.user_info_update_failure),Toast.LENGTH_SHORT).show();
+            MyLog.e(TAG, "mDfuProgressListener" + "--onError--");
+            progressDialog.dismiss();
+        }
+    };
+
+    public void onUploadClicked() {
+        MyLog.e(TAG, "onUploadClicked执行了");
+        progressDialog = new ProgressDialog(GeneralActivity.this);
+        progressDialog.setMessage(getString(R.string.updating));
+        progressDialog.show();
+        DfuServiceInitiator starter = new DfuServiceInitiator(userEntity.getDeviceEntity().getLast_sync_device_id())
+                .setDeviceName("DYH_01")
+                .setKeepBond(false)
+                .setForceDfu(false)
+                .setPacketsReceiptNotificationsEnabled(true)
+                .setPacketsReceiptNotificationsValue(12);
+        starter.setZip(file.getPath());
+        starter.start(this, DfuService.class);
+    }
+
+
     private void initUpdatePopupWindow() {
 
         View view = layoutInflater.inflate(R.layout.firmupdate_popupwindow, null);
+        uploadImageview = (ImageView) view.findViewById(R.id.updateImageview);
+        uploadImageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startUpdate();
+            }
+        });
+        updateTextview = (TextView) view.findViewById(R.id.updateTextview);
         final PopupWindow popupWindow = getnewPopupWindow(view);
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
         dismiss.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +229,146 @@ public class GeneralActivity extends ToolBarActivity {
             }
         });
     }
+
+    private void startUpdate() {
+        UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(GeneralActivity.this);
+        String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
+        if (last_sync_device_id==null||last_sync_device_id.length()==0){
+            Toast.makeText(GeneralActivity.this,getString(R.string.portal_main_unbound_msg),Toast.LENGTH_SHORT).show();
+        }else {
+            boolean networkConnected = ToolKits.isNetworkConnected(GeneralActivity.this);
+            if (networkConnected){
+                downloadZip();
+            }else {
+                showOpenNetWorkDialog();
+            }
+        }
+    }
+
+    private void downloadZip() {
+        dialog = new ProgressDialog(GeneralActivity.this);
+        dialog.setMessage(getString(R.string.getting_version_information));
+        int version_int = ToolKits.makeShort(localDeviceInfo.version_byte[1], localDeviceInfo.version_byte[0]);
+        CallServer.getRequestInstance().add(GeneralActivity.this, false,
+                CommParams.HTTP_OAD, NoHttpRuquestFactory.creat_New_OAD_Request(localDeviceInfo.getModelname()
+                        ,version_int), newHttpCallback);
+    }
+
+
+    private HttpCallback<String> newHttpCallback = new HttpCallback<String>() {
+        @Override
+        public void onFailed(int what, String url, Object tag, CharSequence message, int responseCode, long networkMillis) {
+            MyLog.e(TAG,"failed________"+message.toString());
+            dialog.dismiss();
+        }
+
+        @Override
+        public void onSucceed(int what, Response<String> response) {
+            dialog.dismiss();
+            MyLog.e(TAG + "devicefragment", response.toString() );
+            if (response.get()!=null&&!response.get().isEmpty()) {
+                try {
+                    dialog.dismiss();
+                    CheckFirmwareVersionReponse checkVersionReponse = JSONObject.parseObject(response.get(), CheckFirmwareVersionReponse.class);
+                    if(checkVersionReponse.getModel_name()==null){
+                        MyToast.show(GeneralActivity.this, getString(R.string.bracelet_oad_version_top), Toast.LENGTH_LONG);
+                    }else {
+//                        powerManager = (PowerManager) activity.getSystemService(Service.POWER_SERVICE);
+//                        wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Lock");
+//                        //是否需计算锁的数量
+//                        wakeLock.setReferenceCounted(false);
+//                        //请求屏幕常亮，onResume()方法中执行
+//                        wakeLock.acquire();
+                        downLoadByRetrofit(checkVersionReponse.getModel_name(),
+                                checkVersionReponse.getFile_name(),Integer.parseInt(checkVersionReponse.getVersion_code()) ,
+                                "downloaddyh08.zip",false);
+                    }
+                }catch (Exception e){
+                    MyToast.show(GeneralActivity.this, getString(R.string.bracelet_oad_version_top), Toast.LENGTH_LONG);
+                }
+            } else {
+                dialog.dismiss();
+                MyToast.show(GeneralActivity.this,  getString(R.string.bracelet_oad_version_top), Toast.LENGTH_LONG);
+            }
+        }
+    };
+
+    public void downLoadByRetrofit(String model_name, String file_name, int version_int, final String saveFileName, final boolean OADDirect) {
+//        String message = getString(R.string.general_uploadingnewfirmware);
+        dialog_connect = new ProgressDialog(GeneralActivity.this);
+        dialog_connect.setCancelable(false);
+        dialog_connect.show();
+        OADApi oadApi = FirmwareRetrofitClient.getInstance().create(OADApi.class);
+        HashMap<String, Object> objectObjectHashMap = new HashMap<>();
+        objectObjectHashMap.put("model_name", model_name);
+        objectObjectHashMap.put("file_name", file_name);
+
+        String versionString = version_int + "";
+        if (versionString.length()%2==1){
+            versionString = "0"+versionString ;
+        }
+        objectObjectHashMap.put("version_code",versionString);
+        Call<ResponseBody> responseBodyCall = oadApi.download_file("close",objectObjectHashMap);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                try {
+                    if (response.body()!=null) {
+                        MyLog.e(TAG, response.body().byteStream() + "");
+                        InputStream is = response.body().byteStream();
+                        file = getTempFile(GeneralActivity.this, saveFileName);
+                        FileOutputStream fos = new FileOutputStream(file);
+                        BufferedInputStream bis = new BufferedInputStream(is);
+                        byte[] buffer = new byte[1024];
+                        int len;
+                        while ((len = bis.read(buffer)) != -1) {
+                            fos.write(buffer, 0, len);
+                        }
+                        fos.flush();
+                        fos.close();
+                        bis.close();
+                        is.close();
+                        Log.e(TAG, "下载完成" + saveFileName);
+                        dialog_connect.dismiss();
+                        onUploadClicked();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                MyLog.e(TAG, t.toString());
+                dialog_connect.dismiss();
+                Toast.makeText(GeneralActivity.this, getString(R.string.bracelet_down_file_fail), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public File getTempFile(Context context, String name) {
+        File file = null;
+        try {
+            file = new File(context.getCacheDir(),name);
+        } catch (Exception e) {
+            // Error while creating file
+        }
+        return file;
+    }
+
+
+    private void showOpenNetWorkDialog() {
+        new AlertDialog.Builder(GeneralActivity.this)
+                .setMessage(R.string.connect_network)
+                .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
+
 
     private void initBatteryShowPopupwindow() {
         View view = layoutInflater.inflate(R.layout.battery_show_popupwindow, null);

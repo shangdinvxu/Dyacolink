@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DYACO LINK</string>
-    <string name="Thedevicewill">The device will measure heart rate automatically when switch to ON, if switch to OFF auto HR measurement,  press display two second to start HR measurement. </string>
+    <string name="Thedevicewill">Opening auto heart rate measurement may result in smart band battery consumption.</string>
 
     <!--注册-->
     <string name="login_activity_wechat">请安装微信客户端</string>
@@ -418,7 +418,6 @@
     <string name="user_info_update_user_psw_repeat_new_psw">Confirm Password</string>
     <string name="user_info_update_psw_title">Change Password</string>
     <string name="user_info_update_body_title">Profile Info</string>
-    <string name="user_info_update_success">Update successfully</string>
     <string name="user_info_update_failure">Update failed.</string>
     <string name="user_info_update_user_psw_old_psw_false">Error Password!</string>
     <string name="user_info_update_user_psw_new_psw_not_equal">Error Confirmation!</string>
@@ -640,7 +639,7 @@
     <string name="bracelet_owner">Linkloving Devixe</string>
     <string name="brace_version">Firmware Vision</string>
     <string name="bracelet_oad_Portal">New firmware is available for your device, do you like to upgrade now?</string>
-    <string name="bracelet_oad_version_top">Your device\'s firmware is the latest version!</string>
+    <string name="bracelet_oad_version_top">The firmware is updated to the latest version.</string>
     <string name="bracelet_oad_reason">Firmware upgrade failed because of the bluetooth connection was closed during the process!</string>
     <string name="bracelet_oad_keycodeback">Please do not operate during the upgrade!</string>
     <string name="bracelet_oad_failed_battery">The device is required to have at least 30% power for firmware upgrade, please charge your device first!</string>
@@ -1137,7 +1136,7 @@
     <string name="fence_radius">围栏半径(单位：米)</string>
     <string name="vertex_number">顶点数量</string>
     <string name="fence_precision">去噪精度</string>
-    <string name="confirm">确定</string>
+    <string name="confirm">Confirm</string>
     <string name="circular_fence_caption">请点击地图标记围栏圆心</string>
     <string name="vertexes_fence_caption">请按顺时针或逆时针方向点击地图</string>
     <string name="AutomaticHR">Automatic HR measurement</string>
@@ -1160,4 +1159,16 @@
     <string name="personalPhoto">Personal photo settings</string>
     <string name="user_info_delete_photo">Delete Photo</string>
     <string name="back">Back</string>
+    <string name="firmwareupdate">Firmware update</string>
+    <string name="firmwareupdate_finish">Update complete</string>
+    <string name="firmwareupdate_update">Update</string>
+    <string name="firmwareupdate_detail">Please open the smartphone Bluetooth and bracelet connection update. Please let us assist in updating your smart band device. Depending on the speed of the internet, update time is estimated to be around 10 seconds to several minutes. System updates will not affect the smart band’s current setting or any previous information stored in the App. Please wait patiently. The system will notify you when the update is complete.</string>
+    <string name="batteryShow">Smart band battery  display</string>
+    <string name="heartrateSwitch">Heart rate measurement On/Off</string>
+    <string name="realtime">Auto measurement</string>
+    <string name="connect_network">Please connect to internet</string>
+    <string name="hint">Hint</string>
+    <string name="syncing">Syncing...</string>
+    <string name="updating">updating</string>
+    <string name="user_info_update_success">Update complete</string>
 </resources>

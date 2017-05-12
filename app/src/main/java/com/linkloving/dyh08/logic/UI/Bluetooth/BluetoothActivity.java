@@ -92,7 +92,7 @@ public class BluetoothActivity extends ToolBarActivity {
     private Timer timer;
 
     public static final int REFRESH_BUTTON = 0x123;
-    private AlertDialog dialog;
+    private AlertDialog progressDialog;
     private android.support.v7.app.AlertDialog.Builder builder;
     public String deviceName = null ;
 
@@ -142,7 +142,7 @@ public class BluetoothActivity extends ToolBarActivity {
                 provider.connect_mac(macList.get(position).mac);
                 deviceName = macList.get(position).name;
                 middleChangeIV.setVisibility(View.VISIBLE);
-                dialog = new AlertDialog.Builder(BluetoothActivity.this).setMessage(R.string.connect).setCancelable(false).show();
+                progressDialog = new AlertDialog.Builder(BluetoothActivity.this).setMessage(R.string.connect).setCancelable(false).show();
             }
         });
 
@@ -229,9 +229,9 @@ public class BluetoothActivity extends ToolBarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (dialog != null && dialog.isShowing())
+        if (progressDialog != null && progressDialog.isShowing())
         {
-            dialog.dismiss();
+            progressDialog.dismiss();
         }
     }
 
@@ -390,19 +390,20 @@ public class BluetoothActivity extends ToolBarActivity {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
                                provider.unBoundDevice(BluetoothActivity.this);
-                               try {
-                                   Thread.sleep(1000);
-                                   BleService.getInstance(BluetoothActivity.this).releaseBLE();
-                               } catch (InterruptedException e) {
-                                   e.printStackTrace();
-                               }
+                               provider.connect();
                            }
                        }).setMessage(getString(R.string.Need_format))
                                .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
                                    @Override
                                    public void onClick(DialogInterface dialog, int which) {
+                                       provider.disConnect();
+                                       if (progressDialog != null && progressDialog.isShowing()){
+                                           progressDialog.dismiss();
+                                       }
                                    }
-                               }).show();
+                               })
+                               .setCancelable(false)
+                               .show();
                    }
             } else {
                 provider.requestbound_fit(BluetoothActivity.this);
@@ -445,10 +446,7 @@ public class BluetoothActivity extends ToolBarActivity {
         @Override
         public void updateFor_notifyForDeviceUnboundSucess_D() {
             super.updateFor_notifyForDeviceUnboundSucess_D();
-            Log.e("BluetoothActivity", "updateFor_notifyForDeviceUnboundSucess_D");
             Log.e("BluetoothActivity", "清除设备信息/解绑成功");
-            provider.clearProess();
-            finish();
 
         }
 
@@ -480,6 +478,12 @@ public class BluetoothActivity extends ToolBarActivity {
             if (sendcount < sendcount_MAX) {
                 boundhandler.postDelayed(boundRunnable, sendcount_time);
                 sendcount++;
+            }else {
+                Log.e("BandListActivity", "已经发送超出15次");
+                provider.clearProess();
+                BleService.getInstance(BluetoothActivity.this).releaseBLE();
+                setResult(RESULT_FAIL);
+                finish();
             }
         }
 
@@ -517,13 +521,15 @@ public class BluetoothActivity extends ToolBarActivity {
             Log.e("BluetoothActivity", "updateFor_boundInfoSyncToServerFinish");
             if (resultFromServer != null) {
                 if (((String) resultFromServer).equals("1")) {
-//                    Toast.makeText(BluetoothActivity.this, "绑定成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BluetoothActivity.this, "绑定成功", Toast.LENGTH_SHORT).show();
                     provider.getModelName(BluetoothActivity.this);
                     MyLog.e(TAG,provider.getCurrentDeviceMac()+"provider.getCurrentDeviceMac()");
                     MyApplication.getInstance(BluetoothActivity.this).getLocalUserInfoProvider().getDeviceEntity().setLast_sync_device_id(provider.getCurrentDeviceMac());
                     MyApplication.getInstance(BluetoothActivity.this).getLocalUserInfoProvider().getDeviceEntity().setDevice_type(MyApplication.DEVICE_BAND);
+                    BleService.getInstance(BluetoothActivity.this).syncAllDeviceInfo(BluetoothActivity.this);
                     setResult(RESULT_OK);
                     finish();
+
                 } else if (((String) resultFromServer).equals("10024")) {
                     MyLog.e(TAG, "========绑定失败！========");
                     new android.support.v7.app.AlertDialog.Builder(BluetoothActivity.this)
@@ -563,7 +569,6 @@ public class BluetoothActivity extends ToolBarActivity {
 
     private void startBound() {
         // 绑定设备时必须保证首先从服务端取来标准UTC时间，以便给设备校时(要看看网络是否连接)
-        MyLog.e(TAG, "startBound()");
 //        if (ToolKits.isNetworkConnected(BluetoothActivity.this)) {
         if (true) {
             UserEntity ue = MyApplication.getInstance(getApplicationContext()).getLocalUserInfoProvider();

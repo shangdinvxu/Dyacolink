@@ -40,16 +40,18 @@
             />
 
         <ImageView
+            android:id="@+id/updateImageview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:src="@mipmap/update_continue"
             />
         <TextView
+            android:id="@+id/updateTextview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/firmwareupdate_finish"
+            android:text="@string/firmwareupdate_update"
             />
 
 

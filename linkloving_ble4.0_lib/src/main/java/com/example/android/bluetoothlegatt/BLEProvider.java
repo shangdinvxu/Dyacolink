@@ -248,6 +248,8 @@ public  class BLEProvider
 	public static final int INDEX_CLOSESHOWHAND= INDEX_CLEAR_WORKOUT_DATA + 1;
 	public static final int OPEN_HEARTRATESYNC= INDEX_CLOSESHOWHAND + 1;
 	public static final int CLOSE_HEARTRATESYNC= OPEN_HEARTRATESYNC + 1;
+	/**获取异常信息的指令*/
+	public static final int INDEX_GET_EXCEPTION_INFO= CLOSE_HEARTRATESYNC + 1;
 
 
 	// Stops scanning after 10 seconds.
@@ -1288,6 +1290,14 @@ public  class BLEProvider
 	   runIndexProess(context, INDEX_GET_DEVICEID);
    }
 
+
+	/* 获取异常信息*/
+	public void get_exceptionInfo(Context context)
+	{
+		OwnLog.i(TAG, "..................get_cardnum Thread........................");
+		runIndexProess(context, INDEX_GET_EXCEPTION_INFO);
+	}
+
    public void runIndexProess(Context context,int index,LPDeviceInfo deviceInfo)
    {
 	   	   
@@ -1716,6 +1726,10 @@ public  class BLEProvider
 //				    	msg.obj = mLepaoProtocalImpl.getCharged();
 //				    	msg.sendToTarget();
 //				    	break;
+					case INDEX_GET_EXCEPTION_INFO:
+						msg = mHandler.obtainMessage(INDEX_GET_EXCEPTION_INFO,mLepaoProtocalImpl.getExceptionInfo());
+						msg.sendToTarget();
+						break;
 				    case INDEX_GAT_ALL_INFO_NEW:
 				    	Log.i(TAG, ".................INDEX_GAT_ALL_INFO_NEW................");
 				    	msg = mHandler.obtainMessage();

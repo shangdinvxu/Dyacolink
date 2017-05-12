@@ -9,19 +9,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Vibrator;
-import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -36,10 +32,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -54,7 +48,6 @@ import com.baidu.location.LocationClientOption;
 import com.example.android.bluetoothlegatt.BLEHandler;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
-import com.example.android.bluetoothlegatt.wapper.BLEWapper;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jaeger.library.StatusBarUtil;
@@ -65,6 +58,9 @@ import com.linkloving.dyh08.CommParams;
 import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
+import com.linkloving.dyh08.RetrofitUtils.Bean.CheckFirmwareVersionReponse;
+import com.linkloving.dyh08.RetrofitUtils.FirmwareRetrofitClient;
+import com.linkloving.dyh08.RetrofitUtils.RetrofitApi.OADApi;
 import com.linkloving.dyh08.basic.AppManager;
 import com.linkloving.dyh08.db.sport.UserDeviceRecord;
 import com.linkloving.dyh08.db.summary.DaySynopicTable;
@@ -72,7 +68,6 @@ import com.linkloving.dyh08.http.basic.CallServer;
 import com.linkloving.dyh08.http.basic.HttpCallback;
 import com.linkloving.dyh08.http.basic.NoHttpRuquestFactory;
 import com.linkloving.dyh08.http.data.DataFromServer;
-import com.linkloving.dyh08.logic.UI.Bluetooth.BluetoothActivity;
 import com.linkloving.dyh08.logic.UI.OAD.DfuService;
 import com.linkloving.dyh08.logic.UI.device.DeviceActivity;
 import com.linkloving.dyh08.logic.UI.device.FirmwareDTO;
@@ -82,7 +77,6 @@ import com.linkloving.dyh08.logic.UI.main.materialmenu.MenuNewAdapter;
 import com.linkloving.dyh08.logic.UI.main.materialmenu.MenuVO;
 import com.linkloving.dyh08.logic.UI.more.MoreActivity;
 import com.linkloving.dyh08.logic.UI.setting.GeneralActivity;
-import com.linkloving.dyh08.logic.UI.settings.PersonalInfoActivity;
 import com.linkloving.dyh08.logic.dto.SportRecordUploadDTO;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
@@ -109,15 +103,17 @@ import com.zhy.autolayout.AutoLayoutActivity;
 
 import net.hockeyapp.android.CrashManager;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -127,6 +123,9 @@ import butterknife.OnClick;
 import no.nordicsemi.android.dfu.DfuProgressListenerAdapter;
 import no.nordicsemi.android.dfu.DfuServiceInitiator;
 import no.nordicsemi.android.dfu.DfuServiceListenerHelper;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class PortalActivity extends AutoLayoutActivity implements View.OnClickListener {
     @InjectView(R.id.user_linerLayout)
@@ -216,6 +215,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
     //判断是否从后台进入到前台的flag
     private boolean flag = false;
+    private boolean needTocheck = false ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,6 +225,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         pulltorefreshView = (PullToRefreshListView) findViewById(R.id.pullTorefreshView);
         ListView refreshableView = pulltorefreshView.getRefreshableView();
         refreshableView.addHeaderView(heardView);
+        needTocheck = true ;
         checkBle();
         AppManager.getAppManager().addActivity(this);
         ButterKnife.inject(this);
@@ -248,6 +249,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         //开始定位
         mLocationClient.start();
         builder = new AlertDialog.Builder(PortalActivity.this);
+
         /*--------------------------------*/
         pulltorefreshView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
@@ -270,6 +272,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
             }
 
         });
+        pulltorefreshView.autoRefreshListener();
 
         /*-------------------日历----------------*/
         initCheckUnit();
@@ -313,7 +316,6 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         if (background) {
             flag = true;
         }
-
     }
 
     @Override
@@ -377,7 +379,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     private Handler mScrollViewRefreshingHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (pulltorefreshView.isRefreshing())
+            if (pulltorefreshView.isRefreshing()&&needTocheck)
                 pulltorefreshView.onRefreshComplete();
             super.handleMessage(msg);
         }
@@ -886,15 +888,20 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         }
     }
 
+
     public void onUploadClicked() {
         MyLog.e(TAG, "onUploadClicked执行了");
-        DfuServiceInitiator starter = new DfuServiceInitiator("F6:B2:79:1F:47:E8")
+        if(pulltorefreshView.isRefreshing()){
+            String second_txt = getString(R.string.updating);
+            pulltorefreshView.getHeaderLayout().getmHeaderText().setText(second_txt);
+        }
+        DfuServiceInitiator starter = new DfuServiceInitiator(userEntity.getDeviceEntity().getLast_sync_device_id())
                 .setDeviceName("DYH_01")
                 .setKeepBond(false)
                 .setForceDfu(false)
                 .setPacketsReceiptNotificationsEnabled(true)
                 .setPacketsReceiptNotificationsValue(12);
-        starter.setZip(R.raw.dyh01_alpha07_1017);
+        starter.setZip(file.getPath());
         starter.start(this, DfuService.class);
     }
 
@@ -936,7 +943,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         public void updateFor_handleNotEnableMsg() {
             //用户未打开蓝牙
             Log.i(TAG, "updateFor_handleNotEnableMsg");
-            if (pulltorefreshView!=null&&pulltorefreshView.isRefreshing())
+            if (pulltorefreshView!=null&&pulltorefreshView.isRefreshing()&&needTocheck)
                 pulltorefreshView.onRefreshComplete();
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             getActivity().startActivityForResult(enableBtIntent, BleService.REQUEST_ENABLE_BT);
@@ -962,7 +969,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         @Override
         public void updateFor_handleScanTimeOutMsg() {
             MyLog.e(TAG, "updateFor_handleScanTimeOutMsg");
-            if (pulltorefreshView!=null&&pulltorefreshView.isRefreshing())
+            if (pulltorefreshView!=null&&pulltorefreshView.isRefreshing()&&needTocheck)
                 pulltorefreshView.onRefreshComplete();
         }
 
@@ -973,8 +980,10 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         public void updateFor_handleConnectFailedMsg() {
             //连接失败
             MyLog.e(TAG, "updateFor_handleConnectFailedMsg");
-            if (pulltorefreshView!=null&&pulltorefreshView.isRefreshing())
-                pulltorefreshView.onRefreshComplete();
+            if (needTocheck) {
+                if (pulltorefreshView != null && pulltorefreshView.isRefreshing()&&needTocheck)
+                    pulltorefreshView.onRefreshComplete();
+            }
         }
 
         /**********
@@ -992,6 +1001,10 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         @Override
         public void updateFor_handleConnectLostMsg() {
             MyLog.e(TAG, "updateFor_handleConnectLostMsg");
+            if (needTocheck) {
+                if (pulltorefreshView != null && pulltorefreshView.isRefreshing()&&needTocheck)
+                    pulltorefreshView.onRefreshComplete();
+            }
             //蓝牙断开的显示
         }
 
@@ -1000,6 +1013,15 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
          *********/
         @Override
         public void updateFor_notifyFor0x13ExecSucess_D(LPDeviceInfo latestDeviceInfo) {
+            if (latestDeviceInfo != null && latestDeviceInfo.recoderStatus == 5) {
+                Log.e("BluetoothActivity", "用户非法");
+                Toast.makeText(PortalActivity.this, "设备已经被其他用户绑定", Toast.LENGTH_SHORT).show();
+                provider.release();
+                provider.setCurrentDeviceMac(null);
+                provider.setmBluetoothDevice(null);
+                provider.resetDefaultState();
+                provider.clearProess();
+            }
             if (latestDeviceInfo!=null&&latestDeviceInfo.recoderStatus==66){
                 if (!CommonUtils.isStringEmpty(MyApplication.getInstance(PortalActivity.this)
                         .getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id())){
@@ -1171,6 +1193,17 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                     });
                 }
             }
+
+            if (needTocheck){
+                userEntity.getDeviceEntity().setModel_name(latestDeviceInfo.modelName);
+                needTocheck = false ;
+                downloadZip();
+            }else {
+                pulltorefreshView.onRefreshComplete();
+            }
+            if (pulltorefreshView!=null&&pulltorefreshView.isRefreshing()&&needTocheck) {
+                pulltorefreshView.onRefreshComplete();
+            }
         }
 
         /**********
@@ -1213,8 +1246,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
          *********/
         @Override
         public void updateFor_handleSetTime() {
-            if (pulltorefreshView!=null&&pulltorefreshView.isRefreshing())
-                pulltorefreshView.onRefreshComplete();
+
             MyLog.e(TAG, "updateFor_handleSetTime");
         }
 
@@ -1236,25 +1268,154 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
             super.updateFor_CardNumber(cardId);
         }
     }
+    LocalInfoVO vo;
+    private ProgressDialog dialog;
+    private ProgressDialog dialog_connect;//下载进度
+    private URI uri = null;
+    private File file;
 
+    private void downloadZip() {
+        vo = PreferencesToolkits.getLocalDeviceInfo(PortalActivity.this);
+        dialog = new ProgressDialog(PortalActivity.this);
+        dialog.setMessage(getString(R.string.getting_version_information));
+        int version_int = ToolKits.makeShort(vo.version_byte[1], vo.version_byte[0]);
+//        int version_int = 500 ;
+        CallServer.getRequestInstance().add(PortalActivity.this, false,
+                CommParams.HTTP_OAD, NoHttpRuquestFactory.creat_New_OAD_Request(userEntity.getDeviceEntity().getModel_name()
+                        ,version_int), newHttpCallback);
+    }
+
+
+    private HttpCallback<String> newHttpCallback = new HttpCallback<String>() {
+        @Override
+        public void onFailed(int what, String url, Object tag, CharSequence message, int responseCode, long networkMillis) {
+            MyLog.e(TAG,"failed________"+message.toString());
+            dialog.dismiss();
+        }
+
+        @Override
+        public void onSucceed(int what, Response<String> response) {
+            dialog.dismiss();
+            MyLog.e(TAG + "devicefragment", response.toString() );
+            if (response.get()!=null&&!response.get().isEmpty()) {
+                try {
+                    dialog.dismiss();
+                    CheckFirmwareVersionReponse checkVersionReponse = JSONObject.parseObject(response.get(), CheckFirmwareVersionReponse.class);
+                    if(checkVersionReponse.getModel_name()==null){
+//                        MyToast.show(PortalActivity.this, getString(R.string.bracelet_oad_version_top), Toast.LENGTH_LONG);
+                    }else {
+//                        powerManager = (PowerManager) activity.getSystemService(Service.POWER_SERVICE);
+//                        wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Lock");
+//                        //是否需计算锁的数量
+//                        wakeLock.setReferenceCounted(false);
+//                        //请求屏幕常亮，onResume()方法中执行
+//                        wakeLock.acquire();
+                        downLoadByRetrofit(checkVersionReponse.getModel_name(),
+                                checkVersionReponse.getFile_name(),Integer.parseInt(checkVersionReponse.getVersion_code()) ,
+                                "downloaddyh08.zip",false);
+                    }
+                }catch (Exception e){
+//                    MyToast.show(PortalActivity.this, getString(R.string.bracelet_oad_version_top), Toast.LENGTH_LONG);
+                }
+            } else {
+                dialog.dismiss();
+//                MyToast.show(PortalActivity.this,  getString(R.string.bracelet_oad_version_top), Toast.LENGTH_LONG);
+            }
+        }
+    };
+
+    public void downLoadByRetrofit(String model_name, String file_name, int version_int, final String saveFileName, final boolean OADDirect) {
+//        String message = getString(R.string.general_uploadingnewfirmware);
+        dialog_connect = new ProgressDialog(PortalActivity.this);
+        dialog_connect.setCancelable(false);
+        dialog_connect.show();
+        OADApi oadApi = FirmwareRetrofitClient.getInstance().create(OADApi.class);
+        HashMap<String, Object> objectObjectHashMap = new HashMap<>();
+        objectObjectHashMap.put("model_name", model_name);
+        objectObjectHashMap.put("file_name", file_name);
+
+        String versionString = version_int + "";
+        if (versionString.length()%2==1){
+            versionString = "0"+versionString ;
+        }
+        objectObjectHashMap.put("version_code",versionString);
+        Call<ResponseBody> responseBodyCall = oadApi.download_file("close",objectObjectHashMap);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                try {
+                    if (response.body()!=null) {
+                        MyLog.e(TAG, response.body().byteStream() + "");
+                        InputStream is = response.body().byteStream();
+                        file = getTempFile(PortalActivity.this, saveFileName);
+                        FileOutputStream fos = new FileOutputStream(file);
+                        BufferedInputStream bis = new BufferedInputStream(is);
+                        byte[] buffer = new byte[1024];
+                        int len;
+                        while ((len = bis.read(buffer)) != -1) {
+                            fos.write(buffer, 0, len);
+                        }
+                        fos.flush();
+                        fos.close();
+                        bis.close();
+                        is.close();
+                        Log.e(TAG, "下载完成" + saveFileName);
+                        dialog_connect.dismiss();
+                        onUploadClicked();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                MyLog.e(TAG, t.toString());
+                dialog_connect.dismiss();
+                Toast.makeText(PortalActivity.this, getString(R.string.bracelet_down_file_fail), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public File getTempFile(Context context, String name) {
+        File file = null;
+        try {
+            file = new File(context.getCacheDir(),name);
+        } catch (Exception e) {
+            // Error while creating file
+        }
+        return file;
+    }
+    //固件更新
     private final DfuProgressListenerAdapter mDfuProgressListener = new DfuProgressListenerAdapter() {
         @Override
         public void onProgressChanged(String deviceAddress, int percent, float speed, float avgSpeed, int currentPart, int partsTotal) {
             MyLog.e(TAG, "mDfuProgressListener" + percent + "----");
+
         }
 
         @Override
         public void onDfuCompleted(String deviceAddress) {
             super.onDfuCompleted(deviceAddress);
             MyLog.e(TAG, "mDfuProgressListener" + "---onDfuCompleted-");
+            progressDialog.dismiss();
+            Toast.makeText(PortalActivity.this,getString(R.string.user_info_update_success),Toast.LENGTH_SHORT).show();
+            provider.connect();
+            needTocheck = true ;
         }
 
         @Override
         public void onError(String deviceAddress, int error, int errorType, String message) {
             super.onError(deviceAddress, error, errorType, message);
             MyLog.e(TAG, "mDfuProgressListener" + "--onError--");
+            Toast.makeText(PortalActivity.this,getString(R.string.user_info_update_failure),Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+            pulltorefreshView.onRefreshComplete();
+            needTocheck = true ;
         }
     };
+
 }
 
 

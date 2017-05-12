@@ -1,6 +1,7 @@
 package com.linkloving.dyh08.http.basic;
 
 import android.content.Context;
+import android.nfc.Tag;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -31,6 +32,7 @@ public class NoHttpRuquestFactory {
     public final static String url= CommParams.SERVER_CONTROLLER_URL_ROOT+"MyControllerJSON";//服务器的根地址
 
     public final static String url_new= CommParams.SERVER_CONTROLLER_URL_NEW;//服务器的根地址（新）
+    public final static String checkFirmwareVersion = "http://www.robotime.com/check/";
 
     /**
      * 生成查看我关注的人接口参数
@@ -185,6 +187,18 @@ public class NoHttpRuquestFactory {
         dataFromClientNew.setJobDispatchId(JobDispatchConst.SNS_BASE);
         dataFromClientNew.setData(obj.toJSONString());
         httpsRequest.setRequestBody(JSON.toJSONString(dataFromClientNew).getBytes());
+        return httpsRequest;
+    }
+
+    //OAD最新版本信息获取
+    public static Request<String> creat_New_OAD_Request(String modelName,int version_int) {
+        MyJsonRequest httpsRequest = new MyJsonRequest(checkFirmwareVersion);
+        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
+        objectObjectHashMap.put("model_name",modelName);
+        objectObjectHashMap.put("version_code",version_int);
+        httpsRequest.setRequestBody(JSON.toJSONString(objectObjectHashMap));
+        MyLog.e(TAG,httpsRequest.toString());
+        MyLog.e(TAG,"JSON.toJSONString(objectObjectHashMap)."+JSON.toJSONString(objectObjectHashMap));
         return httpsRequest;
     }
 

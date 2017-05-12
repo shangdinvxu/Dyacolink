@@ -416,8 +416,7 @@
     <string name="user_info_update_user_psw_repeat_new_psw">Confirm Password</string>
     <string name="user_info_update_psw_title">Change Password</string>
     <string name="user_info_update_body_title">Profile Info</string>
-    <string name="user_info_update_success">Update successfully</string>
-    <string name="user_info_update_failure">Update failed.</string>
+    <string name="user_info_update_failure">更新失败</string>
     <string name="user_info_update_user_psw_old_psw_false">Error Password!</string>
     <string name="user_info_update_user_psw_new_psw_not_equal">Error Confirmation!</string>
     <string name="user_info_update_user_psw_length">less than 6 characters!</string>
@@ -480,7 +479,7 @@
     <string name="firmware_update_title">Firmware update</string>
     <string name="move_device_title"> Delete device</string>
     <string name="longsit_dialog_title">Time setting</string>
-    <string name="getting_version_information">Getting version information</string>
+    <string name="getting_version_information">正在获取版本信息</string>
     <string name="update_firmware">Update Firmware</string>
     <string name="being_written">Being written</string>
     <string name="start_upgrading">Download completed, start upgrading</string>
@@ -634,7 +633,6 @@
     <string name="bracelet_owner">Linkloving Devixe</string>
     <string name="brace_version">Firmware Vision</string>
     <string name="bracelet_oad_Portal">New firmware is available for your device, do you like to upgrade now?</string>
-    <string name="bracelet_oad_version_top">Your device\'s firmware is the latest version!</string>
     <string name="bracelet_oad_reason">Firmware upgrade failed because of the bluetooth connection was closed during the process!</string>
     <string name="bracelet_oad_keycodeback">Please do not operate during the upgrade!</string>
     <string name="bracelet_oad_failed_battery">The device is required to have at least 30% power for firmware upgrade, please charge your device first!</string>
@@ -679,7 +677,7 @@
     <string name="portal_main_gobound">Bund Device</string>
     <string name="portal_main_isbounding">Bunding..</string>
     <string name="portal_main_bounding">Bunding!Please pay attention to  the screen of Watch!</string>
-    <string name="portal_main_unbound_msg">You have not bunded the device, please bund one first. </string>
+    <string name="portal_main_unbound_msg">您尚未绑定设备，请先绑定。</string>
     <string name="portal_main_battery_low"> Low Power </string>
     <string name="portal_main_battery_low_msg">Your wristband current consumption is less than 10%, please charge as soon as possible!</string>
     <string name="portal_main_battery_ble_timeout">Bluetooth scan timeout, please try again later.</string>
@@ -1190,5 +1188,14 @@
     <string name="back">取消</string>
     <string name="heartrateSwitch">心率量测开/关</string>
     <string name="batteryShow">手环电量显示</string>
-    <string name="firmwareupdate">固件更新</string>
+    <string name="firmwareupdate">韧体更新</string>
+    <string name="firmwareupdate_finish">更新完成</string>
+    <string name="firmwareupdate_update">进行更新</string>
+    <string name="firmwareupdate_detail">请开启手机蓝芽与手环连接更新。依不同的网路连线状况，系统更新可能需数十秒至数分钟，系统更新并不会影响您的手环设定及APP中保留的历史数据，请耐心等待，系统会提示您更新完成。</string>
+    <string name="connect_network">请连线至网路</string>
+    <string name="hint">提示</string>
+    <string name="syncing">同步数据中…</string>
+    <string name="bracelet_oad_version_top">当前固件版本为最新版本</string>
+    <string name="updating">更新中</string>
+    <string name="user_info_update_success">更新完成</string>
 </resources>

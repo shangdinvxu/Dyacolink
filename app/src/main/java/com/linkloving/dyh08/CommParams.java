@@ -65,6 +65,9 @@ public class CommParams {
     //修改说说
     public final static int REQUEST_CODE_SHUOSHUO= 115;
 
+    //绑定心率手环
+    public final static int REQUEST_CODE_BOUND_HEART_BAND = 116;
+
 
     public final static int HTTP_LOGIN_QQ=11;
     public final static int HTTP_LOGIN_WECHAT=12;

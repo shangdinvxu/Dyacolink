@@ -416,7 +416,7 @@
     <string name="user_info_update_user_psw_repeat_new_psw">Confirm Password</string>
     <string name="user_info_update_psw_title">Change Password</string>
     <string name="user_info_update_body_title">Profile Info</string>
-    <string name="user_info_update_success">Update successfully</string>
+    <string name="user_info_update_success">Update complete</string>
     <string name="user_info_update_failure">Update failed.</string>
     <string name="user_info_update_user_psw_old_psw_false">Error Password!</string>
     <string name="user_info_update_user_psw_new_psw_not_equal">Error Confirmation!</string>
@@ -646,7 +646,7 @@
     <string name="bracelet_owner">Linkloving Devixe</string>
     <string name="brace_version">Firmware Vision</string>
     <string name="bracelet_oad_Portal">New firmware is available for your device, do you like to upgrade now?</string>
-    <string name="bracelet_oad_version_top">Your device\'s firmware is the latest version!</string>
+    <string name="bracelet_oad_version_top">The firmware is updated to the latest version.</string>
     <string name="bracelet_oad_reason">Firmware upgrade failed because of the bluetooth connection was closed during the process!</string>
     <string name="bracelet_oad_keycodeback">Please do not operate during the upgrade!</string>
     <string name="bracelet_oad_failed_battery">The device is required to have at least 30% power for firmware upgrade, please charge your device first!</string>
@@ -1230,6 +1230,12 @@
     <string name="firmwareupdate_detail">请与手环蓝芽连结后进行更新，让我们协助提升您的手环配备。依不同的网路连线状况，系统更新可能需数十秒至数分钟，
 系统更新并不会影响您的手环设定及APP中保留的历史资料，请耐心等待，系统会提示您更新完成。</string>
     <string name="firmwareupdate_finish">更新完成</string>
+    <string name="firmwareupdate_update">进行更新</string>
+
+
+    <string name="syncing">Syncing...</string>
+    <string name="updating">updating</string>
+    <string name="connect_network">請連線至網路</string>
 
 
 </resources>

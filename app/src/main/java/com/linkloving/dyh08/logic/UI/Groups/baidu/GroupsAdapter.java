@@ -93,6 +93,7 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     }
 
  /*   private int[] getSectionIndices() {
+
         //需要知道每个头在源数据里面的索引位置
         sectionIndices = new ArrayList<Integer>();
         String lastChar = mMonthData[0];

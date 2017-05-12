@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -30,6 +31,8 @@ import com.linkloving.dyh08.logic.dto.UserBase;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
 
+import net.hockeyapp.android.CrashManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +49,10 @@ public class AppStartActivity extends AppCompatActivity {
     private List<View> viewList;//view数组
     private PagerAdapter pagerAdapter;
     private UserEntity userAuthedInfo;
+    /**
+     * Shared preferences key for always send dialog button.
+     */
+    private static final String ALWAYS_SEND_KEY = "always_send_crash_reports";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +146,14 @@ public class AppStartActivity extends AppCompatActivity {
 
         // 读取SharedPreferences中需要的数据
         sp = getSharedPreferences("Y_Setting", Context.MODE_PRIVATE);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppStartActivity.this);
+        boolean aBoolean = prefs.getBoolean(ALWAYS_SEND_KEY, false);
+        if (!aBoolean ) {
+            SharedPreferences.Editor edit = prefs.edit();
+            edit.putBoolean(ALWAYS_SEND_KEY, true);
+            edit.apply();
+        }
+
         /**
          * 如果用户不是第一次使用则直接调转到显示界面,否则调转到引导界面
          */

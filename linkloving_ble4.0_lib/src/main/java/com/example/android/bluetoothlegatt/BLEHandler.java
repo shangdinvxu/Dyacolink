@@ -599,6 +599,11 @@ public abstract class BLEHandler extends Handler {
 	public void handleMessage(Message msg) {
 		super.handleMessage(msg);
 		switch (msg.what) {
+		case BLEProvider.INDEX_GET_EXCEPTION_INFO:
+			if (msg.obj!=null){
+				handleExceptionInfo((byte[]) msg.obj);
+			}
+			break;
 		case BLEProvider.MSG_BLE_CONNECT_FAILED:
 			handleConnectFailedMsg();
 			break;
@@ -942,6 +947,11 @@ public abstract class BLEHandler extends Handler {
 		if (bleProviderObserver != null)
 			bleProviderObserver.updateFor_handleConnectFailedMsg();
 	}
+
+
+	protected void handleExceptionInfo(byte[] bytes) {
+	}
+
 
 	protected void handleConnectLostMsg() {
 		OwnLog.e(TAG, "连接断开！！！！！！！！！！！！！！！");
