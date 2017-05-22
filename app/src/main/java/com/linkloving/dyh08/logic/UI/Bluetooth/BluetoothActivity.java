@@ -390,7 +390,7 @@ public class BluetoothActivity extends ToolBarActivity {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
                                provider.unBoundDevice(BluetoothActivity.this);
-                               provider.connect();
+                               provider.requestbound_fit(BluetoothActivity.this);
                            }
                        }).setMessage(getString(R.string.Need_format))
                                .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
@@ -400,6 +400,7 @@ public class BluetoothActivity extends ToolBarActivity {
                                        if (progressDialog != null && progressDialog.isShowing()){
                                            progressDialog.dismiss();
                                        }
+
                                    }
                                })
                                .setCancelable(false)

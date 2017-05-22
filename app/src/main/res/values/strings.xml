@@ -1236,6 +1236,10 @@
     <string name="syncing">Syncing...</string>
     <string name="updating">updating</string>
     <string name="connect_network">請連線至網路</string>
+    <string name="downloading">Downloading...</string>
+    <string name="firmware_updating">firmware updating</string>
+    <string name="hint">Hint</string>
+    <string name="please_stay_in">please stay in this page until update completed</string>
 
 
 </resources>

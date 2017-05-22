@@ -35,6 +35,7 @@ import java.util.Locale;
 
 import Trace.GreenDao.DaoMaster;
 import Trace.GreenDao.Note;
+import rx.Observable;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 /**
@@ -80,6 +81,8 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
         list = traGreendao.searchAllMonthtimes();
         startTimeList = traGreendao.searchAllStarttime();
         endTimeList = traGreendao.searchAllEndTime();
+
+
 
         mMonthData = new String[list.size()];
         for (int i = 0 ;i< list.size();i++){

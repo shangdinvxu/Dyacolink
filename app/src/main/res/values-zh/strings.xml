@@ -1198,4 +1198,6 @@
     <string name="bracelet_oad_version_top">当前固件版本为最新版本</string>
     <string name="updating">更新中</string>
     <string name="user_info_update_success">更新完成</string>
+    <string name="firmware_updating">固件更新中</string>
+    <string name="please_stay_in">韧体更新中，请勿操作。</string>
 </resources>

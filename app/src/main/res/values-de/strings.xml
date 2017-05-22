@@ -1193,5 +1193,8 @@
     <string name="firmwareupdate_detail">Bitte aktivieren Sie Ihr Bluetooth und Armband Anschluss Update. Bitte lassen Sie uns bei der Aktualisierung Ihres Smart-Band-Geräts helfen. Abhängig von der Geschwindigkeit des Internets wird die Aktualisierungszeit auf etwa 10 Sekunden bis zu einigen Minuten geschätzt. Systemaktualisierungen beeinträchtigen die aktuelle Einstellung des Smart-Bandes und gespeicherten Informationen nicht. Bitte warten Sie. Das System benachrichtigt Sie, wenn das Update abgeschlossen ist.</string>
     <string name="batteryShow">Smart Band Batterieanzeige</string>
     <string name="connect_network">Bitte mit dem Internet</string>
+    <string name="firmware_updating">firmware updating</string>
+    <string name="hint">Prompt</string>
+    <string name="please_stay_in">please stay in this page until update completed</string>
 
 </resources>

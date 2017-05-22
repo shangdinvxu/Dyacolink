@@ -39,6 +39,8 @@ import com.linkloving.dyh08.db.sport.UserDeviceRecord;
 import com.linkloving.dyh08.db.summary.DaySynopicTable;
 import com.linkloving.dyh08.logic.UI.HeartRate.GreendaoUtils;
 import com.linkloving.dyh08.logic.UI.device.incomingtel.IncomingTelActivity;
+import com.linkloving.dyh08.logic.UI.main.GetHeartEvent;
+import com.linkloving.dyh08.logic.UI.main.HeartrateFinishEvent;
 import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.dto.UserEntity;
@@ -53,6 +55,8 @@ import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.dyh08.utils.sportUtils.SportDataHelper;
 import com.linkloving.dyh08.utils.sportUtils.TimeUtils;
 import com.baidu.trace.Trace;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -509,7 +513,7 @@ public class BleService extends Service {
             @Override
             protected void notifyForDeviceUnboundSucess_D() {
                 // 解绑成功时，无条件保证重置本地用户存储的mac地址
-                MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity().setLast_sync_device_id(null);
+//                MyApplication.getInstance(BleService.this).getLocalUserInfoProvider().getDeviceEntity().setLast_sync_device_id(null);
                 super.notifyForDeviceUnboundSucess_D();
                 MyLog.e(TAG, "设备解绑成功");
             }
@@ -558,11 +562,11 @@ public class BleService extends Service {
                     } else {
                         MyLog.e(TAG,"latestDeviceInfo是null的时候 重新获取一次");
                         //返回的latestDeviceInfo是null的时候 重新获取一次
-                        if (provider.isConnectedAndDiscovered()) {
+                      /*  if (provider.isConnectedAndDiscovered()) {
                             LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
                             lpDeviceInfo.userId = userEntity.getUser_id();
                             provider.getAllDeviceInfoNew(BleService.this,lpDeviceInfo);
-                        }
+                        }*/
                     }
                 }
             }
@@ -654,6 +658,7 @@ public class BleService extends Service {
                 //设置时间指令
                 provider.SetDeviceTime(BleService.this);
                 provider.GetHeartrate(BleService.this);
+                EventBus.getDefault().post(new GetHeartEvent());
                 provider.getworkOutdata(BleService.this);
                 try {
                     Thread.sleep(1000);
@@ -697,6 +702,7 @@ public class BleService extends Service {
                     greendaoUtils.addwhole(obj1.getStartTime(),obj1.getAvgRate(),obj1.getMaxRate(),
                             obj1.getFakeAvgRate(),obj1.getFakeMaxRate());
                 }
+                EventBus.getDefault().post(new HeartrateFinishEvent());
                 provider.get_exceptionInfo(BleService.this);
             }
 

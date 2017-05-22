@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -97,6 +98,10 @@ public class GeneralActivity extends ToolBarActivity {
     private ImageView uploadImageview;
     private TextView updateTextview;
 
+    private ProgressBar progressbar;
+    private TextView progressInt;
+    private AlertDialog downloadingProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,6 +176,8 @@ public class GeneralActivity extends ToolBarActivity {
     private final DfuProgressListenerAdapter mDfuProgressListener = new DfuProgressListenerAdapter() {
         @Override
         public void onProgressChanged(String deviceAddress, int percent, float speed, float avgSpeed, int currentPart, int partsTotal) {
+            progressbar.setProgress(percent);
+            progressInt.setText(percent+"%");
             MyLog.e(TAG, "mDfuProgressListener" + percent + "----");
         }
 
@@ -181,7 +188,8 @@ public class GeneralActivity extends ToolBarActivity {
             Toast.makeText(GeneralActivity.this,getString(R.string.user_info_update_success),Toast.LENGTH_SHORT).show();
             updateTextview.setText(getString(R.string.firmwareupdate_finish));
             uploadImageview.setImageResource(R.mipmap.update_finish);
-            progressDialog.dismiss();
+            provider.connect();
+            downloadingProgressDialog.dismiss();
         }
 
         @Override
@@ -189,15 +197,21 @@ public class GeneralActivity extends ToolBarActivity {
             super.onError(deviceAddress, error, errorType, message);
             Toast.makeText(GeneralActivity.this,getString(R.string.user_info_update_failure),Toast.LENGTH_SHORT).show();
             MyLog.e(TAG, "mDfuProgressListener" + "--onError--");
-            progressDialog.dismiss();
+            downloadingProgressDialog.dismiss();
+            provider.connect();
         }
     };
 
     public void onUploadClicked() {
         MyLog.e(TAG, "onUploadClicked执行了");
-        progressDialog = new ProgressDialog(GeneralActivity.this);
-        progressDialog.setMessage(getString(R.string.updating));
-        progressDialog.show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(GeneralActivity.this);
+        View view = LayoutInflater.from(GeneralActivity.this).inflate(R.layout.progress_dialog, null);
+        progressbar = (ProgressBar) view.findViewById(R.id.progressbar);
+        progressInt = (TextView) view.findViewById(R.id.progressInt);
+        builder.setView(view);
+        downloadingProgressDialog = builder.create();
+        downloadingProgressDialog.setCancelable(false);
+        downloadingProgressDialog.show();
         DfuServiceInitiator starter = new DfuServiceInitiator(userEntity.getDeviceEntity().getLast_sync_device_id())
                 .setDeviceName("DYH_01")
                 .setKeepBond(false)
@@ -248,6 +262,7 @@ public class GeneralActivity extends ToolBarActivity {
     private void downloadZip() {
         dialog = new ProgressDialog(GeneralActivity.this);
         dialog.setMessage(getString(R.string.getting_version_information));
+        localDeviceInfo = PreferencesToolkits.getLocalDeviceInfo(GeneralActivity.this);
         int version_int = ToolKits.makeShort(localDeviceInfo.version_byte[1], localDeviceInfo.version_byte[0]);
         CallServer.getRequestInstance().add(GeneralActivity.this, false,
                 CommParams.HTTP_OAD, NoHttpRuquestFactory.creat_New_OAD_Request(localDeviceInfo.getModelname()
@@ -258,7 +273,6 @@ public class GeneralActivity extends ToolBarActivity {
     private HttpCallback<String> newHttpCallback = new HttpCallback<String>() {
         @Override
         public void onFailed(int what, String url, Object tag, CharSequence message, int responseCode, long networkMillis) {
-            MyLog.e(TAG,"failed________"+message.toString());
             dialog.dismiss();
         }
 
