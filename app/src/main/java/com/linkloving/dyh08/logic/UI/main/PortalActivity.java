@@ -208,7 +208,6 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
     private Handler timeHandler = new Handler();
 
     private FragmentTransaction transaction;
-    private int caloriesSave  = 0;
 
     /**
      * 当前正在运行中的数据加载异步线程(放全局的目的是尽量控制当前只有一个在运行，防止用户恶意切换导致OOM)
@@ -301,7 +300,6 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                     //开始同步
                     BleService.getInstance(PortalActivity.this).syncAllDeviceInfoAuto(PortalActivity.this, false, null);
                     mScrollViewRefreshingHandler.post(mScrollViewRefreshingRunnable);
-                    calView.setText(caloriesSave+"");
                 }
             }
 
@@ -856,10 +854,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
 
                 MyApplication.getInstance(PortalActivity.this).setOld_calories(calValue);
                 calView.setText(calValue+ "");
-                caloriesSave  =calValue ;
 //                MyApplication.getInstance(PortalActivity.this).setOld_calories(walkCal+runCal);
-//                calView.setText((walkCal+runCal) + "");
-//                caloriesSave  =walkCal+runCal ;
 
                 if (progressDialog != null && progressDialog.isShowing())
                     progressDialog.dismiss();

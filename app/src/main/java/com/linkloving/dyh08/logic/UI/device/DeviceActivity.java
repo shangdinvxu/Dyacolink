@@ -280,6 +280,7 @@ public class DeviceActivity extends ToolBarActivity implements View.OnClickListe
                             .setPositiveButton(ToolKits.getStringbyId(DeviceActivity.this, R.string.general_ok), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+
                                     //请求解绑设备
                                     if(MyApplication.getInstance(DeviceActivity.this).isLocalDeviceNetworkOk()) {
                                         String last_sync_device_id2 = userEntity.getDeviceEntity().getLast_sync_device_id2();
