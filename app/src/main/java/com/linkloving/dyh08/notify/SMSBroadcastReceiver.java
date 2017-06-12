@@ -80,8 +80,8 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
 		                   msg= SmsMessage.createFromPdu((byte[]) p);
 		                   String msgTxt =msg.getMessageBody();
 		                   String senderNumber = msg.getOriginatingAddress();
-		                   Log.e(TAG, "发送人："+senderNumber+"  短信内容："+msgTxt);
-		                   Log.e(TAG, "seq的值："+seq);
+						   Log.e(TAG, "发送人："+senderNumber+"  短信内容："+msgTxt);
+						   Log.e(TAG, "seq的值："+seq);
     		     		   try {
 							provider.setNotification_MSG(context, (byte)seq, CutString.stringtobyte(PhoneReceiver.getContactNameByPhoneNumber(context, senderNumber), 24), CutString.stringtobyte(msgTxt, 84));
 							seq++;

@@ -231,6 +231,7 @@ public class BLEWapper  implements BLEInterface {
 				if(headData!=null){
 					LPUtil.printData(headData,"Revice  Data");
 					headDataLen = headData.length ;
+
 					synchronized (BLEWapper.class) {
 						BLEWapper.class.notify();
 					}
@@ -485,11 +486,12 @@ public class BLEWapper  implements BLEInterface {
 				 byte[] send_data = new byte[data.length-(i*20)<20?data.length-(i*20):20];
 				 System.arraycopy(data, i*20, send_data, 0, data.length-(i*20)<20?data.length-(i*20):20);
 				 if(REC_CMD==0){
+					 LPUtil.printData(send_data,"writeCharacteristic发送的数据是");
 					 writeCharacteristic.setValue(send_data);
 				     mBluetoothGatt.writeCharacteristic(writeCharacteristic);
 				     synchronized (BLEWapper.class) {
 							try {
-								OwnLog.d(TAG, "...................waiting.........................");
+								OwnLog.e(TAG, "...................waiting.........................");
 								BLEWapper.class.wait(TIMEOUT);
 							} catch (InterruptedException e) {
 								OwnLog.d(TAG, "................InterruptedException................");

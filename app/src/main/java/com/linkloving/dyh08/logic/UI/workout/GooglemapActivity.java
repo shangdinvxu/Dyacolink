@@ -15,6 +15,8 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -110,29 +112,28 @@ public class GooglemapActivity extends ToolBarActivity implements OnMapReadyCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.googlemap);
         ButterKnife.inject(this);
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+//        SupportMapFragment mapFragment =
+//                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
+        addGoogleMapFragment();
         createLocationRequest();
-//        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-//                .addLocationRequest(mLocationRequest);
         googleApiClient = new GoogleApiClient.Builder(GooglemapActivity.this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                     @Override
                     public void onConnected(@Nullable Bundle bundle) {
-
+                        MyLog.e(TAG,"google 连接+onConnected");
                     }
 
                     @Override
                     public void onConnectionSuspended(int i) {
-
+                        MyLog.e(TAG,"google 连接+onConnectionSuspended");
                     }
                 })
                 .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+                        Toast.makeText(GooglemapActivity.this,"连接到Google Client 失败",Toast.LENGTH_SHORT).show();
                     }
                 }).build();
         googleApiClient.connect();
@@ -169,21 +170,21 @@ public class GooglemapActivity extends ToolBarActivity implements OnMapReadyCall
         startTimeLong = sharedPreferencesbegin.getLong("startTimeLong", 0);
         if (isClickStart) {
             secondMiddle.setVisibility(View.VISIBLE);
-//            relativeLayout.setBackgroundColor(Color.BLACK);
-//            relativeLayout.getBackground().setAlpha(150);
         }
-
-
-       /* new Handler().postDelayed(new Runnable()
-        {
-            public void run()
-            {
-                requestLocationUpdates();
-            }
-        }, 2000);*/
         locationsp = getSharedPreferences("Location", MODE_PRIVATE);
         edit = locationsp.edit();
     }
+
+
+    private void addGoogleMapFragment(){
+        SupportMapFragment supportMapFragment = new SupportMapFragment();
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.google_map_framelayout,supportMapFragment);
+        fragmentTransaction.commit();
+        supportMapFragment.getMapAsync(this);
+    }
+
 
 
 
@@ -375,7 +376,6 @@ public class GooglemapActivity extends ToolBarActivity implements OnMapReadyCall
 
     public void requestLocationUpdates(Location location) {
 
-//        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, mLocationRequest, this);
         Location myLocation = location ;
         LatLng mapCenter = null ;
         if(myLocation==null) {
@@ -410,6 +410,7 @@ public class GooglemapActivity extends ToolBarActivity implements OnMapReadyCall
     public void requestLocationUpdates() {
         LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, mLocationRequest, this);
         Location myLocation = mgoogleMap.getMyLocation();
+        if (myLocation==null)return;
         LatLng mapCenter = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
 
         mgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapCenter, 13));

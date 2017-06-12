@@ -92,6 +92,7 @@ import com.linkloving.dyh08.utils.ToolKits;
 import com.linkloving.dyh08.utils.TypefaceUtils;
 import com.linkloving.dyh08.utils.logUtils.MyLog;
 import com.linkloving.dyh08.utils.manager.AsyncTaskManger;
+import com.linkloving.dyh08.utils.sportUtils.CaloriesUtils;
 import com.linkloving.dyh08.utils.sportUtils.SportDataHelper;
 import com.linkloving.utils.TimeZoneHelper;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -787,6 +788,10 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                     if (progressDialog != null && progressDialog.isShowing())
                         progressDialog.dismiss();
                     AsyncTaskManger.getAsyncTaskManger().removeAsyncTask(this);
+                    /**基础卡路里*/
+                    int caloriesNow = CaloriesUtils.getCaloriesNow(PortalActivity.this);
+                    MyApplication.getInstance(PortalActivity.this).setOld_calories(caloriesNow);
+                    calView.setText(caloriesNow+ "");
                     return;
                 }
                 //daySynopic:[data_date=2016-04-14,data_date2=null,time_zone=480,record_id=null,user_id=null,run_duration=1.0,run_step=68.0,run_distance=98.0
@@ -841,21 +846,11 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                 int walkCal = ToolKits.calculateCalories(Float.parseFloat(mDaySynopic.getWork_distance()), (int) walktime * 60, userEntity.getUserBase().getUser_weight());
                 int runCal = ToolKits.calculateCalories(Float.parseFloat(mDaySynopic.getRun_distance()), (int) runtime * 60, userEntity.getUserBase().getUser_weight());
                 //基础卡路里
-                ToolKits toolKits = new ToolKits();
-                int calorieseveryday = toolKits.getCalories(PortalActivity.this);
-                Date dateToday = new Date();
-                SimpleDateFormat hh = new SimpleDateFormat("HH", Locale.getDefault());
-                String HH = hh.format(dateToday);
-                SimpleDateFormat mm = new SimpleDateFormat("mm", Locale.getDefault());
-                String MM = mm.format(dateToday);
-                int caloriesNow = calorieseveryday * (Integer.parseInt(HH) * 60 + Integer.parseInt(MM)) / 1440;
+                int caloriesNow = CaloriesUtils.getCaloriesNow(PortalActivity.this);
                 MyLog.e("caloriesNow",caloriesNow+"caloriesNow");
                 int calValue = caloriesNow+walkCal+runCal ;
-
                 MyApplication.getInstance(PortalActivity.this).setOld_calories(calValue);
                 calView.setText(calValue+ "");
-//                MyApplication.getInstance(PortalActivity.this).setOld_calories(walkCal+runCal);
-
                 if (progressDialog != null && progressDialog.isShowing())
                     progressDialog.dismiss();
                 AsyncTaskManger.getAsyncTaskManger().removeAsyncTask(this);
@@ -886,6 +881,10 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                             public void run() {
                                 String timeWithStr = CommonUtils.getTimeWithStrNoS(":");
                                 String dateWithStr = CommonUtils.getDateWithStr();
+                                String timeWithStr1 = CommonUtils.getTimeWithStr();
+                                if (timeWithStr1.equals("00:00:00")){
+                                    getInfoFromDB();
+                                }
                                 main_tv_hour.setText(timeWithStr);
                                 main_tv_day.setText(dateWithStr);
                             }

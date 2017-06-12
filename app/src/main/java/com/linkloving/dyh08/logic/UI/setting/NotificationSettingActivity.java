@@ -767,10 +767,10 @@ public class NotificationSettingActivity extends ToolBarActivity {
             }
         });
         final SharedPreferences messagenotification = getSharedPreferences("Messagenotification", MODE_PRIVATE);
-        boolean switchPhonecallBoolean = messagenotification.getBoolean("switchPhonecall", false);
-        boolean switchTextmessageBoolean = messagenotification.getBoolean("switchTextmessage", false);
-        boolean switchEmailBoolean = messagenotification.getBoolean("switchEmail", false);
-        boolean switchMessagingBoolean = messagenotification.getBoolean("switchMessagingapps", false);
+        boolean switchPhonecallBoolean = messagenotification.getBoolean("switchPhonecall", true);
+        boolean switchTextmessageBoolean = messagenotification.getBoolean("switchTextmessage", true);
+        boolean switchEmailBoolean = messagenotification.getBoolean("switchEmail", true);
+        boolean switchMessagingBoolean = messagenotification.getBoolean("switchMessagingapps", true);
 
         Switch switchPhonecall = (Switch) view.findViewById(R.id.switchPhoneCall);
         switchPhonecall.setChecked(switchPhonecallBoolean);

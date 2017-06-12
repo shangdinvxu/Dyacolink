@@ -80,6 +80,6 @@ public class BluetoothBindActivity extends ToolBarActivity {
     void clickReconnect(View view)
     {
         finish();
-        IntentFactory.startBindActivity3(BluetoothBindActivity.this);
+        IntentFactory.start_Bluetooth(BluetoothBindActivity.this);
     }
 }

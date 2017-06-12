@@ -580,7 +580,7 @@ public class BleService extends Service {
                 String goalCalories = PreferencesToolkits.getGoalInfo(BleService.this, PreferencesToolkits.KEY_GOAL_CAL);
                 LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
                 lpDeviceInfo.stepDayTotals = Integer.parseInt(goalStep);
-                lpDeviceInfo.distenceDayTotals = Integer.parseInt(goalDistance);
+                lpDeviceInfo.distenceDayTotals = (Integer.parseInt(goalDistance))*1000;
                 lpDeviceInfo.CaloriesTotals = Integer.parseInt(goalCalories);
                 provider.setTarget(BleService.this,lpDeviceInfo);
             }

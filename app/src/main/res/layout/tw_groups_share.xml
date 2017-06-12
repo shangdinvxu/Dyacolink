@@ -26,8 +26,6 @@
 
 
 
-
-
     <LinearLayout
         android:id="@+id/screenhot"
         android:layout_width="match_parent"

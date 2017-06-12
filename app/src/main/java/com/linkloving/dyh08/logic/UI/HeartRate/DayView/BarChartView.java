@@ -201,6 +201,7 @@ public class BarChartView extends RelativeLayout {
                 isShowPopupWindow = true;
                 listPostion = i;
                 MyLog.e(TAG, "isShowPopupWindow = true");
+                break;
             }
         }
         if (isShowPopupWindow) {

@@ -1,26 +1,18 @@
 package com.linkloving.dyh08.logic.UI.Groups.baidu;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Looper;
-import android.os.PersistableBundle;
 import android.support.v7.widget.AppCompatTextView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,12 +49,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.linkloving.band.dto.SportRecord;
-import com.linkloving.dyh08.IntentFactory;
 import com.linkloving.dyh08.MyApplication;
 import com.linkloving.dyh08.R;
 import com.linkloving.dyh08.basic.toolbar.ToolBarActivity;
 import com.linkloving.dyh08.db.sport.UserDeviceRecord;
-import com.linkloving.dyh08.logic.UI.workout.GooglemapActivity;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.UI.workout.trackshow.TrackApplication;
 import com.linkloving.dyh08.logic.UI.workout.trackshow.WorkoutActivity;
@@ -90,7 +80,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Formatter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -102,23 +91,14 @@ import Trace.GreenDao.Note;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import cn.sharesdk.facebook.Facebook;
 import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.instagram.Instagram;
 import cn.sharesdk.linkedin.LinkedIn;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.onekeyshare.OnekeyShareTheme;
-import cn.sharesdk.tencent.qq.QQ;
-import cn.sharesdk.wechat.moments.WechatMoments;
-import cn.sharesdk.wechat.utils.WechatHelper;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
 import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.schedulers.Schedulers;
 
 import static com.linkloving.dyh08.R.id.gourps_topmap;
 
@@ -139,17 +119,9 @@ public class GroupsShareActivity extends ToolBarActivity implements OnMapReadyCa
     AppCompatTextView groupsTvDistance;
     @InjectView(R.id.main_tv_Duration)
     AppCompatTextView groupsTvDuration;
-    private static Overlay overlay = null;
-    //    @InjectView(R.id.twitter_share)
-//    ImageView twitterShare;
-//    @InjectView(R.id.instagram_share)
-//    ImageView instagramShare;
-//    @InjectView(R.id.fb_share)
-//    ImageView fbShare;
-//    @InjectView(R.id.google_share)
-//    ImageView googleShare;
     @InjectView(R.id.shareET)
     EditText shareText;
+
     @InjectView(R.id.shareWhere)
     EditText shareWhereText;
     @InjectView(R.id.sharebutton)
@@ -157,8 +129,9 @@ public class GroupsShareActivity extends ToolBarActivity implements OnMapReadyCa
     @InjectView(R.id.screenhot)
     LinearLayout screenhot;
 
+    private static Overlay overlay = null;
     private int user_id;
-    private static BaiduMap map = null;
+    private static BaiduMap baiduMap = null;
     private SQLiteDatabase db;
     private DaoMaster.DevOpenHelper devOpenHelper;
     private List<Note> startTimeList;
@@ -215,19 +188,24 @@ public class GroupsShareActivity extends ToolBarActivity implements OnMapReadyCa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tw_groups_share);
+        ButterKnife.inject(this);
         view = LayoutInflater.from(GroupsShareActivity.this).inflate(R.layout.tw_share_day, null);
+        locationsp = getSharedPreferences("Location", MODE_PRIVATE);
+        ShareSDK.initSDK(GroupsShareActivity.this);
+        user_id = MyApplication.getInstance(GroupsShareActivity.this).getLocalUserInfoProvider().getUser_id();
+        user_weight = MyApplication.getInstance(GroupsShareActivity.this).getLocalUserInfoProvider().getUserBase().getUser_weight();
 
         /**加载google 地图*/
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        locationsp = getSharedPreferences("Location", MODE_PRIVATE);
+        baiduMap = gourpsTopmap.getMap();
+        initDataOnView();
+        initOnTrackListener();
+        initPopupWindow();
+    }
 
-        ButterKnife.inject(this);
-        ShareSDK.initSDK(GroupsShareActivity.this);
-        user_id = MyApplication.getInstance(GroupsShareActivity.this).getLocalUserInfoProvider().getUser_id();
-        user_weight = MyApplication.getInstance(GroupsShareActivity.this).getLocalUserInfoProvider().getUserBase().getUser_weight();
-        map = gourpsTopmap.getMap();
+    private void initDataOnView() {
         Intent intent = getIntent();
         String postionStr = intent.getStringExtra("postion");
         position = Integer.valueOf(postionStr);
@@ -236,32 +214,20 @@ public class GroupsShareActivity extends ToolBarActivity implements OnMapReadyCa
         traGreendao = new TraceGreendao(GroupsShareActivity.this, db);
         startTimeList = traGreendao.searchAllStarttime();
         endTimeList = traGreendao.searchAllEndTime();
-//        workDataNotes = traGreendao.searchWorkData();
-//        startTimeList.addAll( workDataNotes);
-//        endTimeList.addAll(workDataNotes);
         sort sort = new sort();
         Collections.sort(startTimeList, sort);
         Collections.sort(endTimeList, sort);
         startDate = startTimeList.get(position).getStartDate();
         endDate = endTimeList.get(position).getStartDate();
-//        List<Note> lists = traGreendao.searchLocation(startDate, endDate);
         String durtion = getDurtion(position);
         groupsTvDuration.setText(durtion);
         groupsTvDistance.setText(getDistanceKM() + "");
-//        for (int i = 0; i < lists.size(); i++) {
-//            Date runDate = lists.get(i).getRunDate();
-//            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-//            String format1 = simpleDateFormat1.format(runDate);
-//            showRealtimeTrack(lists.get(i).getLatitude(), lists.get(i).getLongitude());
-//        }
         groupsTvStep.setText(getStep() + "");
         groupsTime.setText(getMiddleTime());
         groupsTvCalories.setText(getCalories() + "");
-        initOnTrackListener();
-        initPopupWindow();
-//        isGoogle();
-//        queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
+
     }
+
 
     //判断百度还是google 2,运动数据1.
     public void isGoogle(){
@@ -341,8 +307,6 @@ public class GroupsShareActivity extends ToolBarActivity implements OnMapReadyCa
     }
 
     public void locationUpdates(Location location) {
-
-//        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, mLocationRequest, this);
         Location myLocation = location;
         com.google.android.gms.maps.model.LatLng mapCenter = null;
         if (myLocation == null) {
@@ -476,7 +440,7 @@ public class GroupsShareActivity extends ToolBarActivity implements OnMapReadyCa
     private void drawHistoryTrack(final List<LatLng> points, final double distance) {
 
         // 绘制新覆盖物前，清空之前的覆盖物
-        map.clear();
+        baiduMap.clear();
 
         if (points.size() == 1) {
             points.add(points.get(0));
@@ -519,7 +483,7 @@ public class GroupsShareActivity extends ToolBarActivity implements OnMapReadyCa
 
             addMarker();
             /**设置精度*/
-            map.animateMapStatus(MapStatusUpdateFactory.zoomTo(16));
+            baiduMap.animateMapStatus(MapStatusUpdateFactory.zoomTo(16));
 
 
             MyLog.e("当前轨迹里程为 : " + (int) distance + "米");
@@ -649,7 +613,7 @@ public class GroupsShareActivity extends ToolBarActivity implements OnMapReadyCa
 //               截图分两步
                 /**把下面的部分截图*/
                 ToolKits.saveFile(ToolKits.getViewBitmap(screenhot), filePathCacheUnder);
-                getScreenHot(map);
+                getScreenHot(baiduMap);
                 getScreenGoogle(mGoogleMap);
                 if (BitmapFactory.decodeFile(filePathCache) != null) {
                     final Bitmap bitmap = ToolKits.mergeBitmap_TB(BitmapFactory.decodeFile(filePathCache),
@@ -949,17 +913,17 @@ public class GroupsShareActivity extends ToolBarActivity implements OnMapReadyCa
     protected static void addMarker() {
 
         if (null != msUpdate) {
-            map.setMapStatus(msUpdate);
+            baiduMap.setMapStatus(msUpdate);
         }
 
         // 路线覆盖物
         if (null != polyline) {
-            map.addOverlay(polyline);
+            baiduMap.addOverlay(polyline);
         }
 
         // 实时点覆盖物
         if (null != overlayOptions) {
-            overlay = map.addOverlay(overlayOptions);
+            overlay = baiduMap.addOverlay(overlayOptions);
         }
 
     }

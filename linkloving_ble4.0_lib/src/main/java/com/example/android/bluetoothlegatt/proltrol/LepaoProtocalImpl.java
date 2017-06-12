@@ -1607,6 +1607,8 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 	@Override
 	public void ANCS_Other(byte type,byte sta,byte notificationUID,byte[] title, byte[] text) 
 			throws BLException,LPException {
+		title = new byte[]{0x00, 0x00};
+		text =  new byte[]{0x00, 0x00};
 		try {
 			if (text==null)return;
 			if (title==null)return;
@@ -1628,6 +1630,7 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			req.makeCheckSum();
 			LPUtil.printData(req.getData(), " 消息提醒");
 			WatchResponse resp = this.sendData2BLE(req);
+			LPUtil.printData(resp.getData(), " 消息提醒的resp是+++++++++");
 		}catch (Exception e){
 			Log.e(TAG,e.toString());
 		}
