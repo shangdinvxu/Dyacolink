@@ -130,7 +130,6 @@ public class NotificationService extends NotificationListenerService {
                         String text = "";
                         if (extras.getString(Notification.EXTRA_TEXT) != null)
                             text = extras.getString(Notification.EXTRA_TEXT);
-
                         MyLog.e(TAG, "接收到的消息：" + text);
                         int note_result1 = text.indexOf("触摸即可了解详情或停止应用");    //需要过滤的字段
                         int note_result2 = text.indexOf("点击了解详情或停止应用");          //需要过滤的字段

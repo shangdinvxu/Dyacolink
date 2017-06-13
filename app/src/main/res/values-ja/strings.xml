@@ -1186,16 +1186,17 @@
     <string name="syncing">Syncing...</string>
     <string name="bracelet_oad_version_top">アップデートが完了しました</string>
     <string name="updating">更新</string>
-    <string name="user_info_update_success">アップデート完了</string>
+    <string name="user_info_update_success">更新完成</string>
     <string name="user_info_update_failure">更新に失敗しました</string>
-    <string name="firmwareupdate">アップデート</string>
-    <string name="firmwareupdate_detail">本製品をBluetoothでスマートフォンに接続し、アップデートを行ってください。アップデートは約10秒で完了しますが、ネットワーク環境によっては数分を要することもあります。なお、アップデート後も、元の設定やデータは保持されます。アップデート完了の通知が表示されるまで、スマートフォンのBluetoothをオフにしないでください。</string>
+    <string name="firmwareupdate">韌體更新</string>
+    <string name="firmwareupdate_update">進行更新</string>
+    <string name="firmwareupdate_detail">アップデートより良い機能を提供するためにアップデートを行う必要があり、スマートフォンのBluetooth設定オンにして、バンドの更新を行ってください。アップデートには早ければ約10秒程度、インターネット接続状況により数分間をかかる場合もある。更新後、元の設定やアプリで保存したデータはなくならないので、ご安心ください。しばらくお待ちください。</string>
     <string name="batteryShow">バッテリー残量</string>
     <string name="heartrateSwitch">心拍数</string>
     <string name="connect_network">ネットワークに接続してください</string>
     <string name="confirm">確認</string>
     <string name="firmware_updating">firmware updating</string>
     <string name="hint">プロンプト</string>
-    <string name="please_stay_in">please stay in this page until update completed</string>
+    <string name="please_stay_in">更新が終わるまでこのページから移動せず、このままお待ちください</string>
 
 </resources>

@@ -792,6 +792,11 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
                     int caloriesNow = CaloriesUtils.getCaloriesNow(PortalActivity.this);
                     MyApplication.getInstance(PortalActivity.this).setOld_calories(caloriesNow);
                     calView.setText(caloriesNow+ "");
+                    stepView.setText(0 + "");
+                    MyApplication.getInstance(PortalActivity.this).setOld_step(0);
+                    MyApplication.getInstance(PortalActivity.this).setOld_distance(0);
+                    distanceView.setText(0 + "");
+
                     return;
                 }
                 //daySynopic:[data_date=2016-04-14,data_date2=null,time_zone=480,record_id=null,user_id=null,run_duration=1.0,run_step=68.0,run_distance=98.0

@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="F:\Daniel\dyh08\PullToRefreshLibrary\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="F:\Daniel\dyh08\PullToRefreshLibrary\build-types\release\jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/daniel/AndroidStudioProjects/dyh08/PullToRefreshLibrary/src/main/jniLibs"/></dataSet><dataSet config="release"><source path="/Users/daniel/AndroidStudioProjects/dyh08/PullToRefreshLibrary/build-types/release/jniLibs"/></dataSet></merger>

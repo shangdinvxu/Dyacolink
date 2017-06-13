@@ -1279,7 +1279,7 @@ public  class BLEProvider
    //重置步数
    public void resetStep(Context context,LPDeviceInfo deviceInfo)
    {
-	  OwnLog.i(TAG, "..................INDEX_SEND_STEP Thread........................"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+	  OwnLog.i(TAG, ".................. Thread........................"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 	   runIndexProess(context, INDEX_SEND_STEP,deviceInfo);
    }
    

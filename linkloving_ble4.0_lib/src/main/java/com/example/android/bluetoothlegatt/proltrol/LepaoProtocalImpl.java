@@ -735,6 +735,10 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 		if (deviceInfo.timeWindow==0){
 			deviceInfo.timeWindow=60 ;
 		}
+		deviceInfo.startTime1_H = 0;
+		deviceInfo.startTime1_M = 0 ;
+		deviceInfo.endTime1_H =23 ;
+		deviceInfo.endTime1_M=59;
 		req.appendByte(seq++)
 				.appendByte(LepaoCommand.COMMAND_SET_MOTION_REMIND)
 //				间隔时间

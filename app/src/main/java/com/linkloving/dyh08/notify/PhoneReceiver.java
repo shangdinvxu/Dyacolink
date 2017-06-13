@@ -81,11 +81,11 @@ public class PhoneReceiver extends BroadcastReceiver {
 			//*  第四步：这一步很重要，那就是给应用添加权限。android.permission.READ_PHONE_STATE
 			if(provider!= null && !BleService.isCANCLE_ANCS()){
 				if(!CommonUtils.isStringEmpty(MyApplication.getInstance(context).getLocalUserInfoProvider().getDeviceEntity().getLast_sync_device_id())){
-					if(manager==null){
-						MyLog.i(TAG, "manager是空。，新建");
+//					if(manager==null){
+//						MyLog.i(TAG, "manager是空。，新建");
 						manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 						manager.listen(listener,PhoneStateListener.LISTEN_CALL_STATE);
-					}
+//					}
 				}
 			}
 		}
@@ -96,7 +96,8 @@ public class PhoneReceiver extends BroadcastReceiver {
 
 		@Override
 		public void onCallStateChanged(int state, String incomingNumber) {
-		 switch(state){
+			MyLog.e(TAG,"state"+state);
+			switch(state){
 				 case TelephonyManager.CALL_STATE_IDLE:
 					   
 					    //移除来电
