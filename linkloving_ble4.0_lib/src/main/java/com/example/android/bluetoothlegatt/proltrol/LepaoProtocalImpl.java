@@ -735,10 +735,11 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 		if (deviceInfo.timeWindow==0){
 			deviceInfo.timeWindow=60 ;
 		}
-		deviceInfo.startTime1_H = 0;
-		deviceInfo.startTime1_M = 0 ;
-		deviceInfo.endTime1_H =23 ;
-		deviceInfo.endTime1_M=59;
+
+		deviceInfo.startTime2_H = 0;
+		deviceInfo.startTime2_M = 0 ;
+		deviceInfo.endTime2_H =0 ;
+		deviceInfo.endTime2_M=0;
 		req.appendByte(seq++)
 				.appendByte(LepaoCommand.COMMAND_SET_MOTION_REMIND)
 //				间隔时间
@@ -930,7 +931,21 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 			return BLEProvider.INDEX_SEND_NOTIFICATION;
 		return BLEProvider.INDEX_SEND_NOTIFICATION_FAIL;
 	}
-	
+
+	/**消息提醒*/
+
+	public int setUnitSetting(byte data) throws BLException,LPException {
+		WatchRequset req = new WatchRequset();
+		req.appendByte(seq++).appendByte(LepaoCommand.COMMANDUNITSETTING).appendByte(data).makeCheckSum();
+		LPUtil.printData(req.getData(), "设置单位");
+		WatchResponse resp = this.sendData2BLE(req);
+		if(resp.getData()[4]==1)
+			return BLEProvider.INDEX_UNITSETTING_SUCCESS;
+		return BLEProvider.INDEX_UNITSETTING_FAILDE;
+	}
+
+
+
 	/**keepstate*/
 	public void keepstate() throws BLException,LPException {
 		WatchRequset req = new WatchRequset();
@@ -1645,8 +1660,10 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 	@Override
 	public void ANCS_PHONE(byte Category_status,byte EventID_status, byte notificationUID,
 			byte[] title, byte[] text) throws BLException, LPException {
-		WatchRequset req = new WatchRequset(); 
-		//title 24byte message 84byte 
+		title = new byte[]{0x00, 0x00};
+		text =  new byte[]{0x00, 0x00};
+		WatchRequset req = new WatchRequset();
+		//title 24byte message 84byte
 		req.appendByte(seq++)
 		.appendByte(LepaoCommand.COMMAND_ANCS_PUSH)
 		//从这开始是  categoryID AppID EventID notificationUID 组装部分
@@ -1672,6 +1689,8 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 	//短信消息提醒
 	public void ANCS_MSG(byte type,byte sta,byte notificationUID,byte[] title, byte[] text) 
 			throws BLException,LPException {
+		title = new byte[]{0x00, 0x00};
+		text =  new byte[]{0x00, 0x00};
 		WatchRequset req = new WatchRequset();  
 		//title 24byte message 84byte 
 		req.appendByte(seq++)
@@ -1716,6 +1735,8 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 	//未接来电提醒
 		public void ANCS_MISSCALL(byte notificationUID,byte[] title, byte[] text) 
 				throws BLException,LPException {
+			title = new byte[]{0x00, 0x00};
+			text =  new byte[]{0x00, 0x00};
 			WatchRequset req = new WatchRequset();  
 			req.appendByte(seq++)
 			.appendByte(LepaoCommand.COMMAND_ANCS_PUSH)

@@ -39,9 +39,11 @@ import butterknife.InjectView;
 /**
  * Created by leo.wang on 2016/7/27.
  */
-public class CaloriesActivity extends ToolBarActivity{
+public class CaloriesActivity extends ToolBarActivity {
     private static final String TAG = CaloriesActivity.class.getSimpleName();
-    /**VIEW下方四个切换按钮*/
+    /**
+     * VIEW下方四个切换按钮
+     */
     @InjectView(R.id.step_button_day)
     RadioButton step_button_day_im;
     @InjectView(R.id.step_button_week)
@@ -51,13 +53,13 @@ public class CaloriesActivity extends ToolBarActivity{
     @InjectView(R.id.step_button_year)
     RadioButton step_button_year_im;
     @InjectView(R.id.step_tv_date)
-    TextView step_tv_date ;
+    TextView step_tv_date;
     @InjectView(R.id.step_DrawArc_angle)
-    DrawArc stepCircleView ;
+    DrawArc stepCircleView;
     @InjectView(R.id.step_mount)
-    TextView step_number ;
-@InjectView(R.id.calories_textView)
-TextView caloriesTV ;
+    TextView step_number;
+    @InjectView(R.id.calories_textView)
+    TextView caloriesTV;
     @InjectView(R.id.goal_txt)
     AppCompatTextView goalTv;
     private DayViewFragment dayViewFragment;
@@ -102,11 +104,11 @@ TextView caloriesTV ;
                 List<String> stepGoalList = creatStepGoalList();
                 LayoutInflater inflater = getLayoutInflater();
                 final View layout = inflater.inflate(R.layout.caloriesgoalwheel, (LinearLayout) findViewById(R.id.goal_view));
-                final GoalWheelView wheelView = (GoalWheelView)layout.findViewById(R.id.goal_wheelView);
-                final Button okbtn = (Button)layout.findViewById(R.id.okBtn);
-                final Button cancelBtn = (Button)layout.findViewById(R.id.cancelBtn);
-                String stepGoal = PreferencesToolkits.getGoalInfo(CaloriesActivity.this,PreferencesToolkits.KEY_GOAL_CAL);
-                wheelView.setSeletion(getIndexFromGoalList(stepGoalList,stepGoal));
+                final GoalWheelView wheelView = (GoalWheelView) layout.findViewById(R.id.goal_wheelView);
+                final Button okbtn = (Button) layout.findViewById(R.id.okBtn);
+                final Button cancelBtn = (Button) layout.findViewById(R.id.cancelBtn);
+                String stepGoal = PreferencesToolkits.getGoalInfo(CaloriesActivity.this, PreferencesToolkits.KEY_GOAL_CAL);
+                wheelView.setSeletion(getIndexFromGoalList(stepGoalList, stepGoal));
                 wheelView.setOffset(1);
                 wheelView.setItems(stepGoalList);
                 alertDialog = new AlertDialog.Builder(CaloriesActivity.this)
@@ -118,18 +120,18 @@ TextView caloriesTV ;
                         Log.e(TAG, "wheelView.getSeletedItem():" + wheelView.getSeletedItem());
                         PreferencesToolkits.setGoalInfo(CaloriesActivity.this, PreferencesToolkits.KEY_GOAL_CAL, wheelView.getSeletedItem());
                         updataGoalView();
-                        switch (selectionIndex){
+                        switch (selectionIndex) {
                             case 0:
-                                new DaySportAsynck(null,step_number,stepCircleView,step_tv_date,CaloriesActivity.this).execute(flushDate);
+                                new DaySportAsynck(null, step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushDate);
                                 break;
                             case 1:
-                                new WeekSportAsynckTask(null,step_number,stepCircleView,step_tv_date,CaloriesActivity.this).execute(flushWeek);
+                                new WeekSportAsynckTask(null, step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushWeek);
                                 break;
                             case 2:
-                                new MonthSportAsynck(null,step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushMonth);
+                                new MonthSportAsynck(null, step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushMonth);
                                 break;
                             case 3:
-                                new YearSportAsynck(null,step_number,stepCircleView,step_tv_date,CaloriesActivity.this).execute(flushYear);
+                                new YearSportAsynck(null, step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushYear);
                                 break;
                         }
 
@@ -154,23 +156,24 @@ TextView caloriesTV ;
 
     /**
      * 构建步数目标集合
+     *
      * @return
      */
     private List<String> creatStepGoalList() {
-        List<String> list =new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         //要求步数目标为2000~~100000
         int startGoal = 1000;
         int overGoal = 9900;
-        for(int i =startGoal;i<=overGoal;i+=100 ){
-            list.add(i+"");
+        for (int i = startGoal; i <= overGoal; i += 100) {
+            list.add(i + "");
         }
         return list;
     }
 
-    private int getIndexFromGoalList(List<String> goalList,String goal) {
+    private int getIndexFromGoalList(List<String> goalList, String goal) {
         int i = 0;
-        for(;i<goalList.size();i++){
-            if(goalList.get(i).equals(goal)){
+        for (; i < goalList.size(); i++) {
+            if (goalList.get(i).equals(goal)) {
                 return i;
             }
         }
@@ -183,9 +186,9 @@ TextView caloriesTV ;
 
     private void updataGoalView() {
         //从本地抓取目标值 并且设置到view上
-        String stepGoal = PreferencesToolkits.getGoalInfo(this,PreferencesToolkits.KEY_GOAL_CAL);
+        String stepGoal = PreferencesToolkits.getGoalInfo(this, PreferencesToolkits.KEY_GOAL_CAL);
         goalTv.setText(stepGoal);
-        goalTv.setTextColor(Color.rgb(255,196,0));
+        goalTv.setTextColor(Color.rgb(255, 196, 0));
     }
 
     @Override
@@ -193,100 +196,125 @@ TextView caloriesTV ;
     }
 
 
-
-    /**选择Fragment*/
-    private void setSelection(int index){
+    /**
+     * 选择Fragment
+     */
+    private void setSelection(int index) {
         restartBotton();
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 //        hideFragments(transaction);
-        switch (index){
+        switch (index) {
             case 0:
-                selectionIndex =0 ;
+                selectionIndex = 0;
                 caloriesTV.setText(R.string.kcal);
                 step_button_day_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.d_on_72px, 0, 0);
-                new DaySportAsynck(flushDate,step_number,stepCircleView,step_tv_date,CaloriesActivity.this).execute(flushDate);
-                    dayViewFragment = new DayViewFragment();
-                    dayViewFragment.setDataChangeListener(new IDataChangeListener() {
-                        @Override
-                        public void onDataChange(String data) {
-                            MyLog.e(TAG,"日界面点击的日期是:"+data);
-                            flushDate = data;
-                            new DaySportAsynck(null,step_number,stepCircleView,step_tv_date,CaloriesActivity.this).execute(flushDate);
-                        }
-                    });
-                transaction.replace(R.id.step_middle,dayViewFragment);
+                new DaySportAsynck(flushDate, step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushDate);
+                dayViewFragment = new DayViewFragment();
+                dayViewFragment.setDataChangeListener(new IDataChangeListener() {
+                    @Override
+                    public void onDataChange(String data) {
+                        MyLog.e(TAG, "日界面点击的日期是:" + data);
+                        flushDate = data;
+                        new DaySportAsynck(null, step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushDate);
+                    }
+                });
+                transaction.replace(R.id.step_middle, dayViewFragment);
                 break;
             case 1:
-                selectionIndex =1 ;
+                selectionIndex = 1;
                 caloriesTV.setText(R.string.avgkcal);
                 step_button_week_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.w_on_72px, 0, 0);
-                new WeekSportAsynckTask(null,step_number,stepCircleView,step_tv_date,CaloriesActivity.this).execute(flushWeek);
+                new WeekSportAsynckTask(null, step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushWeek);
                 weekViewFragment = new WeekViewFragment();
                 weekViewFragment.setDataChangeListener(new IDataChangeListener() {
-                        @Override
-                        public void onDataChange(String data) {
-                            MyLog.e(TAG,"周界面点击的日期是:"+data);
-                            flushWeek = data;
-                            new WeekSportAsynckTask(null,step_number,stepCircleView,step_tv_date,CaloriesActivity.this).execute(flushWeek);
-                        }
-                    });
-                transaction.replace(R.id.step_middle,weekViewFragment);
+                    @Override
+                    public void onDataChange(String data) {
+                        MyLog.e(TAG, "周界面点击的日期是:" + data);
+                        flushWeek = data;
+                        new WeekSportAsynckTask(null, step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushWeek);
+                    }
+                });
+                transaction.replace(R.id.step_middle, weekViewFragment);
                 break;
             case 2:
-                selectionIndex =2 ;
+                selectionIndex = 2;
                 caloriesTV.setText(R.string.avgkcal);
                 step_button_month_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.m_on_72px, 0, 0);
-                new MonthSportAsynck(null,step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushMonth);
-                monthViewFragment  = new MonthViewFragment();
+                new MonthSportAsynck(null, step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushMonth);
+                monthViewFragment = new MonthViewFragment();
                 monthViewFragment.setDataChangeListener(new IDataChangeListener() {
-                        @Override
-                        public void onDataChange(String data) {
-                            MyLog.e(TAG, "月界面点击的月是:" + data);
-                            flushMonth = data;
-                            new MonthSportAsynck(null,step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushMonth);
-                        }
-                    });
+                    @Override
+                    public void onDataChange(String data) {
+                        MyLog.e(TAG, "月界面点击的月是:" + data);
+                        flushMonth = data;
+                        new MonthSportAsynck(null, step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushMonth);
+                    }
+                });
                 transaction.replace(R.id.step_middle, monthViewFragment);
                 break;
             case 3:
-                selectionIndex =3 ;
+                selectionIndex = 3;
                 caloriesTV.setText(R.string.avgkcal);
                 step_button_year_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.y_on_72px, 0, 0);
                 yearViewFragment = new YearViewFragment();
                 flushYear = CommonUtils.getFlushYear();
-                new YearSportAsynck(null,step_number,stepCircleView,step_tv_date,CaloriesActivity.this).execute(flushYear);
+                new YearSportAsynck(null, step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(flushYear);
                 yearViewFragment.setDataChangeListener(new IDataChangeListener() {
-                        @Override
-                        public void onDataChange(String data) {
-                            MyLog.e(TAG,"年界面点击的年份是:"+data);
-                            new YearSportAsynck(null,step_number,stepCircleView,step_tv_date,CaloriesActivity.this).execute(data);
-                        }
-                    });
+                    @Override
+                    public void onDataChange(String data) {
+                        MyLog.e(TAG, "年界面点击的年份是:" + data);
+                        new YearSportAsynck(null, step_number, stepCircleView, step_tv_date, CaloriesActivity.this).execute(data);
+                    }
+                });
                 transaction.replace(R.id.step_middle, yearViewFragment);
                 break;
         }
         transaction.commit();
     }
-    /**切换Fragment时候 重置按钮图片*/
+
+    /**
+     * 切换Fragment时候 重置按钮图片
+     */
     private void restartBotton() {
-        step_button_day_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.mipmap.d_off_72px,0,0);
-        step_button_week_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.mipmap.w_off_72px,0,0);
-        step_button_month_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.mipmap.m_off_72px,0,0);
-        step_button_year_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.mipmap.y_off_72px,0,0);
+        step_button_day_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.d_off_72px, 0, 0);
+        step_button_week_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.w_off_72px, 0, 0);
+        step_button_month_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.m_off_72px, 0, 0);
+        step_button_year_im.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.mipmap.y_off_72px, 0, 0);
     }
 
-    /**日数据浏览点击事件*/
-    public void onDayViewClicked(View view){ setSelection(0); }
-    /**周数据浏览点击事件*/
-    public void onWeekViewClicked(View view){ setSelection(1); }
-    /**月数据浏览点击事件*/
-    public void onMonthViewClicked(View view){ setSelection(2); }
-    /**年数据浏览点击事件*/
-    public void onYearViewClicked(View view){ setSelection(3); }
+    /**
+     * 日数据浏览点击事件
+     */
+    public void onDayViewClicked(View view) {
+        setSelection(0);
+    }
+
+    /**
+     * 周数据浏览点击事件
+     */
+    public void onWeekViewClicked(View view) {
+        setSelection(1);
+    }
+
+    /**
+     * 月数据浏览点击事件
+     */
+    public void onMonthViewClicked(View view) {
+        setSelection(2);
+    }
+
+    /**
+     * 年数据浏览点击事件
+     */
+    public void onYearViewClicked(View view) {
+        setSelection(3);
+    }
+
     @Override
     protected void initView() {
     }
+
     @Override
     protected void initListeners() {
     }

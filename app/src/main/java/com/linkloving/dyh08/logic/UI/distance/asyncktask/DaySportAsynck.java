@@ -88,9 +88,8 @@ public class DaySportAsynck extends AsyncTask<Object, Object, DaySynopic> {
             if (localSettingUnitInfo!= ToolKits.UNIT_GONG){
                 i = i*0.6214 ;
             }
-            distanceDB = (Math.round(i * 100 + 0.5) / 100.0);
+            distanceDB = i;
         }
-
         stepNumber.setText(DateSwitcher.twoFloat(distanceDB));
         drawArc.setPercent(stepPercent);
         textView.setText(datasdf);

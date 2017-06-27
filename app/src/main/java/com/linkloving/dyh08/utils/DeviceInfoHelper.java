@@ -81,6 +81,7 @@ public class DeviceInfoHelper {
         // 久坐提醒间隔是负值的话，就意味着关闭，那么直接把start和end time置0就行了。
         String[] LongsitData = deviceSetting.getLongsit_time().split("-");
         String Longsit_vaild = deviceSetting.getLongsit_vaild();
+        deviceInfo.timeWindow = deviceSetting.getLongsit_intervals() ;
         if(Longsit_vaild .equals("0"))  //关闭了久坐提醒
         {
             // 早上提醒的开始时间(小时)

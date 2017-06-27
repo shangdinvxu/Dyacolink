@@ -163,6 +163,11 @@ public class SocialActivity extends ToolBarActivity {
         GetDBInfo.getDBInfoToFile(SocialActivity.this,"HeartRate.txt");
     }
 
+    @OnClick(R.id.Rl_calories)
+    void sendTxt(View view){
+        GetDBInfo.toSendEmail(SocialActivity.this,GetDBInfo.getDiskCacheDir(SocialActivity.this)+"/"+"except.txt");
+    }
+
     private void share() {
         fb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -448,7 +453,7 @@ public class SocialActivity extends ToolBarActivity {
                 float distanceKm = (float) distance / 1000;
                 String distancekm = "" ;
                 if (distance<1000){
-                    distancekm = DateSwitcher.twoFloat(distanceKm);
+                    distancekm = DateSwitcher.oneFloat(distanceKm);
                 }else {
                     distancekm = DateSwitcher.oneFloat(distanceKm);
                 }

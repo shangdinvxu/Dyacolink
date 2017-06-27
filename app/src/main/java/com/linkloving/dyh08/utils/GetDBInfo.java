@@ -103,8 +103,9 @@ public class GetDBInfo {
 
     public static void writeException(byte[] bytes,Context context){
         String exceptionString = LPUtil.printLogData(bytes, "异常的信息是");
+
         final String diskCacheDir = getDiskCacheDir(context);
-        File file = new File(diskCacheDir+"/"+"HeartRate.txt");
+        File file = new File(diskCacheDir+"/"+"except.txt");
         BufferedWriter bufferedWriter = null ;
         try {
             bufferedWriter =  new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
@@ -127,12 +128,11 @@ public class GetDBInfo {
                 }
             }
         }
-
-
     }
 
 
-    private  static void toSendEmail(Context context,String diskCacheDir) {
+
+    public  static void toSendEmail(Context context,String diskCacheDir) {
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setType("application/octet-stream");
         //设置对方邮件地址

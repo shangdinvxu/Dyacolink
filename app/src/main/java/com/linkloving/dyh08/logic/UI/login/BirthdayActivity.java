@@ -78,10 +78,18 @@ public class BirthdayActivity extends Activity {
                 if (year.length() <= 0 || month.length() <= 0 || day.length() <= 0||
                         monthInt ==0|| monthInt >12
                         ||dayInt==0||dayInt>31) {
+
                     Toast.makeText(BirthdayActivity.this, "请填写正确的生日", Toast.LENGTH_SHORT).show();
                 } else {
-                    userEntity.getUserBase().setBirthdate(birthday);
-                    IntentFactory.startNewWeight(BirthdayActivity.this);
+                    int yearage = Integer.parseInt(year);
+                    int userAge = nowYearInt - yearage;
+                    if (userAge>110){
+                        Toast.makeText(BirthdayActivity.this, "请填写正确的生日", Toast.LENGTH_SHORT).show();
+                    }else {
+                        userEntity.getUserBase().setBirthdate(birthday);
+                        IntentFactory.startNewWeight(BirthdayActivity.this);
+                    }
+
                 }
 
             }

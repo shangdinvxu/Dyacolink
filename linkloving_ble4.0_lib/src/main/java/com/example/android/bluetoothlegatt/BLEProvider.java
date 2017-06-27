@@ -250,7 +250,9 @@ public  class BLEProvider
 	public static final int CLOSE_HEARTRATESYNC= OPEN_HEARTRATESYNC + 1;
 	/**获取异常信息的指令*/
 	public static final int INDEX_GET_EXCEPTION_INFO= CLOSE_HEARTRATESYNC + 1;
-
+	public static final int INDEX_UNITSETTING_SUCCESS= INDEX_GET_EXCEPTION_INFO + 1;
+	public static final int INDEX_UNITSETTING_FAILDE= INDEX_UNITSETTING_SUCCESS + 1;
+	public static final int INDEX_UNITSETTING= INDEX_UNITSETTING_FAILDE + 1;
 
 	// Stops scanning after 10 seconds.
 	private static final long SCAN_PERIOD = 10000;
@@ -980,6 +982,14 @@ public  class BLEProvider
 		OwnLog.i(TAG, "..................GetHeartrate Thread........................");
 		runIndexProess(context,INDEX_SET_TIME_SETTING,deviceinfo);
 	}
+
+
+	public void setUnitSetting(Context context,LPDeviceInfo deviceinfo){
+		OwnLog.i(TAG, "..................GetHeartrate Thread........................");
+		runIndexProess(context,INDEX_UNITSETTING,deviceinfo);
+	}
+
+
 
    /* 设置闹钟*/
    public void SetClock(Context context,LPDeviceInfo deviceInfo)
@@ -1761,6 +1771,15 @@ public  class BLEProvider
 						msg.obj = mLepaoProtocalImpl.getModelName();
 			    		msg.sendToTarget();
 						break;
+					case INDEX_UNITSETTING:
+						Log.d(TAG, ".................INDEX_GET_MODEL................");
+						msg = mHandler.obtainMessage();
+						msg.what = MSG_BLE_DATA;
+						msg.arg1 = INDEX_UNITSETTING;
+						msg.obj = mLepaoProtocalImpl.setUnitSetting(serverDeviceInfo.unitSetting);
+						msg.sendToTarget();
+						break;
+
 				    case INDEX_REGIESTER_INFO_NEW:
 				    	Log.d(TAG, ".................INDEX_REGIESTER_INFO_NEW................");
 				    	msg = mHandler.obtainMessage();

@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.android.bluetoothlegatt.BLEHandler;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
 import com.google.android.gms.maps.GoogleMap;
@@ -46,6 +47,7 @@ import com.linkloving.dyh08.http.basic.HttpCallback;
 import com.linkloving.dyh08.http.basic.NoHttpRuquestFactory;
 import com.linkloving.dyh08.logic.UI.OAD.DfuService;
 import com.linkloving.dyh08.logic.UI.device.DeviceActivity;
+import com.linkloving.dyh08.logic.UI.main.PortalActivity;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
 import com.linkloving.dyh08.prefrences.PreferencesToolkits;
@@ -118,6 +120,8 @@ public class GeneralActivity extends ToolBarActivity {
                 ,getString(R.string.firmwareupdate)
         };
         provider = BleService.getInstance(GeneralActivity.this).getCurrentHandlerProvider();
+        BLEProviderObserverAdapterImpl bleProviderObserver = new BLEProviderObserverAdapterImpl();
+        provider.setBleProviderObserver(bleProviderObserver);
         userEntity = MyApplication.getInstance(getApplicationContext()).getLocalUserInfoProvider();
         deviceSetting = LocalUserSettingsToolkits.getLocalSetting(GeneralActivity.this, userEntity.getUser_id() + "");
         localDeviceInfo = PreferencesToolkits.getLocalDeviceInfo(GeneralActivity.this);
@@ -244,6 +248,46 @@ public class GeneralActivity extends ToolBarActivity {
         });
     }
 
+
+    private class BLEProviderObserverAdapterImpl extends BLEHandler.BLEProviderObserverAdapter {
+
+
+        @Override
+        protected Activity getActivity() {
+            return GeneralActivity.this;
+        }
+
+        /**********
+         * BLE连接失败
+         *********/
+        @Override
+        public void updateFor_handleConnectFailedMsg() {
+            //连接失败
+            MyLog.e(TAG, "updateFor_handleConnectFailedMsg");
+            if (dialog_connect!=null&&dialog_connect.isShowing()) {
+                dialog_connect.dismiss();
+            }
+        }
+
+        @Override
+        public void updateFor_handleSendDataError() {
+            super.updateFor_handleSendDataError();
+            if (dialog_connect!=null&&dialog_connect.isShowing()) {
+                dialog_connect.dismiss();
+            }
+        }
+
+
+        @Override
+        public void updateFor_notifyForModelName(LPDeviceInfo latestDeviceInfo) {
+            super.updateFor_notifyForModelName(latestDeviceInfo);
+            if (dialog_connect!=null&&dialog_connect.isShowing()) {
+                dialog_connect.dismiss();
+            }
+            downloadZip(latestDeviceInfo.modelName);
+        }
+    }
+
     private void startUpdate() {
         UserEntity userAuthedInfo = PreferencesToolkits.getLocalUserInfoForLaunch(GeneralActivity.this);
         String last_sync_device_id = userAuthedInfo.getDeviceEntity().getLast_sync_device_id();
@@ -252,20 +296,25 @@ public class GeneralActivity extends ToolBarActivity {
         }else {
             boolean networkConnected = ToolKits.isNetworkConnected(GeneralActivity.this);
             if (networkConnected){
-                downloadZip();
+//                downloadZip();
+                BleService.getInstance(GeneralActivity.this).syncAllDeviceInfo(GeneralActivity.this);
+                dialog_connect = new ProgressDialog(GeneralActivity.this);
+                dialog_connect.show();
             }else {
                 showOpenNetWorkDialog();
             }
         }
     }
 
-    private void downloadZip() {
+
+    private void downloadZip(String modelname) {
+        if (modelname==null) return;
         dialog = new ProgressDialog(GeneralActivity.this);
         dialog.setMessage(getString(R.string.getting_version_information));
         localDeviceInfo = PreferencesToolkits.getLocalDeviceInfo(GeneralActivity.this);
         int version_int = ToolKits.makeShort(localDeviceInfo.version_byte[1], localDeviceInfo.version_byte[0]);
         CallServer.getRequestInstance().add(GeneralActivity.this, false,
-                CommParams.HTTP_OAD, NoHttpRuquestFactory.creat_New_OAD_Request(localDeviceInfo.getModelname()
+                CommParams.HTTP_OAD, NoHttpRuquestFactory.creat_New_OAD_Request(modelname
                         ,version_int), newHttpCallback);
     }
 
@@ -582,6 +631,13 @@ public class GeneralActivity extends ToolBarActivity {
                 PreferencesToolkits.setLocalSettingUnitInfo(GeneralActivity.this, ToolKits.UNIT_GONG);
                 metric.setBackgroundColor(0xFFfbc400);
                 britsh.setBackgroundColor(0xffF5F5F5);
+                if (provider.isConnectedAndDiscovered()) {
+                    LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
+                    lpDeviceInfo.unitSetting=0x00;
+                    provider.setUnitSetting(GeneralActivity.this,lpDeviceInfo);
+                } else {
+                    Toast.makeText(GeneralActivity.this, getString(R.string.keepthe), Toast.LENGTH_SHORT).show();
+                }
             }
         });
         britsh.setOnClickListener(new View.OnClickListener() {
@@ -590,6 +646,13 @@ public class GeneralActivity extends ToolBarActivity {
                 PreferencesToolkits.setLocalSettingUnitInfo(GeneralActivity.this, ToolKits.UNIT_YING);
                 britsh.setBackgroundColor(0xFFfbc400);
                 metric.setBackgroundColor(0xffF5F5F5);
+                if (provider.isConnectedAndDiscovered()) {
+                    LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
+                    lpDeviceInfo.unitSetting=0x01;
+                    provider.setUnitSetting(GeneralActivity.this,lpDeviceInfo);
+                } else {
+                    Toast.makeText(GeneralActivity.this, getString(R.string.keepthe), Toast.LENGTH_SHORT).show();
+                }
             }
         });
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);

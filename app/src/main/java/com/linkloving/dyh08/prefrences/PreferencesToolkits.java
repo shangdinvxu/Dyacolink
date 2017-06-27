@@ -691,7 +691,7 @@ public class PreferencesToolkits {
         boolean jString = false ;
         try {
             sharedPreferences = getAppDefaultSharedPreferences(context, true);
-            jString = sharedPreferences.getBoolean(MAP_SETTING, false);//获得设备信息
+            jString = sharedPreferences.getBoolean(MAP_SETTING, true);//获得设备信息
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }

@@ -193,7 +193,7 @@ public class NotificationService extends NotificationListenerService {
                     } catch (UnsupportedEncodingException e1) {
                         e1.printStackTrace();
                     }
-                } else if ("com.linkloving.rtring_c_watch".equals(sbn.getPackageName()) && array[4] == '1') { // 连爱
+                } else if ( array[4] == '1') { // 通讯软体
                     try {
                         provider.setNotification_LINK(NotificationService.this, seq++, CutString.stringtobyte(extras.getString(Notification.EXTRA_TITLE), 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TEXT), 84));
                     } catch (UnsupportedEncodingException e1) {

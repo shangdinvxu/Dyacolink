@@ -1,5 +1,6 @@
 package com.linkloving.dyh08.logic.UI.distance;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -52,12 +53,11 @@ public class DaychartviewFragment extends Fragment {
         private Date parse;
         private ArrayList<Date> stringTimeList;
         ArrayList<SportRecord> sportRecordArrayList = new ArrayList<SportRecord>();
-        UserDeviceRecord chatMessageTable = UserDeviceRecord.getInstance(getActivity());
         String user_id = MyApplication.getInstance(getActivity()).getLocalUserInfoProvider().getUser_id() + "";
         Date startdata ;
         Date enddata ;
-        private DetailChartCountData count;
-        UserEntity userEntity= MyApplication.getInstance(getActivity()).getLocalUserInfoProvider();
+        private  int stepTotal  = 0  ;
+        private ArrayList<Integer> integers;
 
         @Override
         protected List<DayBarChartView.BarChartItemBean> doInBackground(Object... objects) {
@@ -72,24 +72,20 @@ public class DaychartviewFragment extends Fragment {
             }
             Calendar instance = Calendar.getInstance();
             instance.setTime(parse);
-//            instance.add(Calendar.MINUTE, -TimeZoneHelper.getTimeZoneOffsetMinute());// before 8 hour
             Date time1 = instance.getTime();
-//            String format = simpleDateFormat.format(time1);
             stringTimeList.add(time1);
             for (int i = 0; i<24;i++)
             {
                 instance.add(Calendar.HOUR_OF_DAY,1);
                 Date time2 = instance.getTime();
-//                String format1 = simpleDateFormat.format(time2);
                 stringTimeList.add(time2);
             }
+            stepTotal = 0 ;
+            integers = new ArrayList<>();
             for (int i=0;i<24;i++){
                 int stepnumber = 0 ;
                 startdata = stringTimeList.get(i);
                 enddata = stringTimeList.get(i+1);
-//                String where = COLUMN_START_TIME+">='"+startdata+"' and "+COLUMN_START_TIME+"<'"+enddata+"'";
-//                // 查找此期间内的运动原始数据
-//                sportRecordArrayList = chatMessageTable.findHistory(user_id, where);
                 sportRecordArrayList = UserDeviceRecord.findHistoryChartwithHMS
                         (getActivity(), String.valueOf(user_id), startdata, enddata);
                 if (sportRecordArrayList.size() == 0) {
@@ -99,24 +95,9 @@ public class DaychartviewFragment extends Fragment {
                         if (sportRecordArray.getState().equals("1")||sportRecordArray.getState().equals("2")||sportRecordArray.getState().equals("3"))
                              stepnumber = Integer.parseInt(sportRecordArray.getDistance()) + stepnumber;
                     }
+                    integers.add(i);
                 }
-//                List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
-//                String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(time1);
-//                try {
-//                    count = DatasProcessHelper.countSportData(srs, startDateLocal);
-//                    MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                float walkstep = count.walking_distance ;
-//                float runing_steps = count.runing_distance;
-
-           /*     int walkCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.walking_distance)),
-                        (int) count.walking_duration * 60, userEntity.getUserBase().getUser_weight());
-//        userEntity.getUserBase().getUser_weight()
-                int runCal = ToolKits.calculateCalories(Float.parseFloat(String.valueOf(count.runing_distance)), (int)count.runing_duation * 60, userEntity.getUserBase().getUser_weight());
-                int calValue = walkCal + runCal;
-                MyLog.e(TAG, "calValue" + calValue);*/
+                stepTotal = stepTotal+stepnumber ;
                 DayBarChartView.BarChartItemBean barChartItemBean = new DayBarChartView.BarChartItemBean(Integer.toString(i+1),stepnumber);
                 dayhour.add(barChartItemBean);
             }
@@ -124,6 +105,18 @@ public class DaychartviewFragment extends Fragment {
         }
         protected void onPostExecute(final List<DayBarChartView.BarChartItemBean> dayhour) {
             super.onPostExecute(dayhour);
+            DistanceActivity activity = (DistanceActivity) getActivity();
+            String stepString = activity.step_number.getText().toString();
+            Double stepActivityDouble = Double.parseDouble(stepString);
+            int stepActivityInt = (int)(stepActivityDouble * 1000);
+            int stepDiff = stepActivityInt - stepTotal;
+//            不 大于0 来判断，
+            if (stepDiff>2&&integers.size()>0){
+                int stepDiffEvery = stepDiff / integers.size();
+                for (Integer i : integers){
+                    dayhour.get(i).itemValue =dayhour.get(i).itemValue+stepDiffEvery ;
+                }
+            }
             dayBarChartView.setItems(dayhour);
             dayBarChartView.setDialogListerer(new DayBarChartView.DialogListerer() {
                 @Override

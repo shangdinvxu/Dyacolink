@@ -44,6 +44,10 @@ public class LPDeviceInfo {
     public static final String HUBEI_SHUMA="62585";
     public static final String YUNNAN_FUDIAN="6251";
 
+
+	/**单位设置*/
+	public byte unitSetting ;
+
     
 	/** 激活码*/
 	public static final int ACTIVATION = 1;

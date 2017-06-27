@@ -150,13 +150,14 @@ public class PhoneReceiver extends BroadcastReceiver {
 					    	NotificationService.phoneinidle_count=0;
 					    	NotificationService.phoneinhook_count=0;		
 					    	try {
-					    		NotificationService.incallphone_title=CutString.stringtobyte(name, 24);
-					    		NotificationService.incallphone_text =CutString.stringtobyte(name, 84);
+//					    		NotificationService.incallphone_title=CutString.stringtobyte(name, 24);
+//					    		NotificationService.incallphone_text =CutString.stringtobyte(name, 84);
+								NotificationService.incallphone_title= new byte[]{0x00};
+								NotificationService.incallphone_text = new byte[]{0x00};
 					            provider.setNotification_PHONE(context, (byte)seq, NotificationService.incallphone_title, NotificationService.incallphone_text);
 					            NotificationService.incallphone=(byte)seq;
 					            seq++;
-					           
-							} catch (UnsupportedEncodingException e1) {
+							} catch (Exception e1) {
 								e1.printStackTrace();
 							}
 					    }

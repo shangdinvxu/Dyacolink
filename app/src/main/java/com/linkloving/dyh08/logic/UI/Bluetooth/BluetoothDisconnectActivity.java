@@ -84,7 +84,6 @@ public class BluetoothDisconnectActivity extends ToolBarActivity {
         if (last_sync_device_id==null||last_sync_device_id.length()==0){
         }else{
             provider.unBoundDevice(BluetoothDisconnectActivity.this);
-
             UserEntity userEntity = MyApplication.getInstance(BluetoothDisconnectActivity.this).getLocalUserInfoProvider();
             //设备号置空
             userEntity.getDeviceEntity().setLast_sync_device_id(null);
@@ -92,7 +91,7 @@ public class BluetoothDisconnectActivity extends ToolBarActivity {
             userEntity.getDeviceEntity().setDevice_type(0);
             //*******模拟断开   不管有没有连接 先执行这个再说
             try {
-                Thread.sleep(500);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -104,7 +103,6 @@ public class BluetoothDisconnectActivity extends ToolBarActivity {
             ToolKits.showCommonTosat(BluetoothDisconnectActivity.this, false, ToolKits.getStringbyId(BluetoothDisconnectActivity.this, R.string.unbound_success), Toast.LENGTH_SHORT);
         }
             finish();
-//            IntentFactory.startBindActivity3(BluetoothDisconnectActivity.this);
         IntentFactory.startPortalActivityIntent(BluetoothDisconnectActivity.this);
     }
     private HttpCallback<String> httpCallback = new HttpCallback<String>() {

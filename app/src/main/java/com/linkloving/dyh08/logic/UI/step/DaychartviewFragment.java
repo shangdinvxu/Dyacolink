@@ -30,7 +30,6 @@ import java.util.List;
  * Created by leo.wang on 2016/8/2.
  */
 public class DaychartviewFragment extends Fragment {
-    public static final String COLUMN_START_TIME="start_time";
     private static final String TAG = DaychartviewFragment.class.getSimpleName();
     private List<DayBarChartView.BarChartItemBean> dayhour = new ArrayList<>();
     private DayBarChartView dayBarChartView;
@@ -56,12 +55,12 @@ public class DaychartviewFragment extends Fragment {
         private Date parse;
         private ArrayList<Date> stringTimeList;
         ArrayList<SportRecord> sportRecordArrayList = new ArrayList<SportRecord>();
-        UserDeviceRecord chatMessageTable = UserDeviceRecord.getInstance(getActivity());
         String user_id = MyApplication.getInstance(getActivity()).getLocalUserInfoProvider().getUser_id() + "";
         Date startdata ;
         Date enddata ;
-        private DetailChartCountData count;
-        UserEntity userEntity= MyApplication.getInstance(getActivity()).getLocalUserInfoProvider();
+        private int stepTotal = 0 ;
+//        用来记录哪几个小时有数据
+        private ArrayList<Integer> integers;
 
 
         @Override
@@ -77,26 +76,20 @@ public class DaychartviewFragment extends Fragment {
             }
             Calendar instance = Calendar.getInstance();
             instance.setTime(parse);
-//            instance.add(Calendar.MINUTE, -TimeZoneHelper.getTimeZoneOffsetMinute());// before 8 hour
             Date time1 = instance.getTime();
-//            String format = simpleDateFormat.format(time1);
             stringTimeList.add(time1);
             for (int i = 0; i<24;i++)
             {
                 instance.add(Calendar.HOUR_OF_DAY,1);
                 Date time2 = instance.getTime();
-                String format1 = simpleDateFormat.format(time2);
-//                stringTimeList.add(format1);
                 stringTimeList.add(time2);
             }
-
+            stepTotal = 0 ;
+            integers = new ArrayList<>();
             for (int i=0;i<24;i++){
                 int stepnumber = 0 ;
                 startdata = stringTimeList.get(i);
                 enddata = stringTimeList.get(i+1);
-//                String where = COLUMN_START_TIME+">='"+startdata+"' and "+COLUMN_START_TIME+"<'"+enddata+"'";
-//                // 查找此期间内的运动原始数据
-//                sportRecordArrayList = chatMessageTable.findHistory(user_id, where);
                 sportRecordArrayList = UserDeviceRecord.findHistoryChartwithHMS
                         (getActivity(), String.valueOf(user_id), startdata, enddata);
                 if (sportRecordArrayList.size() == 0) {
@@ -105,19 +98,10 @@ public class DaychartviewFragment extends Fragment {
                     for (SportRecord sportRecordArray : sportRecordArrayList) {
                         if (sportRecordArray.getState().equals("1")||sportRecordArray.getState().equals("2")||sportRecordArray.getState().equals("3"))
                         stepnumber = Integer.parseInt(sportRecordArray.getStep()) + stepnumber;
-
                     }
+                    integers.add(i);
                 }
-//              List<DLPSportData> srs = SleepDataHelper.querySleepDatas2(sportRecordArrayList);
- /*                 String startDateLocal = new SimpleDateFormat(ToolKits.DATE_FORMAT_YYYY_MM_DD).format(time1);
-                try {
-                    count = DatasProcessHelper.countSportData(srs, startDateLocal);
-                    MyLog.e(TAG, "DEBUG【历史数据查询】汇总" + count.toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                float walkstep = count.walking_steps ;
-                float runing_steps = count.runing_steps;*/
+                stepTotal = stepTotal+stepnumber ;
                 DayBarChartView.BarChartItemBean barChartItemBean = new DayBarChartView.BarChartItemBean(Integer.toString(i+1), stepnumber);
                 dayhour.add(barChartItemBean);
             }
@@ -125,6 +109,16 @@ public class DaychartviewFragment extends Fragment {
         }
         protected void onPostExecute(final List<DayBarChartView.BarChartItemBean> dayhour) {
             super.onPostExecute(dayhour);
+            String stepString = activity.step_number.getText().toString();
+            int stepActivityInt = Integer.parseInt(stepString);
+            int stepDiff = stepActivityInt - stepTotal;
+//            不 大于0 来判断，
+            if (stepDiff>2&&integers.size()>0){
+                int stepDiffEvery = stepDiff / integers.size();
+                for (Integer i : integers){
+                    dayhour.get(i).itemValue =dayhour.get(i).itemValue+stepDiffEvery ;
+                }
+            }
             dayBarChartView.setItems(dayhour);
             dayBarChartView.setDialogListerer(new DayBarChartView.DialogListerer() {
                 @Override

@@ -1228,7 +1228,7 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		String format = simpleDateFormat.format(date);
 		int year1 = Integer.parseInt(format);
 		MyLog.e(TAG,year1+"year1"+"====="+year+"year");
-		int age = year1 - year + 1;
+		int age = year1 - year ;
 		switch (user_sex) {
 			case 0:
 				if (localUnit == ToolKits.UNIT_GONG) {
@@ -1242,11 +1242,13 @@ private final static String TAG = ToolKits.class.getSimpleName();
 					dayCalories = (int) (66 + 6.2 * user_weight + 12.7 * user_height - 6.76 * age);
 
 				} else {
-					dayCalories = (int) (66 + 13.75 * user_weight + 5.0003 * user_height - 6.755 * age);
+					dayCalories = (int) (66 + 13.75f * user_weight + 5.0003f * user_height - 6.755f* age);
 				}
 		}
 		MyLog.e(TAG,dayCalories+"dayCalories"+"======"+user_weight+"user_weight"+"======"+user_height+"user_height"+"======"+age+"age");
-
+		if (dayCalories<=0){
+			dayCalories =0;
+		}
 		return dayCalories;
 //		return 0;
 	}

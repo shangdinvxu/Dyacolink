@@ -43,6 +43,7 @@ import com.linkloving.dyh08.utils.logUtils.MyLog;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.Calendar;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -110,7 +111,7 @@ public class PersonalInfoActivity extends ToolBarActivity {
     private String __tempImageFileLocation = null;
     private View totalView;
     private LayoutInflater layoutInflater;
-     private    String day,month,year1 ;
+     private    String day,month,year1 = "2000" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -223,7 +224,14 @@ public class PersonalInfoActivity extends ToolBarActivity {
         datePickerDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                birthday.setText(year1+"-"+month+"-"+day);
+                int yearage = Integer.parseInt(year1);
+                int nowYearInt = Calendar.getInstance().get(Calendar.YEAR);
+                int userAge = nowYearInt - yearage;
+                if (userAge>110){
+                    Toast.makeText(PersonalInfoActivity.this, "请填写正确的生日", Toast.LENGTH_SHORT).show();
+                }else {
+                    birthday.setText(year1+"-"+month+"-"+day);
+                }
             }
         });
 

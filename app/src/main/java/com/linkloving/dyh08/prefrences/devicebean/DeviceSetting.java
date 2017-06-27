@@ -26,7 +26,7 @@ public class DeviceSetting {
     private String alarm_four = "08:30-0-0";
 
     /**久坐提醒的时间*/
-    private String longsit_time = "09:00-11:30-14:00-20:00";
+    private String longsit_time = "09:00-22:00-00:00-00:00";
     /**久坐提醒的步数*/
     private String longsit_step = "60";
     /**久坐提醒的开关*/
@@ -52,7 +52,7 @@ public class DeviceSetting {
         this.longsit_intervals = longsit_intervals;
     }
 
-    private int longsit_intervals ;
+    private int longsit_intervals = 60 ;
 
     public byte getShowhand() {
         return showhand;
