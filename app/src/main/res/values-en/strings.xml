@@ -1173,4 +1173,5 @@
     <string name="user_info_update_success">Update complete</string>
     <string name="firmware_updating">firmware updating</string>
     <string name="please_stay_in">Please stay in this page until update complete</string>
+    <string name="sporttime">Elapsed Time</string>
 </resources>

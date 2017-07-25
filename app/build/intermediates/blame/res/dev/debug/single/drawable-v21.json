@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/drawable-v21/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/drawable-v21/ic_menu_share.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/drawable-v21/ic_menu_share.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/drawable-v21/ic_menu_friends.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/drawable-v21/ic_menu_friends.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/drawable-v21/ic_menu_slideshow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/drawable-v21/ic_menu_slideshow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/drawable-v21/ic_menu_send.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/drawable-v21/ic_menu_send.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/drawable-v21/ic_menu_manage.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/drawable-v21/ic_menu_manage.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/drawable-v21/ic_menu_main.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/drawable-v21/ic_menu_main.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/drawable-v21/abc_edit_text_material.xml"
+    }
+]

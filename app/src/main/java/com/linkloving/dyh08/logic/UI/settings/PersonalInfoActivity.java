@@ -227,7 +227,7 @@ public class PersonalInfoActivity extends ToolBarActivity {
                 int yearage = Integer.parseInt(year1);
                 int nowYearInt = Calendar.getInstance().get(Calendar.YEAR);
                 int userAge = nowYearInt - yearage;
-                if (userAge>110){
+                if (userAge>110||userAge<7){
                     Toast.makeText(PersonalInfoActivity.this, "请填写正确的生日", Toast.LENGTH_SHORT).show();
                 }else {
                     birthday.setText(year1+"-"+month+"-"+day);

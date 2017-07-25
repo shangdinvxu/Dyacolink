@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/mipmap-xxhdpi/chatfrom_bg_normal.9.png",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/mipmap-xxhdpi/chatfrom_bg_normal.9.png"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/mipmap-xxhdpi/chatto_bg_normal.9.png",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/mipmap-xxhdpi/chatto_bg_normal.9.png"
+    }
+]

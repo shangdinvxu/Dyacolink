@@ -1231,19 +1231,19 @@ private final static String TAG = ToolKits.class.getSimpleName();
 		int age = year1 - year ;
 		switch (user_sex) {
 			case 0:
-				if (localUnit == ToolKits.UNIT_GONG) {
+//				if (localUnit == ToolKits.UNIT_GONG) {
 					dayCalories = (int) (655.1 + 9.563 * user_weight + 1.85 * user_height - 4.676 * age);
-				} else {
-					dayCalories = (int) (655.1 + 4.35 * user_weight + 4.7 * user_height - 4.7 * age);
-				}
+//				} else {
+//					dayCalories = (int) (655.1 + 4.35 * user_weight + 4.7 * user_height - 4.7 * age);
+//				}
 				break;
 			case 1:
-				if (localUnit == ToolKits.UNIT_YING) {
-					dayCalories = (int) (66 + 6.2 * user_weight + 12.7 * user_height - 6.76 * age);
-
-				} else {
+//				if (localUnit == ToolKits.UNIT_YING) {
+//					dayCalories = (int) (66 + 6.2 * user_weight + 12.7 * user_height - 6.76 * age);
+//				} else {
 					dayCalories = (int) (66 + 13.75f * user_weight + 5.0003f * user_height - 6.755f* age);
-				}
+//				}
+				break;
 		}
 		MyLog.e(TAG,dayCalories+"dayCalories"+"======"+user_weight+"user_weight"+"======"+user_height+"user_height"+"======"+age+"age");
 		if (dayCalories<=0){

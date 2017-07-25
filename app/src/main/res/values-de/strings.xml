@@ -1196,5 +1196,6 @@
     <string name="firmware_updating">firmware updating</string>
     <string name="hint">Prompt</string>
     <string name="please_stay_in">please stay in this page until update completed</string>
+    <string name="sporttime">Bewegungszeit</string>
 
 </resources>

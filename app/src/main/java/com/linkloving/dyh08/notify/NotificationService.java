@@ -193,7 +193,12 @@ public class NotificationService extends NotificationListenerService {
                     } catch (UnsupportedEncodingException e1) {
                         e1.printStackTrace();
                     }
-                } else if ( array[4] == '1') { // 通讯软体
+                } else if ("com.twitter.android".equals(sbn.getPackageName()) ||"com.skype.raider".equals(sbn.getPackageName())
+                        ||"jp.naver.line.android".equals(sbn.getPackageName())
+                        ||"com.facebook.orca".equals(sbn.getPackageName())
+                        ||"com.whatsapp".equals(sbn.getPackageName())
+                        ||"com.google.android.gm".equals(sbn.getPackageName())
+                        ||"com.facebook.katana".equals(sbn.getPackageName())&& array[4] == '1') { // 通讯软体
                     try {
                         provider.setNotification_LINK(NotificationService.this, seq++, CutString.stringtobyte(extras.getString(Notification.EXTRA_TITLE), 24), CutString.stringtobyte(extras.getString(Notification.EXTRA_TEXT), 84));
                     } catch (UnsupportedEncodingException e1) {

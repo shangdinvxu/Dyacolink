@@ -1,0 +1,82 @@
+[
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/slide_in_from_bottom.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/PullToRefreshLibrary/build/intermediates/bundles/default/res/anim/slide_in_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/abc_fade_out.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/anim/abc_fade_out.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/abc_popup_exit.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/anim/abc_popup_exit.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/slide_out_to_top.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/PullToRefreshLibrary/build/intermediates/bundles/default/res/anim/slide_out_to_top.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/design_fab_in.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/anim/design_fab_in.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/anim/abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/slide_out_to_bottom.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/PullToRefreshLibrary/build/intermediates/bundles/default/res/anim/slide_out_to_bottom.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/popup_exit.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/anim/popup_exit.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/abc_slide_in_top.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/anim/abc_slide_in_top.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/design_fab_out.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/anim/design_fab_out.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/abc_fade_in.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/anim/abc_fade_in.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/anim/abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/design_snackbar_out.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/anim/design_snackbar_out.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/abc_popup_enter.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/anim/abc_popup_enter.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/anim/abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/design_snackbar_in.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/anim/design_snackbar_in.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/popup_enter.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/anim/popup_enter.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/slide_in_from_top.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/PullToRefreshLibrary/build/intermediates/bundles/default/res/anim/slide_in_from_top.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/anim/abc_slide_out_top.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/anim/abc_slide_out_top.xml"
+    }
+]

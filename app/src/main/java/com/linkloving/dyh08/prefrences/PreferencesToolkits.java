@@ -743,9 +743,9 @@ public class PreferencesToolkits {
             } else if (type.equals(KEY_GOAL_STEP)) {
                 jString = sharedPreferences.getString(type, "10000");//目标值
             } else if (type.equals(KEY_GOAL_DISTANCE)) {
-                jString = sharedPreferences.getString(type, "20");//目标值
+                jString = sharedPreferences.getString(type, "6");//目标值
             } else if (type.equals(KEY_GOAL_CAL)) {
-                jString = sharedPreferences.getString(type, "2800");//目标值
+                jString = sharedPreferences.getString(type, "2600");//目标值
             } else if (type.equals(KEY_GOAL_RUN)) {
                 jString = sharedPreferences.getString(type, "30");//目标值
             } else if (type.equals(KEY_GOAL_SLEEP)) {

@@ -47,8 +47,6 @@ public class GroupsAdapter extends BaseAdapter implements StickyListHeadersAdapt
     private Context mContext;
     private LayoutInflater mInflater;
     private String[] mMonthData;
-    private int[] mSectionIndices; //源数据中每种类型头索引
-    private String[] mSectionLetters;
     private TraceGreendao traGreendao ;
     private SQLiteDatabase db;
     private DaoMaster.DevOpenHelper devOpenHelper;

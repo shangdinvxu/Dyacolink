@@ -874,6 +874,14 @@ public abstract class BLEHandler extends Handler {
 			OwnLog.i(TAG, "省电模式设置失败");
 			notifyForSetPowerFail();
 		}
+		else if (typeIndex == BLEProvider.INDEX_SET_TIME_SETTING)
+		{
+			OwnLog.i(TAG, "设置定时器成功");
+
+				notifyforSettingTime();
+
+		}
+
 		else if (typeIndex == BLEProvider.INDEX_SET_NAME)
 		{
 			OwnLog.i(TAG, "名称设置成功");
@@ -968,6 +976,10 @@ public abstract class BLEHandler extends Handler {
 
 		if (bleProviderObserver != null)
 			bleProviderObserver.updateFor_handleConnectSuccessMsg();
+	}
+
+	protected  void notifyforSettingTime(){
+
 	}
 
 	private void handleHaveNotConnectMsg() {

@@ -83,7 +83,7 @@ public class BirthdayActivity extends Activity {
                 } else {
                     int yearage = Integer.parseInt(year);
                     int userAge = nowYearInt - yearage;
-                    if (userAge>110){
+                    if (userAge>110||userAge<7){
                         Toast.makeText(BirthdayActivity.this, "请填写正确的生日", Toast.LENGTH_SHORT).show();
                     }else {
                         userEntity.getUserBase().setBirthdate(birthday);

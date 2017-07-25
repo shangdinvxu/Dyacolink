@@ -551,7 +551,7 @@ public class PortalActivity extends AutoLayoutActivity implements View.OnClickLi
         String MM = mm.format(dateToday);
         int caloriesNow = calorieseveryday * (Integer.parseInt(HH) * 60 + Integer.parseInt(MM)) / 1440;
         MyLog.e("caloriesNow",caloriesNow+"caloriesNow");
-        calView.setText(caloriesNow + "");
+//        calView.setText(caloriesNow + "");
 
     }
 

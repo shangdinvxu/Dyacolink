@@ -178,16 +178,22 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 		}
 	}
 	//	定时器
-	public LPDeviceInfo settimesetting(int millions) throws LPException, BLException {
+	public boolean settimesetting(int millions) throws LPException, BLException {
 		Log.e("settimesetting","settimesetting执行了");
 		WatchRequset req = new WatchRequset();
 		byte[] bytes = LPUtil.intToByte(millions);
 		req.appendByte(seq++).appendByte(LepaoCommand.TIMMERSETTING).appendByte(bytes).makeCheckSum() ;
 		LPUtil.printData(req.getData(), "settimesetting");
 		WatchResponse resp = sendData2BLE(req);
-		LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
-		return lpDeviceInfo ;
+		if(resp.getData()[4]==0){
+			return true;
+		}else{
+			return false;
+		}
+
 	}
+
+
 
 	// 获取设备信息
 	@Override
@@ -381,6 +387,7 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 				WatchResponse heartrate = getHeartrate(itemLeft - 10, 0);
 				itemLeft =LPUtil.makeShort(heartrate.getData()[6], heartrate.getData()[5]);
 				list.addAll(heartrate.toLPHeartrateDataList(heartrate));
+				Log.e(TAG,list.size()+"list的长度是");
 			}
 			getHeartrate(0,0);
 		}
@@ -390,8 +397,8 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 
 	public WatchResponse getHeartrate(int offset, int length)throws BLException, LPException{
 		WatchRequset req = new WatchRequset();
-		req.appendByte(seq++).appendByte(LepaoCommand.COMMAND_GET_HEARTRATE).appendByte((byte) offset)
-				.appendByte((byte) length).makeCheckSum();
+		req.appendByte(seq++).appendByte(LepaoCommand.COMMAND_GET_HEARTRATE).appendShort((short) offset)
+				.appendShort((byte) length).makeCheckSum();
 		LPUtil.printData(req.getData(), " getHeartrate");
 		WatchResponse resp = this.sendData2BLE(req);
 		LPUtil.printData(resp.getData(), " 接收到的Heartrate");

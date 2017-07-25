@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/raw/dyh01_alpha07_1017.zip",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/raw/dyh01_alpha07_1017.zip"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/raw/libs",
+        "source": "/Users/daniel/.android/build-cache/7f1dad10ded512ad445359fda52fdd9d481b7f84/output/res/raw/libs"
+    }
+]

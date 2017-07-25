@@ -1,0 +1,54 @@
+[
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/color/abc_primary_text_disable_only_material_light.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/color/abc_primary_text_disable_only_material_light.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/color/abc_primary_text_material_light.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/color/abc_primary_text_material_light.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/color/switch_thumb_material_dark.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/color/switch_thumb_material_dark.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/color/common_google_signin_btn_text_light.xml",
+        "source": "/Users/daniel/.android/build-cache/1413341e395518ca13a9f2f82790e3fa900c4036/output/res/color/common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/color/abc_search_url_text.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/color/abc_search_url_text.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/color/vpi__dark_theme.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/ViewPagerIndicator/build/intermediates/bundles/default/res/color/vpi__dark_theme.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/color/abc_primary_text_material_dark.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/color/abc_primary_text_material_dark.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/color/abc_primary_text_disable_only_material_dark.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/color/abc_primary_text_disable_only_material_dark.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/color/abc_secondary_text_material_dark.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/color/abc_secondary_text_material_dark.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/color/switch_thumb_material_light.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/color/switch_thumb_material_light.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/color/abc_secondary_text_material_light.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/color/abc_secondary_text_material_light.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/color/common_google_signin_btn_text_dark.xml",
+        "source": "/Users/daniel/.android/build-cache/1413341e395518ca13a9f2f82790e3fa900c4036/output/res/color/common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/color/vpi__light_theme.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/ViewPagerIndicator/build/intermediates/bundles/default/res/color/vpi__light_theme.xml"
+    }
+]

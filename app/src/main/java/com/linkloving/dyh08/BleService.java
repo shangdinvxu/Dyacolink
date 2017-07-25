@@ -42,6 +42,7 @@ import com.linkloving.dyh08.logic.UI.device.incomingtel.IncomingTelActivity;
 import com.linkloving.dyh08.logic.UI.main.GetHeartEvent;
 import com.linkloving.dyh08.logic.UI.main.HeartrateFinishEvent;
 import com.linkloving.dyh08.logic.UI.main.PortalActivity;
+import com.linkloving.dyh08.logic.UI.setting.SettingActivity;
 import com.linkloving.dyh08.logic.UI.workout.Greendao.TraceGreendao;
 import com.linkloving.dyh08.logic.dto.UserEntity;
 import com.linkloving.dyh08.prefrences.LocalUserSettingsToolkits;
@@ -558,16 +559,22 @@ public class BleService extends Service {
                         //BLE--->设置消息提醒
                         startSetANCS();
 
+                        startHeartrateSet();
+
                         MyLog.e(TAG, "notifyFor0x13ExecSucess_D======进入了");
                     } else {
                         MyLog.e(TAG,"latestDeviceInfo是null的时候 重新获取一次");
-                        //返回的latestDeviceInfo是null的时候 重新获取一次
-                      /*  if (provider.isConnectedAndDiscovered()) {
-                            LPDeviceInfo lpDeviceInfo = new LPDeviceInfo();
-                            lpDeviceInfo.userId = userEntity.getUser_id();
-                            provider.getAllDeviceInfoNew(BleService.this,lpDeviceInfo);
-                        }*/
+//                        syncAllDeviceInfo(BleService.this);
                     }
+                }
+            }
+
+            private void startHeartrateSet() {
+                boolean heartrateSync = PreferencesToolkits.getHeartrateSync(BleService.this);
+                if (heartrateSync) {
+                    provider.setHeartrateSync(BleService.this);
+                } else {
+                    provider.setCloseHeartrateSync(BleService.this);
                 }
             }
 

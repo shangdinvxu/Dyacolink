@@ -236,7 +236,7 @@ public class GroupsShareActivity extends ToolBarActivity implements OnMapReadyCa
         }else if (startTimeList.get(position).getLatitude()!=null&&startTimeList.get(position).getLatitude()==1){
             boolean mapSelect = PreferencesToolkits.getMapSelect(GroupsShareActivity.this);
             if (mapSelect){
-                addGoogleMap();
+                addGoogleMapOnePoint();
             }else {
                 hideGoogleMap();
             }
@@ -245,6 +245,26 @@ public class GroupsShareActivity extends ToolBarActivity implements OnMapReadyCa
             initTrace();
         }
 
+    }
+
+    public void addGoogleMapOnePoint(){
+        gourpsTopmap.setVisibility(View.GONE);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //从数据库中获取的坐标点画,有问题,需要纠偏.暂不采用.
+                List<Note> lists = traGreendao.searchLocation(startDate, endDate);
+                if (lists.size() == 0) {
+                    SharedPreferences location = getSharedPreferences("Location", MODE_PRIVATE);
+                    float latitude = location.getFloat("Latitude", 11);
+                    float longitude = location.getFloat("Longitude", 11);
+                    lists.add(new Note(null,null,null,null,null,(double) latitude,(double)longitude));
+                }
+                List<Note> listsOnePoint = new ArrayList<>();
+                listsOnePoint.add(lists.get(0));
+                showGoogleLine(listsOnePoint);
+            }
+        }).start();
     }
 
     private void hideGoogleMap() {

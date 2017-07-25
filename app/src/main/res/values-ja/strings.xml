@@ -1179,9 +1179,9 @@
     <string name="Need_format">リセットするかどうかの手のリングブレスレット終了アンバンドリング、</string>
     <string name="format_success">成功リセット、バインドを続けます</string>
     <string name="Need_before">再バインドする前にデバイスを必要とします</string>
-    <string name="personalPhoto">設定し、個人の写真</string>
-    <string name="user_info_delete_photo">写真を削除する</string>
-    <string name="user_info_take_photo">写真を撮る</string>
+    <string name="personalPhoto">編集</string>
+    <string name="user_info_delete_photo">写真を削除</string>
+    <string name="user_info_take_photo">写真を撮影</string>
     <string name="back">キャンセル</string>
     <string name="syncing">Syncing...</string>
     <string name="bracelet_oad_version_top">アップデートが完了しました</string>
@@ -1198,5 +1198,6 @@
     <string name="firmware_updating">firmware updating</string>
     <string name="hint">プロンプト</string>
     <string name="please_stay_in">更新が終わるまでこのページから移動せず、このままお待ちください</string>
+    <string name="sporttime">タイム</string>
 
 </resources>

@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/mipmap-hdpi-v4/login_input_arrow.png",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/mipmap-hdpi/login_input_arrow.png"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/mipmap-hdpi-v4/ic_appicon.png",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/mipmap-hdpi/ic_appicon.png"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/mipmap-hdpi-v4/xicon.png",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/mipmap-hdpi/xicon.png"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/mipmap-hdpi-v4/fragment_menu_deliver.png",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/mipmap-hdpi/fragment_menu_deliver.png"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/mipmap-hdpi-v4/ic_launcher.png",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    }
+]

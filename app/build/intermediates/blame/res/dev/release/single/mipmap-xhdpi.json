@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/release/mipmap-xhdpi/smssdk_dialog_bg.9.png",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/mipmap-xhdpi/smssdk_dialog_bg.9.png"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/release/mipmap-xhdpi/smssdk_input_bg_normal.9.png",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/mipmap-xhdpi/smssdk_input_bg_normal.9.png"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/release/mipmap-xhdpi/smssdk_input_bg_special_normal.9.png",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/mipmap-xhdpi/smssdk_input_bg_special_normal.9.png"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/release/mipmap-xhdpi/smssdk_input_bg_special_focus.9.png",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/mipmap-xhdpi/smssdk_input_bg_special_focus.9.png"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/release/mipmap-xhdpi/smssdk_input_bg_focus.9.png",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/mipmap-xhdpi/smssdk_input_bg_focus.9.png"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/release/mipmap-xhdpi/smssdk_dialog_back.9.png",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/mipmap-xhdpi/smssdk_dialog_back.9.png"
+    }
+]

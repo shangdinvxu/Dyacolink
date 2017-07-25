@@ -18,6 +18,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.bluetoothlegatt.BLEHandler;
 import com.example.android.bluetoothlegatt.BLEProvider;
 import com.example.android.bluetoothlegatt.proltrol.LPUtil;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
@@ -115,6 +116,10 @@ public class NotificationSettingActivity extends ToolBarActivity {
     private SharedPreferences.Editor edit;
     private TextView clock4;
     private String longsit_step;
+    private TextView starttimeView;
+    private TextView endtimeTextview;
+    private TextView intervalTextview;
+    private ImageView ok_imageview;
 
 
     @Override
@@ -127,6 +132,20 @@ public class NotificationSettingActivity extends ToolBarActivity {
         SharedPreferences clock = getSharedPreferences("clock", MODE_PRIVATE);
         edit = clock.edit();
         provider = BleService.getInstance(NotificationSettingActivity.this).getCurrentHandlerProvider();
+        provider.setProviderHandler(new BLEHandler(NotificationSettingActivity.this) {
+            @Override
+            protected BLEProvider getProvider() {
+                return provider;
+            }
+
+            @Override
+            protected void notifyforSettingTime() {
+                super.notifyforSettingTime();
+                if (ok_imageview!=null){
+                    ok_imageview.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         hrStrings = new ArrayList<>();
         for (int i = 0; i <= 23; i++) {
             String s;
@@ -196,6 +215,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
         timeSetting1 = (TextView) view.findViewById(R.id.clock_1);
         final Switch switch1 = (Switch) view.findViewById(R.id.timesetting1);
+        ok_imageview = (ImageView) view.findViewById(R.id.ok_picture);
         final PopupWindow popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
         timeSetting1.setText(PreferencesToolkits.getTimeSettingString(NotificationSettingActivity.this));
@@ -233,6 +253,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ok_imageview.setVisibility(View.GONE);
                 if (isChecked) {
                     MyLog.e(TAG, "clockone" + timeSetting1.getText().toString());
                     if (timeSetting1.getText().toString().equals("00:00")) {
@@ -249,6 +270,10 @@ public class NotificationSettingActivity extends ToolBarActivity {
                             Toast.makeText(NotificationSettingActivity.this, getString(R.string.keepthe), Toast.LENGTH_SHORT).show();
                         }
                     }
+                }else {
+                    LPDeviceInfo lpDeviceInfo1 = new LPDeviceInfo();
+                    lpDeviceInfo1.millions=0;
+                    provider.SetTimeSetting(NotificationSettingActivity.this, lpDeviceInfo1);
                 }
             }
         });
@@ -458,6 +483,9 @@ public class NotificationSettingActivity extends ToolBarActivity {
     private void initSedentaryPopupWindow() {
         View view = layoutInflater.inflate(R.layout.sedentarypopupwindow, null);
         ImageView dismiss = (ImageView) view.findViewById(R.id.dismiss);
+        starttimeView = (TextView) view.findViewById(R.id.starttimeTextview);
+        endtimeTextview = (TextView) view.findViewById(R.id.endtimeTextview);
+        intervalTextview = (TextView) view.findViewById(R.id.intervalTextview);
         ImageView startTimeNext = (ImageView) view.findViewById(R.id.startTimeNext);
         final ImageView endTimeNext = (ImageView) view.findViewById(R.id.endTimeNext);
         final Switch switchInterval = (Switch) view.findViewById(R.id.switchinterval);
@@ -468,10 +496,13 @@ public class NotificationSettingActivity extends ToolBarActivity {
         String[] splits = split[0].split(":");
         starttimeHr = splits[0];
         starttimeMin = splits[1];
+        starttimeView.setText(starttimeHr+":"+starttimeMin);
         String[] splitsEndTime = split[1].split(":");
         endTimeHr = splitsEndTime[0];
         endTimeMin = splitsEndTime[1];
+        endtimeTextview.setText(endTimeHr+":"+endTimeMin);
         Intervalstime = deviceSetting.getLongsit_intervals();
+        intervalTextview.setText(Intervalstime+"");
         longsit_vaild = deviceSetting.getLongsit_vaild();
         longsit_step = deviceSetting.getLongsit_step();
         final String[] longsit_vaild = {deviceSetting.getLongsit_vaild()};
@@ -561,9 +592,9 @@ public class NotificationSettingActivity extends ToolBarActivity {
                         deviceSetting.setLongsit_time(time);
                         deviceSetting.setLongsit_step(longsit_step);
                         deviceSetting.setLongsit_intervals(Intervalstime);
+                        intervalTextview.setText(Intervalstime+"");
                         LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,
                                 deviceSetting);
-
                     }
                 });
             }
@@ -651,6 +682,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                         deviceSetting.setLongsit_time(time);
                         deviceSetting.setLongsit_step(longsit_step);
                         deviceSetting.setLongsit_intervals(Integer.parseInt(longsit_vaild));
+                        starttimeView.setText(starttimeHr+":"+starttimeMin);
                         LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,
                                 deviceSetting);
                         break;
@@ -660,6 +692,7 @@ public class NotificationSettingActivity extends ToolBarActivity {
                         deviceSetting.setLongsit_time(time1);
                         deviceSetting.setLongsit_step(longsit_step);
                         deviceSetting.setLongsit_intervals(Integer.parseInt(longsit_vaild));
+                        endtimeTextview.setText(endTimeHr+":"+endTimeMin);
                         LocalUserSettingsToolkits.updateLocalSetting(NotificationSettingActivity.this,
                                 deviceSetting);
 

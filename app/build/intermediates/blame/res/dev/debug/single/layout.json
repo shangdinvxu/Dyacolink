@@ -1,0 +1,1210 @@
+[
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/goalwheel.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/goalwheel.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_alert_dialog_button_bar_material.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/hockeyapp_activity_login.xml",
+        "source": "/Users/daniel/.android/build-cache/c2ec2fe83f80c3c350812657ec4d9a64e92afca0/output/res/layout/hockeyapp_activity_login.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_list_menu_item_radio.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/login_from_email.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/login_from_email.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/retrievedatapopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/retrievedatapopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_expanded_menu_layout.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_calories_avg_popupwiew.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_calories_avg_popupwiew.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_trace_fragment_trackupload.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_trace_fragment_trackupload.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_heartrate_popupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_heartrate_popupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_start2.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_start2.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/searchingwearablepopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/searchingwearablepopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_sleep_week_buttom.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_sleep_week_buttom.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_calories_total_popupwiew.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_calories_total_popupwiew.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_sleep_buttom.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_sleep_buttom.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/content_move_device.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/content_move_device.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_activity_weight.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_activity_weight.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_activity_main_lunch.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_activity_main_lunch.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_sleep_top.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_sleep_top.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_calories_chartview_fragment.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_calories_chartview_fragment.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_attention.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_attention.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/messagepopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/messagepopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_trace_dialog_fence.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_trace_dialog_fence.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_move_device.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_move_device.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_activity_height.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_activity_height.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/progress_dialog.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/progress_dialog.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_share_popuwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_share_popuwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/rank_fragment_companies_list.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/rank_fragment_companies_list.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/weight_viewpager.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/weight_viewpager.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/pull_to_refresh_header_vertical.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/PullToRefreshLibrary/build/intermediates/bundles/default/res/layout/pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/design_bottom_sheet_dialog.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/layout/design_bottom_sheet_dialog.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_sex.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_sex.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/distancegoalwheel.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/distancegoalwheel.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/timesettingpopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/timesettingpopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_distance_top.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_distance_top.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_main_clock.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_main_clock.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_calories_activity.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_calories_activity.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/select_dialog_multichoice_material.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/starttimepopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/starttimepopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_step_top.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_step_top.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_distance_avg_popupwiew.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_distance_avg_popupwiew.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/place_autocomplete_item_powered_by_google.xml",
+        "source": "/Users/daniel/.android/build-cache/67b7ba3dd6358d4378efaac52a508454a02bbbd7/output/res/layout/place_autocomplete_item_powered_by_google.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/feedback_item_right.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/feedback_item_right.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_updata_avatar.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_updata_avatar.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/main_more_change_avatar_dialog.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/main_more_change_avatar_dialog.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_action_bar_title_item.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tv_activity_portal_main.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tv_activity_portal_main.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/login_birthday.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/login_birthday.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_registered_success.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_registered_success.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/toolbar.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/toolbar.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/bluetooth_listviewitem.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/bluetooth_listviewitem.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_binding_bluetooth_activity3.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_binding_bluetooth_activity3.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_groups_fourtextview.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_groups_fourtextview.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_list_menu_item_layout.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_action_mode_bar.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/notification_media_action.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/notification_media_action.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/pwd.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/pwd.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_send_mail.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_send_mail.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_app_bar_step.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_app_bar_step.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/comment_item_left.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/comment_item_left.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/fragment_find_group.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/fragment_find_group.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_firmware_update.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_firmware_update.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/firmupdate_popupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/firmupdate_popupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_trace_fragment_title.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_trace_fragment_title.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/nav_header_portal.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/nav_header_portal.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/automatichrpopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/automatichrpopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/login_gender.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/login_gender.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_body.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_body.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_blelist.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_blelist.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_screen_toolbar.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/modify_sex_dialog.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/modify_sex_dialog.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/drawer_list_item.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/drawer_list_item.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_friend_info.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_friend_info.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_guide_view.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_guide_view.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_bound_activity_2.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_bound_activity_2.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/step_listview_item.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/step_listview_item.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_groups_itemheard.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_groups_itemheard.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_groups_share.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_groups_share.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_activity_heightforlauch.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_activity_heightforlauch.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/list_item_menu.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/list_item_menu.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_heartrate_day.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_heartrate_day.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_setting_activity.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_setting_activity.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/rank_fragment_my_attention.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/rank_fragment_my_attention.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_friend.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_friend.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/selectthemappopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/selectthemappopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/pull_to_refresh_header_horizontal.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/PullToRefreshLibrary/build/intermediates/bundles/default/res/layout/pull_to_refresh_header_horizontal.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/hockeyapp_activity_update.xml",
+        "source": "/Users/daniel/.android/build-cache/c2ec2fe83f80c3c350812657ec4d9a64e92afca0/output/res/layout/hockeyapp_activity_update.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_setting_detail.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_setting_detail.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_step_buttom.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_step_buttom.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/list_item_rank.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/list_item_rank.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/design_layout_snackbar_include.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/layout/design_layout_snackbar_include.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/design_navigation_menu_item.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/layout/design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_finishlogin.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_finishlogin.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_list_menu_item_icon.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/hockeyapp_activity_feedback.xml",
+        "source": "/Users/daniel/.android/build-cache/c2ec2fe83f80c3c350812657ec4d9a64e92afca0/output/res/layout/hockeyapp_activity_feedback.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_bound_band3.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_bound_band3.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_week_view_fragment.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_week_view_fragment.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/battery_show_popupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/battery_show_popupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/design_navigation_menu.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/layout/design_navigation_menu.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_pass_word.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_pass_word.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_trace_fragment_bottom.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_trace_fragment_bottom.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/login_wearingstyles.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/login_wearingstyles.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_device.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_device.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_month_barchartview_fragment.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_month_barchartview_fragment.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/login_from_message.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/login_from_message.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/phone_login_layout.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/phone_login_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/sticklist_item_layout.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/sticklist_item_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_calories_top.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_calories_top.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/layout_popupwindow_photo.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/layout_popupwindow_photo.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_heartrate_month.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_heartrate_month.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/fragment_attention_me.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/fragment_attention_me.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/notification_template_lines.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/notification_template_lines.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_verify_code.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_verify_code.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/comm_toolbar.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/comm_toolbar.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/design_layout_snackbar.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/layout/design_layout_snackbar.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/bound_xiangxi.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/bound_xiangxi.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/design_navigation_item_subheader.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/layout/design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_ent_info.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_ent_info.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_common_web.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_common_web.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_hand_up.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_hand_up.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/custom_auto_complete_text_view.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/custom_auto_complete_text_view.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_spor_goal_setting.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_spor_goal_setting.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_action_bar_up_container.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/faq_web_view.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/faq_web_view.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_select_dialog_material.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_sleepchat.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_sleepchat.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_alarm.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_alarm.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_sleep_month_calendar.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_sleep_month_calendar.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_distance_data.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_distance_data.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_action_menu_item_layout.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_set_alarm.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_set_alarm.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/communitywebpopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/communitywebpopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_about_us.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_about_us.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_forget_pass_word_main.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_forget_pass_word_main.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/nearby_activity_listview_item.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/nearby_activity_listview_item.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_calories__popupwiew.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_calories__popupwiew.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/list_item_rank_head.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/list_item_rank_head.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/login_height.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/login_height.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/user_info_update_user_nickname.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/user_info_update_user_nickname.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/notification_template_big_media.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/notification_template_big_media.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/goalwheelstep.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/goalwheelstep.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_app_start.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_app_start.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_sleep_activity.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_sleep_activity.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_start_activity.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_start_activity.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/notification_template_part_time.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_more.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_more.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_share_fragment.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_share_fragment.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_distance_activity.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_distance_activity.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_start1.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_start1.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_device_notify.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_device_notify.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_day_barchartview_fragment.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_day_barchartview_fragment.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/fragment_google_share_map.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/fragment_google_share_map.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/select_dialog_item_material.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/select_dialog_item_material.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/my_auto_complete_text_view_item.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/my_auto_complete_text_view_item.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/select_dialog_singlechoice_material.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_week_barchartview_fragment.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_week_barchartview_fragment.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/googlemap.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/googlemap.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_change_info.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_change_info.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_country.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_country.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/step_data_view.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/step_data_view.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_step_popupwiew.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_step_popupwiew.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_login_page.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_login_page.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_register.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_register.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_sleep_week_barchartview_fragment.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_sleep_week_barchartview_fragment.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/signoutpopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/signoutpopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/alarmclockpopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/alarmclockpopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/nicknamedialog.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/nicknamedialog.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/feedback_item_left.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/feedback_item_left.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_activity_weightforlauch.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_activity_weightforlauch.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_heartrate_chat.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_heartrate_chat.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/change_long_sit_time_dialog.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/change_long_sit_time_dialog.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_dayview_fragment.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_dayview_fragment.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_app_bar_portal.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_app_bar_portal.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/common_toast.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/common_toast.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/popphotopopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/popphotopopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/place_autocomplete_progress.xml",
+        "source": "/Users/daniel/.android/build-cache/67b7ba3dd6358d4378efaac52a508454a02bbbd7/output/res/layout/place_autocomplete_progress.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_trace_menu_geofence.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_trace_menu_geofence.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/design_navigation_item.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/layout/design_navigation_item.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_start3.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_start3.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_distance_total_popupwiew.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_distance_total_popupwiew.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/dialog_layout.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/dialog_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_action_menu_layout.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_register_phone.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_register_phone.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/comment_item_right.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/comment_item_right.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_action_mode_close_item_material.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/goalsettingpopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/goalsettingpopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/longsitpopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/longsitpopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_workout_trace_activity.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_workout_trace_activity.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/dialog_layout_more.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/dialog_layout_more.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_alert_dialog_material.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/view_date_picker.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/view_date_picker.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/fragment_find_friend.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/fragment_find_friend.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/adapter_pay_list.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/adapter_pay_list.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/dropdown_item.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_activity_groups.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_activity_groups.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/hockeyapp_view_feedback_message.xml",
+        "source": "/Users/daniel/.android/build-cache/c2ec2fe83f80c3c350812657ec4d9a64e92afca0/output/res/layout/hockeyapp_view_feedback_message.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_trace_fragment_trackquery.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_trace_fragment_trackquery.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/popup_reg_view.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/popup_reg_view.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_bluetooth_activity.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_bluetooth_activity.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/layout_timepicker.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/layout_timepicker.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/item_bundtype.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/item_bundtype.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_brith.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_brith.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_work_out_activity.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_work_out_activity.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_sleep_popupwiew.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_sleep_popupwiew.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/sleepmonthfragment.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/sleepmonthfragment.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/design_layout_tab_icon.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/layout/design_layout_tab_icon.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_bluetooth.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_bluetooth.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_bound.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_bound.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/recycler_load_more_layout.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/recycler_load_more_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/place_autocomplete_item_prediction.xml",
+        "source": "/Users/daniel/.android/build-cache/67b7ba3dd6358d4378efaac52a508454a02bbbd7/output/res/layout/place_autocomplete_item_prediction.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/sticklist_header.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/sticklist_header.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_cal_date.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_cal_date.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_long_sit.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_long_sit.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/fragment_my_attention.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/fragment_my_attention.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_binding_bluetooth_activity1.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_binding_bluetooth_activity1.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/notification_template_media.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/notification_template_media.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_help.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_help.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_bound_band2.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_bound_band2.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/design_menu_item_action_area.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/layout/design_menu_item_action_area.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_wallet.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_wallet.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/layout_feedback.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/layout_feedback.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/diatance_data_view.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/diatance_data_view.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_sleep_data.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_sleep_data.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/toast_synchronize.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/toast_synchronize.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_step_avg_popupwiew.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_step_avg_popupwiew.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/sedentarypopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/sedentarypopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/dialog_title.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/dialog_title.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_setting_heardview.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_setting_heardview.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_heartrate_point_popupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_heartrate_point_popupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/sampeadapteritem.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/sampeadapteritem.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/hockeyapp_fragment_update.xml",
+        "source": "/Users/daniel/.android/build-cache/c2ec2fe83f80c3c350812657ec4d9a64e92afca0/output/res/layout/hockeyapp_fragment_update.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/design_navigation_item_separator.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/layout/design_navigation_item_separator.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/notification_template_big_media_narrow.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/list_item_search.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/list_item_search.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/rank_fragment_total_list.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/rank_fragment_total_list.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/fragment_comment_me.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/fragment_comment_me.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/toobar_layout.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/toobar_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/notification_media_cancel_action.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_binding_bluetooth_activity2.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_binding_bluetooth_activity2.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_step_activity.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_step_activity.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/list_item_comments.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/list_item_comments.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_distance_popupwiew.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_distance_popupwiew.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_step_data.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_step_data.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/design_layout_tab_text.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/layout/design_layout_tab_text.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_month_view_fragment.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_month_view_fragment.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_bund_type.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_bund_type.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/login_weight.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/login_weight.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/photopopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/photopopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_dialog_title_material.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/design_navigation_item_header.xml",
+        "source": "/Users/daniel/.android/build-cache/e307e9a147462c58917f54b1e9bb2f0921f3d844/output/res/layout/design_navigation_item_header.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_main_time_xml.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_main_time_xml.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_popup_menu_item_layout.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/dialog_layout_sport.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/dialog_layout_sport.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/list_item_search_group.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/list_item_search_group.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/login_other.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/login_other.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/qunzunhead.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/qunzunhead.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_member_login.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_member_login.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_activity_chooser_view.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_device_power.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_device_power.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_year_view_fragment.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_year_view_fragment.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_trace_layout.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_trace_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_sleep_day_buttom.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_sleep_day_buttom.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_setting.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_setting.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_year_barchartview_fragment.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_year_barchartview_fragment.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_common.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_common.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_personal_info.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_personal_info.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_ranking.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_ranking.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/phone_layout.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/phone_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_test_list.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_test_list.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_main_clock1.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_main_clock1.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_content_portal.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_content_portal.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/datasynchronizationpopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/datasynchronizationpopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_screen_content_include.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_screen_content_include.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_screen_simple_overlay_action_mode.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/login_username.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/login_username.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/unitsettingpopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/unitsettingpopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_sleep_calendar_buttom.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_sleep_calendar_buttom.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/showhandpopupwindow.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/showhandpopupwindow.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/list_item_ble_list.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/list_item_ble_list.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_share_day.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_share_day.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_screen_simple.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_screen_simple.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_change_weight.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_change_weight.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_message_register.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_message_register.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_power.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_power.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_heartrate_week.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_heartrate_week.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/caloriesgoalwheel.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/caloriesgoalwheel.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_heartrate.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_heartrate.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_customer_service.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_customer_service.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/abc_search_view.xml",
+        "source": "/Users/daniel/.android/build-cache/11e6322f0218e443297af74c92217733fce7bcd7/output/res/layout/abc_search_view.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/actionbar_layout_menu.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/actionbar_layout_menu.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/toast_layout.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/toast_layout.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_trace_date_select_wheel.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_trace_date_select_wheel.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_bound_band.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_bound_band.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/tw_groups_detail.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/tw_groups_detail.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/hockeyapp_activity_expiry_info.xml",
+        "source": "/Users/daniel/.android/build-cache/c2ec2fe83f80c3c350812657ec4d9a64e92afca0/output/res/layout/hockeyapp_activity_expiry_info.xml"
+    },
+    {
+        "merged": "/Users/daniel/AndroidStudioProjects/dyh08/app/build/intermediates/res/merged/dev/debug/layout/activity_guide.xml",
+        "source": "/Users/daniel/AndroidStudioProjects/dyh08/app/src/main/res/layout/activity_guide.xml"
+    }
+]
